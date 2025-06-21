@@ -1,0 +1,475 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - external/src/grpc/third_party/boringssl-with-bazel/src/include/openssl/ec_key.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../../../../index.html">top level</a> - <a href="index.html">external/src/grpc/third_party/boringssl-with-bazel/src/include/openssl</a> - ec_key.h<span style="font-size: 80%;"> (source / <a href="ec_key.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-06-21 14:45:59</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">0</td>
+          </tr>
+                  <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /* Originally written by Bodo Moeller for the OpenSSL project.</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * ====================================================================</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (c) 1998-2005 The OpenSSL Project.  All rights reserved.</span>
+<span id="L4"><span class="lineNum">       4</span>              :  *</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * Redistribution and use in source and binary forms, with or without</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * modification, are permitted provided that the following conditions</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * are met:</span>
+<span id="L8"><span class="lineNum">       8</span>              :  *</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * 1. Redistributions of source code must retain the above copyright</span>
+<span id="L10"><span class="lineNum">      10</span>              :  *    notice, this list of conditions and the following disclaimer.</span>
+<span id="L11"><span class="lineNum">      11</span>              :  *</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * 2. Redistributions in binary form must reproduce the above copyright</span>
+<span id="L13"><span class="lineNum">      13</span>              :  *    notice, this list of conditions and the following disclaimer in</span>
+<span id="L14"><span class="lineNum">      14</span>              :  *    the documentation and/or other materials provided with the</span>
+<span id="L15"><span class="lineNum">      15</span>              :  *    distribution.</span>
+<span id="L16"><span class="lineNum">      16</span>              :  *</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * 3. All advertising materials mentioning features or use of this</span>
+<span id="L18"><span class="lineNum">      18</span>              :  *    software must display the following acknowledgment:</span>
+<span id="L19"><span class="lineNum">      19</span>              :  *    &quot;This product includes software developed by the OpenSSL Project</span>
+<span id="L20"><span class="lineNum">      20</span>              :  *    for use in the OpenSSL Toolkit. (http://www.openssl.org/)&quot;</span>
+<span id="L21"><span class="lineNum">      21</span>              :  *</span>
+<span id="L22"><span class="lineNum">      22</span>              :  * 4. The names &quot;OpenSSL Toolkit&quot; and &quot;OpenSSL Project&quot; must not be used to</span>
+<span id="L23"><span class="lineNum">      23</span>              :  *    endorse or promote products derived from this software without</span>
+<span id="L24"><span class="lineNum">      24</span>              :  *    prior written permission. For written permission, please contact</span>
+<span id="L25"><span class="lineNum">      25</span>              :  *    openssl-core@openssl.org.</span>
+<span id="L26"><span class="lineNum">      26</span>              :  *</span>
+<span id="L27"><span class="lineNum">      27</span>              :  * 5. Products derived from this software may not be called &quot;OpenSSL&quot;</span>
+<span id="L28"><span class="lineNum">      28</span>              :  *    nor may &quot;OpenSSL&quot; appear in their names without prior written</span>
+<span id="L29"><span class="lineNum">      29</span>              :  *    permission of the OpenSSL Project.</span>
+<span id="L30"><span class="lineNum">      30</span>              :  *</span>
+<span id="L31"><span class="lineNum">      31</span>              :  * 6. Redistributions of any form whatsoever must retain the following</span>
+<span id="L32"><span class="lineNum">      32</span>              :  *    acknowledgment:</span>
+<span id="L33"><span class="lineNum">      33</span>              :  *    &quot;This product includes software developed by the OpenSSL Project</span>
+<span id="L34"><span class="lineNum">      34</span>              :  *    for use in the OpenSSL Toolkit (http://www.openssl.org/)&quot;</span>
+<span id="L35"><span class="lineNum">      35</span>              :  *</span>
+<span id="L36"><span class="lineNum">      36</span>              :  * THIS SOFTWARE IS PROVIDED BY THE OpenSSL PROJECT ``AS IS'' AND ANY</span>
+<span id="L37"><span class="lineNum">      37</span>              :  * EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span id="L38"><span class="lineNum">      38</span>              :  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR</span>
+<span id="L39"><span class="lineNum">      39</span>              :  * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE OpenSSL PROJECT OR</span>
+<span id="L40"><span class="lineNum">      40</span>              :  * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,</span>
+<span id="L41"><span class="lineNum">      41</span>              :  * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT</span>
+<span id="L42"><span class="lineNum">      42</span>              :  * NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;</span>
+<span id="L43"><span class="lineNum">      43</span>              :  * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</span>
+<span id="L44"><span class="lineNum">      44</span>              :  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,</span>
+<span id="L45"><span class="lineNum">      45</span>              :  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span id="L46"><span class="lineNum">      46</span>              :  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED</span>
+<span id="L47"><span class="lineNum">      47</span>              :  * OF THE POSSIBILITY OF SUCH DAMAGE.</span>
+<span id="L48"><span class="lineNum">      48</span>              :  * ====================================================================</span>
+<span id="L49"><span class="lineNum">      49</span>              :  *</span>
+<span id="L50"><span class="lineNum">      50</span>              :  * This product includes cryptographic software written by Eric Young</span>
+<span id="L51"><span class="lineNum">      51</span>              :  * (eay@cryptsoft.com).  This product includes software written by Tim</span>
+<span id="L52"><span class="lineNum">      52</span>              :  * Hudson (tjh@cryptsoft.com).</span>
+<span id="L53"><span class="lineNum">      53</span>              :  *</span>
+<span id="L54"><span class="lineNum">      54</span>              :  */</span>
+<span id="L55"><span class="lineNum">      55</span>              : /* ====================================================================</span>
+<span id="L56"><span class="lineNum">      56</span>              :  * Copyright 2002 Sun Microsystems, Inc. ALL RIGHTS RESERVED.</span>
+<span id="L57"><span class="lineNum">      57</span>              :  *</span>
+<span id="L58"><span class="lineNum">      58</span>              :  * Portions of the attached software (&quot;Contribution&quot;) are developed by</span>
+<span id="L59"><span class="lineNum">      59</span>              :  * SUN MICROSYSTEMS, INC., and are contributed to the OpenSSL project.</span>
+<span id="L60"><span class="lineNum">      60</span>              :  *</span>
+<span id="L61"><span class="lineNum">      61</span>              :  * The Contribution is licensed pursuant to the OpenSSL open source</span>
+<span id="L62"><span class="lineNum">      62</span>              :  * license provided above.</span>
+<span id="L63"><span class="lineNum">      63</span>              :  *</span>
+<span id="L64"><span class="lineNum">      64</span>              :  * The elliptic curve binary polynomial software is originally written by</span>
+<span id="L65"><span class="lineNum">      65</span>              :  * Sheueling Chang Shantz and Douglas Stebila of Sun Microsystems</span>
+<span id="L66"><span class="lineNum">      66</span>              :  * Laboratories. */</span>
+<span id="L67"><span class="lineNum">      67</span>              : </span>
+<span id="L68"><span class="lineNum">      68</span>              : #ifndef OPENSSL_HEADER_EC_KEY_H</span>
+<span id="L69"><span class="lineNum">      69</span>              : #define OPENSSL_HEADER_EC_KEY_H</span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span>              : #include &lt;openssl/base.h&gt;</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              : #include &lt;openssl/ec.h&gt;</span>
+<span id="L74"><span class="lineNum">      74</span>              : #include &lt;openssl/engine.h&gt;</span>
+<span id="L75"><span class="lineNum">      75</span>              : #include &lt;openssl/ex_data.h&gt;</span>
+<span id="L76"><span class="lineNum">      76</span>              : </span>
+<span id="L77"><span class="lineNum">      77</span>              : #if defined(__cplusplus)</span>
+<span id="L78"><span class="lineNum">      78</span>              : extern &quot;C&quot; {</span>
+<span id="L79"><span class="lineNum">      79</span>              : #endif</span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              : // ec_key.h contains functions that handle elliptic-curve points that are</span>
+<span id="L83"><span class="lineNum">      83</span>              : // public/private keys.</span>
+<span id="L84"><span class="lineNum">      84</span>              : </span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span>              : // EC key objects.</span>
+<span id="L87"><span class="lineNum">      87</span>              : //</span>
+<span id="L88"><span class="lineNum">      88</span>              : // An |EC_KEY| object represents a public or private EC key. A given object may</span>
+<span id="L89"><span class="lineNum">      89</span>              : // be used concurrently on multiple threads by non-mutating functions, provided</span>
+<span id="L90"><span class="lineNum">      90</span>              : // no other thread is concurrently calling a mutating function. Unless otherwise</span>
+<span id="L91"><span class="lineNum">      91</span>              : // documented, functions which take a |const| pointer are non-mutating and</span>
+<span id="L92"><span class="lineNum">      92</span>              : // functions which take a non-|const| pointer are mutating.</span>
+<span id="L93"><span class="lineNum">      93</span>              : </span>
+<span id="L94"><span class="lineNum">      94</span>              : // EC_KEY_new returns a fresh |EC_KEY| object or NULL on error.</span>
+<span id="L95"><span class="lineNum">      95</span>              : OPENSSL_EXPORT EC_KEY *EC_KEY_new(void);</span>
+<span id="L96"><span class="lineNum">      96</span>              : </span>
+<span id="L97"><span class="lineNum">      97</span>              : // EC_KEY_new_method acts the same as |EC_KEY_new|, but takes an explicit</span>
+<span id="L98"><span class="lineNum">      98</span>              : // |ENGINE|.</span>
+<span id="L99"><span class="lineNum">      99</span>              : OPENSSL_EXPORT EC_KEY *EC_KEY_new_method(const ENGINE *engine);</span>
+<span id="L100"><span class="lineNum">     100</span>              : </span>
+<span id="L101"><span class="lineNum">     101</span>              : // EC_KEY_new_by_curve_name returns a fresh EC_KEY for group specified by |nid|</span>
+<span id="L102"><span class="lineNum">     102</span>              : // or NULL on error.</span>
+<span id="L103"><span class="lineNum">     103</span>              : OPENSSL_EXPORT EC_KEY *EC_KEY_new_by_curve_name(int nid);</span>
+<span id="L104"><span class="lineNum">     104</span>              : </span>
+<span id="L105"><span class="lineNum">     105</span>              : // EC_KEY_free frees all the data owned by |key| and |key| itself.</span>
+<span id="L106"><span class="lineNum">     106</span>              : OPENSSL_EXPORT void EC_KEY_free(EC_KEY *key);</span>
+<span id="L107"><span class="lineNum">     107</span>              : </span>
+<span id="L108"><span class="lineNum">     108</span>              : // EC_KEY_dup returns a fresh copy of |src| or NULL on error.</span>
+<span id="L109"><span class="lineNum">     109</span>              : OPENSSL_EXPORT EC_KEY *EC_KEY_dup(const EC_KEY *src);</span>
+<span id="L110"><span class="lineNum">     110</span>              : </span>
+<span id="L111"><span class="lineNum">     111</span>              : // EC_KEY_up_ref increases the reference count of |key| and returns one. It does</span>
+<span id="L112"><span class="lineNum">     112</span>              : // not mutate |key| for thread-safety purposes and may be used concurrently.</span>
+<span id="L113"><span class="lineNum">     113</span>              : OPENSSL_EXPORT int EC_KEY_up_ref(EC_KEY *key);</span>
+<span id="L114"><span class="lineNum">     114</span>              : </span>
+<span id="L115"><span class="lineNum">     115</span>              : // EC_KEY_is_opaque returns one if |key| is opaque and doesn't expose its key</span>
+<span id="L116"><span class="lineNum">     116</span>              : // material. Otherwise it return zero.</span>
+<span id="L117"><span class="lineNum">     117</span>              : OPENSSL_EXPORT int EC_KEY_is_opaque(const EC_KEY *key);</span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span>              : // EC_KEY_get0_group returns a pointer to the |EC_GROUP| object inside |key|.</span>
+<span id="L120"><span class="lineNum">     120</span>              : OPENSSL_EXPORT const EC_GROUP *EC_KEY_get0_group(const EC_KEY *key);</span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span>              : // EC_KEY_set_group sets the |EC_GROUP| object that |key| will use to |group|.</span>
+<span id="L123"><span class="lineNum">     123</span>              : // It returns one on success and zero if |key| is already configured with a</span>
+<span id="L124"><span class="lineNum">     124</span>              : // different group.</span>
+<span id="L125"><span class="lineNum">     125</span>              : OPENSSL_EXPORT int EC_KEY_set_group(EC_KEY *key, const EC_GROUP *group);</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              : // EC_KEY_get0_private_key returns a pointer to the private key inside |key|.</span>
+<span id="L128"><span class="lineNum">     128</span>              : OPENSSL_EXPORT const BIGNUM *EC_KEY_get0_private_key(const EC_KEY *key);</span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span>              : // EC_KEY_set_private_key sets the private key of |key| to |priv|. It returns</span>
+<span id="L131"><span class="lineNum">     131</span>              : // one on success and zero otherwise. |key| must already have had a group</span>
+<span id="L132"><span class="lineNum">     132</span>              : // configured (see |EC_KEY_set_group| and |EC_KEY_new_by_curve_name|).</span>
+<span id="L133"><span class="lineNum">     133</span>              : OPENSSL_EXPORT int EC_KEY_set_private_key(EC_KEY *key, const BIGNUM *priv);</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span>              : // EC_KEY_get0_public_key returns a pointer to the public key point inside</span>
+<span id="L136"><span class="lineNum">     136</span>              : // |key|.</span>
+<span id="L137"><span class="lineNum">     137</span>              : OPENSSL_EXPORT const EC_POINT *EC_KEY_get0_public_key(const EC_KEY *key);</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              : // EC_KEY_set_public_key sets the public key of |key| to |pub|, by copying it.</span>
+<span id="L140"><span class="lineNum">     140</span>              : // It returns one on success and zero otherwise. |key| must already have had a</span>
+<span id="L141"><span class="lineNum">     141</span>              : // group configured (see |EC_KEY_set_group| and |EC_KEY_new_by_curve_name|), and</span>
+<span id="L142"><span class="lineNum">     142</span>              : // |pub| must also belong to that group.</span>
+<span id="L143"><span class="lineNum">     143</span>              : OPENSSL_EXPORT int EC_KEY_set_public_key(EC_KEY *key, const EC_POINT *pub);</span>
+<span id="L144"><span class="lineNum">     144</span>              : </span>
+<span id="L145"><span class="lineNum">     145</span>              : #define EC_PKEY_NO_PARAMETERS 0x001</span>
+<span id="L146"><span class="lineNum">     146</span>              : #define EC_PKEY_NO_PUBKEY 0x002</span>
+<span id="L147"><span class="lineNum">     147</span>              : </span>
+<span id="L148"><span class="lineNum">     148</span>              : // EC_KEY_get_enc_flags returns the encoding flags for |key|, which is a</span>
+<span id="L149"><span class="lineNum">     149</span>              : // bitwise-OR of |EC_PKEY_*| values.</span>
+<span id="L150"><span class="lineNum">     150</span>              : OPENSSL_EXPORT unsigned EC_KEY_get_enc_flags(const EC_KEY *key);</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span>              : // EC_KEY_set_enc_flags sets the encoding flags for |key|, which is a</span>
+<span id="L153"><span class="lineNum">     153</span>              : // bitwise-OR of |EC_PKEY_*| values.</span>
+<span id="L154"><span class="lineNum">     154</span>              : OPENSSL_EXPORT void EC_KEY_set_enc_flags(EC_KEY *key, unsigned flags);</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              : // EC_KEY_get_conv_form returns the conversation form that will be used by</span>
+<span id="L157"><span class="lineNum">     157</span>              : // |key|.</span>
+<span id="L158"><span class="lineNum">     158</span>              : OPENSSL_EXPORT point_conversion_form_t EC_KEY_get_conv_form(const EC_KEY *key);</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              : // EC_KEY_set_conv_form sets the conversion form to be used by |key|.</span>
+<span id="L161"><span class="lineNum">     161</span>              : OPENSSL_EXPORT void EC_KEY_set_conv_form(EC_KEY *key,</span>
+<span id="L162"><span class="lineNum">     162</span>              :                                          point_conversion_form_t cform);</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              : // EC_KEY_check_key performs several checks on |key| (possibly including an</span>
+<span id="L165"><span class="lineNum">     165</span>              : // expensive check that the public key is in the primary subgroup). It returns</span>
+<span id="L166"><span class="lineNum">     166</span>              : // one if all checks pass and zero otherwise. If it returns zero then detail</span>
+<span id="L167"><span class="lineNum">     167</span>              : // about the problem can be found on the error stack.</span>
+<span id="L168"><span class="lineNum">     168</span>              : OPENSSL_EXPORT int EC_KEY_check_key(const EC_KEY *key);</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span>              : // EC_KEY_check_fips performs both a signing pairwise consistency test</span>
+<span id="L171"><span class="lineNum">     171</span>              : // (FIPS 140-2 4.9.2) and the consistency test from SP 800-56Ar3 section</span>
+<span id="L172"><span class="lineNum">     172</span>              : // 5.6.2.1.4. It returns one if it passes and zero otherwise.</span>
+<span id="L173"><span class="lineNum">     173</span>              : OPENSSL_EXPORT int EC_KEY_check_fips(const EC_KEY *key);</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              : // EC_KEY_set_public_key_affine_coordinates sets the public key in |key| to</span>
+<span id="L176"><span class="lineNum">     176</span>              : // (|x|, |y|). It returns one on success and zero on error. It's considered an</span>
+<span id="L177"><span class="lineNum">     177</span>              : // error if |x| and |y| do not represent a point on |key|'s curve.</span>
+<span id="L178"><span class="lineNum">     178</span>              : OPENSSL_EXPORT int EC_KEY_set_public_key_affine_coordinates(EC_KEY *key,</span>
+<span id="L179"><span class="lineNum">     179</span>              :                                                             const BIGNUM *x,</span>
+<span id="L180"><span class="lineNum">     180</span>              :                                                             const BIGNUM *y);</span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span>              : // EC_KEY_oct2key decodes |len| bytes from |in| as an EC public key in X9.62</span>
+<span id="L183"><span class="lineNum">     183</span>              : // form. |key| must already have a group configured. On success, it sets the</span>
+<span id="L184"><span class="lineNum">     184</span>              : // public key in |key| to the result and returns one. Otherwise, it returns</span>
+<span id="L185"><span class="lineNum">     185</span>              : // zero.</span>
+<span id="L186"><span class="lineNum">     186</span>              : OPENSSL_EXPORT int EC_KEY_oct2key(EC_KEY *key, const uint8_t *in, size_t len,</span>
+<span id="L187"><span class="lineNum">     187</span>              :                                   BN_CTX *ctx);</span>
+<span id="L188"><span class="lineNum">     188</span>              : </span>
+<span id="L189"><span class="lineNum">     189</span>              : // EC_KEY_key2buf behaves like |EC_POINT_point2buf|, except it encodes the</span>
+<span id="L190"><span class="lineNum">     190</span>              : // public key in |key|.</span>
+<span id="L191"><span class="lineNum">     191</span>              : OPENSSL_EXPORT size_t EC_KEY_key2buf(const EC_KEY *key,</span>
+<span id="L192"><span class="lineNum">     192</span>              :                                      point_conversion_form_t form,</span>
+<span id="L193"><span class="lineNum">     193</span>              :                                      uint8_t **out_buf, BN_CTX *ctx);</span>
+<span id="L194"><span class="lineNum">     194</span>              : </span>
+<span id="L195"><span class="lineNum">     195</span>              : // EC_KEY_oct2priv decodes a big-endian, zero-padded integer from |len| bytes</span>
+<span id="L196"><span class="lineNum">     196</span>              : // from |in| and sets |key|'s private key to the result. It returns one on</span>
+<span id="L197"><span class="lineNum">     197</span>              : // success and zero on error. The input must be padded to the size of |key|'s</span>
+<span id="L198"><span class="lineNum">     198</span>              : // group order.</span>
+<span id="L199"><span class="lineNum">     199</span>              : OPENSSL_EXPORT int EC_KEY_oct2priv(EC_KEY *key, const uint8_t *in, size_t len);</span>
+<span id="L200"><span class="lineNum">     200</span>              : </span>
+<span id="L201"><span class="lineNum">     201</span>              : // EC_KEY_priv2oct serializes |key|'s private key as a big-endian integer,</span>
+<span id="L202"><span class="lineNum">     202</span>              : // zero-padded to the size of |key|'s group order and writes the result to at</span>
+<span id="L203"><span class="lineNum">     203</span>              : // most |max_out| bytes of |out|. It returns the number of bytes written on</span>
+<span id="L204"><span class="lineNum">     204</span>              : // success and zero on error. If |out| is NULL, it returns the number of bytes</span>
+<span id="L205"><span class="lineNum">     205</span>              : // needed without writing anything.</span>
+<span id="L206"><span class="lineNum">     206</span>              : OPENSSL_EXPORT size_t EC_KEY_priv2oct(const EC_KEY *key, uint8_t *out,</span>
+<span id="L207"><span class="lineNum">     207</span>              :                                       size_t max_out);</span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              : // EC_KEY_priv2buf behaves like |EC_KEY_priv2oct| but sets |*out_buf| to a</span>
+<span id="L210"><span class="lineNum">     210</span>              : // newly-allocated buffer containing the result. It returns the size of the</span>
+<span id="L211"><span class="lineNum">     211</span>              : // result on success and zero on error. The caller must release |*out_buf| with</span>
+<span id="L212"><span class="lineNum">     212</span>              : // |OPENSSL_free| when done.</span>
+<span id="L213"><span class="lineNum">     213</span>              : OPENSSL_EXPORT size_t EC_KEY_priv2buf(const EC_KEY *key, uint8_t **out_buf);</span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span>              : </span>
+<span id="L216"><span class="lineNum">     216</span>              : // Key generation.</span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span>              : // EC_KEY_generate_key generates a random, private key, calculates the</span>
+<span id="L219"><span class="lineNum">     219</span>              : // corresponding public key and stores both in |key|. It returns one on success</span>
+<span id="L220"><span class="lineNum">     220</span>              : // or zero otherwise.</span>
+<span id="L221"><span class="lineNum">     221</span>              : OPENSSL_EXPORT int EC_KEY_generate_key(EC_KEY *key);</span>
+<span id="L222"><span class="lineNum">     222</span>              : </span>
+<span id="L223"><span class="lineNum">     223</span>              : // EC_KEY_generate_key_fips behaves like |EC_KEY_generate_key| but performs</span>
+<span id="L224"><span class="lineNum">     224</span>              : // additional checks for FIPS compliance. This function is applicable when</span>
+<span id="L225"><span class="lineNum">     225</span>              : // generating keys for either signing/verification or key agreement because</span>
+<span id="L226"><span class="lineNum">     226</span>              : // both types of consistency check (PCT) are performed.</span>
+<span id="L227"><span class="lineNum">     227</span>              : OPENSSL_EXPORT int EC_KEY_generate_key_fips(EC_KEY *key);</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              : // EC_KEY_derive_from_secret deterministically derives a private key for |group|</span>
+<span id="L230"><span class="lineNum">     230</span>              : // from an input secret using HKDF-SHA256. It returns a newly-allocated |EC_KEY|</span>
+<span id="L231"><span class="lineNum">     231</span>              : // on success or NULL on error. |secret| must not be used in any other</span>
+<span id="L232"><span class="lineNum">     232</span>              : // algorithm. If using a base secret for multiple operations, derive separate</span>
+<span id="L233"><span class="lineNum">     233</span>              : // values with a KDF such as HKDF first.</span>
+<span id="L234"><span class="lineNum">     234</span>              : //</span>
+<span id="L235"><span class="lineNum">     235</span>              : // Note this function implements an arbitrary derivation scheme, rather than any</span>
+<span id="L236"><span class="lineNum">     236</span>              : // particular standard one. New protocols are recommended to use X25519 and</span>
+<span id="L237"><span class="lineNum">     237</span>              : // Ed25519, which have standard byte import functions. See</span>
+<span id="L238"><span class="lineNum">     238</span>              : // |X25519_public_from_private| and |ED25519_keypair_from_seed|.</span>
+<span id="L239"><span class="lineNum">     239</span>              : OPENSSL_EXPORT EC_KEY *EC_KEY_derive_from_secret(const EC_GROUP *group,</span>
+<span id="L240"><span class="lineNum">     240</span>              :                                                  const uint8_t *secret,</span>
+<span id="L241"><span class="lineNum">     241</span>              :                                                  size_t secret_len);</span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span>              : // Serialisation.</span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span>              : // EC_KEY_parse_private_key parses a DER-encoded ECPrivateKey structure (RFC</span>
+<span id="L247"><span class="lineNum">     247</span>              : // 5915) from |cbs| and advances |cbs|. It returns a newly-allocated |EC_KEY| or</span>
+<span id="L248"><span class="lineNum">     248</span>              : // NULL on error. If |group| is non-null, the parameters field of the</span>
+<span id="L249"><span class="lineNum">     249</span>              : // ECPrivateKey may be omitted (but must match |group| if present). Otherwise,</span>
+<span id="L250"><span class="lineNum">     250</span>              : // the parameters field is required.</span>
+<span id="L251"><span class="lineNum">     251</span>              : OPENSSL_EXPORT EC_KEY *EC_KEY_parse_private_key(CBS *cbs,</span>
+<span id="L252"><span class="lineNum">     252</span>              :                                                 const EC_GROUP *group);</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              : // EC_KEY_marshal_private_key marshals |key| as a DER-encoded ECPrivateKey</span>
+<span id="L255"><span class="lineNum">     255</span>              : // structure (RFC 5915) and appends the result to |cbb|. It returns one on</span>
+<span id="L256"><span class="lineNum">     256</span>              : // success and zero on failure. |enc_flags| is a combination of |EC_PKEY_*|</span>
+<span id="L257"><span class="lineNum">     257</span>              : // values and controls whether corresponding fields are omitted.</span>
+<span id="L258"><span class="lineNum">     258</span>              : OPENSSL_EXPORT int EC_KEY_marshal_private_key(CBB *cbb, const EC_KEY *key,</span>
+<span id="L259"><span class="lineNum">     259</span>              :                                               unsigned enc_flags);</span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span>              : // EC_KEY_parse_curve_name parses a DER-encoded OBJECT IDENTIFIER as a curve</span>
+<span id="L262"><span class="lineNum">     262</span>              : // name from |cbs| and advances |cbs|. It returns the decoded |EC_GROUP| or NULL</span>
+<span id="L263"><span class="lineNum">     263</span>              : // on error.</span>
+<span id="L264"><span class="lineNum">     264</span>              : //</span>
+<span id="L265"><span class="lineNum">     265</span>              : // This function returns a non-const pointer which may be passed to</span>
+<span id="L266"><span class="lineNum">     266</span>              : // |EC_GROUP_free|. However, the resulting object is actually static and calling</span>
+<span id="L267"><span class="lineNum">     267</span>              : // |EC_GROUP_free| is optional.</span>
+<span id="L268"><span class="lineNum">     268</span>              : //</span>
+<span id="L269"><span class="lineNum">     269</span>              : // TODO(davidben): Make this return a const pointer, if it does not break too</span>
+<span id="L270"><span class="lineNum">     270</span>              : // many callers.</span>
+<span id="L271"><span class="lineNum">     271</span>              : OPENSSL_EXPORT EC_GROUP *EC_KEY_parse_curve_name(CBS *cbs);</span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span>              : // EC_KEY_marshal_curve_name marshals |group| as a DER-encoded OBJECT IDENTIFIER</span>
+<span id="L274"><span class="lineNum">     274</span>              : // and appends the result to |cbb|. It returns one on success and zero on</span>
+<span id="L275"><span class="lineNum">     275</span>              : // failure.</span>
+<span id="L276"><span class="lineNum">     276</span>              : OPENSSL_EXPORT int EC_KEY_marshal_curve_name(CBB *cbb, const EC_GROUP *group);</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              : // EC_KEY_parse_parameters parses a DER-encoded ECParameters structure (RFC</span>
+<span id="L279"><span class="lineNum">     279</span>              : // 5480) from |cbs| and advances |cbs|. It returns the resulting |EC_GROUP| or</span>
+<span id="L280"><span class="lineNum">     280</span>              : // NULL on error. It supports the namedCurve and specifiedCurve options, but use</span>
+<span id="L281"><span class="lineNum">     281</span>              : // of specifiedCurve is deprecated. Use |EC_KEY_parse_curve_name| instead.</span>
+<span id="L282"><span class="lineNum">     282</span>              : //</span>
+<span id="L283"><span class="lineNum">     283</span>              : // This function returns a non-const pointer which may be passed to</span>
+<span id="L284"><span class="lineNum">     284</span>              : // |EC_GROUP_free|. However, the resulting object is actually static and calling</span>
+<span id="L285"><span class="lineNum">     285</span>              : // |EC_GROUP_free| is optional.</span>
+<span id="L286"><span class="lineNum">     286</span>              : //</span>
+<span id="L287"><span class="lineNum">     287</span>              : // TODO(davidben): Make this return a const pointer, if it does not break too</span>
+<span id="L288"><span class="lineNum">     288</span>              : // many callers.</span>
+<span id="L289"><span class="lineNum">     289</span>              : OPENSSL_EXPORT EC_GROUP *EC_KEY_parse_parameters(CBS *cbs);</span>
+<span id="L290"><span class="lineNum">     290</span>              : </span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span>              : // ex_data functions.</span>
+<span id="L293"><span class="lineNum">     293</span>              : //</span>
+<span id="L294"><span class="lineNum">     294</span>              : // These functions are wrappers. See |ex_data.h| for details.</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span>              : OPENSSL_EXPORT int EC_KEY_get_ex_new_index(long argl, void *argp,</span>
+<span id="L297"><span class="lineNum">     297</span>              :                                            CRYPTO_EX_unused *unused,</span>
+<span id="L298"><span class="lineNum">     298</span>              :                                            CRYPTO_EX_dup *dup_unused,</span>
+<span id="L299"><span class="lineNum">     299</span>              :                                            CRYPTO_EX_free *free_func);</span>
+<span id="L300"><span class="lineNum">     300</span>              : OPENSSL_EXPORT int EC_KEY_set_ex_data(EC_KEY *r, int idx, void *arg);</span>
+<span id="L301"><span class="lineNum">     301</span>              : OPENSSL_EXPORT void *EC_KEY_get_ex_data(const EC_KEY *r, int idx);</span>
+<span id="L302"><span class="lineNum">     302</span>              : </span>
+<span id="L303"><span class="lineNum">     303</span>              : </span>
+<span id="L304"><span class="lineNum">     304</span>              : // ECDSA method.</span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span>              : // ECDSA_FLAG_OPAQUE specifies that this ECDSA_METHOD does not expose its key</span>
+<span id="L307"><span class="lineNum">     307</span>              : // material. This may be set if, for instance, it is wrapping some other crypto</span>
+<span id="L308"><span class="lineNum">     308</span>              : // API, like a platform key store.</span>
+<span id="L309"><span class="lineNum">     309</span>              : #define ECDSA_FLAG_OPAQUE 1</span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              : // ecdsa_method_st is a structure of function pointers for implementing ECDSA.</span>
+<span id="L312"><span class="lineNum">     312</span>              : // See engine.h.</span>
+<span id="L313"><span class="lineNum">     313</span>              : struct ecdsa_method_st {</span>
+<span id="L314"><span class="lineNum">     314</span>              :   struct openssl_method_common_st common;</span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span>              :   void *app_data;</span>
+<span id="L317"><span class="lineNum">     317</span>              : </span>
+<span id="L318"><span class="lineNum">     318</span>              :   int (*init)(EC_KEY *key);</span>
+<span id="L319"><span class="lineNum">     319</span>              :   int (*finish)(EC_KEY *key);</span>
+<span id="L320"><span class="lineNum">     320</span>              : </span>
+<span id="L321"><span class="lineNum">     321</span>              :   // group_order_size returns the number of bytes needed to represent the order</span>
+<span id="L322"><span class="lineNum">     322</span>              :   // of the group. This is used to calculate the maximum size of an ECDSA</span>
+<span id="L323"><span class="lineNum">     323</span>              :   // signature in |ECDSA_size|.</span>
+<span id="L324"><span class="lineNum">     324</span>              :   size_t (*group_order_size)(const EC_KEY *key);</span>
+<span id="L325"><span class="lineNum">     325</span>              : </span>
+<span id="L326"><span class="lineNum">     326</span>              :   // sign matches the arguments and behaviour of |ECDSA_sign|.</span>
+<span id="L327"><span class="lineNum">     327</span>              :   int (*sign)(const uint8_t *digest, size_t digest_len, uint8_t *sig,</span>
+<span id="L328"><span class="lineNum">     328</span>              :               unsigned int *sig_len, EC_KEY *eckey);</span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span>              :   int flags;</span>
+<span id="L331"><span class="lineNum">     331</span>              : };</span>
+<span id="L332"><span class="lineNum">     332</span>              : </span>
+<span id="L333"><span class="lineNum">     333</span>              : </span>
+<span id="L334"><span class="lineNum">     334</span>              : // Deprecated functions.</span>
+<span id="L335"><span class="lineNum">     335</span>              : </span>
+<span id="L336"><span class="lineNum">     336</span>              : // EC_KEY_set_asn1_flag does nothing.</span>
+<span id="L337"><span class="lineNum">     337</span>              : OPENSSL_EXPORT void EC_KEY_set_asn1_flag(EC_KEY *key, int flag);</span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span>              : // d2i_ECPrivateKey parses a DER-encoded ECPrivateKey structure (RFC 5915) from</span>
+<span id="L340"><span class="lineNum">     340</span>              : // |len| bytes at |*inp|, as described in |d2i_SAMPLE|. On input, if |*out_key|</span>
+<span id="L341"><span class="lineNum">     341</span>              : // is non-NULL and has a group configured, the parameters field may be omitted</span>
+<span id="L342"><span class="lineNum">     342</span>              : // but must match that group if present.</span>
+<span id="L343"><span class="lineNum">     343</span>              : //</span>
+<span id="L344"><span class="lineNum">     344</span>              : // Use |EC_KEY_parse_private_key| instead.</span>
+<span id="L345"><span class="lineNum">     345</span>              : OPENSSL_EXPORT EC_KEY *d2i_ECPrivateKey(EC_KEY **out_key, const uint8_t **inp,</span>
+<span id="L346"><span class="lineNum">     346</span>              :                                         long len);</span>
+<span id="L347"><span class="lineNum">     347</span>              : </span>
+<span id="L348"><span class="lineNum">     348</span>              : // i2d_ECPrivateKey marshals |key| as a DER-encoded ECPrivateKey structure (RFC</span>
+<span id="L349"><span class="lineNum">     349</span>              : // 5915), as described in |i2d_SAMPLE|.</span>
+<span id="L350"><span class="lineNum">     350</span>              : //</span>
+<span id="L351"><span class="lineNum">     351</span>              : // Use |EC_KEY_marshal_private_key| instead.</span>
+<span id="L352"><span class="lineNum">     352</span>              : OPENSSL_EXPORT int i2d_ECPrivateKey(const EC_KEY *key, uint8_t **outp);</span>
+<span id="L353"><span class="lineNum">     353</span>              : </span>
+<span id="L354"><span class="lineNum">     354</span>              : // d2i_ECParameters parses a DER-encoded ECParameters structure (RFC 5480) from</span>
+<span id="L355"><span class="lineNum">     355</span>              : // |len| bytes at |*inp|, as described in |d2i_SAMPLE|.</span>
+<span id="L356"><span class="lineNum">     356</span>              : //</span>
+<span id="L357"><span class="lineNum">     357</span>              : // Use |EC_KEY_parse_parameters| or |EC_KEY_parse_curve_name| instead.</span>
+<span id="L358"><span class="lineNum">     358</span>              : OPENSSL_EXPORT EC_KEY *d2i_ECParameters(EC_KEY **out_key, const uint8_t **inp,</span>
+<span id="L359"><span class="lineNum">     359</span>              :                                         long len);</span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span>              : // i2d_ECParameters marshals |key|'s parameters as a DER-encoded OBJECT</span>
+<span id="L362"><span class="lineNum">     362</span>              : // IDENTIFIER, as described in |i2d_SAMPLE|.</span>
+<span id="L363"><span class="lineNum">     363</span>              : //</span>
+<span id="L364"><span class="lineNum">     364</span>              : // Use |EC_KEY_marshal_curve_name| instead.</span>
+<span id="L365"><span class="lineNum">     365</span>              : OPENSSL_EXPORT int i2d_ECParameters(const EC_KEY *key, uint8_t **outp);</span>
+<span id="L366"><span class="lineNum">     366</span>              : </span>
+<span id="L367"><span class="lineNum">     367</span>              : // o2i_ECPublicKey parses an EC point from |len| bytes at |*inp| into</span>
+<span id="L368"><span class="lineNum">     368</span>              : // |*out_key|. Note that this differs from the d2i format in that |*out_key|</span>
+<span id="L369"><span class="lineNum">     369</span>              : // must be non-NULL with a group set. On successful exit, |*inp| is advanced by</span>
+<span id="L370"><span class="lineNum">     370</span>              : // |len| bytes. It returns |*out_key| or NULL on error.</span>
+<span id="L371"><span class="lineNum">     371</span>              : //</span>
+<span id="L372"><span class="lineNum">     372</span>              : // Use |EC_POINT_oct2point| instead.</span>
+<span id="L373"><span class="lineNum">     373</span>              : OPENSSL_EXPORT EC_KEY *o2i_ECPublicKey(EC_KEY **out_key, const uint8_t **inp,</span>
+<span id="L374"><span class="lineNum">     374</span>              :                                        long len);</span>
+<span id="L375"><span class="lineNum">     375</span>              : </span>
+<span id="L376"><span class="lineNum">     376</span>              : // i2o_ECPublicKey marshals an EC point from |key|, as described in</span>
+<span id="L377"><span class="lineNum">     377</span>              : // |i2d_SAMPLE|, except it returns zero on error instead of a negative value.</span>
+<span id="L378"><span class="lineNum">     378</span>              : //</span>
+<span id="L379"><span class="lineNum">     379</span>              : // Use |EC_POINT_point2cbb| instead.</span>
+<span id="L380"><span class="lineNum">     380</span>              : OPENSSL_EXPORT int i2o_ECPublicKey(const EC_KEY *key, unsigned char **outp);</span>
+<span id="L381"><span class="lineNum">     381</span>              : </span>
+<span id="L382"><span class="lineNum">     382</span>              : </span>
+<span id="L383"><span class="lineNum">     383</span>              : #if defined(__cplusplus)</span>
+<span id="L384"><span class="lineNum">     384</span>              : }  // extern C</span>
+<span id="L385"><span class="lineNum">     385</span>              : </span>
+<span id="L386"><span class="lineNum">     386</span>              : extern &quot;C++&quot; {</span>
+<span id="L387"><span class="lineNum">     387</span>              : </span>
+<span id="L388"><span class="lineNum">     388</span>              : BSSL_NAMESPACE_BEGIN</span>
+<span id="L389"><span class="lineNum">     389</span>              : </span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC tlaBgUNC">           0 : BORINGSSL_MAKE_DELETER(EC_KEY, EC_KEY_free)</span></span>
+<span id="L391"><span class="lineNum">     391</span>              : BORINGSSL_MAKE_UP_REF(EC_KEY, EC_KEY_up_ref)</span>
+<span id="L392"><span class="lineNum">     392</span>              : </span>
+<span id="L393"><span class="lineNum">     393</span>              : BSSL_NAMESPACE_END</span>
+<span id="L394"><span class="lineNum">     394</span>              : </span>
+<span id="L395"><span class="lineNum">     395</span>              : }  // extern C++</span>
+<span id="L396"><span class="lineNum">     396</span>              : </span>
+<span id="L397"><span class="lineNum">     397</span>              : #endif</span>
+<span id="L398"><span class="lineNum">     398</span>              : </span>
+<span id="L399"><span class="lineNum">     399</span>              : #endif  // OPENSSL_HEADER_EC_KEY_H</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
