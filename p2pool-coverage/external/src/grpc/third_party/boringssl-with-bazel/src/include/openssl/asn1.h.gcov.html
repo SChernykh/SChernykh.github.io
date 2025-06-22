@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -782,9 +782,9 @@
 <span id="L720"><span class="lineNum">     720</span>              : </span>
 <span id="L721"><span class="lineNum">     721</span>              : // The following formats define encodings for use with functions like</span>
 <span id="L722"><span class="lineNum">     722</span>              : // |ASN1_mbstring_copy|. Note |MBSTRING_ASC| refers to Latin-1, not ASCII.</span>
-<span id="L723"><span class="lineNum">     723</span>              : #define MBSTRING_FLAG 0x1000</span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC tlaBgGNC">           2 : #define MBSTRING_FLAG 0x1000</span></span>
 <span id="L724"><span class="lineNum">     724</span>              : #define MBSTRING_UTF8 (MBSTRING_FLAG)</span>
-<span id="L725"><span class="lineNum">     725</span>              : #define MBSTRING_ASC (MBSTRING_FLAG | 1)</span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">           2 : #define MBSTRING_ASC (MBSTRING_FLAG | 1)</span></span>
 <span id="L726"><span class="lineNum">     726</span>              : #define MBSTRING_BMP (MBSTRING_FLAG | 2)</span>
 <span id="L727"><span class="lineNum">     727</span>              : #define MBSTRING_UNIV (MBSTRING_FLAG | 4)</span>
 <span id="L728"><span class="lineNum">     728</span>              : </span>
@@ -1483,7 +1483,7 @@
 <span id="L1421"><span class="lineNum">    1421</span>              : // obj.h deals with the large NID table, but then functions like |OBJ_get0_data|</span>
 <span id="L1422"><span class="lineNum">    1422</span>              : // or |OBJ_dup| are general |ASN1_OBJECT| functions.</span>
 <span id="L1423"><span class="lineNum">    1423</span>              : </span>
-<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaGNC tlaBgGNC">           2 : DEFINE_STACK_OF(ASN1_OBJECT)</span></span>
+<span id="L1424"><span class="lineNum">    1424</span>              : DEFINE_STACK_OF(ASN1_OBJECT)</span>
 <span id="L1425"><span class="lineNum">    1425</span>              : </span>
 <span id="L1426"><span class="lineNum">    1426</span>              : // ASN1_OBJECT_create returns a newly-allocated |ASN1_OBJECT| with |len| bytes</span>
 <span id="L1427"><span class="lineNum">    1427</span>              : // from |data| as the encoded OID, or NULL on error. |data| should contain the</span>
@@ -2034,7 +2034,7 @@
 <span id="L1972"><span class="lineNum">    1972</span>              : </span>
 <span id="L1973"><span class="lineNum">    1973</span>              : BSSL_NAMESPACE_BEGIN</span>
 <span id="L1974"><span class="lineNum">    1974</span>              : </span>
-<span id="L1975"><span class="lineNum">    1975</span> <span class="tlaGNC">           1 : BORINGSSL_MAKE_DELETER(ASN1_OBJECT, ASN1_OBJECT_free)</span></span>
+<span id="L1975"><span class="lineNum">    1975</span>              : BORINGSSL_MAKE_DELETER(ASN1_OBJECT, ASN1_OBJECT_free)</span>
 <span id="L1976"><span class="lineNum">    1976</span>              : BORINGSSL_MAKE_DELETER(ASN1_STRING, ASN1_STRING_free)</span>
 <span id="L1977"><span class="lineNum">    1977</span>              : BORINGSSL_MAKE_DELETER(ASN1_TYPE, ASN1_TYPE_free)</span>
 <span id="L1978"><span class="lineNum">    1978</span>              : </span>

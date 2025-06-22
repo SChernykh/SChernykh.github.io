@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryLo">15.8&nbsp;%</td>
+            <td class="headerCovTableEntry">95</td>
+            <td class="headerCovTableEntry">15</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntryLo">0.6&nbsp;%</td>
+            <td class="headerCovTableEntry">702</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
                   <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -477,130 +477,130 @@
 <span id="L415"><span class="lineNum">     415</span>              :   typedef int (*sk_##name##_delete_if_func)(ptrtype, void *);                  \</span>
 <span id="L416"><span class="lineNum">     416</span>              :                                                                                \</span>
 <span id="L417"><span class="lineNum">     417</span>              :   OPENSSL_INLINE void sk_##name##_call_free_func(                              \</span>
-<span id="L418"><span class="lineNum">     418</span>              :       OPENSSL_sk_free_func free_func, void *ptr) {                             \</span>
-<span id="L419"><span class="lineNum">     419</span>              :     ((sk_##name##_free_func)free_func)((ptrtype)ptr);                          \</span>
-<span id="L420"><span class="lineNum">     420</span>              :   }                                                                            \</span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaUNC tlaBgUNC">           0 :       OPENSSL_sk_free_func free_func, void *ptr) {                             \</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 :     ((sk_##name##_free_func)free_func)((ptrtype)ptr);                          \</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L421"><span class="lineNum">     421</span>              :                                                                                \</span>
 <span id="L422"><span class="lineNum">     422</span>              :   OPENSSL_INLINE void *sk_##name##_call_copy_func(                             \</span>
-<span id="L423"><span class="lineNum">     423</span>              :       OPENSSL_sk_copy_func copy_func, const void *ptr) {                       \</span>
-<span id="L424"><span class="lineNum">     424</span>              :     return (void *)((sk_##name##_copy_func)copy_func)((constptrtype)ptr);      \</span>
-<span id="L425"><span class="lineNum">     425</span>              :   }                                                                            \</span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC">           0 :       OPENSSL_sk_copy_func copy_func, const void *ptr) {                       \</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC">           0 :     return (void *)((sk_##name##_copy_func)copy_func)((constptrtype)ptr);      \</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L426"><span class="lineNum">     426</span>              :                                                                                \</span>
 <span id="L427"><span class="lineNum">     427</span>              :   OPENSSL_INLINE int sk_##name##_call_cmp_func(OPENSSL_sk_cmp_func cmp_func,   \</span>
-<span id="L428"><span class="lineNum">     428</span>              :                                                const void *a, const void *b) { \</span>
-<span id="L429"><span class="lineNum">     429</span>              :     constptrtype a_ptr = (constptrtype)a;                                      \</span>
-<span id="L430"><span class="lineNum">     430</span>              :     constptrtype b_ptr = (constptrtype)b;                                      \</span>
-<span id="L431"><span class="lineNum">     431</span>              :     /* |cmp_func| expects an extra layer of pointers to match qsort. */        \</span>
-<span id="L432"><span class="lineNum">     432</span>              :     return ((sk_##name##_cmp_func)cmp_func)(&amp;a_ptr, &amp;b_ptr);                   \</span>
-<span id="L433"><span class="lineNum">     433</span>              :   }                                                                            \</span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaUNC">           0 :                                                const void *a, const void *b) { \</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaUNC">           0 :     constptrtype a_ptr = (constptrtype)a;                                      \</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaUNC">           0 :     constptrtype b_ptr = (constptrtype)b;                                      \</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaUNC">           0 :     /* |cmp_func| expects an extra layer of pointers to match qsort. */        \</span></span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaUNC">           0 :     return ((sk_##name##_cmp_func)cmp_func)(&amp;a_ptr, &amp;b_ptr);                   \</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L434"><span class="lineNum">     434</span>              :                                                                                \</span>
 <span id="L435"><span class="lineNum">     435</span>              :   OPENSSL_INLINE int sk_##name##_call_delete_if_func(                          \</span>
-<span id="L436"><span class="lineNum">     436</span>              :       OPENSSL_sk_delete_if_func func, void *obj, void *data) {                 \</span>
-<span id="L437"><span class="lineNum">     437</span>              :     return ((sk_##name##_delete_if_func)func)((ptrtype)obj, data);             \</span>
-<span id="L438"><span class="lineNum">     438</span>              :   }                                                                            \</span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC">           0 :       OPENSSL_sk_delete_if_func func, void *obj, void *data) {                 \</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaUNC">           0 :     return ((sk_##name##_delete_if_func)func)((ptrtype)obj, data);             \</span></span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L439"><span class="lineNum">     439</span>              :                                                                                \</span>
-<span id="L440"><span class="lineNum">     440</span>              :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_new(sk_##name##_cmp_func comp) {  \</span>
-<span id="L441"><span class="lineNum">     441</span>              :     return (STACK_OF(name) *)OPENSSL_sk_new((OPENSSL_sk_cmp_func)comp);        \</span>
-<span id="L442"><span class="lineNum">     442</span>              :   }                                                                            \</span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_new(sk_##name##_cmp_func comp) {  \</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :     return (STACK_OF(name) *)OPENSSL_sk_new((OPENSSL_sk_cmp_func)comp);        \</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L443"><span class="lineNum">     443</span>              :                                                                                \</span>
-<span id="L444"><span class="lineNum">     444</span>              :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_new_null(void) {                  \</span>
-<span id="L445"><span class="lineNum">     445</span>              :     return (STACK_OF(name) *)OPENSSL_sk_new_null();                            \</span>
-<span id="L446"><span class="lineNum">     446</span>              :   }                                                                            \</span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC tlaBgGNC">           1 :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_new_null(void) {                  \</span></span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">           1 :     return (STACK_OF(name) *)OPENSSL_sk_new_null();                            \</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">           1 :   }                                                                            \</span></span>
 <span id="L447"><span class="lineNum">     447</span>              :                                                                                \</span>
-<span id="L448"><span class="lineNum">     448</span>              :   OPENSSL_INLINE size_t sk_##name##_num(const STACK_OF(name) *sk) {            \</span>
-<span id="L449"><span class="lineNum">     449</span>              :     return OPENSSL_sk_num((const OPENSSL_STACK *)sk);                          \</span>
-<span id="L450"><span class="lineNum">     450</span>              :   }                                                                            \</span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC tlaBgUNC">           0 :   OPENSSL_INLINE size_t sk_##name##_num(const STACK_OF(name) *sk) {            \</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaUNC">           0 :     return OPENSSL_sk_num((const OPENSSL_STACK *)sk);                          \</span></span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L451"><span class="lineNum">     451</span>              :                                                                                \</span>
-<span id="L452"><span class="lineNum">     452</span>              :   OPENSSL_INLINE void sk_##name##_zero(STACK_OF(name) *sk) {                   \</span>
-<span id="L453"><span class="lineNum">     453</span>              :     OPENSSL_sk_zero((OPENSSL_STACK *)sk);                                      \</span>
-<span id="L454"><span class="lineNum">     454</span>              :   }                                                                            \</span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE void sk_##name##_zero(STACK_OF(name) *sk) {                   \</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC">           0 :     OPENSSL_sk_zero((OPENSSL_STACK *)sk);                                      \</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L455"><span class="lineNum">     455</span>              :                                                                                \</span>
 <span id="L456"><span class="lineNum">     456</span>              :   OPENSSL_INLINE ptrtype sk_##name##_value(const STACK_OF(name) *sk,           \</span>
-<span id="L457"><span class="lineNum">     457</span>              :                                            size_t i) {                         \</span>
-<span id="L458"><span class="lineNum">     458</span>              :     return (ptrtype)OPENSSL_sk_value((const OPENSSL_STACK *)sk, i);            \</span>
-<span id="L459"><span class="lineNum">     459</span>              :   }                                                                            \</span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC">           0 :                                            size_t i) {                         \</span></span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :     return (ptrtype)OPENSSL_sk_value((const OPENSSL_STACK *)sk, i);            \</span></span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L460"><span class="lineNum">     460</span>              :                                                                                \</span>
 <span id="L461"><span class="lineNum">     461</span>              :   OPENSSL_INLINE ptrtype sk_##name##_set(STACK_OF(name) *sk, size_t i,         \</span>
-<span id="L462"><span class="lineNum">     462</span>              :                                          ptrtype p) {                          \</span>
-<span id="L463"><span class="lineNum">     463</span>              :     return (ptrtype)OPENSSL_sk_set((OPENSSL_STACK *)sk, i, (void *)p);         \</span>
-<span id="L464"><span class="lineNum">     464</span>              :   }                                                                            \</span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaUNC">           0 :                                          ptrtype p) {                          \</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 :     return (ptrtype)OPENSSL_sk_set((OPENSSL_STACK *)sk, i, (void *)p);         \</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L465"><span class="lineNum">     465</span>              :                                                                                \</span>
-<span id="L466"><span class="lineNum">     466</span>              :   OPENSSL_INLINE void sk_##name##_free(STACK_OF(name) *sk) {                   \</span>
-<span id="L467"><span class="lineNum">     467</span>              :     OPENSSL_sk_free((OPENSSL_STACK *)sk);                                      \</span>
-<span id="L468"><span class="lineNum">     468</span>              :   }                                                                            \</span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE void sk_##name##_free(STACK_OF(name) *sk) {                   \</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC">           0 :     OPENSSL_sk_free((OPENSSL_STACK *)sk);                                      \</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L469"><span class="lineNum">     469</span>              :                                                                                \</span>
 <span id="L470"><span class="lineNum">     470</span>              :   OPENSSL_INLINE void sk_##name##_pop_free(STACK_OF(name) *sk,                 \</span>
-<span id="L471"><span class="lineNum">     471</span>              :                                            sk_##name##_free_func free_func) {  \</span>
-<span id="L472"><span class="lineNum">     472</span>              :     OPENSSL_sk_pop_free_ex((OPENSSL_STACK *)sk, sk_##name##_call_free_func,    \</span>
-<span id="L473"><span class="lineNum">     473</span>              :                            (OPENSSL_sk_free_func)free_func);                   \</span>
-<span id="L474"><span class="lineNum">     474</span>              :   }                                                                            \</span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC">           0 :                                            sk_##name##_free_func free_func) {  \</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 :     OPENSSL_sk_pop_free_ex((OPENSSL_STACK *)sk, sk_##name##_call_free_func,    \</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaUNC">           0 :                            (OPENSSL_sk_free_func)free_func);                   \</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L475"><span class="lineNum">     475</span>              :                                                                                \</span>
 <span id="L476"><span class="lineNum">     476</span>              :   OPENSSL_INLINE size_t sk_##name##_insert(STACK_OF(name) *sk, ptrtype p,      \</span>
-<span id="L477"><span class="lineNum">     477</span>              :                                            size_t where) {                     \</span>
-<span id="L478"><span class="lineNum">     478</span>              :     return OPENSSL_sk_insert((OPENSSL_STACK *)sk, (void *)p, where);           \</span>
-<span id="L479"><span class="lineNum">     479</span>              :   }                                                                            \</span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC">           0 :                                            size_t where) {                     \</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :     return OPENSSL_sk_insert((OPENSSL_STACK *)sk, (void *)p, where);           \</span></span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L480"><span class="lineNum">     480</span>              :                                                                                \</span>
 <span id="L481"><span class="lineNum">     481</span>              :   OPENSSL_INLINE ptrtype sk_##name##_delete(STACK_OF(name) *sk,                \</span>
-<span id="L482"><span class="lineNum">     482</span>              :                                             size_t where) {                    \</span>
-<span id="L483"><span class="lineNum">     483</span>              :     return (ptrtype)OPENSSL_sk_delete((OPENSSL_STACK *)sk, where);             \</span>
-<span id="L484"><span class="lineNum">     484</span>              :   }                                                                            \</span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaUNC">           0 :                                             size_t where) {                    \</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :     return (ptrtype)OPENSSL_sk_delete((OPENSSL_STACK *)sk, where);             \</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L485"><span class="lineNum">     485</span>              :                                                                                \</span>
 <span id="L486"><span class="lineNum">     486</span>              :   OPENSSL_INLINE ptrtype sk_##name##_delete_ptr(STACK_OF(name) *sk,            \</span>
-<span id="L487"><span class="lineNum">     487</span>              :                                                 constptrtype p) {              \</span>
-<span id="L488"><span class="lineNum">     488</span>              :     return (ptrtype)OPENSSL_sk_delete_ptr((OPENSSL_STACK *)sk,                 \</span>
-<span id="L489"><span class="lineNum">     489</span>              :                                           (const void *)p);                    \</span>
-<span id="L490"><span class="lineNum">     490</span>              :   }                                                                            \</span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaUNC">           0 :                                                 constptrtype p) {              \</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaUNC">           0 :     return (ptrtype)OPENSSL_sk_delete_ptr((OPENSSL_STACK *)sk,                 \</span></span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaUNC">           0 :                                           (const void *)p);                    \</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L491"><span class="lineNum">     491</span>              :                                                                                \</span>
 <span id="L492"><span class="lineNum">     492</span>              :   OPENSSL_INLINE void sk_##name##_delete_if(                                   \</span>
-<span id="L493"><span class="lineNum">     493</span>              :       STACK_OF(name) *sk, sk_##name##_delete_if_func func, void *data) {       \</span>
-<span id="L494"><span class="lineNum">     494</span>              :     OPENSSL_sk_delete_if((OPENSSL_STACK *)sk, sk_##name##_call_delete_if_func, \</span>
-<span id="L495"><span class="lineNum">     495</span>              :                          (OPENSSL_sk_delete_if_func)func, data);               \</span>
-<span id="L496"><span class="lineNum">     496</span>              :   }                                                                            \</span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC">           0 :       STACK_OF(name) *sk, sk_##name##_delete_if_func func, void *data) {       \</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaUNC">           0 :     OPENSSL_sk_delete_if((OPENSSL_STACK *)sk, sk_##name##_call_delete_if_func, \</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaUNC">           0 :                          (OPENSSL_sk_delete_if_func)func, data);               \</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L497"><span class="lineNum">     497</span>              :                                                                                \</span>
 <span id="L498"><span class="lineNum">     498</span>              :   OPENSSL_INLINE int sk_##name##_find(const STACK_OF(name) *sk,                \</span>
-<span id="L499"><span class="lineNum">     499</span>              :                                       size_t *out_index, constptrtype p) {     \</span>
-<span id="L500"><span class="lineNum">     500</span>              :     return OPENSSL_sk_find((const OPENSSL_STACK *)sk, out_index,               \</span>
-<span id="L501"><span class="lineNum">     501</span>              :                            (const void *)p, sk_##name##_call_cmp_func);        \</span>
-<span id="L502"><span class="lineNum">     502</span>              :   }                                                                            \</span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaUNC">           0 :                                       size_t *out_index, constptrtype p) {     \</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaUNC">           0 :     return OPENSSL_sk_find((const OPENSSL_STACK *)sk, out_index,               \</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC">           0 :                            (const void *)p, sk_##name##_call_cmp_func);        \</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L503"><span class="lineNum">     503</span>              :                                                                                \</span>
-<span id="L504"><span class="lineNum">     504</span>              :   OPENSSL_INLINE ptrtype sk_##name##_shift(STACK_OF(name) *sk) {               \</span>
-<span id="L505"><span class="lineNum">     505</span>              :     return (ptrtype)OPENSSL_sk_shift((OPENSSL_STACK *)sk);                     \</span>
-<span id="L506"><span class="lineNum">     506</span>              :   }                                                                            \</span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE ptrtype sk_##name##_shift(STACK_OF(name) *sk) {               \</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaUNC">           0 :     return (ptrtype)OPENSSL_sk_shift((OPENSSL_STACK *)sk);                     \</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L507"><span class="lineNum">     507</span>              :                                                                                \</span>
-<span id="L508"><span class="lineNum">     508</span>              :   OPENSSL_INLINE size_t sk_##name##_push(STACK_OF(name) *sk, ptrtype p) {      \</span>
-<span id="L509"><span class="lineNum">     509</span>              :     return OPENSSL_sk_push((OPENSSL_STACK *)sk, (void *)p);                    \</span>
-<span id="L510"><span class="lineNum">     510</span>              :   }                                                                            \</span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC tlaBgGNC">           1 :   OPENSSL_INLINE size_t sk_##name##_push(STACK_OF(name) *sk, ptrtype p) {      \</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">           1 :     return OPENSSL_sk_push((OPENSSL_STACK *)sk, (void *)p);                    \</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">           1 :   }                                                                            \</span></span>
 <span id="L511"><span class="lineNum">     511</span>              :                                                                                \</span>
-<span id="L512"><span class="lineNum">     512</span>              :   OPENSSL_INLINE ptrtype sk_##name##_pop(STACK_OF(name) *sk) {                 \</span>
-<span id="L513"><span class="lineNum">     513</span>              :     return (ptrtype)OPENSSL_sk_pop((OPENSSL_STACK *)sk);                       \</span>
-<span id="L514"><span class="lineNum">     514</span>              :   }                                                                            \</span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaUNC tlaBgUNC">           0 :   OPENSSL_INLINE ptrtype sk_##name##_pop(STACK_OF(name) *sk) {                 \</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaUNC">           0 :     return (ptrtype)OPENSSL_sk_pop((OPENSSL_STACK *)sk);                       \</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L515"><span class="lineNum">     515</span>              :                                                                                \</span>
-<span id="L516"><span class="lineNum">     516</span>              :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_dup(const STACK_OF(name) *sk) {   \</span>
-<span id="L517"><span class="lineNum">     517</span>              :     return (STACK_OF(name) *)OPENSSL_sk_dup((const OPENSSL_STACK *)sk);        \</span>
-<span id="L518"><span class="lineNum">     518</span>              :   }                                                                            \</span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_dup(const STACK_OF(name) *sk) {   \</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :     return (STACK_OF(name) *)OPENSSL_sk_dup((const OPENSSL_STACK *)sk);        \</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L519"><span class="lineNum">     519</span>              :                                                                                \</span>
-<span id="L520"><span class="lineNum">     520</span>              :   OPENSSL_INLINE void sk_##name##_sort(STACK_OF(name) *sk) {                   \</span>
-<span id="L521"><span class="lineNum">     521</span>              :     OPENSSL_sk_sort((OPENSSL_STACK *)sk, sk_##name##_call_cmp_func);           \</span>
-<span id="L522"><span class="lineNum">     522</span>              :   }                                                                            \</span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE void sk_##name##_sort(STACK_OF(name) *sk) {                   \</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 :     OPENSSL_sk_sort((OPENSSL_STACK *)sk, sk_##name##_call_cmp_func);           \</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L523"><span class="lineNum">     523</span>              :                                                                                \</span>
-<span id="L524"><span class="lineNum">     524</span>              :   OPENSSL_INLINE int sk_##name##_is_sorted(const STACK_OF(name) *sk) {         \</span>
-<span id="L525"><span class="lineNum">     525</span>              :     return OPENSSL_sk_is_sorted((const OPENSSL_STACK *)sk);                    \</span>
-<span id="L526"><span class="lineNum">     526</span>              :   }                                                                            \</span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC">           0 :   OPENSSL_INLINE int sk_##name##_is_sorted(const STACK_OF(name) *sk) {         \</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaUNC">           0 :     return OPENSSL_sk_is_sorted((const OPENSSL_STACK *)sk);                    \</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L527"><span class="lineNum">     527</span>              :                                                                                \</span>
 <span id="L528"><span class="lineNum">     528</span>              :   OPENSSL_INLINE sk_##name##_cmp_func sk_##name##_set_cmp_func(                \</span>
-<span id="L529"><span class="lineNum">     529</span>              :       STACK_OF(name) *sk, sk_##name##_cmp_func comp) {                         \</span>
-<span id="L530"><span class="lineNum">     530</span>              :     return (sk_##name##_cmp_func)OPENSSL_sk_set_cmp_func(                      \</span>
-<span id="L531"><span class="lineNum">     531</span>              :         (OPENSSL_STACK *)sk, (OPENSSL_sk_cmp_func)comp);                       \</span>
-<span id="L532"><span class="lineNum">     532</span>              :   }                                                                            \</span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 :       STACK_OF(name) *sk, sk_##name##_cmp_func comp) {                         \</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaUNC">           0 :     return (sk_##name##_cmp_func)OPENSSL_sk_set_cmp_func(                      \</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaUNC">           0 :         (OPENSSL_STACK *)sk, (OPENSSL_sk_cmp_func)comp);                       \</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L533"><span class="lineNum">     533</span>              :                                                                                \</span>
 <span id="L534"><span class="lineNum">     534</span>              :   OPENSSL_INLINE STACK_OF(name) *sk_##name##_deep_copy(                        \</span>
 <span id="L535"><span class="lineNum">     535</span>              :       const STACK_OF(name) *sk, sk_##name##_copy_func copy_func,               \</span>
-<span id="L536"><span class="lineNum">     536</span>              :       sk_##name##_free_func free_func) {                                       \</span>
-<span id="L537"><span class="lineNum">     537</span>              :     return (STACK_OF(name) *)OPENSSL_sk_deep_copy(                             \</span>
-<span id="L538"><span class="lineNum">     538</span>              :         (const OPENSSL_STACK *)sk, sk_##name##_call_copy_func,                 \</span>
-<span id="L539"><span class="lineNum">     539</span>              :         (OPENSSL_sk_copy_func)copy_func, sk_##name##_call_free_func,           \</span>
-<span id="L540"><span class="lineNum">     540</span>              :         (OPENSSL_sk_free_func)free_func);                                      \</span>
-<span id="L541"><span class="lineNum">     541</span>              :   }                                                                            \</span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaUNC">           0 :       sk_##name##_free_func free_func) {                                       \</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC">           0 :     return (STACK_OF(name) *)OPENSSL_sk_deep_copy(                             \</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :         (const OPENSSL_STACK *)sk, sk_##name##_call_copy_func,                 \</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaUNC">           0 :         (OPENSSL_sk_copy_func)copy_func, sk_##name##_call_free_func,           \</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC">           0 :         (OPENSSL_sk_free_func)free_func);                                      \</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :   }                                                                            \</span></span>
 <span id="L542"><span class="lineNum">     542</span>              :                                                                                \</span>
 <span id="L543"><span class="lineNum">     543</span>              :   OPENSSL_CLANG_PRAGMA(&quot;clang diagnostic pop&quot;)                                 \</span>
 <span id="L544"><span class="lineNum">     544</span>              :   OPENSSL_MSVC_PRAGMA(warning(pop))</span>
@@ -642,13 +642,13 @@
 <span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC tlaBgGNC">           1 :   static void Free(Stack *sk) {</span></span>
 <span id="L581"><span class="lineNum">     581</span>              :     // sk_FOO_pop_free is defined by macros and bound by name, so we cannot</span>
 <span id="L582"><span class="lineNum">     582</span>              :     // access it from C++ here.</span>
-<span id="L583"><span class="lineNum">     583</span>              :     using Type = typename StackTraits&lt;Stack&gt;::Type;</span>
+<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">           1 :     using Type = typename StackTraits&lt;Stack&gt;::Type;</span></span>
 <span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">           1 :     OPENSSL_sk_pop_free_ex(</span></span>
-<span id="L585"><span class="lineNum">     585</span>              :         reinterpret_cast&lt;OPENSSL_STACK *&gt;(sk),</span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           3 :         [](OPENSSL_sk_free_func /* unused */, void *ptr) {</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">           1 :         reinterpret_cast&lt;OPENSSL_STACK *&gt;(sk),</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           1 :         [](OPENSSL_sk_free_func /* unused */, void *ptr) {</span></span>
 <span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">           1 :           DeleterImpl&lt;Type&gt;::Free(reinterpret_cast&lt;Type *&gt;(ptr));</span></span>
-<span id="L588"><span class="lineNum">     588</span>              :         },</span>
-<span id="L589"><span class="lineNum">     589</span>              :         nullptr);</span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">           1 :         },</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">           1 :         nullptr);</span></span>
 <span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">           1 :   }</span></span>
 <span id="L591"><span class="lineNum">     591</span>              : };</span>
 <span id="L592"><span class="lineNum">     592</span>              : </span>

@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">16</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntry">16</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -240,8 +240,8 @@
 <span id="L178"><span class="lineNum">     178</span>              : </span>
 <span id="L179"><span class="lineNum">     179</span>              :         [[nodiscard]] int external_listen_port() const override;</span>
 <span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span>              :         [[nodiscard]] uint32_t max_outgoing_peers() const { return m_maxOutgoingPeers; }</span>
-<span id="L182"><span class="lineNum">     182</span>              :         [[nodiscard]] uint32_t max_incoming_peers() const { return m_maxIncomingPeers; }</span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint32_t max_outgoing_peers() const { return m_maxOutgoingPeers; }</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint32_t max_incoming_peers() const { return m_maxIncomingPeers; }</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 :         void set_max_outgoing_peers(uint32_t n) { m_maxOutgoingPeers = std::min(std::max(n, 10U), 450U); }</span></span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :         void set_max_incoming_peers(uint32_t n) { m_maxIncomingPeers = std::min(std::max(n, 10U), 450U); }</span></span>

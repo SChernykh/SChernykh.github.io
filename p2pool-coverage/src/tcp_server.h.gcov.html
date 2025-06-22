@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">12</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">33</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -104,7 +104,7 @@
 <span id="L42"><span class="lineNum">      42</span>              :         void shutdown_tcp();</span>
 <span id="L43"><span class="lineNum">      43</span>              :         virtual void print_status();</span>
 <span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span>              :         [[nodiscard]] uv_loop_t* get_loop() { return &amp;m_loop; }</span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :         [[nodiscard]] uv_loop_t* get_loop() { return &amp;m_loop; }</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
 <span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :         [[nodiscard]] virtual int external_listen_port() const { return m_listenPort; }</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
@@ -195,7 +195,7 @@
 <span id="L133"><span class="lineNum">     133</span>              : </span>
 <span id="L134"><span class="lineNum">     134</span>              :         template&lt;typename T&gt;</span>
 <span id="L135"><span class="lineNum">     135</span>              :         FORCEINLINE static void parse_address_list(const std::string&amp; address_list, T&amp;&amp; callback)</span>
-<span id="L136"><span class="lineNum">     136</span>              :         {</span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaUNC">           0 :         {</span></span>
 <span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :                 parse_address_list_internal(address_list, Callback&lt;void, bool, const std::string&amp;, const std::string&amp;, int&gt;::Derived&lt;T&gt;(std::move(callback)));</span></span>
 <span id="L138"><span class="lineNum">     138</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L139"><span class="lineNum">     139</span>              : </span>

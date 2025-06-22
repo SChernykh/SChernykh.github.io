@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">37.5&nbsp;%</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">37.5&nbsp;%</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -121,13 +121,13 @@
 <span id="L59"><span class="lineNum">      59</span>              :         bool submit_sidechain_block(uint32_t template_id, uint32_t nonce, uint32_t extra_nonce);</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
 <span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :         FORCEINLINE const std::vector&lt;MinerShare&gt;&amp; shares() const { return m_shares; }</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :         FORCEINLINE uint64_t get_reward() const { return m_finalReward; }</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC tlaBgGNC">           4 :         FORCEINLINE uint64_t get_reward() const { return m_finalReward; }</span></span>
 <span id="L63"><span class="lineNum">      63</span>              : </span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :         FORCEINLINE std::vector&lt;uint8_t&gt; get_coinbase_merkle_proof() const { ReadLock lock(m_lock); return m_merkleTreeMainBranch; }</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE std::vector&lt;uint8_t&gt; get_coinbase_merkle_proof() const { ReadLock lock(m_lock); return m_merkleTreeMainBranch; }</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
 <span id="L66"><span class="lineNum">      66</span>              : #ifdef P2POOL_UNIT_TESTS</span>
-<span id="L67"><span class="lineNum">      67</span>              :         FORCEINLINE const PoolBlock* pool_block_template() const { return m_poolBlockTemplate; }</span>
-<span id="L68"><span class="lineNum">      68</span>              :         FORCEINLINE std::mt19937_64&amp; rng() { return m_rng; }</span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC tlaBgGNC">           1 :         FORCEINLINE const PoolBlock* pool_block_template() const { return m_poolBlockTemplate; }</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           4 :         FORCEINLINE std::mt19937_64&amp; rng() { return m_rng; }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : #endif</span>
 <span id="L70"><span class="lineNum">      70</span>              : </span>
 <span id="L71"><span class="lineNum">      71</span>              : private:</span>

@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntry">46</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">8</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -498,32 +498,32 @@
 <span id="L436"><span class="lineNum">     436</span>              : #endif // P2POOL_LOG_DISABLE</span>
 <span id="L437"><span class="lineNum">     437</span>              : </span>
 <span id="L438"><span class="lineNum">     438</span>              : static FORCEINLINE void writeCurrentTime(Stream&amp; s)</span>
-<span id="L439"><span class="lineNum">     439</span>              : {</span>
-<span id="L440"><span class="lineNum">     440</span>              :         using namespace std::chrono;</span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaUNC">           0 :         using namespace std::chrono;</span></span>
 <span id="L441"><span class="lineNum">     441</span>              : </span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC tlaBgUNC">           0 :         const system_clock::time_point now = system_clock::now();</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :         const system_clock::time_point now = system_clock::now();</span></span>
 <span id="L443"><span class="lineNum">     443</span> <span class="tlaUNC">           0 :         const time_t t0 = system_clock::to_time_t(now);</span></span>
 <span id="L444"><span class="lineNum">     444</span>              : </span>
-<span id="L445"><span class="lineNum">     445</span>              :         tm t;</span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC">           0 :         tm t;</span></span>
 <span id="L446"><span class="lineNum">     446</span>              : </span>
 <span id="L447"><span class="lineNum">     447</span>              : #ifdef _WIN32</span>
 <span id="L448"><span class="lineNum">     448</span>              :         gmtime_s(&amp;t, &amp;t0);</span>
 <span id="L449"><span class="lineNum">     449</span>              : #else</span>
 <span id="L450"><span class="lineNum">     450</span> <span class="tlaUNC">           0 :         gmtime_r(&amp;t0, &amp;t);</span></span>
-<span id="L451"><span class="lineNum">     451</span>              : #endif</span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L452"><span class="lineNum">     452</span>              : </span>
-<span id="L453"><span class="lineNum">     453</span>              :         s.setNumberWidth(2);</span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC">           0 :         s.setNumberWidth(2);</span></span>
 <span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 :         s &lt;&lt; (t.tm_year + 1900) &lt;&lt; '-' &lt;&lt; (t.tm_mon + 1) &lt;&lt; '-' &lt;&lt; t.tm_mday &lt;&lt; ' ' &lt;&lt; t.tm_hour &lt;&lt; ':' &lt;&lt; t.tm_min &lt;&lt; ':' &lt;&lt; t.tm_sec &lt;&lt; '.';</span></span>
 <span id="L455"><span class="lineNum">     455</span>              : </span>
 <span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :         const int32_t mcs = time_point_cast&lt;microseconds&gt;(now).time_since_epoch().count() % 1000000;</span></span>
 <span id="L457"><span class="lineNum">     457</span>              : </span>
-<span id="L458"><span class="lineNum">     458</span>              :         s.setNumberWidth(4);</span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :         s.setNumberWidth(4);</span></span>
 <span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :         s &lt;&lt; (mcs / 100);</span></span>
-<span id="L460"><span class="lineNum">     460</span>              :         s.setNumberWidth(1);</span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaUNC">           0 :         s.setNumberWidth(1);</span></span>
 <span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L462"><span class="lineNum">     462</span>              : </span>
 <span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 : NOINLINE Writer::Writer(Severity severity) : Stream(m_stackBuf)</span></span>
-<span id="L464"><span class="lineNum">     464</span>              : {</span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC">           0 :         m_stackBuf[BUF_SIZE] = '\0';</span></span>
 <span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC">           0 :         m_buf[0] = static_cast&lt;char&gt;(severity);</span></span>
 <span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC">           0 :         m_pos = 3;</span></span>
@@ -533,8 +533,8 @@
 <span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC">           0 :         *this &lt;&lt; NoColor() &lt;&lt; ' ';</span></span>
 <span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L473"><span class="lineNum">     473</span>              : </span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 : NOINLINE Writer::~Writer()</span></span>
-<span id="L475"><span class="lineNum">     475</span>              : {</span>
+<span id="L474"><span class="lineNum">     474</span>              : NOINLINE Writer::~Writer()</span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L476"><span class="lineNum">     476</span> <span class="tlaUNC">           0 :         const uint32_t size = static_cast&lt;uint32_t&gt;(m_pos + 1);</span></span>
 <span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC">           0 :         m_buf[1] = static_cast&lt;uint8_t&gt;(size &amp; 255);</span></span>
 <span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :         m_buf[2] = static_cast&lt;uint8_t&gt;(size &gt;&gt; 8);</span></span>
@@ -544,8 +544,8 @@
 <span id="L482"><span class="lineNum">     482</span>              : #endif</span>
 <span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L484"><span class="lineNum">     484</span>              : </span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaUNC">           0 : void start()</span></span>
-<span id="L486"><span class="lineNum">     486</span>              : {</span>
+<span id="L485"><span class="lineNum">     485</span>              : void start()</span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L487"><span class="lineNum">     487</span>              : #ifndef P2POOL_LOG_DISABLE</span>
 <span id="L488"><span class="lineNum">     488</span>              :         worker = new Worker();</span>
 <span id="L489"><span class="lineNum">     489</span>              : </span>
@@ -553,37 +553,37 @@
 <span id="L491"><span class="lineNum">     491</span>              : #endif</span>
 <span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L493"><span class="lineNum">     493</span>              : </span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaUNC">           0 : void reopen()</span></span>
-<span id="L495"><span class="lineNum">     495</span>              : {</span>
+<span id="L494"><span class="lineNum">     494</span>              : void reopen()</span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L496"><span class="lineNum">     496</span>              :         // This will trigger the worker thread which will then reopen log file if it's been moved</span>
 <span id="L497"><span class="lineNum">     497</span>              : #ifndef P2POOL_LOG_DISABLE</span>
 <span id="L498"><span class="lineNum">     498</span>              :         worker-&gt;schedule_reopen();</span>
 <span id="L499"><span class="lineNum">     499</span>              : #endif</span>
 <span id="L500"><span class="lineNum">     500</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L501"><span class="lineNum">     501</span>              : </span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaUNC">           0 : void stop()</span></span>
-<span id="L503"><span class="lineNum">     503</span>              : {</span>
+<span id="L502"><span class="lineNum">     502</span>              : void stop()</span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L504"><span class="lineNum">     504</span>              : #ifndef P2POOL_LOG_DISABLE</span>
 <span id="L505"><span class="lineNum">     505</span>              :         delete worker;</span>
 <span id="L506"><span class="lineNum">     506</span>              :         worker = nullptr;</span>
 <span id="L507"><span class="lineNum">     507</span>              : #endif</span>
 <span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L509"><span class="lineNum">     509</span>              : </span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaUNC">           0 : NOINLINE void Stream::Entry&lt;raw_ip&gt;::put(const raw_ip&amp; value, Stream* wrapper)</span></span>
-<span id="L511"><span class="lineNum">     511</span>              : {</span>
+<span id="L510"><span class="lineNum">     510</span>              : NOINLINE void Stream::Entry&lt;raw_ip&gt;::put(const raw_ip&amp; value, Stream* wrapper)</span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L512"><span class="lineNum">     512</span> <span class="tlaUNC">           0 :         const bool is_ipv4 = value.is_ipv4_prefix();</span></span>
 <span id="L513"><span class="lineNum">     513</span>              : </span>
-<span id="L514"><span class="lineNum">     514</span>              :         char addr_str_buf[64];</span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 :         char addr_str_buf[64];</span></span>
 <span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :         const char* addr_str = inet_ntop(is_ipv4 ? AF_INET : AF_INET6, value.data + (is_ipv4 ? 12 : 0), addr_str_buf, sizeof(addr_str_buf));</span></span>
 <span id="L516"><span class="lineNum">     516</span>              : </span>
 <span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :         *wrapper &lt;&lt; (addr_str ? addr_str : &quot;N/A&quot;);</span></span>
 <span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 : NOINLINE void Stream::Entry&lt;Wallet&gt;::put(const Wallet&amp; w, Stream* wrapper)</span></span>
-<span id="L521"><span class="lineNum">     521</span>              : {</span>
-<span id="L522"><span class="lineNum">     522</span>              :         char buf[Wallet::ADDRESS_LENGTH];</span>
+<span id="L520"><span class="lineNum">     520</span>              : NOINLINE void Stream::Entry&lt;Wallet&gt;::put(const Wallet&amp; w, Stream* wrapper)</span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC">           0 :         char buf[Wallet::ADDRESS_LENGTH];</span></span>
 <span id="L523"><span class="lineNum">     523</span> <span class="tlaUNC">           0 :         w.encode(buf);</span></span>
-<span id="L524"><span class="lineNum">     524</span>              :         wrapper-&gt;writeBuf(buf, Wallet::ADDRESS_LENGTH);</span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC">           0 :         wrapper-&gt;writeBuf(buf, Wallet::ADDRESS_LENGTH);</span></span>
 <span id="L525"><span class="lineNum">     525</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L526"><span class="lineNum">     526</span>              : </span>
 <span id="L527"><span class="lineNum">     527</span>              : } // namespace log</span>

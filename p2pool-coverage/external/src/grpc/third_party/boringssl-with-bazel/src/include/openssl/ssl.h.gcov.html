@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -550,7 +550,7 @@
 <span id="L488"><span class="lineNum">     488</span>              : // If signaled by a DTLS handshake, the caller must also call</span>
 <span id="L489"><span class="lineNum">     489</span>              : // |DTLSv1_get_timeout| and |DTLSv1_handle_timeout| as appropriate. See</span>
 <span id="L490"><span class="lineNum">     490</span>              : // |SSL_do_handshake|.</span>
-<span id="L491"><span class="lineNum">     491</span>              : #define SSL_ERROR_WANT_READ 2</span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaUNC tlaBgUNC">           0 : #define SSL_ERROR_WANT_READ 2</span></span>
 <span id="L492"><span class="lineNum">     492</span>              : </span>
 <span id="L493"><span class="lineNum">     493</span>              : // SSL_ERROR_WANT_WRITE indicates the operation failed attempting to write to</span>
 <span id="L494"><span class="lineNum">     494</span>              : // the transport. The caller may retry the operation when the transport is ready</span>
@@ -781,7 +781,7 @@
 <span id="L719"><span class="lineNum">     719</span>              : // SSL_OP_CIPHER_SERVER_PREFERENCE configures servers to select ciphers and</span>
 <span id="L720"><span class="lineNum">     720</span>              : // ECDHE curves according to the server's preferences instead of the</span>
 <span id="L721"><span class="lineNum">     721</span>              : // client's.</span>
-<span id="L722"><span class="lineNum">     722</span>              : #define SSL_OP_CIPHER_SERVER_PREFERENCE 0x00400000L</span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaUNC">           0 : #define SSL_OP_CIPHER_SERVER_PREFERENCE 0x00400000L</span></span>
 <span id="L723"><span class="lineNum">     723</span>              : </span>
 <span id="L724"><span class="lineNum">     724</span>              : // The following flags toggle individual protocol versions. This is deprecated.</span>
 <span id="L725"><span class="lineNum">     725</span>              : // Use |SSL_CTX_set_min_proto_version| and |SSL_CTX_set_max_proto_version|</span>
@@ -1417,7 +1417,7 @@
 <span id="L1355"><span class="lineNum">    1355</span>              : // |type| parameter is one of the |SSL_FILETYPE_*| values and determines whether</span>
 <span id="L1356"><span class="lineNum">    1356</span>              : // the file's contents are read as PEM or DER.</span>
 <span id="L1357"><span class="lineNum">    1357</span>              : </span>
-<span id="L1358"><span class="lineNum">    1358</span>              : #define SSL_FILETYPE_PEM 1</span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 : #define SSL_FILETYPE_PEM 1</span></span>
 <span id="L1359"><span class="lineNum">    1359</span>              : #define SSL_FILETYPE_ASN1 2</span>
 <span id="L1360"><span class="lineNum">    1360</span>              : </span>
 <span id="L1361"><span class="lineNum">    1361</span>              : OPENSSL_EXPORT int SSL_CTX_use_RSAPrivateKey_file(SSL_CTX *ctx,</span>
@@ -5833,7 +5833,7 @@
 <span id="L5771"><span class="lineNum">    5771</span>              : #define SSL_CTX_set_max_send_fragment SSL_CTX_set_max_send_fragment</span>
 <span id="L5772"><span class="lineNum">    5772</span>              : #define SSL_CTX_set_mode SSL_CTX_set_mode</span>
 <span id="L5773"><span class="lineNum">    5773</span>              : #define SSL_CTX_set_msg_callback_arg SSL_CTX_set_msg_callback_arg</span>
-<span id="L5774"><span class="lineNum">    5774</span>              : #define SSL_CTX_set_options SSL_CTX_set_options</span>
+<span id="L5774"><span class="lineNum">    5774</span> <span class="tlaUNC">           0 : #define SSL_CTX_set_options SSL_CTX_set_options</span></span>
 <span id="L5775"><span class="lineNum">    5775</span>              : #define SSL_CTX_set_read_ahead SSL_CTX_set_read_ahead</span>
 <span id="L5776"><span class="lineNum">    5776</span>              : #define SSL_CTX_set_session_cache_mode SSL_CTX_set_session_cache_mode</span>
 <span id="L5777"><span class="lineNum">    5777</span>              : #define SSL_CTX_set_tlsext_servername_arg SSL_CTX_set_tlsext_servername_arg</span>
@@ -5888,10 +5888,10 @@
 <span id="L5826"><span class="lineNum">    5826</span>              : </span>
 <span id="L5827"><span class="lineNum">    5827</span>              : BSSL_NAMESPACE_BEGIN</span>
 <span id="L5828"><span class="lineNum">    5828</span>              : </span>
-<span id="L5829"><span class="lineNum">    5829</span> <span class="tlaUNC tlaBgUNC">           0 : BORINGSSL_MAKE_DELETER(SSL, SSL_free)</span></span>
+<span id="L5829"><span class="lineNum">    5829</span>              : BORINGSSL_MAKE_DELETER(SSL, SSL_free)</span>
 <span id="L5830"><span class="lineNum">    5830</span>              : BORINGSSL_MAKE_DELETER(SSL_CREDENTIAL, SSL_CREDENTIAL_free)</span>
 <span id="L5831"><span class="lineNum">    5831</span>              : BORINGSSL_MAKE_UP_REF(SSL_CREDENTIAL, SSL_CREDENTIAL_up_ref)</span>
-<span id="L5832"><span class="lineNum">    5832</span> <span class="tlaGNC tlaBgGNC">           1 : BORINGSSL_MAKE_DELETER(SSL_CTX, SSL_CTX_free)</span></span>
+<span id="L5832"><span class="lineNum">    5832</span>              : BORINGSSL_MAKE_DELETER(SSL_CTX, SSL_CTX_free)</span>
 <span id="L5833"><span class="lineNum">    5833</span>              : BORINGSSL_MAKE_UP_REF(SSL_CTX, SSL_CTX_up_ref)</span>
 <span id="L5834"><span class="lineNum">    5834</span>              : BORINGSSL_MAKE_DELETER(SSL_ECH_KEYS, SSL_ECH_KEYS_free)</span>
 <span id="L5835"><span class="lineNum">    5835</span>              : BORINGSSL_MAKE_UP_REF(SSL_ECH_KEYS, SSL_ECH_KEYS_up_ref)</span>

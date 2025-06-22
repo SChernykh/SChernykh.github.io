@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -136,8 +136,8 @@
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              :         uv_async_t m_shutdownAsync;</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC">           0 :         static void on_shutdown(uv_async_t* async)</span></span>
-<span id="L78"><span class="lineNum">      78</span>              :         {</span>
+<span id="L77"><span class="lineNum">      77</span>              :         static void on_shutdown(uv_async_t* async)</span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaUNC">           0 :         {</span></span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC">           0 :                 MergeMiningClientJSON_RPC* client = reinterpret_cast&lt;MergeMiningClientJSON_RPC*&gt;(async-&gt;data);</span></span>
 <span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 :                 client-&gt;on_shutdown();</span></span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>

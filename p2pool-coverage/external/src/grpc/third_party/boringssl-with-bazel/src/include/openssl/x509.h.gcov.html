@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -230,7 +230,7 @@
 <span id="L168"><span class="lineNum">     168</span>              : // defined X.509 versions are one less than the named version.</span>
 <span id="L169"><span class="lineNum">     169</span>              : #define X509_VERSION_1 0</span>
 <span id="L170"><span class="lineNum">     170</span>              : #define X509_VERSION_2 1</span>
-<span id="L171"><span class="lineNum">     171</span>              : #define X509_VERSION_3 2</span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC tlaBgGNC">           1 : #define X509_VERSION_3 2</span></span>
 <span id="L172"><span class="lineNum">     172</span>              : </span>
 <span id="L173"><span class="lineNum">     173</span>              : // X509_get_version returns the numerical value of |x509|'s version, which will</span>
 <span id="L174"><span class="lineNum">     174</span>              : // be one of the |X509_VERSION_*| constants.</span>
@@ -5468,7 +5468,7 @@
 <span id="L5406"><span class="lineNum">    5406</span>              : BORINGSSL_MAKE_DELETER(POLICY_MAPPING, POLICY_MAPPING_free)</span>
 <span id="L5407"><span class="lineNum">    5407</span>              : BORINGSSL_MAKE_DELETER(POLICYINFO, POLICYINFO_free)</span>
 <span id="L5408"><span class="lineNum">    5408</span>              : BORINGSSL_MAKE_DELETER(RSA_PSS_PARAMS, RSA_PSS_PARAMS_free)</span>
-<span id="L5409"><span class="lineNum">    5409</span> <span class="tlaGNC tlaBgGNC">           1 : BORINGSSL_MAKE_DELETER(X509, X509_free)</span></span>
+<span id="L5409"><span class="lineNum">    5409</span>              : BORINGSSL_MAKE_DELETER(X509, X509_free)</span>
 <span id="L5410"><span class="lineNum">    5410</span>              : BORINGSSL_MAKE_UP_REF(X509, X509_up_ref)</span>
 <span id="L5411"><span class="lineNum">    5411</span>              : BORINGSSL_MAKE_DELETER(X509_ALGOR, X509_ALGOR_free)</span>
 <span id="L5412"><span class="lineNum">    5412</span>              : BORINGSSL_MAKE_DELETER(X509_ATTRIBUTE, X509_ATTRIBUTE_free)</span>

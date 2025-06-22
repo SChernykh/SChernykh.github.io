@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">69.8&nbsp;%</td>
-            <td class="headerCovTableEntry">96</td>
-            <td class="headerCovTableEntry">67</td>
+            <td class="headerCovTableEntryMed">85.2&nbsp;%</td>
+            <td class="headerCovTableEntry">155</td>
+            <td class="headerCovTableEntry">132</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryHi">-</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryMed">83.3&nbsp;%</td>
+            <td class="headerCovTableEntry">54</td>
+            <td class="headerCovTableEntry">45</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -91,7 +91,7 @@
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              : #define FORCEINLINE __attribute__((always_inline)) inline</span>
 <span id="L31"><span class="lineNum">      31</span>              : #define NOINLINE __attribute__((noinline))</span>
-<span id="L32"><span class="lineNum">      32</span>              : #define LIKELY(expression) __builtin_expect(expression, 1)</span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC tlaBgGNC">    20004009 : #define LIKELY(expression) __builtin_expect(expression, 1)</span></span>
 <span id="L33"><span class="lineNum">      33</span>              : #define MSVC_PRAGMA(...)</span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : #else</span>
@@ -194,23 +194,23 @@
 <span id="L132"><span class="lineNum">     132</span>              : FORCEINLINE uint64_t shiftright128(uint64_t lo, uint64_t hi, uint64_t shift) { return __shiftright128(lo, hi, static_cast&lt;unsigned char&gt;(shift)); }</span>
 <span id="L133"><span class="lineNum">     133</span>              : #else</span>
 <span id="L134"><span class="lineNum">     134</span>              : FORCEINLINE uint64_t umul128(uint64_t a, uint64_t b, uint64_t* hi)</span>
-<span id="L135"><span class="lineNum">     135</span>              : {</span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC tlaBgGNC">   136377119 :         const unsigned __int128 r = static_cast&lt;unsigned __int128&gt;(a) * static_cast&lt;unsigned __int128&gt;(b);</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">   136377119 :         *hi = r &gt;&gt; 64;</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">   132643106 :         return static_cast&lt;uint64_t&gt;(r);</span></span>
-<span id="L139"><span class="lineNum">     139</span>              : }</span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">   146390543 : {</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">   146390543 :         const unsigned __int128 r = static_cast&lt;unsigned __int128&gt;(a) * static_cast&lt;unsigned __int128&gt;(b);</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">   146390543 :         *hi = r &gt;&gt; 64;</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">   146390543 :         return static_cast&lt;uint64_t&gt;(r);</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">   146390543 : }</span></span>
 <span id="L140"><span class="lineNum">     140</span>              : </span>
 <span id="L141"><span class="lineNum">     141</span>              : FORCEINLINE uint64_t udiv128(uint64_t hi, uint64_t lo, uint64_t divisor, uint64_t* remainder)</span>
-<span id="L142"><span class="lineNum">     142</span>              : {</span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">    43804807 :         const unsigned __int128 n = (static_cast&lt;unsigned __int128&gt;(hi) &lt;&lt; 64) + lo;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">    53810088 : {</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">    53810088 :         const unsigned __int128 n = (static_cast&lt;unsigned __int128&gt;(hi) &lt;&lt; 64) + lo;</span></span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">    43804807 :         const uint64_t result = n / divisor;</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">    43804807 :         *remainder = n % divisor;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">    53810088 :         const uint64_t result = n / divisor;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">    53810088 :         *remainder = n % divisor;</span></span>
 <span id="L147"><span class="lineNum">     147</span>              : </span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">    39878703 :         return result;</span></span>
-<span id="L149"><span class="lineNum">     149</span>              : }</span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">    53810088 :         return result;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">    53810088 : }</span></span>
 <span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">    39452018 : FORCEINLINE uint64_t shiftleft128(uint64_t lo, uint64_t hi, uint64_t shift) { return (hi &lt;&lt; shift) | (lo &gt;&gt; (64 - shift)); }</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">    70736640 : FORCEINLINE uint64_t shiftleft128(uint64_t lo, uint64_t hi, uint64_t shift) { return (hi &lt;&lt; shift) | (lo &gt;&gt; (64 - shift)); }</span></span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">     9971125 : FORCEINLINE uint64_t shiftright128(uint64_t lo, uint64_t hi, uint64_t shift) { return (hi &lt;&lt; (64 - shift)) | (lo &gt;&gt; shift); }</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : #endif</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
@@ -220,45 +220,45 @@
 <span id="L158"><span class="lineNum">     158</span>              : {</span>
 <span id="L159"><span class="lineNum">     159</span>              :         uint8_t h[HASH_SIZE];</span>
 <span id="L160"><span class="lineNum">     160</span>              : </span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC tlaBgGNC">    20285282 :         FORCEINLINE hash() : h{} {}</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC tlaBgGNC">    20802997 :         FORCEINLINE hash() : h{} {}</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
 <span id="L163"><span class="lineNum">     163</span>              :         FORCEINLINE bool operator&lt;(const hash&amp; other) const</span>
-<span id="L164"><span class="lineNum">     164</span>              :         {</span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">    33744208 :                 const uint64_t* a = u64();</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">    33744208 :                 const uint64_t* b = other.u64();</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">    33745297 :         {</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">    33745297 :                 const uint64_t* a = u64();</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">    33745297 :                 const uint64_t* b = other.u64();</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">    33744208 :                 if (a[3] &lt; b[3]) return true;</span></span>
-<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">    12512941 :                 if (a[3] &gt; b[3]) return false;</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">    33745297 :                 if (a[3] &lt; b[3]) return true;</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">    12513802 :                 if (a[3] &gt; b[3]) return false;</span></span>
 <span id="L170"><span class="lineNum">     170</span>              : </span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        4721 :                 if (a[2] &lt; b[2]) return true;</span></span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        4721 :                 if (a[2] &gt; b[2]) return false;</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">        5354 :                 if (a[2] &lt; b[2]) return true;</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">        5190 :                 if (a[2] &gt; b[2]) return false;</span></span>
 <span id="L173"><span class="lineNum">     173</span>              : </span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        4721 :                 if (a[1] &lt; b[1]) return true;</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        4721 :                 if (a[1] &gt; b[1]) return false;</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">        5026 :                 if (a[1] &lt; b[1]) return true;</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        4926 :                 if (a[1] &gt; b[1]) return false;</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        4721 :                 return (a[0] &lt; b[0]);</span></span>
-<span id="L178"><span class="lineNum">     178</span>              :         }</span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        4826 :                 return (a[0] &lt; b[0]);</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">        4926 :         }</span></span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
 <span id="L180"><span class="lineNum">     180</span>              :         FORCEINLINE bool operator==(const hash&amp; other) const</span>
-<span id="L181"><span class="lineNum">     181</span>              :         {</span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">   201145620 :                 const uint64_t* a = u64();</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">   201145620 :                 const uint64_t* b = other.u64();</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">   201145620 :                 return (a[0] == b[0]) &amp;&amp; (a[1] == b[1]) &amp;&amp; (a[2] == b[2]) &amp;&amp; (a[3] == b[3]);</span></span>
-<span id="L185"><span class="lineNum">     185</span>              :         }</span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">   201150860 :         {</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">   201150860 :                 const uint64_t* a = u64();</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">   201150860 :                 const uint64_t* b = other.u64();</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">   201150860 :                 return (a[0] == b[0]) &amp;&amp; (a[1] == b[1]) &amp;&amp; (a[2] == b[2]) &amp;&amp; (a[3] == b[3]);</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">   201150860 :         }</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : </span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">     3370038 :         FORCEINLINE bool operator!=(const hash&amp; other) const { return !operator==(other); }</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">     3371127 :         FORCEINLINE bool operator!=(const hash&amp; other) const { return !operator==(other); }</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : </span>
-<span id="L189"><span class="lineNum">     189</span>              :         FORCEINLINE bool empty() const {</span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">      710410 :                 const uint64_t* a = u64();</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">      710410 :                 return (a[0] == 0) &amp;&amp; (a[1] == 0) &amp;&amp; (a[2] == 0) &amp;&amp; (a[3] == 0);</span></span>
-<span id="L192"><span class="lineNum">     192</span>              :         }</span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">      734150 :         FORCEINLINE bool empty() const {</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">      734150 :                 const uint64_t* a = u64();</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">      734150 :                 return (a[0] == 0) &amp;&amp; (a[1] == 0) &amp;&amp; (a[2] == 0) &amp;&amp; (a[3] == 0);</span></span>
+<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">      734150 :         }</span></span>
 <span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span>              :         FORCEINLINE void clear() {</span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       39989 :         FORCEINLINE void clear() {</span></span>
 <span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       39989 :                 memset(h, 0, HASH_SIZE);</span></span>
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">       39989 :         }</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
 <span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       13338 :         FORCEINLINE uint64_t* u64() { return reinterpret_cast&lt;uint64_t*&gt;(h); }</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">   490489354 :         FORCEINLINE const uint64_t* u64() const { return reinterpret_cast&lt;const uint64_t*&gt;(h); }</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">   490524038 :         FORCEINLINE const uint64_t* u64() const { return reinterpret_cast&lt;const uint64_t*&gt;(h); }</span></span>
 <span id="L200"><span class="lineNum">     200</span>              : </span>
 <span id="L201"><span class="lineNum">     201</span>              :         friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const hash&amp; d);</span>
 <span id="L202"><span class="lineNum">     202</span>              :         friend std::istream&amp; operator&gt;&gt;(std::istream&amp; s, hash&amp; d);</span>
@@ -266,8 +266,8 @@
 <span id="L204"><span class="lineNum">     204</span>              : </span>
 <span id="L205"><span class="lineNum">     205</span>              : struct root_hash : public hash</span>
 <span id="L206"><span class="lineNum">     206</span>              : {</span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       80210 :         FORCEINLINE root_hash() : hash() {}</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">       64265 :         explicit FORCEINLINE root_hash(const hash&amp; h) : hash(h) {}</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       80211 :         FORCEINLINE root_hash() : hash() {}</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">       64264 :         explicit FORCEINLINE root_hash(const hash&amp; h) : hash(h) {}</span></span>
 <span id="L209"><span class="lineNum">     209</span>              : };</span>
 <span id="L210"><span class="lineNum">     210</span>              : </span>
 <span id="L211"><span class="lineNum">     211</span>              : static_assert(sizeof(hash) == HASH_SIZE, &quot;struct hash has invalid size, check your compiler options&quot;);</span>
@@ -281,112 +281,112 @@
 <span id="L219"><span class="lineNum">     219</span>              : #endif</span>
 <span id="L220"><span class="lineNum">     220</span>              :         difficulty_type</span>
 <span id="L221"><span class="lineNum">     221</span>              : {</span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">      100071 :         FORCEINLINE          constexpr difficulty_type() noexcept : lo(0), hi(0) {}</span></span>
-<span id="L223"><span class="lineNum">     223</span>              :         FORCEINLINE explicit constexpr difficulty_type(uint64_t a) noexcept : lo(a), hi(0) {}</span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">           9 :         FORCEINLINE          constexpr difficulty_type(uint64_t a, uint64_t b) noexcept : lo(a), hi(b) {}</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">    40396345 :         FORCEINLINE          constexpr difficulty_type() noexcept : lo(0), hi(0) {}</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">           1 :         FORCEINLINE explicit constexpr difficulty_type(uint64_t a) noexcept : lo(a), hi(0) {}</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">    43608657 :         FORCEINLINE          constexpr difficulty_type(uint64_t a, uint64_t b) noexcept : lo(a), hi(b) {}</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
 <span id="L226"><span class="lineNum">     226</span>              :         uint64_t lo;</span>
 <span id="L227"><span class="lineNum">     227</span>              :         uint64_t hi;</span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
 <span id="L229"><span class="lineNum">     229</span>              :         FORCEINLINE difficulty_type&amp; operator+=(const difficulty_type&amp; b)</span>
-<span id="L230"><span class="lineNum">     230</span>              :         {</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">  1093141341 :         {</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : #ifdef _MSC_VER</span>
 <span id="L232"><span class="lineNum">     232</span>              :                 _addcarry_u64(_addcarry_u64(0, lo, b.lo, &amp;lo), hi, b.hi, &amp;hi);</span>
 <span id="L233"><span class="lineNum">     233</span>              : #elif defined(__GNUC__) &amp;&amp; !defined(DEV_CLANG_TIDY)</span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">    46896242 :                 *reinterpret_cast&lt;unsigned __int128*&gt;(this) += *reinterpret_cast&lt;const unsigned __int128*&gt;(&amp;b);</span></span>
+<span id="L234"><span class="lineNum">     234</span>              :                 *reinterpret_cast&lt;unsigned __int128*&gt;(this) += *reinterpret_cast&lt;const unsigned __int128*&gt;(&amp;b);</span>
 <span id="L235"><span class="lineNum">     235</span>              : #else</span>
 <span id="L236"><span class="lineNum">     236</span>              :                 const uint64_t t = lo;</span>
 <span id="L237"><span class="lineNum">     237</span>              :                 lo += b.lo;</span>
 <span id="L238"><span class="lineNum">     238</span>              :                 const uint64_t carry = (lo &lt; t) ? 1 : 0;</span>
 <span id="L239"><span class="lineNum">     239</span>              :                 hi += b.hi + carry;</span>
 <span id="L240"><span class="lineNum">     240</span>              : #endif</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">    43170758 :                 return *this;</span></span>
-<span id="L242"><span class="lineNum">     242</span>              :         }</span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">  1093141341 :                 return *this;</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">  1093141341 :         }</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
-<span id="L244"><span class="lineNum">     244</span>              :         FORCEINLINE difficulty_type&amp; operator+=(uint64_t b) { return operator+=(difficulty_type{ b, 0 }); }</span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         128 :         FORCEINLINE difficulty_type&amp; operator+=(uint64_t b) { return operator+=(difficulty_type{ b, 0 }); }</span></span>
 <span id="L245"><span class="lineNum">     245</span>              : </span>
 <span id="L246"><span class="lineNum">     246</span>              :         FORCEINLINE difficulty_type&amp; operator-=(const difficulty_type&amp; b)</span>
-<span id="L247"><span class="lineNum">     247</span>              :         {</span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">   602470635 :         {</span></span>
 <span id="L248"><span class="lineNum">     248</span>              : #ifdef _MSC_VER</span>
 <span id="L249"><span class="lineNum">     249</span>              :                 _subborrow_u64(_subborrow_u64(0, lo, b.lo, &amp;lo), hi, b.hi, &amp;hi);</span>
 <span id="L250"><span class="lineNum">     250</span>              : #elif defined(__GNUC__) &amp;&amp; !defined(DEV_CLANG_TIDY)</span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">    44190998 :                 *reinterpret_cast&lt;unsigned __int128*&gt;(this) -= *reinterpret_cast&lt;const unsigned __int128*&gt;(&amp;b);</span></span>
+<span id="L251"><span class="lineNum">     251</span>              :                 *reinterpret_cast&lt;unsigned __int128*&gt;(this) -= *reinterpret_cast&lt;const unsigned __int128*&gt;(&amp;b);</span>
 <span id="L252"><span class="lineNum">     252</span>              : #else</span>
 <span id="L253"><span class="lineNum">     253</span>              :                 const uint64_t t = b.lo;</span>
 <span id="L254"><span class="lineNum">     254</span>              :                 const uint64_t carry = (lo &lt; t) ? 1 : 0;</span>
 <span id="L255"><span class="lineNum">     255</span>              :                 lo -= t;</span>
 <span id="L256"><span class="lineNum">     256</span>              :                 hi -= b.hi + carry;</span>
 <span id="L257"><span class="lineNum">     257</span>              : #endif</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">    44190998 :                 return *this;</span></span>
-<span id="L259"><span class="lineNum">     259</span>              :         }</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">   602470635 :                 return *this;</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">   602470635 :         }</span></span>
 <span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span>              :         FORCEINLINE difficulty_type&amp; operator-=(uint64_t b) { return operator-=(difficulty_type{ b, 0 }); }</span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">    20000130 :         FORCEINLINE difficulty_type&amp; operator-=(uint64_t b) { return operator-=(difficulty_type{ b, 0 }); }</span></span>
 <span id="L262"><span class="lineNum">     262</span>              : </span>
 <span id="L263"><span class="lineNum">     263</span>              :         FORCEINLINE difficulty_type&amp; operator*=(const uint64_t b)</span>
-<span id="L264"><span class="lineNum">     264</span>              :         {</span>
-<span id="L265"><span class="lineNum">     265</span>              :                 uint64_t t;</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">     7468026 :                 lo = umul128(lo, b, &amp;t);</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">     3734013 :                 hi = t + hi * b;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">    13734167 :         {</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">    13734167 :                 uint64_t t;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">    13734167 :                 lo = umul128(lo, b, &amp;t);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">    13734167 :                 hi = t + hi * b;</span></span>
 <span id="L268"><span class="lineNum">     268</span>              : </span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">     3734013 :                 return *this;</span></span>
-<span id="L270"><span class="lineNum">     270</span>              :         }</span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">    13734167 :                 return *this;</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">    13734167 :         }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
 <span id="L272"><span class="lineNum">     272</span>              :         FORCEINLINE difficulty_type&amp; operator/=(const uint64_t b)</span>
-<span id="L273"><span class="lineNum">     273</span>              :         {</span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">     3926104 :                 const uint64_t t = hi;</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">     3926104 :                 hi = t / b;</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">     3926383 :         {</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">     3926383 :                 const uint64_t t = hi;</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">     3926383 :                 hi = t / b;</span></span>
 <span id="L276"><span class="lineNum">     276</span>              : </span>
-<span id="L277"><span class="lineNum">     277</span>              :                 uint64_t r;</span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">     4321768 :                 lo = udiv128(t % b, lo, b, &amp;r);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">     3926383 :                 uint64_t r;</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">     3926383 :                 lo = udiv128(t % b, lo, b, &amp;r);</span></span>
 <span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">     3926104 :                 return *this;</span></span>
-<span id="L281"><span class="lineNum">     281</span>              :         }</span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">     3926383 :                 return *this;</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">     3926383 :         }</span></span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
 <span id="L283"><span class="lineNum">     283</span>              :         difficulty_type&amp; operator/=(difficulty_type b);</span>
 <span id="L284"><span class="lineNum">     284</span>              : </span>
 <span id="L285"><span class="lineNum">     285</span>              :         FORCEINLINE bool operator&lt;(const difficulty_type&amp; other) const</span>
-<span id="L286"><span class="lineNum">     286</span>              :         {</span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">   215517817 :                 if (hi &lt; other.hi) return true;</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">   215005234 :                 if (hi &gt; other.hi) return false;</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">   128362529 :                 return (lo &lt; other.lo);</span></span>
-<span id="L290"><span class="lineNum">     290</span>              :         }</span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">   754515490 :         {</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">   754515490 :                 if (hi &lt; other.hi) return true;</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">   743437110 :                 if (hi &gt; other.hi) return false;</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">   195364399 :                 return (lo &lt; other.lo);</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">   743437110 :         }</span></span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">    21659824 :         FORCEINLINE bool operator&gt;(const difficulty_type&amp; other) const { return other.operator&lt;(*this); }</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">    21659986 :         FORCEINLINE bool operator&gt;(const difficulty_type&amp; other) const { return other.operator&lt;(*this); }</span></span>
 <span id="L293"><span class="lineNum">     293</span>              : </span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE bool operator&gt;=(const difficulty_type&amp; other) const { return !operator&lt;(other); }</span></span>
-<span id="L295"><span class="lineNum">     295</span>              :         FORCEINLINE bool operator&lt;=(const difficulty_type&amp; other) const { return !operator&gt;(other); }</span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">   538981060 :         FORCEINLINE bool operator&gt;=(const difficulty_type&amp; other) const { return !operator&lt;(other); }</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">          81 :         FORCEINLINE bool operator&lt;=(const difficulty_type&amp; other) const { return !operator&gt;(other); }</span></span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC">           0 :         FORCEINLINE bool operator==(const difficulty_type&amp; other) const { return (lo == other.lo) &amp;&amp; (hi == other.hi); }</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC tlaBgGNC">       39844 :         FORCEINLINE bool operator!=(const difficulty_type&amp; other) const { return (lo != other.lo) || (hi != other.hi); }</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">      703474 :         FORCEINLINE bool operator==(const difficulty_type&amp; other) const { return (lo == other.lo) &amp;&amp; (hi == other.hi); }</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       39925 :         FORCEINLINE bool operator!=(const difficulty_type&amp; other) const { return (lo != other.lo) || (hi != other.hi); }</span></span>
 <span id="L299"><span class="lineNum">     299</span>              : </span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE bool operator==(uint64_t other) const { return (lo == other) &amp;&amp; (hi == 0); }</span></span>
-<span id="L301"><span class="lineNum">     301</span>              :         FORCEINLINE bool operator!=(uint64_t other) const { return (lo != other) || (hi != 0); }</span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           5 :         FORCEINLINE bool operator==(uint64_t other) const { return (lo == other) &amp;&amp; (hi == 0); }</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE bool operator!=(uint64_t other) const { return (lo != other) || (hi != 0); }</span></span>
 <span id="L302"><span class="lineNum">     302</span>              : </span>
 <span id="L303"><span class="lineNum">     303</span>              :         friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const difficulty_type&amp; d);</span>
 <span id="L304"><span class="lineNum">     304</span>              :         friend std::istream&amp; operator&gt;&gt;(std::istream&amp; s, difficulty_type&amp; d);</span>
 <span id="L305"><span class="lineNum">     305</span>              : </span>
 <span id="L306"><span class="lineNum">     306</span> <span class="tlaUNC">           0 :         FORCEINLINE double to_double() const { return static_cast&lt;double&gt;(hi) * 18446744073709551616.0 + static_cast&lt;double&gt;(lo); }</span></span>
 <span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC tlaBgGNC">       26752 :         FORCEINLINE bool empty() const { return (lo == 0) &amp;&amp; (hi == 0); }</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC tlaBgGNC">       26881 :         FORCEINLINE bool empty() const { return (lo == 0) &amp;&amp; (hi == 0); }</span></span>
 <span id="L309"><span class="lineNum">     309</span>              : </span>
 <span id="L310"><span class="lineNum">     310</span>              :         // Finds a 64-bit target for mining (target = 2^64 / difficulty) and rounds up the result of division</span>
 <span id="L311"><span class="lineNum">     311</span>              :         // Because of that, there's a very small chance that miners will find a hash that meets the target but is still wrong (hash * difficulty &gt;= 2^256)</span>
 <span id="L312"><span class="lineNum">     312</span>              :         // A proper difficulty check is in check_pow()</span>
 <span id="L313"><span class="lineNum">     313</span>              :         FORCEINLINE uint64_t target() const</span>
-<span id="L314"><span class="lineNum">     314</span>              :         {</span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC tlaBgUNC">           0 :                 if (hi) {</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaUNC">           0 :                         return 1;</span></span>
-<span id="L317"><span class="lineNum">     317</span>              :                 }</span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">        1006 :         {</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">        1006 :                 if (hi) {</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           2 :                         return 1;</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           2 :                 }</span></span>
 <span id="L318"><span class="lineNum">     318</span>              : </span>
 <span id="L319"><span class="lineNum">     319</span>              :                 // Safeguard against division by zero (CPU will trigger it even if lo = 1 because result doesn't fit in 64 bits)</span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaUNC">           0 :                 if (lo &lt;= 1) {</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaUNC">           0 :                         return std::numeric_limits&lt;uint64_t&gt;::max();</span></span>
-<span id="L322"><span class="lineNum">     322</span>              :                 }</span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">        1004 :                 if (lo &lt;= 1) {</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           2 :                         return std::numeric_limits&lt;uint64_t&gt;::max();</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           2 :                 }</span></span>
 <span id="L323"><span class="lineNum">     323</span>              : </span>
-<span id="L324"><span class="lineNum">     324</span>              :                 uint64_t rem;</span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :                 uint64_t result = udiv128(1, 0, lo, &amp;rem);</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaUNC">           0 :                 return rem ? (result + 1) : result;</span></span>
-<span id="L327"><span class="lineNum">     327</span>              :         }</span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">        1002 :                 uint64_t rem;</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">        1002 :                 uint64_t result = udiv128(1, 0, lo, &amp;rem);</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">        1002 :                 return rem ? (result + 1) : result;</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">        1004 :         }</span></span>
 <span id="L328"><span class="lineNum">     328</span>              : </span>
 <span id="L329"><span class="lineNum">     329</span>              :         bool check_pow(const hash&amp; pow_hash) const;</span>
 <span id="L330"><span class="lineNum">     330</span>              : };</span>
@@ -398,42 +398,42 @@
 <span id="L336"><span class="lineNum">     336</span>              : </span>
 <span id="L337"><span class="lineNum">     337</span>              : template&lt;typename T&gt;</span>
 <span id="L338"><span class="lineNum">     338</span>              : FORCEINLINE difficulty_type operator+(const difficulty_type&amp; a, const T&amp; b)</span>
-<span id="L339"><span class="lineNum">     339</span>              : {</span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC tlaBgGNC">     3725484 :         difficulty_type result = a;</span></span>
-<span id="L341"><span class="lineNum">     341</span>              :         result += b;</span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">     3725484 :         return result;</span></span>
-<span id="L343"><span class="lineNum">     343</span>              : }</span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">    13725750 : {</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">    13725750 :         difficulty_type result = a;</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">    13725750 :         result += b;</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">    13725750 :         return result;</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">    13725750 : }</span></span>
 <span id="L344"><span class="lineNum">     344</span>              : </span>
 <span id="L345"><span class="lineNum">     345</span>              : template&lt;typename T&gt;</span>
 <span id="L346"><span class="lineNum">     346</span>              : FORCEINLINE difficulty_type operator-(const difficulty_type&amp; a, const T&amp; b)</span>
-<span id="L347"><span class="lineNum">     347</span>              : {</span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">    44190998 :         difficulty_type result = a;</span></span>
-<span id="L349"><span class="lineNum">     349</span>              :         result -= b;</span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">    44190998 :         return result;</span></span>
-<span id="L351"><span class="lineNum">     351</span>              : }</span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">   589032617 : {</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">   589032617 :         difficulty_type result = a;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">   589032617 :         result -= b;</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">   589032617 :         return result;</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">   589032617 : }</span></span>
 <span id="L352"><span class="lineNum">     352</span>              : </span>
 <span id="L353"><span class="lineNum">     353</span>              : FORCEINLINE difficulty_type operator*(const difficulty_type&amp; a, uint64_t b)</span>
-<span id="L354"><span class="lineNum">     354</span>              : {</span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">     3734013 :         difficulty_type result = a;</span></span>
-<span id="L356"><span class="lineNum">     356</span>              :         result *= b;</span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">     3734013 :         return result;</span></span>
-<span id="L358"><span class="lineNum">     358</span>              : }</span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">    13734026 : {</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">    13734026 :         difficulty_type result = a;</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">    13734026 :         result *= b;</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">    13734026 :         return result;</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">    13734026 : }</span></span>
 <span id="L359"><span class="lineNum">     359</span>              : </span>
 <span id="L360"><span class="lineNum">     360</span>              : template&lt;typename T&gt;</span>
 <span id="L361"><span class="lineNum">     361</span>              : FORCEINLINE difficulty_type operator/(const difficulty_type&amp; a, const T&amp; b)</span>
-<span id="L362"><span class="lineNum">     362</span>              : {</span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">     3711566 :         difficulty_type result = a;</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">     3711566 :         result /= b;</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">     3711566 :         return result;</span></span>
-<span id="L366"><span class="lineNum">     366</span>              : }</span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">     4413242 : {</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">     4413242 :         difficulty_type result = a;</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">     4413242 :         result /= b;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">     4413242 :         return result;</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">     4413242 : }</span></span>
 <span id="L367"><span class="lineNum">     367</span>              : </span>
 <span id="L368"><span class="lineNum">     368</span>              : struct TxMempoolData</span>
 <span id="L369"><span class="lineNum">     369</span>              : {</span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE TxMempoolData() : id(), blob_size(0), weight(0), fee(0), time_received(0) {}</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">       10522 :         FORCEINLINE TxMempoolData() : id(), blob_size(0), weight(0), fee(0), time_received(0) {}</span></span>
 <span id="L371"><span class="lineNum">     371</span>              : </span>
 <span id="L372"><span class="lineNum">     372</span>              :         FORCEINLINE bool operator&lt;(const TxMempoolData&amp; tx) const</span>
-<span id="L373"><span class="lineNum">     373</span>              :         {</span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC tlaBgGNC">       96151 :                 const uint64_t a = fee * tx.weight;</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">       96151 :         {</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">       96151 :                 const uint64_t a = fee * tx.weight;</span></span>
 <span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">       96151 :                 const uint64_t b = tx.fee * weight;</span></span>
 <span id="L376"><span class="lineNum">     376</span>              : </span>
 <span id="L377"><span class="lineNum">     377</span>              :                 // Prefer transactions with higher fee/byte</span>
@@ -445,8 +445,8 @@
 <span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">        4721 :                 if (weight &gt; tx.weight) return false;</span></span>
 <span id="L384"><span class="lineNum">     384</span>              : </span>
 <span id="L385"><span class="lineNum">     385</span>              :                 // If two transactions have exactly the same fee and weight, just order them by id</span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">        9442 :                 return id &lt; tx.id;</span></span>
-<span id="L387"><span class="lineNum">     387</span>              :         }</span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">        4721 :                 return id &lt; tx.id;</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">        4721 :         }</span></span>
 <span id="L388"><span class="lineNum">     388</span>              : </span>
 <span id="L389"><span class="lineNum">     389</span>              :         hash id;</span>
 <span id="L390"><span class="lineNum">     390</span>              :         uint64_t blob_size;</span>
@@ -457,11 +457,11 @@
 <span id="L395"><span class="lineNum">     395</span>              : </span>
 <span id="L396"><span class="lineNum">     396</span>              : struct AuxChainData</span>
 <span id="L397"><span class="lineNum">     397</span>              : {</span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE AuxChainData(const hash&amp; _id, const hash&amp; _data, const difficulty_type&amp; _difficulty) : unique_id(_id), data(_data), difficulty(_difficulty) {}</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           1 :         FORCEINLINE AuxChainData(const hash&amp; _id, const hash&amp; _data, const difficulty_type&amp; _difficulty) : unique_id(_id), data(_data), difficulty(_difficulty) {}</span></span>
 <span id="L399"><span class="lineNum">     399</span>              : </span>
-<span id="L400"><span class="lineNum">     400</span>              :         FORCEINLINE bool operator==(const AuxChainData&amp; rhs) const {</span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE bool operator==(const AuxChainData&amp; rhs) const {</span></span>
 <span id="L401"><span class="lineNum">     401</span> <span class="tlaUNC">           0 :                 return (unique_id == rhs.unique_id) &amp;&amp; (data == rhs.data) &amp;&amp; (difficulty == rhs.difficulty);</span></span>
-<span id="L402"><span class="lineNum">     402</span>              :         }</span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
 <span id="L404"><span class="lineNum">     404</span>              :         hash unique_id;</span>
 <span id="L405"><span class="lineNum">     405</span>              :         hash data;</span>
@@ -471,16 +471,16 @@
 <span id="L409"><span class="lineNum">     409</span>              : struct MinerData</span>
 <span id="L410"><span class="lineNum">     410</span>              : {</span>
 <span id="L411"><span class="lineNum">     411</span>              :         FORCEINLINE MinerData()</span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaUNC">           0 :                 : major_version(0)</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC">           0 :                 , height(0)</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :                 , prev_id()</span></span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :                 , seed_hash()</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 :                 , difficulty()</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :                 , median_weight(0)</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaUNC">           0 :                 , already_generated_coins(0)</span></span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 :                 , median_timestamp(0)</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 :                 , aux_nonce(0)</span></span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaUNC">           0 :         {}</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC tlaBgGNC">           2 :                 : major_version(0)</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">           2 :                 , height(0)</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           2 :                 , prev_id()</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           2 :                 , seed_hash()</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">           2 :                 , difficulty()</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">           2 :                 , median_weight(0)</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           2 :                 , already_generated_coins(0)</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">           2 :                 , median_timestamp(0)</span></span>
+<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           2 :                 , aux_nonce(0)</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           2 :         {}</span></span>
 <span id="L422"><span class="lineNum">     422</span>              : </span>
 <span id="L423"><span class="lineNum">     423</span>              :         uint8_t major_version;</span>
 <span id="L424"><span class="lineNum">     424</span>              :         uint64_t height;</span>
@@ -500,7 +500,7 @@
 <span id="L438"><span class="lineNum">     438</span>              : </span>
 <span id="L439"><span class="lineNum">     439</span>              : struct ChainMain</span>
 <span id="L440"><span class="lineNum">     440</span>              : {</span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC tlaBgGNC">           9 :         FORCEINLINE ChainMain() : difficulty(), height(0), timestamp(0), reward(0), id() {}</span></span>
+<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">           9 :         FORCEINLINE ChainMain() : difficulty(), height(0), timestamp(0), reward(0), id() {}</span></span>
 <span id="L442"><span class="lineNum">     442</span>              : </span>
 <span id="L443"><span class="lineNum">     443</span>              :         difficulty_type difficulty;</span>
 <span id="L444"><span class="lineNum">     444</span>              :         uint64_t height;</span>
@@ -521,25 +521,25 @@
 <span id="L459"><span class="lineNum">     459</span>              :         alignas(8) uint8_t data[16];</span>
 <span id="L460"><span class="lineNum">     460</span>              : </span>
 <span id="L461"><span class="lineNum">     461</span>              :         FORCEINLINE bool operator&lt;(const raw_ip&amp; other) const</span>
-<span id="L462"><span class="lineNum">     462</span>              :         {</span>
-<span id="L463"><span class="lineNum">     463</span>              :                 const uint64_t* a = reinterpret_cast&lt;const uint64_t*&gt;(data);</span>
-<span id="L464"><span class="lineNum">     464</span>              :                 const uint64_t* b = reinterpret_cast&lt;const uint64_t*&gt;(other.data);</span>
-<span id="L465"><span class="lineNum">     465</span>              : </span>
-<span id="L466"><span class="lineNum">     466</span>              :                 if (a[1] &lt; b[1]) return true;</span>
-<span id="L467"><span class="lineNum">     467</span>              :                 if (a[1] &gt; b[1]) return false;</span>
-<span id="L468"><span class="lineNum">     468</span>              : </span>
-<span id="L469"><span class="lineNum">     469</span>              :                 return a[0] &lt; b[0];</span>
-<span id="L470"><span class="lineNum">     470</span>              :         }</span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 :                 const uint64_t* a = reinterpret_cast&lt;const uint64_t*&gt;(data);</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :                 const uint64_t* b = reinterpret_cast&lt;const uint64_t*&gt;(other.data);</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC">           0 : </span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC">           0 :                 if (a[1] &lt; b[1]) return true;</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC">           0 :                 if (a[1] &gt; b[1]) return false;</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 : </span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaUNC">           0 :                 return a[0] &lt; b[0];</span></span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L471"><span class="lineNum">     471</span>              : </span>
 <span id="L472"><span class="lineNum">     472</span>              :         FORCEINLINE bool operator==(const raw_ip&amp; other) const</span>
-<span id="L473"><span class="lineNum">     473</span>              :         {</span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC tlaBgUNC">           0 :                 const uint64_t* a = reinterpret_cast&lt;const uint64_t*&gt;(data);</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 :                 const uint64_t* a = reinterpret_cast&lt;const uint64_t*&gt;(data);</span></span>
 <span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :                 const uint64_t* b = reinterpret_cast&lt;const uint64_t*&gt;(other.data);</span></span>
 <span id="L476"><span class="lineNum">     476</span>              : </span>
 <span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC">           0 :                 return (a[0] == b[0]) &amp;&amp; (a[1] == b[1]);</span></span>
-<span id="L478"><span class="lineNum">     478</span>              :         }</span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L479"><span class="lineNum">     479</span>              : </span>
-<span id="L480"><span class="lineNum">     480</span>              :         FORCEINLINE bool operator!=(const raw_ip&amp; other) const { return !operator==(other); }</span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :         FORCEINLINE bool operator!=(const raw_ip&amp; other) const { return !operator==(other); }</span></span>
 <span id="L481"><span class="lineNum">     481</span>              : </span>
 <span id="L482"><span class="lineNum">     482</span> <span class="tlaUNC">           0 :         FORCEINLINE bool is_localhost() const { return (*this == localhost_ipv4) || (*this == localhost_ipv6); }</span></span>
 <span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :         FORCEINLINE bool is_ipv4_prefix() const { return memcmp(data, ipv4_prefix, sizeof(ipv4_prefix)) == 0; }</span></span>

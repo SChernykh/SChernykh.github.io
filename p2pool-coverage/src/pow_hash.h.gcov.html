@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">9.1&nbsp;%</td>
@@ -178,8 +178,8 @@
 <span id="L116"><span class="lineNum">     116</span>              : </span>
 <span id="L117"><span class="lineNum">     117</span>              :         uv_async_t m_shutdownAsync;</span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC">           0 :         static void on_shutdown(uv_async_t* async)</span></span>
-<span id="L120"><span class="lineNum">     120</span>              :         {</span>
+<span id="L119"><span class="lineNum">     119</span>              :         static void on_shutdown(uv_async_t* async)</span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaUNC">           0 :         {</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC">           0 :                 RandomX_Hasher_RPC* server = reinterpret_cast&lt;RandomX_Hasher_RPC*&gt;(async-&gt;data);</span></span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaUNC">           0 :                 uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;server-&gt;m_shutdownAsync), nullptr);</span></span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>

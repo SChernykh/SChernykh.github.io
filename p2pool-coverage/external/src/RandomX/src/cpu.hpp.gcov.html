@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">16.7&nbsp;%</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryLo">16.7&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -95,21 +95,21 @@
 <span id="L33"><span class="lineNum">      33</span>              :         class Cpu {</span>
 <span id="L34"><span class="lineNum">      34</span>              :         public:</span>
 <span id="L35"><span class="lineNum">      35</span>              :                 Cpu();</span>
-<span id="L36"><span class="lineNum">      36</span>              :                 bool hasAes() const {</span>
-<span id="L37"><span class="lineNum">      37</span>              :                         return aes_;</span>
-<span id="L38"><span class="lineNum">      38</span>              :                 }</span>
-<span id="L39"><span class="lineNum">      39</span>              :                 bool hasSsse3() const {</span>
-<span id="L40"><span class="lineNum">      40</span>              :                         return ssse3_;</span>
-<span id="L41"><span class="lineNum">      41</span>              :                 }</span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC tlaBgUNC">           0 :                 bool hasBmi() const {</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC">           0 :                         return bmi_;</span></span>
-<span id="L44"><span class="lineNum">      44</span>              :                 }</span>
-<span id="L45"><span class="lineNum">      45</span>              :                 bool hasAvx2() const {</span>
-<span id="L46"><span class="lineNum">      46</span>              :                         return avx2_;</span>
-<span id="L47"><span class="lineNum">      47</span>              :                 }</span>
-<span id="L48"><span class="lineNum">      48</span>              :                 const char* manufacturer() const {</span>
-<span id="L49"><span class="lineNum">      49</span>              :                         return (const char*) manufacturer_string;</span>
-<span id="L50"><span class="lineNum">      50</span>              :                 }</span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC tlaBgUNC">           0 :                 bool hasAes() const {</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC">           0 :                         return aes_;</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 :                 bool hasSsse3() const {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :                         return ssse3_;</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">           2 :                 bool hasBmi() const {</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           2 :                         return bmi_;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           2 :                 }</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC tlaBgUNC">           0 :                 bool hasAvx2() const {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :                         return avx2_;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :                 const char* manufacturer() const {</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :                         return (const char*) manufacturer_string;</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
 <span id="L52"><span class="lineNum">      52</span>              :                 struct ProcessorInfo</span>
 <span id="L53"><span class="lineNum">      53</span>              :                 {</span>
@@ -123,9 +123,9 @@
 <span id="L61"><span class="lineNum">      61</span>              :                         unsigned int reserved2 : 4;</span>
 <span id="L62"><span class="lineNum">      62</span>              :                 };</span>
 <span id="L63"><span class="lineNum">      63</span>              : </span>
-<span id="L64"><span class="lineNum">      64</span>              :                 ProcessorInfo processorInfo() const {</span>
-<span id="L65"><span class="lineNum">      65</span>              :                         return processor_info;</span>
-<span id="L66"><span class="lineNum">      66</span>              :                 }</span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :                 ProcessorInfo processorInfo() const {</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :                         return processor_info;</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span>              :         private:</span>
 <span id="L69"><span class="lineNum">      69</span>              :                 bool aes_, ssse3_, bmi_, avx2_;</span>

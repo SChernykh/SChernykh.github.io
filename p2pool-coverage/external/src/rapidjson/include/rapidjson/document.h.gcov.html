@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">264</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">51.8&nbsp;%</td>
+            <td class="headerCovTableEntry">355</td>
+            <td class="headerCovTableEntry">184</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 11:49:41</td>
+            <td class="headerValue">2025-06-22 15:13:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">115</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">45.1&nbsp;%</td>
+            <td class="headerCovTableEntry">122</td>
+            <td class="headerCovTableEntry">55</td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -322,7 +322,7 @@
 <span id="L260"><span class="lineNum">     260</span>              :     //! @name relations</span>
 <span id="L261"><span class="lineNum">     261</span>              :     //@{</span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :     template &lt;bool Const_&gt; bool operator==(const GenericMemberIterator&lt;Const_, Encoding, Allocator&gt;&amp; that) const { return ptr_ == that.ptr_; }</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :     template &lt;bool Const_&gt; bool operator!=(const GenericMemberIterator&lt;Const_, Encoding, Allocator&gt;&amp; that) const { return ptr_ != that.ptr_; }</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC tlaBgGNC">          26 :     template &lt;bool Const_&gt; bool operator!=(const GenericMemberIterator&lt;Const_, Encoding, Allocator&gt;&amp; that) const { return ptr_ != that.ptr_; }</span></span>
 <span id="L264"><span class="lineNum">     264</span>              :     template &lt;bool Const_&gt; bool operator&lt;=(const GenericMemberIterator&lt;Const_, Encoding, Allocator&gt;&amp; that) const { return ptr_ &lt;= that.ptr_; }</span>
 <span id="L265"><span class="lineNum">     265</span>              :     template &lt;bool Const_&gt; bool operator&gt;=(const GenericMemberIterator&lt;Const_, Encoding, Allocator&gt;&amp; that) const { return ptr_ &gt;= that.ptr_; }</span>
 <span id="L266"><span class="lineNum">     266</span>              :     template &lt;bool Const_&gt; bool operator&lt; (const GenericMemberIterator&lt;Const_, Encoding, Allocator&gt;&amp; that) const { return ptr_ &lt; that.ptr_; }</span>
@@ -336,7 +336,7 @@
 <span id="L274"><span class="lineNum">     274</span>              :     //! @name dereference</span>
 <span id="L275"><span class="lineNum">     275</span>              :     //@{</span>
 <span id="L276"><span class="lineNum">     276</span>              :     Reference operator*() const { return *ptr_; }</span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaUNC">           0 :     Pointer   operator-&gt;() const { return ptr_; }</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">          26 :     Pointer   operator-&gt;() const { return ptr_; }</span></span>
 <span id="L278"><span class="lineNum">     278</span>              :     Reference operator[](DifferenceType n) const { return ptr_[n]; }</span>
 <span id="L279"><span class="lineNum">     279</span>              :     //@}</span>
 <span id="L280"><span class="lineNum">     280</span>              : </span>
@@ -345,7 +345,7 @@
 <span id="L283"><span class="lineNum">     283</span>              : </span>
 <span id="L284"><span class="lineNum">     284</span>              : private:</span>
 <span id="L285"><span class="lineNum">     285</span>              :     //! Internal constructor from plain pointer</span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaUNC">           0 :     explicit GenericMemberIterator(Pointer p) : ptr_(p) {}</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">          39 :     explicit GenericMemberIterator(Pointer p) : ptr_(p) {}</span></span>
 <span id="L287"><span class="lineNum">     287</span>              : </span>
 <span id="L288"><span class="lineNum">     288</span>              :     Pointer ptr_; //!&lt; raw pointer</span>
 <span id="L289"><span class="lineNum">     289</span>              : };</span>
@@ -458,8 +458,8 @@
 <span id="L396"><span class="lineNum">     396</span>              :             GenericValue instead.</span>
 <span id="L397"><span class="lineNum">     397</span>              :      */</span>
 <span id="L398"><span class="lineNum">     398</span>              : #endif</span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaUNC">           0 :     explicit GenericStringRef(const CharType* str)</span></span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaUNC">           0 :         : s(str), length(NotNullStrLen(str)) {}</span></span>
+<span id="L399"><span class="lineNum">     399</span>              :     explicit GenericStringRef(const CharType* str)</span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">          13 :         : s(str), length(NotNullStrLen(str)) {}</span></span>
 <span id="L401"><span class="lineNum">     401</span>              : </span>
 <span id="L402"><span class="lineNum">     402</span>              :     //! Create constant string reference from pointer and length</span>
 <span id="L403"><span class="lineNum">     403</span>              : #ifndef __clang__ // -Wdocumentation</span>
@@ -470,22 +470,22 @@
 <span id="L408"><span class="lineNum">     408</span>              :         \note Constant complexity.</span>
 <span id="L409"><span class="lineNum">     409</span>              :      */</span>
 <span id="L410"><span class="lineNum">     410</span>              : #endif</span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :     GenericStringRef(const CharType* str, SizeType len)</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaUNC">           0 :         : s(RAPIDJSON_LIKELY(str) ? str : emptyString), length(len) { RAPIDJSON_ASSERT(str != 0 || len == 0u); }</span></span>
+<span id="L411"><span class="lineNum">     411</span>              :     GenericStringRef(const CharType* str, SizeType len)</span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          26 :         : s(RAPIDJSON_LIKELY(str) ? str : emptyString), length(len) { RAPIDJSON_ASSERT(str != 0 || len == 0u); }</span></span>
 <span id="L413"><span class="lineNum">     413</span>              : </span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :     GenericStringRef(const GenericStringRef&amp; rhs) : s(rhs.s), length(rhs.length) {}</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">          13 :     GenericStringRef(const GenericStringRef&amp; rhs) : s(rhs.s), length(rhs.length) {}</span></span>
 <span id="L415"><span class="lineNum">     415</span>              : </span>
 <span id="L416"><span class="lineNum">     416</span>              :     //! implicit conversion to plain CharType pointer</span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :     operator const Ch *() const { return s; }</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">          39 :     operator const Ch *() const { return s; }</span></span>
 <span id="L418"><span class="lineNum">     418</span>              : </span>
 <span id="L419"><span class="lineNum">     419</span>              :     const Ch* const s; //!&lt; plain CharType pointer</span>
 <span id="L420"><span class="lineNum">     420</span>              :     const SizeType length; //!&lt; length of the string (excluding the trailing NULL terminator)</span>
 <span id="L421"><span class="lineNum">     421</span>              : </span>
 <span id="L422"><span class="lineNum">     422</span>              : private:</span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC">           0 :     SizeType NotNullStrLen(const CharType* str) {</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(str != 0);</span></span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :         return internal::StrLen(str);</span></span>
-<span id="L426"><span class="lineNum">     426</span>              :     }</span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">          13 :     SizeType NotNullStrLen(const CharType* str) {</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(str != 0);</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">          13 :         return internal::StrLen(str);</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L427"><span class="lineNum">     427</span>              : </span>
 <span id="L428"><span class="lineNum">     428</span>              :     /// Empty string - used when passing in a NULL pointer</span>
 <span id="L429"><span class="lineNum">     429</span>              :     static const Ch emptyString[];</span>
@@ -513,9 +513,9 @@
 <span id="L451"><span class="lineNum">     451</span>              :     \see GenericValue::GenericValue(StringRefType), GenericValue::operator=(StringRefType), GenericValue::SetString(StringRefType), GenericValue::PushBack(StringRefType, Allocator&amp;), GenericValue::AddMember</span>
 <span id="L452"><span class="lineNum">     452</span>              : */</span>
 <span id="L453"><span class="lineNum">     453</span>              : template&lt;typename CharType&gt;</span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 : inline GenericStringRef&lt;CharType&gt; StringRef(const CharType* str) {</span></span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :     return GenericStringRef&lt;CharType&gt;(str);</span></span>
-<span id="L456"><span class="lineNum">     456</span>              : }</span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">          13 : inline GenericStringRef&lt;CharType&gt; StringRef(const CharType* str) {</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">          13 :     return GenericStringRef&lt;CharType&gt;(str);</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">          13 : }</span></span>
 <span id="L457"><span class="lineNum">     457</span>              : </span>
 <span id="L458"><span class="lineNum">     458</span>              : //! Mark a character pointer as constant string</span>
 <span id="L459"><span class="lineNum">     459</span>              : /*! Mark a plain character pointer as a &quot;string literal&quot;.  This function</span>
@@ -533,9 +533,9 @@
 <span id="L471"><span class="lineNum">     471</span>              :     \relatesalso GenericStringRef</span>
 <span id="L472"><span class="lineNum">     472</span>              : */</span>
 <span id="L473"><span class="lineNum">     473</span>              : template&lt;typename CharType&gt;</span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaUNC">           0 : inline GenericStringRef&lt;CharType&gt; StringRef(const CharType* str, size_t length) {</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :     return GenericStringRef&lt;CharType&gt;(str, SizeType(length));</span></span>
-<span id="L476"><span class="lineNum">     476</span>              : }</span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          26 : inline GenericStringRef&lt;CharType&gt; StringRef(const CharType* str, size_t length) {</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">          26 :     return GenericStringRef&lt;CharType&gt;(str, SizeType(length));</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">          26 : }</span></span>
 <span id="L477"><span class="lineNum">     477</span>              : </span>
 <span id="L478"><span class="lineNum">     478</span>              : #if RAPIDJSON_HAS_STDSTRING</span>
 <span id="L479"><span class="lineNum">     479</span>              : //! Mark a string object as constant string</span>
@@ -749,7 +749,7 @@
 <span id="L687"><span class="lineNum">     687</span>              :     //@{</span>
 <span id="L688"><span class="lineNum">     688</span>              : </span>
 <span id="L689"><span class="lineNum">     689</span>              :     //! Default constructor creates a null value.</span>
-<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 :     GenericValue() RAPIDJSON_NOEXCEPT : data_() { data_.f.flags = kNullFlag; }</span></span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaGNC">          39 :     GenericValue() RAPIDJSON_NOEXCEPT : data_() { data_.f.flags = kNullFlag; }</span></span>
 <span id="L691"><span class="lineNum">     691</span>              : </span>
 <span id="L692"><span class="lineNum">     692</span>              : #if RAPIDJSON_HAS_CXX11_RVALUE_REFS</span>
 <span id="L693"><span class="lineNum">     693</span>              :     //! Move constructor in C++11</span>
@@ -779,18 +779,18 @@
 <span id="L717"><span class="lineNum">     717</span>              :         \param type Type of the value.</span>
 <span id="L718"><span class="lineNum">     718</span>              :         \note Default content for number is zero.</span>
 <span id="L719"><span class="lineNum">     719</span>              :     */</span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :     explicit GenericValue(Type type) RAPIDJSON_NOEXCEPT : data_() {</span></span>
-<span id="L721"><span class="lineNum">     721</span>              :         static const uint16_t defaultFlags[] = {</span>
-<span id="L722"><span class="lineNum">     722</span>              :             kNullFlag, kFalseFlag, kTrueFlag, kObjectFlag, kArrayFlag, kShortStringFlag,</span>
-<span id="L723"><span class="lineNum">     723</span>              :             kNumberAnyFlag</span>
-<span id="L724"><span class="lineNum">     724</span>              :         };</span>
-<span id="L725"><span class="lineNum">     725</span> <span class="tlaUNC">           0 :         RAPIDJSON_NOEXCEPT_ASSERT(type &gt;= kNullType &amp;&amp; type &lt;= kNumberType);</span></span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :         data_.f.flags = defaultFlags[type];</span></span>
+<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">          13 :     explicit GenericValue(Type type) RAPIDJSON_NOEXCEPT : data_() {</span></span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">          13 :         static const uint16_t defaultFlags[] = {</span></span>
+<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">          13 :             kNullFlag, kFalseFlag, kTrueFlag, kObjectFlag, kArrayFlag, kShortStringFlag,</span></span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">          13 :             kNumberAnyFlag</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">          13 :         };</span></span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">          13 :         RAPIDJSON_NOEXCEPT_ASSERT(type &gt;= kNullType &amp;&amp; type &lt;= kNumberType);</span></span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">          13 :         data_.f.flags = defaultFlags[type];</span></span>
 <span id="L727"><span class="lineNum">     727</span>              : </span>
 <span id="L728"><span class="lineNum">     728</span>              :         // Use ShortString to store empty string.</span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaUNC">           0 :         if (type == kStringType)</span></span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaUNC">           0 :             data_.ss.SetLength(0);</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">          13 :         if (type == kStringType)</span></span>
+<span id="L730"><span class="lineNum">     730</span> <span class="tlaUNC tlaBgUNC">           0 :             data_.ss.SetLength(0);</span></span>
+<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC tlaBgGNC">          13 :     }</span></span>
 <span id="L732"><span class="lineNum">     732</span>              : </span>
 <span id="L733"><span class="lineNum">     733</span>              :     //! Explicit copy constructor (with allocator)</span>
 <span id="L734"><span class="lineNum">     734</span>              :     /*! Creates a copy of a Value by using the given Allocator</span>
@@ -840,13 +840,13 @@
 <span id="L778"><span class="lineNum">     778</span>              :      */</span>
 <span id="L779"><span class="lineNum">     779</span>              : #ifndef RAPIDJSON_DOXYGEN_RUNNING // hide SFINAE from Doxygen</span>
 <span id="L780"><span class="lineNum">     780</span>              :     template &lt;typename T&gt;</span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC">           0 :     explicit GenericValue(T b, RAPIDJSON_ENABLEIF((internal::IsSame&lt;bool, T&gt;))) RAPIDJSON_NOEXCEPT  // See #472</span></span>
+<span id="L781"><span class="lineNum">     781</span>              :     explicit GenericValue(T b, RAPIDJSON_ENABLEIF((internal::IsSame&lt;bool, T&gt;))) RAPIDJSON_NOEXCEPT  // See #472</span>
 <span id="L782"><span class="lineNum">     782</span>              : #else</span>
 <span id="L783"><span class="lineNum">     783</span>              :     explicit GenericValue(bool b) RAPIDJSON_NOEXCEPT</span>
 <span id="L784"><span class="lineNum">     784</span>              : #endif</span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :         : data_() {</span></span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC tlaBgUNC">           0 :         : data_() {</span></span>
 <span id="L786"><span class="lineNum">     786</span>              :             // safe-guard against failing SFINAE</span>
-<span id="L787"><span class="lineNum">     787</span>              :             RAPIDJSON_STATIC_ASSERT((internal::IsSame&lt;bool,T&gt;::Value));</span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 :             RAPIDJSON_STATIC_ASSERT((internal::IsSame&lt;bool,T&gt;::Value));</span></span>
 <span id="L788"><span class="lineNum">     788</span> <span class="tlaUNC">           0 :             data_.f.flags = b ? kTrueFlag : kFalseFlag;</span></span>
 <span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L790"><span class="lineNum">     790</span>              : </span>
@@ -872,7 +872,7 @@
 <span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 :                 data_.f.flags |= kUintFlag;</span></span>
 <span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 :             if (!(static_cast&lt;uint64_t&gt;(i64) &amp; RAPIDJSON_UINT64_C2(0xFFFFFFFF, 0x80000000)))</span></span>
 <span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :                 data_.f.flags |= kIntFlag;</span></span>
-<span id="L813"><span class="lineNum">     813</span>              :         }</span>
+<span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 :         else if (i64 &gt;= static_cast&lt;int64_t&gt;(RAPIDJSON_UINT64_C2(0xFFFFFFFF, 0x80000000)))</span></span>
 <span id="L815"><span class="lineNum">     815</span> <span class="tlaUNC">           0 :             data_.f.flags |= kIntFlag;</span></span>
 <span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :     }</span></span>
@@ -899,10 +899,10 @@
 <span id="L837"><span class="lineNum">     837</span> <span class="tlaUNC">           0 :     GenericValue(const Ch* s, SizeType length) RAPIDJSON_NOEXCEPT : data_() { SetStringRaw(StringRef(s, length)); }</span></span>
 <span id="L838"><span class="lineNum">     838</span>              : </span>
 <span id="L839"><span class="lineNum">     839</span>              :     //! Constructor for constant string (i.e. do not make a copy of string)</span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaUNC">           0 :     explicit GenericValue(StringRefType s) RAPIDJSON_NOEXCEPT : data_() { SetStringRaw(s); }</span></span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC tlaBgGNC">          13 :     explicit GenericValue(StringRefType s) RAPIDJSON_NOEXCEPT : data_() { SetStringRaw(s); }</span></span>
 <span id="L841"><span class="lineNum">     841</span>              : </span>
 <span id="L842"><span class="lineNum">     842</span>              :     //! Constructor for copy-string (i.e. do make a copy of string)</span>
-<span id="L843"><span class="lineNum">     843</span> <span class="tlaUNC">           0 :     GenericValue(const Ch* s, SizeType length, Allocator&amp; allocator) : data_() { SetStringRaw(StringRef(s, length), allocator); }</span></span>
+<span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC">          26 :     GenericValue(const Ch* s, SizeType length, Allocator&amp; allocator) : data_() { SetStringRaw(StringRef(s, length), allocator); }</span></span>
 <span id="L844"><span class="lineNum">     844</span>              : </span>
 <span id="L845"><span class="lineNum">     845</span>              :     //! Constructor for copy-string (i.e. do make a copy of string)</span>
 <span id="L846"><span class="lineNum">     846</span>              :     GenericValue(const Ch*s, Allocator&amp; allocator) : data_() { SetStringRaw(StringRef(s), allocator); }</span>
@@ -939,38 +939,38 @@
 <span id="L877"><span class="lineNum">     877</span>              :     //! Destructor.</span>
 <span id="L878"><span class="lineNum">     878</span>              :     /*! Need to destruct elements of array, members of object, or copy-string.</span>
 <span id="L879"><span class="lineNum">     879</span>              :     */</span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaUNC">           0 :     ~GenericValue() {</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">          65 :     ~GenericValue() {</span></span>
 <span id="L881"><span class="lineNum">     881</span>              :         // With RAPIDJSON_USE_MEMBERSMAP, the maps need to be destroyed to release</span>
 <span id="L882"><span class="lineNum">     882</span>              :         // their Allocator if it's refcounted (e.g. MemoryPoolAllocator).</span>
-<span id="L883"><span class="lineNum">     883</span>              :         if (Allocator::kNeedFree || (RAPIDJSON_USE_MEMBERSMAP+0 &amp;&amp;</span>
-<span id="L884"><span class="lineNum">     884</span>              :                                      internal::IsRefCounted&lt;Allocator&gt;::Value)) {</span>
-<span id="L885"><span class="lineNum">     885</span>              :             switch(data_.f.flags) {</span>
-<span id="L886"><span class="lineNum">     886</span>              :             case kArrayFlag:</span>
-<span id="L887"><span class="lineNum">     887</span>              :                 {</span>
-<span id="L888"><span class="lineNum">     888</span>              :                     GenericValue* e = GetElementsPointer();</span>
-<span id="L889"><span class="lineNum">     889</span>              :                     for (GenericValue* v = e; v != e + data_.a.size; ++v)</span>
-<span id="L890"><span class="lineNum">     890</span>              :                         v-&gt;~GenericValue();</span>
-<span id="L891"><span class="lineNum">     891</span>              :                     if (Allocator::kNeedFree) { // Shortcut by Allocator's trait</span>
-<span id="L892"><span class="lineNum">     892</span>              :                         Allocator::Free(e);</span>
-<span id="L893"><span class="lineNum">     893</span>              :                     }</span>
-<span id="L894"><span class="lineNum">     894</span>              :                 }</span>
-<span id="L895"><span class="lineNum">     895</span>              :                 break;</span>
+<span id="L883"><span class="lineNum">     883</span> <span class="tlaGNC">          65 :         if (Allocator::kNeedFree || (RAPIDJSON_USE_MEMBERSMAP+0 &amp;&amp;</span></span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaUNC tlaBgUNC">           0 :                                      internal::IsRefCounted&lt;Allocator&gt;::Value)) {</span></span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaUNC">           0 :             switch(data_.f.flags) {</span></span>
+<span id="L886"><span class="lineNum">     886</span> <span class="tlaUNC">           0 :             case kArrayFlag:</span></span>
+<span id="L887"><span class="lineNum">     887</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L888"><span class="lineNum">     888</span> <span class="tlaUNC">           0 :                     GenericValue* e = GetElementsPointer();</span></span>
+<span id="L889"><span class="lineNum">     889</span> <span class="tlaUNC">           0 :                     for (GenericValue* v = e; v != e + data_.a.size; ++v)</span></span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaUNC">           0 :                         v-&gt;~GenericValue();</span></span>
+<span id="L891"><span class="lineNum">     891</span> <span class="tlaUNC">           0 :                     if (Allocator::kNeedFree) { // Shortcut by Allocator's trait</span></span>
+<span id="L892"><span class="lineNum">     892</span> <span class="tlaUNC">           0 :                         Allocator::Free(e);</span></span>
+<span id="L893"><span class="lineNum">     893</span> <span class="tlaUNC">           0 :                     }</span></span>
+<span id="L894"><span class="lineNum">     894</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L895"><span class="lineNum">     895</span> <span class="tlaUNC">           0 :                 break;</span></span>
 <span id="L896"><span class="lineNum">     896</span>              : </span>
-<span id="L897"><span class="lineNum">     897</span>              :             case kObjectFlag:</span>
-<span id="L898"><span class="lineNum">     898</span>              :                 DoFreeMembers();</span>
-<span id="L899"><span class="lineNum">     899</span>              :                 break;</span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaUNC">           0 :             case kObjectFlag:</span></span>
+<span id="L898"><span class="lineNum">     898</span> <span class="tlaUNC">           0 :                 DoFreeMembers();</span></span>
+<span id="L899"><span class="lineNum">     899</span> <span class="tlaUNC">           0 :                 break;</span></span>
 <span id="L900"><span class="lineNum">     900</span>              : </span>
-<span id="L901"><span class="lineNum">     901</span>              :             case kCopyStringFlag:</span>
-<span id="L902"><span class="lineNum">     902</span>              :                 if (Allocator::kNeedFree) { // Shortcut by Allocator's trait</span>
-<span id="L903"><span class="lineNum">     903</span>              :                     Allocator::Free(const_cast&lt;Ch*&gt;(GetStringPointer()));</span>
-<span id="L904"><span class="lineNum">     904</span>              :                 }</span>
-<span id="L905"><span class="lineNum">     905</span>              :                 break;</span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :             case kCopyStringFlag:</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaUNC">           0 :                 if (Allocator::kNeedFree) { // Shortcut by Allocator's trait</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 :                     Allocator::Free(const_cast&lt;Ch*&gt;(GetStringPointer()));</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L905"><span class="lineNum">     905</span> <span class="tlaUNC">           0 :                 break;</span></span>
 <span id="L906"><span class="lineNum">     906</span>              : </span>
-<span id="L907"><span class="lineNum">     907</span>              :             default:</span>
-<span id="L908"><span class="lineNum">     908</span>              :                 break;  // Do nothing for other types.</span>
-<span id="L909"><span class="lineNum">     909</span>              :             }</span>
-<span id="L910"><span class="lineNum">     910</span>              :         }</span>
-<span id="L911"><span class="lineNum">     911</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L907"><span class="lineNum">     907</span> <span class="tlaUNC">           0 :             default:</span></span>
+<span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 :                 break;  // Do nothing for other types.</span></span>
+<span id="L909"><span class="lineNum">     909</span> <span class="tlaUNC">           0 :             }</span></span>
+<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L911"><span class="lineNum">     911</span> <span class="tlaGNC tlaBgGNC">          65 :     }</span></span>
 <span id="L912"><span class="lineNum">     912</span>              : </span>
 <span id="L913"><span class="lineNum">     913</span>              :     //@}</span>
 <span id="L914"><span class="lineNum">     914</span>              : </span>
@@ -980,18 +980,18 @@
 <span id="L918"><span class="lineNum">     918</span>              :     //! Assignment with move semantics.</span>
 <span id="L919"><span class="lineNum">     919</span>              :     /*! \param rhs Source of the assignment. It will become a null value after assignment.</span>
 <span id="L920"><span class="lineNum">     920</span>              :     */</span>
-<span id="L921"><span class="lineNum">     921</span> <span class="tlaUNC">           0 :     GenericValue&amp; operator=(GenericValue&amp; rhs) RAPIDJSON_NOEXCEPT {</span></span>
-<span id="L922"><span class="lineNum">     922</span> <span class="tlaUNC">           0 :         if (RAPIDJSON_LIKELY(this != &amp;rhs)) {</span></span>
+<span id="L921"><span class="lineNum">     921</span> <span class="tlaGNC">          13 :     GenericValue&amp; operator=(GenericValue&amp; rhs) RAPIDJSON_NOEXCEPT {</span></span>
+<span id="L922"><span class="lineNum">     922</span> <span class="tlaGNC">          13 :         if (RAPIDJSON_LIKELY(this != &amp;rhs)) {</span></span>
 <span id="L923"><span class="lineNum">     923</span>              :             // Can't destroy &quot;this&quot; before assigning &quot;rhs&quot;, otherwise &quot;rhs&quot;</span>
 <span id="L924"><span class="lineNum">     924</span>              :             // could be used after free if it's an sub-Value of &quot;this&quot;,</span>
 <span id="L925"><span class="lineNum">     925</span>              :             // hence the temporary danse.</span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaUNC">           0 :             GenericValue temp;</span></span>
-<span id="L927"><span class="lineNum">     927</span> <span class="tlaUNC">           0 :             temp.RawAssign(rhs);</span></span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaUNC">           0 :             this-&gt;~GenericValue();</span></span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaUNC">           0 :             RawAssign(temp);</span></span>
-<span id="L930"><span class="lineNum">     930</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L931"><span class="lineNum">     931</span> <span class="tlaUNC">           0 :         return *this;</span></span>
-<span id="L932"><span class="lineNum">     932</span>              :     }</span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">          13 :             GenericValue temp;</span></span>
+<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">          13 :             temp.RawAssign(rhs);</span></span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">          13 :             this-&gt;~GenericValue();</span></span>
+<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">          13 :             RawAssign(temp);</span></span>
+<span id="L930"><span class="lineNum">     930</span> <span class="tlaGNC">          13 :         }</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">          13 :         return *this;</span></span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L933"><span class="lineNum">     933</span>              : </span>
 <span id="L934"><span class="lineNum">     934</span>              : #if RAPIDJSON_HAS_CXX11_RVALUE_REFS</span>
 <span id="L935"><span class="lineNum">     935</span>              :     //! Move assignment in C++11</span>
@@ -1174,16 +1174,16 @@
 <span id="L1112"><span class="lineNum">    1112</span>              :     bool IsNull()   const { return data_.f.flags == kNullFlag; }</span>
 <span id="L1113"><span class="lineNum">    1113</span>              :     bool IsFalse()  const { return data_.f.flags == kFalseFlag; }</span>
 <span id="L1114"><span class="lineNum">    1114</span>              :     bool IsTrue()   const { return data_.f.flags == kTrueFlag; }</span>
-<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaUNC">           0 :     bool IsBool()   const { return (data_.f.flags &amp; kBoolFlag) != 0; }</span></span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaUNC">           0 :     bool IsObject() const { return data_.f.flags == kObjectFlag; }</span></span>
-<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC">           0 :     bool IsArray()  const { return data_.f.flags == kArrayFlag; }</span></span>
+<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaUNC tlaBgUNC">           0 :     bool IsBool()   const { return (data_.f.flags &amp; kBoolFlag) != 0; }</span></span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC tlaBgGNC">          65 :     bool IsObject() const { return data_.f.flags == kObjectFlag; }</span></span>
+<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC tlaBgUNC">           0 :     bool IsArray()  const { return data_.f.flags == kArrayFlag; }</span></span>
 <span id="L1118"><span class="lineNum">    1118</span>              :     bool IsNumber() const { return (data_.f.flags &amp; kNumberFlag) != 0; }</span>
 <span id="L1119"><span class="lineNum">    1119</span>              :     bool IsInt()    const { return (data_.f.flags &amp; kIntFlag) != 0; }</span>
 <span id="L1120"><span class="lineNum">    1120</span> <span class="tlaUNC">           0 :     bool IsUint()   const { return (data_.f.flags &amp; kUintFlag) != 0; }</span></span>
 <span id="L1121"><span class="lineNum">    1121</span>              :     bool IsInt64()  const { return (data_.f.flags &amp; kInt64Flag) != 0; }</span>
 <span id="L1122"><span class="lineNum">    1122</span> <span class="tlaUNC">           0 :     bool IsUint64() const { return (data_.f.flags &amp; kUint64Flag) != 0; }</span></span>
 <span id="L1123"><span class="lineNum">    1123</span>              :     bool IsDouble() const { return (data_.f.flags &amp; kDoubleFlag) != 0; }</span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :     bool IsString() const { return (data_.f.flags &amp; kStringFlag) != 0; }</span></span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC tlaBgGNC">         117 :     bool IsString() const { return (data_.f.flags &amp; kStringFlag) != 0; }</span></span>
 <span id="L1125"><span class="lineNum">    1125</span>              : </span>
 <span id="L1126"><span class="lineNum">    1126</span>              :     // Checks whether a number can be losslessly converted to a double.</span>
 <span id="L1127"><span class="lineNum">    1127</span>              :     bool IsLosslessDouble() const {</span>
@@ -1228,14 +1228,14 @@
 <span id="L1166"><span class="lineNum">    1166</span>              :     //!@name Null</span>
 <span id="L1167"><span class="lineNum">    1167</span>              :     //@{</span>
 <span id="L1168"><span class="lineNum">    1168</span>              : </span>
-<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaUNC">           0 :     GenericValue&amp; SetNull() { this-&gt;~GenericValue(); new (this) GenericValue(); return *this; }</span></span>
+<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaGNC">          13 :     GenericValue&amp; SetNull() { this-&gt;~GenericValue(); new (this) GenericValue(); return *this; }</span></span>
 <span id="L1170"><span class="lineNum">    1170</span>              : </span>
 <span id="L1171"><span class="lineNum">    1171</span>              :     //@}</span>
 <span id="L1172"><span class="lineNum">    1172</span>              : </span>
 <span id="L1173"><span class="lineNum">    1173</span>              :     //!@name Bool</span>
 <span id="L1174"><span class="lineNum">    1174</span>              :     //@{</span>
 <span id="L1175"><span class="lineNum">    1175</span>              : </span>
-<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaUNC">           0 :     bool GetBool() const { RAPIDJSON_ASSERT(IsBool()); return data_.f.flags == kTrueFlag; }</span></span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaUNC tlaBgUNC">           0 :     bool GetBool() const { RAPIDJSON_ASSERT(IsBool()); return data_.f.flags == kTrueFlag; }</span></span>
 <span id="L1177"><span class="lineNum">    1177</span>              :     //!&lt; Set boolean value</span>
 <span id="L1178"><span class="lineNum">    1178</span>              :     /*! \post IsBool() == true */</span>
 <span id="L1179"><span class="lineNum">    1179</span>              :     GenericValue&amp; SetBool(bool b) { this-&gt;~GenericValue(); new (this) GenericValue(b); return *this; }</span>
@@ -1289,15 +1289,15 @@
 <span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :         MemberIterator member = FindMember(name);</span></span>
 <span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 :         if (member != MemberEnd())</span></span>
 <span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :             return member-&gt;value;</span></span>
-<span id="L1230"><span class="lineNum">    1230</span>              :         else {</span>
+<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :         else {</span></span>
 <span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :             RAPIDJSON_ASSERT(false);    // see above note</span></span>
 <span id="L1232"><span class="lineNum">    1232</span>              : </span>
-<span id="L1233"><span class="lineNum">    1233</span>              : #if RAPIDJSON_HAS_CXX11</span>
+<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaUNC">           0 : #if RAPIDJSON_HAS_CXX11</span></span>
 <span id="L1234"><span class="lineNum">    1234</span>              :             // Use thread-local storage to prevent races between threads.</span>
 <span id="L1235"><span class="lineNum">    1235</span>              :             // Use static buffer and placement-new to prevent destruction, with</span>
 <span id="L1236"><span class="lineNum">    1236</span>              :             // alignas() to ensure proper alignment.</span>
-<span id="L1237"><span class="lineNum">    1237</span>              :             alignas(GenericValue) thread_local static char buffer[sizeof(GenericValue)];</span>
-<span id="L1238"><span class="lineNum">    1238</span>              :             return *new (buffer) GenericValue();</span>
+<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaUNC">           0 :             alignas(GenericValue) thread_local static char buffer[sizeof(GenericValue)];</span></span>
+<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaUNC">           0 :             return *new (buffer) GenericValue();</span></span>
 <span id="L1239"><span class="lineNum">    1239</span>              : #elif defined(_MSC_VER) &amp;&amp; _MSC_VER &lt; 1900</span>
 <span id="L1240"><span class="lineNum">    1240</span>              :             // There's no way to solve both thread locality and proper alignment</span>
 <span id="L1241"><span class="lineNum">    1241</span>              :             // simultaneously.</span>
@@ -1314,8 +1314,8 @@
 <span id="L1252"><span class="lineNum">    1252</span>              :             static GenericValue buffer;</span>
 <span id="L1253"><span class="lineNum">    1253</span>              :             return buffer;</span>
 <span id="L1254"><span class="lineNum">    1254</span>              : #endif</span>
-<span id="L1255"><span class="lineNum">    1255</span>              :         }</span>
-<span id="L1256"><span class="lineNum">    1256</span>              :     }</span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L1257"><span class="lineNum">    1257</span>              :     template &lt;typename SourceAllocator&gt;</span>
 <span id="L1258"><span class="lineNum">    1258</span>              :     const GenericValue&amp; operator[](const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; name) const { return const_cast&lt;GenericValue&amp;&gt;(*this)[name]; }</span>
 <span id="L1259"><span class="lineNum">    1259</span>              : </span>
@@ -1333,10 +1333,10 @@
 <span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :     ConstMemberIterator MemberEnd() const   { RAPIDJSON_ASSERT(IsObject()); return ConstMemberIterator(GetMembersPointer() + data_.o.size); }</span></span>
 <span id="L1272"><span class="lineNum">    1272</span>              :     //! Member iterator</span>
 <span id="L1273"><span class="lineNum">    1273</span>              :     /*! \pre IsObject() == true */</span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :     MemberIterator MemberBegin()            { RAPIDJSON_ASSERT(IsObject()); return MemberIterator(GetMembersPointer()); }</span></span>
+<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaGNC tlaBgGNC">          13 :     MemberIterator MemberBegin()            { RAPIDJSON_ASSERT(IsObject()); return MemberIterator(GetMembersPointer()); }</span></span>
 <span id="L1275"><span class="lineNum">    1275</span>              :     //! \em Past-the-end member iterator</span>
 <span id="L1276"><span class="lineNum">    1276</span>              :     /*! \pre IsObject() == true */</span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :     MemberIterator MemberEnd()              { RAPIDJSON_ASSERT(IsObject()); return MemberIterator(GetMembersPointer() + data_.o.size); }</span></span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaGNC">          26 :     MemberIterator MemberEnd()              { RAPIDJSON_ASSERT(IsObject()); return MemberIterator(GetMembersPointer() + data_.o.size); }</span></span>
 <span id="L1278"><span class="lineNum">    1278</span>              : </span>
 <span id="L1279"><span class="lineNum">    1279</span>              :     //! Request the object to have enough capacity to store members.</span>
 <span id="L1280"><span class="lineNum">    1280</span>              :     /*! \param newCapacity  The capacity that the object at least need to have.</span>
@@ -1358,7 +1358,7 @@
 <span id="L1296"><span class="lineNum">    1296</span>              :         \note It is better to use FindMember() directly if you need the obtain the value as well.</span>
 <span id="L1297"><span class="lineNum">    1297</span>              :         \note Linear time complexity.</span>
 <span id="L1298"><span class="lineNum">    1298</span>              :     */</span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :     bool HasMember(const Ch* name) const { return FindMember(name) != MemberEnd(); }</span></span>
+<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC tlaBgUNC">           0 :     bool HasMember(const Ch* name) const { return FindMember(name) != MemberEnd(); }</span></span>
 <span id="L1300"><span class="lineNum">    1300</span>              : </span>
 <span id="L1301"><span class="lineNum">    1301</span>              : #if RAPIDJSON_HAS_STDSTRING</span>
 <span id="L1302"><span class="lineNum">    1302</span>              :     //! Check whether a member exists in the object with string object.</span>
@@ -1396,12 +1396,12 @@
 <span id="L1334"><span class="lineNum">    1334</span>              :             \c std::map, this has been changed to MemberEnd() now.</span>
 <span id="L1335"><span class="lineNum">    1335</span>              :         \note Linear time complexity.</span>
 <span id="L1336"><span class="lineNum">    1336</span>              :     */</span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :     MemberIterator FindMember(const Ch* name) {</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :         GenericValue n(StringRef(name));</span></span>
-<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :         return FindMember(n);</span></span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC tlaBgGNC">          13 :     MemberIterator FindMember(const Ch* name) {</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">          13 :         GenericValue n(StringRef(name));</span></span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaGNC">          13 :         return FindMember(n);</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L1341"><span class="lineNum">    1341</span>              : </span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC">           0 :     ConstMemberIterator FindMember(const Ch* name) const { return const_cast&lt;GenericValue&amp;&gt;(*this).FindMember(name); }</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC tlaBgUNC">           0 :     ConstMemberIterator FindMember(const Ch* name) const { return const_cast&lt;GenericValue&amp;&gt;(*this).FindMember(name); }</span></span>
 <span id="L1343"><span class="lineNum">    1343</span>              : </span>
 <span id="L1344"><span class="lineNum">    1344</span>              :     //! Find member by name.</span>
 <span id="L1345"><span class="lineNum">    1345</span>              :     /*!</span>
@@ -1417,11 +1417,11 @@
 <span id="L1355"><span class="lineNum">    1355</span>              :         \note Linear time complexity.</span>
 <span id="L1356"><span class="lineNum">    1356</span>              :     */</span>
 <span id="L1357"><span class="lineNum">    1357</span>              :     template &lt;typename SourceAllocator&gt;</span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :     MemberIterator FindMember(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; name) {</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(IsObject());</span></span>
-<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(name.IsString());</span></span>
-<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 :         return DoFindMember(name);</span></span>
-<span id="L1362"><span class="lineNum">    1362</span>              :     }</span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaGNC tlaBgGNC">          13 :     MemberIterator FindMember(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; name) {</span></span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(IsObject());</span></span>
+<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(name.IsString());</span></span>
+<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaGNC">          13 :         return DoFindMember(name);</span></span>
+<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L1363"><span class="lineNum">    1363</span>              :     template &lt;typename SourceAllocator&gt; ConstMemberIterator FindMember(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; name) const { return const_cast&lt;GenericValue&amp;&gt;(*this).FindMember(name); }</span>
 <span id="L1364"><span class="lineNum">    1364</span>              : </span>
 <span id="L1365"><span class="lineNum">    1365</span>              : #if RAPIDJSON_HAS_STDSTRING</span>
@@ -1702,7 +1702,7 @@
 <span id="L1640"><span class="lineNum">    1640</span>              :     GenericValue&amp; SetArray() { this-&gt;~GenericValue(); new (this) GenericValue(kArrayType); return *this; }</span>
 <span id="L1641"><span class="lineNum">    1641</span>              : </span>
 <span id="L1642"><span class="lineNum">    1642</span>              :     //! Get the number of elements in array.</span>
-<span id="L1643"><span class="lineNum">    1643</span> <span class="tlaUNC">           0 :     SizeType Size() const { RAPIDJSON_ASSERT(IsArray()); return data_.a.size; }</span></span>
+<span id="L1643"><span class="lineNum">    1643</span> <span class="tlaUNC tlaBgUNC">           0 :     SizeType Size() const { RAPIDJSON_ASSERT(IsArray()); return data_.a.size; }</span></span>
 <span id="L1644"><span class="lineNum">    1644</span>              : </span>
 <span id="L1645"><span class="lineNum">    1645</span>              :     //! Get the capacity of array.</span>
 <span id="L1646"><span class="lineNum">    1646</span>              :     SizeType Capacity() const { RAPIDJSON_ASSERT(IsArray()); return data_.a.capacity; }</span>
@@ -1731,7 +1731,7 @@
 <span id="L1669"><span class="lineNum">    1669</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(IsArray());</span></span>
 <span id="L1670"><span class="lineNum">    1670</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(index &lt; data_.a.size);</span></span>
 <span id="L1671"><span class="lineNum">    1671</span> <span class="tlaUNC">           0 :         return GetElementsPointer()[index];</span></span>
-<span id="L1672"><span class="lineNum">    1672</span>              :     }</span>
+<span id="L1672"><span class="lineNum">    1672</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L1673"><span class="lineNum">    1673</span> <span class="tlaUNC">           0 :     const GenericValue&amp; operator[](SizeType index) const { return const_cast&lt;GenericValue&amp;&gt;(*this)[index]; }</span></span>
 <span id="L1674"><span class="lineNum">    1674</span>              : </span>
 <span id="L1675"><span class="lineNum">    1675</span>              :     //! Element iterator</span>
@@ -1912,12 +1912,12 @@
 <span id="L1850"><span class="lineNum">    1850</span>              :     //!@name String</span>
 <span id="L1851"><span class="lineNum">    1851</span>              :     //@{</span>
 <span id="L1852"><span class="lineNum">    1852</span>              : </span>
-<span id="L1853"><span class="lineNum">    1853</span> <span class="tlaUNC">           0 :     const Ch* GetString() const { RAPIDJSON_ASSERT(IsString()); return DataString(data_); }</span></span>
+<span id="L1853"><span class="lineNum">    1853</span> <span class="tlaGNC tlaBgGNC">          39 :     const Ch* GetString() const { RAPIDJSON_ASSERT(IsString()); return DataString(data_); }</span></span>
 <span id="L1854"><span class="lineNum">    1854</span>              : </span>
 <span id="L1855"><span class="lineNum">    1855</span>              :     //! Get the length of string.</span>
 <span id="L1856"><span class="lineNum">    1856</span>              :     /*! Since rapidjson permits &quot;\\u0000&quot; in the json string, strlen(v.GetString()) may not equal to v.GetStringLength().</span>
 <span id="L1857"><span class="lineNum">    1857</span>              :     */</span>
-<span id="L1858"><span class="lineNum">    1858</span> <span class="tlaUNC">           0 :     SizeType GetStringLength() const { RAPIDJSON_ASSERT(IsString()); return DataStringLength(data_); }</span></span>
+<span id="L1858"><span class="lineNum">    1858</span> <span class="tlaGNC">          26 :     SizeType GetStringLength() const { RAPIDJSON_ASSERT(IsString()); return DataStringLength(data_); }</span></span>
 <span id="L1859"><span class="lineNum">    1859</span>              : </span>
 <span id="L1860"><span class="lineNum">    1860</span>              :     //! Set this value as a string without copying source string.</span>
 <span id="L1861"><span class="lineNum">    1861</span>              :     /*! This version has better performance with supplied length, and also support string containing null character.</span>
@@ -2114,9 +2114,9 @@
 <span id="L2052"><span class="lineNum">    2052</span>              :         enum { MaxChars = sizeof(static_cast&lt;Flag*&gt;(0)-&gt;payload) / sizeof(Ch), MaxSize = MaxChars - 1, LenPos = MaxSize };</span>
 <span id="L2053"><span class="lineNum">    2053</span>              :         Ch str[MaxChars];</span>
 <span id="L2054"><span class="lineNum">    2054</span>              : </span>
-<span id="L2055"><span class="lineNum">    2055</span> <span class="tlaUNC">           0 :         inline static bool Usable(SizeType len) { return                       (MaxSize &gt;= len); }</span></span>
-<span id="L2056"><span class="lineNum">    2056</span> <span class="tlaUNC">           0 :         inline void     SetLength(SizeType len) { str[LenPos] = static_cast&lt;Ch&gt;(MaxSize -  len); }</span></span>
-<span id="L2057"><span class="lineNum">    2057</span> <span class="tlaUNC">           0 :         inline SizeType GetLength() const       { return  static_cast&lt;SizeType&gt;(MaxSize -  str[LenPos]); }</span></span>
+<span id="L2055"><span class="lineNum">    2055</span> <span class="tlaGNC">          26 :         inline static bool Usable(SizeType len) { return                       (MaxSize &gt;= len); }</span></span>
+<span id="L2056"><span class="lineNum">    2056</span> <span class="tlaGNC">          15 :         inline void     SetLength(SizeType len) { str[LenPos] = static_cast&lt;Ch&gt;(MaxSize -  len); }</span></span>
+<span id="L2057"><span class="lineNum">    2057</span> <span class="tlaGNC">          13 :         inline SizeType GetLength() const       { return  static_cast&lt;SizeType&gt;(MaxSize -  str[LenPos]); }</span></span>
 <span id="L2058"><span class="lineNum">    2058</span>              :     };  // at most as many bytes as &quot;String&quot; above =&gt; 12 bytes in 32-bit mode, 16 bytes in 64-bit mode</span>
 <span id="L2059"><span class="lineNum">    2059</span>              : </span>
 <span id="L2060"><span class="lineNum">    2060</span>              :     // By using proper binary layout, retrieval of different integer types do not need conversions.</span>
@@ -2166,19 +2166,19 @@
 <span id="L2104"><span class="lineNum">    2104</span>              :         Flag f;</span>
 <span id="L2105"><span class="lineNum">    2105</span>              :     };  // 16 bytes in 32-bit mode, 24 bytes in 64-bit mode, 16 bytes in 64-bit with RAPIDJSON_48BITPOINTER_OPTIMIZATION</span>
 <span id="L2106"><span class="lineNum">    2106</span>              : </span>
-<span id="L2107"><span class="lineNum">    2107</span> <span class="tlaUNC">           0 :     static RAPIDJSON_FORCEINLINE const Ch* DataString(const Data&amp; data) {</span></span>
-<span id="L2108"><span class="lineNum">    2108</span> <span class="tlaUNC">           0 :         return (data.f.flags &amp; kInlineStrFlag) ? data.ss.str : RAPIDJSON_GETPOINTER(Ch, data.s.str);</span></span>
-<span id="L2109"><span class="lineNum">    2109</span>              :     }</span>
-<span id="L2110"><span class="lineNum">    2110</span> <span class="tlaUNC">           0 :     static RAPIDJSON_FORCEINLINE SizeType DataStringLength(const Data&amp; data) {</span></span>
-<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaUNC">           0 :         return (data.f.flags &amp; kInlineStrFlag) ? data.ss.GetLength() : data.s.length;</span></span>
-<span id="L2112"><span class="lineNum">    2112</span>              :     }</span>
+<span id="L2107"><span class="lineNum">    2107</span> <span class="tlaGNC">          39 :     static RAPIDJSON_FORCEINLINE const Ch* DataString(const Data&amp; data) {</span></span>
+<span id="L2108"><span class="lineNum">    2108</span> <span class="tlaGNC">          39 :         return (data.f.flags &amp; kInlineStrFlag) ? data.ss.str : RAPIDJSON_GETPOINTER(Ch, data.s.str);</span></span>
+<span id="L2109"><span class="lineNum">    2109</span> <span class="tlaGNC">          39 :     }</span></span>
+<span id="L2110"><span class="lineNum">    2110</span> <span class="tlaGNC">          26 :     static RAPIDJSON_FORCEINLINE SizeType DataStringLength(const Data&amp; data) {</span></span>
+<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaGNC">          26 :         return (data.f.flags &amp; kInlineStrFlag) ? data.ss.GetLength() : data.s.length;</span></span>
+<span id="L2112"><span class="lineNum">    2112</span> <span class="tlaGNC">          26 :     }</span></span>
 <span id="L2113"><span class="lineNum">    2113</span>              : </span>
-<span id="L2114"><span class="lineNum">    2114</span>              :     RAPIDJSON_FORCEINLINE const Ch* GetStringPointer() const { return RAPIDJSON_GETPOINTER(Ch, data_.s.str); }</span>
-<span id="L2115"><span class="lineNum">    2115</span> <span class="tlaUNC">           0 :     RAPIDJSON_FORCEINLINE const Ch* SetStringPointer(const Ch* str) { return RAPIDJSON_SETPOINTER(Ch, data_.s.str, str); }</span></span>
-<span id="L2116"><span class="lineNum">    2116</span> <span class="tlaUNC">           0 :     RAPIDJSON_FORCEINLINE GenericValue* GetElementsPointer() const { return RAPIDJSON_GETPOINTER(GenericValue, data_.a.elements); }</span></span>
+<span id="L2114"><span class="lineNum">    2114</span> <span class="tlaUNC tlaBgUNC">           0 :     RAPIDJSON_FORCEINLINE const Ch* GetStringPointer() const { return RAPIDJSON_GETPOINTER(Ch, data_.s.str); }</span></span>
+<span id="L2115"><span class="lineNum">    2115</span> <span class="tlaGNC tlaBgGNC">          24 :     RAPIDJSON_FORCEINLINE const Ch* SetStringPointer(const Ch* str) { return RAPIDJSON_SETPOINTER(Ch, data_.s.str, str); }</span></span>
+<span id="L2116"><span class="lineNum">    2116</span> <span class="tlaUNC tlaBgUNC">           0 :     RAPIDJSON_FORCEINLINE GenericValue* GetElementsPointer() const { return RAPIDJSON_GETPOINTER(GenericValue, data_.a.elements); }</span></span>
 <span id="L2117"><span class="lineNum">    2117</span> <span class="tlaUNC">           0 :     RAPIDJSON_FORCEINLINE GenericValue* SetElementsPointer(GenericValue* elements) { return RAPIDJSON_SETPOINTER(GenericValue, data_.a.elements, elements); }</span></span>
-<span id="L2118"><span class="lineNum">    2118</span> <span class="tlaUNC">           0 :     RAPIDJSON_FORCEINLINE Member* GetMembersPointer() const { return RAPIDJSON_GETPOINTER(Member, data_.o.members); }</span></span>
-<span id="L2119"><span class="lineNum">    2119</span> <span class="tlaUNC">           0 :     RAPIDJSON_FORCEINLINE Member* SetMembersPointer(Member* members) { return RAPIDJSON_SETPOINTER(Member, data_.o.members, members); }</span></span>
+<span id="L2118"><span class="lineNum">    2118</span> <span class="tlaGNC tlaBgGNC">          39 :     RAPIDJSON_FORCEINLINE Member* GetMembersPointer() const { return RAPIDJSON_GETPOINTER(Member, data_.o.members); }</span></span>
+<span id="L2119"><span class="lineNum">    2119</span> <span class="tlaGNC">          13 :     RAPIDJSON_FORCEINLINE Member* SetMembersPointer(Member* members) { return RAPIDJSON_SETPOINTER(Member, data_.o.members, members); }</span></span>
 <span id="L2120"><span class="lineNum">    2120</span>              : </span>
 <span id="L2121"><span class="lineNum">    2121</span>              : #if RAPIDJSON_USE_MEMBERSMAP</span>
 <span id="L2122"><span class="lineNum">    2122</span>              : </span>
@@ -2327,9 +2327,9 @@
 <span id="L2265"><span class="lineNum">    2265</span>              : </span>
 <span id="L2266"><span class="lineNum">    2266</span>              : #else // !RAPIDJSON_USE_MEMBERSMAP</span>
 <span id="L2267"><span class="lineNum">    2267</span>              : </span>
-<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaUNC">           0 :     RAPIDJSON_FORCEINLINE Member* DoAllocMembers(SizeType capacity, Allocator&amp; allocator) {</span></span>
-<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaUNC">           0 :         return Malloc&lt;Member&gt;(allocator, capacity);</span></span>
-<span id="L2270"><span class="lineNum">    2270</span>              :     }</span>
+<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaGNC">          13 :     RAPIDJSON_FORCEINLINE Member* DoAllocMembers(SizeType capacity, Allocator&amp; allocator) {</span></span>
+<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaGNC">          13 :         return Malloc&lt;Member&gt;(allocator, capacity);</span></span>
+<span id="L2270"><span class="lineNum">    2270</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2271"><span class="lineNum">    2271</span>              : </span>
 <span id="L2272"><span class="lineNum">    2272</span>              :     void DoReserveMembers(SizeType newCapacity, Allocator&amp; allocator) {</span>
 <span id="L2273"><span class="lineNum">    2273</span>              :         ObjectData&amp; o = data_.o;</span>
@@ -2341,13 +2341,13 @@
 <span id="L2279"><span class="lineNum">    2279</span>              :     }</span>
 <span id="L2280"><span class="lineNum">    2280</span>              : </span>
 <span id="L2281"><span class="lineNum">    2281</span>              :     template &lt;typename SourceAllocator&gt;</span>
-<span id="L2282"><span class="lineNum">    2282</span> <span class="tlaUNC">           0 :     MemberIterator DoFindMember(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; name) {</span></span>
-<span id="L2283"><span class="lineNum">    2283</span> <span class="tlaUNC">           0 :         MemberIterator member = MemberBegin();</span></span>
-<span id="L2284"><span class="lineNum">    2284</span> <span class="tlaUNC">           0 :         for ( ; member != MemberEnd(); ++member)</span></span>
-<span id="L2285"><span class="lineNum">    2285</span> <span class="tlaUNC">           0 :             if (name.StringEqual(member-&gt;name))</span></span>
-<span id="L2286"><span class="lineNum">    2286</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L2287"><span class="lineNum">    2287</span> <span class="tlaUNC">           0 :         return member;</span></span>
-<span id="L2288"><span class="lineNum">    2288</span>              :     }</span>
+<span id="L2282"><span class="lineNum">    2282</span> <span class="tlaGNC">          13 :     MemberIterator DoFindMember(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; name) {</span></span>
+<span id="L2283"><span class="lineNum">    2283</span> <span class="tlaGNC">          13 :         MemberIterator member = MemberBegin();</span></span>
+<span id="L2284"><span class="lineNum">    2284</span> <span class="tlaGNC">          13 :         for ( ; member != MemberEnd(); ++member)</span></span>
+<span id="L2285"><span class="lineNum">    2285</span> <span class="tlaGNC">          13 :             if (name.StringEqual(member-&gt;name))</span></span>
+<span id="L2286"><span class="lineNum">    2286</span> <span class="tlaGNC">          13 :                 break;</span></span>
+<span id="L2287"><span class="lineNum">    2287</span> <span class="tlaGNC">          13 :         return member;</span></span>
+<span id="L2288"><span class="lineNum">    2288</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2289"><span class="lineNum">    2289</span>              : </span>
 <span id="L2290"><span class="lineNum">    2290</span>              :     void DoClearMembers() {</span>
 <span id="L2291"><span class="lineNum">    2291</span>              :         for (MemberIterator m = MemberBegin(); m != MemberEnd(); ++m)</span>
@@ -2355,11 +2355,11 @@
 <span id="L2293"><span class="lineNum">    2293</span>              :         data_.o.size = 0;</span>
 <span id="L2294"><span class="lineNum">    2294</span>              :     }</span>
 <span id="L2295"><span class="lineNum">    2295</span>              : </span>
-<span id="L2296"><span class="lineNum">    2296</span>              :     void DoFreeMembers() {</span>
-<span id="L2297"><span class="lineNum">    2297</span>              :         for (MemberIterator m = MemberBegin(); m != MemberEnd(); ++m)</span>
-<span id="L2298"><span class="lineNum">    2298</span>              :             m-&gt;~Member();</span>
-<span id="L2299"><span class="lineNum">    2299</span>              :         Allocator::Free(GetMembersPointer());</span>
-<span id="L2300"><span class="lineNum">    2300</span>              :     }</span>
+<span id="L2296"><span class="lineNum">    2296</span> <span class="tlaUNC tlaBgUNC">           0 :     void DoFreeMembers() {</span></span>
+<span id="L2297"><span class="lineNum">    2297</span> <span class="tlaUNC">           0 :         for (MemberIterator m = MemberBegin(); m != MemberEnd(); ++m)</span></span>
+<span id="L2298"><span class="lineNum">    2298</span> <span class="tlaUNC">           0 :             m-&gt;~Member();</span></span>
+<span id="L2299"><span class="lineNum">    2299</span> <span class="tlaUNC">           0 :         Allocator::Free(GetMembersPointer());</span></span>
+<span id="L2300"><span class="lineNum">    2300</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2301"><span class="lineNum">    2301</span>              : </span>
 <span id="L2302"><span class="lineNum">    2302</span>              : #endif // !RAPIDJSON_USE_MEMBERSMAP</span>
 <span id="L2303"><span class="lineNum">    2303</span>              : </span>
@@ -2467,19 +2467,19 @@
 <span id="L2405"><span class="lineNum">    2405</span> <span class="tlaUNC">           0 :             GenericValue* e = static_cast&lt;GenericValue*&gt;(allocator.Malloc(count * sizeof(GenericValue)));</span></span>
 <span id="L2406"><span class="lineNum">    2406</span> <span class="tlaUNC">           0 :             SetElementsPointer(e);</span></span>
 <span id="L2407"><span class="lineNum">    2407</span> <span class="tlaUNC">           0 :             std::memcpy(static_cast&lt;void*&gt;(e), values, count * sizeof(GenericValue));</span></span>
-<span id="L2408"><span class="lineNum">    2408</span>              :         }</span>
-<span id="L2409"><span class="lineNum">    2409</span>              :         else</span>
+<span id="L2408"><span class="lineNum">    2408</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2409"><span class="lineNum">    2409</span> <span class="tlaUNC">           0 :         else</span></span>
 <span id="L2410"><span class="lineNum">    2410</span> <span class="tlaUNC">           0 :             SetElementsPointer(0);</span></span>
 <span id="L2411"><span class="lineNum">    2411</span> <span class="tlaUNC">           0 :         data_.a.size = data_.a.capacity = count;</span></span>
 <span id="L2412"><span class="lineNum">    2412</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2413"><span class="lineNum">    2413</span>              : </span>
 <span id="L2414"><span class="lineNum">    2414</span>              :     //! Initialize this value as object with initial data, without calling destructor.</span>
-<span id="L2415"><span class="lineNum">    2415</span> <span class="tlaUNC">           0 :     void SetObjectRaw(Member* members, SizeType count, Allocator&amp; allocator) {</span></span>
-<span id="L2416"><span class="lineNum">    2416</span> <span class="tlaUNC">           0 :         data_.f.flags = kObjectFlag;</span></span>
-<span id="L2417"><span class="lineNum">    2417</span> <span class="tlaUNC">           0 :         if (count) {</span></span>
-<span id="L2418"><span class="lineNum">    2418</span> <span class="tlaUNC">           0 :             Member* m = DoAllocMembers(count, allocator);</span></span>
-<span id="L2419"><span class="lineNum">    2419</span> <span class="tlaUNC">           0 :             SetMembersPointer(m);</span></span>
-<span id="L2420"><span class="lineNum">    2420</span> <span class="tlaUNC">           0 :             std::memcpy(static_cast&lt;void*&gt;(m), members, count * sizeof(Member));</span></span>
+<span id="L2415"><span class="lineNum">    2415</span> <span class="tlaGNC tlaBgGNC">          13 :     void SetObjectRaw(Member* members, SizeType count, Allocator&amp; allocator) {</span></span>
+<span id="L2416"><span class="lineNum">    2416</span> <span class="tlaGNC">          13 :         data_.f.flags = kObjectFlag;</span></span>
+<span id="L2417"><span class="lineNum">    2417</span> <span class="tlaGNC">          13 :         if (count) {</span></span>
+<span id="L2418"><span class="lineNum">    2418</span> <span class="tlaGNC">          13 :             Member* m = DoAllocMembers(count, allocator);</span></span>
+<span id="L2419"><span class="lineNum">    2419</span> <span class="tlaGNC">          13 :             SetMembersPointer(m);</span></span>
+<span id="L2420"><span class="lineNum">    2420</span> <span class="tlaGNC">          13 :             std::memcpy(static_cast&lt;void*&gt;(m), members, count * sizeof(Member));</span></span>
 <span id="L2421"><span class="lineNum">    2421</span>              : #if RAPIDJSON_USE_MEMBERSMAP</span>
 <span id="L2422"><span class="lineNum">    2422</span>              :             Map* &amp;map = GetMap(m);</span>
 <span id="L2423"><span class="lineNum">    2423</span>              :             MapIterator* mit = GetMapIterators(map);</span>
@@ -2487,59 +2487,59 @@
 <span id="L2425"><span class="lineNum">    2425</span>              :                 new (&amp;mit[i]) MapIterator(map-&gt;insert(MapPair(m[i].name.data_, i)));</span>
 <span id="L2426"><span class="lineNum">    2426</span>              :             }</span>
 <span id="L2427"><span class="lineNum">    2427</span>              : #endif</span>
-<span id="L2428"><span class="lineNum">    2428</span>              :         }</span>
-<span id="L2429"><span class="lineNum">    2429</span>              :         else</span>
+<span id="L2428"><span class="lineNum">    2428</span> <span class="tlaGNC">          13 :         }</span></span>
+<span id="L2429"><span class="lineNum">    2429</span> <span class="tlaUNC tlaBgUNC">           0 :         else</span></span>
 <span id="L2430"><span class="lineNum">    2430</span> <span class="tlaUNC">           0 :             SetMembersPointer(0);</span></span>
-<span id="L2431"><span class="lineNum">    2431</span> <span class="tlaUNC">           0 :         data_.o.size = data_.o.capacity = count;</span></span>
-<span id="L2432"><span class="lineNum">    2432</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2431"><span class="lineNum">    2431</span> <span class="tlaGNC tlaBgGNC">          13 :         data_.o.size = data_.o.capacity = count;</span></span>
+<span id="L2432"><span class="lineNum">    2432</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2433"><span class="lineNum">    2433</span>              : </span>
 <span id="L2434"><span class="lineNum">    2434</span>              :     //! Initialize this value as constant string, without calling destructor.</span>
-<span id="L2435"><span class="lineNum">    2435</span> <span class="tlaUNC">           0 :     void SetStringRaw(StringRefType s) RAPIDJSON_NOEXCEPT {</span></span>
-<span id="L2436"><span class="lineNum">    2436</span> <span class="tlaUNC">           0 :         data_.f.flags = kConstStringFlag;</span></span>
-<span id="L2437"><span class="lineNum">    2437</span> <span class="tlaUNC">           0 :         SetStringPointer(s);</span></span>
-<span id="L2438"><span class="lineNum">    2438</span> <span class="tlaUNC">           0 :         data_.s.length = s.length;</span></span>
-<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2435"><span class="lineNum">    2435</span> <span class="tlaGNC">          13 :     void SetStringRaw(StringRefType s) RAPIDJSON_NOEXCEPT {</span></span>
+<span id="L2436"><span class="lineNum">    2436</span> <span class="tlaGNC">          13 :         data_.f.flags = kConstStringFlag;</span></span>
+<span id="L2437"><span class="lineNum">    2437</span> <span class="tlaGNC">          13 :         SetStringPointer(s);</span></span>
+<span id="L2438"><span class="lineNum">    2438</span> <span class="tlaGNC">          13 :         data_.s.length = s.length;</span></span>
+<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2440"><span class="lineNum">    2440</span>              : </span>
 <span id="L2441"><span class="lineNum">    2441</span>              :     //! Initialize this value as copy string with initial data, without calling destructor.</span>
-<span id="L2442"><span class="lineNum">    2442</span> <span class="tlaUNC">           0 :     void SetStringRaw(StringRefType s, Allocator&amp; allocator) {</span></span>
-<span id="L2443"><span class="lineNum">    2443</span> <span class="tlaUNC">           0 :         Ch* str = 0;</span></span>
-<span id="L2444"><span class="lineNum">    2444</span> <span class="tlaUNC">           0 :         if (ShortString::Usable(s.length)) {</span></span>
-<span id="L2445"><span class="lineNum">    2445</span> <span class="tlaUNC">           0 :             data_.f.flags = kShortStringFlag;</span></span>
-<span id="L2446"><span class="lineNum">    2446</span> <span class="tlaUNC">           0 :             data_.ss.SetLength(s.length);</span></span>
-<span id="L2447"><span class="lineNum">    2447</span> <span class="tlaUNC">           0 :             str = data_.ss.str;</span></span>
-<span id="L2448"><span class="lineNum">    2448</span> <span class="tlaUNC">           0 :             std::memmove(str, s, s.length * sizeof(Ch));</span></span>
-<span id="L2449"><span class="lineNum">    2449</span>              :         } else {</span>
-<span id="L2450"><span class="lineNum">    2450</span> <span class="tlaUNC">           0 :             data_.f.flags = kCopyStringFlag;</span></span>
-<span id="L2451"><span class="lineNum">    2451</span> <span class="tlaUNC">           0 :             data_.s.length = s.length;</span></span>
-<span id="L2452"><span class="lineNum">    2452</span> <span class="tlaUNC">           0 :             str = static_cast&lt;Ch *&gt;(allocator.Malloc((s.length + 1) * sizeof(Ch)));</span></span>
-<span id="L2453"><span class="lineNum">    2453</span> <span class="tlaUNC">           0 :             SetStringPointer(str);</span></span>
-<span id="L2454"><span class="lineNum">    2454</span> <span class="tlaUNC">           0 :             std::memcpy(str, s, s.length * sizeof(Ch));</span></span>
-<span id="L2455"><span class="lineNum">    2455</span>              :         }</span>
-<span id="L2456"><span class="lineNum">    2456</span> <span class="tlaUNC">           0 :         str[s.length] = '\0';</span></span>
-<span id="L2457"><span class="lineNum">    2457</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2442"><span class="lineNum">    2442</span> <span class="tlaGNC">          26 :     void SetStringRaw(StringRefType s, Allocator&amp; allocator) {</span></span>
+<span id="L2443"><span class="lineNum">    2443</span> <span class="tlaGNC">          26 :         Ch* str = 0;</span></span>
+<span id="L2444"><span class="lineNum">    2444</span> <span class="tlaGNC">          26 :         if (ShortString::Usable(s.length)) {</span></span>
+<span id="L2445"><span class="lineNum">    2445</span> <span class="tlaGNC">          15 :             data_.f.flags = kShortStringFlag;</span></span>
+<span id="L2446"><span class="lineNum">    2446</span> <span class="tlaGNC">          15 :             data_.ss.SetLength(s.length);</span></span>
+<span id="L2447"><span class="lineNum">    2447</span> <span class="tlaGNC">          15 :             str = data_.ss.str;</span></span>
+<span id="L2448"><span class="lineNum">    2448</span> <span class="tlaGNC">          15 :             std::memmove(str, s, s.length * sizeof(Ch));</span></span>
+<span id="L2449"><span class="lineNum">    2449</span> <span class="tlaGNC">          15 :         } else {</span></span>
+<span id="L2450"><span class="lineNum">    2450</span> <span class="tlaGNC">          11 :             data_.f.flags = kCopyStringFlag;</span></span>
+<span id="L2451"><span class="lineNum">    2451</span> <span class="tlaGNC">          11 :             data_.s.length = s.length;</span></span>
+<span id="L2452"><span class="lineNum">    2452</span> <span class="tlaGNC">          11 :             str = static_cast&lt;Ch *&gt;(allocator.Malloc((s.length + 1) * sizeof(Ch)));</span></span>
+<span id="L2453"><span class="lineNum">    2453</span> <span class="tlaGNC">          11 :             SetStringPointer(str);</span></span>
+<span id="L2454"><span class="lineNum">    2454</span> <span class="tlaGNC">          11 :             std::memcpy(str, s, s.length * sizeof(Ch));</span></span>
+<span id="L2455"><span class="lineNum">    2455</span> <span class="tlaGNC">          11 :         }</span></span>
+<span id="L2456"><span class="lineNum">    2456</span> <span class="tlaGNC">          26 :         str[s.length] = '\0';</span></span>
+<span id="L2457"><span class="lineNum">    2457</span> <span class="tlaGNC">          26 :     }</span></span>
 <span id="L2458"><span class="lineNum">    2458</span>              : </span>
 <span id="L2459"><span class="lineNum">    2459</span>              :     //! Assignment without calling destructor</span>
-<span id="L2460"><span class="lineNum">    2460</span> <span class="tlaUNC">           0 :     void RawAssign(GenericValue&amp; rhs) RAPIDJSON_NOEXCEPT {</span></span>
-<span id="L2461"><span class="lineNum">    2461</span> <span class="tlaUNC">           0 :         data_ = rhs.data_;</span></span>
+<span id="L2460"><span class="lineNum">    2460</span> <span class="tlaGNC">          26 :     void RawAssign(GenericValue&amp; rhs) RAPIDJSON_NOEXCEPT {</span></span>
+<span id="L2461"><span class="lineNum">    2461</span> <span class="tlaGNC">          26 :         data_ = rhs.data_;</span></span>
 <span id="L2462"><span class="lineNum">    2462</span>              :         // data_.f.flags = rhs.data_.f.flags;</span>
-<span id="L2463"><span class="lineNum">    2463</span> <span class="tlaUNC">           0 :         rhs.data_.f.flags = kNullFlag;</span></span>
-<span id="L2464"><span class="lineNum">    2464</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2463"><span class="lineNum">    2463</span> <span class="tlaGNC">          26 :         rhs.data_.f.flags = kNullFlag;</span></span>
+<span id="L2464"><span class="lineNum">    2464</span> <span class="tlaGNC">          26 :     }</span></span>
 <span id="L2465"><span class="lineNum">    2465</span>              : </span>
 <span id="L2466"><span class="lineNum">    2466</span>              :     template &lt;typename SourceAllocator&gt;</span>
-<span id="L2467"><span class="lineNum">    2467</span> <span class="tlaUNC">           0 :     bool StringEqual(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; rhs) const {</span></span>
-<span id="L2468"><span class="lineNum">    2468</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(IsString());</span></span>
-<span id="L2469"><span class="lineNum">    2469</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(rhs.IsString());</span></span>
+<span id="L2467"><span class="lineNum">    2467</span> <span class="tlaGNC">          13 :     bool StringEqual(const GenericValue&lt;Encoding, SourceAllocator&gt;&amp; rhs) const {</span></span>
+<span id="L2468"><span class="lineNum">    2468</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(IsString());</span></span>
+<span id="L2469"><span class="lineNum">    2469</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(rhs.IsString());</span></span>
 <span id="L2470"><span class="lineNum">    2470</span>              : </span>
-<span id="L2471"><span class="lineNum">    2471</span> <span class="tlaUNC">           0 :         const SizeType len1 = GetStringLength();</span></span>
-<span id="L2472"><span class="lineNum">    2472</span> <span class="tlaUNC">           0 :         const SizeType len2 = rhs.GetStringLength();</span></span>
-<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaUNC">           0 :         if(len1 != len2) { return false; }</span></span>
+<span id="L2471"><span class="lineNum">    2471</span> <span class="tlaGNC">          13 :         const SizeType len1 = GetStringLength();</span></span>
+<span id="L2472"><span class="lineNum">    2472</span> <span class="tlaGNC">          13 :         const SizeType len2 = rhs.GetStringLength();</span></span>
+<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaGNC">          13 :         if(len1 != len2) { return false; }</span></span>
 <span id="L2474"><span class="lineNum">    2474</span>              : </span>
-<span id="L2475"><span class="lineNum">    2475</span> <span class="tlaUNC">           0 :         const Ch* const str1 = GetString();</span></span>
-<span id="L2476"><span class="lineNum">    2476</span> <span class="tlaUNC">           0 :         const Ch* const str2 = rhs.GetString();</span></span>
-<span id="L2477"><span class="lineNum">    2477</span> <span class="tlaUNC">           0 :         if(str1 == str2) { return true; } // fast path for constant string</span></span>
+<span id="L2475"><span class="lineNum">    2475</span> <span class="tlaGNC">          13 :         const Ch* const str1 = GetString();</span></span>
+<span id="L2476"><span class="lineNum">    2476</span> <span class="tlaGNC">          13 :         const Ch* const str2 = rhs.GetString();</span></span>
+<span id="L2477"><span class="lineNum">    2477</span> <span class="tlaGNC">          13 :         if(str1 == str2) { return true; } // fast path for constant string</span></span>
 <span id="L2478"><span class="lineNum">    2478</span>              : </span>
-<span id="L2479"><span class="lineNum">    2479</span> <span class="tlaUNC">           0 :         return (std::memcmp(str1, str2, sizeof(Ch) * len1) == 0);</span></span>
-<span id="L2480"><span class="lineNum">    2480</span>              :     }</span>
+<span id="L2479"><span class="lineNum">    2479</span> <span class="tlaGNC">          13 :         return (std::memcmp(str1, str2, sizeof(Ch) * len1) == 0);</span></span>
+<span id="L2480"><span class="lineNum">    2480</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2481"><span class="lineNum">    2481</span>              : </span>
 <span id="L2482"><span class="lineNum">    2482</span>              :     Data data_;</span>
 <span id="L2483"><span class="lineNum">    2483</span>              : };</span>
@@ -2586,12 +2586,12 @@
 <span id="L2524"><span class="lineNum">    2524</span>              :         \param stackCapacity    Optional initial capacity of stack in bytes.</span>
 <span id="L2525"><span class="lineNum">    2525</span>              :         \param stackAllocator   Optional allocator for allocating memory for stack.</span>
 <span id="L2526"><span class="lineNum">    2526</span>              :     */</span>
-<span id="L2527"><span class="lineNum">    2527</span> <span class="tlaUNC">           0 :     GenericDocument(Allocator* allocator = 0, size_t stackCapacity = kDefaultStackCapacity, StackAllocator* stackAllocator = 0) : </span></span>
-<span id="L2528"><span class="lineNum">    2528</span> <span class="tlaUNC">           0 :         allocator_(allocator), ownAllocator_(0), stack_(stackAllocator, stackCapacity), parseResult_()</span></span>
-<span id="L2529"><span class="lineNum">    2529</span>              :     {</span>
-<span id="L2530"><span class="lineNum">    2530</span> <span class="tlaUNC">           0 :         if (!allocator_)</span></span>
-<span id="L2531"><span class="lineNum">    2531</span> <span class="tlaUNC">           0 :             ownAllocator_ = allocator_ = RAPIDJSON_NEW(Allocator)();</span></span>
-<span id="L2532"><span class="lineNum">    2532</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2527"><span class="lineNum">    2527</span>              :     GenericDocument(Allocator* allocator = 0, size_t stackCapacity = kDefaultStackCapacity, StackAllocator* stackAllocator = 0) : </span>
+<span id="L2528"><span class="lineNum">    2528</span> <span class="tlaGNC">          13 :         allocator_(allocator), ownAllocator_(0), stack_(stackAllocator, stackCapacity), parseResult_()</span></span>
+<span id="L2529"><span class="lineNum">    2529</span> <span class="tlaGNC">          13 :     {</span></span>
+<span id="L2530"><span class="lineNum">    2530</span> <span class="tlaGNC">          13 :         if (!allocator_)</span></span>
+<span id="L2531"><span class="lineNum">    2531</span> <span class="tlaGNC">          13 :             ownAllocator_ = allocator_ = RAPIDJSON_NEW(Allocator)();</span></span>
+<span id="L2532"><span class="lineNum">    2532</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2533"><span class="lineNum">    2533</span>              : </span>
 <span id="L2534"><span class="lineNum">    2534</span>              : #if RAPIDJSON_HAS_CXX11_RVALUE_REFS</span>
 <span id="L2535"><span class="lineNum">    2535</span>              :     //! Move constructor in C++11</span>
@@ -2608,16 +2608,16 @@
 <span id="L2546"><span class="lineNum">    2546</span>              :     }</span>
 <span id="L2547"><span class="lineNum">    2547</span>              : #endif</span>
 <span id="L2548"><span class="lineNum">    2548</span>              : </span>
-<span id="L2549"><span class="lineNum">    2549</span> <span class="tlaUNC">           0 :     ~GenericDocument() {</span></span>
+<span id="L2549"><span class="lineNum">    2549</span> <span class="tlaGNC">          13 :     ~GenericDocument() {</span></span>
 <span id="L2550"><span class="lineNum">    2550</span>              :         // Clear the ::ValueType before ownAllocator is destroyed, ~ValueType()</span>
 <span id="L2551"><span class="lineNum">    2551</span>              :         // runs last and may access its elements or members which would be freed</span>
 <span id="L2552"><span class="lineNum">    2552</span>              :         // with an allocator like MemoryPoolAllocator (CrtAllocator does not</span>
 <span id="L2553"><span class="lineNum">    2553</span>              :         // free its data when destroyed, but MemoryPoolAllocator does).</span>
-<span id="L2554"><span class="lineNum">    2554</span> <span class="tlaUNC">           0 :         if (ownAllocator_) {</span></span>
-<span id="L2555"><span class="lineNum">    2555</span> <span class="tlaUNC">           0 :             ValueType::SetNull();</span></span>
-<span id="L2556"><span class="lineNum">    2556</span>              :         }</span>
-<span id="L2557"><span class="lineNum">    2557</span> <span class="tlaUNC">           0 :         Destroy();</span></span>
-<span id="L2558"><span class="lineNum">    2558</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2554"><span class="lineNum">    2554</span> <span class="tlaGNC">          13 :         if (ownAllocator_) {</span></span>
+<span id="L2555"><span class="lineNum">    2555</span> <span class="tlaGNC">          13 :             ValueType::SetNull();</span></span>
+<span id="L2556"><span class="lineNum">    2556</span> <span class="tlaGNC">          13 :         }</span></span>
+<span id="L2557"><span class="lineNum">    2557</span> <span class="tlaGNC">          13 :         Destroy();</span></span>
+<span id="L2558"><span class="lineNum">    2558</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2559"><span class="lineNum">    2559</span>              : </span>
 <span id="L2560"><span class="lineNum">    2560</span>              : #if RAPIDJSON_HAS_CXX11_RVALUE_REFS</span>
 <span id="L2561"><span class="lineNum">    2561</span>              :     //! Move assignment in C++11</span>
@@ -2702,17 +2702,17 @@
 <span id="L2640"><span class="lineNum">    2640</span>              :         \return The document itself for fluent API.</span>
 <span id="L2641"><span class="lineNum">    2641</span>              :     */</span>
 <span id="L2642"><span class="lineNum">    2642</span>              :     template &lt;unsigned parseFlags, typename SourceEncoding, typename InputStream&gt;</span>
-<span id="L2643"><span class="lineNum">    2643</span> <span class="tlaUNC">           0 :     GenericDocument&amp; ParseStream(InputStream&amp; is) {</span></span>
-<span id="L2644"><span class="lineNum">    2644</span> <span class="tlaUNC">           0 :         GenericReader&lt;SourceEncoding, Encoding, StackAllocator&gt; reader(</span></span>
-<span id="L2645"><span class="lineNum">    2645</span> <span class="tlaUNC">           0 :             stack_.HasAllocator() ? &amp;stack_.GetAllocator() : 0);</span></span>
-<span id="L2646"><span class="lineNum">    2646</span> <span class="tlaUNC">           0 :         ClearStackOnExit scope(*this);</span></span>
-<span id="L2647"><span class="lineNum">    2647</span> <span class="tlaUNC">           0 :         parseResult_ = reader.template Parse&lt;parseFlags&gt;(is, *this);</span></span>
-<span id="L2648"><span class="lineNum">    2648</span> <span class="tlaUNC">           0 :         if (parseResult_) {</span></span>
-<span id="L2649"><span class="lineNum">    2649</span> <span class="tlaUNC">           0 :             RAPIDJSON_ASSERT(stack_.GetSize() == sizeof(ValueType)); // Got one and only one root object</span></span>
-<span id="L2650"><span class="lineNum">    2650</span> <span class="tlaUNC">           0 :             ValueType::operator=(*stack_.template Pop&lt;ValueType&gt;(1));// Move value from stack to document</span></span>
-<span id="L2651"><span class="lineNum">    2651</span>              :         }</span>
-<span id="L2652"><span class="lineNum">    2652</span> <span class="tlaUNC">           0 :         return *this;</span></span>
-<span id="L2653"><span class="lineNum">    2653</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2643"><span class="lineNum">    2643</span> <span class="tlaGNC">          13 :     GenericDocument&amp; ParseStream(InputStream&amp; is) {</span></span>
+<span id="L2644"><span class="lineNum">    2644</span> <span class="tlaGNC">          13 :         GenericReader&lt;SourceEncoding, Encoding, StackAllocator&gt; reader(</span></span>
+<span id="L2645"><span class="lineNum">    2645</span> <span class="tlaGNC">          13 :             stack_.HasAllocator() ? &amp;stack_.GetAllocator() : 0);</span></span>
+<span id="L2646"><span class="lineNum">    2646</span> <span class="tlaGNC">          13 :         ClearStackOnExit scope(*this);</span></span>
+<span id="L2647"><span class="lineNum">    2647</span> <span class="tlaGNC">          13 :         parseResult_ = reader.template Parse&lt;parseFlags&gt;(is, *this);</span></span>
+<span id="L2648"><span class="lineNum">    2648</span> <span class="tlaGNC">          13 :         if (parseResult_) {</span></span>
+<span id="L2649"><span class="lineNum">    2649</span> <span class="tlaGNC">          13 :             RAPIDJSON_ASSERT(stack_.GetSize() == sizeof(ValueType)); // Got one and only one root object</span></span>
+<span id="L2650"><span class="lineNum">    2650</span> <span class="tlaGNC">          13 :             ValueType::operator=(*stack_.template Pop&lt;ValueType&gt;(1));// Move value from stack to document</span></span>
+<span id="L2651"><span class="lineNum">    2651</span> <span class="tlaGNC">          13 :         }</span></span>
+<span id="L2652"><span class="lineNum">    2652</span> <span class="tlaGNC">          13 :         return *this;</span></span>
+<span id="L2653"><span class="lineNum">    2653</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2654"><span class="lineNum">    2654</span>              : </span>
 <span id="L2655"><span class="lineNum">    2655</span>              :     //! Parse JSON text from an input stream</span>
 <span id="L2656"><span class="lineNum">    2656</span>              :     /*! \tparam parseFlags Combination of \ref ParseFlag.</span>
@@ -2721,9 +2721,9 @@
 <span id="L2659"><span class="lineNum">    2659</span>              :         \return The document itself for fluent API.</span>
 <span id="L2660"><span class="lineNum">    2660</span>              :     */</span>
 <span id="L2661"><span class="lineNum">    2661</span>              :     template &lt;unsigned parseFlags, typename InputStream&gt;</span>
-<span id="L2662"><span class="lineNum">    2662</span> <span class="tlaUNC">           0 :     GenericDocument&amp; ParseStream(InputStream&amp; is) {</span></span>
+<span id="L2662"><span class="lineNum">    2662</span> <span class="tlaUNC tlaBgUNC">           0 :     GenericDocument&amp; ParseStream(InputStream&amp; is) {</span></span>
 <span id="L2663"><span class="lineNum">    2663</span> <span class="tlaUNC">           0 :         return ParseStream&lt;parseFlags, Encoding, InputStream&gt;(is);</span></span>
-<span id="L2664"><span class="lineNum">    2664</span>              :     }</span>
+<span id="L2664"><span class="lineNum">    2664</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2665"><span class="lineNum">    2665</span>              : </span>
 <span id="L2666"><span class="lineNum">    2666</span>              :     //! Parse JSON text from an input stream (with \ref kParseDefaultFlags)</span>
 <span id="L2667"><span class="lineNum">    2667</span>              :     /*! \tparam InputStream Type of input stream, implementing Stream concept</span>
@@ -2768,45 +2768,45 @@
 <span id="L2706"><span class="lineNum">    2706</span>              :         \param str Read-only zero-terminated string to be parsed.</span>
 <span id="L2707"><span class="lineNum">    2707</span>              :     */</span>
 <span id="L2708"><span class="lineNum">    2708</span>              :     template &lt;unsigned parseFlags, typename SourceEncoding&gt;</span>
-<span id="L2709"><span class="lineNum">    2709</span>              :     GenericDocument&amp; Parse(const typename SourceEncoding::Ch* str) {</span>
-<span id="L2710"><span class="lineNum">    2710</span>              :         RAPIDJSON_ASSERT(!(parseFlags &amp; kParseInsituFlag));</span>
-<span id="L2711"><span class="lineNum">    2711</span>              :         GenericStringStream&lt;SourceEncoding&gt; s(str);</span>
-<span id="L2712"><span class="lineNum">    2712</span>              :         return ParseStream&lt;parseFlags, SourceEncoding&gt;(s);</span>
-<span id="L2713"><span class="lineNum">    2713</span>              :     }</span>
+<span id="L2709"><span class="lineNum">    2709</span> <span class="tlaGNC tlaBgGNC">          13 :     GenericDocument&amp; Parse(const typename SourceEncoding::Ch* str) {</span></span>
+<span id="L2710"><span class="lineNum">    2710</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(!(parseFlags &amp; kParseInsituFlag));</span></span>
+<span id="L2711"><span class="lineNum">    2711</span> <span class="tlaGNC">          13 :         GenericStringStream&lt;SourceEncoding&gt; s(str);</span></span>
+<span id="L2712"><span class="lineNum">    2712</span> <span class="tlaGNC">          13 :         return ParseStream&lt;parseFlags, SourceEncoding&gt;(s);</span></span>
+<span id="L2713"><span class="lineNum">    2713</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2714"><span class="lineNum">    2714</span>              : </span>
 <span id="L2715"><span class="lineNum">    2715</span>              :     //! Parse JSON text from a read-only string</span>
 <span id="L2716"><span class="lineNum">    2716</span>              :     /*! \tparam parseFlags Combination of \ref ParseFlag (must not contain \ref kParseInsituFlag).</span>
 <span id="L2717"><span class="lineNum">    2717</span>              :         \param str Read-only zero-terminated string to be parsed.</span>
 <span id="L2718"><span class="lineNum">    2718</span>              :     */</span>
 <span id="L2719"><span class="lineNum">    2719</span>              :     template &lt;unsigned parseFlags&gt;</span>
-<span id="L2720"><span class="lineNum">    2720</span>              :     GenericDocument&amp; Parse(const Ch* str) {</span>
-<span id="L2721"><span class="lineNum">    2721</span>              :         return Parse&lt;parseFlags, Encoding&gt;(str);</span>
-<span id="L2722"><span class="lineNum">    2722</span>              :     }</span>
+<span id="L2720"><span class="lineNum">    2720</span> <span class="tlaGNC">          13 :     GenericDocument&amp; Parse(const Ch* str) {</span></span>
+<span id="L2721"><span class="lineNum">    2721</span> <span class="tlaGNC">          13 :         return Parse&lt;parseFlags, Encoding&gt;(str);</span></span>
+<span id="L2722"><span class="lineNum">    2722</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2723"><span class="lineNum">    2723</span>              : </span>
 <span id="L2724"><span class="lineNum">    2724</span>              :     //! Parse JSON text from a read-only string (with \ref kParseDefaultFlags)</span>
 <span id="L2725"><span class="lineNum">    2725</span>              :     /*! \param str Read-only zero-terminated string to be parsed.</span>
 <span id="L2726"><span class="lineNum">    2726</span>              :     */</span>
-<span id="L2727"><span class="lineNum">    2727</span>              :     GenericDocument&amp; Parse(const Ch* str) {</span>
-<span id="L2728"><span class="lineNum">    2728</span>              :         return Parse&lt;kParseDefaultFlags&gt;(str);</span>
-<span id="L2729"><span class="lineNum">    2729</span>              :     }</span>
+<span id="L2727"><span class="lineNum">    2727</span> <span class="tlaGNC">          13 :     GenericDocument&amp; Parse(const Ch* str) {</span></span>
+<span id="L2728"><span class="lineNum">    2728</span> <span class="tlaGNC">          13 :         return Parse&lt;kParseDefaultFlags&gt;(str);</span></span>
+<span id="L2729"><span class="lineNum">    2729</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2730"><span class="lineNum">    2730</span>              : </span>
 <span id="L2731"><span class="lineNum">    2731</span>              :     template &lt;unsigned parseFlags, typename SourceEncoding&gt;</span>
-<span id="L2732"><span class="lineNum">    2732</span> <span class="tlaUNC">           0 :     GenericDocument&amp; Parse(const typename SourceEncoding::Ch* str, size_t length) {</span></span>
-<span id="L2733"><span class="lineNum">    2733</span>              :         RAPIDJSON_ASSERT(!(parseFlags &amp; kParseInsituFlag));</span>
+<span id="L2732"><span class="lineNum">    2732</span> <span class="tlaUNC tlaBgUNC">           0 :     GenericDocument&amp; Parse(const typename SourceEncoding::Ch* str, size_t length) {</span></span>
+<span id="L2733"><span class="lineNum">    2733</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(!(parseFlags &amp; kParseInsituFlag));</span></span>
 <span id="L2734"><span class="lineNum">    2734</span> <span class="tlaUNC">           0 :         MemoryStream ms(reinterpret_cast&lt;const char*&gt;(str), length * sizeof(typename SourceEncoding::Ch));</span></span>
 <span id="L2735"><span class="lineNum">    2735</span> <span class="tlaUNC">           0 :         EncodedInputStream&lt;SourceEncoding, MemoryStream&gt; is(ms);</span></span>
 <span id="L2736"><span class="lineNum">    2736</span> <span class="tlaUNC">           0 :         ParseStream&lt;parseFlags, SourceEncoding&gt;(is);</span></span>
 <span id="L2737"><span class="lineNum">    2737</span> <span class="tlaUNC">           0 :         return *this;</span></span>
-<span id="L2738"><span class="lineNum">    2738</span>              :     }</span>
+<span id="L2738"><span class="lineNum">    2738</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2739"><span class="lineNum">    2739</span>              : </span>
 <span id="L2740"><span class="lineNum">    2740</span>              :     template &lt;unsigned parseFlags&gt;</span>
 <span id="L2741"><span class="lineNum">    2741</span> <span class="tlaUNC">           0 :     GenericDocument&amp; Parse(const Ch* str, size_t length) {</span></span>
 <span id="L2742"><span class="lineNum">    2742</span> <span class="tlaUNC">           0 :         return Parse&lt;parseFlags, Encoding&gt;(str, length);</span></span>
-<span id="L2743"><span class="lineNum">    2743</span>              :     }</span>
+<span id="L2743"><span class="lineNum">    2743</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2744"><span class="lineNum">    2744</span>              :     </span>
 <span id="L2745"><span class="lineNum">    2745</span> <span class="tlaUNC">           0 :     GenericDocument&amp; Parse(const Ch* str, size_t length) {</span></span>
 <span id="L2746"><span class="lineNum">    2746</span> <span class="tlaUNC">           0 :         return Parse&lt;kParseDefaultFlags&gt;(str, length);</span></span>
-<span id="L2747"><span class="lineNum">    2747</span>              :     }</span>
+<span id="L2747"><span class="lineNum">    2747</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2748"><span class="lineNum">    2748</span>              : </span>
 <span id="L2749"><span class="lineNum">    2749</span>              : #if RAPIDJSON_HAS_STDSTRING</span>
 <span id="L2750"><span class="lineNum">    2750</span>              :     template &lt;unsigned parseFlags, typename SourceEncoding&gt;</span>
@@ -2855,10 +2855,10 @@
 <span id="L2793"><span class="lineNum">    2793</span>              :     //!@}</span>
 <span id="L2794"><span class="lineNum">    2794</span>              : </span>
 <span id="L2795"><span class="lineNum">    2795</span>              :     //! Get the allocator of this document.</span>
-<span id="L2796"><span class="lineNum">    2796</span> <span class="tlaUNC">           0 :     Allocator&amp; GetAllocator() {</span></span>
-<span id="L2797"><span class="lineNum">    2797</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(allocator_);</span></span>
-<span id="L2798"><span class="lineNum">    2798</span> <span class="tlaUNC">           0 :         return *allocator_;</span></span>
-<span id="L2799"><span class="lineNum">    2799</span>              :     }</span>
+<span id="L2796"><span class="lineNum">    2796</span> <span class="tlaGNC tlaBgGNC">          39 :     Allocator&amp; GetAllocator() {</span></span>
+<span id="L2797"><span class="lineNum">    2797</span> <span class="tlaGNC">          39 :         RAPIDJSON_ASSERT(allocator_);</span></span>
+<span id="L2798"><span class="lineNum">    2798</span> <span class="tlaGNC">          39 :         return *allocator_;</span></span>
+<span id="L2799"><span class="lineNum">    2799</span> <span class="tlaGNC">          39 :     }</span></span>
 <span id="L2800"><span class="lineNum">    2800</span>              : </span>
 <span id="L2801"><span class="lineNum">    2801</span>              :     //! Get the capacity of stack in bytes.</span>
 <span id="L2802"><span class="lineNum">    2802</span>              :     size_t GetStackCapacity() const { return stack_.GetCapacity(); }</span>
@@ -2866,8 +2866,8 @@
 <span id="L2804"><span class="lineNum">    2804</span>              : private:</span>
 <span id="L2805"><span class="lineNum">    2805</span>              :     // clear stack on any exit from ParseStream, e.g. due to exception</span>
 <span id="L2806"><span class="lineNum">    2806</span>              :     struct ClearStackOnExit {</span>
-<span id="L2807"><span class="lineNum">    2807</span> <span class="tlaUNC">           0 :         explicit ClearStackOnExit(GenericDocument&amp; d) : d_(d) {}</span></span>
-<span id="L2808"><span class="lineNum">    2808</span> <span class="tlaUNC">           0 :         ~ClearStackOnExit() { d_.ClearStack(); }</span></span>
+<span id="L2807"><span class="lineNum">    2807</span> <span class="tlaGNC">          13 :         explicit ClearStackOnExit(GenericDocument&amp; d) : d_(d) {}</span></span>
+<span id="L2808"><span class="lineNum">    2808</span> <span class="tlaGNC">          13 :         ~ClearStackOnExit() { d_.ClearStack(); }</span></span>
 <span id="L2809"><span class="lineNum">    2809</span>              :     private:</span>
 <span id="L2810"><span class="lineNum">    2810</span>              :         ClearStackOnExit(const ClearStackOnExit&amp;);</span>
 <span id="L2811"><span class="lineNum">    2811</span>              :         ClearStackOnExit&amp; operator=(const ClearStackOnExit&amp;);</span>
@@ -2880,7 +2880,7 @@
 <span id="L2818"><span class="lineNum">    2818</span>              : </span>
 <span id="L2819"><span class="lineNum">    2819</span>              : public:</span>
 <span id="L2820"><span class="lineNum">    2820</span>              :     // Implementation of Handler</span>
-<span id="L2821"><span class="lineNum">    2821</span> <span class="tlaUNC">           0 :     bool Null() { new (stack_.template Push&lt;ValueType&gt;()) ValueType(); return true; }</span></span>
+<span id="L2821"><span class="lineNum">    2821</span> <span class="tlaUNC tlaBgUNC">           0 :     bool Null() { new (stack_.template Push&lt;ValueType&gt;()) ValueType(); return true; }</span></span>
 <span id="L2822"><span class="lineNum">    2822</span> <span class="tlaUNC">           0 :     bool Bool(bool b) { new (stack_.template Push&lt;ValueType&gt;()) ValueType(b); return true; }</span></span>
 <span id="L2823"><span class="lineNum">    2823</span> <span class="tlaUNC">           0 :     bool Int(int i) { new (stack_.template Push&lt;ValueType&gt;()) ValueType(i); return true; }</span></span>
 <span id="L2824"><span class="lineNum">    2824</span> <span class="tlaUNC">           0 :     bool Uint(unsigned i) { new (stack_.template Push&lt;ValueType&gt;()) ValueType(i); return true; }</span></span>
@@ -2888,39 +2888,39 @@
 <span id="L2826"><span class="lineNum">    2826</span> <span class="tlaUNC">           0 :     bool Uint64(uint64_t i) { new (stack_.template Push&lt;ValueType&gt;()) ValueType(i); return true; }</span></span>
 <span id="L2827"><span class="lineNum">    2827</span> <span class="tlaUNC">           0 :     bool Double(double d) { new (stack_.template Push&lt;ValueType&gt;()) ValueType(d); return true; }</span></span>
 <span id="L2828"><span class="lineNum">    2828</span>              : </span>
-<span id="L2829"><span class="lineNum">    2829</span>              :     bool RawNumber(const Ch* str, SizeType length, bool copy) { </span>
-<span id="L2830"><span class="lineNum">    2830</span>              :         if (copy) </span>
-<span id="L2831"><span class="lineNum">    2831</span>              :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length, GetAllocator());</span>
-<span id="L2832"><span class="lineNum">    2832</span>              :         else</span>
-<span id="L2833"><span class="lineNum">    2833</span>              :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length);</span>
-<span id="L2834"><span class="lineNum">    2834</span>              :         return true;</span>
-<span id="L2835"><span class="lineNum">    2835</span>              :     }</span>
+<span id="L2829"><span class="lineNum">    2829</span> <span class="tlaUNC">           0 :     bool RawNumber(const Ch* str, SizeType length, bool copy) { </span></span>
+<span id="L2830"><span class="lineNum">    2830</span> <span class="tlaUNC">           0 :         if (copy) </span></span>
+<span id="L2831"><span class="lineNum">    2831</span> <span class="tlaUNC">           0 :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length, GetAllocator());</span></span>
+<span id="L2832"><span class="lineNum">    2832</span> <span class="tlaUNC">           0 :         else</span></span>
+<span id="L2833"><span class="lineNum">    2833</span> <span class="tlaUNC">           0 :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length);</span></span>
+<span id="L2834"><span class="lineNum">    2834</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L2835"><span class="lineNum">    2835</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2836"><span class="lineNum">    2836</span>              : </span>
-<span id="L2837"><span class="lineNum">    2837</span> <span class="tlaUNC">           0 :     bool String(const Ch* str, SizeType length, bool copy) { </span></span>
-<span id="L2838"><span class="lineNum">    2838</span> <span class="tlaUNC">           0 :         if (copy) </span></span>
-<span id="L2839"><span class="lineNum">    2839</span> <span class="tlaUNC">           0 :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length, GetAllocator());</span></span>
-<span id="L2840"><span class="lineNum">    2840</span>              :         else</span>
+<span id="L2837"><span class="lineNum">    2837</span> <span class="tlaGNC tlaBgGNC">          26 :     bool String(const Ch* str, SizeType length, bool copy) { </span></span>
+<span id="L2838"><span class="lineNum">    2838</span> <span class="tlaGNC">          26 :         if (copy) </span></span>
+<span id="L2839"><span class="lineNum">    2839</span> <span class="tlaGNC">          26 :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length, GetAllocator());</span></span>
+<span id="L2840"><span class="lineNum">    2840</span> <span class="tlaUNC tlaBgUNC">           0 :         else</span></span>
 <span id="L2841"><span class="lineNum">    2841</span> <span class="tlaUNC">           0 :             new (stack_.template Push&lt;ValueType&gt;()) ValueType(str, length);</span></span>
-<span id="L2842"><span class="lineNum">    2842</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2843"><span class="lineNum">    2843</span>              :     }</span>
+<span id="L2842"><span class="lineNum">    2842</span> <span class="tlaGNC tlaBgGNC">          26 :         return true;</span></span>
+<span id="L2843"><span class="lineNum">    2843</span> <span class="tlaGNC">          26 :     }</span></span>
 <span id="L2844"><span class="lineNum">    2844</span>              : </span>
-<span id="L2845"><span class="lineNum">    2845</span> <span class="tlaUNC">           0 :     bool StartObject() { new (stack_.template Push&lt;ValueType&gt;()) ValueType(kObjectType); return true; }</span></span>
+<span id="L2845"><span class="lineNum">    2845</span> <span class="tlaGNC">          13 :     bool StartObject() { new (stack_.template Push&lt;ValueType&gt;()) ValueType(kObjectType); return true; }</span></span>
 <span id="L2846"><span class="lineNum">    2846</span>              :     </span>
-<span id="L2847"><span class="lineNum">    2847</span> <span class="tlaUNC">           0 :     bool Key(const Ch* str, SizeType length, bool copy) { return String(str, length, copy); }</span></span>
+<span id="L2847"><span class="lineNum">    2847</span> <span class="tlaGNC">          13 :     bool Key(const Ch* str, SizeType length, bool copy) { return String(str, length, copy); }</span></span>
 <span id="L2848"><span class="lineNum">    2848</span>              : </span>
-<span id="L2849"><span class="lineNum">    2849</span> <span class="tlaUNC">           0 :     bool EndObject(SizeType memberCount) {</span></span>
-<span id="L2850"><span class="lineNum">    2850</span> <span class="tlaUNC">           0 :         typename ValueType::Member* members = stack_.template Pop&lt;typename ValueType::Member&gt;(memberCount);</span></span>
-<span id="L2851"><span class="lineNum">    2851</span> <span class="tlaUNC">           0 :         stack_.template Top&lt;ValueType&gt;()-&gt;SetObjectRaw(members, memberCount, GetAllocator());</span></span>
-<span id="L2852"><span class="lineNum">    2852</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2853"><span class="lineNum">    2853</span>              :     }</span>
+<span id="L2849"><span class="lineNum">    2849</span> <span class="tlaGNC">          13 :     bool EndObject(SizeType memberCount) {</span></span>
+<span id="L2850"><span class="lineNum">    2850</span> <span class="tlaGNC">          13 :         typename ValueType::Member* members = stack_.template Pop&lt;typename ValueType::Member&gt;(memberCount);</span></span>
+<span id="L2851"><span class="lineNum">    2851</span> <span class="tlaGNC">          13 :         stack_.template Top&lt;ValueType&gt;()-&gt;SetObjectRaw(members, memberCount, GetAllocator());</span></span>
+<span id="L2852"><span class="lineNum">    2852</span> <span class="tlaGNC">          13 :         return true;</span></span>
+<span id="L2853"><span class="lineNum">    2853</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2854"><span class="lineNum">    2854</span>              : </span>
-<span id="L2855"><span class="lineNum">    2855</span> <span class="tlaUNC">           0 :     bool StartArray() { new (stack_.template Push&lt;ValueType&gt;()) ValueType(kArrayType); return true; }</span></span>
+<span id="L2855"><span class="lineNum">    2855</span> <span class="tlaUNC tlaBgUNC">           0 :     bool StartArray() { new (stack_.template Push&lt;ValueType&gt;()) ValueType(kArrayType); return true; }</span></span>
 <span id="L2856"><span class="lineNum">    2856</span>              :     </span>
 <span id="L2857"><span class="lineNum">    2857</span> <span class="tlaUNC">           0 :     bool EndArray(SizeType elementCount) {</span></span>
 <span id="L2858"><span class="lineNum">    2858</span> <span class="tlaUNC">           0 :         ValueType* elements = stack_.template Pop&lt;ValueType&gt;(elementCount);</span></span>
 <span id="L2859"><span class="lineNum">    2859</span> <span class="tlaUNC">           0 :         stack_.template Top&lt;ValueType&gt;()-&gt;SetArrayRaw(elements, elementCount, GetAllocator());</span></span>
 <span id="L2860"><span class="lineNum">    2860</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2861"><span class="lineNum">    2861</span>              :     }</span>
+<span id="L2861"><span class="lineNum">    2861</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2862"><span class="lineNum">    2862</span>              : </span>
 <span id="L2863"><span class="lineNum">    2863</span>              : private:</span>
 <span id="L2864"><span class="lineNum">    2864</span>              :     //! Prohibit copying</span>
@@ -2928,18 +2928,18 @@
 <span id="L2866"><span class="lineNum">    2866</span>              :     //! Prohibit assignment</span>
 <span id="L2867"><span class="lineNum">    2867</span>              :     GenericDocument&amp; operator=(const GenericDocument&amp;);</span>
 <span id="L2868"><span class="lineNum">    2868</span>              : </span>
-<span id="L2869"><span class="lineNum">    2869</span> <span class="tlaUNC">           0 :     void ClearStack() {</span></span>
-<span id="L2870"><span class="lineNum">    2870</span>              :         if (Allocator::kNeedFree)</span>
-<span id="L2871"><span class="lineNum">    2871</span>              :             while (stack_.GetSize() &gt; 0)    // Here assumes all elements in stack array are GenericValue (Member is actually 2 GenericValue objects)</span>
-<span id="L2872"><span class="lineNum">    2872</span>              :                 (stack_.template Pop&lt;ValueType&gt;(1))-&gt;~ValueType();</span>
-<span id="L2873"><span class="lineNum">    2873</span>              :         else</span>
-<span id="L2874"><span class="lineNum">    2874</span> <span class="tlaUNC">           0 :             stack_.Clear();</span></span>
-<span id="L2875"><span class="lineNum">    2875</span> <span class="tlaUNC">           0 :         stack_.ShrinkToFit();</span></span>
-<span id="L2876"><span class="lineNum">    2876</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2869"><span class="lineNum">    2869</span> <span class="tlaGNC tlaBgGNC">          13 :     void ClearStack() {</span></span>
+<span id="L2870"><span class="lineNum">    2870</span> <span class="tlaGNC">          13 :         if (Allocator::kNeedFree)</span></span>
+<span id="L2871"><span class="lineNum">    2871</span> <span class="tlaUNC tlaBgUNC">           0 :             while (stack_.GetSize() &gt; 0)    // Here assumes all elements in stack array are GenericValue (Member is actually 2 GenericValue objects)</span></span>
+<span id="L2872"><span class="lineNum">    2872</span> <span class="tlaUNC">           0 :                 (stack_.template Pop&lt;ValueType&gt;(1))-&gt;~ValueType();</span></span>
+<span id="L2873"><span class="lineNum">    2873</span> <span class="tlaGNC tlaBgGNC">          13 :         else</span></span>
+<span id="L2874"><span class="lineNum">    2874</span> <span class="tlaGNC">          13 :             stack_.Clear();</span></span>
+<span id="L2875"><span class="lineNum">    2875</span> <span class="tlaGNC">          13 :         stack_.ShrinkToFit();</span></span>
+<span id="L2876"><span class="lineNum">    2876</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2877"><span class="lineNum">    2877</span>              : </span>
-<span id="L2878"><span class="lineNum">    2878</span> <span class="tlaUNC">           0 :     void Destroy() {</span></span>
-<span id="L2879"><span class="lineNum">    2879</span> <span class="tlaUNC">           0 :         RAPIDJSON_DELETE(ownAllocator_);</span></span>
-<span id="L2880"><span class="lineNum">    2880</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L2878"><span class="lineNum">    2878</span> <span class="tlaGNC">          13 :     void Destroy() {</span></span>
+<span id="L2879"><span class="lineNum">    2879</span> <span class="tlaGNC">          13 :         RAPIDJSON_DELETE(ownAllocator_);</span></span>
+<span id="L2880"><span class="lineNum">    2880</span> <span class="tlaGNC">          13 :     }</span></span>
 <span id="L2881"><span class="lineNum">    2881</span>              : </span>
 <span id="L2882"><span class="lineNum">    2882</span>              :     static const size_t kDefaultStackCapacity = 1024;</span>
 <span id="L2883"><span class="lineNum">    2883</span>              :     Allocator* allocator_;</span>
@@ -2974,7 +2974,7 @@
 <span id="L2912"><span class="lineNum">    2912</span>              : </span>
 <span id="L2913"><span class="lineNum">    2913</span>              :     GenericArray(const GenericArray&amp; rhs) : value_(rhs.value_) {}</span>
 <span id="L2914"><span class="lineNum">    2914</span>              :     GenericArray&amp; operator=(const GenericArray&amp; rhs) { value_ = rhs.value_; return *this; }</span>
-<span id="L2915"><span class="lineNum">    2915</span> <span class="tlaUNC">           0 :     ~GenericArray() {}</span></span>
+<span id="L2915"><span class="lineNum">    2915</span> <span class="tlaUNC tlaBgUNC">           0 :     ~GenericArray() {}</span></span>
 <span id="L2916"><span class="lineNum">    2916</span>              : </span>
 <span id="L2917"><span class="lineNum">    2917</span>              :     operator ValueType&amp;() const { return value_; }</span>
 <span id="L2918"><span class="lineNum">    2918</span> <span class="tlaUNC">           0 :     SizeType Size() const { return value_.Size(); }</span></span>
