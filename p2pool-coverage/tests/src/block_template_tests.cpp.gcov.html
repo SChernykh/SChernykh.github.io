@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">159</td>
-            <td class="headerCovTableEntry">159</td>
+            <td class="headerCovTableEntry">160</td>
+            <td class="headerCovTableEntry">160</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 15:34:54</td>
+            <td class="headerValue">2025-06-22 20:05:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -298,22 +298,23 @@
 <span id="L236"><span class="lineNum">     236</span>              : </span>
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">           1 :         ASSERT_EQ(sidechain.difficulty(), 219467);</span></span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           1 :         ASSERT_EQ(sidechain.blocksById().size(), 4487);</span></span>
-<span id="L239"><span class="lineNum">     239</span>              : </span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">           1 :         const PoolBlock* tip = sidechain.chainTip();</span></span>
-<span id="L241"><span class="lineNum">     241</span>              : </span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tip != nullptr);</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tip-&gt;m_verified);</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(tip-&gt;m_invalid);</span></span>
-<span id="L245"><span class="lineNum">     245</span>              : </span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_txinGenHeight, data.height);</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_sidechainHeight, sidechain.chain_window_size() * 3 - 1);</span></span>
-<span id="L248"><span class="lineNum">     248</span>              : </span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_sidechainId, H(&quot;12d57571a28d62d2b6dca3a647500d23ac22864138b22a133f237b459a0862da&quot;));</span></span>
-<span id="L250"><span class="lineNum">     250</span>              : </span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L253"><span class="lineNum">     253</span>              : </span>
-<span id="L254"><span class="lineNum">     254</span>              : }</span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(sidechain.precalcFinished());</span></span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">           1 :         const PoolBlock* tip = sidechain.chainTip();</span></span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tip != nullptr);</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tip-&gt;m_verified);</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(tip-&gt;m_invalid);</span></span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_txinGenHeight, data.height);</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_sidechainHeight, sidechain.chain_window_size() * 3 - 1);</span></span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_sidechainId, H(&quot;12d57571a28d62d2b6dca3a647500d23ac22864138b22a133f237b459a0862da&quot;));</span></span>
+<span id="L251"><span class="lineNum">     251</span>              : </span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L254"><span class="lineNum">     254</span>              : </span>
+<span id="L255"><span class="lineNum">     255</span>              : }</span>
         </pre>
               </td>
             </tr>
