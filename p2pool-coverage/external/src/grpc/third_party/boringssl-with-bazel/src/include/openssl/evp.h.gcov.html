@@ -1,0 +1,1166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - external/src/grpc/third_party/boringssl-with-bazel/src/include/openssl/evp.h</title>
+  <link rel="stylesheet" type="text/css" href="../../../../../../../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../../../../../../../index.html">top level</a> - <a href="index.html">external/src/grpc/third_party/boringssl-with-bazel/src/include/openssl</a> - evp.h<span style="font-size: 80%;"> (source / <a href="evp.h.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+                  <tr><td><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /* Copyright (C) 1995-1998 Eric Young (eay@cryptsoft.com)</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * All rights reserved.</span>
+<span id="L3"><span class="lineNum">       3</span>              :  *</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * This package is an SSL implementation written</span>
+<span id="L5"><span class="lineNum">       5</span>              :  * by Eric Young (eay@cryptsoft.com).</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * The implementation was written so as to conform with Netscapes SSL.</span>
+<span id="L7"><span class="lineNum">       7</span>              :  *</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * This library is free for commercial and non-commercial use as long as</span>
+<span id="L9"><span class="lineNum">       9</span>              :  * the following conditions are aheared to.  The following conditions</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * apply to all code found in this distribution, be it the RC4, RSA,</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * lhash, DES, etc., code; not just the SSL code.  The SSL documentation</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * included with this distribution is covered by the same copyright terms</span>
+<span id="L13"><span class="lineNum">      13</span>              :  * except that the holder is Tim Hudson (tjh@cryptsoft.com).</span>
+<span id="L14"><span class="lineNum">      14</span>              :  *</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * Copyright remains Eric Young's, and as such any Copyright notices in</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * the code are not to be removed.</span>
+<span id="L17"><span class="lineNum">      17</span>              :  * If this package is used in a product, Eric Young should be given attribution</span>
+<span id="L18"><span class="lineNum">      18</span>              :  * as the author of the parts of the library used.</span>
+<span id="L19"><span class="lineNum">      19</span>              :  * This can be in the form of a textual message at program startup or</span>
+<span id="L20"><span class="lineNum">      20</span>              :  * in documentation (online or textual) provided with the package.</span>
+<span id="L21"><span class="lineNum">      21</span>              :  *</span>
+<span id="L22"><span class="lineNum">      22</span>              :  * Redistribution and use in source and binary forms, with or without</span>
+<span id="L23"><span class="lineNum">      23</span>              :  * modification, are permitted provided that the following conditions</span>
+<span id="L24"><span class="lineNum">      24</span>              :  * are met:</span>
+<span id="L25"><span class="lineNum">      25</span>              :  * 1. Redistributions of source code must retain the copyright</span>
+<span id="L26"><span class="lineNum">      26</span>              :  *    notice, this list of conditions and the following disclaimer.</span>
+<span id="L27"><span class="lineNum">      27</span>              :  * 2. Redistributions in binary form must reproduce the above copyright</span>
+<span id="L28"><span class="lineNum">      28</span>              :  *    notice, this list of conditions and the following disclaimer in the</span>
+<span id="L29"><span class="lineNum">      29</span>              :  *    documentation and/or other materials provided with the distribution.</span>
+<span id="L30"><span class="lineNum">      30</span>              :  * 3. All advertising materials mentioning features or use of this software</span>
+<span id="L31"><span class="lineNum">      31</span>              :  *    must display the following acknowledgement:</span>
+<span id="L32"><span class="lineNum">      32</span>              :  *    &quot;This product includes cryptographic software written by</span>
+<span id="L33"><span class="lineNum">      33</span>              :  *     Eric Young (eay@cryptsoft.com)&quot;</span>
+<span id="L34"><span class="lineNum">      34</span>              :  *    The word 'cryptographic' can be left out if the rouines from the library</span>
+<span id="L35"><span class="lineNum">      35</span>              :  *    being used are not cryptographic related :-).</span>
+<span id="L36"><span class="lineNum">      36</span>              :  * 4. If you include any Windows specific code (or a derivative thereof) from</span>
+<span id="L37"><span class="lineNum">      37</span>              :  *    the apps directory (application code) you must include an acknowledgement:</span>
+<span id="L38"><span class="lineNum">      38</span>              :  *    &quot;This product includes software written by Tim Hudson (tjh@cryptsoft.com)&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              :  *</span>
+<span id="L40"><span class="lineNum">      40</span>              :  * THIS SOFTWARE IS PROVIDED BY ERIC YOUNG ``AS IS'' AND</span>
+<span id="L41"><span class="lineNum">      41</span>              :  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span id="L42"><span class="lineNum">      42</span>              :  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span id="L43"><span class="lineNum">      43</span>              :  * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE</span>
+<span id="L44"><span class="lineNum">      44</span>              :  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</span>
+<span id="L45"><span class="lineNum">      45</span>              :  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS</span>
+<span id="L46"><span class="lineNum">      46</span>              :  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)</span>
+<span id="L47"><span class="lineNum">      47</span>              :  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT</span>
+<span id="L48"><span class="lineNum">      48</span>              :  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY</span>
+<span id="L49"><span class="lineNum">      49</span>              :  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF</span>
+<span id="L50"><span class="lineNum">      50</span>              :  * SUCH DAMAGE.</span>
+<span id="L51"><span class="lineNum">      51</span>              :  *</span>
+<span id="L52"><span class="lineNum">      52</span>              :  * The licence and distribution terms for any publically available version or</span>
+<span id="L53"><span class="lineNum">      53</span>              :  * derivative of this code cannot be changed.  i.e. this code cannot simply be</span>
+<span id="L54"><span class="lineNum">      54</span>              :  * copied and put under another distribution licence</span>
+<span id="L55"><span class="lineNum">      55</span>              :  * [including the GNU Public Licence.] */</span>
+<span id="L56"><span class="lineNum">      56</span>              : </span>
+<span id="L57"><span class="lineNum">      57</span>              : #ifndef OPENSSL_HEADER_EVP_H</span>
+<span id="L58"><span class="lineNum">      58</span>              : #define OPENSSL_HEADER_EVP_H</span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span>              : #include &lt;openssl/base.h&gt;</span>
+<span id="L61"><span class="lineNum">      61</span>              : </span>
+<span id="L62"><span class="lineNum">      62</span>              : #include &lt;openssl/evp_errors.h&gt;  // IWYU pragma: export</span>
+<span id="L63"><span class="lineNum">      63</span>              : #include &lt;openssl/thread.h&gt;</span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span>              : // OpenSSL included digest and cipher functions in this header so we include</span>
+<span id="L66"><span class="lineNum">      66</span>              : // them for users that still expect that.</span>
+<span id="L67"><span class="lineNum">      67</span>              : //</span>
+<span id="L68"><span class="lineNum">      68</span>              : // TODO(fork): clean up callers so that they include what they use.</span>
+<span id="L69"><span class="lineNum">      69</span>              : #include &lt;openssl/aead.h&gt;</span>
+<span id="L70"><span class="lineNum">      70</span>              : #include &lt;openssl/base64.h&gt;</span>
+<span id="L71"><span class="lineNum">      71</span>              : #include &lt;openssl/cipher.h&gt;</span>
+<span id="L72"><span class="lineNum">      72</span>              : #include &lt;openssl/digest.h&gt;</span>
+<span id="L73"><span class="lineNum">      73</span>              : #include &lt;openssl/nid.h&gt;</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              : #if defined(__cplusplus)</span>
+<span id="L76"><span class="lineNum">      76</span>              : extern &quot;C&quot; {</span>
+<span id="L77"><span class="lineNum">      77</span>              : #endif</span>
+<span id="L78"><span class="lineNum">      78</span>              : </span>
+<span id="L79"><span class="lineNum">      79</span>              : </span>
+<span id="L80"><span class="lineNum">      80</span>              : // EVP abstracts over public/private key algorithms.</span>
+<span id="L81"><span class="lineNum">      81</span>              : </span>
+<span id="L82"><span class="lineNum">      82</span>              : </span>
+<span id="L83"><span class="lineNum">      83</span>              : // Public key objects.</span>
+<span id="L84"><span class="lineNum">      84</span>              : //</span>
+<span id="L85"><span class="lineNum">      85</span>              : // An |EVP_PKEY| object represents a public or private key. A given object may</span>
+<span id="L86"><span class="lineNum">      86</span>              : // be used concurrently on multiple threads by non-mutating functions, provided</span>
+<span id="L87"><span class="lineNum">      87</span>              : // no other thread is concurrently calling a mutating function. Unless otherwise</span>
+<span id="L88"><span class="lineNum">      88</span>              : // documented, functions which take a |const| pointer are non-mutating and</span>
+<span id="L89"><span class="lineNum">      89</span>              : // functions which take a non-|const| pointer are mutating.</span>
+<span id="L90"><span class="lineNum">      90</span>              : </span>
+<span id="L91"><span class="lineNum">      91</span>              : // EVP_PKEY_new creates a new, empty public-key object and returns it or NULL</span>
+<span id="L92"><span class="lineNum">      92</span>              : // on allocation failure.</span>
+<span id="L93"><span class="lineNum">      93</span>              : OPENSSL_EXPORT EVP_PKEY *EVP_PKEY_new(void);</span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span>              : // EVP_PKEY_free frees all data referenced by |pkey| and then frees |pkey|</span>
+<span id="L96"><span class="lineNum">      96</span>              : // itself.</span>
+<span id="L97"><span class="lineNum">      97</span>              : OPENSSL_EXPORT void EVP_PKEY_free(EVP_PKEY *pkey);</span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span>              : // EVP_PKEY_up_ref increments the reference count of |pkey| and returns one. It</span>
+<span id="L100"><span class="lineNum">     100</span>              : // does not mutate |pkey| for thread-safety purposes and may be used</span>
+<span id="L101"><span class="lineNum">     101</span>              : // concurrently.</span>
+<span id="L102"><span class="lineNum">     102</span>              : OPENSSL_EXPORT int EVP_PKEY_up_ref(EVP_PKEY *pkey);</span>
+<span id="L103"><span class="lineNum">     103</span>              : </span>
+<span id="L104"><span class="lineNum">     104</span>              : // EVP_PKEY_is_opaque returns one if |pkey| is opaque. Opaque keys are backed by</span>
+<span id="L105"><span class="lineNum">     105</span>              : // custom implementations which do not expose key material and parameters. It is</span>
+<span id="L106"><span class="lineNum">     106</span>              : // an error to attempt to duplicate, export, or compare an opaque key.</span>
+<span id="L107"><span class="lineNum">     107</span>              : OPENSSL_EXPORT int EVP_PKEY_is_opaque(const EVP_PKEY *pkey);</span>
+<span id="L108"><span class="lineNum">     108</span>              : </span>
+<span id="L109"><span class="lineNum">     109</span>              : // EVP_PKEY_cmp compares |a| and |b| and returns one if they are equal, zero if</span>
+<span id="L110"><span class="lineNum">     110</span>              : // not and a negative number on error.</span>
+<span id="L111"><span class="lineNum">     111</span>              : //</span>
+<span id="L112"><span class="lineNum">     112</span>              : // WARNING: this differs from the traditional return value of a &quot;cmp&quot;</span>
+<span id="L113"><span class="lineNum">     113</span>              : // function.</span>
+<span id="L114"><span class="lineNum">     114</span>              : OPENSSL_EXPORT int EVP_PKEY_cmp(const EVP_PKEY *a, const EVP_PKEY *b);</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              : // EVP_PKEY_copy_parameters sets the parameters of |to| to equal the parameters</span>
+<span id="L117"><span class="lineNum">     117</span>              : // of |from|. It returns one on success and zero on error.</span>
+<span id="L118"><span class="lineNum">     118</span>              : OPENSSL_EXPORT int EVP_PKEY_copy_parameters(EVP_PKEY *to, const EVP_PKEY *from);</span>
+<span id="L119"><span class="lineNum">     119</span>              : </span>
+<span id="L120"><span class="lineNum">     120</span>              : // EVP_PKEY_missing_parameters returns one if |pkey| is missing needed</span>
+<span id="L121"><span class="lineNum">     121</span>              : // parameters or zero if not, or if the algorithm doesn't take parameters.</span>
+<span id="L122"><span class="lineNum">     122</span>              : OPENSSL_EXPORT int EVP_PKEY_missing_parameters(const EVP_PKEY *pkey);</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              : // EVP_PKEY_size returns the maximum size, in bytes, of a signature signed by</span>
+<span id="L125"><span class="lineNum">     125</span>              : // |pkey|. For an RSA key, this returns the number of bytes needed to represent</span>
+<span id="L126"><span class="lineNum">     126</span>              : // the modulus. For an EC key, this returns the maximum size of a DER-encoded</span>
+<span id="L127"><span class="lineNum">     127</span>              : // ECDSA signature.</span>
+<span id="L128"><span class="lineNum">     128</span>              : OPENSSL_EXPORT int EVP_PKEY_size(const EVP_PKEY *pkey);</span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span>              : // EVP_PKEY_bits returns the &quot;size&quot;, in bits, of |pkey|. For an RSA key, this</span>
+<span id="L131"><span class="lineNum">     131</span>              : // returns the bit length of the modulus. For an EC key, this returns the bit</span>
+<span id="L132"><span class="lineNum">     132</span>              : // length of the group order.</span>
+<span id="L133"><span class="lineNum">     133</span>              : OPENSSL_EXPORT int EVP_PKEY_bits(const EVP_PKEY *pkey);</span>
+<span id="L134"><span class="lineNum">     134</span>              : </span>
+<span id="L135"><span class="lineNum">     135</span>              : // EVP_PKEY_id returns the type of |pkey|, which is one of the |EVP_PKEY_*|</span>
+<span id="L136"><span class="lineNum">     136</span>              : // values.</span>
+<span id="L137"><span class="lineNum">     137</span>              : OPENSSL_EXPORT int EVP_PKEY_id(const EVP_PKEY *pkey);</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              : // Getting and setting concrete public key types.</span>
+<span id="L141"><span class="lineNum">     141</span>              : //</span>
+<span id="L142"><span class="lineNum">     142</span>              : // The following functions get and set the underlying public key in an</span>
+<span id="L143"><span class="lineNum">     143</span>              : // |EVP_PKEY| object. The |set1| functions take an additional reference to the</span>
+<span id="L144"><span class="lineNum">     144</span>              : // underlying key and return one on success or zero if |key| is NULL. The</span>
+<span id="L145"><span class="lineNum">     145</span>              : // |assign| functions adopt the caller's reference and return one on success or</span>
+<span id="L146"><span class="lineNum">     146</span>              : // zero if |key| is NULL. The |get1| functions return a fresh reference to the</span>
+<span id="L147"><span class="lineNum">     147</span>              : // underlying object or NULL if |pkey| is not of the correct type. The |get0|</span>
+<span id="L148"><span class="lineNum">     148</span>              : // functions behave the same but return a non-owning pointer.</span>
+<span id="L149"><span class="lineNum">     149</span>              : //</span>
+<span id="L150"><span class="lineNum">     150</span>              : // The |get0| and |get1| functions take |const| pointers and are thus</span>
+<span id="L151"><span class="lineNum">     151</span>              : // non-mutating for thread-safety purposes, but mutating functions on the</span>
+<span id="L152"><span class="lineNum">     152</span>              : // returned lower-level objects are considered to also mutate the |EVP_PKEY| and</span>
+<span id="L153"><span class="lineNum">     153</span>              : // may not be called concurrently with other operations on the |EVP_PKEY|.</span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span>              : OPENSSL_EXPORT int EVP_PKEY_set1_RSA(EVP_PKEY *pkey, RSA *key);</span>
+<span id="L156"><span class="lineNum">     156</span>              : OPENSSL_EXPORT int EVP_PKEY_assign_RSA(EVP_PKEY *pkey, RSA *key);</span>
+<span id="L157"><span class="lineNum">     157</span>              : OPENSSL_EXPORT RSA *EVP_PKEY_get0_RSA(const EVP_PKEY *pkey);</span>
+<span id="L158"><span class="lineNum">     158</span>              : OPENSSL_EXPORT RSA *EVP_PKEY_get1_RSA(const EVP_PKEY *pkey);</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              : OPENSSL_EXPORT int EVP_PKEY_set1_DSA(EVP_PKEY *pkey, DSA *key);</span>
+<span id="L161"><span class="lineNum">     161</span>              : OPENSSL_EXPORT int EVP_PKEY_assign_DSA(EVP_PKEY *pkey, DSA *key);</span>
+<span id="L162"><span class="lineNum">     162</span>              : OPENSSL_EXPORT DSA *EVP_PKEY_get0_DSA(const EVP_PKEY *pkey);</span>
+<span id="L163"><span class="lineNum">     163</span>              : OPENSSL_EXPORT DSA *EVP_PKEY_get1_DSA(const EVP_PKEY *pkey);</span>
+<span id="L164"><span class="lineNum">     164</span>              : </span>
+<span id="L165"><span class="lineNum">     165</span>              : OPENSSL_EXPORT int EVP_PKEY_set1_EC_KEY(EVP_PKEY *pkey, EC_KEY *key);</span>
+<span id="L166"><span class="lineNum">     166</span>              : OPENSSL_EXPORT int EVP_PKEY_assign_EC_KEY(EVP_PKEY *pkey, EC_KEY *key);</span>
+<span id="L167"><span class="lineNum">     167</span>              : OPENSSL_EXPORT EC_KEY *EVP_PKEY_get0_EC_KEY(const EVP_PKEY *pkey);</span>
+<span id="L168"><span class="lineNum">     168</span>              : OPENSSL_EXPORT EC_KEY *EVP_PKEY_get1_EC_KEY(const EVP_PKEY *pkey);</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span>              : OPENSSL_EXPORT int EVP_PKEY_set1_DH(EVP_PKEY *pkey, DH *key);</span>
+<span id="L171"><span class="lineNum">     171</span>              : OPENSSL_EXPORT int EVP_PKEY_assign_DH(EVP_PKEY *pkey, DH *key);</span>
+<span id="L172"><span class="lineNum">     172</span>              : OPENSSL_EXPORT DH *EVP_PKEY_get0_DH(const EVP_PKEY *pkey);</span>
+<span id="L173"><span class="lineNum">     173</span>              : OPENSSL_EXPORT DH *EVP_PKEY_get1_DH(const EVP_PKEY *pkey);</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              : #define EVP_PKEY_NONE NID_undef</span>
+<span id="L176"><span class="lineNum">     176</span>              : #define EVP_PKEY_RSA NID_rsaEncryption</span>
+<span id="L177"><span class="lineNum">     177</span>              : #define EVP_PKEY_RSA_PSS NID_rsassaPss</span>
+<span id="L178"><span class="lineNum">     178</span>              : #define EVP_PKEY_DSA NID_dsa</span>
+<span id="L179"><span class="lineNum">     179</span>              : #define EVP_PKEY_EC NID_X9_62_id_ecPublicKey</span>
+<span id="L180"><span class="lineNum">     180</span>              : #define EVP_PKEY_ED25519 NID_ED25519</span>
+<span id="L181"><span class="lineNum">     181</span>              : #define EVP_PKEY_X25519 NID_X25519</span>
+<span id="L182"><span class="lineNum">     182</span>              : #define EVP_PKEY_HKDF NID_hkdf</span>
+<span id="L183"><span class="lineNum">     183</span>              : #define EVP_PKEY_DH NID_dhKeyAgreement</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span>              : // EVP_PKEY_set_type sets the type of |pkey| to |type|. It returns one if</span>
+<span id="L186"><span class="lineNum">     186</span>              : // successful or zero if the |type| argument is not one of the |EVP_PKEY_*|</span>
+<span id="L187"><span class="lineNum">     187</span>              : // values. If |pkey| is NULL, it simply reports whether the type is known.</span>
+<span id="L188"><span class="lineNum">     188</span>              : OPENSSL_EXPORT int EVP_PKEY_set_type(EVP_PKEY *pkey, int type);</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span>              : // EVP_PKEY_cmp_parameters compares the parameters of |a| and |b|. It returns</span>
+<span id="L191"><span class="lineNum">     191</span>              : // one if they match, zero if not, or a negative number of on error.</span>
+<span id="L192"><span class="lineNum">     192</span>              : //</span>
+<span id="L193"><span class="lineNum">     193</span>              : // WARNING: the return value differs from the usual return value convention.</span>
+<span id="L194"><span class="lineNum">     194</span>              : OPENSSL_EXPORT int EVP_PKEY_cmp_parameters(const EVP_PKEY *a,</span>
+<span id="L195"><span class="lineNum">     195</span>              :                                            const EVP_PKEY *b);</span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span>              : </span>
+<span id="L198"><span class="lineNum">     198</span>              : // ASN.1 functions</span>
+<span id="L199"><span class="lineNum">     199</span>              : </span>
+<span id="L200"><span class="lineNum">     200</span>              : // EVP_parse_public_key decodes a DER-encoded SubjectPublicKeyInfo structure</span>
+<span id="L201"><span class="lineNum">     201</span>              : // (RFC 5280) from |cbs| and advances |cbs|. It returns a newly-allocated</span>
+<span id="L202"><span class="lineNum">     202</span>              : // |EVP_PKEY| or NULL on error. If the key is an EC key, the curve is guaranteed</span>
+<span id="L203"><span class="lineNum">     203</span>              : // to be set.</span>
+<span id="L204"><span class="lineNum">     204</span>              : //</span>
+<span id="L205"><span class="lineNum">     205</span>              : // The caller must check the type of the parsed public key to ensure it is</span>
+<span id="L206"><span class="lineNum">     206</span>              : // suitable and validate other desired key properties such as RSA modulus size</span>
+<span id="L207"><span class="lineNum">     207</span>              : // or EC curve.</span>
+<span id="L208"><span class="lineNum">     208</span>              : OPENSSL_EXPORT EVP_PKEY *EVP_parse_public_key(CBS *cbs);</span>
+<span id="L209"><span class="lineNum">     209</span>              : </span>
+<span id="L210"><span class="lineNum">     210</span>              : // EVP_marshal_public_key marshals |key| as a DER-encoded SubjectPublicKeyInfo</span>
+<span id="L211"><span class="lineNum">     211</span>              : // structure (RFC 5280) and appends the result to |cbb|. It returns one on</span>
+<span id="L212"><span class="lineNum">     212</span>              : // success and zero on error.</span>
+<span id="L213"><span class="lineNum">     213</span>              : OPENSSL_EXPORT int EVP_marshal_public_key(CBB *cbb, const EVP_PKEY *key);</span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span>              : // EVP_parse_private_key decodes a DER-encoded PrivateKeyInfo structure (RFC</span>
+<span id="L216"><span class="lineNum">     216</span>              : // 5208) from |cbs| and advances |cbs|. It returns a newly-allocated |EVP_PKEY|</span>
+<span id="L217"><span class="lineNum">     217</span>              : // or NULL on error.</span>
+<span id="L218"><span class="lineNum">     218</span>              : //</span>
+<span id="L219"><span class="lineNum">     219</span>              : // The caller must check the type of the parsed private key to ensure it is</span>
+<span id="L220"><span class="lineNum">     220</span>              : // suitable and validate other desired key properties such as RSA modulus size</span>
+<span id="L221"><span class="lineNum">     221</span>              : // or EC curve. In particular, RSA private key operations scale cubicly, so</span>
+<span id="L222"><span class="lineNum">     222</span>              : // applications accepting RSA private keys from external sources may need to</span>
+<span id="L223"><span class="lineNum">     223</span>              : // bound key sizes (use |EVP_PKEY_bits| or |RSA_bits|) to avoid a DoS vector.</span>
+<span id="L224"><span class="lineNum">     224</span>              : //</span>
+<span id="L225"><span class="lineNum">     225</span>              : // A PrivateKeyInfo ends with an optional set of attributes. These are not</span>
+<span id="L226"><span class="lineNum">     226</span>              : // processed and so this function will silently ignore any trailing data in the</span>
+<span id="L227"><span class="lineNum">     227</span>              : // structure.</span>
+<span id="L228"><span class="lineNum">     228</span>              : OPENSSL_EXPORT EVP_PKEY *EVP_parse_private_key(CBS *cbs);</span>
+<span id="L229"><span class="lineNum">     229</span>              : </span>
+<span id="L230"><span class="lineNum">     230</span>              : // EVP_marshal_private_key marshals |key| as a DER-encoded PrivateKeyInfo</span>
+<span id="L231"><span class="lineNum">     231</span>              : // structure (RFC 5208) and appends the result to |cbb|. It returns one on</span>
+<span id="L232"><span class="lineNum">     232</span>              : // success and zero on error.</span>
+<span id="L233"><span class="lineNum">     233</span>              : OPENSSL_EXPORT int EVP_marshal_private_key(CBB *cbb, const EVP_PKEY *key);</span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span>              : </span>
+<span id="L236"><span class="lineNum">     236</span>              : // Raw keys</span>
+<span id="L237"><span class="lineNum">     237</span>              : //</span>
+<span id="L238"><span class="lineNum">     238</span>              : // Some keys types support a &quot;raw&quot; serialization. Currently the only supported</span>
+<span id="L239"><span class="lineNum">     239</span>              : // raw formats are X25519 and Ed25519, where the formats are those specified in</span>
+<span id="L240"><span class="lineNum">     240</span>              : // RFC 7748 and RFC 8032, respectively. Note the RFC 8032 private key format is</span>
+<span id="L241"><span class="lineNum">     241</span>              : // the 32-byte prefix of |ED25519_sign|'s 64-byte private key.</span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span>              : // EVP_PKEY_new_raw_private_key returns a newly allocated |EVP_PKEY| wrapping a</span>
+<span id="L244"><span class="lineNum">     244</span>              : // private key of the specified type. It returns one on success and zero on</span>
+<span id="L245"><span class="lineNum">     245</span>              : // error.</span>
+<span id="L246"><span class="lineNum">     246</span>              : OPENSSL_EXPORT EVP_PKEY *EVP_PKEY_new_raw_private_key(int type, ENGINE *unused,</span>
+<span id="L247"><span class="lineNum">     247</span>              :                                                       const uint8_t *in,</span>
+<span id="L248"><span class="lineNum">     248</span>              :                                                       size_t len);</span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span>              : // EVP_PKEY_new_raw_public_key returns a newly allocated |EVP_PKEY| wrapping a</span>
+<span id="L251"><span class="lineNum">     251</span>              : // public key of the specified type. It returns one on success and zero on</span>
+<span id="L252"><span class="lineNum">     252</span>              : // error.</span>
+<span id="L253"><span class="lineNum">     253</span>              : OPENSSL_EXPORT EVP_PKEY *EVP_PKEY_new_raw_public_key(int type, ENGINE *unused,</span>
+<span id="L254"><span class="lineNum">     254</span>              :                                                      const uint8_t *in,</span>
+<span id="L255"><span class="lineNum">     255</span>              :                                                      size_t len);</span>
+<span id="L256"><span class="lineNum">     256</span>              : </span>
+<span id="L257"><span class="lineNum">     257</span>              : // EVP_PKEY_get_raw_private_key outputs the private key for |pkey| in raw form.</span>
+<span id="L258"><span class="lineNum">     258</span>              : // If |out| is NULL, it sets |*out_len| to the size of the raw private key.</span>
+<span id="L259"><span class="lineNum">     259</span>              : // Otherwise, it writes at most |*out_len| bytes to |out| and sets |*out_len| to</span>
+<span id="L260"><span class="lineNum">     260</span>              : // the number of bytes written.</span>
+<span id="L261"><span class="lineNum">     261</span>              : //</span>
+<span id="L262"><span class="lineNum">     262</span>              : // It returns one on success and zero if |pkey| has no private key, the key</span>
+<span id="L263"><span class="lineNum">     263</span>              : // type does not support a raw format, or the buffer is too small.</span>
+<span id="L264"><span class="lineNum">     264</span>              : OPENSSL_EXPORT int EVP_PKEY_get_raw_private_key(const EVP_PKEY *pkey,</span>
+<span id="L265"><span class="lineNum">     265</span>              :                                                 uint8_t *out, size_t *out_len);</span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span>              : // EVP_PKEY_get_raw_public_key outputs the public key for |pkey| in raw form.</span>
+<span id="L268"><span class="lineNum">     268</span>              : // If |out| is NULL, it sets |*out_len| to the size of the raw public key.</span>
+<span id="L269"><span class="lineNum">     269</span>              : // Otherwise, it writes at most |*out_len| bytes to |out| and sets |*out_len| to</span>
+<span id="L270"><span class="lineNum">     270</span>              : // the number of bytes written.</span>
+<span id="L271"><span class="lineNum">     271</span>              : //</span>
+<span id="L272"><span class="lineNum">     272</span>              : // It returns one on success and zero if |pkey| has no public key, the key</span>
+<span id="L273"><span class="lineNum">     273</span>              : // type does not support a raw format, or the buffer is too small.</span>
+<span id="L274"><span class="lineNum">     274</span>              : OPENSSL_EXPORT int EVP_PKEY_get_raw_public_key(const EVP_PKEY *pkey,</span>
+<span id="L275"><span class="lineNum">     275</span>              :                                                uint8_t *out, size_t *out_len);</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              : // Signing</span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span>              : // EVP_DigestSignInit sets up |ctx| for a signing operation with |type| and</span>
+<span id="L281"><span class="lineNum">     281</span>              : // |pkey|. The |ctx| argument must have been initialised with</span>
+<span id="L282"><span class="lineNum">     282</span>              : // |EVP_MD_CTX_init|. If |pctx| is not NULL, the |EVP_PKEY_CTX| of the signing</span>
+<span id="L283"><span class="lineNum">     283</span>              : // operation will be written to |*pctx|; this can be used to set alternative</span>
+<span id="L284"><span class="lineNum">     284</span>              : // signing options.</span>
+<span id="L285"><span class="lineNum">     285</span>              : //</span>
+<span id="L286"><span class="lineNum">     286</span>              : // For single-shot signing algorithms which do not use a pre-hash, such as</span>
+<span id="L287"><span class="lineNum">     287</span>              : // Ed25519, |type| should be NULL. The |EVP_MD_CTX| itself is unused but is</span>
+<span id="L288"><span class="lineNum">     288</span>              : // present so the API is uniform. See |EVP_DigestSign|.</span>
+<span id="L289"><span class="lineNum">     289</span>              : //</span>
+<span id="L290"><span class="lineNum">     290</span>              : // This function does not mutate |pkey| for thread-safety purposes and may be</span>
+<span id="L291"><span class="lineNum">     291</span>              : // used concurrently with other non-mutating functions on |pkey|.</span>
+<span id="L292"><span class="lineNum">     292</span>              : //</span>
+<span id="L293"><span class="lineNum">     293</span>              : // It returns one on success, or zero on error.</span>
+<span id="L294"><span class="lineNum">     294</span>              : OPENSSL_EXPORT int EVP_DigestSignInit(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,</span>
+<span id="L295"><span class="lineNum">     295</span>              :                                       const EVP_MD *type, ENGINE *e,</span>
+<span id="L296"><span class="lineNum">     296</span>              :                                       EVP_PKEY *pkey);</span>
+<span id="L297"><span class="lineNum">     297</span>              : </span>
+<span id="L298"><span class="lineNum">     298</span>              : // EVP_DigestSignUpdate appends |len| bytes from |data| to the data which will</span>
+<span id="L299"><span class="lineNum">     299</span>              : // be signed in |EVP_DigestSignFinal|. It returns one.</span>
+<span id="L300"><span class="lineNum">     300</span>              : //</span>
+<span id="L301"><span class="lineNum">     301</span>              : // This function performs a streaming signing operation and will fail for</span>
+<span id="L302"><span class="lineNum">     302</span>              : // signature algorithms which do not support this. Use |EVP_DigestSign| for a</span>
+<span id="L303"><span class="lineNum">     303</span>              : // single-shot operation.</span>
+<span id="L304"><span class="lineNum">     304</span>              : OPENSSL_EXPORT int EVP_DigestSignUpdate(EVP_MD_CTX *ctx, const void *data,</span>
+<span id="L305"><span class="lineNum">     305</span>              :                                         size_t len);</span>
+<span id="L306"><span class="lineNum">     306</span>              : </span>
+<span id="L307"><span class="lineNum">     307</span>              : // EVP_DigestSignFinal signs the data that has been included by one or more</span>
+<span id="L308"><span class="lineNum">     308</span>              : // calls to |EVP_DigestSignUpdate|. If |out_sig| is NULL then |*out_sig_len| is</span>
+<span id="L309"><span class="lineNum">     309</span>              : // set to the maximum number of output bytes. Otherwise, on entry,</span>
+<span id="L310"><span class="lineNum">     310</span>              : // |*out_sig_len| must contain the length of the |out_sig| buffer. If the call</span>
+<span id="L311"><span class="lineNum">     311</span>              : // is successful, the signature is written to |out_sig| and |*out_sig_len| is</span>
+<span id="L312"><span class="lineNum">     312</span>              : // set to its length.</span>
+<span id="L313"><span class="lineNum">     313</span>              : //</span>
+<span id="L314"><span class="lineNum">     314</span>              : // This function performs a streaming signing operation and will fail for</span>
+<span id="L315"><span class="lineNum">     315</span>              : // signature algorithms which do not support this. Use |EVP_DigestSign| for a</span>
+<span id="L316"><span class="lineNum">     316</span>              : // single-shot operation.</span>
+<span id="L317"><span class="lineNum">     317</span>              : //</span>
+<span id="L318"><span class="lineNum">     318</span>              : // It returns one on success, or zero on error.</span>
+<span id="L319"><span class="lineNum">     319</span>              : OPENSSL_EXPORT int EVP_DigestSignFinal(EVP_MD_CTX *ctx, uint8_t *out_sig,</span>
+<span id="L320"><span class="lineNum">     320</span>              :                                        size_t *out_sig_len);</span>
+<span id="L321"><span class="lineNum">     321</span>              : </span>
+<span id="L322"><span class="lineNum">     322</span>              : // EVP_DigestSign signs |data_len| bytes from |data| using |ctx|. If |out_sig|</span>
+<span id="L323"><span class="lineNum">     323</span>              : // is NULL then |*out_sig_len| is set to the maximum number of output</span>
+<span id="L324"><span class="lineNum">     324</span>              : // bytes. Otherwise, on entry, |*out_sig_len| must contain the length of the</span>
+<span id="L325"><span class="lineNum">     325</span>              : // |out_sig| buffer. If the call is successful, the signature is written to</span>
+<span id="L326"><span class="lineNum">     326</span>              : // |out_sig| and |*out_sig_len| is set to its length.</span>
+<span id="L327"><span class="lineNum">     327</span>              : //</span>
+<span id="L328"><span class="lineNum">     328</span>              : // It returns one on success and zero on error.</span>
+<span id="L329"><span class="lineNum">     329</span>              : OPENSSL_EXPORT int EVP_DigestSign(EVP_MD_CTX *ctx, uint8_t *out_sig,</span>
+<span id="L330"><span class="lineNum">     330</span>              :                                   size_t *out_sig_len, const uint8_t *data,</span>
+<span id="L331"><span class="lineNum">     331</span>              :                                   size_t data_len);</span>
+<span id="L332"><span class="lineNum">     332</span>              : </span>
+<span id="L333"><span class="lineNum">     333</span>              : </span>
+<span id="L334"><span class="lineNum">     334</span>              : // Verifying</span>
+<span id="L335"><span class="lineNum">     335</span>              : </span>
+<span id="L336"><span class="lineNum">     336</span>              : // EVP_DigestVerifyInit sets up |ctx| for a signature verification operation</span>
+<span id="L337"><span class="lineNum">     337</span>              : // with |type| and |pkey|. The |ctx| argument must have been initialised with</span>
+<span id="L338"><span class="lineNum">     338</span>              : // |EVP_MD_CTX_init|. If |pctx| is not NULL, the |EVP_PKEY_CTX| of the signing</span>
+<span id="L339"><span class="lineNum">     339</span>              : // operation will be written to |*pctx|; this can be used to set alternative</span>
+<span id="L340"><span class="lineNum">     340</span>              : // signing options.</span>
+<span id="L341"><span class="lineNum">     341</span>              : //</span>
+<span id="L342"><span class="lineNum">     342</span>              : // For single-shot signing algorithms which do not use a pre-hash, such as</span>
+<span id="L343"><span class="lineNum">     343</span>              : // Ed25519, |type| should be NULL. The |EVP_MD_CTX| itself is unused but is</span>
+<span id="L344"><span class="lineNum">     344</span>              : // present so the API is uniform. See |EVP_DigestVerify|.</span>
+<span id="L345"><span class="lineNum">     345</span>              : //</span>
+<span id="L346"><span class="lineNum">     346</span>              : // This function does not mutate |pkey| for thread-safety purposes and may be</span>
+<span id="L347"><span class="lineNum">     347</span>              : // used concurrently with other non-mutating functions on |pkey|.</span>
+<span id="L348"><span class="lineNum">     348</span>              : //</span>
+<span id="L349"><span class="lineNum">     349</span>              : // It returns one on success, or zero on error.</span>
+<span id="L350"><span class="lineNum">     350</span>              : OPENSSL_EXPORT int EVP_DigestVerifyInit(EVP_MD_CTX *ctx, EVP_PKEY_CTX **pctx,</span>
+<span id="L351"><span class="lineNum">     351</span>              :                                         const EVP_MD *type, ENGINE *e,</span>
+<span id="L352"><span class="lineNum">     352</span>              :                                         EVP_PKEY *pkey);</span>
+<span id="L353"><span class="lineNum">     353</span>              : </span>
+<span id="L354"><span class="lineNum">     354</span>              : // EVP_DigestVerifyUpdate appends |len| bytes from |data| to the data which</span>
+<span id="L355"><span class="lineNum">     355</span>              : // will be verified by |EVP_DigestVerifyFinal|. It returns one.</span>
+<span id="L356"><span class="lineNum">     356</span>              : //</span>
+<span id="L357"><span class="lineNum">     357</span>              : // This function performs streaming signature verification and will fail for</span>
+<span id="L358"><span class="lineNum">     358</span>              : // signature algorithms which do not support this. Use |EVP_PKEY_verify_message|</span>
+<span id="L359"><span class="lineNum">     359</span>              : // for a single-shot verification.</span>
+<span id="L360"><span class="lineNum">     360</span>              : OPENSSL_EXPORT int EVP_DigestVerifyUpdate(EVP_MD_CTX *ctx, const void *data,</span>
+<span id="L361"><span class="lineNum">     361</span>              :                                           size_t len);</span>
+<span id="L362"><span class="lineNum">     362</span>              : </span>
+<span id="L363"><span class="lineNum">     363</span>              : // EVP_DigestVerifyFinal verifies that |sig_len| bytes of |sig| are a valid</span>
+<span id="L364"><span class="lineNum">     364</span>              : // signature for the data that has been included by one or more calls to</span>
+<span id="L365"><span class="lineNum">     365</span>              : // |EVP_DigestVerifyUpdate|. It returns one on success and zero otherwise.</span>
+<span id="L366"><span class="lineNum">     366</span>              : //</span>
+<span id="L367"><span class="lineNum">     367</span>              : // This function performs streaming signature verification and will fail for</span>
+<span id="L368"><span class="lineNum">     368</span>              : // signature algorithms which do not support this. Use |EVP_PKEY_verify_message|</span>
+<span id="L369"><span class="lineNum">     369</span>              : // for a single-shot verification.</span>
+<span id="L370"><span class="lineNum">     370</span>              : OPENSSL_EXPORT int EVP_DigestVerifyFinal(EVP_MD_CTX *ctx, const uint8_t *sig,</span>
+<span id="L371"><span class="lineNum">     371</span>              :                                          size_t sig_len);</span>
+<span id="L372"><span class="lineNum">     372</span>              : </span>
+<span id="L373"><span class="lineNum">     373</span>              : // EVP_DigestVerify verifies that |sig_len| bytes from |sig| are a valid</span>
+<span id="L374"><span class="lineNum">     374</span>              : // signature for |data|. It returns one on success or zero on error.</span>
+<span id="L375"><span class="lineNum">     375</span>              : OPENSSL_EXPORT int EVP_DigestVerify(EVP_MD_CTX *ctx, const uint8_t *sig,</span>
+<span id="L376"><span class="lineNum">     376</span>              :                                     size_t sig_len, const uint8_t *data,</span>
+<span id="L377"><span class="lineNum">     377</span>              :                                     size_t len);</span>
+<span id="L378"><span class="lineNum">     378</span>              : </span>
+<span id="L379"><span class="lineNum">     379</span>              : </span>
+<span id="L380"><span class="lineNum">     380</span>              : // Signing (old functions)</span>
+<span id="L381"><span class="lineNum">     381</span>              : </span>
+<span id="L382"><span class="lineNum">     382</span>              : // EVP_SignInit_ex configures |ctx|, which must already have been initialised,</span>
+<span id="L383"><span class="lineNum">     383</span>              : // for a fresh signing operation using the hash function |type|. It returns one</span>
+<span id="L384"><span class="lineNum">     384</span>              : // on success and zero otherwise.</span>
+<span id="L385"><span class="lineNum">     385</span>              : //</span>
+<span id="L386"><span class="lineNum">     386</span>              : // (In order to initialise |ctx|, either obtain it initialised with</span>
+<span id="L387"><span class="lineNum">     387</span>              : // |EVP_MD_CTX_create|, or use |EVP_MD_CTX_init|.)</span>
+<span id="L388"><span class="lineNum">     388</span>              : OPENSSL_EXPORT int EVP_SignInit_ex(EVP_MD_CTX *ctx, const EVP_MD *type,</span>
+<span id="L389"><span class="lineNum">     389</span>              :                                    ENGINE *impl);</span>
+<span id="L390"><span class="lineNum">     390</span>              : </span>
+<span id="L391"><span class="lineNum">     391</span>              : // EVP_SignInit is a deprecated version of |EVP_SignInit_ex|.</span>
+<span id="L392"><span class="lineNum">     392</span>              : //</span>
+<span id="L393"><span class="lineNum">     393</span>              : // TODO(fork): remove.</span>
+<span id="L394"><span class="lineNum">     394</span>              : OPENSSL_EXPORT int EVP_SignInit(EVP_MD_CTX *ctx, const EVP_MD *type);</span>
+<span id="L395"><span class="lineNum">     395</span>              : </span>
+<span id="L396"><span class="lineNum">     396</span>              : // EVP_SignUpdate appends |len| bytes from |data| to the data which will be</span>
+<span id="L397"><span class="lineNum">     397</span>              : // signed in |EVP_SignFinal|.</span>
+<span id="L398"><span class="lineNum">     398</span>              : OPENSSL_EXPORT int EVP_SignUpdate(EVP_MD_CTX *ctx, const void *data,</span>
+<span id="L399"><span class="lineNum">     399</span>              :                                   size_t len);</span>
+<span id="L400"><span class="lineNum">     400</span>              : </span>
+<span id="L401"><span class="lineNum">     401</span>              : // EVP_SignFinal signs the data that has been included by one or more calls to</span>
+<span id="L402"><span class="lineNum">     402</span>              : // |EVP_SignUpdate|, using the key |pkey|, and writes it to |sig|. On entry,</span>
+<span id="L403"><span class="lineNum">     403</span>              : // |sig| must point to at least |EVP_PKEY_size(pkey)| bytes of space. The</span>
+<span id="L404"><span class="lineNum">     404</span>              : // actual size of the signature is written to |*out_sig_len|.</span>
+<span id="L405"><span class="lineNum">     405</span>              : //</span>
+<span id="L406"><span class="lineNum">     406</span>              : // It returns one on success and zero otherwise.</span>
+<span id="L407"><span class="lineNum">     407</span>              : //</span>
+<span id="L408"><span class="lineNum">     408</span>              : // It does not modify |ctx|, thus it's possible to continue to use |ctx| in</span>
+<span id="L409"><span class="lineNum">     409</span>              : // order to sign a longer message. It also does not mutate |pkey| for</span>
+<span id="L410"><span class="lineNum">     410</span>              : // thread-safety purposes and may be used concurrently with other non-mutating</span>
+<span id="L411"><span class="lineNum">     411</span>              : // functions on |pkey|.</span>
+<span id="L412"><span class="lineNum">     412</span>              : OPENSSL_EXPORT int EVP_SignFinal(const EVP_MD_CTX *ctx, uint8_t *sig,</span>
+<span id="L413"><span class="lineNum">     413</span>              :                                  unsigned int *out_sig_len, EVP_PKEY *pkey);</span>
+<span id="L414"><span class="lineNum">     414</span>              : </span>
+<span id="L415"><span class="lineNum">     415</span>              : </span>
+<span id="L416"><span class="lineNum">     416</span>              : // Verifying (old functions)</span>
+<span id="L417"><span class="lineNum">     417</span>              : </span>
+<span id="L418"><span class="lineNum">     418</span>              : // EVP_VerifyInit_ex configures |ctx|, which must already have been</span>
+<span id="L419"><span class="lineNum">     419</span>              : // initialised, for a fresh signature verification operation using the hash</span>
+<span id="L420"><span class="lineNum">     420</span>              : // function |type|. It returns one on success and zero otherwise.</span>
+<span id="L421"><span class="lineNum">     421</span>              : //</span>
+<span id="L422"><span class="lineNum">     422</span>              : // (In order to initialise |ctx|, either obtain it initialised with</span>
+<span id="L423"><span class="lineNum">     423</span>              : // |EVP_MD_CTX_create|, or use |EVP_MD_CTX_init|.)</span>
+<span id="L424"><span class="lineNum">     424</span>              : OPENSSL_EXPORT int EVP_VerifyInit_ex(EVP_MD_CTX *ctx, const EVP_MD *type,</span>
+<span id="L425"><span class="lineNum">     425</span>              :                                      ENGINE *impl);</span>
+<span id="L426"><span class="lineNum">     426</span>              : </span>
+<span id="L427"><span class="lineNum">     427</span>              : // EVP_VerifyInit is a deprecated version of |EVP_VerifyInit_ex|.</span>
+<span id="L428"><span class="lineNum">     428</span>              : //</span>
+<span id="L429"><span class="lineNum">     429</span>              : // TODO(fork): remove.</span>
+<span id="L430"><span class="lineNum">     430</span>              : OPENSSL_EXPORT int EVP_VerifyInit(EVP_MD_CTX *ctx, const EVP_MD *type);</span>
+<span id="L431"><span class="lineNum">     431</span>              : </span>
+<span id="L432"><span class="lineNum">     432</span>              : // EVP_VerifyUpdate appends |len| bytes from |data| to the data which will be</span>
+<span id="L433"><span class="lineNum">     433</span>              : // signed in |EVP_VerifyFinal|.</span>
+<span id="L434"><span class="lineNum">     434</span>              : OPENSSL_EXPORT int EVP_VerifyUpdate(EVP_MD_CTX *ctx, const void *data,</span>
+<span id="L435"><span class="lineNum">     435</span>              :                                     size_t len);</span>
+<span id="L436"><span class="lineNum">     436</span>              : </span>
+<span id="L437"><span class="lineNum">     437</span>              : // EVP_VerifyFinal verifies that |sig_len| bytes of |sig| are a valid</span>
+<span id="L438"><span class="lineNum">     438</span>              : // signature, by |pkey|, for the data that has been included by one or more</span>
+<span id="L439"><span class="lineNum">     439</span>              : // calls to |EVP_VerifyUpdate|.</span>
+<span id="L440"><span class="lineNum">     440</span>              : //</span>
+<span id="L441"><span class="lineNum">     441</span>              : // It returns one on success and zero otherwise.</span>
+<span id="L442"><span class="lineNum">     442</span>              : //</span>
+<span id="L443"><span class="lineNum">     443</span>              : // It does not modify |ctx|, thus it's possible to continue to use |ctx| in</span>
+<span id="L444"><span class="lineNum">     444</span>              : // order to verify a longer message. It also does not mutate |pkey| for</span>
+<span id="L445"><span class="lineNum">     445</span>              : // thread-safety purposes and may be used concurrently with other non-mutating</span>
+<span id="L446"><span class="lineNum">     446</span>              : // functions on |pkey|.</span>
+<span id="L447"><span class="lineNum">     447</span>              : OPENSSL_EXPORT int EVP_VerifyFinal(EVP_MD_CTX *ctx, const uint8_t *sig,</span>
+<span id="L448"><span class="lineNum">     448</span>              :                                    size_t sig_len, EVP_PKEY *pkey);</span>
+<span id="L449"><span class="lineNum">     449</span>              : </span>
+<span id="L450"><span class="lineNum">     450</span>              : </span>
+<span id="L451"><span class="lineNum">     451</span>              : // Printing</span>
+<span id="L452"><span class="lineNum">     452</span>              : </span>
+<span id="L453"><span class="lineNum">     453</span>              : // EVP_PKEY_print_public prints a textual representation of the public key in</span>
+<span id="L454"><span class="lineNum">     454</span>              : // |pkey| to |out|. Returns one on success or zero otherwise.</span>
+<span id="L455"><span class="lineNum">     455</span>              : OPENSSL_EXPORT int EVP_PKEY_print_public(BIO *out, const EVP_PKEY *pkey,</span>
+<span id="L456"><span class="lineNum">     456</span>              :                                          int indent, ASN1_PCTX *pctx);</span>
+<span id="L457"><span class="lineNum">     457</span>              : </span>
+<span id="L458"><span class="lineNum">     458</span>              : // EVP_PKEY_print_private prints a textual representation of the private key in</span>
+<span id="L459"><span class="lineNum">     459</span>              : // |pkey| to |out|. Returns one on success or zero otherwise.</span>
+<span id="L460"><span class="lineNum">     460</span>              : OPENSSL_EXPORT int EVP_PKEY_print_private(BIO *out, const EVP_PKEY *pkey,</span>
+<span id="L461"><span class="lineNum">     461</span>              :                                           int indent, ASN1_PCTX *pctx);</span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span>              : // EVP_PKEY_print_params prints a textual representation of the parameters in</span>
+<span id="L464"><span class="lineNum">     464</span>              : // |pkey| to |out|. Returns one on success or zero otherwise.</span>
+<span id="L465"><span class="lineNum">     465</span>              : OPENSSL_EXPORT int EVP_PKEY_print_params(BIO *out, const EVP_PKEY *pkey,</span>
+<span id="L466"><span class="lineNum">     466</span>              :                                          int indent, ASN1_PCTX *pctx);</span>
+<span id="L467"><span class="lineNum">     467</span>              : </span>
+<span id="L468"><span class="lineNum">     468</span>              : </span>
+<span id="L469"><span class="lineNum">     469</span>              : // Password stretching.</span>
+<span id="L470"><span class="lineNum">     470</span>              : //</span>
+<span id="L471"><span class="lineNum">     471</span>              : // Password stretching functions take a low-entropy password and apply a slow</span>
+<span id="L472"><span class="lineNum">     472</span>              : // function that results in a key suitable for use in symmetric</span>
+<span id="L473"><span class="lineNum">     473</span>              : // cryptography.</span>
+<span id="L474"><span class="lineNum">     474</span>              : </span>
+<span id="L475"><span class="lineNum">     475</span>              : // PKCS5_PBKDF2_HMAC computes |iterations| iterations of PBKDF2 of |password|</span>
+<span id="L476"><span class="lineNum">     476</span>              : // and |salt|, using |digest|, and outputs |key_len| bytes to |out_key|. It</span>
+<span id="L477"><span class="lineNum">     477</span>              : // returns one on success and zero on allocation failure or if iterations is 0.</span>
+<span id="L478"><span class="lineNum">     478</span>              : OPENSSL_EXPORT int PKCS5_PBKDF2_HMAC(const char *password, size_t password_len,</span>
+<span id="L479"><span class="lineNum">     479</span>              :                                      const uint8_t *salt, size_t salt_len,</span>
+<span id="L480"><span class="lineNum">     480</span>              :                                      uint32_t iterations, const EVP_MD *digest,</span>
+<span id="L481"><span class="lineNum">     481</span>              :                                      size_t key_len, uint8_t *out_key);</span>
+<span id="L482"><span class="lineNum">     482</span>              : </span>
+<span id="L483"><span class="lineNum">     483</span>              : // PKCS5_PBKDF2_HMAC_SHA1 is the same as PKCS5_PBKDF2_HMAC, but with |digest|</span>
+<span id="L484"><span class="lineNum">     484</span>              : // fixed to |EVP_sha1|.</span>
+<span id="L485"><span class="lineNum">     485</span>              : OPENSSL_EXPORT int PKCS5_PBKDF2_HMAC_SHA1(const char *password,</span>
+<span id="L486"><span class="lineNum">     486</span>              :                                           size_t password_len,</span>
+<span id="L487"><span class="lineNum">     487</span>              :                                           const uint8_t *salt, size_t salt_len,</span>
+<span id="L488"><span class="lineNum">     488</span>              :                                           uint32_t iterations, size_t key_len,</span>
+<span id="L489"><span class="lineNum">     489</span>              :                                           uint8_t *out_key);</span>
+<span id="L490"><span class="lineNum">     490</span>              : </span>
+<span id="L491"><span class="lineNum">     491</span>              : // EVP_PBE_scrypt expands |password| into a secret key of length |key_len| using</span>
+<span id="L492"><span class="lineNum">     492</span>              : // scrypt, as described in RFC 7914, and writes the result to |out_key|. It</span>
+<span id="L493"><span class="lineNum">     493</span>              : // returns one on success and zero on allocation failure, if the memory required</span>
+<span id="L494"><span class="lineNum">     494</span>              : // for the operation exceeds |max_mem|, or if any of the parameters are invalid</span>
+<span id="L495"><span class="lineNum">     495</span>              : // as described below.</span>
+<span id="L496"><span class="lineNum">     496</span>              : //</span>
+<span id="L497"><span class="lineNum">     497</span>              : // |N|, |r|, and |p| are as described in RFC 7914 section 6. They determine the</span>
+<span id="L498"><span class="lineNum">     498</span>              : // cost of the operation. If |max_mem| is zero, a defult limit of 32MiB will be</span>
+<span id="L499"><span class="lineNum">     499</span>              : // used.</span>
+<span id="L500"><span class="lineNum">     500</span>              : //</span>
+<span id="L501"><span class="lineNum">     501</span>              : // The parameters are considered invalid under any of the following conditions:</span>
+<span id="L502"><span class="lineNum">     502</span>              : // - |r| or |p| are zero</span>
+<span id="L503"><span class="lineNum">     503</span>              : // - |p| &gt; (2^30 - 1) / |r|</span>
+<span id="L504"><span class="lineNum">     504</span>              : // - |N| is not a power of two</span>
+<span id="L505"><span class="lineNum">     505</span>              : // - |N| &gt; 2^32</span>
+<span id="L506"><span class="lineNum">     506</span>              : // - |N| &gt; 2^(128 * |r| / 8)</span>
+<span id="L507"><span class="lineNum">     507</span>              : OPENSSL_EXPORT int EVP_PBE_scrypt(const char *password, size_t password_len,</span>
+<span id="L508"><span class="lineNum">     508</span>              :                                   const uint8_t *salt, size_t salt_len,</span>
+<span id="L509"><span class="lineNum">     509</span>              :                                   uint64_t N, uint64_t r, uint64_t p,</span>
+<span id="L510"><span class="lineNum">     510</span>              :                                   size_t max_mem, uint8_t *out_key,</span>
+<span id="L511"><span class="lineNum">     511</span>              :                                   size_t key_len);</span>
+<span id="L512"><span class="lineNum">     512</span>              : </span>
+<span id="L513"><span class="lineNum">     513</span>              : </span>
+<span id="L514"><span class="lineNum">     514</span>              : // Public key contexts.</span>
+<span id="L515"><span class="lineNum">     515</span>              : //</span>
+<span id="L516"><span class="lineNum">     516</span>              : // |EVP_PKEY_CTX| objects hold the context of an operation (e.g. signing or</span>
+<span id="L517"><span class="lineNum">     517</span>              : // encrypting) that uses a public key.</span>
+<span id="L518"><span class="lineNum">     518</span>              : </span>
+<span id="L519"><span class="lineNum">     519</span>              : // EVP_PKEY_CTX_new allocates a fresh |EVP_PKEY_CTX| for use with |pkey|. It</span>
+<span id="L520"><span class="lineNum">     520</span>              : // returns the context or NULL on error.</span>
+<span id="L521"><span class="lineNum">     521</span>              : OPENSSL_EXPORT EVP_PKEY_CTX *EVP_PKEY_CTX_new(EVP_PKEY *pkey, ENGINE *e);</span>
+<span id="L522"><span class="lineNum">     522</span>              : </span>
+<span id="L523"><span class="lineNum">     523</span>              : // EVP_PKEY_CTX_new_id allocates a fresh |EVP_PKEY_CTX| for a key of type |id|</span>
+<span id="L524"><span class="lineNum">     524</span>              : // (e.g. |EVP_PKEY_HMAC|). This can be used for key generation where</span>
+<span id="L525"><span class="lineNum">     525</span>              : // |EVP_PKEY_CTX_new| can't be used because there isn't an |EVP_PKEY| to pass</span>
+<span id="L526"><span class="lineNum">     526</span>              : // it. It returns the context or NULL on error.</span>
+<span id="L527"><span class="lineNum">     527</span>              : OPENSSL_EXPORT EVP_PKEY_CTX *EVP_PKEY_CTX_new_id(int id, ENGINE *e);</span>
+<span id="L528"><span class="lineNum">     528</span>              : </span>
+<span id="L529"><span class="lineNum">     529</span>              : // EVP_PKEY_CTX_free frees |ctx| and the data it owns.</span>
+<span id="L530"><span class="lineNum">     530</span>              : OPENSSL_EXPORT void EVP_PKEY_CTX_free(EVP_PKEY_CTX *ctx);</span>
+<span id="L531"><span class="lineNum">     531</span>              : </span>
+<span id="L532"><span class="lineNum">     532</span>              : // EVP_PKEY_CTX_dup allocates a fresh |EVP_PKEY_CTX| and sets it equal to the</span>
+<span id="L533"><span class="lineNum">     533</span>              : // state of |ctx|. It returns the fresh |EVP_PKEY_CTX| or NULL on error.</span>
+<span id="L534"><span class="lineNum">     534</span>              : OPENSSL_EXPORT EVP_PKEY_CTX *EVP_PKEY_CTX_dup(EVP_PKEY_CTX *ctx);</span>
+<span id="L535"><span class="lineNum">     535</span>              : </span>
+<span id="L536"><span class="lineNum">     536</span>              : // EVP_PKEY_CTX_get0_pkey returns the |EVP_PKEY| associated with |ctx|.</span>
+<span id="L537"><span class="lineNum">     537</span>              : OPENSSL_EXPORT EVP_PKEY *EVP_PKEY_CTX_get0_pkey(EVP_PKEY_CTX *ctx);</span>
+<span id="L538"><span class="lineNum">     538</span>              : </span>
+<span id="L539"><span class="lineNum">     539</span>              : // EVP_PKEY_sign_init initialises an |EVP_PKEY_CTX| for a signing operation. It</span>
+<span id="L540"><span class="lineNum">     540</span>              : // should be called before |EVP_PKEY_sign|.</span>
+<span id="L541"><span class="lineNum">     541</span>              : //</span>
+<span id="L542"><span class="lineNum">     542</span>              : // It returns one on success or zero on error.</span>
+<span id="L543"><span class="lineNum">     543</span>              : OPENSSL_EXPORT int EVP_PKEY_sign_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L544"><span class="lineNum">     544</span>              : </span>
+<span id="L545"><span class="lineNum">     545</span>              : // EVP_PKEY_sign signs |digest_len| bytes from |digest| using |ctx|. If |sig| is</span>
+<span id="L546"><span class="lineNum">     546</span>              : // NULL, the maximum size of the signature is written to |out_sig_len|.</span>
+<span id="L547"><span class="lineNum">     547</span>              : // Otherwise, |*sig_len| must contain the number of bytes of space available at</span>
+<span id="L548"><span class="lineNum">     548</span>              : // |sig|. If sufficient, the signature will be written to |sig| and |*sig_len|</span>
+<span id="L549"><span class="lineNum">     549</span>              : // updated with the true length. This function will fail for signature</span>
+<span id="L550"><span class="lineNum">     550</span>              : // algorithms like Ed25519 that do not support signing pre-hashed inputs.</span>
+<span id="L551"><span class="lineNum">     551</span>              : //</span>
+<span id="L552"><span class="lineNum">     552</span>              : // WARNING: |digest| must be the output of some hash function on the data to be</span>
+<span id="L553"><span class="lineNum">     553</span>              : // signed. Passing unhashed inputs will not result in a secure signature scheme.</span>
+<span id="L554"><span class="lineNum">     554</span>              : // Use |EVP_DigestSignInit| to sign an unhashed input.</span>
+<span id="L555"><span class="lineNum">     555</span>              : //</span>
+<span id="L556"><span class="lineNum">     556</span>              : // WARNING: Setting |sig| to NULL only gives the maximum size of the</span>
+<span id="L557"><span class="lineNum">     557</span>              : // signature. The actual signature may be smaller.</span>
+<span id="L558"><span class="lineNum">     558</span>              : //</span>
+<span id="L559"><span class="lineNum">     559</span>              : // It returns one on success or zero on error. (Note: this differs from</span>
+<span id="L560"><span class="lineNum">     560</span>              : // OpenSSL, which can also return negative values to indicate an error. )</span>
+<span id="L561"><span class="lineNum">     561</span>              : OPENSSL_EXPORT int EVP_PKEY_sign(EVP_PKEY_CTX *ctx, uint8_t *sig,</span>
+<span id="L562"><span class="lineNum">     562</span>              :                                  size_t *sig_len, const uint8_t *digest,</span>
+<span id="L563"><span class="lineNum">     563</span>              :                                  size_t digest_len);</span>
+<span id="L564"><span class="lineNum">     564</span>              : </span>
+<span id="L565"><span class="lineNum">     565</span>              : // EVP_PKEY_verify_init initialises an |EVP_PKEY_CTX| for a signature</span>
+<span id="L566"><span class="lineNum">     566</span>              : // verification operation. It should be called before |EVP_PKEY_verify|.</span>
+<span id="L567"><span class="lineNum">     567</span>              : //</span>
+<span id="L568"><span class="lineNum">     568</span>              : // It returns one on success or zero on error.</span>
+<span id="L569"><span class="lineNum">     569</span>              : OPENSSL_EXPORT int EVP_PKEY_verify_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L570"><span class="lineNum">     570</span>              : </span>
+<span id="L571"><span class="lineNum">     571</span>              : // EVP_PKEY_verify verifies that |sig_len| bytes from |sig| are a valid</span>
+<span id="L572"><span class="lineNum">     572</span>              : // signature for |digest|. This function will fail for signature</span>
+<span id="L573"><span class="lineNum">     573</span>              : // algorithms like Ed25519 that do not support signing pre-hashed inputs.</span>
+<span id="L574"><span class="lineNum">     574</span>              : //</span>
+<span id="L575"><span class="lineNum">     575</span>              : // WARNING: |digest| must be the output of some hash function on the data to be</span>
+<span id="L576"><span class="lineNum">     576</span>              : // verified. Passing unhashed inputs will not result in a secure signature</span>
+<span id="L577"><span class="lineNum">     577</span>              : // scheme. Use |EVP_DigestVerifyInit| to verify a signature given the unhashed</span>
+<span id="L578"><span class="lineNum">     578</span>              : // input.</span>
+<span id="L579"><span class="lineNum">     579</span>              : //</span>
+<span id="L580"><span class="lineNum">     580</span>              : // It returns one on success or zero on error.</span>
+<span id="L581"><span class="lineNum">     581</span>              : OPENSSL_EXPORT int EVP_PKEY_verify(EVP_PKEY_CTX *ctx, const uint8_t *sig,</span>
+<span id="L582"><span class="lineNum">     582</span>              :                                    size_t sig_len, const uint8_t *digest,</span>
+<span id="L583"><span class="lineNum">     583</span>              :                                    size_t digest_len);</span>
+<span id="L584"><span class="lineNum">     584</span>              : </span>
+<span id="L585"><span class="lineNum">     585</span>              : // EVP_PKEY_encrypt_init initialises an |EVP_PKEY_CTX| for an encryption</span>
+<span id="L586"><span class="lineNum">     586</span>              : // operation. It should be called before |EVP_PKEY_encrypt|.</span>
+<span id="L587"><span class="lineNum">     587</span>              : //</span>
+<span id="L588"><span class="lineNum">     588</span>              : // It returns one on success or zero on error.</span>
+<span id="L589"><span class="lineNum">     589</span>              : OPENSSL_EXPORT int EVP_PKEY_encrypt_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L590"><span class="lineNum">     590</span>              : </span>
+<span id="L591"><span class="lineNum">     591</span>              : // EVP_PKEY_encrypt encrypts |in_len| bytes from |in|. If |out| is NULL, the</span>
+<span id="L592"><span class="lineNum">     592</span>              : // maximum size of the ciphertext is written to |out_len|. Otherwise, |*out_len|</span>
+<span id="L593"><span class="lineNum">     593</span>              : // must contain the number of bytes of space available at |out|. If sufficient,</span>
+<span id="L594"><span class="lineNum">     594</span>              : // the ciphertext will be written to |out| and |*out_len| updated with the true</span>
+<span id="L595"><span class="lineNum">     595</span>              : // length.</span>
+<span id="L596"><span class="lineNum">     596</span>              : //</span>
+<span id="L597"><span class="lineNum">     597</span>              : // WARNING: Setting |out| to NULL only gives the maximum size of the</span>
+<span id="L598"><span class="lineNum">     598</span>              : // ciphertext. The actual ciphertext may be smaller.</span>
+<span id="L599"><span class="lineNum">     599</span>              : //</span>
+<span id="L600"><span class="lineNum">     600</span>              : // It returns one on success or zero on error.</span>
+<span id="L601"><span class="lineNum">     601</span>              : OPENSSL_EXPORT int EVP_PKEY_encrypt(EVP_PKEY_CTX *ctx, uint8_t *out,</span>
+<span id="L602"><span class="lineNum">     602</span>              :                                     size_t *out_len, const uint8_t *in,</span>
+<span id="L603"><span class="lineNum">     603</span>              :                                     size_t in_len);</span>
+<span id="L604"><span class="lineNum">     604</span>              : </span>
+<span id="L605"><span class="lineNum">     605</span>              : // EVP_PKEY_decrypt_init initialises an |EVP_PKEY_CTX| for a decryption</span>
+<span id="L606"><span class="lineNum">     606</span>              : // operation. It should be called before |EVP_PKEY_decrypt|.</span>
+<span id="L607"><span class="lineNum">     607</span>              : //</span>
+<span id="L608"><span class="lineNum">     608</span>              : // It returns one on success or zero on error.</span>
+<span id="L609"><span class="lineNum">     609</span>              : OPENSSL_EXPORT int EVP_PKEY_decrypt_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L610"><span class="lineNum">     610</span>              : </span>
+<span id="L611"><span class="lineNum">     611</span>              : // EVP_PKEY_decrypt decrypts |in_len| bytes from |in|. If |out| is NULL, the</span>
+<span id="L612"><span class="lineNum">     612</span>              : // maximum size of the plaintext is written to |out_len|. Otherwise, |*out_len|</span>
+<span id="L613"><span class="lineNum">     613</span>              : // must contain the number of bytes of space available at |out|. If sufficient,</span>
+<span id="L614"><span class="lineNum">     614</span>              : // the ciphertext will be written to |out| and |*out_len| updated with the true</span>
+<span id="L615"><span class="lineNum">     615</span>              : // length.</span>
+<span id="L616"><span class="lineNum">     616</span>              : //</span>
+<span id="L617"><span class="lineNum">     617</span>              : // WARNING: Setting |out| to NULL only gives the maximum size of the</span>
+<span id="L618"><span class="lineNum">     618</span>              : // plaintext. The actual plaintext may be smaller.</span>
+<span id="L619"><span class="lineNum">     619</span>              : //</span>
+<span id="L620"><span class="lineNum">     620</span>              : // It returns one on success or zero on error.</span>
+<span id="L621"><span class="lineNum">     621</span>              : OPENSSL_EXPORT int EVP_PKEY_decrypt(EVP_PKEY_CTX *ctx, uint8_t *out,</span>
+<span id="L622"><span class="lineNum">     622</span>              :                                     size_t *out_len, const uint8_t *in,</span>
+<span id="L623"><span class="lineNum">     623</span>              :                                     size_t in_len);</span>
+<span id="L624"><span class="lineNum">     624</span>              : </span>
+<span id="L625"><span class="lineNum">     625</span>              : // EVP_PKEY_verify_recover_init initialises an |EVP_PKEY_CTX| for a public-key</span>
+<span id="L626"><span class="lineNum">     626</span>              : // decryption operation. It should be called before |EVP_PKEY_verify_recover|.</span>
+<span id="L627"><span class="lineNum">     627</span>              : //</span>
+<span id="L628"><span class="lineNum">     628</span>              : // Public-key decryption is a very obscure operation that is only implemented</span>
+<span id="L629"><span class="lineNum">     629</span>              : // by RSA keys. It is effectively a signature verification operation that</span>
+<span id="L630"><span class="lineNum">     630</span>              : // returns the signed message directly. It is almost certainly not what you</span>
+<span id="L631"><span class="lineNum">     631</span>              : // want.</span>
+<span id="L632"><span class="lineNum">     632</span>              : //</span>
+<span id="L633"><span class="lineNum">     633</span>              : // It returns one on success or zero on error.</span>
+<span id="L634"><span class="lineNum">     634</span>              : OPENSSL_EXPORT int EVP_PKEY_verify_recover_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L635"><span class="lineNum">     635</span>              : </span>
+<span id="L636"><span class="lineNum">     636</span>              : // EVP_PKEY_verify_recover decrypts |sig_len| bytes from |sig|. If |out| is</span>
+<span id="L637"><span class="lineNum">     637</span>              : // NULL, the maximum size of the plaintext is written to |out_len|. Otherwise,</span>
+<span id="L638"><span class="lineNum">     638</span>              : // |*out_len| must contain the number of bytes of space available at |out|. If</span>
+<span id="L639"><span class="lineNum">     639</span>              : // sufficient, the ciphertext will be written to |out| and |*out_len| updated</span>
+<span id="L640"><span class="lineNum">     640</span>              : // with the true length.</span>
+<span id="L641"><span class="lineNum">     641</span>              : //</span>
+<span id="L642"><span class="lineNum">     642</span>              : // WARNING: Setting |out| to NULL only gives the maximum size of the</span>
+<span id="L643"><span class="lineNum">     643</span>              : // plaintext. The actual plaintext may be smaller.</span>
+<span id="L644"><span class="lineNum">     644</span>              : //</span>
+<span id="L645"><span class="lineNum">     645</span>              : // See the warning about this operation in |EVP_PKEY_verify_recover_init|. It</span>
+<span id="L646"><span class="lineNum">     646</span>              : // is probably not what you want.</span>
+<span id="L647"><span class="lineNum">     647</span>              : //</span>
+<span id="L648"><span class="lineNum">     648</span>              : // It returns one on success or zero on error.</span>
+<span id="L649"><span class="lineNum">     649</span>              : OPENSSL_EXPORT int EVP_PKEY_verify_recover(EVP_PKEY_CTX *ctx, uint8_t *out,</span>
+<span id="L650"><span class="lineNum">     650</span>              :                                            size_t *out_len, const uint8_t *sig,</span>
+<span id="L651"><span class="lineNum">     651</span>              :                                            size_t siglen);</span>
+<span id="L652"><span class="lineNum">     652</span>              : </span>
+<span id="L653"><span class="lineNum">     653</span>              : // EVP_PKEY_derive_init initialises an |EVP_PKEY_CTX| for a key derivation</span>
+<span id="L654"><span class="lineNum">     654</span>              : // operation. It should be called before |EVP_PKEY_derive_set_peer| and</span>
+<span id="L655"><span class="lineNum">     655</span>              : // |EVP_PKEY_derive|.</span>
+<span id="L656"><span class="lineNum">     656</span>              : //</span>
+<span id="L657"><span class="lineNum">     657</span>              : // It returns one on success or zero on error.</span>
+<span id="L658"><span class="lineNum">     658</span>              : OPENSSL_EXPORT int EVP_PKEY_derive_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L659"><span class="lineNum">     659</span>              : </span>
+<span id="L660"><span class="lineNum">     660</span>              : // EVP_PKEY_derive_set_peer sets the peer's key to be used for key derivation</span>
+<span id="L661"><span class="lineNum">     661</span>              : // by |ctx| to |peer|. It should be called after |EVP_PKEY_derive_init|. (For</span>
+<span id="L662"><span class="lineNum">     662</span>              : // example, this is used to set the peer's key in (EC)DH.) It returns one on</span>
+<span id="L663"><span class="lineNum">     663</span>              : // success and zero on error.</span>
+<span id="L664"><span class="lineNum">     664</span>              : OPENSSL_EXPORT int EVP_PKEY_derive_set_peer(EVP_PKEY_CTX *ctx, EVP_PKEY *peer);</span>
+<span id="L665"><span class="lineNum">     665</span>              : </span>
+<span id="L666"><span class="lineNum">     666</span>              : // EVP_PKEY_derive derives a shared key from |ctx|. If |key| is non-NULL then,</span>
+<span id="L667"><span class="lineNum">     667</span>              : // on entry, |out_key_len| must contain the amount of space at |key|. If</span>
+<span id="L668"><span class="lineNum">     668</span>              : // sufficient then the shared key will be written to |key| and |*out_key_len|</span>
+<span id="L669"><span class="lineNum">     669</span>              : // will be set to the length. If |key| is NULL then |out_key_len| will be set to</span>
+<span id="L670"><span class="lineNum">     670</span>              : // the maximum length.</span>
+<span id="L671"><span class="lineNum">     671</span>              : //</span>
+<span id="L672"><span class="lineNum">     672</span>              : // WARNING: Setting |out| to NULL only gives the maximum size of the key. The</span>
+<span id="L673"><span class="lineNum">     673</span>              : // actual key may be smaller.</span>
+<span id="L674"><span class="lineNum">     674</span>              : //</span>
+<span id="L675"><span class="lineNum">     675</span>              : // It returns one on success and zero on error.</span>
+<span id="L676"><span class="lineNum">     676</span>              : OPENSSL_EXPORT int EVP_PKEY_derive(EVP_PKEY_CTX *ctx, uint8_t *key,</span>
+<span id="L677"><span class="lineNum">     677</span>              :                                    size_t *out_key_len);</span>
+<span id="L678"><span class="lineNum">     678</span>              : </span>
+<span id="L679"><span class="lineNum">     679</span>              : // EVP_PKEY_keygen_init initialises an |EVP_PKEY_CTX| for a key generation</span>
+<span id="L680"><span class="lineNum">     680</span>              : // operation. It should be called before |EVP_PKEY_keygen|.</span>
+<span id="L681"><span class="lineNum">     681</span>              : //</span>
+<span id="L682"><span class="lineNum">     682</span>              : // It returns one on success or zero on error.</span>
+<span id="L683"><span class="lineNum">     683</span>              : OPENSSL_EXPORT int EVP_PKEY_keygen_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L684"><span class="lineNum">     684</span>              : </span>
+<span id="L685"><span class="lineNum">     685</span>              : // EVP_PKEY_keygen performs a key generation operation using the values from</span>
+<span id="L686"><span class="lineNum">     686</span>              : // |ctx|. If |*out_pkey| is non-NULL, it overwrites |*out_pkey| with the</span>
+<span id="L687"><span class="lineNum">     687</span>              : // resulting key. Otherwise, it sets |*out_pkey| to a newly-allocated |EVP_PKEY|</span>
+<span id="L688"><span class="lineNum">     688</span>              : // containing the result. It returns one on success or zero on error.</span>
+<span id="L689"><span class="lineNum">     689</span>              : OPENSSL_EXPORT int EVP_PKEY_keygen(EVP_PKEY_CTX *ctx, EVP_PKEY **out_pkey);</span>
+<span id="L690"><span class="lineNum">     690</span>              : </span>
+<span id="L691"><span class="lineNum">     691</span>              : // EVP_PKEY_paramgen_init initialises an |EVP_PKEY_CTX| for a parameter</span>
+<span id="L692"><span class="lineNum">     692</span>              : // generation operation. It should be called before |EVP_PKEY_paramgen|.</span>
+<span id="L693"><span class="lineNum">     693</span>              : //</span>
+<span id="L694"><span class="lineNum">     694</span>              : // It returns one on success or zero on error.</span>
+<span id="L695"><span class="lineNum">     695</span>              : OPENSSL_EXPORT int EVP_PKEY_paramgen_init(EVP_PKEY_CTX *ctx);</span>
+<span id="L696"><span class="lineNum">     696</span>              : </span>
+<span id="L697"><span class="lineNum">     697</span>              : // EVP_PKEY_paramgen performs a parameter generation using the values from</span>
+<span id="L698"><span class="lineNum">     698</span>              : // |ctx|. If |*out_pkey| is non-NULL, it overwrites |*out_pkey| with the</span>
+<span id="L699"><span class="lineNum">     699</span>              : // resulting parameters, but no key. Otherwise, it sets |*out_pkey| to a</span>
+<span id="L700"><span class="lineNum">     700</span>              : // newly-allocated |EVP_PKEY| containing the result. It returns one on success</span>
+<span id="L701"><span class="lineNum">     701</span>              : // or zero on error.</span>
+<span id="L702"><span class="lineNum">     702</span>              : OPENSSL_EXPORT int EVP_PKEY_paramgen(EVP_PKEY_CTX *ctx, EVP_PKEY **out_pkey);</span>
+<span id="L703"><span class="lineNum">     703</span>              : </span>
+<span id="L704"><span class="lineNum">     704</span>              : </span>
+<span id="L705"><span class="lineNum">     705</span>              : // Generic control functions.</span>
+<span id="L706"><span class="lineNum">     706</span>              : </span>
+<span id="L707"><span class="lineNum">     707</span>              : // EVP_PKEY_CTX_set_signature_md sets |md| as the digest to be used in a</span>
+<span id="L708"><span class="lineNum">     708</span>              : // signature operation. It returns one on success or zero on error.</span>
+<span id="L709"><span class="lineNum">     709</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_signature_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L710"><span class="lineNum">     710</span>              :                                                  const EVP_MD *md);</span>
+<span id="L711"><span class="lineNum">     711</span>              : </span>
+<span id="L712"><span class="lineNum">     712</span>              : // EVP_PKEY_CTX_get_signature_md sets |*out_md| to the digest to be used in a</span>
+<span id="L713"><span class="lineNum">     713</span>              : // signature operation. It returns one on success or zero on error.</span>
+<span id="L714"><span class="lineNum">     714</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_get_signature_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L715"><span class="lineNum">     715</span>              :                                                  const EVP_MD **out_md);</span>
+<span id="L716"><span class="lineNum">     716</span>              : </span>
+<span id="L717"><span class="lineNum">     717</span>              : </span>
+<span id="L718"><span class="lineNum">     718</span>              : // RSA specific control functions.</span>
+<span id="L719"><span class="lineNum">     719</span>              : </span>
+<span id="L720"><span class="lineNum">     720</span>              : // EVP_PKEY_CTX_set_rsa_padding sets the padding type to use. It should be one</span>
+<span id="L721"><span class="lineNum">     721</span>              : // of the |RSA_*_PADDING| values. Returns one on success or zero on error. By</span>
+<span id="L722"><span class="lineNum">     722</span>              : // default, the padding is |RSA_PKCS1_PADDING|.</span>
+<span id="L723"><span class="lineNum">     723</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_padding(EVP_PKEY_CTX *ctx, int padding);</span>
+<span id="L724"><span class="lineNum">     724</span>              : </span>
+<span id="L725"><span class="lineNum">     725</span>              : // EVP_PKEY_CTX_get_rsa_padding sets |*out_padding| to the current padding</span>
+<span id="L726"><span class="lineNum">     726</span>              : // value, which is one of the |RSA_*_PADDING| values. Returns one on success or</span>
+<span id="L727"><span class="lineNum">     727</span>              : // zero on error.</span>
+<span id="L728"><span class="lineNum">     728</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_get_rsa_padding(EVP_PKEY_CTX *ctx,</span>
+<span id="L729"><span class="lineNum">     729</span>              :                                                 int *out_padding);</span>
+<span id="L730"><span class="lineNum">     730</span>              : </span>
+<span id="L731"><span class="lineNum">     731</span>              : // EVP_PKEY_CTX_set_rsa_pss_saltlen sets the length of the salt in a PSS-padded</span>
+<span id="L732"><span class="lineNum">     732</span>              : // signature. A value of -1 cause the salt to be the same length as the digest</span>
+<span id="L733"><span class="lineNum">     733</span>              : // in the signature. A value of -2 causes the salt to be the maximum length</span>
+<span id="L734"><span class="lineNum">     734</span>              : // that will fit when signing and recovered from the signature when verifying.</span>
+<span id="L735"><span class="lineNum">     735</span>              : // Otherwise the value gives the size of the salt in bytes.</span>
+<span id="L736"><span class="lineNum">     736</span>              : //</span>
+<span id="L737"><span class="lineNum">     737</span>              : // If unsure, use -1.</span>
+<span id="L738"><span class="lineNum">     738</span>              : //</span>
+<span id="L739"><span class="lineNum">     739</span>              : // Returns one on success or zero on error.</span>
+<span id="L740"><span class="lineNum">     740</span>              : //</span>
+<span id="L741"><span class="lineNum">     741</span>              : // TODO(davidben): The default is currently -2. Switch it to -1.</span>
+<span id="L742"><span class="lineNum">     742</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_pss_saltlen(EVP_PKEY_CTX *ctx,</span>
+<span id="L743"><span class="lineNum">     743</span>              :                                                     int salt_len);</span>
+<span id="L744"><span class="lineNum">     744</span>              : </span>
+<span id="L745"><span class="lineNum">     745</span>              : // EVP_PKEY_CTX_get_rsa_pss_saltlen sets |*out_salt_len| to the salt length of</span>
+<span id="L746"><span class="lineNum">     746</span>              : // a PSS-padded signature. See the documentation for</span>
+<span id="L747"><span class="lineNum">     747</span>              : // |EVP_PKEY_CTX_set_rsa_pss_saltlen| for details of the special values that it</span>
+<span id="L748"><span class="lineNum">     748</span>              : // can take.</span>
+<span id="L749"><span class="lineNum">     749</span>              : //</span>
+<span id="L750"><span class="lineNum">     750</span>              : // Returns one on success or zero on error.</span>
+<span id="L751"><span class="lineNum">     751</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_get_rsa_pss_saltlen(EVP_PKEY_CTX *ctx,</span>
+<span id="L752"><span class="lineNum">     752</span>              :                                                     int *out_salt_len);</span>
+<span id="L753"><span class="lineNum">     753</span>              : </span>
+<span id="L754"><span class="lineNum">     754</span>              : // EVP_PKEY_CTX_set_rsa_keygen_bits sets the size of the desired RSA modulus,</span>
+<span id="L755"><span class="lineNum">     755</span>              : // in bits, for key generation. Returns one on success or zero on</span>
+<span id="L756"><span class="lineNum">     756</span>              : // error.</span>
+<span id="L757"><span class="lineNum">     757</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_keygen_bits(EVP_PKEY_CTX *ctx,</span>
+<span id="L758"><span class="lineNum">     758</span>              :                                                     int bits);</span>
+<span id="L759"><span class="lineNum">     759</span>              : </span>
+<span id="L760"><span class="lineNum">     760</span>              : // EVP_PKEY_CTX_set_rsa_keygen_pubexp sets |e| as the public exponent for key</span>
+<span id="L761"><span class="lineNum">     761</span>              : // generation. Returns one on success or zero on error.</span>
+<span id="L762"><span class="lineNum">     762</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_keygen_pubexp(EVP_PKEY_CTX *ctx,</span>
+<span id="L763"><span class="lineNum">     763</span>              :                                                       BIGNUM *e);</span>
+<span id="L764"><span class="lineNum">     764</span>              : </span>
+<span id="L765"><span class="lineNum">     765</span>              : // EVP_PKEY_CTX_set_rsa_oaep_md sets |md| as the digest used in OAEP padding.</span>
+<span id="L766"><span class="lineNum">     766</span>              : // Returns one on success or zero on error. If unset, the default is SHA-1.</span>
+<span id="L767"><span class="lineNum">     767</span>              : // Callers are recommended to overwrite this default.</span>
+<span id="L768"><span class="lineNum">     768</span>              : //</span>
+<span id="L769"><span class="lineNum">     769</span>              : // TODO(davidben): Remove the default and require callers specify this.</span>
+<span id="L770"><span class="lineNum">     770</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_oaep_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L771"><span class="lineNum">     771</span>              :                                                 const EVP_MD *md);</span>
+<span id="L772"><span class="lineNum">     772</span>              : </span>
+<span id="L773"><span class="lineNum">     773</span>              : // EVP_PKEY_CTX_get_rsa_oaep_md sets |*out_md| to the digest function used in</span>
+<span id="L774"><span class="lineNum">     774</span>              : // OAEP padding. Returns one on success or zero on error.</span>
+<span id="L775"><span class="lineNum">     775</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_get_rsa_oaep_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L776"><span class="lineNum">     776</span>              :                                                 const EVP_MD **out_md);</span>
+<span id="L777"><span class="lineNum">     777</span>              : </span>
+<span id="L778"><span class="lineNum">     778</span>              : // EVP_PKEY_CTX_set_rsa_mgf1_md sets |md| as the digest used in MGF1. Returns</span>
+<span id="L779"><span class="lineNum">     779</span>              : // one on success or zero on error.</span>
+<span id="L780"><span class="lineNum">     780</span>              : //</span>
+<span id="L781"><span class="lineNum">     781</span>              : // If unset, the default is the signing hash for |RSA_PKCS1_PSS_PADDING| and the</span>
+<span id="L782"><span class="lineNum">     782</span>              : // OAEP hash for |RSA_PKCS1_OAEP_PADDING|. Callers are recommended to use this</span>
+<span id="L783"><span class="lineNum">     783</span>              : // default and not call this function.</span>
+<span id="L784"><span class="lineNum">     784</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_mgf1_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L785"><span class="lineNum">     785</span>              :                                                 const EVP_MD *md);</span>
+<span id="L786"><span class="lineNum">     786</span>              : </span>
+<span id="L787"><span class="lineNum">     787</span>              : // EVP_PKEY_CTX_get_rsa_mgf1_md sets |*out_md| to the digest function used in</span>
+<span id="L788"><span class="lineNum">     788</span>              : // MGF1. Returns one on success or zero on error.</span>
+<span id="L789"><span class="lineNum">     789</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_get_rsa_mgf1_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L790"><span class="lineNum">     790</span>              :                                                 const EVP_MD **out_md);</span>
+<span id="L791"><span class="lineNum">     791</span>              : </span>
+<span id="L792"><span class="lineNum">     792</span>              : // EVP_PKEY_CTX_set0_rsa_oaep_label sets |label_len| bytes from |label| as the</span>
+<span id="L793"><span class="lineNum">     793</span>              : // label used in OAEP. DANGER: On success, this call takes ownership of |label|</span>
+<span id="L794"><span class="lineNum">     794</span>              : // and will call |OPENSSL_free| on it when |ctx| is destroyed.</span>
+<span id="L795"><span class="lineNum">     795</span>              : //</span>
+<span id="L796"><span class="lineNum">     796</span>              : // Returns one on success or zero on error.</span>
+<span id="L797"><span class="lineNum">     797</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set0_rsa_oaep_label(EVP_PKEY_CTX *ctx,</span>
+<span id="L798"><span class="lineNum">     798</span>              :                                                     uint8_t *label,</span>
+<span id="L799"><span class="lineNum">     799</span>              :                                                     size_t label_len);</span>
+<span id="L800"><span class="lineNum">     800</span>              : </span>
+<span id="L801"><span class="lineNum">     801</span>              : // EVP_PKEY_CTX_get0_rsa_oaep_label sets |*out_label| to point to the internal</span>
+<span id="L802"><span class="lineNum">     802</span>              : // buffer containing the OAEP label (which may be NULL) and returns the length</span>
+<span id="L803"><span class="lineNum">     803</span>              : // of the label or a negative value on error.</span>
+<span id="L804"><span class="lineNum">     804</span>              : //</span>
+<span id="L805"><span class="lineNum">     805</span>              : // WARNING: the return value differs from the usual return value convention.</span>
+<span id="L806"><span class="lineNum">     806</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_get0_rsa_oaep_label(EVP_PKEY_CTX *ctx,</span>
+<span id="L807"><span class="lineNum">     807</span>              :                                                     const uint8_t **out_label);</span>
+<span id="L808"><span class="lineNum">     808</span>              : </span>
+<span id="L809"><span class="lineNum">     809</span>              : </span>
+<span id="L810"><span class="lineNum">     810</span>              : // EC specific control functions.</span>
+<span id="L811"><span class="lineNum">     811</span>              : </span>
+<span id="L812"><span class="lineNum">     812</span>              : // EVP_PKEY_CTX_set_ec_paramgen_curve_nid sets the curve used for</span>
+<span id="L813"><span class="lineNum">     813</span>              : // |EVP_PKEY_keygen| or |EVP_PKEY_paramgen| operations to |nid|. It returns one</span>
+<span id="L814"><span class="lineNum">     814</span>              : // on success and zero on error.</span>
+<span id="L815"><span class="lineNum">     815</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_ec_paramgen_curve_nid(EVP_PKEY_CTX *ctx,</span>
+<span id="L816"><span class="lineNum">     816</span>              :                                                           int nid);</span>
+<span id="L817"><span class="lineNum">     817</span>              : </span>
+<span id="L818"><span class="lineNum">     818</span>              : </span>
+<span id="L819"><span class="lineNum">     819</span>              : // Diffie-Hellman-specific control functions.</span>
+<span id="L820"><span class="lineNum">     820</span>              : </span>
+<span id="L821"><span class="lineNum">     821</span>              : // EVP_PKEY_CTX_set_dh_pad configures configures whether |ctx|, which must be an</span>
+<span id="L822"><span class="lineNum">     822</span>              : // |EVP_PKEY_derive| operation, configures the handling of leading zeros in the</span>
+<span id="L823"><span class="lineNum">     823</span>              : // Diffie-Hellman shared secret. If |pad| is zero, leading zeros are removed</span>
+<span id="L824"><span class="lineNum">     824</span>              : // from the secret. If |pad| is non-zero, the fixed-width shared secret is used</span>
+<span id="L825"><span class="lineNum">     825</span>              : // unmodified, as in PKCS #3. If this function is not called, the default is to</span>
+<span id="L826"><span class="lineNum">     826</span>              : // remove leading zeros.</span>
+<span id="L827"><span class="lineNum">     827</span>              : //</span>
+<span id="L828"><span class="lineNum">     828</span>              : // WARNING: The behavior when |pad| is zero leaks information about the shared</span>
+<span id="L829"><span class="lineNum">     829</span>              : // secret. This may result in side channel attacks such as</span>
+<span id="L830"><span class="lineNum">     830</span>              : // https://raccoon-attack.com/, particularly when the same private key is used</span>
+<span id="L831"><span class="lineNum">     831</span>              : // for multiple operations.</span>
+<span id="L832"><span class="lineNum">     832</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_dh_pad(EVP_PKEY_CTX *ctx, int pad);</span>
+<span id="L833"><span class="lineNum">     833</span>              : </span>
+<span id="L834"><span class="lineNum">     834</span>              : </span>
+<span id="L835"><span class="lineNum">     835</span>              : // Deprecated functions.</span>
+<span id="L836"><span class="lineNum">     836</span>              : </span>
+<span id="L837"><span class="lineNum">     837</span>              : // EVP_PKEY_RSA2 was historically an alternate form for RSA public keys (OID</span>
+<span id="L838"><span class="lineNum">     838</span>              : // 2.5.8.1.1), but is no longer accepted.</span>
+<span id="L839"><span class="lineNum">     839</span>              : #define EVP_PKEY_RSA2 NID_rsa</span>
+<span id="L840"><span class="lineNum">     840</span>              : </span>
+<span id="L841"><span class="lineNum">     841</span>              : // EVP_PKEY_X448 is defined for OpenSSL compatibility, but we do not support</span>
+<span id="L842"><span class="lineNum">     842</span>              : // X448 and attempts to create keys will fail.</span>
+<span id="L843"><span class="lineNum">     843</span>              : #define EVP_PKEY_X448 NID_X448</span>
+<span id="L844"><span class="lineNum">     844</span>              : </span>
+<span id="L845"><span class="lineNum">     845</span>              : // EVP_PKEY_ED448 is defined for OpenSSL compatibility, but we do not support</span>
+<span id="L846"><span class="lineNum">     846</span>              : // Ed448 and attempts to create keys will fail.</span>
+<span id="L847"><span class="lineNum">     847</span>              : #define EVP_PKEY_ED448 NID_ED448</span>
+<span id="L848"><span class="lineNum">     848</span>              : </span>
+<span id="L849"><span class="lineNum">     849</span>              : // EVP_PKEY_get0 returns NULL. This function is provided for compatibility with</span>
+<span id="L850"><span class="lineNum">     850</span>              : // OpenSSL but does not return anything. Use the typed |EVP_PKEY_get0_*|</span>
+<span id="L851"><span class="lineNum">     851</span>              : // functions instead.</span>
+<span id="L852"><span class="lineNum">     852</span>              : OPENSSL_EXPORT void *EVP_PKEY_get0(const EVP_PKEY *pkey);</span>
+<span id="L853"><span class="lineNum">     853</span>              : </span>
+<span id="L854"><span class="lineNum">     854</span>              : // OpenSSL_add_all_algorithms does nothing.</span>
+<span id="L855"><span class="lineNum">     855</span>              : OPENSSL_EXPORT void OpenSSL_add_all_algorithms(void);</span>
+<span id="L856"><span class="lineNum">     856</span>              : </span>
+<span id="L857"><span class="lineNum">     857</span>              : // OPENSSL_add_all_algorithms_conf does nothing.</span>
+<span id="L858"><span class="lineNum">     858</span>              : OPENSSL_EXPORT void OPENSSL_add_all_algorithms_conf(void);</span>
+<span id="L859"><span class="lineNum">     859</span>              : </span>
+<span id="L860"><span class="lineNum">     860</span>              : // OpenSSL_add_all_ciphers does nothing.</span>
+<span id="L861"><span class="lineNum">     861</span>              : OPENSSL_EXPORT void OpenSSL_add_all_ciphers(void);</span>
+<span id="L862"><span class="lineNum">     862</span>              : </span>
+<span id="L863"><span class="lineNum">     863</span>              : // OpenSSL_add_all_digests does nothing.</span>
+<span id="L864"><span class="lineNum">     864</span>              : OPENSSL_EXPORT void OpenSSL_add_all_digests(void);</span>
+<span id="L865"><span class="lineNum">     865</span>              : </span>
+<span id="L866"><span class="lineNum">     866</span>              : // EVP_cleanup does nothing.</span>
+<span id="L867"><span class="lineNum">     867</span>              : OPENSSL_EXPORT void EVP_cleanup(void);</span>
+<span id="L868"><span class="lineNum">     868</span>              : </span>
+<span id="L869"><span class="lineNum">     869</span>              : OPENSSL_EXPORT void EVP_CIPHER_do_all_sorted(</span>
+<span id="L870"><span class="lineNum">     870</span>              :     void (*callback)(const EVP_CIPHER *cipher, const char *name,</span>
+<span id="L871"><span class="lineNum">     871</span>              :                      const char *unused, void *arg),</span>
+<span id="L872"><span class="lineNum">     872</span>              :     void *arg);</span>
+<span id="L873"><span class="lineNum">     873</span>              : </span>
+<span id="L874"><span class="lineNum">     874</span>              : OPENSSL_EXPORT void EVP_MD_do_all_sorted(void (*callback)(const EVP_MD *cipher,</span>
+<span id="L875"><span class="lineNum">     875</span>              :                                                           const char *name,</span>
+<span id="L876"><span class="lineNum">     876</span>              :                                                           const char *unused,</span>
+<span id="L877"><span class="lineNum">     877</span>              :                                                           void *arg),</span>
+<span id="L878"><span class="lineNum">     878</span>              :                                          void *arg);</span>
+<span id="L879"><span class="lineNum">     879</span>              : </span>
+<span id="L880"><span class="lineNum">     880</span>              : OPENSSL_EXPORT void EVP_MD_do_all(void (*callback)(const EVP_MD *cipher,</span>
+<span id="L881"><span class="lineNum">     881</span>              :                                                    const char *name,</span>
+<span id="L882"><span class="lineNum">     882</span>              :                                                    const char *unused,</span>
+<span id="L883"><span class="lineNum">     883</span>              :                                                    void *arg),</span>
+<span id="L884"><span class="lineNum">     884</span>              :                                   void *arg);</span>
+<span id="L885"><span class="lineNum">     885</span>              : </span>
+<span id="L886"><span class="lineNum">     886</span>              : // i2d_PrivateKey marshals a private key from |key| to type-specific format, as</span>
+<span id="L887"><span class="lineNum">     887</span>              : // described in |i2d_SAMPLE|.</span>
+<span id="L888"><span class="lineNum">     888</span>              : //</span>
+<span id="L889"><span class="lineNum">     889</span>              : // RSA keys are serialized as a DER-encoded RSAPublicKey (RFC 8017) structure.</span>
+<span id="L890"><span class="lineNum">     890</span>              : // EC keys are serialized as a DER-encoded ECPrivateKey (RFC 5915) structure.</span>
+<span id="L891"><span class="lineNum">     891</span>              : //</span>
+<span id="L892"><span class="lineNum">     892</span>              : // Use |RSA_marshal_private_key| or |EC_KEY_marshal_private_key| instead.</span>
+<span id="L893"><span class="lineNum">     893</span>              : OPENSSL_EXPORT int i2d_PrivateKey(const EVP_PKEY *key, uint8_t **outp);</span>
+<span id="L894"><span class="lineNum">     894</span>              : </span>
+<span id="L895"><span class="lineNum">     895</span>              : // i2d_PublicKey marshals a public key from |key| to a type-specific format, as</span>
+<span id="L896"><span class="lineNum">     896</span>              : // described in |i2d_SAMPLE|.</span>
+<span id="L897"><span class="lineNum">     897</span>              : //</span>
+<span id="L898"><span class="lineNum">     898</span>              : // RSA keys are serialized as a DER-encoded RSAPublicKey (RFC 8017) structure.</span>
+<span id="L899"><span class="lineNum">     899</span>              : // EC keys are serialized as an EC point per SEC 1.</span>
+<span id="L900"><span class="lineNum">     900</span>              : //</span>
+<span id="L901"><span class="lineNum">     901</span>              : // Use |RSA_marshal_public_key| or |EC_POINT_point2cbb| instead.</span>
+<span id="L902"><span class="lineNum">     902</span>              : OPENSSL_EXPORT int i2d_PublicKey(const EVP_PKEY *key, uint8_t **outp);</span>
+<span id="L903"><span class="lineNum">     903</span>              : </span>
+<span id="L904"><span class="lineNum">     904</span>              : // d2i_PrivateKey parses a DER-encoded private key from |len| bytes at |*inp|,</span>
+<span id="L905"><span class="lineNum">     905</span>              : // as described in |d2i_SAMPLE|. The private key must have type |type|,</span>
+<span id="L906"><span class="lineNum">     906</span>              : // otherwise it will be rejected.</span>
+<span id="L907"><span class="lineNum">     907</span>              : //</span>
+<span id="L908"><span class="lineNum">     908</span>              : // This function tries to detect one of several formats. Instead, use</span>
+<span id="L909"><span class="lineNum">     909</span>              : // |EVP_parse_private_key| for a PrivateKeyInfo, |RSA_parse_private_key| for an</span>
+<span id="L910"><span class="lineNum">     910</span>              : // RSAPrivateKey, and |EC_parse_private_key| for an ECPrivateKey.</span>
+<span id="L911"><span class="lineNum">     911</span>              : OPENSSL_EXPORT EVP_PKEY *d2i_PrivateKey(int type, EVP_PKEY **out,</span>
+<span id="L912"><span class="lineNum">     912</span>              :                                         const uint8_t **inp, long len);</span>
+<span id="L913"><span class="lineNum">     913</span>              : </span>
+<span id="L914"><span class="lineNum">     914</span>              : // d2i_AutoPrivateKey acts the same as |d2i_PrivateKey|, but detects the type</span>
+<span id="L915"><span class="lineNum">     915</span>              : // of the private key.</span>
+<span id="L916"><span class="lineNum">     916</span>              : //</span>
+<span id="L917"><span class="lineNum">     917</span>              : // This function tries to detect one of several formats. Instead, use</span>
+<span id="L918"><span class="lineNum">     918</span>              : // |EVP_parse_private_key| for a PrivateKeyInfo, |RSA_parse_private_key| for an</span>
+<span id="L919"><span class="lineNum">     919</span>              : // RSAPrivateKey, and |EC_parse_private_key| for an ECPrivateKey.</span>
+<span id="L920"><span class="lineNum">     920</span>              : OPENSSL_EXPORT EVP_PKEY *d2i_AutoPrivateKey(EVP_PKEY **out, const uint8_t **inp,</span>
+<span id="L921"><span class="lineNum">     921</span>              :                                             long len);</span>
+<span id="L922"><span class="lineNum">     922</span>              : </span>
+<span id="L923"><span class="lineNum">     923</span>              : // d2i_PublicKey parses a public key from |len| bytes at |*inp| in a type-</span>
+<span id="L924"><span class="lineNum">     924</span>              : // specific format specified by |type|, as described in |d2i_SAMPLE|.</span>
+<span id="L925"><span class="lineNum">     925</span>              : //</span>
+<span id="L926"><span class="lineNum">     926</span>              : // The only supported value for |type| is |EVP_PKEY_RSA|, which parses a</span>
+<span id="L927"><span class="lineNum">     927</span>              : // DER-encoded RSAPublicKey (RFC 8017) structure. Parsing EC keys is not</span>
+<span id="L928"><span class="lineNum">     928</span>              : // supported by this function.</span>
+<span id="L929"><span class="lineNum">     929</span>              : //</span>
+<span id="L930"><span class="lineNum">     930</span>              : // Use |RSA_parse_public_key| instead.</span>
+<span id="L931"><span class="lineNum">     931</span>              : OPENSSL_EXPORT EVP_PKEY *d2i_PublicKey(int type, EVP_PKEY **out,</span>
+<span id="L932"><span class="lineNum">     932</span>              :                                        const uint8_t **inp, long len);</span>
+<span id="L933"><span class="lineNum">     933</span>              : </span>
+<span id="L934"><span class="lineNum">     934</span>              : // EVP_PKEY_CTX_set_ec_param_enc returns one if |encoding| is</span>
+<span id="L935"><span class="lineNum">     935</span>              : // |OPENSSL_EC_NAMED_CURVE| or zero with an error otherwise.</span>
+<span id="L936"><span class="lineNum">     936</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_ec_param_enc(EVP_PKEY_CTX *ctx,</span>
+<span id="L937"><span class="lineNum">     937</span>              :                                                  int encoding);</span>
+<span id="L938"><span class="lineNum">     938</span>              : </span>
+<span id="L939"><span class="lineNum">     939</span>              : // EVP_PKEY_set1_tls_encodedpoint replaces |pkey| with a public key encoded by</span>
+<span id="L940"><span class="lineNum">     940</span>              : // |in|. It returns one on success and zero on error.</span>
+<span id="L941"><span class="lineNum">     941</span>              : //</span>
+<span id="L942"><span class="lineNum">     942</span>              : // If |pkey| is an EC key, the format is an X9.62 point and |pkey| must already</span>
+<span id="L943"><span class="lineNum">     943</span>              : // have an EC group configured. If it is an X25519 key, it is the 32-byte X25519</span>
+<span id="L944"><span class="lineNum">     944</span>              : // public key representation. This function is not supported for other key types</span>
+<span id="L945"><span class="lineNum">     945</span>              : // and will fail.</span>
+<span id="L946"><span class="lineNum">     946</span>              : OPENSSL_EXPORT int EVP_PKEY_set1_tls_encodedpoint(EVP_PKEY *pkey,</span>
+<span id="L947"><span class="lineNum">     947</span>              :                                                   const uint8_t *in,</span>
+<span id="L948"><span class="lineNum">     948</span>              :                                                   size_t len);</span>
+<span id="L949"><span class="lineNum">     949</span>              : </span>
+<span id="L950"><span class="lineNum">     950</span>              : // EVP_PKEY_get1_tls_encodedpoint sets |*out_ptr| to a newly-allocated buffer</span>
+<span id="L951"><span class="lineNum">     951</span>              : // containing the raw encoded public key for |pkey|. The caller must call</span>
+<span id="L952"><span class="lineNum">     952</span>              : // |OPENSSL_free| to release this buffer. The function returns the length of the</span>
+<span id="L953"><span class="lineNum">     953</span>              : // buffer on success and zero on error.</span>
+<span id="L954"><span class="lineNum">     954</span>              : //</span>
+<span id="L955"><span class="lineNum">     955</span>              : // If |pkey| is an EC key, the format is an X9.62 point with uncompressed</span>
+<span id="L956"><span class="lineNum">     956</span>              : // coordinates. If it is an X25519 key, it is the 32-byte X25519 public key</span>
+<span id="L957"><span class="lineNum">     957</span>              : // representation. This function is not supported for other key types and will</span>
+<span id="L958"><span class="lineNum">     958</span>              : // fail.</span>
+<span id="L959"><span class="lineNum">     959</span>              : OPENSSL_EXPORT size_t EVP_PKEY_get1_tls_encodedpoint(const EVP_PKEY *pkey,</span>
+<span id="L960"><span class="lineNum">     960</span>              :                                                      uint8_t **out_ptr);</span>
+<span id="L961"><span class="lineNum">     961</span>              : </span>
+<span id="L962"><span class="lineNum">     962</span>              : // EVP_PKEY_base_id calls |EVP_PKEY_id|.</span>
+<span id="L963"><span class="lineNum">     963</span>              : OPENSSL_EXPORT int EVP_PKEY_base_id(const EVP_PKEY *pkey);</span>
+<span id="L964"><span class="lineNum">     964</span>              : </span>
+<span id="L965"><span class="lineNum">     965</span>              : // EVP_PKEY_CTX_set_rsa_pss_keygen_md returns 0.</span>
+<span id="L966"><span class="lineNum">     966</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_pss_keygen_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L967"><span class="lineNum">     967</span>              :                                                       const EVP_MD *md);</span>
+<span id="L968"><span class="lineNum">     968</span>              : </span>
+<span id="L969"><span class="lineNum">     969</span>              : // EVP_PKEY_CTX_set_rsa_pss_keygen_saltlen returns 0.</span>
+<span id="L970"><span class="lineNum">     970</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_pss_keygen_saltlen(EVP_PKEY_CTX *ctx,</span>
+<span id="L971"><span class="lineNum">     971</span>              :                                                            int salt_len);</span>
+<span id="L972"><span class="lineNum">     972</span>              : </span>
+<span id="L973"><span class="lineNum">     973</span>              : // EVP_PKEY_CTX_set_rsa_pss_keygen_mgf1_md returns 0.</span>
+<span id="L974"><span class="lineNum">     974</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_rsa_pss_keygen_mgf1_md(EVP_PKEY_CTX *ctx,</span>
+<span id="L975"><span class="lineNum">     975</span>              :                                                            const EVP_MD *md);</span>
+<span id="L976"><span class="lineNum">     976</span>              : </span>
+<span id="L977"><span class="lineNum">     977</span>              : // i2d_PUBKEY marshals |pkey| as a DER-encoded SubjectPublicKeyInfo, as</span>
+<span id="L978"><span class="lineNum">     978</span>              : // described in |i2d_SAMPLE|.</span>
+<span id="L979"><span class="lineNum">     979</span>              : //</span>
+<span id="L980"><span class="lineNum">     980</span>              : // Use |EVP_marshal_public_key| instead.</span>
+<span id="L981"><span class="lineNum">     981</span>              : OPENSSL_EXPORT int i2d_PUBKEY(const EVP_PKEY *pkey, uint8_t **outp);</span>
+<span id="L982"><span class="lineNum">     982</span>              : </span>
+<span id="L983"><span class="lineNum">     983</span>              : // d2i_PUBKEY parses a DER-encoded SubjectPublicKeyInfo from |len| bytes at</span>
+<span id="L984"><span class="lineNum">     984</span>              : // |*inp|, as described in |d2i_SAMPLE|.</span>
+<span id="L985"><span class="lineNum">     985</span>              : //</span>
+<span id="L986"><span class="lineNum">     986</span>              : // Use |EVP_parse_public_key| instead.</span>
+<span id="L987"><span class="lineNum">     987</span>              : OPENSSL_EXPORT EVP_PKEY *d2i_PUBKEY(EVP_PKEY **out, const uint8_t **inp,</span>
+<span id="L988"><span class="lineNum">     988</span>              :                                     long len);</span>
+<span id="L989"><span class="lineNum">     989</span>              : </span>
+<span id="L990"><span class="lineNum">     990</span>              : // i2d_RSA_PUBKEY marshals |rsa| as a DER-encoded SubjectPublicKeyInfo</span>
+<span id="L991"><span class="lineNum">     991</span>              : // structure, as described in |i2d_SAMPLE|.</span>
+<span id="L992"><span class="lineNum">     992</span>              : //</span>
+<span id="L993"><span class="lineNum">     993</span>              : // Use |EVP_marshal_public_key| instead.</span>
+<span id="L994"><span class="lineNum">     994</span>              : OPENSSL_EXPORT int i2d_RSA_PUBKEY(const RSA *rsa, uint8_t **outp);</span>
+<span id="L995"><span class="lineNum">     995</span>              : </span>
+<span id="L996"><span class="lineNum">     996</span>              : // d2i_RSA_PUBKEY parses an RSA public key as a DER-encoded SubjectPublicKeyInfo</span>
+<span id="L997"><span class="lineNum">     997</span>              : // from |len| bytes at |*inp|, as described in |d2i_SAMPLE|.</span>
+<span id="L998"><span class="lineNum">     998</span>              : // SubjectPublicKeyInfo structures containing other key types are rejected.</span>
+<span id="L999"><span class="lineNum">     999</span>              : //</span>
+<span id="L1000"><span class="lineNum">    1000</span>              : // Use |EVP_parse_public_key| instead.</span>
+<span id="L1001"><span class="lineNum">    1001</span>              : OPENSSL_EXPORT RSA *d2i_RSA_PUBKEY(RSA **out, const uint8_t **inp, long len);</span>
+<span id="L1002"><span class="lineNum">    1002</span>              : </span>
+<span id="L1003"><span class="lineNum">    1003</span>              : // i2d_DSA_PUBKEY marshals |dsa| as a DER-encoded SubjectPublicKeyInfo, as</span>
+<span id="L1004"><span class="lineNum">    1004</span>              : // described in |i2d_SAMPLE|.</span>
+<span id="L1005"><span class="lineNum">    1005</span>              : //</span>
+<span id="L1006"><span class="lineNum">    1006</span>              : // Use |EVP_marshal_public_key| instead.</span>
+<span id="L1007"><span class="lineNum">    1007</span>              : OPENSSL_EXPORT int i2d_DSA_PUBKEY(const DSA *dsa, uint8_t **outp);</span>
+<span id="L1008"><span class="lineNum">    1008</span>              : </span>
+<span id="L1009"><span class="lineNum">    1009</span>              : // d2i_DSA_PUBKEY parses a DSA public key as a DER-encoded SubjectPublicKeyInfo</span>
+<span id="L1010"><span class="lineNum">    1010</span>              : // from |len| bytes at |*inp|, as described in |d2i_SAMPLE|.</span>
+<span id="L1011"><span class="lineNum">    1011</span>              : // SubjectPublicKeyInfo structures containing other key types are rejected.</span>
+<span id="L1012"><span class="lineNum">    1012</span>              : //</span>
+<span id="L1013"><span class="lineNum">    1013</span>              : // Use |EVP_parse_public_key| instead.</span>
+<span id="L1014"><span class="lineNum">    1014</span>              : OPENSSL_EXPORT DSA *d2i_DSA_PUBKEY(DSA **out, const uint8_t **inp, long len);</span>
+<span id="L1015"><span class="lineNum">    1015</span>              : </span>
+<span id="L1016"><span class="lineNum">    1016</span>              : // i2d_EC_PUBKEY marshals |ec_key| as a DER-encoded SubjectPublicKeyInfo, as</span>
+<span id="L1017"><span class="lineNum">    1017</span>              : // described in |i2d_SAMPLE|.</span>
+<span id="L1018"><span class="lineNum">    1018</span>              : //</span>
+<span id="L1019"><span class="lineNum">    1019</span>              : // Use |EVP_marshal_public_key| instead.</span>
+<span id="L1020"><span class="lineNum">    1020</span>              : OPENSSL_EXPORT int i2d_EC_PUBKEY(const EC_KEY *ec_key, uint8_t **outp);</span>
+<span id="L1021"><span class="lineNum">    1021</span>              : </span>
+<span id="L1022"><span class="lineNum">    1022</span>              : // d2i_EC_PUBKEY parses an EC public key as a DER-encoded SubjectPublicKeyInfo</span>
+<span id="L1023"><span class="lineNum">    1023</span>              : // from |len| bytes at |*inp|, as described in |d2i_SAMPLE|.</span>
+<span id="L1024"><span class="lineNum">    1024</span>              : // SubjectPublicKeyInfo structures containing other key types are rejected.</span>
+<span id="L1025"><span class="lineNum">    1025</span>              : //</span>
+<span id="L1026"><span class="lineNum">    1026</span>              : // Use |EVP_parse_public_key| instead.</span>
+<span id="L1027"><span class="lineNum">    1027</span>              : OPENSSL_EXPORT EC_KEY *d2i_EC_PUBKEY(EC_KEY **out, const uint8_t **inp,</span>
+<span id="L1028"><span class="lineNum">    1028</span>              :                                      long len);</span>
+<span id="L1029"><span class="lineNum">    1029</span>              : </span>
+<span id="L1030"><span class="lineNum">    1030</span>              : // EVP_PKEY_CTX_set_dsa_paramgen_bits returns zero.</span>
+<span id="L1031"><span class="lineNum">    1031</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_dsa_paramgen_bits(EVP_PKEY_CTX *ctx,</span>
+<span id="L1032"><span class="lineNum">    1032</span>              :                                                       int nbits);</span>
+<span id="L1033"><span class="lineNum">    1033</span>              : </span>
+<span id="L1034"><span class="lineNum">    1034</span>              : // EVP_PKEY_CTX_set_dsa_paramgen_q_bits returns zero.</span>
+<span id="L1035"><span class="lineNum">    1035</span>              : OPENSSL_EXPORT int EVP_PKEY_CTX_set_dsa_paramgen_q_bits(EVP_PKEY_CTX *ctx,</span>
+<span id="L1036"><span class="lineNum">    1036</span>              :                                                         int qbits);</span>
+<span id="L1037"><span class="lineNum">    1037</span>              : </span>
+<span id="L1038"><span class="lineNum">    1038</span>              : // EVP_PKEY_assign sets the underlying key of |pkey| to |key|, which must be of</span>
+<span id="L1039"><span class="lineNum">    1039</span>              : // the given type. If successful, it returns one. If the |type| argument</span>
+<span id="L1040"><span class="lineNum">    1040</span>              : // is not one of |EVP_PKEY_RSA|, |EVP_PKEY_DSA|, or |EVP_PKEY_EC| values or if</span>
+<span id="L1041"><span class="lineNum">    1041</span>              : // |key| is NULL, it returns zero. This function may not be used with other</span>
+<span id="L1042"><span class="lineNum">    1042</span>              : // |EVP_PKEY_*| types.</span>
+<span id="L1043"><span class="lineNum">    1043</span>              : //</span>
+<span id="L1044"><span class="lineNum">    1044</span>              : // Use the |EVP_PKEY_assign_*| functions instead.</span>
+<span id="L1045"><span class="lineNum">    1045</span>              : OPENSSL_EXPORT int EVP_PKEY_assign(EVP_PKEY *pkey, int type, void *key);</span>
+<span id="L1046"><span class="lineNum">    1046</span>              : </span>
+<span id="L1047"><span class="lineNum">    1047</span>              : // EVP_PKEY_type returns |nid|.</span>
+<span id="L1048"><span class="lineNum">    1048</span>              : OPENSSL_EXPORT int EVP_PKEY_type(int nid);</span>
+<span id="L1049"><span class="lineNum">    1049</span>              : </span>
+<span id="L1050"><span class="lineNum">    1050</span>              : </span>
+<span id="L1051"><span class="lineNum">    1051</span>              : // Preprocessor compatibility section (hidden).</span>
+<span id="L1052"><span class="lineNum">    1052</span>              : //</span>
+<span id="L1053"><span class="lineNum">    1053</span>              : // Historically, a number of APIs were implemented in OpenSSL as macros and</span>
+<span id="L1054"><span class="lineNum">    1054</span>              : // constants to 'ctrl' functions. To avoid breaking #ifdefs in consumers, this</span>
+<span id="L1055"><span class="lineNum">    1055</span>              : // section defines a number of legacy macros.</span>
+<span id="L1056"><span class="lineNum">    1056</span>              : </span>
+<span id="L1057"><span class="lineNum">    1057</span>              : // |BORINGSSL_PREFIX| already makes each of these symbols into macros, so there</span>
+<span id="L1058"><span class="lineNum">    1058</span>              : // is no need to define conflicting macros.</span>
+<span id="L1059"><span class="lineNum">    1059</span>              : #if !defined(BORINGSSL_PREFIX)</span>
+<span id="L1060"><span class="lineNum">    1060</span>              : #define EVP_PKEY_CTX_set_rsa_oaep_md EVP_PKEY_CTX_set_rsa_oaep_md</span>
+<span id="L1061"><span class="lineNum">    1061</span>              : #define EVP_PKEY_CTX_set0_rsa_oaep_label EVP_PKEY_CTX_set0_rsa_oaep_label</span>
+<span id="L1062"><span class="lineNum">    1062</span>              : #endif</span>
+<span id="L1063"><span class="lineNum">    1063</span>              : </span>
+<span id="L1064"><span class="lineNum">    1064</span>              : </span>
+<span id="L1065"><span class="lineNum">    1065</span>              : // Nodejs compatibility section (hidden).</span>
+<span id="L1066"><span class="lineNum">    1066</span>              : //</span>
+<span id="L1067"><span class="lineNum">    1067</span>              : // These defines exist for node.js, with the hope that we can eliminate the</span>
+<span id="L1068"><span class="lineNum">    1068</span>              : // need for them over time.</span>
+<span id="L1069"><span class="lineNum">    1069</span>              : </span>
+<span id="L1070"><span class="lineNum">    1070</span>              : #define EVPerr(function, reason) \</span>
+<span id="L1071"><span class="lineNum">    1071</span>              :   ERR_put_error(ERR_LIB_EVP, 0, reason, __FILE__, __LINE__)</span>
+<span id="L1072"><span class="lineNum">    1072</span>              : </span>
+<span id="L1073"><span class="lineNum">    1073</span>              : </span>
+<span id="L1074"><span class="lineNum">    1074</span>              : #if defined(__cplusplus)</span>
+<span id="L1075"><span class="lineNum">    1075</span>              : }  // extern C</span>
+<span id="L1076"><span class="lineNum">    1076</span>              : </span>
+<span id="L1077"><span class="lineNum">    1077</span>              : extern &quot;C++&quot; {</span>
+<span id="L1078"><span class="lineNum">    1078</span>              : BSSL_NAMESPACE_BEGIN</span>
+<span id="L1079"><span class="lineNum">    1079</span>              : </span>
+<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC tlaBgGNC">           3 : BORINGSSL_MAKE_DELETER(EVP_PKEY, EVP_PKEY_free)</span></span>
+<span id="L1081"><span class="lineNum">    1081</span>              : BORINGSSL_MAKE_UP_REF(EVP_PKEY, EVP_PKEY_up_ref)</span>
+<span id="L1082"><span class="lineNum">    1082</span>              : BORINGSSL_MAKE_DELETER(EVP_PKEY_CTX, EVP_PKEY_CTX_free)</span>
+<span id="L1083"><span class="lineNum">    1083</span>              : </span>
+<span id="L1084"><span class="lineNum">    1084</span>              : BSSL_NAMESPACE_END</span>
+<span id="L1085"><span class="lineNum">    1085</span>              : </span>
+<span id="L1086"><span class="lineNum">    1086</span>              : }  // extern C++</span>
+<span id="L1087"><span class="lineNum">    1087</span>              : </span>
+<span id="L1088"><span class="lineNum">    1088</span>              : #endif</span>
+<span id="L1089"><span class="lineNum">    1089</span>              : </span>
+<span id="L1090"><span class="lineNum">    1090</span>              : #endif  // OPENSSL_HEADER_EVP_H</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>
