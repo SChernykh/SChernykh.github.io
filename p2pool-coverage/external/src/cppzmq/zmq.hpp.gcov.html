@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 15:13:47</td>
+            <td class="headerValue">2025-06-22 15:34:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -283,9 +283,9 @@
 <span id="L221"><span class="lineNum">     221</span>              : // In order to prevent unused variable warnings when building in non-debug</span>
 <span id="L222"><span class="lineNum">     222</span>              : // mode use this macro to make assertions.</span>
 <span id="L223"><span class="lineNum">     223</span>              : #ifndef NDEBUG</span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaUNC">           0 : #define ZMQ_ASSERT(expression) assert(expression)</span></span>
+<span id="L224"><span class="lineNum">     224</span>              : #define ZMQ_ASSERT(expression) assert(expression)</span>
 <span id="L225"><span class="lineNum">     225</span>              : #else</span>
-<span id="L226"><span class="lineNum">     226</span>              : #define ZMQ_ASSERT(expression) (void) (expression)</span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 : #define ZMQ_ASSERT(expression) (void) (expression)</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : #endif</span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
 <span id="L229"><span class="lineNum">     229</span>              : namespace zmq</span>

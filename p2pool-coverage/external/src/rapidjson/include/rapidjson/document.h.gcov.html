@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 15:13:47</td>
+            <td class="headerValue">2025-06-22 15:34:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">45.1&nbsp;%</td>
@@ -1175,7 +1175,7 @@
 <span id="L1113"><span class="lineNum">    1113</span>              :     bool IsFalse()  const { return data_.f.flags == kFalseFlag; }</span>
 <span id="L1114"><span class="lineNum">    1114</span>              :     bool IsTrue()   const { return data_.f.flags == kTrueFlag; }</span>
 <span id="L1115"><span class="lineNum">    1115</span> <span class="tlaUNC tlaBgUNC">           0 :     bool IsBool()   const { return (data_.f.flags &amp; kBoolFlag) != 0; }</span></span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC tlaBgGNC">          65 :     bool IsObject() const { return data_.f.flags == kObjectFlag; }</span></span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC tlaBgGNC">          13 :     bool IsObject() const { return data_.f.flags == kObjectFlag; }</span></span>
 <span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC tlaBgUNC">           0 :     bool IsArray()  const { return data_.f.flags == kArrayFlag; }</span></span>
 <span id="L1118"><span class="lineNum">    1118</span>              :     bool IsNumber() const { return (data_.f.flags &amp; kNumberFlag) != 0; }</span>
 <span id="L1119"><span class="lineNum">    1119</span>              :     bool IsInt()    const { return (data_.f.flags &amp; kIntFlag) != 0; }</span>
@@ -1183,7 +1183,7 @@
 <span id="L1121"><span class="lineNum">    1121</span>              :     bool IsInt64()  const { return (data_.f.flags &amp; kInt64Flag) != 0; }</span>
 <span id="L1122"><span class="lineNum">    1122</span> <span class="tlaUNC">           0 :     bool IsUint64() const { return (data_.f.flags &amp; kUint64Flag) != 0; }</span></span>
 <span id="L1123"><span class="lineNum">    1123</span>              :     bool IsDouble() const { return (data_.f.flags &amp; kDoubleFlag) != 0; }</span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC tlaBgGNC">         117 :     bool IsString() const { return (data_.f.flags &amp; kStringFlag) != 0; }</span></span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC tlaBgGNC">          13 :     bool IsString() const { return (data_.f.flags &amp; kStringFlag) != 0; }</span></span>
 <span id="L1125"><span class="lineNum">    1125</span>              : </span>
 <span id="L1126"><span class="lineNum">    1126</span>              :     // Checks whether a number can be losslessly converted to a double.</span>
 <span id="L1127"><span class="lineNum">    1127</span>              :     bool IsLosslessDouble() const {</span>
