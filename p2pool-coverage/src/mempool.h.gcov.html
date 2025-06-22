@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">71.4&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">14</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntry">14</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 20:05:24</td>
+            <td class="headerValue">2025-06-22 21:24:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">66.7&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">3</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -97,14 +97,14 @@
 <span id="L35"><span class="lineNum">      35</span>              :         void swap(std::vector&lt;TxMempoolData&gt;&amp; transactions);</span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
 <span id="L37"><span class="lineNum">      37</span>              :         size_t size() const</span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaUNC">           0 :                 ReadLock lock(m_lock);</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :                 return m_transactions.size();</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">           3 :         {</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           3 :                 ReadLock lock(m_lock);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           3 :                 return m_transactions.size();</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           3 :         }</span></span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
 <span id="L43"><span class="lineNum">      43</span>              :         template&lt;typename T&gt;</span>
 <span id="L44"><span class="lineNum">      44</span>              :         void iterate(T&amp;&amp; callback) const</span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">        6723 :         {</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">        6723 :         {</span></span>
 <span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">        6723 :                 ReadLock lock(m_lock);</span></span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       10522 :                 for (const auto&amp; it : m_transactions) {</span></span>

@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">93.2&nbsp;%</td>
+            <td class="headerCovTableEntryHi">94.1&nbsp;%</td>
             <td class="headerCovTableEntry">307</td>
-            <td class="headerCovTableEntry">286</td>
+            <td class="headerCovTableEntry">289</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 20:05:24</td>
+            <td class="headerValue">2025-06-22 21:24:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -136,12 +136,12 @@
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              : // cppcheck-suppress operatorEqVarError</span>
 <span id="L76"><span class="lineNum">      76</span>              : PoolBlock&amp; PoolBlock::operator=(const PoolBlock&amp; b)</span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40000 : {</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       40000 :         if (this == &amp;b) {</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :                 return *this;</span></span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40001 : {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       40001 :         if (this == &amp;b) {</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           1 :                 return *this;</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC tlaBgGNC">       40000 : #if POOL_BLOCK_DEBUG</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">       40000 : #if POOL_BLOCK_DEBUG</span></span>
 <span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       40000 :         m_mainChainDataDebug = b.m_mainChainDataDebug;</span></span>
 <span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       40000 :         m_sideChainDataDebug = b.m_sideChainDataDebug;</span></span>
 <span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       40000 : #endif</span></span>
@@ -196,172 +196,172 @@
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">       40000 :         m_seed = b.m_seed;</span></span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">       40000 :         return *this;</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       40000 : }</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       40001 : }</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span>              : std::vector&lt;uint8_t&gt; PoolBlock::serialize_mainchain_data(size_t* header_size, size_t* miner_tx_size, int* outputs_offset, int* outputs_blob_size, const uint32_t* nonce, const uint32_t* extra_nonce) const</span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       30156 : {</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       30156 :         std::vector&lt;uint8_t&gt; data;</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">       30156 :         data.reserve(128 + m_outputs.size() * 39 + m_transactions.size() * HASH_SIZE);</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       30157 : {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">       30157 :         std::vector&lt;uint8_t&gt; data;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">       30157 :         data.reserve(128 + m_outputs.size() * 39 + m_transactions.size() * HASH_SIZE);</span></span>
 <span id="L143"><span class="lineNum">     143</span>              : </span>
 <span id="L144"><span class="lineNum">     144</span>              :         // Header</span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">       30156 :         data.push_back(m_majorVersion);</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">       30156 :         data.push_back(m_minorVersion);</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">       30156 :         writeVarint(m_timestamp, data);</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">       30156 :         data.insert(data.end(), m_prevId.h, m_prevId.h + HASH_SIZE);</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">       30157 :         data.push_back(m_majorVersion);</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">       30157 :         data.push_back(m_minorVersion);</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">       30157 :         writeVarint(m_timestamp, data);</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">       30157 :         data.insert(data.end(), m_prevId.h, m_prevId.h + HASH_SIZE);</span></span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">       30156 :         if (!nonce) {</span></span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">       26890 :                 nonce = &amp;m_nonce;</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">       26890 :         }</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">       30156 :         data.insert(data.end(), reinterpret_cast&lt;const uint8_t*&gt;(nonce), reinterpret_cast&lt;const uint8_t*&gt;(nonce) + NONCE_SIZE);</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">       30157 :         if (!nonce) {</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">       26891 :                 nonce = &amp;m_nonce;</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">       26891 :         }</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">       30157 :         data.insert(data.end(), reinterpret_cast&lt;const uint8_t*&gt;(nonce), reinterpret_cast&lt;const uint8_t*&gt;(nonce) + NONCE_SIZE);</span></span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       30156 :         const size_t header_size0 = data.size();</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       30156 :         if (header_size) {</span></span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">       30157 :         const size_t header_size0 = data.size();</span></span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">       30157 :         if (header_size) {</span></span>
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           2 :                 *header_size = header_size0;</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">           2 :         }</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
 <span id="L160"><span class="lineNum">     160</span>              :         // Miner tx</span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">       30156 :         data.push_back(TX_VERSION);</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">       30156 :         writeVarint(m_txinGenHeight + MINER_REWARD_UNLOCK_TIME, data);</span></span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">       30156 :         data.push_back(1);</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       30156 :         data.push_back(TXIN_GEN);</span></span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">       30156 :         writeVarint(m_txinGenHeight, data);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">       30157 :         data.push_back(TX_VERSION);</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">       30157 :         writeVarint(m_txinGenHeight + MINER_REWARD_UNLOCK_TIME, data);</span></span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">       30157 :         data.push_back(1);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">       30157 :         data.push_back(TXIN_GEN);</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">       30157 :         writeVarint(m_txinGenHeight, data);</span></span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       30156 :         const int outputs_offset0 = static_cast&lt;int&gt;(data.size());</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       30156 :         if (outputs_offset) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">       30157 :         const int outputs_offset0 = static_cast&lt;int&gt;(data.size());</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">       30157 :         if (outputs_offset) {</span></span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">           1 :                 *outputs_offset = outputs_offset0;</span></span>
 <span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L171"><span class="lineNum">     171</span>              : </span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">       30156 :         writeVarint(m_outputs.size(), data);</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">       30157 :         writeVarint(m_outputs.size(), data);</span></span>
 <span id="L173"><span class="lineNum">     173</span>              : </span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">       30156 :         const uint8_t tx_type = get_tx_type();</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">       30157 :         const uint8_t tx_type = get_tx_type();</span></span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      717380 :         for (const TxOutput&amp; output : m_outputs) {</span></span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">      717380 :                 writeVarint(output.m_reward, data);</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      717380 :                 data.push_back(tx_type);</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      717380 :                 data.insert(data.end(), output.m_ephPublicKey.h, output.m_ephPublicKey.h + HASH_SIZE);</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      717407 :         for (const TxOutput&amp; output : m_outputs) {</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">      717407 :                 writeVarint(output.m_reward, data);</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      717407 :                 data.push_back(tx_type);</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">      717407 :                 data.insert(data.end(), output.m_ephPublicKey.h, output.m_ephPublicKey.h + HASH_SIZE);</span></span>
 <span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      717380 :                 if (tx_type == TXOUT_TO_TAGGED_KEY) {</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">      717380 :                         data.push_back(static_cast&lt;uint8_t&gt;(output.m_viewTag));</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">      717380 :                 }</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">      717380 :         }</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">      717407 :                 if (tx_type == TXOUT_TO_TAGGED_KEY) {</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">      717407 :                         data.push_back(static_cast&lt;uint8_t&gt;(output.m_viewTag));</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">      717407 :                 }</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">      717407 :         }</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">       30156 :         if (outputs_blob_size) {</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">       30157 :         if (outputs_blob_size) {</span></span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">           1 :                 *outputs_blob_size = static_cast&lt;int&gt;(data.size()) - outputs_offset0;</span></span>
 <span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">       30156 :         uint8_t tx_extra[128];</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">       30156 :         uint8_t* p = tx_extra;</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">       30157 :         uint8_t tx_extra[128];</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">       30157 :         uint8_t* p = tx_extra;</span></span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       30156 :         *(p++) = TX_EXTRA_TAG_PUBKEY;</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       30156 :         memcpy(p, m_txkeyPub.h, HASH_SIZE);</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       30156 :         p += HASH_SIZE;</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       30157 :         *(p++) = TX_EXTRA_TAG_PUBKEY;</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       30157 :         memcpy(p, m_txkeyPub.h, HASH_SIZE);</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       30157 :         p += HASH_SIZE;</span></span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">       30156 :         uint64_t extra_nonce_size = m_extraNonceSize;</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       30156 :         if (extra_nonce_size &gt; EXTRA_NONCE_MAX_SIZE) {</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">       30157 :         uint64_t extra_nonce_size = m_extraNonceSize;</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       30157 :         if (extra_nonce_size &gt; EXTRA_NONCE_MAX_SIZE) {</span></span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;extra nonce size is too large (&quot; &lt;&lt; extra_nonce_size &lt;&lt; &quot;), fix the code!&quot;);</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC">           0 :                 extra_nonce_size = EXTRA_NONCE_MAX_SIZE;</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC tlaBgGNC">       30156 :         *(p++) = TX_EXTRA_NONCE;</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       30156 :         *(p++) = static_cast&lt;uint8_t&gt;(extra_nonce_size);</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC tlaBgGNC">       30157 :         *(p++) = TX_EXTRA_NONCE;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       30157 :         *(p++) = static_cast&lt;uint8_t&gt;(extra_nonce_size);</span></span>
 <span id="L205"><span class="lineNum">     205</span>              : </span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">       30156 :         if (!extra_nonce) {</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       26890 :                 extra_nonce = &amp;m_extraNonce;</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">       26890 :         }</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       30156 :         memcpy(p, extra_nonce, EXTRA_NONCE_SIZE);</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       30156 :         p += EXTRA_NONCE_SIZE;</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">       30156 :         if (extra_nonce_size &gt; EXTRA_NONCE_SIZE) {</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">       30157 :         if (!extra_nonce) {</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">       26891 :                 extra_nonce = &amp;m_extraNonce;</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">       26891 :         }</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       30157 :         memcpy(p, extra_nonce, EXTRA_NONCE_SIZE);</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       30157 :         p += EXTRA_NONCE_SIZE;</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">       30157 :         if (extra_nonce_size &gt; EXTRA_NONCE_SIZE) {</span></span>
 <span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">           8 :                 memset(p, 0, extra_nonce_size - EXTRA_NONCE_SIZE);</span></span>
 <span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           8 :                 p += extra_nonce_size - EXTRA_NONCE_SIZE;</span></span>
 <span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">           8 :         }</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       30156 :         *(p++) = TX_EXTRA_MERGE_MINING_TAG;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       30157 :         *(p++) = TX_EXTRA_MERGE_MINING_TAG;</span></span>
 <span id="L217"><span class="lineNum">     217</span>              : </span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       30156 :         *(p++) = static_cast&lt;uint8_t&gt;(m_merkleTreeDataSize + HASH_SIZE);</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       30156 :         writeVarint(m_merkleTreeData, [&amp;p](const uint8_t b) { *(p++) = b; });</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       30156 :         memcpy(p, m_merkleRoot.h, HASH_SIZE);</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       30156 :         p += HASH_SIZE;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       30157 :         *(p++) = static_cast&lt;uint8_t&gt;(m_merkleTreeDataSize + HASH_SIZE);</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       30157 :         writeVarint(m_merkleTreeData, [&amp;p](const uint8_t b) { *(p++) = b; });</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       30157 :         memcpy(p, m_merkleRoot.h, HASH_SIZE);</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       30157 :         p += HASH_SIZE;</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">       30156 :         writeVarint(static_cast&lt;size_t&gt;(p - tx_extra), data);</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       30156 :         data.insert(data.end(), tx_extra, p);</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">       30157 :         writeVarint(static_cast&lt;size_t&gt;(p - tx_extra), data);</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       30157 :         data.insert(data.end(), tx_extra, p);</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       30156 :         data.push_back(0);</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       30157 :         data.push_back(0);</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       30156 :         if (miner_tx_size) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       30157 :         if (miner_tx_size) {</span></span>
 <span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">           2 :                 *miner_tx_size = data.size() - header_size0;</span></span>
 <span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">           2 :         }</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : </span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       30156 :         writeVarint(m_transactions.size() - 1, data);</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       30156 :         const uint8_t* t = reinterpret_cast&lt;const uint8_t*&gt;(m_transactions.data());</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">       30156 :         data.insert(data.end(), t + HASH_SIZE, t + m_transactions.size() * HASH_SIZE);</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       30157 :         writeVarint(m_transactions.size() - 1, data);</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       30157 :         const uint8_t* t = reinterpret_cast&lt;const uint8_t*&gt;(m_transactions.data());</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">       30157 :         data.insert(data.end(), t + HASH_SIZE, t + m_transactions.size() * HASH_SIZE);</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">       30156 : #if POOL_BLOCK_DEBUG</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">       30156 :         if ((nonce == &amp;m_nonce) &amp;&amp; (extra_nonce == &amp;m_extraNonce) &amp;&amp; !m_mainChainDataDebug.empty() &amp;&amp; (data != m_mainChainDataDebug)) {</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">       30157 : #if POOL_BLOCK_DEBUG</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">       30157 :         if ((nonce == &amp;m_nonce) &amp;&amp; (extra_nonce == &amp;m_extraNonce) &amp;&amp; !m_mainChainDataDebug.empty() &amp;&amp; (data != m_mainChainDataDebug)) {</span></span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;serialize_mainchain_data() has a bug, fix it!&quot;);</span></span>
 <span id="L239"><span class="lineNum">     239</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">       30156 : #endif</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC tlaBgGNC">       30157 : #endif</span></span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       30156 :         return data;</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">       30156 : }</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       30157 :         return data;</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">       30157 : }</span></span>
 <span id="L245"><span class="lineNum">     245</span>              : </span>
 <span id="L246"><span class="lineNum">     246</span>              : std::vector&lt;uint8_t&gt; PoolBlock::serialize_sidechain_data() const</span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       23431 : {</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       23431 :         std::vector&lt;uint8_t&gt; data;</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       23433 : {</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       23433 :         std::vector&lt;uint8_t&gt; data;</span></span>
 <span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       23431 :         data.reserve((m_uncles.size() + 4) * HASH_SIZE + 36);</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       23433 :         data.reserve((m_uncles.size() + 4) * HASH_SIZE + 36);</span></span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       23431 :         const hash&amp; spend = m_minerWallet.spend_public_key();</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       23431 :         const hash&amp; view = m_minerWallet.view_public_key();</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       23433 :         const hash&amp; spend = m_minerWallet.spend_public_key();</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       23433 :         const hash&amp; view = m_minerWallet.view_public_key();</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       23431 :         data.insert(data.end(), spend.h, spend.h + HASH_SIZE);</span></span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">       23431 :         data.insert(data.end(), view.h, view.h + HASH_SIZE);</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">       23431 :         data.insert(data.end(), m_txkeySecSeed.h, m_txkeySecSeed.h + HASH_SIZE);</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">       23431 :         data.insert(data.end(), m_parent.h, m_parent.h + HASH_SIZE);</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       23433 :         data.insert(data.end(), spend.h, spend.h + HASH_SIZE);</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">       23433 :         data.insert(data.end(), view.h, view.h + HASH_SIZE);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">       23433 :         data.insert(data.end(), m_txkeySecSeed.h, m_txkeySecSeed.h + HASH_SIZE);</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">       23433 :         data.insert(data.end(), m_parent.h, m_parent.h + HASH_SIZE);</span></span>
 <span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">       23431 :         writeVarint(m_uncles.size(), data);</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">       23433 :         writeVarint(m_uncles.size(), data);</span></span>
 <span id="L261"><span class="lineNum">     261</span>              : </span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">       23431 :         for (const hash&amp; id : m_uncles) {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">       23433 :         for (const hash&amp; id : m_uncles) {</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         785 :                 data.insert(data.end(), id.h, id.h + HASH_SIZE);</span></span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         785 :         }</span></span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       23431 :         writeVarint(m_sidechainHeight, data);</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       23433 :         writeVarint(m_sidechainHeight, data);</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">       23431 :         writeVarint(m_difficulty.lo, data);</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">       23431 :         writeVarint(m_difficulty.hi, data);</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">       23433 :         writeVarint(m_difficulty.lo, data);</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">       23433 :         writeVarint(m_difficulty.hi, data);</span></span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">       23431 :         writeVarint(m_cumulativeDifficulty.lo, data);</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       23431 :         writeVarint(m_cumulativeDifficulty.hi, data);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">       23433 :         writeVarint(m_cumulativeDifficulty.lo, data);</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">       23433 :         writeVarint(m_cumulativeDifficulty.hi, data);</span></span>
 <span id="L273"><span class="lineNum">     273</span>              : </span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       23431 :         const uint8_t n = static_cast&lt;uint8_t&gt;(m_merkleProof.size());</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       23431 :         data.push_back(n);</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       23433 :         const uint8_t n = static_cast&lt;uint8_t&gt;(m_merkleProof.size());</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       23433 :         data.push_back(n);</span></span>
 <span id="L276"><span class="lineNum">     276</span>              : </span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       24629 :         for (uint8_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       24631 :         for (uint8_t i = 0; i &lt; n; ++i) {</span></span>
 <span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        1198 :                 const hash&amp; h = m_merkleProof[i];</span></span>
 <span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        1198 :                 data.insert(data.end(), h.h, h.h + HASH_SIZE);</span></span>
 <span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        1198 :         }</span></span>
 <span id="L281"><span class="lineNum">     281</span>              : </span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       23431 :         writeVarint(m_mergeMiningExtra.size(), data);</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       23433 :         writeVarint(m_mergeMiningExtra.size(), data);</span></span>
 <span id="L283"><span class="lineNum">     283</span>              : </span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       23431 :         for (const auto&amp; mm_extra_data : m_mergeMiningExtra) {</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       23433 :         for (const auto&amp; mm_extra_data : m_mergeMiningExtra) {</span></span>
 <span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">        1022 :                 data.insert(data.end(), mm_extra_data.first.h, mm_extra_data.first.h + HASH_SIZE);</span></span>
 <span id="L286"><span class="lineNum">     286</span>              : </span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">        1022 :                 writeVarint(mm_extra_data.second.size(), data);</span></span>
 <span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">        1022 :                 data.insert(data.end(), mm_extra_data.second.begin(), mm_extra_data.second.end());</span></span>
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        1022 :         }</span></span>
 <span id="L290"><span class="lineNum">     290</span>              : </span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       23431 :         const uint8_t* p = reinterpret_cast&lt;const uint8_t*&gt;(m_sidechainExtraBuf);</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       23431 :         data.insert(data.end(), p, p + sizeof(m_sidechainExtraBuf));</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       23433 :         const uint8_t* p = reinterpret_cast&lt;const uint8_t*&gt;(m_sidechainExtraBuf);</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       23433 :         data.insert(data.end(), p, p + sizeof(m_sidechainExtraBuf));</span></span>
 <span id="L293"><span class="lineNum">     293</span>              : </span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       23431 : #if POOL_BLOCK_DEBUG</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       23431 :         if (!m_sideChainDataDebug.empty() &amp;&amp; (data != m_sideChainDataDebug)) {</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       23433 : #if POOL_BLOCK_DEBUG</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       23433 :         if (!m_sideChainDataDebug.empty() &amp;&amp; (data != m_sideChainDataDebug)) {</span></span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;serialize_sidechain_data() has a bug, fix it!&quot;);</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC tlaBgGNC">       23431 : #endif</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC tlaBgGNC">       23433 : #endif</span></span>
 <span id="L300"><span class="lineNum">     300</span>              : </span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">       23431 :         return data;</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       23431 : }</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">       23433 :         return data;</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       23433 : }</span></span>
 <span id="L303"><span class="lineNum">     303</span>              : </span>
 <span id="L304"><span class="lineNum">     304</span>              : void PoolBlock::reset_offchain_data()</span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">       39989 : {</span></span>
@@ -451,10 +451,10 @@
 <span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">           1 :                 root_hash tmp_root;</span></span>
 <span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">           1 :                 merkle_hash(m_transactions, tmp_root);</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">           1 :                 memcpy(blob + blob_size, tmp_root.h, HASH_SIZE);</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC tlaBgUNC">           0 :         blob_size += HASH_SIZE;</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">           1 :                 blob_size += HASH_SIZE;</span></span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L394"><span class="lineNum">     394</span>              : </span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC tlaBgGNC">           1 :         writeVarint(count, [&amp;blob, &amp;blob_size](uint8_t b) { blob[blob_size++] = b; });</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           1 :         writeVarint(count, [&amp;blob, &amp;blob_size](uint8_t b) { blob[blob_size++] = b; });</span></span>
 <span id="L396"><span class="lineNum">     396</span>              : </span>
 <span id="L397"><span class="lineNum">     397</span>              :         // cppcheck-suppress danglingLifetime</span>
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           1 :         m_hashingBlob.assign(blob, blob + blob_size);</span></span>
