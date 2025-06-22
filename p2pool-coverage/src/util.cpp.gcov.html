@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">36.8&nbsp;%</td>
@@ -182,22 +182,22 @@
 <span id="L120"><span class="lineNum">     120</span>              : #endif</span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC tlaBgGNC">    44069309 : NOINLINE difficulty_type&amp; difficulty_type::operator/=(difficulty_type b)</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC tlaBgGNC">    44082747 : NOINLINE difficulty_type&amp; difficulty_type::operator/=(difficulty_type b)</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : {</span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">    44069309 :         if (*this &lt; b) {</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">    44082747 :         if (*this &lt; b) {</span></span>
 <span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">      287413 :                 lo = 0;</span></span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">      287413 :                 hi = 0;</span></span>
 <span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">      287413 :                 return *this;</span></span>
 <span id="L129"><span class="lineNum">     129</span>              :         }</span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">    87563792 :         if (*this - b &lt; b) {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">    87590668 :         if (*this - b &lt; b) {</span></span>
 <span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">      812876 :                 lo = 1;</span></span>
 <span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">      812876 :                 hi = 0;</span></span>
 <span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">      812876 :                 return *this;</span></span>
 <span id="L135"><span class="lineNum">     135</span>              :         }</span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">    42969020 :         if (b.hi == 0) {</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">     7034004 :                 return operator/=(b.lo);</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">    42982458 :         if (b.hi == 0) {</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">     7060880 :                 return operator/=(b.lo);</span></span>
 <span id="L139"><span class="lineNum">     139</span>              :         }</span>
 <span id="L140"><span class="lineNum">     140</span>              : </span>
 <span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">    39452018 :         const uint64_t shift = bsr(b.hi) + 1;</span></span>
@@ -330,25 +330,25 @@
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           5 :         return s;</span></span>
 <span id="L269"><span class="lineNum">     269</span>              : }</span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        8297 : std::istream&amp; operator&gt;&gt;(std::istream&amp; s, hash&amp; h)</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        8285 : std::istream&amp; operator&gt;&gt;(std::istream&amp; s, hash&amp; h)</span></span>
 <span id="L272"><span class="lineNum">     272</span>              : {</span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        8297 :         memset(h.h, 0, HASH_SIZE);</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        8285 :         memset(h.h, 0, HASH_SIZE);</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        8297 :         bool found_number = false;</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        8297 :         uint32_t index = 0;</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        8285 :         bool found_number = false;</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        8285 :         uint32_t index = 0;</span></span>
 <span id="L277"><span class="lineNum">     277</span>              :         char c;</span>
-<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">      539288 :         while (s.good() &amp;&amp; !s.eof()) {</span></span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">      539288 :                 s.read(&amp;c, 1);</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">      539288 :                 if (!s.good() || s.eof()) {</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">      538520 :         while (s.good() &amp;&amp; !s.eof()) {</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">      538520 :                 s.read(&amp;c, 1);</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">      538520 :                 if (!s.good() || s.eof()) {</span></span>
 <span id="L281"><span class="lineNum">     281</span> <span class="tlaUNC tlaBgUNC">           0 :                         break;</span></span>
 <span id="L282"><span class="lineNum">     282</span>              :                 }</span>
 <span id="L283"><span class="lineNum">     283</span>              :                 uint8_t digit;</span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC tlaBgGNC">     1078576 :                 if (from_hex(c, digit)) {</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">      531008 :                         found_number = true;</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">      531008 :                         h.h[index &gt;&gt; 1] = (h.h[index &gt;&gt; 1] &lt;&lt; 4) | digit;</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      531008 :                         ++index;</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      531008 :                         if (index &gt;= HASH_SIZE * 2) {</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        8297 :                                 return s;</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC tlaBgGNC">     1077040 :                 if (from_hex(c, digit)) {</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">      530240 :                         found_number = true;</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">      530240 :                         h.h[index &gt;&gt; 1] = (h.h[index &gt;&gt; 1] &lt;&lt; 4) | digit;</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      530240 :                         ++index;</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">      530240 :                         if (index &gt;= HASH_SIZE * 2) {</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        8285 :                                 return s;</span></span>
 <span id="L290"><span class="lineNum">     290</span>              :                         }</span>
 <span id="L291"><span class="lineNum">     291</span>              :                 }</span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">        8280 :                 else if (found_number) {</span></span>
@@ -358,32 +358,32 @@
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC">           0 :         return s;</span></span>
 <span id="L297"><span class="lineNum">     297</span>              : }</span>
 <span id="L298"><span class="lineNum">     298</span>              : </span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC tlaBgGNC">           8 : void uv_cond_init_checked(uv_cond_t* cond)</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC tlaBgGNC">           9 : void uv_cond_init_checked(uv_cond_t* cond)</span></span>
 <span id="L300"><span class="lineNum">     300</span>              : {</span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           8 :         const int result = uv_cond_init(cond);</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           8 :         if (result) {</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           9 :         const int result = uv_cond_init(cond);</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           9 :         if (result) {</span></span>
 <span id="L303"><span class="lineNum">     303</span>              :                 LOGERR(1, &quot;failed to create conditional variable, error &quot; &lt;&lt; uv_err_name(result));</span>
 <span id="L304"><span class="lineNum">     304</span> <span class="tlaUNC tlaBgUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L305"><span class="lineNum">     305</span>              :         }</span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC tlaBgGNC">           8 : }</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC tlaBgGNC">           9 : }</span></span>
 <span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          31 : void uv_mutex_init_checked(uv_mutex_t* mutex)</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">          35 : void uv_mutex_init_checked(uv_mutex_t* mutex)</span></span>
 <span id="L309"><span class="lineNum">     309</span>              : {</span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          31 :         const int result = uv_mutex_init(mutex);</span></span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">          31 :         if (result) {</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">          35 :         const int result = uv_mutex_init(mutex);</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">          35 :         if (result) {</span></span>
 <span id="L312"><span class="lineNum">     312</span>              :                 LOGERR(1, &quot;failed to create mutex, error &quot; &lt;&lt; uv_err_name(result));</span>
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaUNC tlaBgUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L314"><span class="lineNum">     314</span>              :         }</span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC tlaBgGNC">          31 : }</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC tlaBgGNC">          35 : }</span></span>
 <span id="L316"><span class="lineNum">     316</span>              : </span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">          44 : void uv_rwlock_init_checked(uv_rwlock_t* lock)</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">          66 : void uv_rwlock_init_checked(uv_rwlock_t* lock)</span></span>
 <span id="L318"><span class="lineNum">     318</span>              : {</span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">          44 :         const int result = uv_rwlock_init(lock);</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">          44 :         if (result) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">          66 :         const int result = uv_rwlock_init(lock);</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">          66 :         if (result) {</span></span>
 <span id="L321"><span class="lineNum">     321</span>              :                 LOGERR(1, &quot;failed to create rwlock, error &quot; &lt;&lt; uv_err_name(result));</span>
 <span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC tlaBgUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L323"><span class="lineNum">     323</span>              :         }</span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC tlaBgGNC">          44 : }</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC tlaBgGNC">          66 : }</span></span>
 <span id="L325"><span class="lineNum">     325</span>              : </span>
 <span id="L326"><span class="lineNum">     326</span> <span class="tlaUNC tlaBgUNC">           0 : void uv_async_init_checked(uv_loop_t* loop, uv_async_t* async, uv_async_cb async_cb)</span></span>
 <span id="L327"><span class="lineNum">     327</span>              : {</span>
@@ -394,9 +394,9 @@
 <span id="L332"><span class="lineNum">     332</span>              :         }</span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L334"><span class="lineNum">     334</span>              : </span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC tlaBgGNC">           8 : uv_loop_t* uv_default_loop_checked()</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC tlaBgGNC">        6727 : uv_loop_t* uv_default_loop_checked()</span></span>
 <span id="L336"><span class="lineNum">     336</span>              : {</span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">           8 :         if (!is_main_thread()) {</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">        6727 :         if (!is_main_thread()) {</span></span>
 <span id="L338"><span class="lineNum">     338</span>              :                 LOGERR(1, &quot;uv_default_loop() can only be used by the main thread. Fix the code!&quot;);</span>
 <span id="L339"><span class="lineNum">     339</span>              : #ifdef _WIN32</span>
 <span id="L340"><span class="lineNum">     340</span>              :                 if (IsDebuggerPresent()) {</span>
@@ -404,7 +404,7 @@
 <span id="L342"><span class="lineNum">     342</span>              :                 }</span>
 <span id="L343"><span class="lineNum">     343</span>              : #endif</span>
 <span id="L344"><span class="lineNum">     344</span>              :         }</span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">           8 :         return uv_default_loop();</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">        6727 :         return uv_default_loop();</span></span>
 <span id="L346"><span class="lineNum">     346</span>              : }</span>
 <span id="L347"><span class="lineNum">     347</span>              : </span>
 <span id="L348"><span class="lineNum">     348</span>              : struct BackgroundJobTracker::Impl</span>
@@ -522,7 +522,7 @@
 <span id="L460"><span class="lineNum">     460</span>              : </span>
 <span id="L461"><span class="lineNum">     461</span>              : static thread_local bool main_thread = false;</span>
 <span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC tlaBgGNC">           1 : void set_main_thread() { main_thread = true; }</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">           8 : bool is_main_thread() { return main_thread; }</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">        6727 : bool is_main_thread() { return main_thread; }</span></span>
 <span id="L464"><span class="lineNum">     464</span>              : </span>
 <span id="L465"><span class="lineNum">     465</span>              : bool disable_resolve_host = false;</span>
 <span id="L466"><span class="lineNum">     466</span>              : </span>
@@ -910,7 +910,7 @@
 <span id="L848"><span class="lineNum">     848</span>              :         LOGINFO(m_level, m_name &lt;&lt; &quot; took &quot; &lt;&lt; dt.count() &lt;&lt; &quot; ms&quot;);</span>
 <span id="L849"><span class="lineNum">     849</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L850"><span class="lineNum">     850</span>              : </span>
-<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC tlaBgGNC">          24 : void set_thread_name(const char* name)</span></span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC tlaBgGNC">          27 : void set_thread_name(const char* name)</span></span>
 <span id="L852"><span class="lineNum">     852</span>              : {</span>
 <span id="L853"><span class="lineNum">     853</span>              : #if (UV_VERSION_MAJOR &gt; 1) || ((UV_VERSION_MAJOR == 1) &amp;&amp; (UV_VERSION_MINOR &gt;= 50))</span>
 <span id="L854"><span class="lineNum">     854</span>              :         const int err = uv_thread_setname(name);</span>
@@ -925,7 +925,7 @@
 <span id="L863"><span class="lineNum">     863</span>              : #else</span>
 <span id="L864"><span class="lineNum">     864</span>              :         (void)name;</span>
 <span id="L865"><span class="lineNum">     865</span>              : #endif</span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">          24 : }</span></span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">          27 : }</span></span>
 <span id="L867"><span class="lineNum">     867</span>              : </span>
 <span id="L868"><span class="lineNum">     868</span>              : } // namespace p2pool</span>
         </pre>

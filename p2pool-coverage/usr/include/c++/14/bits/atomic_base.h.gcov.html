@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">34.8&nbsp;%</td>
@@ -417,7 +417,7 @@
 <span id="L355"><span class="lineNum">     355</span>              :       __atomic_base&amp; operator=(const __atomic_base&amp;) volatile = delete;</span>
 <span id="L356"><span class="lineNum">     356</span>              : </span>
 <span id="L357"><span class="lineNum">     357</span>              :       // Requires __int_type convertible to _M_i.</span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">          18 :       constexpr __atomic_base(__int_type __i) noexcept : _M_i (__i) { }</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">        6747 :       constexpr __atomic_base(__int_type __i) noexcept : _M_i (__i) { }</span></span>
 <span id="L359"><span class="lineNum">     359</span>              : </span>
 <span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC tlaBgUNC">           0 :       operator __int_type() const noexcept</span></span>
 <span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :       { return load(); }</span></span>
@@ -426,10 +426,10 @@
 <span id="L364"><span class="lineNum">     364</span>              :       { return load(); }</span>
 <span id="L365"><span class="lineNum">     365</span>              : </span>
 <span id="L366"><span class="lineNum">     366</span>              :       __int_type</span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC tlaBgGNC">          37 :       operator=(__int_type __i) noexcept</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC tlaBgGNC">       47097 :       operator=(__int_type __i) noexcept</span></span>
 <span id="L368"><span class="lineNum">     368</span>              :       {</span>
 <span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC tlaBgUNC">           0 :         store(__i);</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC tlaBgGNC">          37 :         return __i;</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC tlaBgGNC">       47097 :         return __i;</span></span>
 <span id="L371"><span class="lineNum">     371</span>              :       }</span>
 <span id="L372"><span class="lineNum">     372</span>              : </span>
 <span id="L373"><span class="lineNum">     373</span>              :       __int_type</span>
@@ -531,13 +531,13 @@
 <span id="L469"><span class="lineNum">     469</span>              :       store(__int_type __i, memory_order __m = memory_order_seq_cst) noexcept</span>
 <span id="L470"><span class="lineNum">     470</span>              :       {</span>
 <span id="L471"><span class="lineNum">     471</span>              :         memory_order __b __attribute__ ((__unused__))</span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC tlaBgGNC">          37 :           = __m &amp; __memory_order_mask;</span></span>
-<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">          37 :         __glibcxx_assert(__b != memory_order_acquire);</span></span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          37 :         __glibcxx_assert(__b != memory_order_acq_rel);</span></span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">          37 :         __glibcxx_assert(__b != memory_order_consume);</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC tlaBgGNC">       47097 :           = __m &amp; __memory_order_mask;</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">       47097 :         __glibcxx_assert(__b != memory_order_acquire);</span></span>
+<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">       47097 :         __glibcxx_assert(__b != memory_order_acq_rel);</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">       47097 :         __glibcxx_assert(__b != memory_order_consume);</span></span>
 <span id="L476"><span class="lineNum">     476</span>              : </span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">          37 :         __atomic_store_n(&amp;_M_i, __i, int(__m));</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">          37 :       }</span></span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">       47097 :         __atomic_store_n(&amp;_M_i, __i, int(__m));</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">       47097 :       }</span></span>
 <span id="L479"><span class="lineNum">     479</span>              : </span>
 <span id="L480"><span class="lineNum">     480</span>              :       _GLIBCXX_ALWAYS_INLINE void</span>
 <span id="L481"><span class="lineNum">     481</span>              :       store(__int_type __i,</span>
@@ -556,11 +556,11 @@
 <span id="L494"><span class="lineNum">     494</span>              :       load(memory_order __m = memory_order_seq_cst) const noexcept</span>
 <span id="L495"><span class="lineNum">     495</span>              :       {</span>
 <span id="L496"><span class="lineNum">     496</span>              :         memory_order __b __attribute__ ((__unused__))</span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">       26725 :           = __m &amp; __memory_order_mask;</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">       26725 :         __glibcxx_assert(__b != memory_order_release);</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">       26725 :         __glibcxx_assert(__b != memory_order_acq_rel);</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">       62603 :           = __m &amp; __memory_order_mask;</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">       62603 :         __glibcxx_assert(__b != memory_order_release);</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">       62603 :         __glibcxx_assert(__b != memory_order_acq_rel);</span></span>
 <span id="L500"><span class="lineNum">     500</span>              : </span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">       26725 :         return __atomic_load_n(&amp;_M_i, int(__m));</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">       62603 :         return __atomic_load_n(&amp;_M_i, int(__m));</span></span>
 <span id="L502"><span class="lineNum">     502</span>              :       }</span>
 <span id="L503"><span class="lineNum">     503</span>              : </span>
 <span id="L504"><span class="lineNum">     504</span>              :       _GLIBCXX_ALWAYS_INLINE __int_type</span>
@@ -578,7 +578,7 @@
 <span id="L516"><span class="lineNum">     516</span>              :       exchange(__int_type __i,</span>
 <span id="L517"><span class="lineNum">     517</span>              :                memory_order __m = memory_order_seq_cst) noexcept</span>
 <span id="L518"><span class="lineNum">     518</span>              :       {</span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">           9 :         return __atomic_exchange_n(&amp;_M_i, __i, int(__m));</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">        2158 :         return __atomic_exchange_n(&amp;_M_i, __i, int(__m));</span></span>
 <span id="L520"><span class="lineNum">     520</span>              :       }</span>
 <span id="L521"><span class="lineNum">     521</span>              : </span>
 <span id="L522"><span class="lineNum">     522</span>              : </span>
@@ -700,7 +700,7 @@
 <span id="L638"><span class="lineNum">     638</span>              :       _GLIBCXX_ALWAYS_INLINE __int_type</span>
 <span id="L639"><span class="lineNum">     639</span>              :       fetch_sub(__int_type __i,</span>
 <span id="L640"><span class="lineNum">     640</span>              :                 memory_order __m = memory_order_seq_cst) noexcept</span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">          16 :       { return __atomic_fetch_sub(&amp;_M_i, __i, int(__m)); }</span></span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">       26892 :       { return __atomic_fetch_sub(&amp;_M_i, __i, int(__m)); }</span></span>
 <span id="L642"><span class="lineNum">     642</span>              : </span>
 <span id="L643"><span class="lineNum">     643</span>              :       _GLIBCXX_ALWAYS_INLINE __int_type</span>
 <span id="L644"><span class="lineNum">     644</span>              :       fetch_sub(__int_type __i,</span>
@@ -763,7 +763,7 @@
 <span id="L701"><span class="lineNum">     701</span>              :       __atomic_base&amp; operator=(const __atomic_base&amp;) volatile = delete;</span>
 <span id="L702"><span class="lineNum">     702</span>              : </span>
 <span id="L703"><span class="lineNum">     703</span>              :       // Requires __pointer_type convertible to _M_p.</span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">           8 :       constexpr __atomic_base(__pointer_type __p) noexcept : _M_p (__p) { }</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">           9 :       constexpr __atomic_base(__pointer_type __p) noexcept : _M_p (__p) { }</span></span>
 <span id="L705"><span class="lineNum">     705</span>              : </span>
 <span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC tlaBgUNC">           0 :       operator __pointer_type() const noexcept</span></span>
 <span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 :       { return load(); }</span></span>
@@ -772,10 +772,10 @@
 <span id="L710"><span class="lineNum">     710</span>              :       { return load(); }</span>
 <span id="L711"><span class="lineNum">     711</span>              : </span>
 <span id="L712"><span class="lineNum">     712</span>              :       __pointer_type</span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC tlaBgGNC">           6 :       operator=(__pointer_type __p) noexcept</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC tlaBgGNC">        6486 :       operator=(__pointer_type __p) noexcept</span></span>
 <span id="L714"><span class="lineNum">     714</span>              :       {</span>
 <span id="L715"><span class="lineNum">     715</span>              :         store(__p);</span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">           6 :         return __p;</span></span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">        6486 :         return __p;</span></span>
 <span id="L717"><span class="lineNum">     717</span>              :       }</span>
 <span id="L718"><span class="lineNum">     718</span>              : </span>
 <span id="L719"><span class="lineNum">     719</span>              :       __pointer_type</span>
@@ -862,14 +862,14 @@
 <span id="L800"><span class="lineNum">     800</span>              :             memory_order __m = memory_order_seq_cst) noexcept</span>
 <span id="L801"><span class="lineNum">     801</span>              :       {</span>
 <span id="L802"><span class="lineNum">     802</span>              :         memory_order __b __attribute__ ((__unused__))</span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">           6 :           = __m &amp; __memory_order_mask;</span></span>
+<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">        6486 :           = __m &amp; __memory_order_mask;</span></span>
 <span id="L804"><span class="lineNum">     804</span>              : </span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">           6 :         __glibcxx_assert(__b != memory_order_acquire);</span></span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">           6 :         __glibcxx_assert(__b != memory_order_acq_rel);</span></span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">           6 :         __glibcxx_assert(__b != memory_order_consume);</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">        6486 :         __glibcxx_assert(__b != memory_order_acquire);</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">        6486 :         __glibcxx_assert(__b != memory_order_acq_rel);</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">        6486 :         __glibcxx_assert(__b != memory_order_consume);</span></span>
 <span id="L808"><span class="lineNum">     808</span>              : </span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">           6 :         __atomic_store_n(&amp;_M_p, __p, int(__m));</span></span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">           6 :       }</span></span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">        6486 :         __atomic_store_n(&amp;_M_p, __p, int(__m));</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">        6486 :       }</span></span>
 <span id="L811"><span class="lineNum">     811</span>              : </span>
 <span id="L812"><span class="lineNum">     812</span>              :       _GLIBCXX_ALWAYS_INLINE void</span>
 <span id="L813"><span class="lineNum">     813</span>              :       store(__pointer_type __p,</span>

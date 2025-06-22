@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">40.0&nbsp;%</td>
@@ -717,8 +717,8 @@
 <span id="L655"><span class="lineNum">     655</span>              :        */</span>
 <span id="L656"><span class="lineNum">     656</span>              :       template&lt;typename _Sseq, typename = _If_seed_seq&lt;_Sseq&gt;&gt;</span>
 <span id="L657"><span class="lineNum">     657</span>              :         explicit</span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC tlaBgGNC">           6 :         mersenne_twister_engine(_Sseq&amp; __q)</span></span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">           6 :         { seed(__q); }</span></span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC tlaBgGNC">          10 :         mersenne_twister_engine(_Sseq&amp; __q)</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">          10 :         { seed(__q); }</span></span>
 <span id="L660"><span class="lineNum">     660</span>              : </span>
 <span id="L661"><span class="lineNum">     661</span>              :       void</span>
 <span id="L662"><span class="lineNum">     662</span>              :       seed(result_type __sd = default_seed);</span>
@@ -1819,13 +1819,13 @@
 <span id="L1757"><span class="lineNum">    1757</span>              : </span>
 <span id="L1758"><span class="lineNum">    1758</span>              :     // constructors, destructors and member functions</span>
 <span id="L1759"><span class="lineNum">    1759</span>              : </span>
-<span id="L1760"><span class="lineNum">    1760</span> <span class="tlaGNC">          18 :     random_device() { _M_init(&quot;default&quot;); }</span></span>
+<span id="L1760"><span class="lineNum">    1760</span> <span class="tlaGNC">          30 :     random_device() { _M_init(&quot;default&quot;); }</span></span>
 <span id="L1761"><span class="lineNum">    1761</span>              : </span>
 <span id="L1762"><span class="lineNum">    1762</span>              :     explicit</span>
 <span id="L1763"><span class="lineNum">    1763</span>              :     random_device(const std::string&amp; __token) { _M_init(__token); }</span>
 <span id="L1764"><span class="lineNum">    1764</span>              : </span>
-<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">           6 :     ~random_device()</span></span>
-<span id="L1766"><span class="lineNum">    1766</span> <span class="tlaGNC">           6 :     { _M_fini(); }</span></span>
+<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">          10 :     ~random_device()</span></span>
+<span id="L1766"><span class="lineNum">    1766</span> <span class="tlaGNC">          10 :     { _M_fini(); }</span></span>
 <span id="L1767"><span class="lineNum">    1767</span>              : </span>
 <span id="L1768"><span class="lineNum">    1768</span>              :     static constexpr result_type</span>
 <span id="L1769"><span class="lineNum">    1769</span>              :     min()</span>
@@ -1840,8 +1840,8 @@
 <span id="L1778"><span class="lineNum">    1778</span>              :     { return this-&gt;_M_getentropy(); }</span>
 <span id="L1779"><span class="lineNum">    1779</span>              : </span>
 <span id="L1780"><span class="lineNum">    1780</span>              :     result_type</span>
-<span id="L1781"><span class="lineNum">    1781</span> <span class="tlaGNC">        3744 :     operator()()</span></span>
-<span id="L1782"><span class="lineNum">    1782</span> <span class="tlaGNC">        3744 :     { return this-&gt;_M_getval(); }</span></span>
+<span id="L1781"><span class="lineNum">    1781</span> <span class="tlaGNC">        6240 :     operator()()</span></span>
+<span id="L1782"><span class="lineNum">    1782</span> <span class="tlaGNC">        6240 :     { return this-&gt;_M_getval(); }</span></span>
 <span id="L1783"><span class="lineNum">    1783</span>              : </span>
 <span id="L1784"><span class="lineNum">    1784</span>              :     // No copy functions.</span>
 <span id="L1785"><span class="lineNum">    1785</span>              :     random_device(const random_device&amp;) = delete;</span>

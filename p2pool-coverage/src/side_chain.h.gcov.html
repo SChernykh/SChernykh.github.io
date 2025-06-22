@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">63.6&nbsp;%</td>
+            <td class="headerCovTableEntryLo">45.5&nbsp;%</td>
             <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">42.9&nbsp;%</td>
+            <td class="headerCovTableEntryLo">14.3&nbsp;%</td>
             <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">1</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -92,7 +92,7 @@
 <span id="L30"><span class="lineNum">      30</span>              : struct MinerShare</span>
 <span id="L31"><span class="lineNum">      31</span>              : {</span>
 <span id="L32"><span class="lineNum">      32</span>              :         FORCEINLINE MinerShare() : m_weight(), m_wallet(nullptr) {}</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">    21610385 :         FORCEINLINE MinerShare(const difficulty_type&amp; w, const Wallet* x) : m_weight(w), m_wallet(x) {}</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">    21619351 :         FORCEINLINE MinerShare(const difficulty_type&amp; w, const Wallet* x) : m_weight(w), m_wallet(x) {}</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">    36469624 :         FORCEINLINE bool operator==(const MinerShare&amp; s) const { return *m_wallet == *s.m_wallet; }</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
@@ -130,11 +130,11 @@
 <span id="L68"><span class="lineNum">      68</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L69"><span class="lineNum">      69</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC tlaBgUNC">           0 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC tlaBgGNC">       30561 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">       26551 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC">           0 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC tlaBgGNC">       39989 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">          12 :         [[nodiscard]] FORCEINLINE difficulty_type difficulty() const { ReadLock lock(m_curDifficultyLock); return m_curDifficulty; }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       13448 :         [[nodiscard]] FORCEINLINE difficulty_type difficulty() const { ReadLock lock(m_curDifficultyLock); return m_curDifficulty; }</span></span>
 <span id="L76"><span class="lineNum">      76</span>              :         [[nodiscard]] difficulty_type total_hashes() const;</span>
 <span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC tlaBgUNC">           0 :         [[nodiscard]] uint64_t block_time() const { return m_targetBlockTime; }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :         [[nodiscard]] uint64_t miner_count();</span>
@@ -239,7 +239,7 @@
 <span id="L177"><span class="lineNum">     177</span>              :         {</span>
 <span id="L178"><span class="lineNum">     178</span>              :                 FORCEINLINE size_t operator()(const p2pool::MinerShare&amp; value) const noexcept</span>
 <span id="L179"><span class="lineNum">     179</span>              :                 {</span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC tlaBgGNC">    43220770 :                         return hash_bytes(value.m_wallet-&gt;spend_public_key().h, p2pool::HASH_SIZE);</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC tlaBgGNC">    43238702 :                         return hash_bytes(value.m_wallet-&gt;spend_public_key().h, p2pool::HASH_SIZE);</span></span>
 <span id="L181"><span class="lineNum">     181</span>              :                 }</span>
 <span id="L182"><span class="lineNum">     182</span>              :         };</span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">28.6&nbsp;%</td>
@@ -537,7 +537,7 @@
 <span id="L475"><span class="lineNum">     475</span>              :       [[__nodiscard__,__gnu__::__always_inline__]]</span>
 <span id="L476"><span class="lineNum">     476</span>              :       static _GLIBCXX20_CONSTEXPR pointer</span>
 <span id="L477"><span class="lineNum">     477</span>              :       allocate(allocator_type&amp; __a, size_type __n)</span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC tlaBgGNC">      227373 :       { return __a.allocate(__n); }</span></span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC tlaBgGNC">      287947 :       { return __a.allocate(__n); }</span></span>
 <span id="L479"><span class="lineNum">     479</span>              : </span>
 <span id="L480"><span class="lineNum">     480</span>              :       /**</span>
 <span id="L481"><span class="lineNum">     481</span>              :        *  @brief  Allocate memory.</span>
@@ -572,7 +572,7 @@
 <span id="L510"><span class="lineNum">     510</span>              :       [[__gnu__::__always_inline__]]</span>
 <span id="L511"><span class="lineNum">     511</span>              :       static _GLIBCXX20_CONSTEXPR void</span>
 <span id="L512"><span class="lineNum">     512</span>              :       deallocate(allocator_type&amp; __a, pointer __p, size_type __n)</span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">      138641 :       { __a.deallocate(__p, __n); }</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">      164225 :       { __a.deallocate(__p, __n); }</span></span>
 <span id="L514"><span class="lineNum">     514</span>              : </span>
 <span id="L515"><span class="lineNum">     515</span>              :       /**</span>
 <span id="L516"><span class="lineNum">     516</span>              :        *  @brief  Construct an object of type `_Up`</span>
@@ -593,11 +593,11 @@
 <span id="L531"><span class="lineNum">     531</span>              :         noexcept(std::is_nothrow_constructible&lt;_Up, _Args...&gt;::value)</span>
 <span id="L532"><span class="lineNum">     532</span>              :         {</span>
 <span id="L533"><span class="lineNum">     533</span>              : #if __cplusplus &lt;= 201703L</span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">    64854223 :           __a.construct(__p, std::forward&lt;_Args&gt;(__args)...);</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">    89571933 :           __a.construct(__p, std::forward&lt;_Args&gt;(__args)...);</span></span>
 <span id="L535"><span class="lineNum">     535</span>              : #else</span>
 <span id="L536"><span class="lineNum">     536</span>              :           std::construct_at(__p, std::forward&lt;_Args&gt;(__args)...);</span>
 <span id="L537"><span class="lineNum">     537</span>              : #endif</span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">    64854223 :         }</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">    89571933 :         }</span></span>
 <span id="L539"><span class="lineNum">     539</span>              : </span>
 <span id="L540"><span class="lineNum">     540</span>              :       /**</span>
 <span id="L541"><span class="lineNum">     541</span>              :        *  @brief  Destroy an object of type @a _Up</span>
@@ -617,7 +617,7 @@
 <span id="L555"><span class="lineNum">     555</span>              : #else</span>
 <span id="L556"><span class="lineNum">     556</span>              :           std::destroy_at(__p);</span>
 <span id="L557"><span class="lineNum">     557</span>              : #endif</span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">      282680 :         }</span></span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">    19745556 :         }</span></span>
 <span id="L559"><span class="lineNum">     559</span>              : </span>
 <span id="L560"><span class="lineNum">     560</span>              :       /**</span>
 <span id="L561"><span class="lineNum">     561</span>              :        *  @brief  The maximum supported allocation size</span>
@@ -629,7 +629,7 @@
 <span id="L567"><span class="lineNum">     567</span>              :       max_size(const allocator_type&amp; __a __attribute__((__unused__))) noexcept</span>
 <span id="L568"><span class="lineNum">     568</span>              :       {</span>
 <span id="L569"><span class="lineNum">     569</span>              : #if __cplusplus &lt;= 201703L</span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">      343321 :         return __a.max_size();</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">      469612 :         return __a.max_size();</span></span>
 <span id="L571"><span class="lineNum">     571</span>              : #else</span>
 <span id="L572"><span class="lineNum">     572</span>              :         return size_t(-1) / sizeof(value_type);</span>
 <span id="L573"><span class="lineNum">     573</span>              : #endif</span>
@@ -643,7 +643,7 @@
 <span id="L581"><span class="lineNum">     581</span>              :       [[__gnu__::__always_inline__]]</span>
 <span id="L582"><span class="lineNum">     582</span>              :       static _GLIBCXX20_CONSTEXPR allocator_type</span>
 <span id="L583"><span class="lineNum">     583</span>              :       select_on_container_copy_construction(const allocator_type&amp; __rhs)</span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">        4929 :       { return __rhs; }</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">        4930 :       { return __rhs; }</span></span>
 <span id="L585"><span class="lineNum">     585</span>              :     };</span>
 <span id="L586"><span class="lineNum">     586</span>              : </span>
 <span id="L587"><span class="lineNum">     587</span>              :   /// Explicit specialization for std::allocator&lt;void&gt;.</span>
@@ -716,7 +716,7 @@
 <span id="L654"><span class="lineNum">     654</span>              :         static _GLIBCXX20_CONSTEXPR void</span>
 <span id="L655"><span class="lineNum">     655</span>              :         construct(allocator_type&amp;, _Up* __p, _Args&amp;&amp;... __args)</span>
 <span id="L656"><span class="lineNum">     656</span>              :         noexcept(std::is_nothrow_constructible&lt;_Up, _Args...&gt;::value)</span>
-<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC">           8 :         { std::_Construct(__p, std::forward&lt;_Args&gt;(__args)...); }</span></span>
+<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC">        6727 :         { std::_Construct(__p, std::forward&lt;_Args&gt;(__args)...); }</span></span>
 <span id="L658"><span class="lineNum">     658</span>              : </span>
 <span id="L659"><span class="lineNum">     659</span>              :       /**</span>
 <span id="L660"><span class="lineNum">     660</span>              :        *  @brief  Destroy an object of type `_Up`</span>
@@ -730,7 +730,7 @@
 <span id="L668"><span class="lineNum">     668</span>              :         static _GLIBCXX20_CONSTEXPR void</span>
 <span id="L669"><span class="lineNum">     669</span>              :         destroy(allocator_type&amp;, _Up* __p)</span>
 <span id="L670"><span class="lineNum">     670</span>              :         noexcept(is_nothrow_destructible&lt;_Up&gt;::value)</span>
-<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">           8 :         { std::_Destroy(__p); }</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">        6727 :         { std::_Destroy(__p); }</span></span>
 <span id="L672"><span class="lineNum">     672</span>              : </span>
 <span id="L673"><span class="lineNum">     673</span>              :       /// max_size is ill-formed for allocator&lt;void&gt;</span>
 <span id="L674"><span class="lineNum">     674</span>              :       static size_type</span>
@@ -810,11 +810,11 @@
 <span id="L748"><span class="lineNum">     748</span>              :         = typename __traits::propagate_on_container_move_assignment::type;</span>
 <span id="L749"><span class="lineNum">     749</span>              : #if __cplusplus &gt;= 201703L</span>
 <span id="L750"><span class="lineNum">     750</span>              :       if constexpr (__pocma::value)</span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC tlaBgGNC">       26638 :         __one = std::move(__two);</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC tlaBgGNC">       28885 :         __one = std::move(__two);</span></span>
 <span id="L752"><span class="lineNum">     752</span>              : #else</span>
 <span id="L753"><span class="lineNum">     753</span>              :       __do_alloc_on_move(__one, __two, __pocma());</span>
 <span id="L754"><span class="lineNum">     754</span>              : #endif</span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">       26638 :     }</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">       28885 :     }</span></span>
 <span id="L756"><span class="lineNum">     756</span>              : </span>
 <span id="L757"><span class="lineNum">     757</span>              : #if __cplusplus &lt; 201703L</span>
 <span id="L758"><span class="lineNum">     758</span>              :   template&lt;typename _Alloc&gt;</span>
@@ -847,7 +847,7 @@
 <span id="L785"><span class="lineNum">     785</span>              : #else</span>
 <span id="L786"><span class="lineNum">     786</span>              :       __do_alloc_on_swap(__one, __two, __pocs());</span>
 <span id="L787"><span class="lineNum">     787</span>              : #endif</span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">          16 :     }</span></span>
+<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">          18 :     }</span></span>
 <span id="L789"><span class="lineNum">     789</span>              : </span>
 <span id="L790"><span class="lineNum">     790</span>              :   template&lt;typename _Alloc, typename _Tp,</span>
 <span id="L791"><span class="lineNum">     791</span>              :            typename _ValueT = __remove_cvref_t&lt;typename _Alloc::value_type&gt;,</span>
@@ -956,15 +956,15 @@
 <span id="L894"><span class="lineNum">     894</span>              :     {</span>
 <span id="L895"><span class="lineNum">     895</span>              :       _GLIBCXX20_CONSTEXPR</span>
 <span id="L896"><span class="lineNum">     896</span>              :       static bool</span>
-<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">          16 :       _S_do_it(_Tp&amp; __c) noexcept</span></span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">          18 :       _S_do_it(_Tp&amp; __c) noexcept</span></span>
 <span id="L898"><span class="lineNum">     898</span>              :       {</span>
 <span id="L899"><span class="lineNum">     899</span>              : #if __cpp_exceptions</span>
 <span id="L900"><span class="lineNum">     900</span>              :         try</span>
 <span id="L901"><span class="lineNum">     901</span>              :           {</span>
-<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">          32 :             _Tp(__make_move_if_noexcept_iterator(__c.begin()),</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">          36 :             _Tp(__make_move_if_noexcept_iterator(__c.begin()),</span></span>
 <span id="L903"><span class="lineNum">     903</span>              :                 __make_move_if_noexcept_iterator(__c.end()),</span>
-<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">          32 :                 __c.get_allocator()).swap(__c);</span></span>
-<span id="L905"><span class="lineNum">     905</span> <span class="tlaGNC">          16 :             return true;</span></span>
+<span id="L904"><span class="lineNum">     904</span> <span class="tlaGNC">          36 :                 __c.get_allocator()).swap(__c);</span></span>
+<span id="L905"><span class="lineNum">     905</span> <span class="tlaGNC">          18 :             return true;</span></span>
 <span id="L906"><span class="lineNum">     906</span>              :           }</span>
 <span id="L907"><span class="lineNum">     907</span> <span class="tlaUNC tlaBgUNC">           0 :         catch(...)</span></span>
 <span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 :           { return false; }</span></span>
@@ -1003,8 +1003,8 @@
 <span id="L941"><span class="lineNum">     941</span>              :     _Destroy(_ForwardIterator __first, _ForwardIterator __last,</span>
 <span id="L942"><span class="lineNum">     942</span>              :              allocator&lt;_Tp&gt;&amp;)</span>
 <span id="L943"><span class="lineNum">     943</span>              :     {</span>
-<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC tlaBgGNC">     1564772 :       std::_Destroy(__first, __last);</span></span>
-<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">     1564772 :     }</span></span>
+<span id="L944"><span class="lineNum">     944</span> <span class="tlaGNC tlaBgGNC">     1828802 :       std::_Destroy(__first, __last);</span></span>
+<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">     1828802 :     }</span></span>
 <span id="L946"><span class="lineNum">     946</span>              : #endif</span>
 <span id="L947"><span class="lineNum">     947</span>              :   /// @endcond</span>
 <span id="L948"><span class="lineNum">     948</span>              : </span>

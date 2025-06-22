@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">66.7&nbsp;%</td>
@@ -140,19 +140,19 @@
 <span id="L78"><span class="lineNum">      78</span>              :   template&lt;typename _InputIterator&gt;</span>
 <span id="L79"><span class="lineNum">      79</span>              :     inline _GLIBCXX14_CONSTEXPR</span>
 <span id="L80"><span class="lineNum">      80</span>              :     typename iterator_traits&lt;_InputIterator&gt;::difference_type</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">       13342 :     __distance(_InputIterator __first, _InputIterator __last,</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">       22308 :     __distance(_InputIterator __first, _InputIterator __last,</span></span>
 <span id="L82"><span class="lineNum">      82</span>              :                input_iterator_tag)</span>
 <span id="L83"><span class="lineNum">      83</span>              :     {</span>
 <span id="L84"><span class="lineNum">      84</span>              :       // concept requirements</span>
 <span id="L85"><span class="lineNum">      85</span>              :       __glibcxx_function_requires(_InputIteratorConcept&lt;_InputIterator&gt;)</span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       13342 :       typename iterator_traits&lt;_InputIterator&gt;::difference_type __n = 0;</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">     3323472 :       while (__first != __last)</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       22308 :       typename iterator_traits&lt;_InputIterator&gt;::difference_type __n = 0;</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">     3341404 :       while (__first != __last)</span></span>
 <span id="L89"><span class="lineNum">      89</span>              :         {</span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">     3310130 :           ++__first;</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">     3310130 :           ++__n;</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">     3319096 :           ++__first;</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">     3319096 :           ++__n;</span></span>
 <span id="L92"><span class="lineNum">      92</span>              :         }</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       13342 :       return __n;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       22308 :       return __n;</span></span>
 <span id="L94"><span class="lineNum">      94</span>              :     }</span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
 <span id="L96"><span class="lineNum">      96</span>              :   template&lt;typename _RandomAccessIterator&gt;</span>
@@ -165,7 +165,7 @@
 <span id="L103"><span class="lineNum">     103</span>              :       // concept requirements</span>
 <span id="L104"><span class="lineNum">     104</span>              :       __glibcxx_function_requires(_RandomAccessIteratorConcept&lt;</span>
 <span id="L105"><span class="lineNum">     105</span>              :                                   _RandomAccessIterator&gt;)</span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">      991708 :       return __last - __first;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">     1038705 :       return __last - __first;</span></span>
 <span id="L107"><span class="lineNum">     107</span>              :     }</span>
 <span id="L108"><span class="lineNum">     108</span>              : </span>
 <span id="L109"><span class="lineNum">     109</span>              : #if _GLIBCXX_USE_CXX11_ABI</span>
@@ -210,20 +210,20 @@
 <span id="L148"><span class="lineNum">     148</span>              :     distance(_InputIterator __first, _InputIterator __last)</span>
 <span id="L149"><span class="lineNum">     149</span>              :     {</span>
 <span id="L150"><span class="lineNum">     150</span>              :       // concept requirements -- taken care of in __distance</span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">     3760567 :       return std::__distance(__first, __last,</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">     3761746 :                              std::__iterator_category(__first));</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">     4394994 :       return std::__distance(__first, __last,</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">     4443868 :                              std::__iterator_category(__first));</span></span>
 <span id="L153"><span class="lineNum">     153</span>              :     }</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span>              :   template&lt;typename _InputIterator, typename _Distance&gt;</span>
 <span id="L156"><span class="lineNum">     156</span>              :     inline _GLIBCXX14_CONSTEXPR void</span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           1 :     __advance(_InputIterator&amp; __i, _Distance __n, input_iterator_tag)</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           4 :     __advance(_InputIterator&amp; __i, _Distance __n, input_iterator_tag)</span></span>
 <span id="L158"><span class="lineNum">     158</span>              :     {</span>
 <span id="L159"><span class="lineNum">     159</span>              :       // concept requirements</span>
 <span id="L160"><span class="lineNum">     160</span>              :       __glibcxx_function_requires(_InputIteratorConcept&lt;_InputIterator&gt;)</span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           1 :       __glibcxx_assert(__n &gt;= 0);</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">           1 :       while (__n--)</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           4 :       __glibcxx_assert(__n &gt;= 0);</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">           4 :       while (__n--)</span></span>
 <span id="L163"><span class="lineNum">     163</span> <span class="tlaUNC tlaBgUNC">           0 :         ++__i;</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">           1 :     }</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">           4 :     }</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
 <span id="L166"><span class="lineNum">     166</span>              :   template&lt;typename _BidirectionalIterator, typename _Distance&gt;</span>
 <span id="L167"><span class="lineNum">     167</span>              :     inline _GLIBCXX14_CONSTEXPR void</span>
@@ -243,7 +243,7 @@
 <span id="L181"><span class="lineNum">     181</span>              : </span>
 <span id="L182"><span class="lineNum">     182</span>              :   template&lt;typename _RandomAccessIterator, typename _Distance&gt;</span>
 <span id="L183"><span class="lineNum">     183</span>              :     inline _GLIBCXX14_CONSTEXPR void</span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC tlaBgGNC">      780579 :     __advance(_RandomAccessIterator&amp; __i, _Distance __n,</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC tlaBgGNC">     1064166 :     __advance(_RandomAccessIterator&amp; __i, _Distance __n,</span></span>
 <span id="L185"><span class="lineNum">     185</span>              :               random_access_iterator_tag)</span>
 <span id="L186"><span class="lineNum">     186</span>              :     {</span>
 <span id="L187"><span class="lineNum">     187</span>              :       // concept requirements</span>
@@ -254,8 +254,8 @@
 <span id="L192"><span class="lineNum">     192</span>              :       else if (__builtin_constant_p(__n) &amp;&amp; __n == -1)</span>
 <span id="L193"><span class="lineNum">     193</span>              :         --__i;</span>
 <span id="L194"><span class="lineNum">     194</span>              :       else</span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">      780579 :         __i += __n;</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">      780579 :     }</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">     1064166 :         __i += __n;</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">     1064166 :     }</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
 <span id="L198"><span class="lineNum">     198</span>              : #if __cplusplus &gt;= 201103L</span>
 <span id="L199"><span class="lineNum">     199</span>              :   // Give better error if std::advance called with a non-Cpp17InputIterator.</span>
@@ -282,9 +282,9 @@
 <span id="L220"><span class="lineNum">     220</span>              :     advance(_InputIterator&amp; __i, _Distance __n)</span>
 <span id="L221"><span class="lineNum">     221</span>              :     {</span>
 <span id="L222"><span class="lineNum">     222</span>              :       // concept requirements -- taken care of in __advance</span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      780580 :       typename iterator_traits&lt;_InputIterator&gt;::difference_type __d = __n;</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">      780580 :       std::__advance(__i, __d, std::__iterator_category(__i));</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">      780580 :     }</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">     1064170 :       typename iterator_traits&lt;_InputIterator&gt;::difference_type __d = __n;</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">     1064170 :       std::__advance(__i, __d, std::__iterator_category(__i));</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">     1064170 :     }</span></span>
 <span id="L226"><span class="lineNum">     226</span>              : </span>
 <span id="L227"><span class="lineNum">     227</span>              : #if __cplusplus &gt;= 201103L</span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>

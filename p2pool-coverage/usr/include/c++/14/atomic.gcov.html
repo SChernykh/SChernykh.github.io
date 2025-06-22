@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-22 09:20:37</td>
+            <td class="headerValue">2025-06-22 11:49:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">57.1&nbsp;%</td>
@@ -140,7 +140,7 @@
 <span id="L78"><span class="lineNum">      78</span>              :     atomic&amp; operator=(const atomic&amp;) = delete;</span>
 <span id="L79"><span class="lineNum">      79</span>              :     atomic&amp; operator=(const atomic&amp;) volatile = delete;</span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">           8 :     constexpr atomic(bool __i) noexcept : _M_base(__i) { }</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">           9 :     constexpr atomic(bool __i) noexcept : _M_base(__i) { }</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
 <span id="L83"><span class="lineNum">      83</span>              :     bool</span>
 <span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC tlaBgUNC">           0 :     operator=(bool __i) noexcept</span></span>
@@ -150,8 +150,8 @@
 <span id="L88"><span class="lineNum">      88</span>              :     operator=(bool __i) volatile noexcept</span>
 <span id="L89"><span class="lineNum">      89</span>              :     { return _M_base.operator=(__i); }</span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC tlaBgGNC">       26696 :     operator bool() const noexcept</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       53392 :     { return _M_base.load(); }</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC tlaBgGNC">       35671 :     operator bool() const noexcept</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       71342 :     { return _M_base.load(); }</span></span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
 <span id="L94"><span class="lineNum">      94</span>              :     operator bool() const volatile noexcept</span>
 <span id="L95"><span class="lineNum">      95</span>              :     { return _M_base.load(); }</span>
@@ -183,8 +183,8 @@
 <span id="L121"><span class="lineNum">     121</span>              :     { return _M_base.load(__m); }</span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
 <span id="L123"><span class="lineNum">     123</span>              :     bool</span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">           8 :     exchange(bool __i, memory_order __m = memory_order_seq_cst) noexcept</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">          16 :     { return _M_base.exchange(__i, __m); }</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC tlaBgGNC">        2157 :     exchange(bool __i, memory_order __m = memory_order_seq_cst) noexcept</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">        4314 :     { return _M_base.exchange(__i, __m); }</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : </span>
 <span id="L127"><span class="lineNum">     127</span>              :     bool</span>
 <span id="L128"><span class="lineNum">     128</span>              :     exchange(bool __i,</span>
@@ -492,7 +492,7 @@
 <span id="L430"><span class="lineNum">     430</span>              :       atomic&amp; operator=(const atomic&amp;) = delete;</span>
 <span id="L431"><span class="lineNum">     431</span>              :       atomic&amp; operator=(const atomic&amp;) volatile = delete;</span>
 <span id="L432"><span class="lineNum">     432</span>              : </span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           8 :       constexpr atomic(__pointer_type __p) noexcept : _M_b(__p) { }</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           9 :       constexpr atomic(__pointer_type __p) noexcept : _M_b(__p) { }</span></span>
 <span id="L434"><span class="lineNum">     434</span>              : </span>
 <span id="L435"><span class="lineNum">     435</span> <span class="tlaUNC tlaBgUNC">           0 :       operator __pointer_type() const noexcept</span></span>
 <span id="L436"><span class="lineNum">     436</span> <span class="tlaUNC">           0 :       { return __pointer_type(_M_b); }</span></span>
@@ -501,8 +501,8 @@
 <span id="L439"><span class="lineNum">     439</span>              :       { return __pointer_type(_M_b); }</span>
 <span id="L440"><span class="lineNum">     440</span>              : </span>
 <span id="L441"><span class="lineNum">     441</span>              :       __pointer_type</span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC tlaBgGNC">           6 :       operator=(__pointer_type __p) noexcept</span></span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">           6 :       { return _M_b.operator=(__p); }</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC tlaBgGNC">        6486 :       operator=(__pointer_type __p) noexcept</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">        6486 :       { return _M_b.operator=(__p); }</span></span>
 <span id="L444"><span class="lineNum">     444</span>              : </span>
 <span id="L445"><span class="lineNum">     445</span>              :       __pointer_type</span>
 <span id="L446"><span class="lineNum">     446</span>              :       operator=(__pointer_type __p) volatile noexcept</span>
@@ -897,7 +897,7 @@
 <span id="L835"><span class="lineNum">     835</span>              :       atomic&amp; operator=(const atomic&amp;) = delete;</span>
 <span id="L836"><span class="lineNum">     836</span>              :       atomic&amp; operator=(const atomic&amp;) volatile = delete;</span>
 <span id="L837"><span class="lineNum">     837</span>              : </span>
-<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC tlaBgGNC">           5 :       constexpr atomic(__integral_type __i) noexcept : __base_type(__i) { }</span></span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC tlaBgGNC">        6724 :       constexpr atomic(__integral_type __i) noexcept : __base_type(__i) { }</span></span>
 <span id="L839"><span class="lineNum">     839</span>              : </span>
 <span id="L840"><span class="lineNum">     840</span>              :       using __base_type::operator __integral_type;</span>
 <span id="L841"><span class="lineNum">     841</span>              :       using __base_type::operator=;</span>
@@ -966,7 +966,7 @@
 <span id="L904"><span class="lineNum">     904</span>              :       atomic&amp; operator=(const atomic&amp;) = delete;</span>
 <span id="L905"><span class="lineNum">     905</span>              :       atomic&amp; operator=(const atomic&amp;) volatile = delete;</span>
 <span id="L906"><span class="lineNum">     906</span>              : </span>
-<span id="L907"><span class="lineNum">     907</span> <span class="tlaGNC">           3 :       constexpr atomic(__integral_type __i) noexcept : __base_type(__i) { }</span></span>
+<span id="L907"><span class="lineNum">     907</span> <span class="tlaGNC">          12 :       constexpr atomic(__integral_type __i) noexcept : __base_type(__i) { }</span></span>
 <span id="L908"><span class="lineNum">     908</span>              : </span>
 <span id="L909"><span class="lineNum">     909</span>              :       using __base_type::operator __integral_type;</span>
 <span id="L910"><span class="lineNum">     910</span>              :       using __base_type::operator=;</span>
