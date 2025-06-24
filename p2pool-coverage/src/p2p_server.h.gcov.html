@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-24 11:46:15</td>
+            <td class="headerValue">2025-06-24 21:18:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -230,171 +230,173 @@
 <span id="L168"><span class="lineNum">     168</span>              :                 };</span>
 <span id="L169"><span class="lineNum">     169</span>              :         };</span>
 <span id="L170"><span class="lineNum">     170</span>              : </span>
-<span id="L171"><span class="lineNum">     171</span>              :         void broadcast(const PoolBlock&amp; block, const PoolBlock* parent);</span>
-<span id="L172"><span class="lineNum">     172</span>              :         [[nodiscard]] uint64_t get_random64();</span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint64_t get_peerId() const { return m_peerId; }</span></span>
+<span id="L171"><span class="lineNum">     171</span>              :         struct Broadcast</span>
+<span id="L172"><span class="lineNum">     172</span>              :         {</span>
+<span id="L173"><span class="lineNum">     173</span>              :                 Broadcast(const PoolBlock&amp; block, const PoolBlock* parent);</span>
 <span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span>              :         void print_status() override;</span>
-<span id="L176"><span class="lineNum">     176</span>              :         void show_peers_async();</span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :         [[nodiscard]] size_t peer_list_size() const { MutexLock lock(m_peerListLock); return m_peerList.size(); }</span></span>
-<span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span>              :         [[nodiscard]] int external_listen_port() const override;</span>
-<span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint32_t max_outgoing_peers() const { return m_maxOutgoingPeers; }</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint32_t max_incoming_peers() const { return m_maxIncomingPeers; }</span></span>
+<span id="L175"><span class="lineNum">     175</span>              :                 hash id;</span>
+<span id="L176"><span class="lineNum">     176</span>              :                 uint64_t received_timestamp;</span>
+<span id="L177"><span class="lineNum">     177</span>              : </span>
+<span id="L178"><span class="lineNum">     178</span>              :                 std::vector&lt;uint8_t&gt; blob;</span>
+<span id="L179"><span class="lineNum">     179</span>              :                 std::vector&lt;uint8_t&gt; pruned_blob;</span>
+<span id="L180"><span class="lineNum">     180</span>              :                 std::vector&lt;uint8_t&gt; compact_blob;</span>
+<span id="L181"><span class="lineNum">     181</span>              :                 std::vector&lt;hash&gt; ancestor_hashes;</span>
+<span id="L182"><span class="lineNum">     182</span>              :         };</span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 :         void set_max_outgoing_peers(uint32_t n) { m_maxOutgoingPeers = std::min(std::max(n, 10U), 450U); }</span></span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :         void set_max_incoming_peers(uint32_t n) { m_maxIncomingPeers = std::min(std::max(n, 10U), 450U); }</span></span>
-<span id="L186"><span class="lineNum">     186</span>              : </span>
-<span id="L187"><span class="lineNum">     187</span>              :         [[nodiscard]] int deserialize_block(const uint8_t* buf, uint32_t size, bool compact, uint64_t received_timestamp);</span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :         [[nodiscard]] const PoolBlock* get_block() const { return m_block; }</span></span>
-<span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span>              :         [[nodiscard]] const PoolBlock* find_block(const hash&amp; id) const;</span>
+<span id="L184"><span class="lineNum">     184</span>              :         void broadcast(const PoolBlock&amp; block, const PoolBlock* parent);</span>
+<span id="L185"><span class="lineNum">     185</span>              :         [[nodiscard]] uint64_t get_random64();</span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint64_t get_peerId() const { return m_peerId; }</span></span>
+<span id="L187"><span class="lineNum">     187</span>              : </span>
+<span id="L188"><span class="lineNum">     188</span>              :         void print_status() override;</span>
+<span id="L189"><span class="lineNum">     189</span>              :         void show_peers_async();</span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :         [[nodiscard]] size_t peer_list_size() const { MutexLock lock(m_peerListLock); return m_peerList.size(); }</span></span>
 <span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span>              :         void check_for_updates(bool forced = false) const;</span>
+<span id="L192"><span class="lineNum">     192</span>              :         [[nodiscard]] int external_listen_port() const override;</span>
 <span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :         bool disconnected() const { return m_seenGoodPeers &amp;&amp; (m_numConnections == 0); };</span></span>
-<span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
-<span id="L197"><span class="lineNum">     197</span>              :         void broadcast_aux_job_donation_async(const uint8_t* data, uint32_t data_size, uint64_t timestamp);</span>
-<span id="L198"><span class="lineNum">     198</span>              : #endif</span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint32_t max_outgoing_peers() const { return m_maxOutgoingPeers; }</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaUNC">           0 :         [[nodiscard]] uint32_t max_incoming_peers() const { return m_maxIncomingPeers; }</span></span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC">           0 :         void set_max_outgoing_peers(uint32_t n) { m_maxOutgoingPeers = std::min(std::max(n, 10U), 450U); }</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaUNC">           0 :         void set_max_incoming_peers(uint32_t n) { m_maxIncomingPeers = std::min(std::max(n, 10U), 450U); }</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span>              :         void broadcast_aux_job_donation(const uint8_t* data, uint32_t data_size, uint64_t timestamp, const P2PClient* source, bool duplicate_check_done);</span>
-<span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span>              : private:</span>
-<span id="L203"><span class="lineNum">     203</span>              :         [[nodiscard]] const char* get_log_category() const override;</span>
+<span id="L200"><span class="lineNum">     200</span>              :         [[nodiscard]] int deserialize_block(const uint8_t* buf, uint32_t size, bool compact, uint64_t received_timestamp);</span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :         [[nodiscard]] const PoolBlock* get_block() const { return m_block; }</span></span>
+<span id="L202"><span class="lineNum">     202</span>              : </span>
+<span id="L203"><span class="lineNum">     203</span>              :         [[nodiscard]] const PoolBlock* find_block(const hash&amp; id) const;</span>
 <span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              :         p2pool* m_pool;</span>
-<span id="L206"><span class="lineNum">     206</span>              :         BlockCache* m_cache;</span>
-<span id="L207"><span class="lineNum">     207</span>              :         bool m_cacheLoaded;</span>
-<span id="L208"><span class="lineNum">     208</span>              :         std::string m_initialPeerList;</span>
-<span id="L209"><span class="lineNum">     209</span>              :         uint32_t m_maxOutgoingPeers;</span>
-<span id="L210"><span class="lineNum">     210</span>              :         uint32_t m_maxIncomingPeers;</span>
-<span id="L211"><span class="lineNum">     211</span>              : </span>
-<span id="L212"><span class="lineNum">     212</span>              :         uv_rwlock_t m_cachedBlocksLock;</span>
-<span id="L213"><span class="lineNum">     213</span>              :         unordered_map&lt;hash, PoolBlock*&gt;* m_cachedBlocks;</span>
+<span id="L205"><span class="lineNum">     205</span>              :         void check_for_updates(bool forced = false) const;</span>
+<span id="L206"><span class="lineNum">     206</span>              : </span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :         bool disconnected() const { return m_seenGoodPeers &amp;&amp; (m_numConnections == 0); };</span></span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
+<span id="L210"><span class="lineNum">     210</span>              :         void broadcast_aux_job_donation_async(const uint8_t* data, uint32_t data_size, uint64_t timestamp);</span>
+<span id="L211"><span class="lineNum">     211</span>              : #endif</span>
+<span id="L212"><span class="lineNum">     212</span>              : </span>
+<span id="L213"><span class="lineNum">     213</span>              :         void broadcast_aux_job_donation(const uint8_t* data, uint32_t data_size, uint64_t timestamp, const P2PClient* source, bool duplicate_check_done);</span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
 <span id="L215"><span class="lineNum">     215</span>              : private:</span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :         static void on_timer(uv_timer_t* timer) { reinterpret_cast&lt;P2PServer*&gt;(timer-&gt;data)-&gt;on_timer(); }</span></span>
-<span id="L217"><span class="lineNum">     217</span>              :         void on_timer();</span>
-<span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span>              :         void flush_cache();</span>
-<span id="L220"><span class="lineNum">     220</span>              :         void download_missing_blocks();</span>
-<span id="L221"><span class="lineNum">     221</span>              :         void check_host();</span>
-<span id="L222"><span class="lineNum">     222</span>              :         void check_block_template();</span>
-<span id="L223"><span class="lineNum">     223</span>              :         void update_peer_connections();</span>
-<span id="L224"><span class="lineNum">     224</span>              :         void update_peer_list();</span>
-<span id="L225"><span class="lineNum">     225</span>              :         void send_peer_list_request(P2PClient* client, uint64_t cur_time);</span>
-<span id="L226"><span class="lineNum">     226</span>              :         void save_peer_list_async();</span>
-<span id="L227"><span class="lineNum">     227</span>              :         void save_peer_list();</span>
-<span id="L228"><span class="lineNum">     228</span>              :         void load_peer_list();</span>
-<span id="L229"><span class="lineNum">     229</span>              :         void load_monerod_peer_list();</span>
-<span id="L230"><span class="lineNum">     230</span>              :         void update_peer_in_list(bool is_v6, const raw_ip&amp; ip, int port);</span>
-<span id="L231"><span class="lineNum">     231</span>              :         void remove_peer_from_list(const P2PClient* client);</span>
-<span id="L232"><span class="lineNum">     232</span>              :         void remove_peer_from_list(const raw_ip&amp; ip);</span>
-<span id="L233"><span class="lineNum">     233</span>              : </span>
-<span id="L234"><span class="lineNum">     234</span>              :         std::mt19937_64 m_rng;</span>
-<span id="L235"><span class="lineNum">     235</span>              : </span>
-<span id="L236"><span class="lineNum">     236</span>              :         uv_mutex_t m_blockLock;</span>
-<span id="L237"><span class="lineNum">     237</span>              :         PoolBlock* m_block;</span>
-<span id="L238"><span class="lineNum">     238</span>              :         std::vector&lt;uint8_t&gt; m_blockDeserializeBuf;</span>
-<span id="L239"><span class="lineNum">     239</span>              :         int m_blockDeserializeResult;</span>
-<span id="L240"><span class="lineNum">     240</span>              : </span>
-<span id="L241"><span class="lineNum">     241</span>              :         uv_timer_t m_timer;</span>
-<span id="L242"><span class="lineNum">     242</span>              :         uint64_t m_timerCounter;</span>
-<span id="L243"><span class="lineNum">     243</span>              :         uint64_t m_timerInterval;</span>
-<span id="L244"><span class="lineNum">     244</span>              : </span>
-<span id="L245"><span class="lineNum">     245</span>              :         uint64_t m_peerId;</span>
+<span id="L216"><span class="lineNum">     216</span>              :         [[nodiscard]] const char* get_log_category() const override;</span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span>              :         p2pool* m_pool;</span>
+<span id="L219"><span class="lineNum">     219</span>              :         BlockCache* m_cache;</span>
+<span id="L220"><span class="lineNum">     220</span>              :         bool m_cacheLoaded;</span>
+<span id="L221"><span class="lineNum">     221</span>              :         std::string m_initialPeerList;</span>
+<span id="L222"><span class="lineNum">     222</span>              :         uint32_t m_maxOutgoingPeers;</span>
+<span id="L223"><span class="lineNum">     223</span>              :         uint32_t m_maxIncomingPeers;</span>
+<span id="L224"><span class="lineNum">     224</span>              : </span>
+<span id="L225"><span class="lineNum">     225</span>              :         uv_rwlock_t m_cachedBlocksLock;</span>
+<span id="L226"><span class="lineNum">     226</span>              :         unordered_map&lt;hash, PoolBlock*&gt;* m_cachedBlocks;</span>
+<span id="L227"><span class="lineNum">     227</span>              : </span>
+<span id="L228"><span class="lineNum">     228</span>              : private:</span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaUNC">           0 :         static void on_timer(uv_timer_t* timer) { reinterpret_cast&lt;P2PServer*&gt;(timer-&gt;data)-&gt;on_timer(); }</span></span>
+<span id="L230"><span class="lineNum">     230</span>              :         void on_timer();</span>
+<span id="L231"><span class="lineNum">     231</span>              : </span>
+<span id="L232"><span class="lineNum">     232</span>              :         void flush_cache();</span>
+<span id="L233"><span class="lineNum">     233</span>              :         void download_missing_blocks();</span>
+<span id="L234"><span class="lineNum">     234</span>              :         void check_host();</span>
+<span id="L235"><span class="lineNum">     235</span>              :         void check_block_template();</span>
+<span id="L236"><span class="lineNum">     236</span>              :         void update_peer_connections();</span>
+<span id="L237"><span class="lineNum">     237</span>              :         void update_peer_list();</span>
+<span id="L238"><span class="lineNum">     238</span>              :         void send_peer_list_request(P2PClient* client, uint64_t cur_time);</span>
+<span id="L239"><span class="lineNum">     239</span>              :         void save_peer_list_async();</span>
+<span id="L240"><span class="lineNum">     240</span>              :         void save_peer_list();</span>
+<span id="L241"><span class="lineNum">     241</span>              :         void load_peer_list();</span>
+<span id="L242"><span class="lineNum">     242</span>              :         void load_monerod_peer_list();</span>
+<span id="L243"><span class="lineNum">     243</span>              :         void update_peer_in_list(bool is_v6, const raw_ip&amp; ip, int port);</span>
+<span id="L244"><span class="lineNum">     244</span>              :         void remove_peer_from_list(const P2PClient* client);</span>
+<span id="L245"><span class="lineNum">     245</span>              :         void remove_peer_from_list(const raw_ip&amp; ip);</span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
-<span id="L247"><span class="lineNum">     247</span>              :         mutable uv_mutex_t m_peerListLock;</span>
+<span id="L247"><span class="lineNum">     247</span>              :         std::mt19937_64 m_rng;</span>
 <span id="L248"><span class="lineNum">     248</span>              : </span>
-<span id="L249"><span class="lineNum">     249</span>              :         struct Peer</span>
-<span id="L250"><span class="lineNum">     250</span>              :         {</span>
-<span id="L251"><span class="lineNum">     251</span>              :                 void normalize();</span>
-<span id="L252"><span class="lineNum">     252</span>              : </span>
-<span id="L253"><span class="lineNum">     253</span>              :                 bool m_isV6;</span>
-<span id="L254"><span class="lineNum">     254</span>              :                 raw_ip m_addr;</span>
-<span id="L255"><span class="lineNum">     255</span>              :                 int m_port;</span>
-<span id="L256"><span class="lineNum">     256</span>              :                 uint32_t m_numFailedConnections;</span>
-<span id="L257"><span class="lineNum">     257</span>              :                 uint64_t m_lastSeen;</span>
-<span id="L258"><span class="lineNum">     258</span>              :         };</span>
+<span id="L249"><span class="lineNum">     249</span>              :         uv_mutex_t m_blockLock;</span>
+<span id="L250"><span class="lineNum">     250</span>              :         PoolBlock* m_block;</span>
+<span id="L251"><span class="lineNum">     251</span>              :         std::vector&lt;uint8_t&gt; m_blockDeserializeBuf;</span>
+<span id="L252"><span class="lineNum">     252</span>              :         int m_blockDeserializeResult;</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              :         uv_timer_t m_timer;</span>
+<span id="L255"><span class="lineNum">     255</span>              :         uint64_t m_timerCounter;</span>
+<span id="L256"><span class="lineNum">     256</span>              :         uint64_t m_timerInterval;</span>
+<span id="L257"><span class="lineNum">     257</span>              : </span>
+<span id="L258"><span class="lineNum">     258</span>              :         uint64_t m_peerId;</span>
 <span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span>              :         std::atomic&lt;bool&gt; m_seenGoodPeers;</span>
-<span id="L261"><span class="lineNum">     261</span>              :         std::vector&lt;Peer&gt; m_peerList;</span>
-<span id="L262"><span class="lineNum">     262</span>              :         std::vector&lt;Peer&gt; m_peerListMonero;</span>
-<span id="L263"><span class="lineNum">     263</span>              :         std::atomic&lt;uint64_t&gt; m_peerListLastSaved;</span>
-<span id="L264"><span class="lineNum">     264</span>              : </span>
-<span id="L265"><span class="lineNum">     265</span>              :         struct Broadcast</span>
-<span id="L266"><span class="lineNum">     266</span>              :         {</span>
-<span id="L267"><span class="lineNum">     267</span>              :                 hash id;</span>
-<span id="L268"><span class="lineNum">     268</span>              :                 uint64_t received_timestamp;</span>
-<span id="L269"><span class="lineNum">     269</span>              : </span>
-<span id="L270"><span class="lineNum">     270</span>              :                 std::vector&lt;uint8_t&gt; blob;</span>
-<span id="L271"><span class="lineNum">     271</span>              :                 std::vector&lt;uint8_t&gt; pruned_blob;</span>
-<span id="L272"><span class="lineNum">     272</span>              :                 std::vector&lt;uint8_t&gt; compact_blob;</span>
-<span id="L273"><span class="lineNum">     273</span>              :                 std::vector&lt;hash&gt; ancestor_hashes;</span>
-<span id="L274"><span class="lineNum">     274</span>              :         };</span>
-<span id="L275"><span class="lineNum">     275</span>              : </span>
-<span id="L276"><span class="lineNum">     276</span>              :         uv_mutex_t m_broadcastLock;</span>
-<span id="L277"><span class="lineNum">     277</span>              :         uv_async_t m_broadcastAsync;</span>
-<span id="L278"><span class="lineNum">     278</span>              :         std::vector&lt;Broadcast*&gt; m_broadcastQueue;</span>
-<span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span>              :         bool m_lookForMissingBlocks;</span>
-<span id="L281"><span class="lineNum">     281</span>              :         unordered_set&lt;std::pair&lt;uint64_t, uint64_t&gt;&gt; m_missingBlockRequests;</span>
-<span id="L282"><span class="lineNum">     282</span>              :         unordered_set&lt;uint64_t&gt; m_blockNotifyRequests;</span>
-<span id="L283"><span class="lineNum">     283</span>              : </span>
-<span id="L284"><span class="lineNum">     284</span>              :         P2PClient* m_fastestPeer;</span>
-<span id="L285"><span class="lineNum">     285</span>              :         std::atomic&lt;bool&gt; m_newP2PoolVersionDetected;</span>
-<span id="L286"><span class="lineNum">     286</span>              : </span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC">           0 :         static void on_broadcast(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;on_broadcast(); }</span></span>
-<span id="L288"><span class="lineNum">     288</span>              :         void on_broadcast();</span>
-<span id="L289"><span class="lineNum">     289</span>              : </span>
-<span id="L290"><span class="lineNum">     290</span>              :         uv_mutex_t m_connectToPeersLock;</span>
-<span id="L291"><span class="lineNum">     291</span>              :         uv_async_t m_connectToPeersAsync;</span>
-<span id="L292"><span class="lineNum">     292</span>              :         std::string m_connectToPeersData;</span>
-<span id="L293"><span class="lineNum">     293</span>              : </span>
-<span id="L294"><span class="lineNum">     294</span>              :         static void on_connect_to_peers(uv_async_t* handle);</span>
+<span id="L260"><span class="lineNum">     260</span>              :         mutable uv_mutex_t m_peerListLock;</span>
+<span id="L261"><span class="lineNum">     261</span>              : </span>
+<span id="L262"><span class="lineNum">     262</span>              :         struct Peer</span>
+<span id="L263"><span class="lineNum">     263</span>              :         {</span>
+<span id="L264"><span class="lineNum">     264</span>              :                 void normalize();</span>
+<span id="L265"><span class="lineNum">     265</span>              : </span>
+<span id="L266"><span class="lineNum">     266</span>              :                 bool m_isV6;</span>
+<span id="L267"><span class="lineNum">     267</span>              :                 raw_ip m_addr;</span>
+<span id="L268"><span class="lineNum">     268</span>              :                 int m_port;</span>
+<span id="L269"><span class="lineNum">     269</span>              :                 uint32_t m_numFailedConnections;</span>
+<span id="L270"><span class="lineNum">     270</span>              :                 uint64_t m_lastSeen;</span>
+<span id="L271"><span class="lineNum">     271</span>              :         };</span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span>              :         std::atomic&lt;bool&gt; m_seenGoodPeers;</span>
+<span id="L274"><span class="lineNum">     274</span>              :         std::vector&lt;Peer&gt; m_peerList;</span>
+<span id="L275"><span class="lineNum">     275</span>              :         std::vector&lt;Peer&gt; m_peerListMonero;</span>
+<span id="L276"><span class="lineNum">     276</span>              :         std::atomic&lt;uint64_t&gt; m_peerListLastSaved;</span>
+<span id="L277"><span class="lineNum">     277</span>              : </span>
+<span id="L278"><span class="lineNum">     278</span>              :         uv_mutex_t m_broadcastLock;</span>
+<span id="L279"><span class="lineNum">     279</span>              :         uv_async_t m_broadcastAsync;</span>
+<span id="L280"><span class="lineNum">     280</span>              :         std::vector&lt;Broadcast*&gt; m_broadcastQueue;</span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span>              :         bool m_lookForMissingBlocks;</span>
+<span id="L283"><span class="lineNum">     283</span>              :         unordered_set&lt;std::pair&lt;uint64_t, uint64_t&gt;&gt; m_missingBlockRequests;</span>
+<span id="L284"><span class="lineNum">     284</span>              :         unordered_set&lt;uint64_t&gt; m_blockNotifyRequests;</span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span>              :         P2PClient* m_fastestPeer;</span>
+<span id="L287"><span class="lineNum">     287</span>              :         std::atomic&lt;bool&gt; m_newP2PoolVersionDetected;</span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC">           0 :         static void on_broadcast(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;on_broadcast(); }</span></span>
+<span id="L290"><span class="lineNum">     290</span>              :         void on_broadcast();</span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span>              :         uv_mutex_t m_connectToPeersLock;</span>
+<span id="L293"><span class="lineNum">     293</span>              :         uv_async_t m_connectToPeersAsync;</span>
+<span id="L294"><span class="lineNum">     294</span>              :         std::string m_connectToPeersData;</span>
 <span id="L295"><span class="lineNum">     295</span>              : </span>
-<span id="L296"><span class="lineNum">     296</span>              :         uv_mutex_t m_showPeersLock;</span>
-<span id="L297"><span class="lineNum">     297</span>              :         uv_async_t m_showPeersAsync;</span>
-<span id="L298"><span class="lineNum">     298</span>              : </span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaUNC">           0 :         static void on_show_peers(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;show_peers(); }</span></span>
-<span id="L300"><span class="lineNum">     300</span>              :         void show_peers() const;</span>
-<span id="L301"><span class="lineNum">     301</span>              : </span>
-<span id="L302"><span class="lineNum">     302</span>              :         void on_shutdown() override;</span>
+<span id="L296"><span class="lineNum">     296</span>              :         static void on_connect_to_peers(uv_async_t* handle);</span>
+<span id="L297"><span class="lineNum">     297</span>              : </span>
+<span id="L298"><span class="lineNum">     298</span>              :         uv_mutex_t m_showPeersLock;</span>
+<span id="L299"><span class="lineNum">     299</span>              :         uv_async_t m_showPeersAsync;</span>
+<span id="L300"><span class="lineNum">     300</span>              : </span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC">           0 :         static void on_show_peers(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;show_peers(); }</span></span>
+<span id="L302"><span class="lineNum">     302</span>              :         void show_peers() const;</span>
 <span id="L303"><span class="lineNum">     303</span>              : </span>
-<span id="L304"><span class="lineNum">     304</span>              :         void api_update_local_stats();</span>
+<span id="L304"><span class="lineNum">     304</span>              :         void on_shutdown() override;</span>
 <span id="L305"><span class="lineNum">     305</span>              : </span>
-<span id="L306"><span class="lineNum">     306</span>              :         enum {</span>
-<span id="L307"><span class="lineNum">     307</span>              :                 AUX_JOB_TIMEOUT = 3600,</span>
-<span id="L308"><span class="lineNum">     308</span>              :         };</span>
-<span id="L309"><span class="lineNum">     309</span>              : </span>
-<span id="L310"><span class="lineNum">     310</span>              :         unordered_set&lt;std::pair&lt;uint64_t, uint64_t&gt;&gt; m_auxJobMessages;</span>
-<span id="L311"><span class="lineNum">     311</span>              :         std::vector&lt;uint8_t&gt; m_auxJobLastMessage;</span>
-<span id="L312"><span class="lineNum">     312</span>              :         uint64_t m_auxJobLastMessageTimestamp;</span>
-<span id="L313"><span class="lineNum">     313</span>              : </span>
-<span id="L314"><span class="lineNum">     314</span>              :         void send_aux_job_donation(P2PServer::P2PClient* client, const uint8_t* data, uint32_t data_size);</span>
+<span id="L306"><span class="lineNum">     306</span>              :         void api_update_local_stats();</span>
+<span id="L307"><span class="lineNum">     307</span>              : </span>
+<span id="L308"><span class="lineNum">     308</span>              :         enum {</span>
+<span id="L309"><span class="lineNum">     309</span>              :                 AUX_JOB_TIMEOUT = 3600,</span>
+<span id="L310"><span class="lineNum">     310</span>              :         };</span>
+<span id="L311"><span class="lineNum">     311</span>              : </span>
+<span id="L312"><span class="lineNum">     312</span>              :         unordered_set&lt;std::pair&lt;uint64_t, uint64_t&gt;&gt; m_auxJobMessages;</span>
+<span id="L313"><span class="lineNum">     313</span>              :         std::vector&lt;uint8_t&gt; m_auxJobLastMessage;</span>
+<span id="L314"><span class="lineNum">     314</span>              :         uint64_t m_auxJobLastMessageTimestamp;</span>
 <span id="L315"><span class="lineNum">     315</span>              : </span>
-<span id="L316"><span class="lineNum">     316</span>              :         void clean_aux_job_messages();</span>
+<span id="L316"><span class="lineNum">     316</span>              :         void send_aux_job_donation(P2PServer::P2PClient* client, const uint8_t* data, uint32_t data_size);</span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
-<span id="L319"><span class="lineNum">     319</span>              :         struct AuxJobBroadcast</span>
-<span id="L320"><span class="lineNum">     320</span>              :         {</span>
-<span id="L321"><span class="lineNum">     321</span>              :                 std::vector&lt;uint8_t&gt; job;</span>
-<span id="L322"><span class="lineNum">     322</span>              :                 uint64_t timestamp = 0;</span>
-<span id="L323"><span class="lineNum">     323</span>              :         };</span>
-<span id="L324"><span class="lineNum">     324</span>              : </span>
-<span id="L325"><span class="lineNum">     325</span>              :         uv_mutex_t m_AuxJobBroadcastLock;</span>
-<span id="L326"><span class="lineNum">     326</span>              :         AuxJobBroadcast m_AuxJobBroadcast;</span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span>              :         uv_async_t m_AuxJobBroadcastAsync;</span>
+<span id="L318"><span class="lineNum">     318</span>              :         void clean_aux_job_messages();</span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
+<span id="L321"><span class="lineNum">     321</span>              :         struct AuxJobBroadcast</span>
+<span id="L322"><span class="lineNum">     322</span>              :         {</span>
+<span id="L323"><span class="lineNum">     323</span>              :                 std::vector&lt;uint8_t&gt; job;</span>
+<span id="L324"><span class="lineNum">     324</span>              :                 uint64_t timestamp = 0;</span>
+<span id="L325"><span class="lineNum">     325</span>              :         };</span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span>              :         uv_mutex_t m_AuxJobBroadcastLock;</span>
+<span id="L328"><span class="lineNum">     328</span>              :         AuxJobBroadcast m_AuxJobBroadcast;</span>
 <span id="L329"><span class="lineNum">     329</span>              : </span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 :         static void on_aux_job_broadcast(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;broadcast_aux_job_donation_handler(); }</span></span>
-<span id="L331"><span class="lineNum">     331</span>              :         void broadcast_aux_job_donation_handler();</span>
-<span id="L332"><span class="lineNum">     332</span>              : #endif</span>
-<span id="L333"><span class="lineNum">     333</span>              : };</span>
-<span id="L334"><span class="lineNum">     334</span>              : </span>
-<span id="L335"><span class="lineNum">     335</span>              : } // namespace p2pool</span>
+<span id="L330"><span class="lineNum">     330</span>              :         uv_async_t m_AuxJobBroadcastAsync;</span>
+<span id="L331"><span class="lineNum">     331</span>              : </span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :         static void on_aux_job_broadcast(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;broadcast_aux_job_donation_handler(); }</span></span>
+<span id="L333"><span class="lineNum">     333</span>              :         void broadcast_aux_job_donation_handler();</span>
+<span id="L334"><span class="lineNum">     334</span>              : #endif</span>
+<span id="L335"><span class="lineNum">     335</span>              : };</span>
+<span id="L336"><span class="lineNum">     336</span>              : </span>
+<span id="L337"><span class="lineNum">     337</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-06-24 11:46:15</td>
+            <td class="headerValue">2025-06-24 21:18:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">12.4&nbsp;%</td>
+            <td class="headerCovTableEntryLo">13.1&nbsp;%</td>
             <td class="headerCovTableEntry">419</td>
-            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntry">55</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -2627,7 +2627,7 @@
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L214">long p2pool::read_unaligned&lt;long&gt;(long const*)</a></td>
               
-              <td class="coverFnHi">555849</td>
+              <td class="coverFnHi">555817</td>
               
               
             </tr>
@@ -2648,21 +2648,21 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L214">unsigned long p2pool::read_unaligned<unsigned long>(unsigned long const*)</a></td>
               
-              <td class="coverFnAliasHi">555849</td>
+              <td class="coverFnAliasHi">555817</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L298">p2pool::seconds_since_epoch()</a></td>
               
-              <td class="coverFnHi">1407045</td>
+              <td class="coverFnHi">1414810</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L222">unsigned long p2pool::array_size&lt;int const, 4ul&gt;(int const (&amp;) [4ul])</a></td>
               
-              <td class="coverFnHi">3151911</td>
+              <td class="coverFnHi">3152411</td>
               
               
             </tr>
@@ -2697,28 +2697,28 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L222">unsigned long p2pool::array_size<unsigned char, 72ul>(unsigned char (&) [72ul])</a></td>
               
-              <td class="coverFnAliasHi">3151911</td>
+              <td class="coverFnAliasHi">3152411</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L166">void p2pool::writeVarint&lt;int&gt;(int, std::vector&lt;unsigned char, std::allocator&lt;unsigned char&gt; &gt;&amp;)</a></td>
               
-              <td class="coverFnHi">3254681</td>
+              <td class="coverFnHi">3261621</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L166">void p2pool::writeVarint<int>(int, std::vector<unsigned char, std::allocator<unsigned char> >&)</a></td>
               
-              <td class="coverFnAliasLo">0</td>
+              <td class="coverFnAliasHi">6</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L166">void p2pool::writeVarint<unsigned long>(unsigned long, std::vector<unsigned char, std::allocator<unsigned char> >&)</a></td>
               
-              <td class="coverFnAliasHi">3254681</td>
+              <td class="coverFnAliasHi">3261615</td>
               
               
             </tr>
@@ -2732,14 +2732,7 @@
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L156">crypto.cpp:void p2pool::writeVarint&lt;unsigned long, p2pool::derive_view_tag(p2pool::hash const&amp;, unsigned long, unsigned char&amp;)::$_0&gt;(unsigned long, p2pool::derive_view_tag(p2pool::hash const&amp;, unsigned long, unsigned char&amp;)::$_0&amp;&amp;)</a></td>
               
-              <td class="coverFnHi">4579369</td>
-              
-              
-            </tr>
-            <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L156">void p2pool::writeVarint<int, p2pool::writeVarint<int>(int, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}>(int, p2pool::writeVarint<int>(int, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}&&)</a></td>
-              
-              <td class="coverFnAliasLo">0</td>
+              <td class="coverFnHi">4594490</td>
               
               
             </tr>
@@ -2751,9 +2744,16 @@
               
             </tr>
             <tr>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L156">void p2pool::writeVarint<int, p2pool::writeVarint<int>(int, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}>(int, p2pool::writeVarint<int>(int, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}&&)</a></td>
+              
+              <td class="coverFnAliasHi">6</td>
+              
+              
+            </tr>
+            <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L156">block_template.cpp:void p2pool::writeVarint<unsigned long, p2pool::BlockTemplate::get_hashing_blob_nolock(unsigned int, unsigned char*) const::$_0>(unsigned long, p2pool::BlockTemplate::get_hashing_blob_nolock(unsigned int, unsigned char*) const::$_0&&)</a></td>
               
-              <td class="coverFnAliasHi">3984</td>
+              <td class="coverFnAliasHi">3992</td>
               
               
             </tr>
@@ -2795,35 +2795,35 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L156">pool_block.cpp:void p2pool::writeVarint<unsigned long, p2pool::PoolBlock::serialize_mainchain_data(unsigned long*, unsigned long*, int*, int*, unsigned int const*, unsigned int const*) const::$_0>(unsigned long, p2pool::PoolBlock::serialize_mainchain_data(unsigned long*, unsigned long*, int*, int*, unsigned int const*, unsigned int const*) const::$_0&&)</a></td>
               
-              <td class="coverFnAliasHi">30157</td>
+              <td class="coverFnAliasHi">30177</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L156">crypto.cpp:void p2pool::writeVarint<unsigned long, p2pool::derive_view_tag(p2pool::hash const&, unsigned long, unsigned char&)::$_0>(unsigned long, p2pool::derive_view_tag(p2pool::hash const&, unsigned long, unsigned char&)::$_0&&)</a></td>
               
-              <td class="coverFnAliasHi">606365</td>
+              <td class="coverFnAliasHi">610310</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L156">crypto.cpp:void p2pool::writeVarint<unsigned long, p2pool::derivation_to_scalar(p2pool::hash const&, unsigned long, unsigned char (&) [32])::{lambda(unsigned char)#1}>(unsigned long, p2pool::derivation_to_scalar(p2pool::hash const&, unsigned long, unsigned char (&) [32])::{lambda(unsigned char)#1}&&)</a></td>
               
-              <td class="coverFnAliasHi">643843</td>
+              <td class="coverFnAliasHi">648051</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L156">void p2pool::writeVarint<unsigned long, p2pool::writeVarint<unsigned long>(unsigned long, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}>(unsigned long, p2pool::writeVarint<unsigned long>(unsigned long, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}&&)</a></td>
               
-              <td class="coverFnAliasHi">3254681</td>
+              <td class="coverFnAliasHi">3261615</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L171">log.cpp:bool p2pool::out_of_range&lt;unsigned long&gt;(unsigned long)</a></td>
               
-              <td class="coverFnHi">9430544</td>
+              <td class="coverFnHi">9430822</td>
               
               
             </tr>
@@ -3096,14 +3096,14 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L171">util_tests.cpp:bool p2pool::out_of_range<unsigned long>(unsigned long)</a></td>
               
-              <td class="coverFnAliasHi">9430544</td>
+              <td class="coverFnAliasHi">9430822</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L175">unsigned char const* p2pool::readVarint&lt;unsigned int&gt;(unsigned char const*, unsigned char const*, unsigned int&amp;)</a></td>
               
-              <td class="coverFnHi">9430550</td>
+              <td class="coverFnHi">9430828</td>
               
               
             </tr>
@@ -3117,14 +3117,14 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L175">unsigned char const* p2pool::readVarint<unsigned long>(unsigned char const*, unsigned char const*, unsigned long&)</a></td>
               
-              <td class="coverFnAliasHi">9430549</td>
+              <td class="coverFnAliasHi">9430827</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L414">robin_hood::hash&lt;std::array&lt;unsigned char, 40ul&gt;, void&gt;::operator()(std::array&lt;unsigned char, 40ul&gt; const&amp;) const</a></td>
               
-              <td class="coverFnHi">9989315</td>
+              <td class="coverFnHi">9997213</td>
               
               
             </tr>
@@ -3138,42 +3138,42 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L414">robin_hood::hash<std::array<unsigned char, 64ul>, void>::operator()(std::array<unsigned char, 64ul> const&) const</a></td>
               
-              <td class="coverFnAliasHi">4883803</td>
+              <td class="coverFnAliasHi">4887489</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L414">robin_hood::hash<std::array<unsigned char, 72ul>, void>::operator()(std::array<unsigned char, 72ul> const&) const</a></td>
               
-              <td class="coverFnAliasHi">5085676</td>
+              <td class="coverFnAliasHi">5089888</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L167">p2pool::writeVarint&lt;int&gt;(int, std::vector&lt;unsigned char, std::allocator&lt;unsigned char&gt; &gt;&amp;)::{lambda(unsigned char)#1}::operator()(unsigned char) const</a></td>
               
-              <td class="coverFnHi">10876184</td>
+              <td class="coverFnHi">10908996</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L167">p2pool::writeVarint<int>(int, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}::operator()(unsigned char) const</a></td>
               
-              <td class="coverFnAliasLo">0</td>
+              <td class="coverFnAliasHi">14</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L167">p2pool::writeVarint<unsigned long>(unsigned long, std::vector<unsigned char, std::allocator<unsigned char> >&)::{lambda(unsigned char)#1}::operator()(unsigned char) const</a></td>
               
-              <td class="coverFnAliasHi">10876184</td>
+              <td class="coverFnAliasHi">10908982</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L396">robin_hood::hash&lt;p2pool::hash, void&gt;::operator()(p2pool::hash const&amp;) const</a></td>
               
-              <td class="coverFnHi">83615905</td>
+              <td class="coverFnHi">83616175</td>
               
               
             </tr>
