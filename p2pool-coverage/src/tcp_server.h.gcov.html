@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">14</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-12 06:59:56</td>
+            <td class="headerValue">2025-07-13 14:41:57</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntry">35</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -202,90 +202,93 @@
 <span id="L140"><span class="lineNum">     140</span>              :         template&lt;typename T&gt;</span>
 <span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC">           0 :         [[nodiscard]] FORCEINLINE bool send(Client* client, T&amp;&amp; callback, bool raw = false) { return send_internal(client, Callback&lt;size_t, uint8_t*, size_t&gt;::Derived&lt;T&gt;(std::move(callback)), raw); }</span></span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
-<span id="L143"><span class="lineNum">     143</span>              : private:</span>
-<span id="L144"><span class="lineNum">     144</span>              :         static void on_new_connection(uv_stream_t* server, int status);</span>
-<span id="L145"><span class="lineNum">     145</span>              :         static void on_connection_close(uv_handle_t* handle);</span>
-<span id="L146"><span class="lineNum">     146</span>              :         static void on_connection_error(uv_handle_t* handle);</span>
-<span id="L147"><span class="lineNum">     147</span>              :         static void on_connect(uv_connect_t* req, int status);</span>
-<span id="L148"><span class="lineNum">     148</span>              :         void on_new_client(uv_stream_t* server);</span>
-<span id="L149"><span class="lineNum">     149</span>              :         void on_new_client(uv_stream_t* server, Client* client);</span>
-<span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span>              :         [[nodiscard]] bool send_internal(Client* client, Callback&lt;size_t, uint8_t*, size_t&gt;::Base&amp;&amp; callback, bool raw);</span>
-<span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span>              :         allocate_client_callback m_allocateNewClient;</span>
-<span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span>              :         void close_sockets(bool listen_sockets);</span>
-<span id="L156"><span class="lineNum">     156</span>              :         static void error_invalid_ip(const std::string&amp; address);</span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :         [[nodiscard]] FORCEINLINE uint32_t num_connections() const { return m_numConnections.load(); }</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :         [[nodiscard]] FORCEINLINE uint32_t num_incoming_connections() const { return m_numIncomingConnections.load(); }</span></span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span>              : private:</span>
+<span id="L147"><span class="lineNum">     147</span>              :         static void on_new_connection(uv_stream_t* server, int status);</span>
+<span id="L148"><span class="lineNum">     148</span>              :         static void on_connection_close(uv_handle_t* handle);</span>
+<span id="L149"><span class="lineNum">     149</span>              :         static void on_connection_error(uv_handle_t* handle);</span>
+<span id="L150"><span class="lineNum">     150</span>              :         static void on_connect(uv_connect_t* req, int status);</span>
+<span id="L151"><span class="lineNum">     151</span>              :         void on_new_client(uv_stream_t* server);</span>
+<span id="L152"><span class="lineNum">     152</span>              :         void on_new_client(uv_stream_t* server, Client* client);</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              :         [[nodiscard]] bool send_internal(Client* client, Callback&lt;size_t, uint8_t*, size_t&gt;::Base&amp;&amp; callback, bool raw);</span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              :         allocate_client_callback m_allocateNewClient;</span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span>              :         std::vector&lt;uv_tcp_t*&gt; m_listenSockets6;</span>
-<span id="L159"><span class="lineNum">     159</span>              :         std::vector&lt;uv_tcp_t*&gt; m_listenSockets;</span>
+<span id="L158"><span class="lineNum">     158</span>              :         void close_sockets(bool listen_sockets);</span>
+<span id="L159"><span class="lineNum">     159</span>              :         static void error_invalid_ip(const std::string&amp; address);</span>
 <span id="L160"><span class="lineNum">     160</span>              : </span>
-<span id="L161"><span class="lineNum">     161</span>              : protected:</span>
-<span id="L162"><span class="lineNum">     162</span>              :         virtual const char* get_log_category() const;</span>
+<span id="L161"><span class="lineNum">     161</span>              :         std::vector&lt;uv_tcp_t*&gt; m_listenSockets6;</span>
+<span id="L162"><span class="lineNum">     162</span>              :         std::vector&lt;uv_tcp_t*&gt; m_listenSockets;</span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span>              :         std::vector&lt;uint8_t&gt; m_callbackBuf;</span>
-<span id="L165"><span class="lineNum">     165</span>              :         int m_defaultBacklog;</span>
+<span id="L164"><span class="lineNum">     164</span>              : protected:</span>
+<span id="L165"><span class="lineNum">     165</span>              :         virtual const char* get_log_category() const;</span>
 <span id="L166"><span class="lineNum">     166</span>              : </span>
-<span id="L167"><span class="lineNum">     167</span>              :         uv_thread_t m_loopThread;</span>
-<span id="L168"><span class="lineNum">     168</span>              :         std::atomic&lt;bool&gt; m_loopThreadCreated;</span>
+<span id="L167"><span class="lineNum">     167</span>              :         std::vector&lt;uint8_t&gt; m_callbackBuf;</span>
+<span id="L168"><span class="lineNum">     168</span>              :         int m_defaultBacklog;</span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span>              :         static void loop(void* data);</span>
-<span id="L171"><span class="lineNum">     171</span>              : </span>
-<span id="L172"><span class="lineNum">     172</span>              :         static void parse_address_list_internal(const std::string&amp; address_list, Callback&lt;void, bool, const std::string&amp;, const std::string&amp;, int&gt;::Base&amp;&amp; callback);</span>
-<span id="L173"><span class="lineNum">     173</span>              :         void start_listening(const std::string&amp; listen_addresses, bool upnp);</span>
-<span id="L174"><span class="lineNum">     174</span>              :         bool start_listening(bool is_v6, const std::string&amp; ip, int port, std::string address = std::string());</span>
-<span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span>              : #ifdef WITH_UPNP</span>
-<span id="L177"><span class="lineNum">     177</span>              :         int m_portMapping;</span>
-<span id="L178"><span class="lineNum">     178</span>              : #endif</span>
-<span id="L179"><span class="lineNum">     179</span>              : </span>
-<span id="L180"><span class="lineNum">     180</span>              :         std::string m_socks5Proxy;</span>
-<span id="L181"><span class="lineNum">     181</span>              :         bool m_socks5ProxyV6;</span>
-<span id="L182"><span class="lineNum">     182</span>              :         raw_ip m_socks5ProxyIP;</span>
-<span id="L183"><span class="lineNum">     183</span>              :         int m_socks5ProxyPort;</span>
-<span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span>              :         std::atomic&lt;int&gt; m_finished;</span>
-<span id="L186"><span class="lineNum">     186</span>              :         int m_listenPort;</span>
+<span id="L170"><span class="lineNum">     170</span>              :         uv_thread_t m_loopThread;</span>
+<span id="L171"><span class="lineNum">     171</span>              :         std::atomic&lt;bool&gt; m_loopThreadCreated;</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span>              :         static void loop(void* data);</span>
+<span id="L174"><span class="lineNum">     174</span>              : </span>
+<span id="L175"><span class="lineNum">     175</span>              :         static void parse_address_list_internal(const std::string&amp; address_list, Callback&lt;void, bool, const std::string&amp;, const std::string&amp;, int&gt;::Base&amp;&amp; callback);</span>
+<span id="L176"><span class="lineNum">     176</span>              :         void start_listening(const std::string&amp; listen_addresses, bool upnp);</span>
+<span id="L177"><span class="lineNum">     177</span>              :         bool start_listening(bool is_v6, const std::string&amp; ip, int port, std::string address = std::string());</span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span>              : #ifdef WITH_UPNP</span>
+<span id="L180"><span class="lineNum">     180</span>              :         int m_portMapping;</span>
+<span id="L181"><span class="lineNum">     181</span>              : #endif</span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span>              :         std::string m_socks5Proxy;</span>
+<span id="L184"><span class="lineNum">     184</span>              :         bool m_socks5ProxyV6;</span>
+<span id="L185"><span class="lineNum">     185</span>              :         raw_ip m_socks5ProxyIP;</span>
+<span id="L186"><span class="lineNum">     186</span>              :         int m_socks5ProxyPort;</span>
 <span id="L187"><span class="lineNum">     187</span>              : </span>
-<span id="L188"><span class="lineNum">     188</span>              :         uv_loop_t m_loop;</span>
-<span id="L189"><span class="lineNum">     189</span>              : </span>
-<span id="L190"><span class="lineNum">     190</span>              : #ifdef P2POOL_DEBUGGING</span>
-<span id="L191"><span class="lineNum">     191</span>              :         void check_event_loop_thread(const char *func) const;</span>
-<span id="L192"><span class="lineNum">     192</span>              : #else</span>
-<span id="L193"><span class="lineNum">     193</span>              :         static FORCEINLINE void check_event_loop_thread(const char*) {}</span>
-<span id="L194"><span class="lineNum">     194</span>              : #endif</span>
-<span id="L195"><span class="lineNum">     195</span>              : </span>
-<span id="L196"><span class="lineNum">     196</span>              :         std::vector&lt;Client*&gt; m_preallocatedClients;</span>
-<span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span>              :         Client* get_client();</span>
-<span id="L199"><span class="lineNum">     199</span>              :         void return_client(Client* c);</span>
+<span id="L188"><span class="lineNum">     188</span>              :         std::atomic&lt;int&gt; m_finished;</span>
+<span id="L189"><span class="lineNum">     189</span>              :         int m_listenPort;</span>
+<span id="L190"><span class="lineNum">     190</span>              : </span>
+<span id="L191"><span class="lineNum">     191</span>              :         uv_loop_t m_loop;</span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span>              : #ifdef P2POOL_DEBUGGING</span>
+<span id="L194"><span class="lineNum">     194</span>              :         void check_event_loop_thread(const char *func) const;</span>
+<span id="L195"><span class="lineNum">     195</span>              : #else</span>
+<span id="L196"><span class="lineNum">     196</span>              :         static FORCEINLINE void check_event_loop_thread(const char*) {}</span>
+<span id="L197"><span class="lineNum">     197</span>              : #endif</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :         std::vector&lt;Client*&gt; m_preallocatedClients;</span>
 <span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span>              :         Client* m_connectedClientsList;</span>
-<span id="L202"><span class="lineNum">     202</span>              :         std::atomic&lt;uint32_t&gt; m_numConnections;</span>
-<span id="L203"><span class="lineNum">     203</span>              :         std::atomic&lt;uint32_t&gt; m_numIncomingConnections;</span>
-<span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              :         uv_mutex_t m_bansLock;</span>
-<span id="L206"><span class="lineNum">     206</span>              :         unordered_map&lt;raw_ip, std::chrono::steady_clock::time_point&gt; m_bans;</span>
+<span id="L201"><span class="lineNum">     201</span>              :         Client* get_client();</span>
+<span id="L202"><span class="lineNum">     202</span>              :         void return_client(Client* c);</span>
+<span id="L203"><span class="lineNum">     203</span>              : </span>
+<span id="L204"><span class="lineNum">     204</span>              :         Client* m_connectedClientsList;</span>
+<span id="L205"><span class="lineNum">     205</span>              :         std::atomic&lt;uint32_t&gt; m_numConnections;</span>
+<span id="L206"><span class="lineNum">     206</span>              :         std::atomic&lt;uint32_t&gt; m_numIncomingConnections;</span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span>              :         [[nodiscard]] bool is_banned(bool is_v6, raw_ip ip);</span>
-<span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span>              :         unordered_set&lt;raw_ip&gt; m_pendingConnections;</span>
-<span id="L211"><span class="lineNum">     211</span>              : </span>
-<span id="L212"><span class="lineNum">     212</span>              :         uv_async_t m_dropConnectionsAsync;</span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :         static void on_drop_connections(uv_async_t* async) { reinterpret_cast&lt;TCPServer*&gt;(async-&gt;data)-&gt;close_sockets(false); }</span></span>
+<span id="L208"><span class="lineNum">     208</span>              :         uv_mutex_t m_bansLock;</span>
+<span id="L209"><span class="lineNum">     209</span>              :         unordered_map&lt;raw_ip, std::chrono::steady_clock::time_point&gt; m_bans;</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :         [[nodiscard]] bool is_banned(bool is_v6, raw_ip ip);</span>
+<span id="L212"><span class="lineNum">     212</span>              : </span>
+<span id="L213"><span class="lineNum">     213</span>              :         unordered_set&lt;raw_ip&gt; m_pendingConnections;</span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span>              :         virtual void on_shutdown() = 0;</span>
-<span id="L216"><span class="lineNum">     216</span>              : </span>
-<span id="L217"><span class="lineNum">     217</span>              :         uv_async_t m_shutdownAsync;</span>
-<span id="L218"><span class="lineNum">     218</span>              :         uv_prepare_t m_shutdownPrepare;</span>
-<span id="L219"><span class="lineNum">     219</span>              :         uv_timer_t m_shutdownTimer;</span>
-<span id="L220"><span class="lineNum">     220</span>              :         uint32_t m_shutdownCountdown;</span>
-<span id="L221"><span class="lineNum">     221</span>              :         uint32_t m_numHandles;</span>
-<span id="L222"><span class="lineNum">     222</span>              : </span>
-<span id="L223"><span class="lineNum">     223</span>              :         static void on_shutdown(uv_async_t* async);</span>
-<span id="L224"><span class="lineNum">     224</span>              : };</span>
+<span id="L215"><span class="lineNum">     215</span>              :         uv_async_t m_dropConnectionsAsync;</span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaUNC">           0 :         static void on_drop_connections(uv_async_t* async) { reinterpret_cast&lt;TCPServer*&gt;(async-&gt;data)-&gt;close_sockets(false); }</span></span>
+<span id="L217"><span class="lineNum">     217</span>              : </span>
+<span id="L218"><span class="lineNum">     218</span>              :         virtual void on_shutdown() = 0;</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span>              :         uv_async_t m_shutdownAsync;</span>
+<span id="L221"><span class="lineNum">     221</span>              :         uv_prepare_t m_shutdownPrepare;</span>
+<span id="L222"><span class="lineNum">     222</span>              :         uv_timer_t m_shutdownTimer;</span>
+<span id="L223"><span class="lineNum">     223</span>              :         uint32_t m_shutdownCountdown;</span>
+<span id="L224"><span class="lineNum">     224</span>              :         uint32_t m_numHandles;</span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span>              : } // namespace p2pool</span>
+<span id="L226"><span class="lineNum">     226</span>              :         static void on_shutdown(uv_async_t* async);</span>
+<span id="L227"><span class="lineNum">     227</span>              : };</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
