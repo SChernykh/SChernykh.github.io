@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-13 14:41:57</td>
+            <td class="headerValue">2025-07-13 14:50:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -321,7 +321,7 @@
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :         else if (!c.precalcFinished()) {</span></span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :                 node_health -= 1;</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :                 comments.push_back(&quot;Sidechain just synced, need a few minutes to ensure that this is the correct chain&quot;);</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :                 comments.push_back(&quot;Sidechain just synced, it needs a few minutes to confirm that everything is ok&quot;);</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L264"><span class="lineNum">     264</span>              : </span>
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaUNC">           0 :         const MinerData data = m_pool-&gt;miner_data();</span></span>
@@ -331,7 +331,7 @@
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC">           0 :                 comments.push_back(&quot;Your Monero node is lagging&quot;);</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC">           0 :         if (stratum &amp;&amp; stratum-&gt;num_connections() == 0) {</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC">           0 :         if (stratum &amp;&amp; (stratum-&gt;num_connections() == 0)) {</span></span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaUNC">           0 :                 node_health -= 1;</span></span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaUNC">           0 :                 comments.push_back(&quot;No stratum connections&quot;);</span></span>
 <span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC">           0 :         }</span></span>
