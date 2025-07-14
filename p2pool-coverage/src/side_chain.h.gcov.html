@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-13 22:27:31</td>
+            <td class="headerValue">2025-07-14 18:35:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -62,7 +62,7 @@
 <pre class="source">
 <span id="L1"><span class="lineNum">       1</span>              : /*</span>
 <span id="L2"><span class="lineNum">       2</span>              :  * This file is part of the Monero P2Pool &lt;https://github.com/SChernykh/p2pool&gt;</span>
-<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (c) 2021-2024 SChernykh &lt;https://github.com/SChernykh&gt;</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (c) 2021-2025 SChernykh &lt;https://github.com/SChernykh&gt;</span>
 <span id="L4"><span class="lineNum">       4</span>              :  *</span>
 <span id="L5"><span class="lineNum">       5</span>              :  * This program is free software: you can redistribute it and/or modify</span>
 <span id="L6"><span class="lineNum">       6</span>              :  * it under the terms of the GNU General Public License as published by</span>
@@ -129,7 +129,7 @@
 <span id="L67"><span class="lineNum">      67</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L68"><span class="lineNum">      68</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">       46721 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       64163 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       64162 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        6487 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       39997 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L73"><span class="lineNum">      73</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
