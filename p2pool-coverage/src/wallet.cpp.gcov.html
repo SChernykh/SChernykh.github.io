@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-15 17:49:09</td>
+            <td class="headerValue">2025-07-15 22:19:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">87.5&nbsp;%</td>
@@ -293,22 +293,22 @@
 <span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">          36 : }</span></span>
 <span id="L232"><span class="lineNum">     232</span>              : </span>
 <span id="L233"><span class="lineNum">     233</span>              : bool Wallet::get_eph_public_key(const hash&amp; txkey_sec, size_t output_index, hash&amp; eph_public_key, uint8_t&amp; view_tag, const uint8_t* expected_view_tag) const</span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">     3682868 : {</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">     3682868 :         hash derivation;</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">     3682868 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">     3682996 : {</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">     3682996 :         hash derivation;</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">     3682996 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L238"><span class="lineNum">     238</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L239"><span class="lineNum">     239</span>              : </span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC tlaBgGNC">     3682868 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC tlaBgGNC">     3682996 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
 <span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">          54 :                 return false;</span></span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          54 :         }</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">     3682814 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">     3682942 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">     3682814 :         return true;</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">     3682814 : }</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">     3682942 :         return true;</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">     3682942 : }</span></span>
 <span id="L250"><span class="lineNum">     250</span>              : </span>
 <span id="L251"><span class="lineNum">     251</span>              : } // namespace p2pool</span>
         </pre>
