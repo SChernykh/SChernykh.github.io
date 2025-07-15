@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-15 08:23:31</td>
+            <td class="headerValue">2025-07-15 16:30:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -253,43 +253,43 @@
 <span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          57 : }</span></span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
 <span id="L193"><span class="lineNum">     193</span>              : root_hash get_root_from_proof(hash h, const std::vector&lt;hash&gt;&amp; proof, size_t index, size_t count)</span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       64469 : {</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       64469 :         if (index &gt;= count) {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       64715 : {</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       64715 :         if (index &gt;= count) {</span></span>
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          55 :                 return root_hash();</span></span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          55 :         }</span></span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       64414 :         if (count == 1) {</span></span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">       56253 :                 return root_hash(h);</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">       56253 :         }</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       64660 :         if (count == 1) {</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">       47752 :                 return root_hash(h);</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">       47752 :         }</span></span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        8161 :         hash tmp[2];</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">       16908 :         hash tmp[2];</span></span>
 <span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        8161 :         if (count == 2) {</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        7890 :                 if (proof.empty()) {</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">       16908 :         if (count == 2) {</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">       16649 :                 if (proof.empty()) {</span></span>
 <span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">           2 :                         return root_hash();</span></span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">           2 :                 }</span></span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        7888 :                 if (index &amp; 1) {</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">          30 :                         tmp[0] = proof[0];</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">          30 :                         tmp[1] = h;</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">          30 :                 }</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">        7858 :                 else {</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        7858 :                         tmp[0] = h;</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        7858 :                         tmp[1] = proof[0];</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        7858 :                 }</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       16647 :                 if (index &amp; 1) {</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">           2 :                         tmp[0] = proof[0];</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">           2 :                         tmp[1] = h;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">           2 :                 }</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       16645 :                 else {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">       16645 :                         tmp[0] = h;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       16645 :                         tmp[1] = proof[0];</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       16645 :                 }</span></span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        7888 :                 keccak(tmp[0].h, HASH_SIZE * 2, h.h);</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        7888 :         }</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">         271 :         else {</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">         271 :                 size_t cnt = 1;</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">         919 :                 do { cnt &lt;&lt;= 1; } while (cnt &lt;= count);</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         271 :                 cnt &gt;&gt;= 1;</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       16647 :                 keccak(tmp[0].h, HASH_SIZE * 2, h.h);</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       16647 :         }</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">         259 :         else {</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">         259 :                 size_t cnt = 1;</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">         893 :                 do { cnt &lt;&lt;= 1; } while (cnt &lt;= count);</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">         259 :                 cnt &gt;&gt;= 1;</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">         271 :                 size_t proof_index = 0;</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">         259 :                 size_t proof_index = 0;</span></span>
 <span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         271 :                 const size_t k = cnt * 2 - count;</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         259 :                 const size_t k = cnt * 2 - count;</span></span>
 <span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">         271 :                 if (index &gt;= k) {</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">         259 :                 if (index &gt;= k) {</span></span>
 <span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">         104 :                         index -= k;</span></span>
 <span id="L232"><span class="lineNum">     232</span>              : </span>
 <span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">         104 :                         if (proof.empty()) {</span></span>
@@ -311,31 +311,31 @@
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">          84 :                         proof_index = 1;</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">          84 :                 }</span></span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         624 :                 for (; cnt &gt;= 2; ++proof_index, index &gt;&gt;= 1, cnt &gt;&gt;= 1) {</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         501 :                         if (proof_index &gt;= proof.size()) {</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         598 :                 for (; cnt &gt;= 2; ++proof_index, index &gt;&gt;= 1, cnt &gt;&gt;= 1) {</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         487 :                         if (proof_index &gt;= proof.size()) {</span></span>
 <span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         128 :                                 return root_hash();</span></span>
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">         128 :                         }</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : </span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         373 :                         if (index &amp; 1) {</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         359 :                         if (index &amp; 1) {</span></span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         197 :                                 tmp[0] = proof[proof_index];</span></span>
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         197 :                                 tmp[1] = h;</span></span>
 <span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         197 :                         }</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">         176 :                         else {</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         176 :                                 tmp[0] = h;</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         176 :                                 tmp[1] = proof[proof_index];</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         176 :                         }</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">         162 :                         else {</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         162 :                                 tmp[0] = h;</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">         162 :                                 tmp[1] = proof[proof_index];</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         162 :                         }</span></span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         373 :                         keccak(tmp[0].h, HASH_SIZE * 2, h.h);</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         373 :                 }</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         251 :         }</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         359 :                         keccak(tmp[0].h, HASH_SIZE * 2, h.h);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         359 :                 }</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         239 :         }</span></span>
 <span id="L269"><span class="lineNum">     269</span>              : </span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        8011 :         return root_hash(h);</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        8161 : }</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">       16758 :         return root_hash(h);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">       16908 : }</span></span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
 <span id="L273"><span class="lineNum">     273</span>              : bool verify_merkle_proof(const hash&amp; h, const std::vector&lt;hash&gt;&amp; proof, size_t index, size_t count, const root_hash&amp; root)</span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       40312 : {</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       40312 :         return get_root_from_proof(h, proof, index, count) == root;</span></span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       40312 : }</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">       40564 : {</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">       40564 :         return get_root_from_proof(h, proof, index, count) == root;</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       40564 : }</span></span>
 <span id="L277"><span class="lineNum">     277</span>              : </span>
 <span id="L278"><span class="lineNum">     278</span>              : bool verify_merkle_proof(hash h, const std::vector&lt;hash&gt;&amp; proof, uint32_t path, const root_hash&amp; root)</span>
 <span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">         260 : {</span></span>
@@ -358,24 +358,24 @@
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">         260 : }</span></span>
 <span id="L297"><span class="lineNum">     297</span>              : </span>
 <span id="L298"><span class="lineNum">     298</span>              : uint32_t get_aux_slot(const hash &amp;id, uint32_t nonce, uint32_t n_aux_chains)</span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">      208063 : {</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">      208063 :         if (n_aux_chains &lt;= 1) {</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">       56259 :                 return 0;</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       56259 :         }</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">      208309 : {</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">      208309 :         if (n_aux_chains &lt;= 1) {</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">       47759 :                 return 0;</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       47759 :         }</span></span>
 <span id="L303"><span class="lineNum">     303</span>              : </span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">      151804 :         constexpr uint8_t HASH_KEY_MM_SLOT = 'm';</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">      160550 :         constexpr uint8_t HASH_KEY_MM_SLOT = 'm';</span></span>
 <span id="L305"><span class="lineNum">     305</span>              : </span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">      151804 :         uint8_t buf[HASH_SIZE + sizeof(uint32_t) + 1];</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">      160550 :         uint8_t buf[HASH_SIZE + sizeof(uint32_t) + 1];</span></span>
 <span id="L307"><span class="lineNum">     307</span>              : </span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">      151804 :         memcpy(buf, &amp;id, HASH_SIZE);</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">      151804 :         memcpy(buf + HASH_SIZE, &amp;nonce, sizeof(uint32_t));</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      151804 :         buf[HASH_SIZE + sizeof(uint32_t)] = HASH_KEY_MM_SLOT;</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">      160550 :         memcpy(buf, &amp;id, HASH_SIZE);</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">      160550 :         memcpy(buf + HASH_SIZE, &amp;nonce, sizeof(uint32_t));</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      160550 :         buf[HASH_SIZE + sizeof(uint32_t)] = HASH_KEY_MM_SLOT;</span></span>
 <span id="L311"><span class="lineNum">     311</span>              : </span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      151804 :         hash res;</span></span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      151804 :         sha256(buf, sizeof(buf), res.h);</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      160550 :         hash res;</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      160550 :         sha256(buf, sizeof(buf), res.h);</span></span>
 <span id="L314"><span class="lineNum">     314</span>              : </span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">      151804 :         return *reinterpret_cast&lt;uint32_t*&gt;(res.h) % n_aux_chains;</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">      208063 : }</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">      160550 :         return *reinterpret_cast&lt;uint32_t*&gt;(res.h) % n_aux_chains;</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">      208309 : }</span></span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
 <span id="L318"><span class="lineNum">     318</span>              : bool find_aux_nonce(const std::vector&lt;hash&gt;&amp; aux_id, uint32_t&amp; nonce, uint32_t max_nonce)</span>
 <span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">          12 : {</span></span>

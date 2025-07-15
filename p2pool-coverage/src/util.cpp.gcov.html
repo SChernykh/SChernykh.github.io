@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-15 08:23:31</td>
+            <td class="headerValue">2025-07-15 16:30:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">34.1&nbsp;%</td>
@@ -226,22 +226,22 @@
 <span id="L164"><span class="lineNum">     164</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
 <span id="L166"><span class="lineNum">     166</span>              : NOINLINE difficulty_type&amp; difficulty_type::operator/=(difficulty_type b)</span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC tlaBgGNC">    44082747 : {</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">    44082747 :         if (*this &lt; b) {</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC tlaBgGNC">    44083125 : {</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">    44083125 :         if (*this &lt; b) {</span></span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaGNC">      287413 :                 lo = 0;</span></span>
 <span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">      287413 :                 hi = 0;</span></span>
 <span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      287413 :                 return *this;</span></span>
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">      287413 :         }</span></span>
 <span id="L173"><span class="lineNum">     173</span>              : </span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">    43795334 :         if (*this - b &lt; b) {</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">    43795712 :         if (*this - b &lt; b) {</span></span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      812876 :                 lo = 1;</span></span>
 <span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">      812876 :                 hi = 0;</span></span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">      812876 :                 return *this;</span></span>
 <span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">      812876 :         }</span></span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">    42982458 :         if (b.hi == 0) {</span></span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">     3530440 :                 return operator/=(b.lo);</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">     3530440 :         }</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">    42982836 :         if (b.hi == 0) {</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">     3530818 :                 return operator/=(b.lo);</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">     3530818 :         }</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">    39452018 :         const uint64_t shift = bsr(b.hi) + 1;</span></span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">    39452018 :         const uint64_t divisor = shiftleft128(b.lo, b.hi, 64 - shift);</span></span>
@@ -271,7 +271,7 @@
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">    39452018 :         hi = 0;</span></span>
 <span id="L210"><span class="lineNum">     210</span>              : </span>
 <span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">    39452018 :         return *this;</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">    42982458 : }</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">    42982836 : }</span></span>
 <span id="L213"><span class="lineNum">     213</span>              : </span>
 <span id="L214"><span class="lineNum">     214</span>              : NOINLINE bool difficulty_type::check_pow(const hash&amp; pow_hash) const</span>
 <span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">    20004009 : {</span></span>

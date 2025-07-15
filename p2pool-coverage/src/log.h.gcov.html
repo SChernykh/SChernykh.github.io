@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-15 08:23:31</td>
+            <td class="headerValue">2025-07-15 16:30:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">12.6&nbsp;%</td>
@@ -631,7 +631,7 @@
 <span id="L569"><span class="lineNum">     569</span>              : #define SIDE_EFFECT_CHECK(level, ...)</span>
 <span id="L570"><span class="lineNum">     570</span>              : #else</span>
 <span id="L571"><span class="lineNum">     571</span>              : #define SIDE_EFFECT_CHECK(level, ...) \</span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">      172135 :         if (0) { \</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">      187569 :         if (0) { \</span></span>
 <span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC tlaBgUNC">           0 :                 MSVC_PRAGMA(warning(suppress:26444)) \</span></span>
 <span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :                 [=]() { \</span></span>
 <span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC">           0 :                         log::DummyStream x; \</span></span>
@@ -644,8 +644,8 @@
 <span id="L582"><span class="lineNum">     582</span>              : </span>
 <span id="L583"><span class="lineNum">     583</span>              : #ifdef P2POOL_LOG_DISABLE</span>
 <span id="L584"><span class="lineNum">     584</span>              : </span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC tlaBgGNC">      165130 : #define LOGINFO(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">        7005 : #define LOGWARN(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC tlaBgGNC">      166434 : #define LOGINFO(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">       21135 : #define LOGWARN(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
 <span id="L587"><span class="lineNum">     587</span> <span class="tlaUNC tlaBgUNC">           0 : #define LOGERR(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
 <span id="L588"><span class="lineNum">     588</span>              : </span>
 <span id="L589"><span class="lineNum">     589</span>              : #else</span>
