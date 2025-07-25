@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-25 07:54:54</td>
+            <td class="headerValue">2025-07-25 11:43:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">82.9&nbsp;%</td>
@@ -367,17 +367,17 @@
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">        6723 :                         Precalc&amp; operator=(Precalc&amp;&amp;) = delete;</span></span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
 <span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">        6723 :                         FORCEINLINE void operator()()</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">       20160 :                         {</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       20160 :                                 if (shares) {</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">       20159 :                                         hash derivation, eph_public_key;</span></span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">       20159 :                                         int i;</span></span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">       26882 :                                         while ((i = counter.fetch_sub(1)) &gt;= 0) {</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">       20152 :                         {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       20161 :                                 if (shares) {</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">       20161 :                                         hash derivation, eph_public_key;</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">       20161 :                                         int i;</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">       26884 :                                         while ((i = counter.fetch_sub(1)) &gt;= 0) {</span></span>
 <span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">        6723 :                                                 uint8_t view_tag;</span></span>
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">        6723 :                                                 generate_key_derivation(shares[i].first, txKeySec, i, derivation, view_tag);</span></span>
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">        6723 :                                                 derive_public_key(derivation, i, shares[i].second, eph_public_key);</span></span>
 <span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">        6723 :                                         }</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">       20159 :                                 }</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       20160 :                         }</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">       20161 :                                 }</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       20152 :                         }</span></span>
 <span id="L319"><span class="lineNum">     319</span>              : </span>
 <span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">        6723 :                         hash txKeySec;</span></span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">        6723 :                         std::atomic&lt;int&gt; counter;</span></span>
@@ -1046,112 +1046,112 @@
 <span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">       13446 : }</span></span>
 <span id="L985"><span class="lineNum">     985</span>              : </span>
 <span id="L986"><span class="lineNum">     986</span>              : hash BlockTemplate::calc_sidechain_hash(uint32_t sidechain_extra_nonce) const</span>
-<span id="L987"><span class="lineNum">     987</span> <span class="tlaGNC">       24123 : {</span></span>
+<span id="L987"><span class="lineNum">     987</span> <span class="tlaGNC">       24115 : {</span></span>
 <span id="L988"><span class="lineNum">     988</span>              :         // Calculate side-chain hash (all block template bytes + all side-chain bytes + consensus ID, replacing NONCE, EXTRA_NONCE and HASH itself with 0's)</span>
-<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">       24123 :         const size_t size = m_sidechainHashBlob.size();</span></span>
-<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">       24123 :         const size_t N = m_sidechainHashInputLength;</span></span>
+<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">       24115 :         const size_t size = m_sidechainHashBlob.size();</span></span>
+<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">       24115 :         const size_t N = m_sidechainHashInputLength;</span></span>
 <span id="L991"><span class="lineNum">     991</span>              : </span>
-<span id="L992"><span class="lineNum">     992</span> <span class="tlaGNC">       24123 :         const size_t sidechain_extra_nonce_offset = size - HASH_SIZE - EXTRA_NONCE_SIZE;</span></span>
-<span id="L993"><span class="lineNum">     993</span> <span class="tlaGNC">       24123 :         const uint8_t sidechain_extra_nonce_buf[EXTRA_NONCE_SIZE] = {</span></span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">       24123 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 0),</span></span>
-<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">       24123 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 8),</span></span>
-<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">       24123 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 16),</span></span>
-<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">       24123 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 24)</span></span>
-<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">       24123 :         };</span></span>
+<span id="L992"><span class="lineNum">     992</span> <span class="tlaGNC">       24115 :         const size_t sidechain_extra_nonce_offset = size - HASH_SIZE - EXTRA_NONCE_SIZE;</span></span>
+<span id="L993"><span class="lineNum">     993</span> <span class="tlaGNC">       24115 :         const uint8_t sidechain_extra_nonce_buf[EXTRA_NONCE_SIZE] = {</span></span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">       24115 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 0),</span></span>
+<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">       24115 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 8),</span></span>
+<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">       24115 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 16),</span></span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">       24115 :                 static_cast&lt;uint8_t&gt;(sidechain_extra_nonce &gt;&gt; 24)</span></span>
+<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">       24115 :         };</span></span>
 <span id="L999"><span class="lineNum">     999</span>              : </span>
-<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">       24123 :         hash result;</span></span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">       24123 :         uint8_t buf[288];</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">       24115 :         hash result;</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">       24115 :         uint8_t buf[288];</span></span>
 <span id="L1002"><span class="lineNum">    1002</span>              : </span>
-<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">       24132 :         const bool b = N &amp;&amp; (N &lt;= sidechain_extra_nonce_offset) &amp;&amp; (N &lt; size) &amp;&amp; (size - N &lt;= sizeof(buf));</span></span>
+<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">       24130 :         const bool b = N &amp;&amp; (N &lt;= sidechain_extra_nonce_offset) &amp;&amp; (N &lt; size) &amp;&amp; (size - N &lt;= sizeof(buf));</span></span>
 <span id="L1004"><span class="lineNum">    1004</span>              : </span>
 <span id="L1005"><span class="lineNum">    1005</span>              :         // Slow path: O(N)</span>
-<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">       24132 :         if (!b || pool_block_debug()) {</span></span>
-<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">    13700071 :                 keccak_custom([this, sidechain_extra_nonce_offset, &amp;sidechain_extra_nonce_buf](int offset) -&gt; uint8_t {</span></span>
-<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">    13700071 :                         const uint32_t k = static_cast&lt;uint32_t&gt;(offset - sidechain_extra_nonce_offset);</span></span>
-<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">    13700071 :                         if (k &lt; EXTRA_NONCE_SIZE) {</span></span>
-<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">       95265 :                                 return sidechain_extra_nonce_buf[k];</span></span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">       95265 :                         }</span></span>
-<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaGNC">    13604806 :                         return m_sidechainHashBlob[offset];</span></span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">    13700071 :                 }, static_cast&lt;int&gt;(size), result.h, HASH_SIZE);</span></span>
-<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">       24131 :         }</span></span>
+<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">       24130 :         if (!b || pool_block_debug()) {</span></span>
+<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">    13493101 :                 keccak_custom([this, sidechain_extra_nonce_offset, &amp;sidechain_extra_nonce_buf](int offset) -&gt; uint8_t {</span></span>
+<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">    13493101 :                         const uint32_t k = static_cast&lt;uint32_t&gt;(offset - sidechain_extra_nonce_offset);</span></span>
+<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">    13493101 :                         if (k &lt; EXTRA_NONCE_SIZE) {</span></span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">       95418 :                                 return sidechain_extra_nonce_buf[k];</span></span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">       95418 :                         }</span></span>
+<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaGNC">    13397683 :                         return m_sidechainHashBlob[offset];</span></span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">    13493101 :                 }, static_cast&lt;int&gt;(size), result.h, HASH_SIZE);</span></span>
+<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">       24129 :         }</span></span>
 <span id="L1015"><span class="lineNum">    1015</span>              : </span>
 <span id="L1016"><span class="lineNum">    1016</span>              :         // Fast path: O(1)</span>
-<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaGNC">       24165 :         if (b) {</span></span>
-<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">       24165 :                 const int inlen = static_cast&lt;int&gt;(size - N);</span></span>
+<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaGNC">       24161 :         if (b) {</span></span>
+<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">       24161 :                 const int inlen = static_cast&lt;int&gt;(size - N);</span></span>
 <span id="L1019"><span class="lineNum">    1019</span>              : </span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">       24165 :                 memcpy(buf, m_sidechainHashBlob.data() + N, size - N);</span></span>
-<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">       24165 :                 memcpy(buf + sidechain_extra_nonce_offset - N, sidechain_extra_nonce_buf, EXTRA_NONCE_SIZE);</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">       24161 :                 memcpy(buf, m_sidechainHashBlob.data() + N, size - N);</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">       24161 :                 memcpy(buf + sidechain_extra_nonce_offset - N, sidechain_extra_nonce_buf, EXTRA_NONCE_SIZE);</span></span>
 <span id="L1022"><span class="lineNum">    1022</span>              : </span>
-<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">       24165 :                 std::array&lt;uint64_t, 25&gt; st = m_sidechainHashKeccakState;</span></span>
-<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">       24165 :                 keccak_finish(buf, inlen, st);</span></span>
+<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">       24161 :                 std::array&lt;uint64_t, 25&gt; st = m_sidechainHashKeccakState;</span></span>
+<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">       24161 :                 keccak_finish(buf, inlen, st);</span></span>
 <span id="L1025"><span class="lineNum">    1025</span>              : </span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">       24165 :                 if (pool_block_debug() &amp;&amp; (memcmp(st.data(), result.h, HASH_SIZE) != 0)) {</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">       24161 :                 if (pool_block_debug() &amp;&amp; (memcmp(st.data(), result.h, HASH_SIZE) != 0)) {</span></span>
 <span id="L1027"><span class="lineNum">    1027</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;calc_sidechain_hash fast path is broken. Fix the code!&quot;);</span></span>
 <span id="L1028"><span class="lineNum">    1028</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1029"><span class="lineNum">    1029</span>              : </span>
-<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC tlaBgGNC">       24165 :                 memcpy(result.h, st.data(), HASH_SIZE);</span></span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">       24165 :         }</span></span>
+<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC tlaBgGNC">       24161 :                 memcpy(result.h, st.data(), HASH_SIZE);</span></span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">       24161 :         }</span></span>
 <span id="L1032"><span class="lineNum">    1032</span>              : </span>
-<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">       24123 :         return result;</span></span>
-<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">       24123 : }</span></span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">       24115 :         return result;</span></span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">       24115 : }</span></span>
 <span id="L1035"><span class="lineNum">    1035</span>              : </span>
 <span id="L1036"><span class="lineNum">    1036</span>              : hash BlockTemplate::calc_miner_tx_hash(uint32_t extra_nonce) const</span>
-<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">       10674 : {</span></span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">       10671 : {</span></span>
 <span id="L1038"><span class="lineNum">    1038</span>              :         // Calculate 3 partial hashes</span>
-<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">       10674 :         uint8_t hashes[HASH_SIZE * 3];</span></span>
+<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">       10671 :         uint8_t hashes[HASH_SIZE * 3];</span></span>
 <span id="L1040"><span class="lineNum">    1040</span>              : </span>
-<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">       10674 :         const uint8_t* data = m_blockTemplateBlob.data() + m_minerTxOffsetInTemplate;</span></span>
+<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">       10671 :         const uint8_t* data = m_blockTemplateBlob.data() + m_minerTxOffsetInTemplate;</span></span>
 <span id="L1042"><span class="lineNum">    1042</span>              : </span>
-<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaGNC">       10674 :         const size_t extra_nonce_offset = m_extraNonceOffsetInTemplate - m_minerTxOffsetInTemplate;</span></span>
-<span id="L1044"><span class="lineNum">    1044</span> <span class="tlaGNC">       10674 :         const uint8_t extra_nonce_buf[EXTRA_NONCE_SIZE] = {</span></span>
-<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC">       10674 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 0),</span></span>
-<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaGNC">       10674 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 8),</span></span>
-<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">       10674 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 16),</span></span>
-<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">       10674 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 24)</span></span>
-<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC">       10674 :         };</span></span>
+<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaGNC">       10671 :         const size_t extra_nonce_offset = m_extraNonceOffsetInTemplate - m_minerTxOffsetInTemplate;</span></span>
+<span id="L1044"><span class="lineNum">    1044</span> <span class="tlaGNC">       10671 :         const uint8_t extra_nonce_buf[EXTRA_NONCE_SIZE] = {</span></span>
+<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC">       10671 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 0),</span></span>
+<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaGNC">       10671 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 8),</span></span>
+<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">       10671 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 16),</span></span>
+<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">       10671 :                 static_cast&lt;uint8_t&gt;(extra_nonce &gt;&gt; 24)</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC">       10671 :         };</span></span>
 <span id="L1050"><span class="lineNum">    1050</span>              : </span>
 <span id="L1051"><span class="lineNum">    1051</span>              :         // Calculate sidechain id and merge mining root hash with this extra_nonce</span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">       10674 :         hash merge_mining_root;</span></span>
-<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">       10674 :         {</span></span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">       10674 :                 const hash sidechain_id = calc_sidechain_hash(extra_nonce);</span></span>
-<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaGNC">       10674 :                 const uint32_t n_aux_chains = static_cast&lt;uint32_t&gt;(m_poolBlockTemplate-&gt;m_auxChains.size() + 1);</span></span>
-<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">       10674 :                 const uint32_t aux_slot = get_aux_slot(m_sidechain-&gt;consensus_hash(), m_poolBlockTemplate-&gt;m_auxNonce, n_aux_chains);</span></span>
-<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">       10674 :                 merge_mining_root = get_root_from_proof(sidechain_id, m_poolBlockTemplate-&gt;m_merkleProof, aux_slot, n_aux_chains);</span></span>
-<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaGNC">       10674 :         }</span></span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">       10671 :         hash merge_mining_root;</span></span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">       10671 :         {</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">       10671 :                 const hash sidechain_id = calc_sidechain_hash(extra_nonce);</span></span>
+<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaGNC">       10671 :                 const uint32_t n_aux_chains = static_cast&lt;uint32_t&gt;(m_poolBlockTemplate-&gt;m_auxChains.size() + 1);</span></span>
+<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">       10671 :                 const uint32_t aux_slot = get_aux_slot(m_sidechain-&gt;consensus_hash(), m_poolBlockTemplate-&gt;m_auxNonce, n_aux_chains);</span></span>
+<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">       10671 :                 merge_mining_root = get_root_from_proof(sidechain_id, m_poolBlockTemplate-&gt;m_merkleProof, aux_slot, n_aux_chains);</span></span>
+<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaGNC">       10671 :         }</span></span>
 <span id="L1059"><span class="lineNum">    1059</span>              : </span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">       10674 :         const size_t merkle_root_offset = extra_nonce_offset + m_poolBlockTemplate-&gt;m_extraNonceSize + 2 + m_poolBlockTemplate-&gt;m_merkleTreeDataSize;</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">       10671 :         const size_t merkle_root_offset = extra_nonce_offset + m_poolBlockTemplate-&gt;m_extraNonceSize + 2 + m_poolBlockTemplate-&gt;m_merkleTreeDataSize;</span></span>
 <span id="L1061"><span class="lineNum">    1061</span>              : </span>
 <span id="L1062"><span class="lineNum">    1062</span>              :         // 1. Prefix (everything except vin_rct_type byte in the end)</span>
 <span id="L1063"><span class="lineNum">    1063</span>              :         // Apply extra_nonce in-place because we can't write to the block template here</span>
-<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaGNC">       10674 :         const size_t tx_size = m_minerTxSize - 1;</span></span>
+<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaGNC">       10671 :         const size_t tx_size = m_minerTxSize - 1;</span></span>
 <span id="L1065"><span class="lineNum">    1065</span>              : </span>
-<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">       10674 :         hash full_hash;</span></span>
-<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">       10674 :         uint8_t tx_buf[288];</span></span>
+<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">       10671 :         hash full_hash;</span></span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">       10671 :         uint8_t tx_buf[288];</span></span>
 <span id="L1068"><span class="lineNum">    1068</span>              : </span>
-<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">       10674 :         const size_t N = m_minerTxKeccakStateInputLength;</span></span>
-<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC">       10674 :         const bool b = N &amp;&amp; (N &lt;= extra_nonce_offset) &amp;&amp; (N &lt; tx_size) &amp;&amp; (tx_size - N &lt;= sizeof(tx_buf));</span></span>
+<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">       10671 :         const size_t N = m_minerTxKeccakStateInputLength;</span></span>
+<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC">       10671 :         const bool b = N &amp;&amp; (N &lt;= extra_nonce_offset) &amp;&amp; (N &lt; tx_size) &amp;&amp; (tx_size - N &lt;= sizeof(tx_buf));</span></span>
 <span id="L1071"><span class="lineNum">    1071</span>              : </span>
 <span id="L1072"><span class="lineNum">    1072</span>              :         // Slow path: O(N)</span>
-<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">       10674 :         if (!b || pool_block_debug())</span></span>
-<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaGNC">       10697 :         {</span></span>
-<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaGNC">     1340909 :                 keccak_custom([data, extra_nonce_offset, &amp;extra_nonce_buf, merkle_root_offset, &amp;merge_mining_root](int offset) {</span></span>
-<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaGNC">     1340909 :                         uint32_t k = static_cast&lt;uint32_t&gt;(offset - static_cast&lt;int&gt;(extra_nonce_offset));</span></span>
-<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">     1340909 :                         if (k &lt; EXTRA_NONCE_SIZE) {</span></span>
-<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaGNC">       42111 :                                 return extra_nonce_buf[k];</span></span>
-<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaGNC">       42111 :                         }</span></span>
+<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">       10671 :         if (!b || pool_block_debug())</span></span>
+<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaGNC">       10705 :         {</span></span>
+<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaGNC">     1342353 :                 keccak_custom([data, extra_nonce_offset, &amp;extra_nonce_buf, merkle_root_offset, &amp;merge_mining_root](int offset) {</span></span>
+<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaGNC">     1342353 :                         uint32_t k = static_cast&lt;uint32_t&gt;(offset - static_cast&lt;int&gt;(extra_nonce_offset));</span></span>
+<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">     1342353 :                         if (k &lt; EXTRA_NONCE_SIZE) {</span></span>
+<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaGNC">       42195 :                                 return extra_nonce_buf[k];</span></span>
+<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaGNC">       42195 :                         }</span></span>
 <span id="L1080"><span class="lineNum">    1080</span>              : </span>
-<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">     1298798 :                         k = static_cast&lt;uint32_t&gt;(offset - static_cast&lt;int&gt;(merkle_root_offset));</span></span>
-<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaGNC">     1298798 :                         if (k &lt; HASH_SIZE) {</span></span>
-<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaGNC">      335583 :                                 return merge_mining_root.h[k];</span></span>
-<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">      335583 :                         }</span></span>
+<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">     1300158 :                         k = static_cast&lt;uint32_t&gt;(offset - static_cast&lt;int&gt;(merkle_root_offset));</span></span>
+<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaGNC">     1300158 :                         if (k &lt; HASH_SIZE) {</span></span>
+<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaGNC">      336225 :                                 return merge_mining_root.h[k];</span></span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">      336225 :                         }</span></span>
 <span id="L1085"><span class="lineNum">    1085</span>              : </span>
-<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">      963215 :                         return data[offset];</span></span>
-<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaGNC">     1298798 :                 }, static_cast&lt;int&gt;(tx_size), full_hash.h, HASH_SIZE);</span></span>
-<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaGNC">       10697 :                 memcpy(hashes, full_hash.h, HASH_SIZE);</span></span>
-<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaGNC">       10697 :         }</span></span>
+<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">      963933 :                         return data[offset];</span></span>
+<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaGNC">     1300158 :                 }, static_cast&lt;int&gt;(tx_size), full_hash.h, HASH_SIZE);</span></span>
+<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaGNC">       10705 :                 memcpy(hashes, full_hash.h, HASH_SIZE);</span></span>
+<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaGNC">       10705 :         }</span></span>
 <span id="L1090"><span class="lineNum">    1090</span>              : </span>
 <span id="L1091"><span class="lineNum">    1091</span>              :         // Fast path: O(1)</span>
-<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaGNC">       10674 :         if (b) {</span></span>
+<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaGNC">       10671 :         if (b) {</span></span>
 <span id="L1093"><span class="lineNum">    1093</span> <span class="tlaUNC tlaBgUNC">           0 :                 const int inlen = static_cast&lt;int&gt;(tx_size - N);</span></span>
 <span id="L1094"><span class="lineNum">    1094</span>              : </span>
 <span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :                 memcpy(tx_buf, data + N, inlen);</span></span>
@@ -1169,20 +1169,20 @@
 <span id="L1107"><span class="lineNum">    1107</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1108"><span class="lineNum">    1108</span>              : </span>
 <span id="L1109"><span class="lineNum">    1109</span>              :         // 2. Base RCT, single 0 byte in miner tx</span>
-<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaGNC tlaBgGNC">       10674 :         static constexpr uint8_t known_second_hash[HASH_SIZE] = {</span></span>
-<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC">       10674 :                 188,54,120,158,122,30,40,20,54,70,66,41,130,143,129,125,102,18,247,180,119,214,101,145,255,150,169,224,100,188,201,138</span></span>
-<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaGNC">       10674 :         };</span></span>
-<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaGNC">       10674 :         memcpy(hashes + HASH_SIZE, known_second_hash, HASH_SIZE);</span></span>
+<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaGNC tlaBgGNC">       10671 :         static constexpr uint8_t known_second_hash[HASH_SIZE] = {</span></span>
+<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC">       10671 :                 188,54,120,158,122,30,40,20,54,70,66,41,130,143,129,125,102,18,247,180,119,214,101,145,255,150,169,224,100,188,201,138</span></span>
+<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaGNC">       10671 :         };</span></span>
+<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaGNC">       10671 :         memcpy(hashes + HASH_SIZE, known_second_hash, HASH_SIZE);</span></span>
 <span id="L1114"><span class="lineNum">    1114</span>              : </span>
 <span id="L1115"><span class="lineNum">    1115</span>              :         // 3. Prunable RCT, empty in miner tx</span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">       10674 :         memset(hashes + HASH_SIZE * 2, 0, HASH_SIZE);</span></span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">       10671 :         memset(hashes + HASH_SIZE * 2, 0, HASH_SIZE);</span></span>
 <span id="L1117"><span class="lineNum">    1117</span>              : </span>
 <span id="L1118"><span class="lineNum">    1118</span>              :         // Calculate miner transaction hash</span>
-<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaGNC">       10674 :         hash result;</span></span>
-<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaGNC">       10674 :         keccak(hashes, sizeof(hashes), result.h);</span></span>
+<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaGNC">       10671 :         hash result;</span></span>
+<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaGNC">       10671 :         keccak(hashes, sizeof(hashes), result.h);</span></span>
 <span id="L1121"><span class="lineNum">    1121</span>              : </span>
-<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaGNC">       10674 :         return result;</span></span>
-<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaGNC">       10674 : }</span></span>
+<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaGNC">       10671 :         return result;</span></span>
+<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaGNC">       10671 : }</span></span>
 <span id="L1124"><span class="lineNum">    1124</span>              : </span>
 <span id="L1125"><span class="lineNum">    1125</span>              : void BlockTemplate::calc_merkle_tree_main_branch()</span>
 <span id="L1126"><span class="lineNum">    1126</span> <span class="tlaGNC">        6723 : {</span></span>
@@ -1296,33 +1296,33 @@
 <span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1235"><span class="lineNum">    1235</span>              : </span>
 <span id="L1236"><span class="lineNum">    1236</span>              : uint32_t BlockTemplate::get_hashing_blob_nolock(uint32_t extra_nonce, uint8_t* blob) const</span>
-<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaGNC tlaBgGNC">        3988 : {</span></span>
-<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaGNC">        3988 :         uint8_t* p = blob;</span></span>
+<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaGNC tlaBgGNC">        3991 : {</span></span>
+<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaGNC">        3991 :         uint8_t* p = blob;</span></span>
 <span id="L1239"><span class="lineNum">    1239</span>              : </span>
 <span id="L1240"><span class="lineNum">    1240</span>              :         // Block header</span>
-<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaGNC">        3988 :         memcpy(p, m_blockTemplateBlob.data(), m_blockHeaderSize);</span></span>
-<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaGNC">        3988 :         p += m_blockHeaderSize;</span></span>
+<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaGNC">        3991 :         memcpy(p, m_blockTemplateBlob.data(), m_blockHeaderSize);</span></span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaGNC">        3991 :         p += m_blockHeaderSize;</span></span>
 <span id="L1243"><span class="lineNum">    1243</span>              : </span>
 <span id="L1244"><span class="lineNum">    1244</span>              :         // Merkle tree hash</span>
-<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaGNC">        3988 :         hash root_hash = calc_miner_tx_hash(extra_nonce);</span></span>
+<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaGNC">        3991 :         hash root_hash = calc_miner_tx_hash(extra_nonce);</span></span>
 <span id="L1246"><span class="lineNum">    1246</span>              : </span>
-<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaGNC">       20914 :         for (size_t i = 0; i &lt; m_merkleTreeMainBranch.size(); i += HASH_SIZE) {</span></span>
-<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaGNC">       16926 :                 uint8_t h[HASH_SIZE * 2];</span></span>
+<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaGNC">       20951 :         for (size_t i = 0; i &lt; m_merkleTreeMainBranch.size(); i += HASH_SIZE) {</span></span>
+<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaGNC">       16960 :                 uint8_t h[HASH_SIZE * 2];</span></span>
 <span id="L1249"><span class="lineNum">    1249</span>              : </span>
-<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaGNC">       16926 :                 memcpy(h, root_hash.h, HASH_SIZE);</span></span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC">       16926 :                 memcpy(h + HASH_SIZE, m_merkleTreeMainBranch.data() + i, HASH_SIZE);</span></span>
+<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaGNC">       16960 :                 memcpy(h, root_hash.h, HASH_SIZE);</span></span>
+<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC">       16960 :                 memcpy(h + HASH_SIZE, m_merkleTreeMainBranch.data() + i, HASH_SIZE);</span></span>
 <span id="L1252"><span class="lineNum">    1252</span>              : </span>
-<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">       16926 :                 keccak(h, HASH_SIZE * 2, root_hash.h);</span></span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">       16926 :         }</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaGNC">       16960 :                 keccak(h, HASH_SIZE * 2, root_hash.h);</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">       16960 :         }</span></span>
 <span id="L1255"><span class="lineNum">    1255</span>              : </span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">        3988 :         memcpy(p, root_hash.h, HASH_SIZE);</span></span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">        3988 :         p += HASH_SIZE;</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">        3991 :         memcpy(p, root_hash.h, HASH_SIZE);</span></span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaGNC">        3991 :         p += HASH_SIZE;</span></span>
 <span id="L1258"><span class="lineNum">    1258</span>              : </span>
 <span id="L1259"><span class="lineNum">    1259</span>              :         // Total number of transactions in this block (including the miner tx)</span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">        5979 :         writeVarint(m_numTransactionHashes + 1, [&amp;p](uint8_t b) { *(p++) = b; });</span></span>
+<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaGNC">        5973 :         writeVarint(m_numTransactionHashes + 1, [&amp;p](uint8_t b) { *(p++) = b; });</span></span>
 <span id="L1261"><span class="lineNum">    1261</span>              : </span>
-<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaGNC">        3988 :         return static_cast&lt;uint32_t&gt;(p - blob);</span></span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaGNC">        3988 : }</span></span>
+<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaGNC">        3991 :         return static_cast&lt;uint32_t&gt;(p - blob);</span></span>
+<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaGNC">        3991 : }</span></span>
 <span id="L1264"><span class="lineNum">    1264</span>              : </span>
 <span id="L1265"><span class="lineNum">    1265</span>              : uint32_t BlockTemplate::get_hashing_blobs(uint32_t extra_nonce_start, uint32_t count, std::vector&lt;uint8_t&gt;&amp; blobs, uint64_t&amp; height, difficulty_type&amp; difficulty, difficulty_type&amp; aux_diff, difficulty_type&amp; sidechain_difficulty, hash&amp; seed_hash, size_t&amp; nonce_offset, uint32_t&amp; template_id) const</span>
 <span id="L1266"><span class="lineNum">    1266</span> <span class="tlaGNC">           4 : {</span></span>
@@ -1365,17 +1365,17 @@
 <span id="L1303"><span class="lineNum">    1303</span> <span class="tlaGNC">           4 :                 std::atomic&lt;uint32_t&gt; counter = 1;</span></span>
 <span id="L1304"><span class="lineNum">    1304</span>              : </span>
 <span id="L1305"><span class="lineNum">    1305</span> <span class="tlaGNC">          16 :                 parallel_run(uv_default_loop_checked(), [this, blob_size, extra_nonce_start, count, &amp;counter, blobs_data]() {</span></span>
-<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaGNC">        3991 :                         for (;;) {</span></span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC">        3991 :                                 const uint32_t i = counter.fetch_add(1);</span></span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">        3991 :                                 if (i &gt;= count) {</span></span>
+<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaGNC">        3990 :                         for (;;) {</span></span>
+<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC">        3990 :                                 const uint32_t i = counter.fetch_add(1);</span></span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">        3990 :                                 if (i &gt;= count) {</span></span>
 <span id="L1309"><span class="lineNum">    1309</span> <span class="tlaGNC">          16 :                                         return;</span></span>
 <span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">          16 :                                 }</span></span>
 <span id="L1311"><span class="lineNum">    1311</span>              : </span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC">        3975 :                                 const uint32_t n = get_hashing_blob_nolock(extra_nonce_start + i, blobs_data + static_cast&lt;size_t&gt;(i) * blob_size);</span></span>
-<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaGNC">        3975 :                                 if (n != blob_size) {</span></span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC">        3974 :                                 const uint32_t n = get_hashing_blob_nolock(extra_nonce_start + i, blobs_data + static_cast&lt;size_t&gt;(i) * blob_size);</span></span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaGNC">        3974 :                                 if (n != blob_size) {</span></span>
 <span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC tlaBgUNC">           0 :                                         LOGERR(1, &quot;internal error: get_hashing_blob_nolock returned different blob size &quot; &lt;&lt; n &lt;&lt; &quot;, expected &quot; &lt;&lt; blob_size);</span></span>
 <span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaGNC tlaBgGNC">        3975 :                         }</span></span>
+<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaGNC tlaBgGNC">        3974 :                         }</span></span>
 <span id="L1317"><span class="lineNum">    1317</span> <span class="tlaGNC">          16 :                 }, true);</span></span>
 <span id="L1318"><span class="lineNum">    1318</span> <span class="tlaGNC">           4 :         }</span></span>
 <span id="L1319"><span class="lineNum">    1319</span>              : </span>
