@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1684</td>
+            <td class="headerCovTableEntry">1616</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-26 08:46:21</td>
+            <td class="headerValue">2025-07-26 10:41:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -775,9 +775,9 @@
 <span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :                         update_block_template();</span></span>
 <span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L715"><span class="lineNum">     715</span>              : </span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 : #if defined(WITH_MERGE_MINING_DONATION) &amp;&amp; defined(WITH_TLS)</span></span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :                 send_aux_job_donation();</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L716"><span class="lineNum">     716</span>              : #if defined(WITH_MERGE_MINING_DONATION) &amp;&amp; defined(WITH_TLS)</span>
+<span id="L717"><span class="lineNum">     717</span>              :                 send_aux_job_donation();</span>
+<span id="L718"><span class="lineNum">     718</span>              : #endif</span>
 <span id="L719"><span class="lineNum">     719</span>              : </span>
 <span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :                 api_update_aux_data();</span></span>
 <span id="L721"><span class="lineNum">     721</span> <span class="tlaUNC">           0 :         }</span></span>
@@ -786,90 +786,90 @@
 <span id="L724"><span class="lineNum">     724</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
 <span id="L725"><span class="lineNum">     725</span>              : void p2pool::send_aux_job_donation()</span>
 <span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 :         if (m_params-&gt;m_authorKeyFile.empty()) {</span></span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L727"><span class="lineNum">     727</span>              : #ifdef WITH_TLS</span>
+<span id="L728"><span class="lineNum">     728</span>              :         if (m_params-&gt;m_authorKeyFile.empty()) {</span>
+<span id="L729"><span class="lineNum">     729</span>              :                 return;</span>
+<span id="L730"><span class="lineNum">     730</span>              :         }</span>
 <span id="L731"><span class="lineNum">     731</span>              : </span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaUNC">           0 :         std::ifstream f(m_params-&gt;m_authorKeyFile, std::ios::binary | std::ios::ate);</span></span>
+<span id="L732"><span class="lineNum">     732</span>              :         std::ifstream f(m_params-&gt;m_authorKeyFile, std::ios::binary | std::ios::ate);</span>
 <span id="L733"><span class="lineNum">     733</span>              : </span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 :         if (!f.good()) {</span></span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: failed to open &quot; &lt;&lt; m_params-&gt;m_authorKeyFile);</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L737"><span class="lineNum">     737</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L734"><span class="lineNum">     734</span>              :         if (!f.good()) {</span>
+<span id="L735"><span class="lineNum">     735</span>              :                 LOGERR(1, &quot;send_aux_job_donation: failed to open &quot; &lt;&lt; m_params-&gt;m_authorKeyFile);</span>
+<span id="L736"><span class="lineNum">     736</span>              :                 return;</span>
+<span id="L737"><span class="lineNum">     737</span>              :         }</span>
 <span id="L738"><span class="lineNum">     738</span>              : </span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC">           0 :         Params::AuthorKey key;</span></span>
+<span id="L739"><span class="lineNum">     739</span>              :         Params::AuthorKey key;</span>
 <span id="L740"><span class="lineNum">     740</span>              : </span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :         if (f.tellg() != static_cast&lt;std::streampos&gt;(sizeof(key))) {</span></span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: &quot; &lt;&lt; m_params-&gt;m_authorKeyFile &lt;&lt; &quot; has an invalid size&quot;);</span></span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L744"><span class="lineNum">     744</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L741"><span class="lineNum">     741</span>              :         if (f.tellg() != static_cast&lt;std::streampos&gt;(sizeof(key))) {</span>
+<span id="L742"><span class="lineNum">     742</span>              :                 LOGERR(1, &quot;send_aux_job_donation: &quot; &lt;&lt; m_params-&gt;m_authorKeyFile &lt;&lt; &quot; has an invalid size&quot;);</span>
+<span id="L743"><span class="lineNum">     743</span>              :                 return;</span>
+<span id="L744"><span class="lineNum">     744</span>              :         }</span>
 <span id="L745"><span class="lineNum">     745</span>              : </span>
-<span id="L746"><span class="lineNum">     746</span> <span class="tlaUNC">           0 :         f.seekg(0);</span></span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaUNC">           0 :         f.read(reinterpret_cast&lt;char*&gt;(&amp;key), sizeof(key));</span></span>
+<span id="L746"><span class="lineNum">     746</span>              :         f.seekg(0);</span>
+<span id="L747"><span class="lineNum">     747</span>              :         f.read(reinterpret_cast&lt;char*&gt;(&amp;key), sizeof(key));</span>
 <span id="L748"><span class="lineNum">     748</span>              : </span>
-<span id="L749"><span class="lineNum">     749</span> <span class="tlaUNC">           0 :         if (!f.good()) {</span></span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: failed to read data from &quot; &lt;&lt; m_params-&gt;m_authorKeyFile);</span></span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L749"><span class="lineNum">     749</span>              :         if (!f.good()) {</span>
+<span id="L750"><span class="lineNum">     750</span>              :                 LOGERR(1, &quot;send_aux_job_donation: failed to read data from &quot; &lt;&lt; m_params-&gt;m_authorKeyFile);</span>
+<span id="L751"><span class="lineNum">     751</span>              :                 return;</span>
+<span id="L752"><span class="lineNum">     752</span>              :         }</span>
 <span id="L753"><span class="lineNum">     753</span>              : </span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :         const uint64_t timestamp = time(nullptr);</span></span>
+<span id="L754"><span class="lineNum">     754</span>              :         const uint64_t timestamp = time(nullptr);</span>
 <span id="L755"><span class="lineNum">     755</span>              : </span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 :         if (timestamp &gt;= read_unaligned(reinterpret_cast&lt;uint64_t*&gt;(key.expiration_time))) {</span></span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: &quot; &lt;&lt; m_params-&gt;m_authorKeyFile &lt;&lt; &quot; is expired&quot;);</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L759"><span class="lineNum">     759</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L756"><span class="lineNum">     756</span>              :         if (timestamp &gt;= read_unaligned(reinterpret_cast&lt;uint64_t*&gt;(key.expiration_time))) {</span>
+<span id="L757"><span class="lineNum">     757</span>              :                 LOGERR(1, &quot;send_aux_job_donation: &quot; &lt;&lt; m_params-&gt;m_authorKeyFile &lt;&lt; &quot; is expired&quot;);</span>
+<span id="L758"><span class="lineNum">     758</span>              :                 return;</span>
+<span id="L759"><span class="lineNum">     759</span>              :         }</span>
 <span id="L760"><span class="lineNum">     760</span>              : </span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaUNC">           0 :         const uint8_t* p = reinterpret_cast&lt;uint8_t*&gt;(&amp;key);</span></span>
+<span id="L761"><span class="lineNum">     761</span>              :         const uint8_t* p = reinterpret_cast&lt;uint8_t*&gt;(&amp;key);</span>
 <span id="L762"><span class="lineNum">     762</span>              : </span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaUNC">           0 :         if (!ED25519_verify(p, sizeof(key.pub_key) + sizeof(key.expiration_time), key.master_key_signature, ED25519_MASTER_PUBLIC_KEY)) {</span></span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: &quot; &lt;&lt; m_params-&gt;m_authorKeyFile &lt;&lt; &quot;: signature verification failed&quot;);</span></span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L763"><span class="lineNum">     763</span>              :         if (!ED25519_verify(p, sizeof(key.pub_key) + sizeof(key.expiration_time), key.master_key_signature, ED25519_MASTER_PUBLIC_KEY)) {</span>
+<span id="L764"><span class="lineNum">     764</span>              :                 LOGERR(1, &quot;send_aux_job_donation: &quot; &lt;&lt; m_params-&gt;m_authorKeyFile &lt;&lt; &quot;: signature verification failed&quot;);</span>
+<span id="L765"><span class="lineNum">     765</span>              :                 return;</span>
+<span id="L766"><span class="lineNum">     766</span>              :         }</span>
 <span id="L767"><span class="lineNum">     767</span>              : </span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaUNC">           0 :         std::vector&lt;uint8_t&gt; job;</span></span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaUNC">           0 :         job.reserve(512);</span></span>
+<span id="L768"><span class="lineNum">     768</span>              :         std::vector&lt;uint8_t&gt; job;</span>
+<span id="L769"><span class="lineNum">     769</span>              :         job.reserve(512);</span>
 <span id="L770"><span class="lineNum">     770</span>              : </span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaUNC">           0 :         constexpr uint32_t DATA_OFFSET = sizeof(key.pub_key) + sizeof(key.expiration_time) + sizeof(key.master_key_signature);</span></span>
+<span id="L771"><span class="lineNum">     771</span>              :         constexpr uint32_t DATA_OFFSET = sizeof(key.pub_key) + sizeof(key.expiration_time) + sizeof(key.master_key_signature);</span>
 <span id="L772"><span class="lineNum">     772</span>              : </span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaUNC">           0 :         job.assign(p, p + DATA_OFFSET);</span></span>
+<span id="L773"><span class="lineNum">     773</span>              :         job.assign(p, p + DATA_OFFSET);</span>
 <span id="L774"><span class="lineNum">     774</span>              : </span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaUNC">           0 :         job.insert(job.end(), reinterpret_cast&lt;const uint8_t*&gt;(&amp;timestamp), reinterpret_cast&lt;const uint8_t*&gt;(&amp;timestamp) + sizeof(uint64_t));</span></span>
+<span id="L775"><span class="lineNum">     775</span>              :         job.insert(job.end(), reinterpret_cast&lt;const uint8_t*&gt;(&amp;timestamp), reinterpret_cast&lt;const uint8_t*&gt;(&amp;timestamp) + sizeof(uint64_t));</span>
 <span id="L776"><span class="lineNum">     776</span>              : </span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaUNC">           0 :                 ReadLock lock(m_minerDataLock);</span></span>
+<span id="L777"><span class="lineNum">     777</span>              :         {</span>
+<span id="L778"><span class="lineNum">     778</span>              :                 ReadLock lock(m_minerDataLock);</span>
 <span id="L779"><span class="lineNum">     779</span>              : </span>
-<span id="L780"><span class="lineNum">     780</span> <span class="tlaUNC">           0 :                 if (m_minerData.aux_chains.empty()) {</span></span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;send_aux_job_donation: no merge mined chains found&quot;);</span></span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :                         return;</span></span>
-<span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L780"><span class="lineNum">     780</span>              :                 if (m_minerData.aux_chains.empty()) {</span>
+<span id="L781"><span class="lineNum">     781</span>              :                         LOGERR(1, &quot;send_aux_job_donation: no merge mined chains found&quot;);</span>
+<span id="L782"><span class="lineNum">     782</span>              :                         return;</span>
+<span id="L783"><span class="lineNum">     783</span>              :                 }</span>
 <span id="L784"><span class="lineNum">     784</span>              : </span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :                 for (const AuxChainData&amp; c : m_minerData.aux_chains) {</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaUNC">           0 :                         job.insert(job.end(), c.unique_id.h, c.unique_id.h + HASH_SIZE);</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaUNC">           0 :                         job.insert(job.end(), c.data.h, c.data.h + HASH_SIZE);</span></span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaUNC">           0 :                         job.insert(job.end(), reinterpret_cast&lt;const uint8_t*&gt;(&amp;c.difficulty), reinterpret_cast&lt;const uint8_t*&gt;(&amp;c.difficulty) + sizeof(difficulty_type));</span></span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L785"><span class="lineNum">     785</span>              :                 for (const AuxChainData&amp; c : m_minerData.aux_chains) {</span>
+<span id="L786"><span class="lineNum">     786</span>              :                         job.insert(job.end(), c.unique_id.h, c.unique_id.h + HASH_SIZE);</span>
+<span id="L787"><span class="lineNum">     787</span>              :                         job.insert(job.end(), c.data.h, c.data.h + HASH_SIZE);</span>
+<span id="L788"><span class="lineNum">     788</span>              :                         job.insert(job.end(), reinterpret_cast&lt;const uint8_t*&gt;(&amp;c.difficulty), reinterpret_cast&lt;const uint8_t*&gt;(&amp;c.difficulty) + sizeof(difficulty_type));</span>
+<span id="L789"><span class="lineNum">     789</span>              :                 }</span>
+<span id="L790"><span class="lineNum">     790</span>              :         }</span>
 <span id="L791"><span class="lineNum">     791</span>              : </span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC">           0 :         uint8_t signature[64];</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaUNC">           0 :         if (!ED25519_sign(signature, job.data() + DATA_OFFSET, job.size() - DATA_OFFSET, key.priv_key)) {</span></span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: failed to sign the donation job&quot;);</span></span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L792"><span class="lineNum">     792</span>              :         uint8_t signature[64];</span>
+<span id="L793"><span class="lineNum">     793</span>              :         if (!ED25519_sign(signature, job.data() + DATA_OFFSET, job.size() - DATA_OFFSET, key.priv_key)) {</span>
+<span id="L794"><span class="lineNum">     794</span>              :                 LOGERR(1, &quot;send_aux_job_donation: failed to sign the donation job&quot;);</span>
+<span id="L795"><span class="lineNum">     795</span>              :                 return;</span>
+<span id="L796"><span class="lineNum">     796</span>              :         }</span>
 <span id="L797"><span class="lineNum">     797</span>              : </span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 :         if (!ED25519_verify(job.data() + DATA_OFFSET, job.size() - DATA_OFFSET, signature, key.pub_key)) {</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;send_aux_job_donation: failed to verify the donation job's signature&quot;);</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L798"><span class="lineNum">     798</span>              :         if (!ED25519_verify(job.data() + DATA_OFFSET, job.size() - DATA_OFFSET, signature, key.pub_key)) {</span>
+<span id="L799"><span class="lineNum">     799</span>              :                 LOGERR(1, &quot;send_aux_job_donation: failed to verify the donation job's signature&quot;);</span>
+<span id="L800"><span class="lineNum">     800</span>              :                 return;</span>
+<span id="L801"><span class="lineNum">     801</span>              :         }</span>
 <span id="L802"><span class="lineNum">     802</span>              : </span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :         OPENSSL_cleanse(&amp;key, sizeof(key));</span></span>
+<span id="L803"><span class="lineNum">     803</span>              :         OPENSSL_cleanse(&amp;key, sizeof(key));</span>
 <span id="L804"><span class="lineNum">     804</span>              : </span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaUNC">           0 :         job.insert(job.end(), signature, signature + sizeof(signature));</span></span>
+<span id="L805"><span class="lineNum">     805</span>              :         job.insert(job.end(), signature, signature + sizeof(signature));</span>
 <span id="L806"><span class="lineNum">     806</span>              : </span>
-<span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :         m_p2pServer-&gt;broadcast_aux_job_donation_async(job.data(), static_cast&lt;uint32_t&gt;(job.size()), timestamp);</span></span>
+<span id="L807"><span class="lineNum">     807</span>              :         m_p2pServer-&gt;broadcast_aux_job_donation_async(job.data(), static_cast&lt;uint32_t&gt;(job.size()), timestamp);</span>
 <span id="L808"><span class="lineNum">     808</span>              : #else</span>
-<span id="L809"><span class="lineNum">     809</span>              :         LOGERR(1, &quot;p2pool::send_aux_job_donation() must be built with TLS&quot;);</span>
-<span id="L810"><span class="lineNum">     810</span>              : #endif</span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaUNC">           0 :         LOGERR(1, &quot;p2pool::send_aux_job_donation() must be built with TLS&quot;);</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L811"><span class="lineNum">     811</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L812"><span class="lineNum">     812</span>              : #endif</span>
 <span id="L813"><span class="lineNum">     813</span>              : </span>
@@ -2285,14 +2285,14 @@
 <span id="L2223"><span class="lineNum">    2223</span> <span class="tlaUNC">           0 :                 return 1;</span></span>
 <span id="L2224"><span class="lineNum">    2224</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2225"><span class="lineNum">    2225</span>              : </span>
-<span id="L2226"><span class="lineNum">    2226</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L2227"><span class="lineNum">    2227</span> <span class="tlaUNC">           0 :         if (!m_params-&gt;m_tlsCert.empty() &amp;&amp; !m_params-&gt;m_tlsCertKey.empty()) {</span></span>
-<span id="L2228"><span class="lineNum">    2228</span> <span class="tlaUNC">           0 :                 if (!ServerTls::load_from_files(m_params-&gt;m_tlsCert.c_str(), m_params-&gt;m_tlsCertKey.c_str())) {</span></span>
-<span id="L2229"><span class="lineNum">    2229</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;Failed to load TLS files&quot;);</span></span>
-<span id="L2230"><span class="lineNum">    2230</span> <span class="tlaUNC">           0 :                         return 1;</span></span>
-<span id="L2231"><span class="lineNum">    2231</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2232"><span class="lineNum">    2232</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2233"><span class="lineNum">    2233</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L2226"><span class="lineNum">    2226</span>              : #ifdef WITH_TLS</span>
+<span id="L2227"><span class="lineNum">    2227</span>              :         if (!m_params-&gt;m_tlsCert.empty() &amp;&amp; !m_params-&gt;m_tlsCertKey.empty()) {</span>
+<span id="L2228"><span class="lineNum">    2228</span>              :                 if (!ServerTls::load_from_files(m_params-&gt;m_tlsCert.c_str(), m_params-&gt;m_tlsCertKey.c_str())) {</span>
+<span id="L2229"><span class="lineNum">    2229</span>              :                         LOGERR(1, &quot;Failed to load TLS files&quot;);</span>
+<span id="L2230"><span class="lineNum">    2230</span>              :                         return 1;</span>
+<span id="L2231"><span class="lineNum">    2231</span>              :                 }</span>
+<span id="L2232"><span class="lineNum">    2232</span>              :         }</span>
+<span id="L2233"><span class="lineNum">    2233</span>              : #endif</span>
 <span id="L2234"><span class="lineNum">    2234</span>              : </span>
 <span id="L2235"><span class="lineNum">    2235</span>              :         // Init default loop user data before running it</span>
 <span id="L2236"><span class="lineNum">    2236</span> <span class="tlaUNC">           0 :         uv_loop_t* loop = uv_default_loop_checked();</span></span>

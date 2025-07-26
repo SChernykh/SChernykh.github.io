@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1178</td>
+            <td class="headerCovTableEntry">1152</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-26 08:46:21</td>
+            <td class="headerValue">2025-07-26 10:41:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntry">42</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -640,11 +640,11 @@
 <span id="L578"><span class="lineNum">     578</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L579"><span class="lineNum">     579</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L580"><span class="lineNum">     580</span>              : </span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L582"><span class="lineNum">     582</span> <span class="tlaUNC">           0 :                 const bool is_tls = !c-&gt;m_tls.is_empty();</span></span>
+<span id="L581"><span class="lineNum">     581</span>              : #ifdef WITH_TLS</span>
+<span id="L582"><span class="lineNum">     582</span>              :                 const bool is_tls = !c-&gt;m_tls.is_empty();</span>
 <span id="L583"><span class="lineNum">     583</span>              : #else</span>
-<span id="L584"><span class="lineNum">     584</span>              :                 constexpr bool is_tls = false;</span>
-<span id="L585"><span class="lineNum">     585</span>              : #endif</span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaUNC">           0 :                 constexpr bool is_tls = false;</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L586"><span class="lineNum">     586</span>              : </span>
 <span id="L587"><span class="lineNum">     587</span> <span class="tlaUNC">           0 :                 LOGINFO(0, log::pad_right(static_cast&lt;const char*&gt;(c-&gt;m_addrString), addr_len + 8)</span></span>
 <span id="L588"><span class="lineNum">     588</span> <span class="tlaUNC">           0 :                                 &lt;&lt; (is_tls ? &quot;yes    &quot; : &quot;no     &quot;)</span></span>
@@ -1280,18 +1280,18 @@
 <span id="L1218"><span class="lineNum">    1218</span>              : </span>
 <span id="L1219"><span class="lineNum">    1219</span>              : bool StratumServer::StratumClient::on_read(const char* data, uint32_t size)</span>
 <span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :         if (!m_tlsChecked) {</span></span>
-<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :                 if (data[0] == 0x16) {</span></span>
-<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :                         if (!m_tls.init()) {</span></span>
-<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; &quot;: TLS init failed&quot;);</span></span>
-<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 :                         LOGINFO(5, &quot;client &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; is using TLS&quot;);</span></span>
-<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :                 m_tlsChecked = true;</span></span>
-<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L1221"><span class="lineNum">    1221</span>              : #ifdef WITH_TLS</span>
+<span id="L1222"><span class="lineNum">    1222</span>              :         if (!m_tlsChecked) {</span>
+<span id="L1223"><span class="lineNum">    1223</span>              :                 if (data[0] == 0x16) {</span>
+<span id="L1224"><span class="lineNum">    1224</span>              :                         if (!m_tls.init()) {</span>
+<span id="L1225"><span class="lineNum">    1225</span>              :                                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; &quot;: TLS init failed&quot;);</span>
+<span id="L1226"><span class="lineNum">    1226</span>              :                                 return false;</span>
+<span id="L1227"><span class="lineNum">    1227</span>              :                         }</span>
+<span id="L1228"><span class="lineNum">    1228</span>              :                         LOGINFO(5, &quot;client &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; is using TLS&quot;);</span>
+<span id="L1229"><span class="lineNum">    1229</span>              :                 }</span>
+<span id="L1230"><span class="lineNum">    1230</span>              :                 m_tlsChecked = true;</span>
+<span id="L1231"><span class="lineNum">    1231</span>              :         }</span>
+<span id="L1232"><span class="lineNum">    1232</span>              : #endif</span>
 <span id="L1233"><span class="lineNum">    1233</span>              : </span>
 <span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :         auto on_parse = [this](const char* data, uint32_t size) {</span></span>
 <span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :                 if (static_cast&lt;size_t&gt;(m_stratumReadBufBytes) + size &gt; STRATUM_BUF_SIZE) {</span></span>
@@ -1343,21 +1343,21 @@
 <span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC">           0 :                 return true;</span></span>
 <span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L1283"><span class="lineNum">    1283</span>              : </span>
-<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :         if (!m_tls.is_empty()) {</span></span>
-<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaUNC">           0 :                 auto on_write = [this](const uint8_t* data, size_t size) {</span></span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :                         return m_owner-&gt;send(this, [data, size](uint8_t* buf, size_t buf_size) -&gt; size_t {</span></span>
-<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC">           0 :                                 if (buf_size &lt; size) {</span></span>
-<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaUNC">           0 :                                         return 0;</span></span>
-<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaUNC">           0 :                                 memcpy(buf, data, size);</span></span>
-<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaUNC">           0 :                                 return size;</span></span>
-<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :                         }, true);</span></span>
-<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaUNC">           0 :                 };</span></span>
+<span id="L1284"><span class="lineNum">    1284</span>              : #ifdef WITH_TLS</span>
+<span id="L1285"><span class="lineNum">    1285</span>              :         if (!m_tls.is_empty()) {</span>
+<span id="L1286"><span class="lineNum">    1286</span>              :                 auto on_write = [this](const uint8_t* data, size_t size) {</span>
+<span id="L1287"><span class="lineNum">    1287</span>              :                         return m_owner-&gt;send(this, [data, size](uint8_t* buf, size_t buf_size) -&gt; size_t {</span>
+<span id="L1288"><span class="lineNum">    1288</span>              :                                 if (buf_size &lt; size) {</span>
+<span id="L1289"><span class="lineNum">    1289</span>              :                                         return 0;</span>
+<span id="L1290"><span class="lineNum">    1290</span>              :                                 }</span>
+<span id="L1291"><span class="lineNum">    1291</span>              :                                 memcpy(buf, data, size);</span>
+<span id="L1292"><span class="lineNum">    1292</span>              :                                 return size;</span>
+<span id="L1293"><span class="lineNum">    1293</span>              :                         }, true);</span>
+<span id="L1294"><span class="lineNum">    1294</span>              :                 };</span>
 <span id="L1295"><span class="lineNum">    1295</span>              : </span>
-<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :                 return m_tls.on_read(data, size, std::move(on_parse), std::move(on_write));</span></span>
-<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L1296"><span class="lineNum">    1296</span>              :                 return m_tls.on_read(data, size, std::move(on_parse), std::move(on_write));</span>
+<span id="L1297"><span class="lineNum">    1297</span>              :         }</span>
+<span id="L1298"><span class="lineNum">    1298</span>              : #endif</span>
 <span id="L1299"><span class="lineNum">    1299</span>              : </span>
 <span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :         return on_parse(data, size);</span></span>
 <span id="L1301"><span class="lineNum">    1301</span> <span class="tlaUNC">           0 : }</span></span>

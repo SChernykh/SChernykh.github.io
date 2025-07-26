@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1018</td>
+            <td class="headerCovTableEntry">1007</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-26 08:46:21</td>
+            <td class="headerValue">2025-07-26 10:41:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -652,17 +652,17 @@
 <span id="L590"><span class="lineNum">     590</span> <span class="tlaUNC">           0 :                 return true;</span></span>
 <span id="L591"><span class="lineNum">     591</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L592"><span class="lineNum">     592</span>              : </span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaUNC">           0 :         if (!client-&gt;m_tls.is_empty() &amp;&amp; !raw) {</span></span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaUNC">           0 :                 if (!client-&gt;m_tls.on_write(m_callbackBuf.data(), bytes_written, std::move(on_write))) {</span></span>
-<span id="L596"><span class="lineNum">     596</span> <span class="tlaUNC">           0 :                         LOGWARN(1, &quot;TLS write failed to client connection &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString));</span></span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L593"><span class="lineNum">     593</span>              : #ifdef WITH_TLS</span>
+<span id="L594"><span class="lineNum">     594</span>              :         if (!client-&gt;m_tls.is_empty() &amp;&amp; !raw) {</span>
+<span id="L595"><span class="lineNum">     595</span>              :                 if (!client-&gt;m_tls.on_write(m_callbackBuf.data(), bytes_written, std::move(on_write))) {</span>
+<span id="L596"><span class="lineNum">     596</span>              :                         LOGWARN(1, &quot;TLS write failed to client connection &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString));</span>
+<span id="L597"><span class="lineNum">     597</span>              :                         return false;</span>
+<span id="L598"><span class="lineNum">     598</span>              :                 }</span>
+<span id="L599"><span class="lineNum">     599</span>              :                 return true;</span>
+<span id="L600"><span class="lineNum">     600</span>              :         }</span>
 <span id="L601"><span class="lineNum">     601</span>              : #else</span>
-<span id="L602"><span class="lineNum">     602</span>              :         (void)raw;</span>
-<span id="L603"><span class="lineNum">     603</span>              : #endif</span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaUNC">           0 :         (void)raw;</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L604"><span class="lineNum">     604</span>              : </span>
 <span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :         return on_write(m_callbackBuf.data(), bytes_written);</span></span>
 <span id="L606"><span class="lineNum">     606</span> <span class="tlaUNC">           0 : }</span></span>
@@ -1106,7 +1106,7 @@
 <span id="L1044"><span class="lineNum">    1044</span> <span class="tlaUNC">           0 :         , m_socks5ProxyState(Socks5ProxyState::Default)</span></span>
 <span id="L1045"><span class="lineNum">    1045</span> <span class="tlaUNC">           0 :         , m_resetCounter{ 0 }</span></span>
 <span id="L1046"><span class="lineNum">    1046</span>              : #ifdef WITH_TLS</span>
-<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaUNC">           0 :         , m_tlsChecked(false)</span></span>
+<span id="L1047"><span class="lineNum">    1047</span>              :         , m_tlsChecked(false)</span>
 <span id="L1048"><span class="lineNum">    1048</span>              : #endif</span>
 <span id="L1049"><span class="lineNum">    1049</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L1050"><span class="lineNum">    1050</span> <span class="tlaUNC">           0 :         m_readBuf[0] = '\0';</span></span>
@@ -1133,10 +1133,10 @@
 <span id="L1071"><span class="lineNum">    1071</span> <span class="tlaUNC">           0 :         m_readBuf[0] = '\0';</span></span>
 <span id="L1072"><span class="lineNum">    1072</span> <span class="tlaUNC">           0 :         m_readBuf[m_readBufSize - 1] = '\0';</span></span>
 <span id="L1073"><span class="lineNum">    1073</span>              : </span>
-<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaUNC">           0 : #ifdef WITH_TLS</span></span>
-<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaUNC">           0 :         m_tls.reset();</span></span>
-<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaUNC">           0 :         m_tlsChecked = false;</span></span>
-<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L1074"><span class="lineNum">    1074</span>              : #ifdef WITH_TLS</span>
+<span id="L1075"><span class="lineNum">    1075</span>              :         m_tls.reset();</span>
+<span id="L1076"><span class="lineNum">    1076</span>              :         m_tlsChecked = false;</span>
+<span id="L1077"><span class="lineNum">    1077</span>              : #endif</span>
 <span id="L1078"><span class="lineNum">    1078</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1079"><span class="lineNum">    1079</span>              : </span>
 <span id="L1080"><span class="lineNum">    1080</span>              : void TCPServer::Client::on_alloc(uv_handle_t* handle, size_t /*suggested_size*/, uv_buf_t* buf)</span>
