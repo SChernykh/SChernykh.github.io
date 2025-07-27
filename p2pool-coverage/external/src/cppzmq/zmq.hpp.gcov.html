@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">899</td>
+            <td class="headerCovTableEntry">923</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-07-26 16:39:39</td>
+            <td class="headerValue">2025-07-27 12:11:27</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">213</td>
+            <td class="headerCovTableEntry">210</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -143,7 +143,7 @@
 <span id="L81"><span class="lineNum">      81</span>              : #define ZMQ_NOTHROW noexcept</span>
 <span id="L82"><span class="lineNum">      82</span>              : #define ZMQ_EXPLICIT explicit</span>
 <span id="L83"><span class="lineNum">      83</span>              : #define ZMQ_OVERRIDE override</span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC tlaBgUNC">           0 : #define ZMQ_NULLPTR nullptr</span></span>
+<span id="L84"><span class="lineNum">      84</span>              : #define ZMQ_NULLPTR nullptr</span>
 <span id="L85"><span class="lineNum">      85</span>              : #define ZMQ_CONSTEXPR_FN constexpr</span>
 <span id="L86"><span class="lineNum">      86</span>              : #define ZMQ_CONSTEXPR_VAR constexpr</span>
 <span id="L87"><span class="lineNum">      87</span>              : #define ZMQ_CPP11_DEPRECATED(msg) ZMQ_DEPRECATED(msg)</span>
@@ -285,7 +285,7 @@
 <span id="L223"><span class="lineNum">     223</span>              : #ifndef NDEBUG</span>
 <span id="L224"><span class="lineNum">     224</span>              : #define ZMQ_ASSERT(expression) assert(expression)</span>
 <span id="L225"><span class="lineNum">     225</span>              : #else</span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaUNC">           0 : #define ZMQ_ASSERT(expression) (void) (expression)</span></span>
+<span id="L226"><span class="lineNum">     226</span>              : #define ZMQ_ASSERT(expression) (void) (expression)</span>
 <span id="L227"><span class="lineNum">     227</span>              : #endif</span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
 <span id="L229"><span class="lineNum">     229</span>              : namespace zmq</span>
@@ -352,7 +352,7 @@
 <span id="L290"><span class="lineNum">     290</span>              : class error_t : public std::exception</span>
 <span id="L291"><span class="lineNum">     291</span>              : {</span>
 <span id="L292"><span class="lineNum">     292</span>              :   public:</span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :     error_t() ZMQ_NOTHROW : errnum(zmq_errno()) {}</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC tlaBgUNC">           0 :     error_t() ZMQ_NOTHROW : errnum(zmq_errno()) {}</span></span>
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC">           0 :     explicit error_t(int err) ZMQ_NOTHROW : errnum(err) {}</span></span>
 <span id="L295"><span class="lineNum">     295</span>              :     virtual const char *what() const ZMQ_NOTHROW ZMQ_OVERRIDE</span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC">           0 :     {</span></span>
@@ -874,10 +874,10 @@
 <span id="L812"><span class="lineNum">     812</span> <span class="tlaUNC">           0 :         ptr = zmq_ctx_new();</span></span>
 <span id="L813"><span class="lineNum">     813</span> <span class="tlaUNC">           0 :         if (ptr == ZMQ_NULLPTR)</span></span>
 <span id="L814"><span class="lineNum">     814</span> <span class="tlaUNC">           0 :             throw error_t();</span></span>
-<span id="L815"><span class="lineNum">     815</span>              : </span>
+<span id="L815"><span class="lineNum">     815</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L816"><span class="lineNum">     816</span> <span class="tlaUNC">           0 :         int rc = zmq_ctx_set(ptr, ZMQ_IO_THREADS, io_threads_);</span></span>
 <span id="L817"><span class="lineNum">     817</span> <span class="tlaUNC">           0 :         ZMQ_ASSERT(rc == 0);</span></span>
-<span id="L818"><span class="lineNum">     818</span>              : </span>
+<span id="L818"><span class="lineNum">     818</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L819"><span class="lineNum">     819</span> <span class="tlaUNC">           0 :         rc = zmq_ctx_set(ptr, ZMQ_MAX_SOCKETS, max_sockets_);</span></span>
 <span id="L820"><span class="lineNum">     820</span> <span class="tlaUNC">           0 :         ZMQ_ASSERT(rc == 0);</span></span>
 <span id="L821"><span class="lineNum">     821</span> <span class="tlaUNC">           0 :     }</span></span>
@@ -930,12 +930,12 @@
 <span id="L868"><span class="lineNum">     868</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L869"><span class="lineNum">     869</span> <span class="tlaUNC">           0 :         if (ptr == ZMQ_NULLPTR)</span></span>
 <span id="L870"><span class="lineNum">     870</span> <span class="tlaUNC">           0 :             return;</span></span>
-<span id="L871"><span class="lineNum">     871</span>              : </span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L872"><span class="lineNum">     872</span> <span class="tlaUNC">           0 :         int rc;</span></span>
 <span id="L873"><span class="lineNum">     873</span> <span class="tlaUNC">           0 :         do {</span></span>
 <span id="L874"><span class="lineNum">     874</span> <span class="tlaUNC">           0 :             rc = zmq_ctx_term(ptr);</span></span>
 <span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 :         } while (rc == -1 &amp;&amp; errno == EINTR);</span></span>
-<span id="L876"><span class="lineNum">     876</span>              : </span>
+<span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L877"><span class="lineNum">     877</span> <span class="tlaUNC">           0 :         ZMQ_ASSERT(rc == 0);</span></span>
 <span id="L878"><span class="lineNum">     878</span> <span class="tlaUNC">           0 :         ptr = ZMQ_NULLPTR;</span></span>
 <span id="L879"><span class="lineNum">     879</span> <span class="tlaUNC">           0 :     }</span></span>
@@ -1184,11 +1184,11 @@
 <span id="L1122"><span class="lineNum">    1122</span>              : {</span>
 <span id="L1123"><span class="lineNum">    1123</span>              :   public:</span>
 <span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :     constexpr const_buffer() noexcept : _data(nullptr), _size(0) {}</span></span>
-<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaUNC">           0 :     constexpr const_buffer(const void *p, size_t n) noexcept : _data(p), _size(n)</span></span>
+<span id="L1125"><span class="lineNum">    1125</span>              :     constexpr const_buffer(const void *p, size_t n) noexcept : _data(p), _size(n)</span>
 <span id="L1126"><span class="lineNum">    1126</span> <span class="tlaUNC">           0 :     {</span></span>
-<span id="L1127"><span class="lineNum">    1127</span>              : #ifdef ZMQ_EXTENDED_CONSTEXPR</span>
-<span id="L1128"><span class="lineNum">    1128</span>              :         assert(p != nullptr || n == 0);</span>
-<span id="L1129"><span class="lineNum">    1129</span>              : #endif</span>
+<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaUNC">           0 : #ifdef ZMQ_EXTENDED_CONSTEXPR</span></span>
+<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaUNC">           0 :         assert(p != nullptr || n == 0);</span></span>
+<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L1131"><span class="lineNum">    1131</span>              :     constexpr const_buffer(const mutable_buffer &amp;mb) noexcept :</span>
 <span id="L1132"><span class="lineNum">    1132</span>              :         _data(mb.data()), _size(mb.size())</span>
@@ -1837,10 +1837,10 @@
 <span id="L1775"><span class="lineNum">    1775</span>              :     // `socket.set(zmq::sockopt::linger, 0)`</span>
 <span id="L1776"><span class="lineNum">    1776</span>              :     template&lt;int Opt, class T, bool BoolUnit&gt;</span>
 <span id="L1777"><span class="lineNum">    1777</span>              :     void set(sockopt::integral_option&lt;Opt, T, BoolUnit&gt;, const T &amp;val)</span>
-<span id="L1778"><span class="lineNum">    1778</span> <span class="tlaUNC">           0 :     {</span></span>
-<span id="L1779"><span class="lineNum">    1779</span> <span class="tlaUNC">           0 :         static_assert(std::is_integral&lt;T&gt;::value, &quot;T must be integral&quot;);</span></span>
-<span id="L1780"><span class="lineNum">    1780</span> <span class="tlaUNC">           0 :         set_option(Opt, &amp;val, sizeof val);</span></span>
-<span id="L1781"><span class="lineNum">    1781</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1778"><span class="lineNum">    1778</span>              :     {</span>
+<span id="L1779"><span class="lineNum">    1779</span>              :         static_assert(std::is_integral&lt;T&gt;::value, &quot;T must be integral&quot;);</span>
+<span id="L1780"><span class="lineNum">    1780</span>              :         set_option(Opt, &amp;val, sizeof val);</span>
+<span id="L1781"><span class="lineNum">    1781</span>              :     }</span>
 <span id="L1782"><span class="lineNum">    1782</span>              : </span>
 <span id="L1783"><span class="lineNum">    1783</span>              :     // Set integral socket option from boolean, e.g.</span>
 <span id="L1784"><span class="lineNum">    1784</span>              :     // `socket.set(zmq::sockopt::immediate, false)`</span>
@@ -1856,17 +1856,17 @@
 <span id="L1794"><span class="lineNum">    1794</span>              :     // `socket.set(zmq::sockopt::plain_username, &quot;foo123&quot;)`</span>
 <span id="L1795"><span class="lineNum">    1795</span>              :     template&lt;int Opt, int NullTerm&gt;</span>
 <span id="L1796"><span class="lineNum">    1796</span>              :     void set(sockopt::array_option&lt;Opt, NullTerm&gt;, const char *buf)</span>
-<span id="L1797"><span class="lineNum">    1797</span> <span class="tlaUNC">           0 :     {</span></span>
-<span id="L1798"><span class="lineNum">    1798</span> <span class="tlaUNC">           0 :         set_option(Opt, buf, std::strlen(buf));</span></span>
-<span id="L1799"><span class="lineNum">    1799</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1797"><span class="lineNum">    1797</span>              :     {</span>
+<span id="L1798"><span class="lineNum">    1798</span>              :         set_option(Opt, buf, std::strlen(buf));</span>
+<span id="L1799"><span class="lineNum">    1799</span>              :     }</span>
 <span id="L1800"><span class="lineNum">    1800</span>              : </span>
 <span id="L1801"><span class="lineNum">    1801</span>              :     // Set array socket option, e.g.</span>
 <span id="L1802"><span class="lineNum">    1802</span>              :     // `socket.set(zmq::sockopt::routing_id, zmq::buffer(id))`</span>
 <span id="L1803"><span class="lineNum">    1803</span>              :     template&lt;int Opt, int NullTerm&gt;</span>
 <span id="L1804"><span class="lineNum">    1804</span>              :     void set(sockopt::array_option&lt;Opt, NullTerm&gt;, const_buffer buf)</span>
-<span id="L1805"><span class="lineNum">    1805</span> <span class="tlaUNC">           0 :     {</span></span>
-<span id="L1806"><span class="lineNum">    1806</span> <span class="tlaUNC">           0 :         set_option(Opt, buf.data(), buf.size());</span></span>
-<span id="L1807"><span class="lineNum">    1807</span> <span class="tlaUNC">           0 :     }</span></span>
+<span id="L1805"><span class="lineNum">    1805</span>              :     {</span>
+<span id="L1806"><span class="lineNum">    1806</span>              :         set_option(Opt, buf.data(), buf.size());</span>
+<span id="L1807"><span class="lineNum">    1807</span>              :     }</span>
 <span id="L1808"><span class="lineNum">    1808</span>              : </span>
 <span id="L1809"><span class="lineNum">    1809</span>              :     // Set array socket option, e.g.</span>
 <span id="L1810"><span class="lineNum">    1810</span>              :     // `socket.set(zmq::sockopt::routing_id, id_str)`</span>
@@ -2181,7 +2181,7 @@
 <span id="L2119"><span class="lineNum">    2119</span> <span class="tlaUNC">           0 :     socket_ref(std::nullptr_t) ZMQ_NOTHROW : detail::socket_base() {}</span></span>
 <span id="L2120"><span class="lineNum">    2120</span>              : #endif</span>
 <span id="L2121"><span class="lineNum">    2121</span>              :     socket_ref(from_handle_t /*fh*/, void *handle) ZMQ_NOTHROW</span>
-<span id="L2122"><span class="lineNum">    2122</span> <span class="tlaUNC">           0 :         : detail::socket_base(handle)</span></span>
+<span id="L2122"><span class="lineNum">    2122</span>              :         : detail::socket_base(handle)</span>
 <span id="L2123"><span class="lineNum">    2123</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2124"><span class="lineNum">    2124</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2125"><span class="lineNum">    2125</span>              : };</span>
@@ -2255,8 +2255,8 @@
 <span id="L2193"><span class="lineNum">    2193</span> <span class="tlaUNC">           0 :     socket_t() ZMQ_NOTHROW : detail::socket_base(ZMQ_NULLPTR), ctxptr(ZMQ_NULLPTR) {}</span></span>
 <span id="L2194"><span class="lineNum">    2194</span>              : </span>
 <span id="L2195"><span class="lineNum">    2195</span>              :     socket_t(context_t &amp;context_, int type_) :</span>
-<span id="L2196"><span class="lineNum">    2196</span> <span class="tlaUNC">           0 :         detail::socket_base(zmq_socket(context_.handle(), type_)),</span></span>
-<span id="L2197"><span class="lineNum">    2197</span> <span class="tlaUNC">           0 :         ctxptr(context_.handle())</span></span>
+<span id="L2196"><span class="lineNum">    2196</span>              :         detail::socket_base(zmq_socket(context_.handle(), type_)),</span>
+<span id="L2197"><span class="lineNum">    2197</span>              :         ctxptr(context_.handle())</span>
 <span id="L2198"><span class="lineNum">    2198</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2199"><span class="lineNum">    2199</span> <span class="tlaUNC">           0 :         if (_handle == ZMQ_NULLPTR)</span></span>
 <span id="L2200"><span class="lineNum">    2200</span> <span class="tlaUNC">           0 :             throw error_t();</span></span>
@@ -2294,7 +2294,7 @@
 <span id="L2232"><span class="lineNum">    2232</span>              :     void close() ZMQ_NOTHROW</span>
 <span id="L2233"><span class="lineNum">    2233</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2234"><span class="lineNum">    2234</span> <span class="tlaUNC">           0 :         if (_handle == ZMQ_NULLPTR)</span></span>
-<span id="L2235"><span class="lineNum">    2235</span>              :             // already closed</span>
+<span id="L2235"><span class="lineNum">    2235</span> <span class="tlaUNC">           0 :             // already closed</span></span>
 <span id="L2236"><span class="lineNum">    2236</span> <span class="tlaUNC">           0 :             return;</span></span>
 <span id="L2237"><span class="lineNum">    2237</span> <span class="tlaUNC">           0 :         int rc = zmq_close(_handle);</span></span>
 <span id="L2238"><span class="lineNum">    2238</span> <span class="tlaUNC">           0 :         ZMQ_ASSERT(rc == 0);</span></span>
@@ -2318,7 +2318,7 @@
 <span id="L2256"><span class="lineNum">    2256</span>              : </span>
 <span id="L2257"><span class="lineNum">    2257</span>              :     // used by monitor_t</span>
 <span id="L2258"><span class="lineNum">    2258</span>              :     socket_t(void *context_, int type_) :</span>
-<span id="L2259"><span class="lineNum">    2259</span> <span class="tlaUNC">           0 :         detail::socket_base(zmq_socket(context_, type_)), ctxptr(context_)</span></span>
+<span id="L2259"><span class="lineNum">    2259</span>              :         detail::socket_base(zmq_socket(context_, type_)), ctxptr(context_)</span>
 <span id="L2260"><span class="lineNum">    2260</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2261"><span class="lineNum">    2261</span> <span class="tlaUNC">           0 :         if (_handle == ZMQ_NULLPTR)</span></span>
 <span id="L2262"><span class="lineNum">    2262</span> <span class="tlaUNC">           0 :             throw error_t();</span></span>
@@ -2419,28 +2419,28 @@
 <span id="L2357"><span class="lineNum">    2357</span> <span class="tlaUNC">           0 :         int rc = zmq_socket_monitor(socket.handle(), addr_, events);</span></span>
 <span id="L2358"><span class="lineNum">    2358</span> <span class="tlaUNC">           0 :         if (rc != 0)</span></span>
 <span id="L2359"><span class="lineNum">    2359</span> <span class="tlaUNC">           0 :             throw error_t();</span></span>
-<span id="L2360"><span class="lineNum">    2360</span>              : </span>
+<span id="L2360"><span class="lineNum">    2360</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2361"><span class="lineNum">    2361</span> <span class="tlaUNC">           0 :         _socket = socket;</span></span>
 <span id="L2362"><span class="lineNum">    2362</span> <span class="tlaUNC">           0 :         _monitor_socket = socket_t(socket.ctxptr, ZMQ_PAIR);</span></span>
 <span id="L2363"><span class="lineNum">    2363</span> <span class="tlaUNC">           0 :         _monitor_socket.connect(addr_);</span></span>
-<span id="L2364"><span class="lineNum">    2364</span>              : </span>
+<span id="L2364"><span class="lineNum">    2364</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2365"><span class="lineNum">    2365</span> <span class="tlaUNC">           0 :         on_monitor_started();</span></span>
 <span id="L2366"><span class="lineNum">    2366</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2367"><span class="lineNum">    2367</span>              : </span>
 <span id="L2368"><span class="lineNum">    2368</span>              :     bool check_event(int timeout = 0)</span>
 <span id="L2369"><span class="lineNum">    2369</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2370"><span class="lineNum">    2370</span> <span class="tlaUNC">           0 :         assert(_monitor_socket);</span></span>
-<span id="L2371"><span class="lineNum">    2371</span>              : </span>
+<span id="L2371"><span class="lineNum">    2371</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2372"><span class="lineNum">    2372</span> <span class="tlaUNC">           0 :         zmq::pollitem_t items[] = {</span></span>
 <span id="L2373"><span class="lineNum">    2373</span> <span class="tlaUNC">           0 :           {_monitor_socket.handle(), 0, ZMQ_POLLIN, 0},</span></span>
 <span id="L2374"><span class="lineNum">    2374</span> <span class="tlaUNC">           0 :         };</span></span>
-<span id="L2375"><span class="lineNum">    2375</span>              : </span>
+<span id="L2375"><span class="lineNum">    2375</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2376"><span class="lineNum">    2376</span> <span class="tlaUNC">           0 :         #ifdef ZMQ_CPP11</span></span>
 <span id="L2377"><span class="lineNum">    2377</span> <span class="tlaUNC">           0 :         zmq::poll(&amp;items[0], 1, std::chrono::milliseconds(timeout));</span></span>
-<span id="L2378"><span class="lineNum">    2378</span>              :         #else</span>
-<span id="L2379"><span class="lineNum">    2379</span>              :         zmq::poll(&amp;items[0], 1, timeout);</span>
-<span id="L2380"><span class="lineNum">    2380</span>              :         #endif</span>
-<span id="L2381"><span class="lineNum">    2381</span>              : </span>
+<span id="L2378"><span class="lineNum">    2378</span> <span class="tlaUNC">           0 :         #else</span></span>
+<span id="L2379"><span class="lineNum">    2379</span> <span class="tlaUNC">           0 :         zmq::poll(&amp;items[0], 1, timeout);</span></span>
+<span id="L2380"><span class="lineNum">    2380</span> <span class="tlaUNC">           0 :         #endif</span></span>
+<span id="L2381"><span class="lineNum">    2381</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2382"><span class="lineNum">    2382</span> <span class="tlaUNC">           0 :         return process_event(items[0].revents);</span></span>
 <span id="L2383"><span class="lineNum">    2383</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2384"><span class="lineNum">    2384</span>              : </span>
@@ -2449,7 +2449,7 @@
 <span id="L2387"><span class="lineNum">    2387</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2388"><span class="lineNum">    2388</span> <span class="tlaUNC">           0 :         if (_socket)</span></span>
 <span id="L2389"><span class="lineNum">    2389</span> <span class="tlaUNC">           0 :             zmq_socket_monitor(_socket.handle(), ZMQ_NULLPTR, 0);</span></span>
-<span id="L2390"><span class="lineNum">    2390</span>              : </span>
+<span id="L2390"><span class="lineNum">    2390</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2391"><span class="lineNum">    2391</span> <span class="tlaUNC">           0 :         _socket = socket_ref();</span></span>
 <span id="L2392"><span class="lineNum">    2392</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2393"><span class="lineNum">    2393</span>              : </span>
@@ -2557,17 +2557,17 @@
 <span id="L2495"><span class="lineNum">    2495</span>              :     bool process_event(short events)</span>
 <span id="L2496"><span class="lineNum">    2496</span> <span class="tlaUNC">           0 :     {</span></span>
 <span id="L2497"><span class="lineNum">    2497</span> <span class="tlaUNC">           0 :         zmq::message_t eventMsg;</span></span>
-<span id="L2498"><span class="lineNum">    2498</span>              : </span>
+<span id="L2498"><span class="lineNum">    2498</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2499"><span class="lineNum">    2499</span> <span class="tlaUNC">           0 :         if (events &amp; ZMQ_POLLIN) {</span></span>
 <span id="L2500"><span class="lineNum">    2500</span> <span class="tlaUNC">           0 :             int rc = zmq_msg_recv(eventMsg.handle(), _monitor_socket.handle(), 0);</span></span>
 <span id="L2501"><span class="lineNum">    2501</span> <span class="tlaUNC">           0 :             if (rc == -1 &amp;&amp; zmq_errno() == ETERM)</span></span>
 <span id="L2502"><span class="lineNum">    2502</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L2503"><span class="lineNum">    2503</span> <span class="tlaUNC">           0 :             assert(rc != -1);</span></span>
-<span id="L2504"><span class="lineNum">    2504</span>              : </span>
+<span id="L2504"><span class="lineNum">    2504</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2505"><span class="lineNum">    2505</span> <span class="tlaUNC">           0 :         } else {</span></span>
 <span id="L2506"><span class="lineNum">    2506</span> <span class="tlaUNC">           0 :             return false;</span></span>
 <span id="L2507"><span class="lineNum">    2507</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2508"><span class="lineNum">    2508</span>              : </span>
+<span id="L2508"><span class="lineNum">    2508</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2509"><span class="lineNum">    2509</span> <span class="tlaUNC">           0 : #if ZMQ_VERSION_MAJOR &gt;= 4</span></span>
 <span id="L2510"><span class="lineNum">    2510</span> <span class="tlaUNC">           0 :         const char *data = static_cast&lt;const char *&gt;(eventMsg.data());</span></span>
 <span id="L2511"><span class="lineNum">    2511</span> <span class="tlaUNC">           0 :         zmq_event_t msgEvent;</span></span>
@@ -2575,32 +2575,32 @@
 <span id="L2513"><span class="lineNum">    2513</span> <span class="tlaUNC">           0 :         data += sizeof(uint16_t);</span></span>
 <span id="L2514"><span class="lineNum">    2514</span> <span class="tlaUNC">           0 :         memcpy(&amp;msgEvent.value, data, sizeof(int32_t));</span></span>
 <span id="L2515"><span class="lineNum">    2515</span> <span class="tlaUNC">           0 :         zmq_event_t *event = &amp;msgEvent;</span></span>
-<span id="L2516"><span class="lineNum">    2516</span>              : #else</span>
-<span id="L2517"><span class="lineNum">    2517</span>              :         zmq_event_t *event = static_cast&lt;zmq_event_t *&gt;(eventMsg.data());</span>
-<span id="L2518"><span class="lineNum">    2518</span>              : #endif</span>
-<span id="L2519"><span class="lineNum">    2519</span>              : </span>
+<span id="L2516"><span class="lineNum">    2516</span> <span class="tlaUNC">           0 : #else</span></span>
+<span id="L2517"><span class="lineNum">    2517</span> <span class="tlaUNC">           0 :         zmq_event_t *event = static_cast&lt;zmq_event_t *&gt;(eventMsg.data());</span></span>
+<span id="L2518"><span class="lineNum">    2518</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L2519"><span class="lineNum">    2519</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2520"><span class="lineNum">    2520</span> <span class="tlaUNC">           0 : #ifdef ZMQ_NEW_MONITOR_EVENT_LAYOUT</span></span>
 <span id="L2521"><span class="lineNum">    2521</span> <span class="tlaUNC">           0 :         zmq::message_t addrMsg;</span></span>
 <span id="L2522"><span class="lineNum">    2522</span> <span class="tlaUNC">           0 :         int rc = zmq_msg_recv(addrMsg.handle(), _monitor_socket.handle(), 0);</span></span>
 <span id="L2523"><span class="lineNum">    2523</span> <span class="tlaUNC">           0 :         if (rc == -1 &amp;&amp; zmq_errno() == ETERM) {</span></span>
 <span id="L2524"><span class="lineNum">    2524</span> <span class="tlaUNC">           0 :             return false;</span></span>
 <span id="L2525"><span class="lineNum">    2525</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2526"><span class="lineNum">    2526</span>              : </span>
+<span id="L2526"><span class="lineNum">    2526</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2527"><span class="lineNum">    2527</span> <span class="tlaUNC">           0 :         assert(rc != -1);</span></span>
 <span id="L2528"><span class="lineNum">    2528</span> <span class="tlaUNC">           0 :         std::string address = addrMsg.to_string();</span></span>
-<span id="L2529"><span class="lineNum">    2529</span>              : #else</span>
-<span id="L2530"><span class="lineNum">    2530</span>              :         // Bit of a hack, but all events in the zmq_event_t union have the same layout so this will work for all event types.</span>
-<span id="L2531"><span class="lineNum">    2531</span>              :         std::string address = event-&gt;data.connected.addr;</span>
-<span id="L2532"><span class="lineNum">    2532</span>              : #endif</span>
-<span id="L2533"><span class="lineNum">    2533</span>              : </span>
+<span id="L2529"><span class="lineNum">    2529</span> <span class="tlaUNC">           0 : #else</span></span>
+<span id="L2530"><span class="lineNum">    2530</span> <span class="tlaUNC">           0 :         // Bit of a hack, but all events in the zmq_event_t union have the same layout so this will work for all event types.</span></span>
+<span id="L2531"><span class="lineNum">    2531</span> <span class="tlaUNC">           0 :         std::string address = event-&gt;data.connected.addr;</span></span>
+<span id="L2532"><span class="lineNum">    2532</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L2533"><span class="lineNum">    2533</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2534"><span class="lineNum">    2534</span> <span class="tlaUNC">           0 : #ifdef ZMQ_EVENT_MONITOR_STOPPED</span></span>
 <span id="L2535"><span class="lineNum">    2535</span> <span class="tlaUNC">           0 :         if (event-&gt;event == ZMQ_EVENT_MONITOR_STOPPED) {</span></span>
 <span id="L2536"><span class="lineNum">    2536</span> <span class="tlaUNC">           0 :             on_monitor_stopped();</span></span>
 <span id="L2537"><span class="lineNum">    2537</span> <span class="tlaUNC">           0 :             return false;</span></span>
 <span id="L2538"><span class="lineNum">    2538</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2539"><span class="lineNum">    2539</span>              : </span>
+<span id="L2539"><span class="lineNum">    2539</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2540"><span class="lineNum">    2540</span> <span class="tlaUNC">           0 : #endif</span></span>
-<span id="L2541"><span class="lineNum">    2541</span>              : </span>
+<span id="L2541"><span class="lineNum">    2541</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2542"><span class="lineNum">    2542</span> <span class="tlaUNC">           0 :         switch (event-&gt;event) {</span></span>
 <span id="L2543"><span class="lineNum">    2543</span> <span class="tlaUNC">           0 :             case ZMQ_EVENT_CONNECTED:</span></span>
 <span id="L2544"><span class="lineNum">    2544</span> <span class="tlaUNC">           0 :                 on_event_connected(*event, address.c_str());</span></span>
@@ -2645,19 +2645,19 @@
 <span id="L2583"><span class="lineNum">    2583</span> <span class="tlaUNC">           0 :             case ZMQ_EVENT_HANDSHAKE_SUCCEEDED:</span></span>
 <span id="L2584"><span class="lineNum">    2584</span> <span class="tlaUNC">           0 :                 on_event_handshake_succeeded(*event, address.c_str());</span></span>
 <span id="L2585"><span class="lineNum">    2585</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L2586"><span class="lineNum">    2586</span>              : #elif defined(ZMQ_BUILD_DRAFT_API) &amp;&amp; ZMQ_VERSION &gt;= ZMQ_MAKE_VERSION(4, 2, 1)</span>
-<span id="L2587"><span class="lineNum">    2587</span>              :             case ZMQ_EVENT_HANDSHAKE_FAILED:</span>
-<span id="L2588"><span class="lineNum">    2588</span>              :                 on_event_handshake_failed(*event, address.c_str());</span>
-<span id="L2589"><span class="lineNum">    2589</span>              :                 break;</span>
-<span id="L2590"><span class="lineNum">    2590</span>              :             case ZMQ_EVENT_HANDSHAKE_SUCCEED:</span>
-<span id="L2591"><span class="lineNum">    2591</span>              :                 on_event_handshake_succeed(*event, address.c_str());</span>
-<span id="L2592"><span class="lineNum">    2592</span>              :                 break;</span>
-<span id="L2593"><span class="lineNum">    2593</span>              : #endif</span>
+<span id="L2586"><span class="lineNum">    2586</span> <span class="tlaUNC">           0 : #elif defined(ZMQ_BUILD_DRAFT_API) &amp;&amp; ZMQ_VERSION &gt;= ZMQ_MAKE_VERSION(4, 2, 1)</span></span>
+<span id="L2587"><span class="lineNum">    2587</span> <span class="tlaUNC">           0 :             case ZMQ_EVENT_HANDSHAKE_FAILED:</span></span>
+<span id="L2588"><span class="lineNum">    2588</span> <span class="tlaUNC">           0 :                 on_event_handshake_failed(*event, address.c_str());</span></span>
+<span id="L2589"><span class="lineNum">    2589</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L2590"><span class="lineNum">    2590</span> <span class="tlaUNC">           0 :             case ZMQ_EVENT_HANDSHAKE_SUCCEED:</span></span>
+<span id="L2591"><span class="lineNum">    2591</span> <span class="tlaUNC">           0 :                 on_event_handshake_succeed(*event, address.c_str());</span></span>
+<span id="L2592"><span class="lineNum">    2592</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L2593"><span class="lineNum">    2593</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L2594"><span class="lineNum">    2594</span> <span class="tlaUNC">           0 :             default:</span></span>
 <span id="L2595"><span class="lineNum">    2595</span> <span class="tlaUNC">           0 :                 on_event_unknown(*event, address.c_str());</span></span>
 <span id="L2596"><span class="lineNum">    2596</span> <span class="tlaUNC">           0 :                 break;</span></span>
 <span id="L2597"><span class="lineNum">    2597</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2598"><span class="lineNum">    2598</span>              : </span>
+<span id="L2598"><span class="lineNum">    2598</span> <span class="tlaUNC">           0 : </span></span>
 <span id="L2599"><span class="lineNum">    2599</span> <span class="tlaUNC">           0 :         return true;</span></span>
 <span id="L2600"><span class="lineNum">    2600</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2601"><span class="lineNum">    2601</span>              : </span>
