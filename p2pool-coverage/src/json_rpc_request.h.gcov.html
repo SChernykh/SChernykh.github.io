@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-29 22:40:21</td>
+            <td class="headerValue">2025-09-03 08:13:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">17</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -82,21 +82,23 @@
 <span id="L20"><span class="lineNum">      20</span>              : namespace p2pool {</span>
 <span id="L21"><span class="lineNum">      21</span>              : namespace JSONRPCRequest {</span>
 <span id="L22"><span class="lineNum">      22</span>              : </span>
-<span id="L23"><span class="lineNum">      23</span>              : typedef Callback&lt;void, const char*, size_t, double&gt;::Base CallbackBase;</span>
+<span id="L23"><span class="lineNum">      23</span>              : typedef Callback&lt;void, const char* /*msg*/, size_t /*msg_size*/, double /*tcp_ping*/&gt;::Base CallbackBase;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
-<span id="L25"><span class="lineNum">      25</span>              : void Call(const std::string&amp; address, int port, const std::string&amp; req, const std::string&amp; auth, const std::string&amp; proxy, bool ssl, const std::string&amp; ssl_fingerprint, CallbackBase* cb, CallbackBase* close_cb, uv_loop_t* loop);</span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaUNC tlaBgUNC">           0 : FORCEINLINE static constexpr void dummy_callback(const char* /*msg*/, size_t /*msg_size*/, double /*tcp_ping*/) {}</span></span>
 <span id="L26"><span class="lineNum">      26</span>              : </span>
-<span id="L27"><span class="lineNum">      27</span>              : template&lt;typename T, typename U&gt;</span>
-<span id="L28"><span class="lineNum">      28</span>              : FORCEINLINE void call(const std::string&amp; address, int port, const std::string&amp; req, const std::string&amp; auth, const std::string&amp; proxy, bool ssl, const std::string&amp; ssl_fingerprint, T&amp;&amp; cb, U&amp;&amp; close_cb, uv_loop_t* loop = nullptr)</span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC">           0 :         typedef Callback&lt;void, const char*, size_t, double&gt;::Derived&lt;T&gt; CallbackT;</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC">           0 :         typedef Callback&lt;void, const char*, size_t, double&gt;::Derived&lt;U&gt; CallbackU;</span></span>
-<span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :         Call(address, port, req, auth, proxy, ssl, ssl_fingerprint, new CallbackT(std::move(cb)), new CallbackU(std::move(close_cb)), loop);</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span>              : } // namespace JSONRPCRequest</span>
-<span id="L37"><span class="lineNum">      37</span>              : } // namespace p2pool</span>
+<span id="L27"><span class="lineNum">      27</span>              : void Call(const std::string&amp; address, int port, const std::string&amp; req, const std::string&amp; auth, const std::string&amp; proxy, bool ssl, const std::string&amp; ssl_fingerprint, CallbackBase* cb, CallbackBase* close_cb, uv_loop_t* loop);</span>
+<span id="L28"><span class="lineNum">      28</span>              : </span>
+<span id="L29"><span class="lineNum">      29</span>              : template&lt;typename T, typename U&gt;</span>
+<span id="L30"><span class="lineNum">      30</span>              : FORCEINLINE void call(const std::string&amp; address, int port, const std::string&amp; req, const std::string&amp; auth, const std::string&amp; proxy, bool ssl, const std::string&amp; ssl_fingerprint, T&amp;&amp; cb, U&amp;&amp; close_cb, uv_loop_t* loop = nullptr)</span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC">           0 :         typedef Callback&lt;void, const char*, size_t, double&gt;::Derived&lt;T&gt; CallbackT;</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :         typedef Callback&lt;void, const char*, size_t, double&gt;::Derived&lt;U&gt; CallbackU;</span></span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :         Call(address, port, req, auth, proxy, ssl, ssl_fingerprint, new CallbackT(std::move(cb)), new CallbackU(std::move(close_cb)), loop);</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span>              : } // namespace JSONRPCRequest</span>
+<span id="L39"><span class="lineNum">      39</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

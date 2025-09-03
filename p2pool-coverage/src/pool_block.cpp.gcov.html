@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">94.1&nbsp;%</td>
-            <td class="headerCovTableEntry">307</td>
-            <td class="headerCovTableEntry">289</td>
+            <td class="headerCovTableEntry">303</td>
+            <td class="headerCovTableEntry">285</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-08-29 22:40:21</td>
+            <td class="headerValue">2025-09-03 08:13:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -405,114 +405,109 @@
 <span id="L343"><span class="lineNum">     343</span>              : </span>
 <span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">           1 :         alignas(8) uint8_t hashes[HASH_SIZE * 3];</span></span>
 <span id="L345"><span class="lineNum">     345</span>              : </span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">           1 :         uint64_t* second_hash = reinterpret_cast&lt;uint64_t*&gt;(hashes + HASH_SIZE);</span></span>
-<span id="L347"><span class="lineNum">     347</span>              : </span>
-<span id="L348"><span class="lineNum">     348</span>              :         // Second hash is keccak of base rct data (it doesn't exist for the coinbase transaction, so it's a hash of a single 0x00 byte)</span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           1 :         second_hash[0] = 0x14281e7a9e7836bcull;</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">           1 :         second_hash[1] = 0x7d818f8229424636ull;</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">           1 :         second_hash[2] = 0x9165d677b4f71266ull;</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">           1 :         second_hash[3] = 0x8ac9bc64e0a996ffull;</span></span>
+<span id="L346"><span class="lineNum">     346</span>              :         // Second hash is keccak of base rct data (it doesn't exist for the coinbase transaction, so it's a hash of a single 0x00 byte)</span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">           1 :         memcpy(hashes + HASH_SIZE, keccak_0x00.h, HASH_SIZE);</span></span>
+<span id="L348"><span class="lineNum">     348</span>              : </span>
+<span id="L349"><span class="lineNum">     349</span>              :         // Third hash is null because there is no rct data in the coinbase transaction</span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">           1 :         memset(hashes + HASH_SIZE * 2, 0, HASH_SIZE);</span></span>
+<span id="L351"><span class="lineNum">     351</span>              : </span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">           1 :         uint64_t count;</span></span>
 <span id="L353"><span class="lineNum">     353</span>              : </span>
-<span id="L354"><span class="lineNum">     354</span>              :         // Third hash is null because there is no rct data in the coinbase transaction</span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           1 :         memset(hashes + HASH_SIZE * 2, 0, HASH_SIZE);</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">           1 :         uint8_t blob[128];</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           1 :         size_t blob_size = 0;</span></span>
 <span id="L356"><span class="lineNum">     356</span>              : </span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">           1 :         uint64_t count;</span></span>
-<span id="L358"><span class="lineNum">     358</span>              : </span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           1 :         uint8_t blob[128];</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">           1 :         size_t blob_size = 0;</span></span>
-<span id="L361"><span class="lineNum">     361</span>              : </span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">           1 :         {</span></span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">           1 :                 size_t header_size, miner_tx_size;</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">           1 :                 const std::vector&lt;uint8_t&gt; mainchain_data = serialize_mainchain_data(&amp;header_size, &amp;miner_tx_size, nullptr, nullptr, nullptr, nullptr);</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">           1 :         {</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">           1 :                 size_t header_size, miner_tx_size;</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           1 :                 const std::vector&lt;uint8_t&gt; mainchain_data = serialize_mainchain_data(&amp;header_size, &amp;miner_tx_size, nullptr, nullptr, nullptr, nullptr);</span></span>
+<span id="L360"><span class="lineNum">     360</span>              : </span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">           1 :                 if (!header_size || !miner_tx_size || (mainchain_data.size() &lt; header_size + miner_tx_size)) {</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;tried to calculate PoW of uninitialized block&quot;);</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L365"><span class="lineNum">     365</span>              : </span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">           1 :                 if (!header_size || !miner_tx_size || (mainchain_data.size() &lt; header_size + miner_tx_size)) {</span></span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;tried to calculate PoW of uninitialized block&quot;);</span></span>
-<span id="L368"><span class="lineNum">     368</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L370"><span class="lineNum">     370</span>              : </span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC tlaBgGNC">           1 :                 blob_size = header_size;</span></span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">           1 :                 memcpy(blob, mainchain_data.data(), blob_size);</span></span>
-<span id="L373"><span class="lineNum">     373</span>              : </span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">           1 :                 const uint8_t* miner_tx = mainchain_data.data() + header_size;</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">           1 :                 hash tmp;</span></span>
-<span id="L376"><span class="lineNum">     376</span>              : </span>
-<span id="L377"><span class="lineNum">     377</span>              :                 // &quot;miner_tx_size - 1&quot; because the last byte is 0x00 (base rct data), it goes into the second hash</span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">           1 :                 keccak(miner_tx, static_cast&lt;int&gt;(miner_tx_size) - 1, tmp.h);</span></span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">           1 :                 memcpy(hashes, tmp.h, HASH_SIZE);</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC tlaBgGNC">           1 :                 blob_size = header_size;</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">           1 :                 memcpy(blob, mainchain_data.data(), blob_size);</span></span>
+<span id="L368"><span class="lineNum">     368</span>              : </span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">           1 :                 const uint8_t* miner_tx = mainchain_data.data() + header_size;</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">           1 :                 hash tmp;</span></span>
+<span id="L371"><span class="lineNum">     371</span>              : </span>
+<span id="L372"><span class="lineNum">     372</span>              :                 // &quot;miner_tx_size - 1&quot; because the last byte is 0x00 (base rct data), it goes into the second hash</span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">           1 :                 keccak(miner_tx, static_cast&lt;int&gt;(miner_tx_size) - 1, tmp.h);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">           1 :                 memcpy(hashes, tmp.h, HASH_SIZE);</span></span>
+<span id="L375"><span class="lineNum">     375</span>              : </span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">           1 :                 count = m_transactions.size();</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">           1 :                 uint8_t* h = reinterpret_cast&lt;uint8_t*&gt;(m_transactions.data());</span></span>
+<span id="L378"><span class="lineNum">     378</span>              : </span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">           1 :                 keccak(reinterpret_cast&lt;uint8_t*&gt;(hashes), HASH_SIZE * 3, tmp.h);</span></span>
 <span id="L380"><span class="lineNum">     380</span>              : </span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">           1 :                 count = m_transactions.size();</span></span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">           1 :                 uint8_t* h = reinterpret_cast&lt;uint8_t*&gt;(m_transactions.data());</span></span>
+<span id="L381"><span class="lineNum">     381</span>              :                 // Save the coinbase tx hash into the first element of m_transactions</span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">           1 :                 memcpy(h, tmp.h, HASH_SIZE);</span></span>
 <span id="L383"><span class="lineNum">     383</span>              : </span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">           1 :                 keccak(reinterpret_cast&lt;uint8_t*&gt;(hashes), HASH_SIZE * 3, tmp.h);</span></span>
-<span id="L385"><span class="lineNum">     385</span>              : </span>
-<span id="L386"><span class="lineNum">     386</span>              :                 // Save the coinbase tx hash into the first element of m_transactions</span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">           1 :                 memcpy(h, tmp.h, HASH_SIZE);</span></span>
-<span id="L388"><span class="lineNum">     388</span>              : </span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">           1 :                 root_hash tmp_root;</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">           1 :                 merkle_hash(m_transactions, tmp_root);</span></span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">           1 :                 memcpy(blob + blob_size, tmp_root.h, HASH_SIZE);</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">           1 :                 blob_size += HASH_SIZE;</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">           1 :                 root_hash tmp_root;</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">           1 :                 merkle_hash(m_transactions, tmp_root);</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">           1 :                 memcpy(blob + blob_size, tmp_root.h, HASH_SIZE);</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">           1 :                 blob_size += HASH_SIZE;</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L389"><span class="lineNum">     389</span>              : </span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">           1 :         writeVarint(count, [&amp;blob, &amp;blob_size](uint8_t b) { blob[blob_size++] = b; });</span></span>
+<span id="L391"><span class="lineNum">     391</span>              : </span>
+<span id="L392"><span class="lineNum">     392</span>              :         // cppcheck-suppress danglingLifetime</span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">           1 :         m_hashingBlob.assign(blob, blob + blob_size);</span></span>
 <span id="L394"><span class="lineNum">     394</span>              : </span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           1 :         writeVarint(count, [&amp;blob, &amp;blob_size](uint8_t b) { blob[blob_size++] = b; });</span></span>
-<span id="L396"><span class="lineNum">     396</span>              : </span>
-<span id="L397"><span class="lineNum">     397</span>              :         // cppcheck-suppress danglingLifetime</span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           1 :         m_hashingBlob.assign(blob, blob + blob_size);</span></span>
-<span id="L399"><span class="lineNum">     399</span>              : </span>
-<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           1 :         return hasher-&gt;calculate(blob, blob_size, height, seed_hash, pow_hash, force_light_mode);</span></span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L402"><span class="lineNum">     402</span>              : </span>
-<span id="L403"><span class="lineNum">     403</span>              : uint64_t PoolBlock::get_payout(const Wallet&amp; w) const</span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">           4 : {</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">           4 :         const uint8_t tx_type = get_tx_type();</span></span>
-<span id="L406"><span class="lineNum">     406</span>              : </span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          58 :         for (size_t i = 0, n = m_outputs.size(); i &lt; n; ++i) {</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          57 :                 const TxOutput&amp; out = m_outputs[i];</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          57 :                 hash eph_public_key;</span></span>
-<span id="L410"><span class="lineNum">     410</span>              : </span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          57 :                 if (tx_type == TXOUT_TO_TAGGED_KEY) {</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          57 :                         uint8_t view_tag;</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">          57 :                         const uint8_t expected_view_tag = out.m_viewTag;</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">          57 :                         if (w.get_eph_public_key(m_txkeySec, i, eph_public_key, view_tag, &amp;expected_view_tag) &amp;&amp; (eph_public_key == out.m_ephPublicKey)) {</span></span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           3 :                                 return out.m_reward;</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">           3 :                         }</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">          57 :                 }</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaUNC tlaBgUNC">           0 :                 else {</span></span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaUNC">           0 :                         uint8_t view_tag;</span></span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaUNC">           0 :                         if (w.get_eph_public_key(m_txkeySec, i, eph_public_key, view_tag) &amp;&amp; (eph_public_key == out.m_ephPublicKey)) {</span></span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaUNC">           0 :                                 return out.m_reward;</span></span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC tlaBgGNC">          57 :         }</span></span>
-<span id="L425"><span class="lineNum">     425</span>              : </span>
-<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">           1 :         return 0;</span></span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           1 :         return hasher-&gt;calculate(blob, blob_size, height, seed_hash, pow_hash, force_light_mode);</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L397"><span class="lineNum">     397</span>              : </span>
+<span id="L398"><span class="lineNum">     398</span>              : uint64_t PoolBlock::get_payout(const Wallet&amp; w) const</span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           4 : {</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           4 :         const uint8_t tx_type = get_tx_type();</span></span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          58 :         for (size_t i = 0, n = m_outputs.size(); i &lt; n; ++i) {</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          57 :                 const TxOutput&amp; out = m_outputs[i];</span></span>
+<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          57 :                 hash eph_public_key;</span></span>
+<span id="L405"><span class="lineNum">     405</span>              : </span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          57 :                 if (tx_type == TXOUT_TO_TAGGED_KEY) {</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          57 :                         uint8_t view_tag;</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          57 :                         const uint8_t expected_view_tag = out.m_viewTag;</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">          57 :                         if (w.get_eph_public_key(m_txkeySec, i, eph_public_key, view_tag, &amp;expected_view_tag) &amp;&amp; (eph_public_key == out.m_ephPublicKey)) {</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">           3 :                                 return out.m_reward;</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">           3 :                         }</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          57 :                 }</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC tlaBgUNC">           0 :                 else {</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :                         uint8_t view_tag;</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :                         if (w.get_eph_public_key(m_txkeySec, i, eph_public_key, view_tag) &amp;&amp; (eph_public_key == out.m_ephPublicKey)) {</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 :                                 return out.m_reward;</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC tlaBgGNC">          57 :         }</span></span>
+<span id="L420"><span class="lineNum">     420</span>              : </span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           1 :         return 0;</span></span>
+<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">           4 : }</span></span>
+<span id="L423"><span class="lineNum">     423</span>              : </span>
+<span id="L424"><span class="lineNum">     424</span>              : hash PoolBlock::calculate_tx_key_seed() const</span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">        3227 : {</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">        3227 :         const char domain[] = &quot;tx_key_seed&quot;;</span></span>
+<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">        3227 :         const uint32_t zero = 0;</span></span>
 <span id="L428"><span class="lineNum">     428</span>              : </span>
-<span id="L429"><span class="lineNum">     429</span>              : hash PoolBlock::calculate_tx_key_seed() const</span>
-<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">        3227 : {</span></span>
-<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">        3227 :         const char domain[] = &quot;tx_key_seed&quot;;</span></span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">        3227 :         const uint32_t zero = 0;</span></span>
-<span id="L433"><span class="lineNum">     433</span>              : </span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">        3227 :         const std::vector&lt;uint8_t&gt; mainchain_data = serialize_mainchain_data(nullptr, nullptr, nullptr, nullptr, &amp;zero, &amp;zero);</span></span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">        3227 :         const std::vector&lt;uint8_t&gt; sidechain_data = serialize_sidechain_data();</span></span>
-<span id="L436"><span class="lineNum">     436</span>              : </span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">        3227 :         hash result;</span></span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">    31294396 :         keccak_custom([&amp;domain, &amp;mainchain_data, &amp;sidechain_data](int offset) -&gt; uint8_t {</span></span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">    31294396 :                 size_t k = offset;</span></span>
-<span id="L440"><span class="lineNum">     440</span>              : </span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">    31294396 :                 if (k &lt; sizeof(domain)) return domain[k];</span></span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">    31255672 :                 k -= sizeof(domain);</span></span>
-<span id="L443"><span class="lineNum">     443</span>              : </span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">    31255672 :                 if (k &lt; mainchain_data.size()) return mainchain_data[k];</span></span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">      729750 :                 k -= mainchain_data.size();</span></span>
-<span id="L446"><span class="lineNum">     446</span>              : </span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">      729750 :                 return sidechain_data[k];</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">    31255672 :         }, static_cast&lt;int&gt;(sizeof(domain) + mainchain_data.size() + sidechain_data.size()), result.h, HASH_SIZE);</span></span>
-<span id="L449"><span class="lineNum">     449</span>              : </span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">        3227 :         return result;</span></span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">        3227 : }</span></span>
-<span id="L452"><span class="lineNum">     452</span>              : </span>
-<span id="L453"><span class="lineNum">     453</span>              : } // namespace p2pool</span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">        3227 :         const std::vector&lt;uint8_t&gt; mainchain_data = serialize_mainchain_data(nullptr, nullptr, nullptr, nullptr, &amp;zero, &amp;zero);</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">        3227 :         const std::vector&lt;uint8_t&gt; sidechain_data = serialize_sidechain_data();</span></span>
+<span id="L431"><span class="lineNum">     431</span>              : </span>
+<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">        3227 :         hash result;</span></span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">    31294396 :         keccak_custom([&amp;domain, &amp;mainchain_data, &amp;sidechain_data](int offset) -&gt; uint8_t {</span></span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">    31294396 :                 size_t k = offset;</span></span>
+<span id="L435"><span class="lineNum">     435</span>              : </span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">    31294396 :                 if (k &lt; sizeof(domain)) return domain[k];</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">    31255672 :                 k -= sizeof(domain);</span></span>
+<span id="L438"><span class="lineNum">     438</span>              : </span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">    31255672 :                 if (k &lt; mainchain_data.size()) return mainchain_data[k];</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">      729750 :                 k -= mainchain_data.size();</span></span>
+<span id="L441"><span class="lineNum">     441</span>              : </span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">      729750 :                 return sidechain_data[k];</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">    31255672 :         }, static_cast&lt;int&gt;(sizeof(domain) + mainchain_data.size() + sidechain_data.size()), result.h, HASH_SIZE);</span></span>
+<span id="L444"><span class="lineNum">     444</span>              : </span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">        3227 :         return result;</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">        3227 : }</span></span>
+<span id="L447"><span class="lineNum">     447</span>              : </span>
+<span id="L448"><span class="lineNum">     448</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
