@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-03 08:13:02</td>
+            <td class="headerValue">2025-09-03 11:23:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -183,7 +183,7 @@
 <span id="L121"><span class="lineNum">     121</span>              :                 void on_peer_list_response(const uint8_t* buf);</span>
 <span id="L122"><span class="lineNum">     122</span>              :                 void on_block_notify(const uint8_t* buf);</span>
 <span id="L123"><span class="lineNum">     123</span>              :                 [[nodiscard]] bool on_aux_job_donation(const uint8_t* buf, uint32_t size);</span>
-<span id="L124"><span class="lineNum">     124</span>              :                 [[nodiscard]] bool on_monero_block_broadcast(const uint8_t* buf, uint32_t size);</span>
+<span id="L124"><span class="lineNum">     124</span>              :                 [[nodiscard]] bool on_monero_block_broadcast(const uint8_t* buf, uint32_t size) const;</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
 <span id="L126"><span class="lineNum">     126</span>              :                 [[nodiscard]] bool handle_incoming_block_async(const PoolBlock* block, uint64_t max_time_delta = 0);</span>
 <span id="L127"><span class="lineNum">     127</span>              :                 static void handle_incoming_block(p2pool* pool, PoolBlock&amp; block, std::vector&lt;hash&gt;&amp; missing_blocks, bool&amp; result);</span>
