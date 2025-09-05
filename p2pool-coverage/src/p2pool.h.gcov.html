@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">30</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-03 12:43:33</td>
+            <td class="headerValue">2025-09-05 13:44:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">19</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -213,141 +213,149 @@
 <span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :         static void on_update_block_template(uv_async_t* async) { reinterpret_cast&lt;p2pool*&gt;(async-&gt;data)-&gt;update_block_template(); }</span></span>
 <span id="L152"><span class="lineNum">     152</span>              :         static void on_stop(uv_async_t*);</span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaUNC">           0 :         static void on_reconnect_to_host(uv_async_t* async) { reinterpret_cast&lt;p2pool*&gt;(async-&gt;data)-&gt;reconnect_to_host(); }</span></span>
-<span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span>              :         void submit_block() const;</span>
-<span id="L156"><span class="lineNum">     156</span>              :         void submit_aux_block() const;</span>
-<span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span>              :         std::atomic&lt;bool&gt; m_stopped;</span>
-<span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span>              :         const Params* m_params;</span>
-<span id="L161"><span class="lineNum">     161</span>              :         std::vector&lt;double&gt; m_hostPing;</span>
-<span id="L162"><span class="lineNum">     162</span>              : </span>
-<span id="L163"><span class="lineNum">     163</span>              :         std::atomic&lt;uint32_t&gt; m_currentHostIndex;</span>
-<span id="L164"><span class="lineNum">     164</span>              : </span>
-<span id="L165"><span class="lineNum">     165</span>              :         p2pool_api* m_api;</span>
-<span id="L166"><span class="lineNum">     166</span>              :         SideChain* m_sideChain;</span>
-<span id="L167"><span class="lineNum">     167</span>              :         RandomX_Hasher_Base* m_hasher;</span>
-<span id="L168"><span class="lineNum">     168</span>              :         BlockTemplate* m_blockTemplate;</span>
-<span id="L169"><span class="lineNum">     169</span>              :         std::atomic&lt;bool&gt; m_updateSeed;</span>
-<span id="L170"><span class="lineNum">     170</span>              :         Mempool* m_mempool;</span>
-<span id="L171"><span class="lineNum">     171</span>              : </span>
-<span id="L172"><span class="lineNum">     172</span>              :         mutable uv_rwlock_t m_mainchainLock;</span>
-<span id="L173"><span class="lineNum">     173</span>              :         std::map&lt;uint64_t, ChainMain&gt; m_mainchainByHeight;</span>
-<span id="L174"><span class="lineNum">     174</span>              :         unordered_map&lt;hash, ChainMain&gt; m_mainchainByHash;</span>
-<span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span>              :         mutable uv_rwlock_t m_minerDataLock;</span>
-<span id="L177"><span class="lineNum">     177</span>              :         MinerData m_minerData;</span>
-<span id="L178"><span class="lineNum">     178</span>              : </span>
-<span id="L179"><span class="lineNum">     179</span>              :         enum { TIMESTAMP_WINDOW = 60 };</span>
-<span id="L180"><span class="lineNum">     180</span>              :         bool get_timestamps(uint64_t (&amp;timestamps)[TIMESTAMP_WINDOW]) const;</span>
-<span id="L181"><span class="lineNum">     181</span>              :         void update_median_timestamp();</span>
-<span id="L182"><span class="lineNum">     182</span>              : </span>
-<span id="L183"><span class="lineNum">     183</span>              :         void stratum_on_block();</span>
-<span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span>              :         void get_info();</span>
-<span id="L186"><span class="lineNum">     186</span>              :         void load_found_blocks();</span>
-<span id="L187"><span class="lineNum">     187</span>              :         void parse_get_info_rpc(const char* data, size_t size);</span>
-<span id="L188"><span class="lineNum">     188</span>              : </span>
-<span id="L189"><span class="lineNum">     189</span>              :         void get_version();</span>
-<span id="L190"><span class="lineNum">     190</span>              :         void parse_get_version_rpc(const char* data, size_t size);</span>
-<span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span>              :         void get_miner_data(bool retry = true);</span>
-<span id="L193"><span class="lineNum">     193</span>              :         void parse_get_miner_data_rpc(const char* data, size_t size);</span>
-<span id="L194"><span class="lineNum">     194</span>              : </span>
-<span id="L195"><span class="lineNum">     195</span>              :         bool parse_block_header(const char* data, size_t size, ChainMain&amp; c);</span>
-<span id="L196"><span class="lineNum">     196</span>              :         uint32_t parse_block_headers_range(const char* data, size_t size);</span>
-<span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span>              :         void api_update_network_stats();</span>
-<span id="L199"><span class="lineNum">     199</span>              :         void api_update_pool_stats();</span>
-<span id="L200"><span class="lineNum">     200</span>              :         void api_update_stats_mod();</span>
-<span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span>              :         void cleanup_mainchain_data(uint64_t height);</span>
-<span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span>              :         struct FoundBlock</span>
-<span id="L205"><span class="lineNum">     205</span>              :         {</span>
-<span id="L206"><span class="lineNum">     206</span>              :                 FORCEINLINE FoundBlock(time_t _t, uint64_t _h, const hash&amp; _id, const difficulty_type&amp; _block_diff, const difficulty_type&amp; _total_hashes)</span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :                         : timestamp(_t)</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :                         , height(_h)</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :                         , id(_id)</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :                         , block_diff(_block_diff)</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :                         , total_hashes(_total_hashes)</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :                 {}</span></span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span>              :                 time_t timestamp;</span>
-<span id="L215"><span class="lineNum">     215</span>              :                 uint64_t height;</span>
-<span id="L216"><span class="lineNum">     216</span>              :                 hash id;</span>
-<span id="L217"><span class="lineNum">     217</span>              :                 difficulty_type block_diff;</span>
-<span id="L218"><span class="lineNum">     218</span>              :                 difficulty_type total_hashes;</span>
-<span id="L219"><span class="lineNum">     219</span>              :         };</span>
-<span id="L220"><span class="lineNum">     220</span>              : </span>
-<span id="L221"><span class="lineNum">     221</span>              :         uv_mutex_t m_foundBlocksLock;</span>
-<span id="L222"><span class="lineNum">     222</span>              :         std::vector&lt;FoundBlock&gt; m_foundBlocks;</span>
-<span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span>              :         std::atomic&lt;uint32_t&gt; m_serversStarted{ 0 };</span>
-<span id="L225"><span class="lineNum">     225</span>              :         StratumServer* m_stratumServer = nullptr;</span>
-<span id="L226"><span class="lineNum">     226</span>              :         P2PServer* m_p2pServer = nullptr;</span>
-<span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span>              :         std::atomic&lt;bool&gt; m_startupFinished{ false };</span>
-<span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
-<span id="L231"><span class="lineNum">     231</span>              :         uv_mutex_t m_minerLock;</span>
-<span id="L232"><span class="lineNum">     232</span>              :         Miner* m_miner = nullptr;</span>
-<span id="L233"><span class="lineNum">     233</span>              : #endif</span>
-<span id="L234"><span class="lineNum">     234</span>              : </span>
-<span id="L235"><span class="lineNum">     235</span>              : #ifndef P2POOL_UNIT_TESTS</span>
-<span id="L236"><span class="lineNum">     236</span>              :         ConsoleCommands* m_consoleCommands;</span>
-<span id="L237"><span class="lineNum">     237</span>              : #endif</span>
-<span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span>              :         struct SubmitBlockData</span>
-<span id="L240"><span class="lineNum">     240</span>              :         {</span>
-<span id="L241"><span class="lineNum">     241</span>              :                 uint32_t template_id = 0;</span>
-<span id="L242"><span class="lineNum">     242</span>              :                 uint32_t nonce = 0;</span>
-<span id="L243"><span class="lineNum">     243</span>              :                 uint32_t extra_nonce = 0;</span>
-<span id="L244"><span class="lineNum">     244</span>              :                 std::vector&lt;uint8_t&gt; blob;</span>
-<span id="L245"><span class="lineNum">     245</span>              :         };</span>
-<span id="L246"><span class="lineNum">     246</span>              : </span>
-<span id="L247"><span class="lineNum">     247</span>              :         mutable uv_mutex_t m_submitBlockDataLock;</span>
-<span id="L248"><span class="lineNum">     248</span>              :         SubmitBlockData m_submitBlockData;</span>
-<span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span>              :         mutable uv_mutex_t m_submitAuxBlockDataLock;</span>
-<span id="L251"><span class="lineNum">     251</span>              :         mutable std::vector&lt;SubmitAuxBlockData&gt; m_submitAuxBlockData;</span>
-<span id="L252"><span class="lineNum">     252</span>              : </span>
-<span id="L253"><span class="lineNum">     253</span>              :         uv_async_t m_submitBlockAsync;</span>
-<span id="L254"><span class="lineNum">     254</span>              :         uv_async_t m_submitAuxBlockAsync;</span>
-<span id="L255"><span class="lineNum">     255</span>              :         uv_async_t m_blockTemplateAsync;</span>
-<span id="L256"><span class="lineNum">     256</span>              :         uv_async_t m_stopAsync;</span>
-<span id="L257"><span class="lineNum">     257</span>              : </span>
-<span id="L258"><span class="lineNum">     258</span>              :         std::atomic&lt;bool&gt; m_isAlternativeBlock{ false };</span>
-<span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span>              :         std::atomic&lt;uint64_t&gt; m_zmqLastActive;</span>
-<span id="L261"><span class="lineNum">     261</span>              :         uint64_t m_startTime;</span>
-<span id="L262"><span class="lineNum">     262</span>              :         uv_async_t m_reconnectToHostAsync;</span>
-<span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span>              : #ifndef P2POOL_UNIT_TESTS</span>
-<span id="L265"><span class="lineNum">     265</span>              :         mutable uv_rwlock_t m_ZMQReaderLock;</span>
-<span id="L266"><span class="lineNum">     266</span>              :         ZMQReader* m_ZMQReader = nullptr;</span>
-<span id="L267"><span class="lineNum">     267</span>              : #endif</span>
-<span id="L268"><span class="lineNum">     268</span>              : </span>
-<span id="L269"><span class="lineNum">     269</span>              :         mutable uv_rwlock_t m_mergeMiningClientsLock;</span>
-<span id="L270"><span class="lineNum">     270</span>              :         std::vector&lt;IMergeMiningClient*&gt; m_mergeMiningClients;</span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaUNC">           0 :         static void on_get_missing_heights(uv_async_t* async) { reinterpret_cast&lt;p2pool*&gt;(async-&gt;data)-&gt;get_missing_heights(); }</span></span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span>              :         void submit_block() const;</span>
+<span id="L157"><span class="lineNum">     157</span>              :         void submit_aux_block() const;</span>
+<span id="L158"><span class="lineNum">     158</span>              : </span>
+<span id="L159"><span class="lineNum">     159</span>              :         std::atomic&lt;bool&gt; m_stopped;</span>
+<span id="L160"><span class="lineNum">     160</span>              : </span>
+<span id="L161"><span class="lineNum">     161</span>              :         const Params* m_params;</span>
+<span id="L162"><span class="lineNum">     162</span>              :         std::vector&lt;double&gt; m_hostPing;</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              :         std::atomic&lt;uint32_t&gt; m_currentHostIndex;</span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span>              :         p2pool_api* m_api;</span>
+<span id="L167"><span class="lineNum">     167</span>              :         SideChain* m_sideChain;</span>
+<span id="L168"><span class="lineNum">     168</span>              :         RandomX_Hasher_Base* m_hasher;</span>
+<span id="L169"><span class="lineNum">     169</span>              :         BlockTemplate* m_blockTemplate;</span>
+<span id="L170"><span class="lineNum">     170</span>              :         std::atomic&lt;bool&gt; m_updateSeed;</span>
+<span id="L171"><span class="lineNum">     171</span>              :         Mempool* m_mempool;</span>
+<span id="L172"><span class="lineNum">     172</span>              : </span>
+<span id="L173"><span class="lineNum">     173</span>              :         mutable uv_rwlock_t m_mainchainLock;</span>
+<span id="L174"><span class="lineNum">     174</span>              :         std::map&lt;uint64_t, ChainMain&gt; m_mainchainByHeight;</span>
+<span id="L175"><span class="lineNum">     175</span>              :         unordered_map&lt;hash, ChainMain&gt; m_mainchainByHash;</span>
+<span id="L176"><span class="lineNum">     176</span>              : </span>
+<span id="L177"><span class="lineNum">     177</span>              :         mutable uv_rwlock_t m_minerDataLock;</span>
+<span id="L178"><span class="lineNum">     178</span>              :         MinerData m_minerData;</span>
+<span id="L179"><span class="lineNum">     179</span>              : </span>
+<span id="L180"><span class="lineNum">     180</span>              :         enum { TIMESTAMP_WINDOW = 60 };</span>
+<span id="L181"><span class="lineNum">     181</span>              :         bool get_timestamps(uint64_t (&amp;timestamps)[TIMESTAMP_WINDOW]) const;</span>
+<span id="L182"><span class="lineNum">     182</span>              :         void update_median_timestamp();</span>
+<span id="L183"><span class="lineNum">     183</span>              : </span>
+<span id="L184"><span class="lineNum">     184</span>              :         void stratum_on_block();</span>
+<span id="L185"><span class="lineNum">     185</span>              : </span>
+<span id="L186"><span class="lineNum">     186</span>              :         void get_info();</span>
+<span id="L187"><span class="lineNum">     187</span>              :         void load_found_blocks();</span>
+<span id="L188"><span class="lineNum">     188</span>              :         void parse_get_info_rpc(const char* data, size_t size);</span>
+<span id="L189"><span class="lineNum">     189</span>              : </span>
+<span id="L190"><span class="lineNum">     190</span>              :         void get_version();</span>
+<span id="L191"><span class="lineNum">     191</span>              :         void parse_get_version_rpc(const char* data, size_t size);</span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span>              :         void get_miner_data(bool retry = true);</span>
+<span id="L194"><span class="lineNum">     194</span>              :         void parse_get_miner_data_rpc(const char* data, size_t size);</span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span>              :         bool parse_block_header(const char* data, size_t size, ChainMain&amp; c);</span>
+<span id="L197"><span class="lineNum">     197</span>              :         uint32_t parse_block_headers_range(const char* data, size_t size);</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :         void api_update_network_stats();</span>
+<span id="L200"><span class="lineNum">     200</span>              :         void api_update_pool_stats();</span>
+<span id="L201"><span class="lineNum">     201</span>              :         void api_update_stats_mod();</span>
+<span id="L202"><span class="lineNum">     202</span>              : </span>
+<span id="L203"><span class="lineNum">     203</span>              :         void cleanup_mainchain_data(uint64_t height);</span>
+<span id="L204"><span class="lineNum">     204</span>              : </span>
+<span id="L205"><span class="lineNum">     205</span>              :         struct FoundBlock</span>
+<span id="L206"><span class="lineNum">     206</span>              :         {</span>
+<span id="L207"><span class="lineNum">     207</span>              :                 FORCEINLINE FoundBlock(time_t _t, uint64_t _h, const hash&amp; _id, const difficulty_type&amp; _block_diff, const difficulty_type&amp; _total_hashes)</span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :                         : timestamp(_t)</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :                         , height(_h)</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :                         , id(_id)</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :                         , block_diff(_block_diff)</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :                         , total_hashes(_total_hashes)</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :                 {}</span></span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span>              :                 time_t timestamp;</span>
+<span id="L216"><span class="lineNum">     216</span>              :                 uint64_t height;</span>
+<span id="L217"><span class="lineNum">     217</span>              :                 hash id;</span>
+<span id="L218"><span class="lineNum">     218</span>              :                 difficulty_type block_diff;</span>
+<span id="L219"><span class="lineNum">     219</span>              :                 difficulty_type total_hashes;</span>
+<span id="L220"><span class="lineNum">     220</span>              :         };</span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span>              :         uv_mutex_t m_foundBlocksLock;</span>
+<span id="L223"><span class="lineNum">     223</span>              :         std::vector&lt;FoundBlock&gt; m_foundBlocks;</span>
+<span id="L224"><span class="lineNum">     224</span>              : </span>
+<span id="L225"><span class="lineNum">     225</span>              :         std::atomic&lt;uint32_t&gt; m_serversStarted{ 0 };</span>
+<span id="L226"><span class="lineNum">     226</span>              :         StratumServer* m_stratumServer = nullptr;</span>
+<span id="L227"><span class="lineNum">     227</span>              :         P2PServer* m_p2pServer = nullptr;</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              :         std::atomic&lt;bool&gt; m_startupFinished{ false };</span>
+<span id="L230"><span class="lineNum">     230</span>              : </span>
+<span id="L231"><span class="lineNum">     231</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
+<span id="L232"><span class="lineNum">     232</span>              :         uv_mutex_t m_minerLock;</span>
+<span id="L233"><span class="lineNum">     233</span>              :         Miner* m_miner = nullptr;</span>
+<span id="L234"><span class="lineNum">     234</span>              : #endif</span>
+<span id="L235"><span class="lineNum">     235</span>              : </span>
+<span id="L236"><span class="lineNum">     236</span>              : #ifndef P2POOL_UNIT_TESTS</span>
+<span id="L237"><span class="lineNum">     237</span>              :         ConsoleCommands* m_consoleCommands;</span>
+<span id="L238"><span class="lineNum">     238</span>              : #endif</span>
+<span id="L239"><span class="lineNum">     239</span>              : </span>
+<span id="L240"><span class="lineNum">     240</span>              :         struct SubmitBlockData</span>
+<span id="L241"><span class="lineNum">     241</span>              :         {</span>
+<span id="L242"><span class="lineNum">     242</span>              :                 uint32_t template_id = 0;</span>
+<span id="L243"><span class="lineNum">     243</span>              :                 uint32_t nonce = 0;</span>
+<span id="L244"><span class="lineNum">     244</span>              :                 uint32_t extra_nonce = 0;</span>
+<span id="L245"><span class="lineNum">     245</span>              :                 std::vector&lt;uint8_t&gt; blob;</span>
+<span id="L246"><span class="lineNum">     246</span>              :         };</span>
+<span id="L247"><span class="lineNum">     247</span>              : </span>
+<span id="L248"><span class="lineNum">     248</span>              :         mutable uv_mutex_t m_submitBlockDataLock;</span>
+<span id="L249"><span class="lineNum">     249</span>              :         SubmitBlockData m_submitBlockData;</span>
+<span id="L250"><span class="lineNum">     250</span>              : </span>
+<span id="L251"><span class="lineNum">     251</span>              :         mutable uv_mutex_t m_submitAuxBlockDataLock;</span>
+<span id="L252"><span class="lineNum">     252</span>              :         mutable std::vector&lt;SubmitAuxBlockData&gt; m_submitAuxBlockData;</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              :         uv_async_t m_submitBlockAsync;</span>
+<span id="L255"><span class="lineNum">     255</span>              :         uv_async_t m_submitAuxBlockAsync;</span>
+<span id="L256"><span class="lineNum">     256</span>              :         uv_async_t m_blockTemplateAsync;</span>
+<span id="L257"><span class="lineNum">     257</span>              :         uv_async_t m_stopAsync;</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span>              :         std::atomic&lt;bool&gt; m_isAlternativeBlock{ false };</span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span>              :         std::atomic&lt;uint64_t&gt; m_zmqLastActive;</span>
+<span id="L262"><span class="lineNum">     262</span>              :         uint64_t m_startTime;</span>
+<span id="L263"><span class="lineNum">     263</span>              :         uv_async_t m_reconnectToHostAsync;</span>
+<span id="L264"><span class="lineNum">     264</span>              : </span>
+<span id="L265"><span class="lineNum">     265</span>              :         uv_async_t m_getMissingHeightsAsync;</span>
+<span id="L266"><span class="lineNum">     266</span>              : </span>
+<span id="L267"><span class="lineNum">     267</span>              :         mutable uv_mutex_t m_missingHeightsLock;</span>
+<span id="L268"><span class="lineNum">     268</span>              :         mutable std::vector&lt;uint64_t&gt; m_missingHeights;</span>
+<span id="L269"><span class="lineNum">     269</span>              : </span>
+<span id="L270"><span class="lineNum">     270</span>              :         void get_missing_heights();</span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
-<span id="L273"><span class="lineNum">     273</span>              :         mutable uv_rwlock_t m_auxJobDonationLock;</span>
-<span id="L274"><span class="lineNum">     274</span>              :         std::vector&lt;IMergeMiningClient::ChainParameters&gt; m_auxJobDonation;</span>
-<span id="L275"><span class="lineNum">     275</span>              :         uint64_t m_auxJobDonationLastUpdated = 0;</span>
-<span id="L276"><span class="lineNum">     276</span>              : #endif</span>
-<span id="L277"><span class="lineNum">     277</span>              : </span>
-<span id="L278"><span class="lineNum">     278</span>              :         mutable uv_rwlock_t m_auxIdLock;</span>
-<span id="L279"><span class="lineNum">     279</span>              :         std::vector&lt;hash&gt; m_auxId;</span>
-<span id="L280"><span class="lineNum">     280</span>              :         uint32_t m_auxNonce = 0;</span>
-<span id="L281"><span class="lineNum">     281</span>              : </span>
-<span id="L282"><span class="lineNum">     282</span>              :         hash m_getMinerDataHash;</span>
-<span id="L283"><span class="lineNum">     283</span>              :         bool m_getMinerDataPending = false;</span>
-<span id="L284"><span class="lineNum">     284</span>              : </span>
-<span id="L285"><span class="lineNum">     285</span>              :         std::atomic&lt;uint64_t&gt; m_lastMinerDataReceived;</span>
-<span id="L286"><span class="lineNum">     286</span>              : };</span>
-<span id="L287"><span class="lineNum">     287</span>              : </span>
-<span id="L288"><span class="lineNum">     288</span>              : } // namespace p2pool</span>
+<span id="L272"><span class="lineNum">     272</span>              : #ifndef P2POOL_UNIT_TESTS</span>
+<span id="L273"><span class="lineNum">     273</span>              :         mutable uv_rwlock_t m_ZMQReaderLock;</span>
+<span id="L274"><span class="lineNum">     274</span>              :         ZMQReader* m_ZMQReader = nullptr;</span>
+<span id="L275"><span class="lineNum">     275</span>              : #endif</span>
+<span id="L276"><span class="lineNum">     276</span>              : </span>
+<span id="L277"><span class="lineNum">     277</span>              :         mutable uv_rwlock_t m_mergeMiningClientsLock;</span>
+<span id="L278"><span class="lineNum">     278</span>              :         std::vector&lt;IMergeMiningClient*&gt; m_mergeMiningClients;</span>
+<span id="L279"><span class="lineNum">     279</span>              : </span>
+<span id="L280"><span class="lineNum">     280</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
+<span id="L281"><span class="lineNum">     281</span>              :         mutable uv_rwlock_t m_auxJobDonationLock;</span>
+<span id="L282"><span class="lineNum">     282</span>              :         std::vector&lt;IMergeMiningClient::ChainParameters&gt; m_auxJobDonation;</span>
+<span id="L283"><span class="lineNum">     283</span>              :         uint64_t m_auxJobDonationLastUpdated = 0;</span>
+<span id="L284"><span class="lineNum">     284</span>              : #endif</span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span>              :         mutable uv_rwlock_t m_auxIdLock;</span>
+<span id="L287"><span class="lineNum">     287</span>              :         std::vector&lt;hash&gt; m_auxId;</span>
+<span id="L288"><span class="lineNum">     288</span>              :         uint32_t m_auxNonce = 0;</span>
+<span id="L289"><span class="lineNum">     289</span>              : </span>
+<span id="L290"><span class="lineNum">     290</span>              :         hash m_getMinerDataHash;</span>
+<span id="L291"><span class="lineNum">     291</span>              :         bool m_getMinerDataPending = false;</span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span>              :         std::atomic&lt;uint64_t&gt; m_lastMinerDataReceived;</span>
+<span id="L294"><span class="lineNum">     294</span>              : };</span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
