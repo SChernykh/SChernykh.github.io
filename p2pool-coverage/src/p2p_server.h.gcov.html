@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-05 13:44:40</td>
+            <td class="headerValue">2025-09-06 12:29:57</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -278,7 +278,7 @@
 <span id="L216"><span class="lineNum">     216</span>              : </span>
 <span id="L217"><span class="lineNum">     217</span>              :         void broadcast_aux_job_donation(const uint8_t* data, uint32_t data_size, uint64_t timestamp, const P2PClient* source, bool duplicate_check_done);</span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span>              :         void broadcast_monero_block_async(std::vector&lt;uint8_t&gt;&amp;&amp; blob);</span>
+<span id="L219"><span class="lineNum">     219</span>              :         void broadcast_monero_block_async(std::vector&lt;std::vector&lt;uint8_t&gt;&gt;&amp;&amp; blobs);</span>
 <span id="L220"><span class="lineNum">     220</span>              :         void broadcast_monero_block_handler();</span>
 <span id="L221"><span class="lineNum">     221</span>              :         void broadcast_monero_block(const uint8_t* data, uint32_t data_size, const P2PClient* source, bool duplicate_check_done);</span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
@@ -409,10 +409,10 @@
 <span id="L347"><span class="lineNum">     347</span>              :         void broadcast_aux_job_donation_handler();</span>
 <span id="L348"><span class="lineNum">     348</span>              : #endif</span>
 <span id="L349"><span class="lineNum">     349</span>              : </span>
-<span id="L350"><span class="lineNum">     350</span>              :         uv_mutex_t m_BroadcastMoneroBlockLock;</span>
-<span id="L351"><span class="lineNum">     351</span>              :         std::vector&lt;uint8_t&gt; m_MoneroBlockToBroadcast;</span>
+<span id="L350"><span class="lineNum">     350</span>              :         uv_mutex_t m_MoneroBlocksToBroadcastLock;</span>
+<span id="L351"><span class="lineNum">     351</span>              :         std::vector&lt;std::vector&lt;uint8_t&gt;&gt; m_MoneroBlocksToBroadcast;</span>
 <span id="L352"><span class="lineNum">     352</span>              : </span>
-<span id="L353"><span class="lineNum">     353</span>              :         uv_async_t m_BroadcastMoneroBlockAsync;</span>
+<span id="L353"><span class="lineNum">     353</span>              :         uv_async_t m_MoneroBlocksToBroadcastAsync;</span>
 <span id="L354"><span class="lineNum">     354</span>              : </span>
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC">           0 :         static void on_monero_block_broadcast(uv_async_t* handle) { reinterpret_cast&lt;P2PServer*&gt;(handle-&gt;data)-&gt;broadcast_monero_block_handler(); }</span></span>
 <span id="L356"><span class="lineNum">     356</span>              : </span>
