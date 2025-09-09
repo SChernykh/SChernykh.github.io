@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1155</td>
+            <td class="headerCovTableEntry">1157</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-09 14:53:30</td>
+            <td class="headerValue">2025-09-09 15:46:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1071,602 +1071,605 @@
 <span id="L1009"><span class="lineNum">    1009</span>              : </span>
 <span id="L1010"><span class="lineNum">    1010</span> <span class="tlaUNC">           0 :                 share-&gt;m_score = GOOD_SHARE_POINTS;</span></span>
 <span id="L1011"><span class="lineNum">    1011</span>              : </span>
-<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :                 const double diff = sidechain_difficulty.to_double();</span></span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC">           0 :                 time_t prev_time;</span></span>
-<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaUNC">           0 :                 const time_t cur_time = time(nullptr);</span></span>
-<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L1016"><span class="lineNum">    1016</span> <span class="tlaUNC">           0 :                         WriteLock lock(server-&gt;m_hashrateDataLock);</span></span>
-<span id="L1017"><span class="lineNum">    1017</span>              : </span>
-<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaUNC">           0 :                         const uint64_t n = server-&gt;m_cumulativeHashes + hashes;</span></span>
-<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaUNC">           0 :                         share-&gt;m_effort = static_cast&lt;double&gt;(n - server-&gt;m_cumulativeHashesAtLastShare) * 100.0 / diff;</span></span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaUNC">           0 :                         server-&gt;m_cumulativeHashesAtLastShare = n;</span></span>
-<span id="L1021"><span class="lineNum">    1021</span>              : </span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaUNC">           0 :                         server-&gt;m_cumulativeFoundSharesDiff += diff;</span></span>
-<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaUNC">           0 :                         ++server-&gt;m_totalFoundSidechainShares;</span></span>
-<span id="L1024"><span class="lineNum">    1024</span>              : </span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaUNC">           0 :                         prev_time = server-&gt;m_lastSidechainShareFoundTime;</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaUNC">           0 :                         server-&gt;m_lastSidechainShareFoundTime = cur_time;</span></span>
-<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaUNC">           0 :                 if (share-&gt;m_highEnoughDifficulty &amp;&amp; !pool-&gt;submit_sidechain_block(share-&gt;m_templateId, share-&gt;m_nonce, share-&gt;m_extraNonce)) {</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaUNC">           0 :                         WriteLock lock(server-&gt;m_hashrateDataLock);</span></span>
-<span id="L1030"><span class="lineNum">    1030</span>              : </span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaUNC">           0 :                         if (server-&gt;m_totalFoundSidechainShares &gt; 0) {</span></span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaUNC">           0 :                                 --server-&gt;m_totalFoundSidechainShares;</span></span>
-<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaUNC">           0 :                                 ++server-&gt;m_totalFailedSidechainShares;</span></span>
-<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaUNC">           0 :                                 server-&gt;m_lastSidechainShareFoundTime = prev_time;</span></span>
-<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1038"><span class="lineNum">    1038</span>              : </span>
-<span id="L1039"><span class="lineNum">    1039</span>              :         // Send the response to miner</span>
-<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaUNC">           0 :         const uint64_t value = share-&gt;m_resultHash.u64()[HASH_SIZE / sizeof(uint64_t) - 1];</span></span>
+<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :                 if (share-&gt;m_highEnoughDifficulty) {</span></span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC">           0 :                         const double diff = sidechain_difficulty.to_double();</span></span>
+<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaUNC">           0 :                         time_t prev_time;</span></span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaUNC">           0 :                         const time_t cur_time = time(nullptr);</span></span>
+<span id="L1016"><span class="lineNum">    1016</span> <span class="tlaUNC">           0 :                         {</span></span>
+<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaUNC">           0 :                                 WriteLock lock(server-&gt;m_hashrateDataLock);</span></span>
+<span id="L1018"><span class="lineNum">    1018</span>              : </span>
+<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaUNC">           0 :                                 const uint64_t n = server-&gt;m_cumulativeHashes + hashes;</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaUNC">           0 :                                 share-&gt;m_effort = static_cast&lt;double&gt;(n - server-&gt;m_cumulativeHashesAtLastShare) * 100.0 / diff;</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaUNC">           0 :                                 server-&gt;m_cumulativeHashesAtLastShare = n;</span></span>
+<span id="L1022"><span class="lineNum">    1022</span>              : </span>
+<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaUNC">           0 :                                 server-&gt;m_cumulativeFoundSharesDiff += diff;</span></span>
+<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaUNC">           0 :                                 ++server-&gt;m_totalFoundSidechainShares;</span></span>
+<span id="L1025"><span class="lineNum">    1025</span>              : </span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaUNC">           0 :                                 prev_time = server-&gt;m_lastSidechainShareFoundTime;</span></span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaUNC">           0 :                                 server-&gt;m_lastSidechainShareFoundTime = cur_time;</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1029"><span class="lineNum">    1029</span>              : </span>
+<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaUNC">           0 :                         if (!pool-&gt;submit_sidechain_block(share-&gt;m_templateId, share-&gt;m_nonce, share-&gt;m_extraNonce)) {</span></span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaUNC">           0 :                                 WriteLock lock(server-&gt;m_hashrateDataLock);</span></span>
+<span id="L1032"><span class="lineNum">    1032</span>              : </span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaUNC">           0 :                                 if (server-&gt;m_totalFoundSidechainShares &gt; 0) {</span></span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaUNC">           0 :                                         --server-&gt;m_totalFoundSidechainShares;</span></span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaUNC">           0 :                                         ++server-&gt;m_totalFailedSidechainShares;</span></span>
+<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaUNC">           0 :                                         server-&gt;m_lastSidechainShareFoundTime = prev_time;</span></span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1041"><span class="lineNum">    1041</span>              : </span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaUNC">           0 :         if (LIKELY(value &lt; target)) {</span></span>
-<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaUNC">           0 :                 const uint64_t timestamp = share-&gt;m_timestamp;</span></span>
-<span id="L1044"><span class="lineNum">    1044</span> <span class="tlaUNC">           0 :                 server-&gt;update_hashrate_data(hashes, timestamp);</span></span>
-<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaUNC">           0 :                 server-&gt;api_update_local_stats(timestamp);</span></span>
-<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaUNC">           0 :                 share-&gt;m_result = SubmittedShare::Result::OK;</span></span>
-<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaUNC">           0 :         else {</span></span>
-<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(share-&gt;m_clientAddrString) &lt;&lt; &quot; got a low diff share&quot;);</span></span>
-<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaUNC">           0 :                 share-&gt;m_result = SubmittedShare::Result::LOW_DIFF;</span></span>
-<span id="L1051"><span class="lineNum">    1051</span> <span class="tlaUNC">           0 :                 share-&gt;m_score = BAD_SHARE_POINTS;</span></span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1054"><span class="lineNum">    1054</span>              : </span>
-<span id="L1055"><span class="lineNum">    1055</span>              : void StratumServer::on_after_share_found(uv_work_t* req, int /*status*/)</span>
-<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaUNC">           0 :         SubmittedShare* share = reinterpret_cast&lt;SubmittedShare*&gt;(req-&gt;data);</span></span>
-<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaUNC">           0 :         StratumServer* server = share-&gt;m_server;</span></span>
-<span id="L1059"><span class="lineNum">    1059</span>              : </span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :         server-&gt;check_event_loop_thread(__func__);</span></span>
-<span id="L1061"><span class="lineNum">    1061</span>              : </span>
-<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaUNC">           0 :         if (share-&gt;m_highEnoughDifficulty) {</span></span>
-<span id="L1063"><span class="lineNum">    1063</span> <span class="tlaUNC">           0 :                 const char* s = share-&gt;m_clientCustomUser;</span></span>
-<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaUNC">           0 :                 if (share-&gt;m_result == SubmittedShare::Result::OK) {</span></span>
-<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaUNC">           0 :                         LOGINFO(0, log::Green() &lt;&lt; &quot;SHARE FOUND: mainchain height &quot; &lt;&lt; share-&gt;m_mainchainHeight &lt;&lt; &quot;, sidechain height &quot; &lt;&lt; share-&gt;m_sidechainHeight &lt;&lt; &quot;, diff &quot; &lt;&lt; share-&gt;m_sidechainDifficulty &lt;&lt; &quot;, client &quot; &lt;&lt; static_cast&lt;char*&gt;(share-&gt;m_clientAddrString) &lt;&lt; (*s ? &quot;, user &quot; : &quot;&quot;) &lt;&lt; s &lt;&lt; &quot;, effort &quot; &lt;&lt; share-&gt;m_effort &lt;&lt; '%');</span></span>
-<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaUNC">           0 :                         static const char* reason_list[] = {</span></span>
-<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaUNC">           0 :                                 &quot;stale share&quot;,</span></span>
-<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaUNC">           0 :                                 &quot;couldn't check PoW&quot;,</span></span>
-<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaUNC">           0 :                                 &quot;low difficulty&quot;,</span></span>
-<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaUNC">           0 :                                 &quot;invalid PoW&quot;,</span></span>
-<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaUNC">           0 :                                 &quot;worker banned&quot;,</span></span>
-<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaUNC">           0 :                         };</span></span>
-<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaUNC">           0 :                         static_assert(array_size(reason_list) == static_cast&lt;size_t&gt;(SubmittedShare::Result::OK), &quot;Update reason_list to match SubmittedShare::Result enum&quot;);</span></span>
-<span id="L1076"><span class="lineNum">    1076</span>              : </span>
-<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaUNC">           0 :                         const size_t k = static_cast&lt;size_t&gt;(share-&gt;m_result);</span></span>
-<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaUNC">           0 :                         const char* reason = (k &lt; array_size(reason_list)) ? reason_list[k] : &quot;unknown&quot;;</span></span>
-<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaUNC">           0 :                         LOGWARN(0, &quot;INVALID SHARE: mainchain height &quot; &lt;&lt; share-&gt;m_mainchainHeight &lt;&lt; &quot;, sidechain height &quot; &lt;&lt; share-&gt;m_sidechainHeight &lt;&lt; &quot;, diff &quot; &lt;&lt; share-&gt;m_sidechainDifficulty &lt;&lt; &quot;, client &quot; &lt;&lt; static_cast&lt;char*&gt;(share-&gt;m_clientAddrString) &lt;&lt; (*s ? &quot;, user &quot; : &quot;&quot;) &lt;&lt; s &lt;&lt; &quot;, reason: &quot; &lt;&lt; reason);</span></span>
-<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1082"><span class="lineNum">    1082</span>              : </span>
-<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaUNC">           0 :         if (share-&gt;m_highEnoughDifficulty || server-&gt;m_enableFullValidation) {</span></span>
-<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaUNC">           0 :                 BACKGROUND_JOB_STOP(StratumServer::on_share_found);</span></span>
-<span id="L1085"><span class="lineNum">    1085</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1086"><span class="lineNum">    1086</span>              : </span>
-<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaUNC">           0 :         const bool bad_share = (share-&gt;m_result == SubmittedShare::Result::LOW_DIFF) || (share-&gt;m_result == SubmittedShare::Result::INVALID_POW);</span></span>
-<span id="L1088"><span class="lineNum">    1088</span>              : </span>
-<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaUNC">           0 :         StratumClient* client = share-&gt;m_client;</span></span>
-<span id="L1090"><span class="lineNum">    1090</span>              : </span>
-<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaUNC">           0 :         if (client-&gt;m_resetCounter.load() == share-&gt;m_clientResetCounter) {</span></span>
-<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaUNC">           0 :                 const bool result = server-&gt;send(client,</span></span>
-<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaUNC">           0 :                         [share](uint8_t* buf, size_t buf_size)</span></span>
-<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaUNC">           0 :                         {</span></span>
-<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :                                 log::Stream s(buf, buf_size);</span></span>
-<span id="L1096"><span class="lineNum">    1096</span> <span class="tlaUNC">           0 :                                 switch (share-&gt;m_result) {</span></span>
-<span id="L1097"><span class="lineNum">    1097</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::STALE:</span></span>
-<span id="L1098"><span class="lineNum">    1098</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Stale share\&quot;}}\n&quot;;</span></span>
-<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::COULDNT_CHECK_POW:</span></span>
-<span id="L1101"><span class="lineNum">    1101</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Couldn't check PoW\&quot;}}\n&quot;;</span></span>
+<span id="L1042"><span class="lineNum">    1042</span>              :         // Send the response to miner</span>
+<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaUNC">           0 :         const uint64_t value = share-&gt;m_resultHash.u64()[HASH_SIZE / sizeof(uint64_t) - 1];</span></span>
+<span id="L1044"><span class="lineNum">    1044</span>              : </span>
+<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaUNC">           0 :         if (LIKELY(value &lt; target)) {</span></span>
+<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaUNC">           0 :                 const uint64_t timestamp = share-&gt;m_timestamp;</span></span>
+<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaUNC">           0 :                 server-&gt;update_hashrate_data(hashes, timestamp);</span></span>
+<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaUNC">           0 :                 server-&gt;api_update_local_stats(timestamp);</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaUNC">           0 :                 share-&gt;m_result = SubmittedShare::Result::OK;</span></span>
+<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1051"><span class="lineNum">    1051</span> <span class="tlaUNC">           0 :         else {</span></span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(share-&gt;m_clientAddrString) &lt;&lt; &quot; got a low diff share&quot;);</span></span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaUNC">           0 :                 share-&gt;m_result = SubmittedShare::Result::LOW_DIFF;</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaUNC">           0 :                 share-&gt;m_score = BAD_SHARE_POINTS;</span></span>
+<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1057"><span class="lineNum">    1057</span>              : </span>
+<span id="L1058"><span class="lineNum">    1058</span>              : void StratumServer::on_after_share_found(uv_work_t* req, int /*status*/)</span>
+<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaUNC">           0 :         SubmittedShare* share = reinterpret_cast&lt;SubmittedShare*&gt;(req-&gt;data);</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaUNC">           0 :         StratumServer* server = share-&gt;m_server;</span></span>
+<span id="L1062"><span class="lineNum">    1062</span>              : </span>
+<span id="L1063"><span class="lineNum">    1063</span> <span class="tlaUNC">           0 :         server-&gt;check_event_loop_thread(__func__);</span></span>
+<span id="L1064"><span class="lineNum">    1064</span>              : </span>
+<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaUNC">           0 :         if (share-&gt;m_highEnoughDifficulty) {</span></span>
+<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaUNC">           0 :                 const char* s = share-&gt;m_clientCustomUser;</span></span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaUNC">           0 :                 if (share-&gt;m_result == SubmittedShare::Result::OK) {</span></span>
+<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaUNC">           0 :                         LOGINFO(0, log::Green() &lt;&lt; &quot;SHARE FOUND: mainchain height &quot; &lt;&lt; share-&gt;m_mainchainHeight &lt;&lt; &quot;, sidechain height &quot; &lt;&lt; share-&gt;m_sidechainHeight &lt;&lt; &quot;, diff &quot; &lt;&lt; share-&gt;m_sidechainDifficulty &lt;&lt; &quot;, client &quot; &lt;&lt; static_cast&lt;char*&gt;(share-&gt;m_clientAddrString) &lt;&lt; (*s ? &quot;, user &quot; : &quot;&quot;) &lt;&lt; s &lt;&lt; &quot;, effort &quot; &lt;&lt; share-&gt;m_effort &lt;&lt; '%');</span></span>
+<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaUNC">           0 :                         static const char* reason_list[] = {</span></span>
+<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaUNC">           0 :                                 &quot;stale share&quot;,</span></span>
+<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaUNC">           0 :                                 &quot;couldn't check PoW&quot;,</span></span>
+<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaUNC">           0 :                                 &quot;low difficulty&quot;,</span></span>
+<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaUNC">           0 :                                 &quot;invalid PoW&quot;,</span></span>
+<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaUNC">           0 :                                 &quot;worker banned&quot;,</span></span>
+<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaUNC">           0 :                         };</span></span>
+<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaUNC">           0 :                         static_assert(array_size(reason_list) == static_cast&lt;size_t&gt;(SubmittedShare::Result::OK), &quot;Update reason_list to match SubmittedShare::Result enum&quot;);</span></span>
+<span id="L1079"><span class="lineNum">    1079</span>              : </span>
+<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaUNC">           0 :                         const size_t k = static_cast&lt;size_t&gt;(share-&gt;m_result);</span></span>
+<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaUNC">           0 :                         const char* reason = (k &lt; array_size(reason_list)) ? reason_list[k] : &quot;unknown&quot;;</span></span>
+<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaUNC">           0 :                         LOGWARN(0, &quot;INVALID SHARE: mainchain height &quot; &lt;&lt; share-&gt;m_mainchainHeight &lt;&lt; &quot;, sidechain height &quot; &lt;&lt; share-&gt;m_sidechainHeight &lt;&lt; &quot;, diff &quot; &lt;&lt; share-&gt;m_sidechainDifficulty &lt;&lt; &quot;, client &quot; &lt;&lt; static_cast&lt;char*&gt;(share-&gt;m_clientAddrString) &lt;&lt; (*s ? &quot;, user &quot; : &quot;&quot;) &lt;&lt; s &lt;&lt; &quot;, reason: &quot; &lt;&lt; reason);</span></span>
+<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1085"><span class="lineNum">    1085</span>              : </span>
+<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaUNC">           0 :         if (share-&gt;m_highEnoughDifficulty || server-&gt;m_enableFullValidation) {</span></span>
+<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaUNC">           0 :                 BACKGROUND_JOB_STOP(StratumServer::on_share_found);</span></span>
+<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1089"><span class="lineNum">    1089</span>              : </span>
+<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaUNC">           0 :         const bool bad_share = (share-&gt;m_result == SubmittedShare::Result::LOW_DIFF) || (share-&gt;m_result == SubmittedShare::Result::INVALID_POW);</span></span>
+<span id="L1091"><span class="lineNum">    1091</span>              : </span>
+<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaUNC">           0 :         StratumClient* client = share-&gt;m_client;</span></span>
+<span id="L1093"><span class="lineNum">    1093</span>              : </span>
+<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaUNC">           0 :         if (client-&gt;m_resetCounter.load() == share-&gt;m_clientResetCounter) {</span></span>
+<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaUNC">           0 :                 const bool result = server-&gt;send(client,</span></span>
+<span id="L1096"><span class="lineNum">    1096</span> <span class="tlaUNC">           0 :                         [share](uint8_t* buf, size_t buf_size)</span></span>
+<span id="L1097"><span class="lineNum">    1097</span> <span class="tlaUNC">           0 :                         {</span></span>
+<span id="L1098"><span class="lineNum">    1098</span> <span class="tlaUNC">           0 :                                 log::Stream s(buf, buf_size);</span></span>
+<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaUNC">           0 :                                 switch (share-&gt;m_result) {</span></span>
+<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::STALE:</span></span>
+<span id="L1101"><span class="lineNum">    1101</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Stale share\&quot;}}\n&quot;;</span></span>
 <span id="L1102"><span class="lineNum">    1102</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L1103"><span class="lineNum">    1103</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::LOW_DIFF:</span></span>
-<span id="L1104"><span class="lineNum">    1104</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Low diff share\&quot;}}\n&quot;;</span></span>
+<span id="L1103"><span class="lineNum">    1103</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::COULDNT_CHECK_POW:</span></span>
+<span id="L1104"><span class="lineNum">    1104</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Couldn't check PoW\&quot;}}\n&quot;;</span></span>
 <span id="L1105"><span class="lineNum">    1105</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L1106"><span class="lineNum">    1106</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::INVALID_POW:</span></span>
-<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Invalid PoW\&quot;}}\n&quot;;</span></span>
+<span id="L1106"><span class="lineNum">    1106</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::LOW_DIFF:</span></span>
+<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Low diff share\&quot;}}\n&quot;;</span></span>
 <span id="L1108"><span class="lineNum">    1108</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L1109"><span class="lineNum">    1109</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::BANNED:</span></span>
-<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Banned\&quot;}}\n&quot;;</span></span>
+<span id="L1109"><span class="lineNum">    1109</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::INVALID_POW:</span></span>
+<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Invalid PoW\&quot;}}\n&quot;;</span></span>
 <span id="L1111"><span class="lineNum">    1111</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::OK:</span></span>
-<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:null,\&quot;result\&quot;:{\&quot;status\&quot;:\&quot;OK\&quot;}}\n&quot;;</span></span>
+<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::BANNED:</span></span>
+<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:{\&quot;message\&quot;:\&quot;Banned\&quot;}}\n&quot;;</span></span>
 <span id="L1114"><span class="lineNum">    1114</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaUNC">           0 :                                 return s.m_pos;</span></span>
-<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC">           0 :                         });</span></span>
-<span id="L1118"><span class="lineNum">    1118</span>              : </span>
-<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaUNC">           0 :                 client-&gt;m_score += share-&gt;m_score;</span></span>
-<span id="L1120"><span class="lineNum">    1120</span>              : </span>
-<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaUNC">           0 :                 if (bad_share &amp;&amp; (client-&gt;m_score &lt;= BAN_THRESHOLD_POINTS)) {</span></span>
-<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaUNC">           0 :                         client-&gt;ban(server-&gt;m_banTime);</span></span>
-<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaUNC">           0 :                         client-&gt;close();</span></span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaUNC">           0 :                 else if (!result) {</span></span>
+<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaUNC">           0 :                                 case SubmittedShare::Result::OK:</span></span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; &quot;{\&quot;id\&quot;:&quot; &lt;&lt; share-&gt;m_id &lt;&lt; &quot;,\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;error\&quot;:null,\&quot;result\&quot;:{\&quot;status\&quot;:\&quot;OK\&quot;}}\n&quot;;</span></span>
+<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaUNC">           0 :                                         break;</span></span>
+<span id="L1118"><span class="lineNum">    1118</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaUNC">           0 :                                 return s.m_pos;</span></span>
+<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaUNC">           0 :                         });</span></span>
+<span id="L1121"><span class="lineNum">    1121</span>              : </span>
+<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaUNC">           0 :                 client-&gt;m_score += share-&gt;m_score;</span></span>
+<span id="L1123"><span class="lineNum">    1123</span>              : </span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaUNC">           0 :                 if (bad_share &amp;&amp; (client-&gt;m_score &lt;= BAN_THRESHOLD_POINTS)) {</span></span>
+<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaUNC">           0 :                         client-&gt;ban(server-&gt;m_banTime);</span></span>
 <span id="L1126"><span class="lineNum">    1126</span> <span class="tlaUNC">           0 :                         client-&gt;close();</span></span>
 <span id="L1127"><span class="lineNum">    1127</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 :         else if (bad_share) {</span></span>
-<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :                 server-&gt;ban(share-&gt;m_clientIPv6, share-&gt;m_clientAddr, server-&gt;m_banTime);</span></span>
+<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaUNC">           0 :                 else if (!result) {</span></span>
+<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaUNC">           0 :                         client-&gt;close();</span></span>
+<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1131"><span class="lineNum">    1131</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1132"><span class="lineNum">    1132</span>              : </span>
-<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaUNC">           0 :         if (share-&gt;m_allocated) {</span></span>
-<span id="L1134"><span class="lineNum">    1134</span> <span class="tlaUNC">           0 :                 auto it = std::find(server-&gt;m_pendingShareChecks.begin(), server-&gt;m_pendingShareChecks.end(), share);</span></span>
-<span id="L1135"><span class="lineNum">    1135</span> <span class="tlaUNC">           0 :                 if (it != server-&gt;m_pendingShareChecks.end()) {</span></span>
-<span id="L1136"><span class="lineNum">    1136</span> <span class="tlaUNC">           0 :                         server-&gt;m_pendingShareChecks.erase(it);</span></span>
-<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1138"><span class="lineNum">    1138</span>              : </span>
-<span id="L1139"><span class="lineNum">    1139</span> <span class="tlaUNC">           0 :                 delete share;</span></span>
-<span id="L1140"><span class="lineNum">    1140</span>              : </span>
-<span id="L1141"><span class="lineNum">    1141</span> <span class="tlaUNC">           0 :                 if (!server-&gt;m_pendingShareChecks.empty()) {</span></span>
-<span id="L1142"><span class="lineNum">    1142</span> <span class="tlaUNC">           0 :                         SubmittedShare* share2 = server-&gt;m_pendingShareChecks.front();</span></span>
+<span id="L1132"><span class="lineNum">    1132</span> <span class="tlaUNC">           0 :         else if (bad_share) {</span></span>
+<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaUNC">           0 :                 server-&gt;ban(share-&gt;m_clientIPv6, share-&gt;m_clientAddr, server-&gt;m_banTime);</span></span>
+<span id="L1134"><span class="lineNum">    1134</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1135"><span class="lineNum">    1135</span>              : </span>
+<span id="L1136"><span class="lineNum">    1136</span> <span class="tlaUNC">           0 :         if (share-&gt;m_allocated) {</span></span>
+<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaUNC">           0 :                 auto it = std::find(server-&gt;m_pendingShareChecks.begin(), server-&gt;m_pendingShareChecks.end(), share);</span></span>
+<span id="L1138"><span class="lineNum">    1138</span> <span class="tlaUNC">           0 :                 if (it != server-&gt;m_pendingShareChecks.end()) {</span></span>
+<span id="L1139"><span class="lineNum">    1139</span> <span class="tlaUNC">           0 :                         server-&gt;m_pendingShareChecks.erase(it);</span></span>
+<span id="L1140"><span class="lineNum">    1140</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1141"><span class="lineNum">    1141</span>              : </span>
+<span id="L1142"><span class="lineNum">    1142</span> <span class="tlaUNC">           0 :                 delete share;</span></span>
 <span id="L1143"><span class="lineNum">    1143</span>              : </span>
-<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaUNC">           0 :                         const int err = uv_queue_work(&amp;server-&gt;m_loop, &amp;share2-&gt;m_req, on_share_found, on_after_share_found);</span></span>
-<span id="L1145"><span class="lineNum">    1145</span> <span class="tlaUNC">           0 :                         if (err) {</span></span>
-<span id="L1146"><span class="lineNum">    1146</span> <span class="tlaUNC">           0 :                                 LOGERR(1, &quot;uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span></span>
-<span id="L1147"><span class="lineNum">    1147</span>              : </span>
-<span id="L1148"><span class="lineNum">    1148</span>              :                                 // If uv_queue_work failed, process this share here anyway</span>
-<span id="L1149"><span class="lineNum">    1149</span> <span class="tlaUNC">           0 :                                 server-&gt;on_share_found(&amp;share2-&gt;m_req);</span></span>
-<span id="L1150"><span class="lineNum">    1150</span> <span class="tlaUNC">           0 :                                 server-&gt;on_after_share_found(&amp;share2-&gt;m_req, 0);</span></span>
-<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1152"><span class="lineNum">    1152</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1153"><span class="lineNum">    1153</span>              : </span>
-<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :                 LOGINFO(5, &quot;on_after_share_found: pending share checks count = &quot; &lt;&lt; server-&gt;m_pendingShareChecks.size());</span></span>
-<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1157"><span class="lineNum">    1157</span>              : </span>
-<span id="L1158"><span class="lineNum">    1158</span>              : void StratumServer::on_shutdown()</span>
-<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1160"><span class="lineNum">    1160</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_blobsQueueLock);</span></span>
-<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 :                 uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;m_blobsAsync), nullptr);</span></span>
-<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_showWorkersLock);</span></span>
-<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC">           0 :                 uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;m_showWorkersAsync), nullptr);</span></span>
-<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1169"><span class="lineNum">    1169</span>              : </span>
-<span id="L1170"><span class="lineNum">    1170</span>              : StratumServer::StratumClient::StratumClient()</span>
-<span id="L1171"><span class="lineNum">    1171</span> <span class="tlaUNC">           0 :         : Client(m_rawReadBuf, sizeof(m_rawReadBuf))</span></span>
-<span id="L1172"><span class="lineNum">    1172</span> <span class="tlaUNC">           0 :         , m_stratumReadBufBytes(0)</span></span>
-<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaUNC">           0 :         , m_rpcId(0)</span></span>
-<span id="L1174"><span class="lineNum">    1174</span> <span class="tlaUNC">           0 :         , m_perConnectionJobId(0)</span></span>
-<span id="L1175"><span class="lineNum">    1175</span> <span class="tlaUNC">           0 :         , m_connectedTime(0)</span></span>
-<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaUNC">           0 :         , m_jobs{}</span></span>
-<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaUNC">           0 :         , m_autoDiffData{}</span></span>
-<span id="L1178"><span class="lineNum">    1178</span> <span class="tlaUNC">           0 :         , m_autoDiffWindowHashes(0)</span></span>
-<span id="L1179"><span class="lineNum">    1179</span> <span class="tlaUNC">           0 :         , m_autoDiffIndex(0)</span></span>
-<span id="L1180"><span class="lineNum">    1180</span> <span class="tlaUNC">           0 :         , m_customDiff{}</span></span>
-<span id="L1181"><span class="lineNum">    1181</span> <span class="tlaUNC">           0 :         , m_autoDiff{}</span></span>
-<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :         , m_customUser{}</span></span>
-<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :         , m_lastJobTarget(0)</span></span>
-<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :         , m_score(0)</span></span>
-<span id="L1185"><span class="lineNum">    1185</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1186"><span class="lineNum">    1186</span> <span class="tlaUNC">           0 :         m_rawReadBuf[0] = '\0';</span></span>
-<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaUNC">           0 :         m_stratumReadBuf[0] = '\0';</span></span>
-<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1189"><span class="lineNum">    1189</span>              : </span>
-<span id="L1190"><span class="lineNum">    1190</span>              : void StratumServer::StratumClient::reset()</span>
-<span id="L1191"><span class="lineNum">    1191</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaUNC">           0 :         Client::reset();</span></span>
-<span id="L1193"><span class="lineNum">    1193</span>              : </span>
-<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaUNC">           0 :         m_stratumReadBuf[0] = '\0';</span></span>
-<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaUNC">           0 :         m_stratumReadBufBytes = 0;</span></span>
+<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaUNC">           0 :                 if (!server-&gt;m_pendingShareChecks.empty()) {</span></span>
+<span id="L1145"><span class="lineNum">    1145</span> <span class="tlaUNC">           0 :                         SubmittedShare* share2 = server-&gt;m_pendingShareChecks.front();</span></span>
+<span id="L1146"><span class="lineNum">    1146</span>              : </span>
+<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaUNC">           0 :                         const int err = uv_queue_work(&amp;server-&gt;m_loop, &amp;share2-&gt;m_req, on_share_found, on_after_share_found);</span></span>
+<span id="L1148"><span class="lineNum">    1148</span> <span class="tlaUNC">           0 :                         if (err) {</span></span>
+<span id="L1149"><span class="lineNum">    1149</span> <span class="tlaUNC">           0 :                                 LOGERR(1, &quot;uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span></span>
+<span id="L1150"><span class="lineNum">    1150</span>              : </span>
+<span id="L1151"><span class="lineNum">    1151</span>              :                                 // If uv_queue_work failed, process this share here anyway</span>
+<span id="L1152"><span class="lineNum">    1152</span> <span class="tlaUNC">           0 :                                 server-&gt;on_share_found(&amp;share2-&gt;m_req);</span></span>
+<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaUNC">           0 :                                 server-&gt;on_after_share_found(&amp;share2-&gt;m_req, 0);</span></span>
+<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1156"><span class="lineNum">    1156</span>              : </span>
+<span id="L1157"><span class="lineNum">    1157</span> <span class="tlaUNC">           0 :                 LOGINFO(5, &quot;on_after_share_found: pending share checks count = &quot; &lt;&lt; server-&gt;m_pendingShareChecks.size());</span></span>
+<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1160"><span class="lineNum">    1160</span>              : </span>
+<span id="L1161"><span class="lineNum">    1161</span>              : void StratumServer::on_shutdown()</span>
+<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_blobsQueueLock);</span></span>
+<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC">           0 :                 uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;m_blobsAsync), nullptr);</span></span>
+<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_showWorkersLock);</span></span>
+<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaUNC">           0 :                 uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;m_showWorkersAsync), nullptr);</span></span>
+<span id="L1170"><span class="lineNum">    1170</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1171"><span class="lineNum">    1171</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1172"><span class="lineNum">    1172</span>              : </span>
+<span id="L1173"><span class="lineNum">    1173</span>              : StratumServer::StratumClient::StratumClient()</span>
+<span id="L1174"><span class="lineNum">    1174</span> <span class="tlaUNC">           0 :         : Client(m_rawReadBuf, sizeof(m_rawReadBuf))</span></span>
+<span id="L1175"><span class="lineNum">    1175</span> <span class="tlaUNC">           0 :         , m_stratumReadBufBytes(0)</span></span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaUNC">           0 :         , m_rpcId(0)</span></span>
+<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaUNC">           0 :         , m_perConnectionJobId(0)</span></span>
+<span id="L1178"><span class="lineNum">    1178</span> <span class="tlaUNC">           0 :         , m_connectedTime(0)</span></span>
+<span id="L1179"><span class="lineNum">    1179</span> <span class="tlaUNC">           0 :         , m_jobs{}</span></span>
+<span id="L1180"><span class="lineNum">    1180</span> <span class="tlaUNC">           0 :         , m_autoDiffData{}</span></span>
+<span id="L1181"><span class="lineNum">    1181</span> <span class="tlaUNC">           0 :         , m_autoDiffWindowHashes(0)</span></span>
+<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :         , m_autoDiffIndex(0)</span></span>
+<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :         , m_customDiff{}</span></span>
+<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :         , m_autoDiff{}</span></span>
+<span id="L1185"><span class="lineNum">    1185</span> <span class="tlaUNC">           0 :         , m_customUser{}</span></span>
+<span id="L1186"><span class="lineNum">    1186</span> <span class="tlaUNC">           0 :         , m_lastJobTarget(0)</span></span>
+<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaUNC">           0 :         , m_score(0)</span></span>
+<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaUNC">           0 :         m_rawReadBuf[0] = '\0';</span></span>
+<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaUNC">           0 :         m_stratumReadBuf[0] = '\0';</span></span>
+<span id="L1191"><span class="lineNum">    1191</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1192"><span class="lineNum">    1192</span>              : </span>
+<span id="L1193"><span class="lineNum">    1193</span>              : void StratumServer::StratumClient::reset()</span>
+<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaUNC">           0 :         Client::reset();</span></span>
 <span id="L1196"><span class="lineNum">    1196</span>              : </span>
-<span id="L1197"><span class="lineNum">    1197</span> <span class="tlaUNC">           0 :         m_rpcId = 0;</span></span>
-<span id="L1198"><span class="lineNum">    1198</span> <span class="tlaUNC">           0 :         m_perConnectionJobId = 0;</span></span>
-<span id="L1199"><span class="lineNum">    1199</span> <span class="tlaUNC">           0 :         m_connectedTime = 0;</span></span>
-<span id="L1200"><span class="lineNum">    1200</span>              : </span>
-<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaUNC">           0 :         for (int i = 0; i &lt; JOBS_SIZE; ++i) {</span></span>
-<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaUNC">           0 :                 m_jobs[i].job_id = 0;</span></span>
-<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1204"><span class="lineNum">    1204</span>              : </span>
-<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaUNC">           0 :         m_autoDiffWindowHashes = 0;</span></span>
-<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :         m_autoDiffIndex = 0;</span></span>
-<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaUNC">           0 :         m_customDiff = {};</span></span>
-<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :         m_autoDiff = {};</span></span>
-<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaUNC">           0 :         m_customUser[0] = '\0';</span></span>
-<span id="L1210"><span class="lineNum">    1210</span>              : </span>
-<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :         m_lastJobTarget = 0;</span></span>
-<span id="L1212"><span class="lineNum">    1212</span>              : </span>
-<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :         m_score = 0;</span></span>
-<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1197"><span class="lineNum">    1197</span> <span class="tlaUNC">           0 :         m_stratumReadBuf[0] = '\0';</span></span>
+<span id="L1198"><span class="lineNum">    1198</span> <span class="tlaUNC">           0 :         m_stratumReadBufBytes = 0;</span></span>
+<span id="L1199"><span class="lineNum">    1199</span>              : </span>
+<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaUNC">           0 :         m_rpcId = 0;</span></span>
+<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaUNC">           0 :         m_perConnectionJobId = 0;</span></span>
+<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaUNC">           0 :         m_connectedTime = 0;</span></span>
+<span id="L1203"><span class="lineNum">    1203</span>              : </span>
+<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaUNC">           0 :         for (int i = 0; i &lt; JOBS_SIZE; ++i) {</span></span>
+<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaUNC">           0 :                 m_jobs[i].job_id = 0;</span></span>
+<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1207"><span class="lineNum">    1207</span>              : </span>
+<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :         m_autoDiffWindowHashes = 0;</span></span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaUNC">           0 :         m_autoDiffIndex = 0;</span></span>
+<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC">           0 :         m_customDiff = {};</span></span>
+<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :         m_autoDiff = {};</span></span>
+<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :         m_customUser[0] = '\0';</span></span>
+<span id="L1213"><span class="lineNum">    1213</span>              : </span>
+<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :         m_lastJobTarget = 0;</span></span>
 <span id="L1215"><span class="lineNum">    1215</span>              : </span>
-<span id="L1216"><span class="lineNum">    1216</span>              : bool StratumServer::StratumClient::on_connect()</span>
-<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :         m_connectedTime = seconds_since_epoch();</span></span>
-<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1221"><span class="lineNum">    1221</span>              : </span>
-<span id="L1222"><span class="lineNum">    1222</span>              : bool StratumServer::StratumClient::on_read(const char* data, uint32_t size)</span>
-<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1224"><span class="lineNum">    1224</span>              : #ifdef WITH_TLS</span>
-<span id="L1225"><span class="lineNum">    1225</span>              :         if (!m_tlsChecked) {</span>
-<span id="L1226"><span class="lineNum">    1226</span>              :                 if (data[0] == 0x16) {</span>
-<span id="L1227"><span class="lineNum">    1227</span>              :                         if (!m_tls.init()) {</span>
-<span id="L1228"><span class="lineNum">    1228</span>              :                                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; &quot;: TLS init failed&quot;);</span>
-<span id="L1229"><span class="lineNum">    1229</span>              :                                 return false;</span>
-<span id="L1230"><span class="lineNum">    1230</span>              :                         }</span>
-<span id="L1231"><span class="lineNum">    1231</span>              :                         LOGINFO(5, &quot;client &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; is using TLS&quot;);</span>
-<span id="L1232"><span class="lineNum">    1232</span>              :                 }</span>
-<span id="L1233"><span class="lineNum">    1233</span>              :                 m_tlsChecked = true;</span>
-<span id="L1234"><span class="lineNum">    1234</span>              :         }</span>
-<span id="L1235"><span class="lineNum">    1235</span>              : #endif</span>
-<span id="L1236"><span class="lineNum">    1236</span>              : </span>
-<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaUNC">           0 :         auto on_parse = [this](const char* data, uint32_t size) {</span></span>
-<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaUNC">           0 :                 if (static_cast&lt;size_t&gt;(m_stratumReadBufBytes) + size &gt; STRATUM_BUF_SIZE) {</span></span>
-<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC">           0 :                         LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; &quot; sent too long Stratum message&quot;);</span></span>
-<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :                         ban(static_cast&lt;StratumServer*&gt;(m_owner)-&gt;m_banTime);</span></span>
-<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1243"><span class="lineNum">    1243</span>              : </span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :                 memcpy(m_stratumReadBuf + m_stratumReadBufBytes, data, size);</span></span>
-<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaUNC">           0 :                 m_stratumReadBufBytes += size;</span></span>
+<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :         m_score = 0;</span></span>
+<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1218"><span class="lineNum">    1218</span>              : </span>
+<span id="L1219"><span class="lineNum">    1219</span>              : bool StratumServer::StratumClient::on_connect()</span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :         m_connectedTime = seconds_since_epoch();</span></span>
+<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1224"><span class="lineNum">    1224</span>              : </span>
+<span id="L1225"><span class="lineNum">    1225</span>              : bool StratumServer::StratumClient::on_read(const char* data, uint32_t size)</span>
+<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1227"><span class="lineNum">    1227</span>              : #ifdef WITH_TLS</span>
+<span id="L1228"><span class="lineNum">    1228</span>              :         if (!m_tlsChecked) {</span>
+<span id="L1229"><span class="lineNum">    1229</span>              :                 if (data[0] == 0x16) {</span>
+<span id="L1230"><span class="lineNum">    1230</span>              :                         if (!m_tls.init()) {</span>
+<span id="L1231"><span class="lineNum">    1231</span>              :                                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; &quot;: TLS init failed&quot;);</span>
+<span id="L1232"><span class="lineNum">    1232</span>              :                                 return false;</span>
+<span id="L1233"><span class="lineNum">    1233</span>              :                         }</span>
+<span id="L1234"><span class="lineNum">    1234</span>              :                         LOGINFO(5, &quot;client &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; is using TLS&quot;);</span>
+<span id="L1235"><span class="lineNum">    1235</span>              :                 }</span>
+<span id="L1236"><span class="lineNum">    1236</span>              :                 m_tlsChecked = true;</span>
+<span id="L1237"><span class="lineNum">    1237</span>              :         }</span>
+<span id="L1238"><span class="lineNum">    1238</span>              : #endif</span>
+<span id="L1239"><span class="lineNum">    1239</span>              : </span>
+<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :         auto on_parse = [this](const char* data, uint32_t size) {</span></span>
+<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :                 if (static_cast&lt;size_t&gt;(m_stratumReadBufBytes) + size &gt; STRATUM_BUF_SIZE) {</span></span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :                         LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; &quot; sent too long Stratum message&quot;);</span></span>
+<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :                         ban(static_cast&lt;StratumServer*&gt;(m_owner)-&gt;m_banTime);</span></span>
+<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1246"><span class="lineNum">    1246</span>              : </span>
-<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :                 char* line_start = m_stratumReadBuf;</span></span>
-<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :                 const char* e = line_start + m_stratumReadBufBytes;</span></span>
-<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :                 for (char *c = line_start + m_stratumReadBufBytes - size; c &lt; e; ++c) {</span></span>
-<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :                         if (*c == '\n') {</span></span>
-<span id="L1251"><span class="lineNum">    1251</span>              :                                 // Check if the line starts with &quot;GET &quot; or &quot;HEAD&quot; (an HTTP request)</span>
-<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :                                 if (static_cast&lt;StratumServer*&gt;(m_owner)-&gt;http_enabled() &amp;&amp; (c - line_start &gt;= 4)) {</span></span>
-<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :                                         const uint32_t line_start_data = read_unaligned(reinterpret_cast&lt;uint32_t*&gt;(line_start));</span></span>
-<span id="L1254"><span class="lineNum">    1254</span>              : </span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :                                         const bool is_http_get  = (line_start_data == 0x20544547U);</span></span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :                                         const bool is_http_head = (line_start_data == 0x44414548U);</span></span>
+<span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :                 memcpy(m_stratumReadBuf + m_stratumReadBufBytes, data, size);</span></span>
+<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :                 m_stratumReadBufBytes += size;</span></span>
+<span id="L1249"><span class="lineNum">    1249</span>              : </span>
+<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :                 char* line_start = m_stratumReadBuf;</span></span>
+<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaUNC">           0 :                 const char* e = line_start + m_stratumReadBufBytes;</span></span>
+<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :                 for (char *c = line_start + m_stratumReadBufBytes - size; c &lt; e; ++c) {</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :                         if (*c == '\n') {</span></span>
+<span id="L1254"><span class="lineNum">    1254</span>              :                                 // Check if the line starts with &quot;GET &quot; or &quot;HEAD&quot; (an HTTP request)</span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :                                 if (static_cast&lt;StratumServer*&gt;(m_owner)-&gt;http_enabled() &amp;&amp; (c - line_start &gt;= 4)) {</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :                                         const uint32_t line_start_data = read_unaligned(reinterpret_cast&lt;uint32_t*&gt;(line_start));</span></span>
 <span id="L1257"><span class="lineNum">    1257</span>              : </span>
-<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :                                         if (is_http_get || is_http_head) {</span></span>
-<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :                                                 LOGINFO(5, &quot;client &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; sent an HTTP &quot; &lt;&lt; (is_http_get ? &quot;GET&quot; : &quot;HEAD&quot;) &lt;&lt; &quot; request&quot;);</span></span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaUNC">           0 :                                                 send_http_response(is_http_get);</span></span>
-<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaUNC">           0 :                                                 close();</span></span>
-<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaUNC">           0 :                                                 return true;</span></span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L1264"><span class="lineNum">    1264</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1265"><span class="lineNum">    1265</span>              : </span>
-<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :                                 *c = '\0';</span></span>
-<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :                                 if (!process_request(line_start, static_cast&lt;uint32_t&gt;(c - line_start))) {</span></span>
-<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaUNC">           0 :                                         ban(static_cast&lt;StratumServer*&gt;(m_owner)-&gt;m_banTime);</span></span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :                                         return false;</span></span>
-<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1271"><span class="lineNum">    1271</span>              : </span>
-<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :                                 line_start = c + 1;</span></span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1275"><span class="lineNum">    1275</span>              : </span>
-<span id="L1276"><span class="lineNum">    1276</span>              :                 // Move the possible unfinished line to the beginning of m_stratumReadBuf to free up more space for reading</span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :                 if (line_start != m_stratumReadBuf) {</span></span>
-<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaUNC">           0 :                         m_stratumReadBufBytes = static_cast&lt;uint32_t&gt;(m_stratumReadBuf + m_stratumReadBufBytes - line_start);</span></span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaUNC">           0 :                         if (m_stratumReadBufBytes &gt; 0) {</span></span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaUNC">           0 :                                 memmove(m_stratumReadBuf, line_start, m_stratumReadBufBytes);</span></span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1283"><span class="lineNum">    1283</span>              : </span>
-<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :         };</span></span>
+<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :                                         const bool is_http_get  = (line_start_data == 0x20544547U);</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :                                         const bool is_http_head = (line_start_data == 0x44414548U);</span></span>
+<span id="L1260"><span class="lineNum">    1260</span>              : </span>
+<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaUNC">           0 :                                         if (is_http_get || is_http_head) {</span></span>
+<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaUNC">           0 :                                                 LOGINFO(5, &quot;client &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; sent an HTTP &quot; &lt;&lt; (is_http_get ? &quot;GET&quot; : &quot;HEAD&quot;) &lt;&lt; &quot; request&quot;);</span></span>
+<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 :                                                 send_http_response(is_http_get);</span></span>
+<span id="L1264"><span class="lineNum">    1264</span> <span class="tlaUNC">           0 :                                                 close();</span></span>
+<span id="L1265"><span class="lineNum">    1265</span> <span class="tlaUNC">           0 :                                                 return true;</span></span>
+<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1268"><span class="lineNum">    1268</span>              : </span>
+<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :                                 *c = '\0';</span></span>
+<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :                                 if (!process_request(line_start, static_cast&lt;uint32_t&gt;(c - line_start))) {</span></span>
+<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :                                         ban(static_cast&lt;StratumServer*&gt;(m_owner)-&gt;m_banTime);</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :                                         return false;</span></span>
+<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1274"><span class="lineNum">    1274</span>              : </span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :                                 line_start = c + 1;</span></span>
+<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1278"><span class="lineNum">    1278</span>              : </span>
+<span id="L1279"><span class="lineNum">    1279</span>              :                 // Move the possible unfinished line to the beginning of m_stratumReadBuf to free up more space for reading</span>
+<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaUNC">           0 :                 if (line_start != m_stratumReadBuf) {</span></span>
+<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC">           0 :                         m_stratumReadBufBytes = static_cast&lt;uint32_t&gt;(m_stratumReadBuf + m_stratumReadBufBytes - line_start);</span></span>
+<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :                         if (m_stratumReadBufBytes &gt; 0) {</span></span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaUNC">           0 :                                 memmove(m_stratumReadBuf, line_start, m_stratumReadBufBytes);</span></span>
+<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1286"><span class="lineNum">    1286</span>              : </span>
-<span id="L1287"><span class="lineNum">    1287</span>              : #ifdef WITH_TLS</span>
-<span id="L1288"><span class="lineNum">    1288</span>              :         if (!m_tls.is_empty()) {</span>
-<span id="L1289"><span class="lineNum">    1289</span>              :                 auto on_write = [this](const uint8_t* data, size_t size) {</span>
-<span id="L1290"><span class="lineNum">    1290</span>              :                         return m_owner-&gt;send(this, [data, size](uint8_t* buf, size_t buf_size) -&gt; size_t {</span>
-<span id="L1291"><span class="lineNum">    1291</span>              :                                 if (buf_size &lt; size) {</span>
-<span id="L1292"><span class="lineNum">    1292</span>              :                                         return 0;</span>
-<span id="L1293"><span class="lineNum">    1293</span>              :                                 }</span>
-<span id="L1294"><span class="lineNum">    1294</span>              :                                 memcpy(buf, data, size);</span>
-<span id="L1295"><span class="lineNum">    1295</span>              :                                 return size;</span>
-<span id="L1296"><span class="lineNum">    1296</span>              :                         }, true);</span>
-<span id="L1297"><span class="lineNum">    1297</span>              :                 };</span>
-<span id="L1298"><span class="lineNum">    1298</span>              : </span>
-<span id="L1299"><span class="lineNum">    1299</span>              :                 return m_tls.on_read(data, size, std::move(on_parse), std::move(on_write));</span>
-<span id="L1300"><span class="lineNum">    1300</span>              :         }</span>
-<span id="L1301"><span class="lineNum">    1301</span>              : #endif</span>
-<span id="L1302"><span class="lineNum">    1302</span>              : </span>
-<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :         return on_parse(data, size);</span></span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC">           0 :         };</span></span>
+<span id="L1289"><span class="lineNum">    1289</span>              : </span>
+<span id="L1290"><span class="lineNum">    1290</span>              : #ifdef WITH_TLS</span>
+<span id="L1291"><span class="lineNum">    1291</span>              :         if (!m_tls.is_empty()) {</span>
+<span id="L1292"><span class="lineNum">    1292</span>              :                 auto on_write = [this](const uint8_t* data, size_t size) {</span>
+<span id="L1293"><span class="lineNum">    1293</span>              :                         return m_owner-&gt;send(this, [data, size](uint8_t* buf, size_t buf_size) -&gt; size_t {</span>
+<span id="L1294"><span class="lineNum">    1294</span>              :                                 if (buf_size &lt; size) {</span>
+<span id="L1295"><span class="lineNum">    1295</span>              :                                         return 0;</span>
+<span id="L1296"><span class="lineNum">    1296</span>              :                                 }</span>
+<span id="L1297"><span class="lineNum">    1297</span>              :                                 memcpy(buf, data, size);</span>
+<span id="L1298"><span class="lineNum">    1298</span>              :                                 return size;</span>
+<span id="L1299"><span class="lineNum">    1299</span>              :                         }, true);</span>
+<span id="L1300"><span class="lineNum">    1300</span>              :                 };</span>
+<span id="L1301"><span class="lineNum">    1301</span>              : </span>
+<span id="L1302"><span class="lineNum">    1302</span>              :                 return m_tls.on_read(data, size, std::move(on_parse), std::move(on_write));</span>
+<span id="L1303"><span class="lineNum">    1303</span>              :         }</span>
+<span id="L1304"><span class="lineNum">    1304</span>              : #endif</span>
 <span id="L1305"><span class="lineNum">    1305</span>              : </span>
-<span id="L1306"><span class="lineNum">    1306</span>              : bool StratumServer::StratumClient::process_request(char* data, uint32_t size)</span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :         rapidjson::Document doc;</span></span>
-<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC">           0 :         if (doc.Parse(data, size).HasParseError()) {</span></span>
-<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request (parse error)&quot;);</span></span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1313"><span class="lineNum">    1313</span>              : </span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :         if (!doc.IsObject()) {</span></span>
-<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request (not an object)&quot;);</span></span>
-<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1318"><span class="lineNum">    1318</span>              : </span>
-<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaUNC">           0 :         const auto id_it = doc.FindMember(&quot;id&quot;);</span></span>
-<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :         if (id_it == doc.MemberEnd()) {</span></span>
-<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('id' field not found)&quot;);</span></span>
-<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1324"><span class="lineNum">    1324</span>              : </span>
-<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaUNC">           0 :         const auto&amp; id = id_it-&gt;value;</span></span>
-<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :         if (!id.IsUint()) {</span></span>
-<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('id' field is not an integer)&quot;);</span></span>
-<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1330"><span class="lineNum">    1330</span>              : </span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :         const auto method_it = doc.FindMember(&quot;method&quot;);</span></span>
-<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 :         if (method_it == doc.MemberEnd()) {</span></span>
-<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('method' field not found)&quot;);</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1336"><span class="lineNum">    1336</span>              : </span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :         const auto&amp; method = method_it-&gt;value;</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :         if (!method.IsString()) {</span></span>
-<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('method' field is not a string)&quot;);</span></span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1342"><span class="lineNum">    1342</span>              : </span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :         const char* s = method.GetString();</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :         if (strcmp(s, &quot;login&quot;) == 0) {</span></span>
-<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;incoming login from &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :                 return process_login(doc, id.GetUint());</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :         else if (strcmp(s, &quot;submit&quot;) == 0) {</span></span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;incoming share from &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :                 return process_submit(doc, id.GetUint());</span></span>
-<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaUNC">           0 :         else if (strcmp(s, &quot;keepalived&quot;) == 0) {</span></span>
-<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;incoming keepalive from &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
-<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1356"><span class="lineNum">    1356</span>              : </span>
-<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 :         LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request (unknown method)&quot;);</span></span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1360"><span class="lineNum">    1360</span>              : </span>
-<span id="L1361"><span class="lineNum">    1361</span>              : template&lt;typename T&gt;</span>
-<span id="L1362"><span class="lineNum">    1362</span>              : bool StratumServer::StratumClient::process_login(T&amp; doc, uint32_t id)</span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaUNC">           0 :         const auto params_it = doc.FindMember(&quot;params&quot;);</span></span>
-<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaUNC">           0 :         if (params_it == doc.MemberEnd()) {</span></span>
-<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON login request ('params' field not found)&quot;);</span></span>
-<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1369"><span class="lineNum">    1369</span>              : </span>
-<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaUNC">           0 :         const auto&amp; params = params_it-&gt;value;</span></span>
-<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaUNC">           0 :         if (!params.IsObject()) {</span></span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON login request ('params' field is not an object)&quot;);</span></span>
-<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1375"><span class="lineNum">    1375</span>              : </span>
-<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :         const auto login_it = params.FindMember(&quot;login&quot;);</span></span>
-<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaUNC">           0 :         if (login_it == params.MemberEnd()) {</span></span>
-<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid login params ('login' field not found)&quot;);</span></span>
-<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1381"><span class="lineNum">    1381</span>              : </span>
-<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaUNC">           0 :         const auto&amp; login = login_it-&gt;value;</span></span>
-<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaUNC">           0 :         if (!login.IsString()) {</span></span>
-<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid login params ('login' field is not a string)&quot;);</span></span>
-<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1387"><span class="lineNum">    1387</span>              : </span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaUNC">           0 :         return static_cast&lt;StratumServer*&gt;(m_owner)-&gt;on_login(this, id, login.GetString());</span></span>
-<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaUNC">           0 :         return on_parse(data, size);</span></span>
+<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1308"><span class="lineNum">    1308</span>              : </span>
+<span id="L1309"><span class="lineNum">    1309</span>              : bool StratumServer::StratumClient::process_request(char* data, uint32_t size)</span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 :         rapidjson::Document doc;</span></span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :         if (doc.Parse(data, size).HasParseError()) {</span></span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request (parse error)&quot;);</span></span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1316"><span class="lineNum">    1316</span>              : </span>
+<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :         if (!doc.IsObject()) {</span></span>
+<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request (not an object)&quot;);</span></span>
+<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1321"><span class="lineNum">    1321</span>              : </span>
+<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :         const auto id_it = doc.FindMember(&quot;id&quot;);</span></span>
+<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :         if (id_it == doc.MemberEnd()) {</span></span>
+<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('id' field not found)&quot;);</span></span>
+<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1327"><span class="lineNum">    1327</span>              : </span>
+<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :         const auto&amp; id = id_it-&gt;value;</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :         if (!id.IsUint()) {</span></span>
+<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('id' field is not an integer)&quot;);</span></span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1333"><span class="lineNum">    1333</span>              : </span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :         const auto method_it = doc.FindMember(&quot;method&quot;);</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :         if (method_it == doc.MemberEnd()) {</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('method' field not found)&quot;);</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1339"><span class="lineNum">    1339</span>              : </span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :         const auto&amp; method = method_it-&gt;value;</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :         if (!method.IsString()) {</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request ('method' field is not a string)&quot;);</span></span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1345"><span class="lineNum">    1345</span>              : </span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :         const char* s = method.GetString();</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :         if (strcmp(s, &quot;login&quot;) == 0) {</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;incoming login from &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
+<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :                 return process_login(doc, id.GetUint());</span></span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :         else if (strcmp(s, &quot;submit&quot;) == 0) {</span></span>
+<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;incoming share from &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
+<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaUNC">           0 :                 return process_submit(doc, id.GetUint());</span></span>
+<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :         else if (strcmp(s, &quot;keepalived&quot;) == 0) {</span></span>
+<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;incoming keepalive from &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
+<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1359"><span class="lineNum">    1359</span>              : </span>
+<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaUNC">           0 :         LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON request (unknown method)&quot;);</span></span>
+<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1363"><span class="lineNum">    1363</span>              : </span>
+<span id="L1364"><span class="lineNum">    1364</span>              : template&lt;typename T&gt;</span>
+<span id="L1365"><span class="lineNum">    1365</span>              : bool StratumServer::StratumClient::process_login(T&amp; doc, uint32_t id)</span>
+<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :         const auto params_it = doc.FindMember(&quot;params&quot;);</span></span>
+<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :         if (params_it == doc.MemberEnd()) {</span></span>
+<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON login request ('params' field not found)&quot;);</span></span>
+<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1372"><span class="lineNum">    1372</span>              : </span>
+<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :         const auto&amp; params = params_it-&gt;value;</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :         if (!params.IsObject()) {</span></span>
+<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON login request ('params' field is not an object)&quot;);</span></span>
+<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1378"><span class="lineNum">    1378</span>              : </span>
+<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaUNC">           0 :         const auto login_it = params.FindMember(&quot;login&quot;);</span></span>
+<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaUNC">           0 :         if (login_it == params.MemberEnd()) {</span></span>
+<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid login params ('login' field not found)&quot;);</span></span>
+<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1384"><span class="lineNum">    1384</span>              : </span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaUNC">           0 :         const auto&amp; login = login_it-&gt;value;</span></span>
+<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaUNC">           0 :         if (!login.IsString()) {</span></span>
+<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid login params ('login' field is not a string)&quot;);</span></span>
+<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1390"><span class="lineNum">    1390</span>              : </span>
-<span id="L1391"><span class="lineNum">    1391</span>              : template&lt;typename T&gt;</span>
-<span id="L1392"><span class="lineNum">    1392</span>              : bool StratumServer::StratumClient::process_submit(T&amp; doc, uint32_t id)</span>
-<span id="L1393"><span class="lineNum">    1393</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :         const auto params_it = doc.FindMember(&quot;params&quot;);</span></span>
-<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaUNC">           0 :         if (params_it == doc.MemberEnd()) {</span></span>
-<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON submit request ('params' field not found)&quot;);</span></span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1399"><span class="lineNum">    1399</span>              : </span>
-<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 :         const auto&amp; params = params_it-&gt;value;</span></span>
-<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :         if (!params.IsObject()) {</span></span>
-<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON submit request ('params' field is not an object)&quot;);</span></span>
-<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1405"><span class="lineNum">    1405</span>              : </span>
-<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :         const auto rpcId_it = params.FindMember(&quot;id&quot;);</span></span>
-<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :         if (rpcId_it == params.MemberEnd()) {</span></span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('id' field not found)&quot;);</span></span>
-<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1411"><span class="lineNum">    1411</span>              : </span>
-<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :         const auto&amp; rpcId = rpcId_it-&gt;value;</span></span>
-<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :         if (!rpcId.IsString()) {</span></span>
-<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('id' field is not a string)&quot;);</span></span>
-<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1416"><span class="lineNum">    1416</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1417"><span class="lineNum">    1417</span>              : </span>
-<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaUNC">           0 :         const auto job_id_it = params.FindMember(&quot;job_id&quot;);</span></span>
-<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaUNC">           0 :         if (job_id_it == params.MemberEnd()) {</span></span>
-<span id="L1420"><span class="lineNum">    1420</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('job_id' field not found)&quot;);</span></span>
-<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1422"><span class="lineNum">    1422</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1423"><span class="lineNum">    1423</span>              : </span>
-<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :         const auto&amp; job_id = job_id_it-&gt;value;</span></span>
-<span id="L1425"><span class="lineNum">    1425</span> <span class="tlaUNC">           0 :         if (!job_id.IsString()) {</span></span>
-<span id="L1426"><span class="lineNum">    1426</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('job_id' field is not a string)&quot;);</span></span>
-<span id="L1427"><span class="lineNum">    1427</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1429"><span class="lineNum">    1429</span>              : </span>
-<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaUNC">           0 :         const auto nonce_it = params.FindMember(&quot;nonce&quot;);</span></span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaUNC">           0 :         if (nonce_it == params.MemberEnd()) {</span></span>
-<span id="L1432"><span class="lineNum">    1432</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('nonce' field not found)&quot;);</span></span>
-<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1435"><span class="lineNum">    1435</span>              : </span>
-<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaUNC">           0 :         const auto&amp; nonce = nonce_it-&gt;value;</span></span>
-<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 :         if (!nonce.IsString()) {</span></span>
-<span id="L1438"><span class="lineNum">    1438</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('nonce' field is not a string)&quot;);</span></span>
-<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1441"><span class="lineNum">    1441</span>              : </span>
-<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaUNC">           0 :         if (nonce.GetStringLength() != sizeof(uint32_t) * 2) {</span></span>
-<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('nonce' field has invalid length)&quot;);</span></span>
-<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1446"><span class="lineNum">    1446</span>              : </span>
-<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaUNC">           0 :         const auto result_it = params.FindMember(&quot;result&quot;);</span></span>
-<span id="L1448"><span class="lineNum">    1448</span> <span class="tlaUNC">           0 :         if (result_it == params.MemberEnd()) {</span></span>
-<span id="L1449"><span class="lineNum">    1449</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('result' field not found)&quot;);</span></span>
-<span id="L1450"><span class="lineNum">    1450</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1451"><span class="lineNum">    1451</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1452"><span class="lineNum">    1452</span>              : </span>
-<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaUNC">           0 :         const auto&amp; result = result_it-&gt;value;</span></span>
-<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaUNC">           0 :         if (!result.IsString()) {</span></span>
-<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('result' field is not a string)&quot;);</span></span>
-<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1458"><span class="lineNum">    1458</span>              : </span>
-<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaUNC">           0 :         if (result.GetStringLength() != HASH_SIZE * 2) {</span></span>
-<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('result' field has invalid length)&quot;);</span></span>
-<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1463"><span class="lineNum">    1463</span>              : </span>
-<span id="L1464"><span class="lineNum">    1464</span> <span class="tlaUNC">           0 :         return static_cast&lt;StratumServer*&gt;(m_owner)-&gt;on_submit(this, id, job_id.GetString(), nonce.GetString(), result.GetString());</span></span>
-<span id="L1465"><span class="lineNum">    1465</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaUNC">           0 :         return static_cast&lt;StratumServer*&gt;(m_owner)-&gt;on_login(this, id, login.GetString());</span></span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1393"><span class="lineNum">    1393</span>              : </span>
+<span id="L1394"><span class="lineNum">    1394</span>              : template&lt;typename T&gt;</span>
+<span id="L1395"><span class="lineNum">    1395</span>              : bool StratumServer::StratumClient::process_submit(T&amp; doc, uint32_t id)</span>
+<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :         const auto params_it = doc.FindMember(&quot;params&quot;);</span></span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :         if (params_it == doc.MemberEnd()) {</span></span>
+<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON submit request ('params' field not found)&quot;);</span></span>
+<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1402"><span class="lineNum">    1402</span>              : </span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :         const auto&amp; params = params_it-&gt;value;</span></span>
+<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :         if (!params.IsObject()) {</span></span>
+<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid JSON submit request ('params' field is not an object)&quot;);</span></span>
+<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1408"><span class="lineNum">    1408</span>              : </span>
+<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaUNC">           0 :         const auto rpcId_it = params.FindMember(&quot;id&quot;);</span></span>
+<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 :         if (rpcId_it == params.MemberEnd()) {</span></span>
+<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('id' field not found)&quot;);</span></span>
+<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1414"><span class="lineNum">    1414</span>              : </span>
+<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaUNC">           0 :         const auto&amp; rpcId = rpcId_it-&gt;value;</span></span>
+<span id="L1416"><span class="lineNum">    1416</span> <span class="tlaUNC">           0 :         if (!rpcId.IsString()) {</span></span>
+<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('id' field is not a string)&quot;);</span></span>
+<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1420"><span class="lineNum">    1420</span>              : </span>
+<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 :         const auto job_id_it = params.FindMember(&quot;job_id&quot;);</span></span>
+<span id="L1422"><span class="lineNum">    1422</span> <span class="tlaUNC">           0 :         if (job_id_it == params.MemberEnd()) {</span></span>
+<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('job_id' field not found)&quot;);</span></span>
+<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1425"><span class="lineNum">    1425</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1426"><span class="lineNum">    1426</span>              : </span>
+<span id="L1427"><span class="lineNum">    1427</span> <span class="tlaUNC">           0 :         const auto&amp; job_id = job_id_it-&gt;value;</span></span>
+<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :         if (!job_id.IsString()) {</span></span>
+<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('job_id' field is not a string)&quot;);</span></span>
+<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1432"><span class="lineNum">    1432</span>              : </span>
+<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaUNC">           0 :         const auto nonce_it = params.FindMember(&quot;nonce&quot;);</span></span>
+<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaUNC">           0 :         if (nonce_it == params.MemberEnd()) {</span></span>
+<span id="L1435"><span class="lineNum">    1435</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('nonce' field not found)&quot;);</span></span>
+<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1438"><span class="lineNum">    1438</span>              : </span>
+<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :         const auto&amp; nonce = nonce_it-&gt;value;</span></span>
+<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaUNC">           0 :         if (!nonce.IsString()) {</span></span>
+<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('nonce' field is not a string)&quot;);</span></span>
+<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1444"><span class="lineNum">    1444</span>              : </span>
+<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaUNC">           0 :         if (nonce.GetStringLength() != sizeof(uint32_t) * 2) {</span></span>
+<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('nonce' field has invalid length)&quot;);</span></span>
+<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1448"><span class="lineNum">    1448</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1449"><span class="lineNum">    1449</span>              : </span>
+<span id="L1450"><span class="lineNum">    1450</span> <span class="tlaUNC">           0 :         const auto result_it = params.FindMember(&quot;result&quot;);</span></span>
+<span id="L1451"><span class="lineNum">    1451</span> <span class="tlaUNC">           0 :         if (result_it == params.MemberEnd()) {</span></span>
+<span id="L1452"><span class="lineNum">    1452</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('result' field not found)&quot;);</span></span>
+<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1455"><span class="lineNum">    1455</span>              : </span>
+<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaUNC">           0 :         const auto&amp; result = result_it-&gt;value;</span></span>
+<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaUNC">           0 :         if (!result.IsString()) {</span></span>
+<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('result' field is not a string)&quot;);</span></span>
+<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1461"><span class="lineNum">    1461</span>              : </span>
+<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaUNC">           0 :         if (result.GetStringLength() != HASH_SIZE * 2) {</span></span>
+<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid submit params ('result' field has invalid length)&quot;);</span></span>
+<span id="L1464"><span class="lineNum">    1464</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1465"><span class="lineNum">    1465</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1466"><span class="lineNum">    1466</span>              : </span>
-<span id="L1467"><span class="lineNum">    1467</span>              : bool StratumServer::StratumClient::send_http_response(bool send_content)</span>
-<span id="L1468"><span class="lineNum">    1468</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1469"><span class="lineNum">    1469</span> <span class="tlaUNC">           0 :         return m_owner-&gt;send(this, [send_content](uint8_t *buf, size_t buf_size) -&gt; size_t {</span></span>
-<span id="L1470"><span class="lineNum">    1470</span> <span class="tlaUNC">           0 :                 static constexpr uint8_t data[] =</span></span>
-<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaUNC">           0 :                         &quot;HTTP/1.1 200 OK\r\n&quot;</span></span>
-<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaUNC">           0 :                         &quot;Content-Length: 21\r\n&quot;</span></span>
-<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :                         &quot;Content-Type: text/plain\r\n&quot;</span></span>
-<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaUNC">           0 :                         &quot;Connection: Closed\r\n\r\n&quot;</span></span>
-<span id="L1475"><span class="lineNum">    1475</span> <span class="tlaUNC">           0 :                         &quot;P2Pool Stratum online&quot;;</span></span>
-<span id="L1476"><span class="lineNum">    1476</span>              : </span>
-<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaUNC">           0 :                 const size_t data_size = send_content ? (sizeof(data) - 1) : (sizeof(data) - 1 - 21);</span></span>
-<span id="L1478"><span class="lineNum">    1478</span>              : </span>
-<span id="L1479"><span class="lineNum">    1479</span> <span class="tlaUNC">           0 :                 if (buf_size &lt; data_size) {</span></span>
-<span id="L1480"><span class="lineNum">    1480</span> <span class="tlaUNC">           0 :                         return 0;</span></span>
-<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1482"><span class="lineNum">    1482</span>              : </span>
-<span id="L1483"><span class="lineNum">    1483</span> <span class="tlaUNC">           0 :                 memcpy(buf, data, data_size);</span></span>
-<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaUNC">           0 :                 return data_size;</span></span>
-<span id="L1485"><span class="lineNum">    1485</span> <span class="tlaUNC">           0 :         });</span></span>
-<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1487"><span class="lineNum">    1487</span>              : </span>
-<span id="L1488"><span class="lineNum">    1488</span>              : void StratumServer::api_update_local_stats(uint64_t timestamp)</span>
-<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaUNC">           0 :         if (!m_pool-&gt;api() || !m_pool-&gt;params().m_localStats || m_pool-&gt;stopped()) {</span></span>
-<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1493"><span class="lineNum">    1493</span>              : </span>
-<span id="L1494"><span class="lineNum">    1494</span>              :         // Rate limit to no more than once in 20 seconds.</span>
-<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaUNC">           0 :         uint64_t t = m_apiLastUpdateTime.load();</span></span>
-<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaUNC">           0 :         if (timestamp &lt; t + 20) {</span></span>
-<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1499"><span class="lineNum">    1499</span>              : </span>
-<span id="L1500"><span class="lineNum">    1500</span> <span class="tlaUNC">           0 :         if (!m_apiLastUpdateTime.compare_exchange_strong(t, timestamp)) {</span></span>
-<span id="L1501"><span class="lineNum">    1501</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1502"><span class="lineNum">    1502</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1503"><span class="lineNum">    1503</span>              : </span>
-<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaUNC">           0 :         uint64_t hashes_15m, hashes_1h, hashes_24h, total_hashes;</span></span>
-<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaUNC">           0 :         int64_t dt_15m, dt_1h, dt_24h;</span></span>
+<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaUNC">           0 :         return static_cast&lt;StratumServer*&gt;(m_owner)-&gt;on_submit(this, id, job_id.GetString(), nonce.GetString(), result.GetString());</span></span>
+<span id="L1468"><span class="lineNum">    1468</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1469"><span class="lineNum">    1469</span>              : </span>
+<span id="L1470"><span class="lineNum">    1470</span>              : bool StratumServer::StratumClient::send_http_response(bool send_content)</span>
+<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaUNC">           0 :         return m_owner-&gt;send(this, [send_content](uint8_t *buf, size_t buf_size) -&gt; size_t {</span></span>
+<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :                 static constexpr uint8_t data[] =</span></span>
+<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaUNC">           0 :                         &quot;HTTP/1.1 200 OK\r\n&quot;</span></span>
+<span id="L1475"><span class="lineNum">    1475</span> <span class="tlaUNC">           0 :                         &quot;Content-Length: 21\r\n&quot;</span></span>
+<span id="L1476"><span class="lineNum">    1476</span> <span class="tlaUNC">           0 :                         &quot;Content-Type: text/plain\r\n&quot;</span></span>
+<span id="L1477"><span class="lineNum">    1477</span> <span class="tlaUNC">           0 :                         &quot;Connection: Closed\r\n\r\n&quot;</span></span>
+<span id="L1478"><span class="lineNum">    1478</span> <span class="tlaUNC">           0 :                         &quot;P2Pool Stratum online&quot;;</span></span>
+<span id="L1479"><span class="lineNum">    1479</span>              : </span>
+<span id="L1480"><span class="lineNum">    1480</span> <span class="tlaUNC">           0 :                 const size_t data_size = send_content ? (sizeof(data) - 1) : (sizeof(data) - 1 - 21);</span></span>
+<span id="L1481"><span class="lineNum">    1481</span>              : </span>
+<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaUNC">           0 :                 if (buf_size &lt; data_size) {</span></span>
+<span id="L1483"><span class="lineNum">    1483</span> <span class="tlaUNC">           0 :                         return 0;</span></span>
+<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1485"><span class="lineNum">    1485</span>              : </span>
+<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaUNC">           0 :                 memcpy(buf, data, data_size);</span></span>
+<span id="L1487"><span class="lineNum">    1487</span> <span class="tlaUNC">           0 :                 return data_size;</span></span>
+<span id="L1488"><span class="lineNum">    1488</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1490"><span class="lineNum">    1490</span>              : </span>
+<span id="L1491"><span class="lineNum">    1491</span>              : void StratumServer::api_update_local_stats(uint64_t timestamp)</span>
+<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaUNC">           0 :         if (!m_pool-&gt;api() || !m_pool-&gt;params().m_localStats || m_pool-&gt;stopped()) {</span></span>
+<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1496"><span class="lineNum">    1496</span>              : </span>
+<span id="L1497"><span class="lineNum">    1497</span>              :         // Rate limit to no more than once in 20 seconds.</span>
+<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC">           0 :         uint64_t t = m_apiLastUpdateTime.load();</span></span>
+<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaUNC">           0 :         if (timestamp &lt; t + 20) {</span></span>
+<span id="L1500"><span class="lineNum">    1500</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1501"><span class="lineNum">    1501</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1502"><span class="lineNum">    1502</span>              : </span>
+<span id="L1503"><span class="lineNum">    1503</span> <span class="tlaUNC">           0 :         if (!m_apiLastUpdateTime.compare_exchange_strong(t, timestamp)) {</span></span>
+<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1506"><span class="lineNum">    1506</span>              : </span>
-<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaUNC">           0 :         uint64_t hashes_since_last_share;</span></span>
-<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC">           0 :         double average_effort;</span></span>
-<span id="L1509"><span class="lineNum">    1509</span> <span class="tlaUNC">           0 :         uint32_t shares_found, shares_failed;</span></span>
-<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaUNC">           0 :         time_t last_share_found_time;</span></span>
-<span id="L1511"><span class="lineNum">    1511</span> <span class="tlaUNC">           0 :         uint64_t total_stratum_shares;</span></span>
-<span id="L1512"><span class="lineNum">    1512</span>              : </span>
-<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaUNC">           0 :                 ReadLock lock(m_hashrateDataLock);</span></span>
+<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaUNC">           0 :         uint64_t hashes_15m, hashes_1h, hashes_24h, total_hashes;</span></span>
+<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC">           0 :         int64_t dt_15m, dt_1h, dt_24h;</span></span>
+<span id="L1509"><span class="lineNum">    1509</span>              : </span>
+<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaUNC">           0 :         uint64_t hashes_since_last_share;</span></span>
+<span id="L1511"><span class="lineNum">    1511</span> <span class="tlaUNC">           0 :         double average_effort;</span></span>
+<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaUNC">           0 :         uint32_t shares_found, shares_failed;</span></span>
+<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC">           0 :         time_t last_share_found_time;</span></span>
+<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaUNC">           0 :         uint64_t total_stratum_shares;</span></span>
 <span id="L1515"><span class="lineNum">    1515</span>              : </span>
-<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaUNC">           0 :                 total_hashes = m_cumulativeHashes;</span></span>
-<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaUNC">           0 :                 hashes_since_last_share = m_cumulativeHashes - m_cumulativeHashesAtLastShare;</span></span>
+<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaUNC">           0 :                 ReadLock lock(m_hashrateDataLock);</span></span>
 <span id="L1518"><span class="lineNum">    1518</span>              : </span>
-<span id="L1519"><span class="lineNum">    1519</span> <span class="tlaUNC">           0 :                 const HashrateData* data = m_hashrateData;</span></span>
-<span id="L1520"><span class="lineNum">    1520</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; head = data[m_hashrateDataHead];</span></span>
-<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; tail_15m = data[m_hashrateDataTail_15m];</span></span>
-<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; tail_1h = data[m_hashrateDataTail_1h];</span></span>
-<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; tail_24h = data[m_hashrateDataTail_24h];</span></span>
-<span id="L1524"><span class="lineNum">    1524</span>              : </span>
-<span id="L1525"><span class="lineNum">    1525</span> <span class="tlaUNC">           0 :                 hashes_15m = head.m_cumulativeHashes - tail_15m.m_cumulativeHashes;</span></span>
-<span id="L1526"><span class="lineNum">    1526</span> <span class="tlaUNC">           0 :                 dt_15m = static_cast&lt;int64_t&gt;(head.m_timestamp - tail_15m.m_timestamp);</span></span>
+<span id="L1519"><span class="lineNum">    1519</span> <span class="tlaUNC">           0 :                 total_hashes = m_cumulativeHashes;</span></span>
+<span id="L1520"><span class="lineNum">    1520</span> <span class="tlaUNC">           0 :                 hashes_since_last_share = m_cumulativeHashes - m_cumulativeHashesAtLastShare;</span></span>
+<span id="L1521"><span class="lineNum">    1521</span>              : </span>
+<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaUNC">           0 :                 const HashrateData* data = m_hashrateData;</span></span>
+<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; head = data[m_hashrateDataHead];</span></span>
+<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; tail_15m = data[m_hashrateDataTail_15m];</span></span>
+<span id="L1525"><span class="lineNum">    1525</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; tail_1h = data[m_hashrateDataTail_1h];</span></span>
+<span id="L1526"><span class="lineNum">    1526</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; tail_24h = data[m_hashrateDataTail_24h];</span></span>
 <span id="L1527"><span class="lineNum">    1527</span>              : </span>
-<span id="L1528"><span class="lineNum">    1528</span> <span class="tlaUNC">           0 :                 hashes_1h = head.m_cumulativeHashes - tail_1h.m_cumulativeHashes;</span></span>
-<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaUNC">           0 :                 dt_1h = static_cast&lt;int64_t&gt;(head.m_timestamp - tail_1h.m_timestamp);</span></span>
+<span id="L1528"><span class="lineNum">    1528</span> <span class="tlaUNC">           0 :                 hashes_15m = head.m_cumulativeHashes - tail_15m.m_cumulativeHashes;</span></span>
+<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaUNC">           0 :                 dt_15m = static_cast&lt;int64_t&gt;(head.m_timestamp - tail_15m.m_timestamp);</span></span>
 <span id="L1530"><span class="lineNum">    1530</span>              : </span>
-<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaUNC">           0 :                 hashes_24h = head.m_cumulativeHashes - tail_24h.m_cumulativeHashes;</span></span>
-<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaUNC">           0 :                 dt_24h = static_cast&lt;int64_t&gt;(head.m_timestamp - tail_24h.m_timestamp);</span></span>
+<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaUNC">           0 :                 hashes_1h = head.m_cumulativeHashes - tail_1h.m_cumulativeHashes;</span></span>
+<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaUNC">           0 :                 dt_1h = static_cast&lt;int64_t&gt;(head.m_timestamp - tail_1h.m_timestamp);</span></span>
 <span id="L1533"><span class="lineNum">    1533</span>              : </span>
-<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaUNC">           0 :                 average_effort = 0.0;</span></span>
-<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :                 const double diff = m_cumulativeFoundSharesDiff;</span></span>
-<span id="L1536"><span class="lineNum">    1536</span> <span class="tlaUNC">           0 :                 if (diff &gt; 0.0) {</span></span>
-<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaUNC">           0 :                         average_effort = static_cast&lt;double&gt;(m_cumulativeHashesAtLastShare) * 100.0 / diff;</span></span>
-<span id="L1538"><span class="lineNum">    1538</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1539"><span class="lineNum">    1539</span>              : </span>
-<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaUNC">           0 :                 shares_found = m_totalFoundSidechainShares;</span></span>
-<span id="L1541"><span class="lineNum">    1541</span> <span class="tlaUNC">           0 :                 shares_failed = m_totalFailedSidechainShares;</span></span>
-<span id="L1542"><span class="lineNum">    1542</span> <span class="tlaUNC">           0 :                 last_share_found_time = m_lastSidechainShareFoundTime;</span></span>
-<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaUNC">           0 :                 total_stratum_shares = m_totalStratumShares;</span></span>
-<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1545"><span class="lineNum">    1545</span>              : </span>
-<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaUNC">           0 :         const uint64_t hashrate_15m = (dt_15m &gt; 0) ? (hashes_15m / dt_15m) : 0;</span></span>
-<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaUNC">           0 :         const uint64_t hashrate_1h  = (dt_1h  &gt; 0) ? (hashes_1h  / dt_1h ) : 0;</span></span>
-<span id="L1548"><span class="lineNum">    1548</span> <span class="tlaUNC">           0 :         const uint64_t hashrate_24h = (dt_24h &gt; 0) ? (hashes_24h / dt_24h) : 0;</span></span>
-<span id="L1549"><span class="lineNum">    1549</span>              : </span>
-<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaUNC">           0 :         double current_effort = static_cast&lt;double&gt;(hashes_since_last_share) * 100.0 / m_pool-&gt;side_chain().difficulty().to_double();</span></span>
-<span id="L1551"><span class="lineNum">    1551</span>              : </span>
-<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaUNC">           0 :         uint32_t connections = m_numConnections;</span></span>
-<span id="L1553"><span class="lineNum">    1553</span> <span class="tlaUNC">           0 :         uint32_t incoming_connections = m_numIncomingConnections;</span></span>
+<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaUNC">           0 :                 hashes_24h = head.m_cumulativeHashes - tail_24h.m_cumulativeHashes;</span></span>
+<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :                 dt_24h = static_cast&lt;int64_t&gt;(head.m_timestamp - tail_24h.m_timestamp);</span></span>
+<span id="L1536"><span class="lineNum">    1536</span>              : </span>
+<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaUNC">           0 :                 average_effort = 0.0;</span></span>
+<span id="L1538"><span class="lineNum">    1538</span> <span class="tlaUNC">           0 :                 const double diff = m_cumulativeFoundSharesDiff;</span></span>
+<span id="L1539"><span class="lineNum">    1539</span> <span class="tlaUNC">           0 :                 if (diff &gt; 0.0) {</span></span>
+<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaUNC">           0 :                         average_effort = static_cast&lt;double&gt;(m_cumulativeHashesAtLastShare) * 100.0 / diff;</span></span>
+<span id="L1541"><span class="lineNum">    1541</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1542"><span class="lineNum">    1542</span>              : </span>
+<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaUNC">           0 :                 shares_found = m_totalFoundSidechainShares;</span></span>
+<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaUNC">           0 :                 shares_failed = m_totalFailedSidechainShares;</span></span>
+<span id="L1545"><span class="lineNum">    1545</span> <span class="tlaUNC">           0 :                 last_share_found_time = m_lastSidechainShareFoundTime;</span></span>
+<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaUNC">           0 :                 total_stratum_shares = m_totalStratumShares;</span></span>
+<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1548"><span class="lineNum">    1548</span>              : </span>
+<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaUNC">           0 :         const uint64_t hashrate_15m = (dt_15m &gt; 0) ? (hashes_15m / dt_15m) : 0;</span></span>
+<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaUNC">           0 :         const uint64_t hashrate_1h  = (dt_1h  &gt; 0) ? (hashes_1h  / dt_1h ) : 0;</span></span>
+<span id="L1551"><span class="lineNum">    1551</span> <span class="tlaUNC">           0 :         const uint64_t hashrate_24h = (dt_24h &gt; 0) ? (hashes_24h / dt_24h) : 0;</span></span>
+<span id="L1552"><span class="lineNum">    1552</span>              : </span>
+<span id="L1553"><span class="lineNum">    1553</span> <span class="tlaUNC">           0 :         double current_effort = static_cast&lt;double&gt;(hashes_since_last_share) * 100.0 / m_pool-&gt;side_chain().difficulty().to_double();</span></span>
 <span id="L1554"><span class="lineNum">    1554</span>              : </span>
-<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaUNC">           0 :         const double block_reward_share_percent = m_pool-&gt;side_chain().get_reward_share(m_pool-&gt;params().m_wallet) * 100.0;</span></span>
-<span id="L1556"><span class="lineNum">    1556</span>              : </span>
-<span id="L1557"><span class="lineNum">    1557</span> <span class="tlaUNC">           0 :         CallOnLoop(&amp;m_loop, [=]() {</span></span>
-<span id="L1558"><span class="lineNum">    1558</span> <span class="tlaUNC">           0 :                 m_pool-&gt;api()-&gt;set(p2pool_api::Category::LOCAL, &quot;stratum&quot;, [=](log::Stream&amp; s) {</span></span>
-<span id="L1559"><span class="lineNum">    1559</span> <span class="tlaUNC">           0 :                         s       &lt;&lt; &quot;{\&quot;hashrate_15m\&quot;:&quot; &lt;&lt; hashrate_15m</span></span>
-<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;hashrate_1h\&quot;:&quot; &lt;&lt; hashrate_1h</span></span>
-<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;hashrate_24h\&quot;:&quot; &lt;&lt; hashrate_24h</span></span>
-<span id="L1562"><span class="lineNum">    1562</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;total_hashes\&quot;:&quot; &lt;&lt; total_hashes</span></span>
-<span id="L1563"><span class="lineNum">    1563</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;total_stratum_shares\&quot;:&quot; &lt;&lt; total_stratum_shares</span></span>
-<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;last_share_found_time\&quot;:&quot; &lt;&lt; last_share_found_time</span></span>
-<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;shares_found\&quot;:&quot; &lt;&lt; shares_found</span></span>
-<span id="L1566"><span class="lineNum">    1566</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;shares_failed\&quot;:&quot; &lt;&lt; shares_failed</span></span>
-<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;average_effort\&quot;:&quot; &lt;&lt; average_effort</span></span>
-<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;current_effort\&quot;:&quot; &lt;&lt; current_effort</span></span>
-<span id="L1569"><span class="lineNum">    1569</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;connections\&quot;:&quot; &lt;&lt; connections</span></span>
-<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;incoming_connections\&quot;:&quot; &lt;&lt; incoming_connections</span></span>
-<span id="L1571"><span class="lineNum">    1571</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;block_reward_share_percent\&quot;:&quot; &lt;&lt; block_reward_share_percent</span></span>
-<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;wallet\&quot;:\&quot;&quot; &lt;&lt; m_pool-&gt;params().m_wallet &lt;&lt; '&quot;'</span></span>
-<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;workers\&quot;:[&quot;;</span></span>
-<span id="L1574"><span class="lineNum">    1574</span>              : </span>
-<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaUNC">           0 :                         const difficulty_type pool_diff = m_pool-&gt;side_chain().difficulty();</span></span>
-<span id="L1576"><span class="lineNum">    1576</span> <span class="tlaUNC">           0 :                         bool first = true;</span></span>
+<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaUNC">           0 :         uint32_t connections = m_numConnections;</span></span>
+<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaUNC">           0 :         uint32_t incoming_connections = m_numIncomingConnections;</span></span>
+<span id="L1557"><span class="lineNum">    1557</span>              : </span>
+<span id="L1558"><span class="lineNum">    1558</span> <span class="tlaUNC">           0 :         const double block_reward_share_percent = m_pool-&gt;side_chain().get_reward_share(m_pool-&gt;params().m_wallet) * 100.0;</span></span>
+<span id="L1559"><span class="lineNum">    1559</span>              : </span>
+<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaUNC">           0 :         CallOnLoop(&amp;m_loop, [=]() {</span></span>
+<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaUNC">           0 :                 m_pool-&gt;api()-&gt;set(p2pool_api::Category::LOCAL, &quot;stratum&quot;, [=](log::Stream&amp; s) {</span></span>
+<span id="L1562"><span class="lineNum">    1562</span> <span class="tlaUNC">           0 :                         s       &lt;&lt; &quot;{\&quot;hashrate_15m\&quot;:&quot; &lt;&lt; hashrate_15m</span></span>
+<span id="L1563"><span class="lineNum">    1563</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;hashrate_1h\&quot;:&quot; &lt;&lt; hashrate_1h</span></span>
+<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;hashrate_24h\&quot;:&quot; &lt;&lt; hashrate_24h</span></span>
+<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;total_hashes\&quot;:&quot; &lt;&lt; total_hashes</span></span>
+<span id="L1566"><span class="lineNum">    1566</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;total_stratum_shares\&quot;:&quot; &lt;&lt; total_stratum_shares</span></span>
+<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;last_share_found_time\&quot;:&quot; &lt;&lt; last_share_found_time</span></span>
+<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;shares_found\&quot;:&quot; &lt;&lt; shares_found</span></span>
+<span id="L1569"><span class="lineNum">    1569</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;shares_failed\&quot;:&quot; &lt;&lt; shares_failed</span></span>
+<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;average_effort\&quot;:&quot; &lt;&lt; average_effort</span></span>
+<span id="L1571"><span class="lineNum">    1571</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;current_effort\&quot;:&quot; &lt;&lt; current_effort</span></span>
+<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;connections\&quot;:&quot; &lt;&lt; connections</span></span>
+<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;incoming_connections\&quot;:&quot; &lt;&lt; incoming_connections</span></span>
+<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;block_reward_share_percent\&quot;:&quot; &lt;&lt; block_reward_share_percent</span></span>
+<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;wallet\&quot;:\&quot;&quot; &lt;&lt; m_pool-&gt;params().m_wallet &lt;&lt; '&quot;'</span></span>
+<span id="L1576"><span class="lineNum">    1576</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;workers\&quot;:[&quot;;</span></span>
 <span id="L1577"><span class="lineNum">    1577</span>              : </span>
-<span id="L1578"><span class="lineNum">    1578</span> <span class="tlaUNC">           0 :                         for (const StratumClient* client = static_cast&lt;StratumClient*&gt;(m_connectedClientsList-&gt;m_next); client != m_connectedClientsList; client = static_cast&lt;StratumClient*&gt;(client-&gt;m_next)) {</span></span>
-<span id="L1579"><span class="lineNum">    1579</span> <span class="tlaUNC">           0 :                                 if (!first) {</span></span>
-<span id="L1580"><span class="lineNum">    1580</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; ',';</span></span>
-<span id="L1581"><span class="lineNum">    1581</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1582"><span class="lineNum">    1582</span> <span class="tlaUNC">           0 :                                 difficulty_type diff = pool_diff;</span></span>
-<span id="L1583"><span class="lineNum">    1583</span> <span class="tlaUNC">           0 :                                 if (client-&gt;m_lastJobTarget &gt; 1) {</span></span>
-<span id="L1584"><span class="lineNum">    1584</span> <span class="tlaUNC">           0 :                                         uint64_t r;</span></span>
-<span id="L1585"><span class="lineNum">    1585</span> <span class="tlaUNC">           0 :                                         diff.lo = udiv128(1, 0, client-&gt;m_lastJobTarget, &amp;r);</span></span>
-<span id="L1586"><span class="lineNum">    1586</span> <span class="tlaUNC">           0 :                                         diff.hi = 0;</span></span>
-<span id="L1587"><span class="lineNum">    1587</span> <span class="tlaUNC">           0 :                                         if (r) {</span></span>
-<span id="L1588"><span class="lineNum">    1588</span> <span class="tlaUNC">           0 :                                                 ++diff.lo;</span></span>
-<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L1590"><span class="lineNum">    1590</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1591"><span class="lineNum">    1591</span>              : </span>
-<span id="L1592"><span class="lineNum">    1592</span> <span class="tlaUNC">           0 :                                 s       &lt;&lt; '&quot;' &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; ','</span></span>
-<span id="L1593"><span class="lineNum">    1593</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (timestamp - client-&gt;m_connectedTime) &lt;&lt; ','</span></span>
-<span id="L1594"><span class="lineNum">    1594</span> <span class="tlaUNC">           0 :                                         &lt;&lt; diff &lt;&lt; ','</span></span>
-<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (client-&gt;m_autoDiff.lo / AUTO_DIFF_TARGET_TIME) &lt;&lt; ','</span></span>
-<span id="L1596"><span class="lineNum">    1596</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (client-&gt;m_rpcId ? client-&gt;m_customUser : &quot;not logged in&quot;)</span></span>
-<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaUNC">           0 :                                         &lt;&lt; '&quot;';</span></span>
-<span id="L1598"><span class="lineNum">    1598</span>              : </span>
-<span id="L1599"><span class="lineNum">    1599</span> <span class="tlaUNC">           0 :                                 first = false;</span></span>
-<span id="L1600"><span class="lineNum">    1600</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1578"><span class="lineNum">    1578</span> <span class="tlaUNC">           0 :                         const difficulty_type pool_diff = m_pool-&gt;side_chain().difficulty();</span></span>
+<span id="L1579"><span class="lineNum">    1579</span> <span class="tlaUNC">           0 :                         bool first = true;</span></span>
+<span id="L1580"><span class="lineNum">    1580</span>              : </span>
+<span id="L1581"><span class="lineNum">    1581</span> <span class="tlaUNC">           0 :                         for (const StratumClient* client = static_cast&lt;StratumClient*&gt;(m_connectedClientsList-&gt;m_next); client != m_connectedClientsList; client = static_cast&lt;StratumClient*&gt;(client-&gt;m_next)) {</span></span>
+<span id="L1582"><span class="lineNum">    1582</span> <span class="tlaUNC">           0 :                                 if (!first) {</span></span>
+<span id="L1583"><span class="lineNum">    1583</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; ',';</span></span>
+<span id="L1584"><span class="lineNum">    1584</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1585"><span class="lineNum">    1585</span> <span class="tlaUNC">           0 :                                 difficulty_type diff = pool_diff;</span></span>
+<span id="L1586"><span class="lineNum">    1586</span> <span class="tlaUNC">           0 :                                 if (client-&gt;m_lastJobTarget &gt; 1) {</span></span>
+<span id="L1587"><span class="lineNum">    1587</span> <span class="tlaUNC">           0 :                                         uint64_t r;</span></span>
+<span id="L1588"><span class="lineNum">    1588</span> <span class="tlaUNC">           0 :                                         diff.lo = udiv128(1, 0, client-&gt;m_lastJobTarget, &amp;r);</span></span>
+<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaUNC">           0 :                                         diff.hi = 0;</span></span>
+<span id="L1590"><span class="lineNum">    1590</span> <span class="tlaUNC">           0 :                                         if (r) {</span></span>
+<span id="L1591"><span class="lineNum">    1591</span> <span class="tlaUNC">           0 :                                                 ++diff.lo;</span></span>
+<span id="L1592"><span class="lineNum">    1592</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L1593"><span class="lineNum">    1593</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1594"><span class="lineNum">    1594</span>              : </span>
+<span id="L1595"><span class="lineNum">    1595</span> <span class="tlaUNC">           0 :                                 s       &lt;&lt; '&quot;' &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; ','</span></span>
+<span id="L1596"><span class="lineNum">    1596</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (timestamp - client-&gt;m_connectedTime) &lt;&lt; ','</span></span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaUNC">           0 :                                         &lt;&lt; diff &lt;&lt; ','</span></span>
+<span id="L1598"><span class="lineNum">    1598</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (client-&gt;m_autoDiff.lo / AUTO_DIFF_TARGET_TIME) &lt;&lt; ','</span></span>
+<span id="L1599"><span class="lineNum">    1599</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (client-&gt;m_rpcId ? client-&gt;m_customUser : &quot;not logged in&quot;)</span></span>
+<span id="L1600"><span class="lineNum">    1600</span> <span class="tlaUNC">           0 :                                         &lt;&lt; '&quot;';</span></span>
 <span id="L1601"><span class="lineNum">    1601</span>              : </span>
-<span id="L1602"><span class="lineNum">    1602</span> <span class="tlaUNC">           0 :                         s       &lt;&lt; &quot;]}&quot;;</span></span>
-<span id="L1603"><span class="lineNum">    1603</span> <span class="tlaUNC">           0 :                 });</span></span>
-<span id="L1604"><span class="lineNum">    1604</span> <span class="tlaUNC">           0 :         });</span></span>
-<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1606"><span class="lineNum">    1606</span>              : </span>
-<span id="L1607"><span class="lineNum">    1607</span>              : } // namespace p2pool</span>
+<span id="L1602"><span class="lineNum">    1602</span> <span class="tlaUNC">           0 :                                 first = false;</span></span>
+<span id="L1603"><span class="lineNum">    1603</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1604"><span class="lineNum">    1604</span>              : </span>
+<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaUNC">           0 :                         s       &lt;&lt; &quot;]}&quot;;</span></span>
+<span id="L1606"><span class="lineNum">    1606</span> <span class="tlaUNC">           0 :                 });</span></span>
+<span id="L1607"><span class="lineNum">    1607</span> <span class="tlaUNC">           0 :         });</span></span>
+<span id="L1608"><span class="lineNum">    1608</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1609"><span class="lineNum">    1609</span>              : </span>
+<span id="L1610"><span class="lineNum">    1610</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
