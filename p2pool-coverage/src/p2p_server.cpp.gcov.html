@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-13 22:12:23</td>
+            <td class="headerValue">2025-09-13 22:30:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -1724,7 +1724,7 @@
 <span id="L1662"><span class="lineNum">    1662</span> <span class="tlaUNC">           0 :                                 LOGERR(3, &quot;submit_monero_blocks: submit_block RPC request failed, error &quot; &lt;&lt; log::const_buf(data, size));</span></span>
 <span id="L1663"><span class="lineNum">    1663</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L1664"><span class="lineNum">    1664</span> <span class="tlaUNC">           0 :                         else {</span></span>
-<span id="L1665"><span class="lineNum">    1665</span> <span class="tlaUNC">           0 :                                 LOGINFO(4, &quot;submit_monero_blocks: submit_block RPC completed in &quot; &lt;&lt; (microseconds_since_epoch() - t1) / 1e3 &lt;&lt; &quot; ms&quot;);</span></span>
+<span id="L1665"><span class="lineNum">    1665</span> <span class="tlaUNC">           0 :                                 LOGINFO(4, &quot;submit_monero_blocks: submit_block RPC completed in &quot; &lt;&lt; static_cast&lt;double&gt;(microseconds_since_epoch() - t1) / 1e3 &lt;&lt; &quot; ms&quot;);</span></span>
 <span id="L1666"><span class="lineNum">    1666</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L1667"><span class="lineNum">    1667</span>              : </span>
 <span id="L1668"><span class="lineNum">    1668</span> <span class="tlaUNC">           0 :                         if (!m_MoneroBlocksToSubmit.empty()) {</span></span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-13 22:12:23</td>
+            <td class="headerValue">2025-09-13 22:30:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1241,7 +1241,7 @@
 <span id="L1179"><span class="lineNum">    1179</span> <span class="tlaUNC">           0 :                                 }</span></span>
 <span id="L1180"><span class="lineNum">    1180</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L1181"><span class="lineNum">    1181</span> <span class="tlaUNC">           0 :                         else {</span></span>
-<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :                                 LOGINFO(4, &quot;submit_block RPC completed in &quot; &lt;&lt; (microseconds_since_epoch() - t1) / 1e3 &lt;&lt; &quot; ms&quot;);</span></span>
+<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :                                 LOGINFO(4, &quot;submit_block RPC completed in &quot; &lt;&lt; static_cast&lt;double&gt;(microseconds_since_epoch() - t1) / 1e3 &lt;&lt; &quot; ms&quot;);</span></span>
 <span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :                 });</span></span>
 <span id="L1185"><span class="lineNum">    1185</span> <span class="tlaUNC">           0 : }</span></span>
