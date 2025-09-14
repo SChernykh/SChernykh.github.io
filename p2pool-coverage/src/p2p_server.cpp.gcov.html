@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-14 10:44:12</td>
+            <td class="headerValue">2025-09-14 11:01:29</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -3232,7 +3232,7 @@
 <span id="L3170"><span class="lineNum">    3170</span>              : </span>
 <span id="L3171"><span class="lineNum">    3171</span> <span class="tlaUNC">           0 :                         if (work-&gt;pow_check_passed) {</span></span>
 <span id="L3172"><span class="lineNum">    3172</span> <span class="tlaUNC">           0 :                                 const uint8_t* buf0 = work-&gt;message.data();</span></span>
-<span id="L3173"><span class="lineNum">    3173</span> <span class="tlaUNC">           0 :                                 const uint32_t size0 = work-&gt;message.size();</span></span>
+<span id="L3173"><span class="lineNum">    3173</span> <span class="tlaUNC">           0 :                                 const uint32_t size0 = static_cast&lt;uint32_t&gt;(work-&gt;message.size());</span></span>
 <span id="L3174"><span class="lineNum">    3174</span>              : </span>
 <span id="L3175"><span class="lineNum">    3175</span> <span class="tlaUNC">           0 :                                 const uint8_t* buf = buf0 + sizeof(MoneroBlockBroadcastHeader);</span></span>
 <span id="L3176"><span class="lineNum">    3176</span> <span class="tlaUNC">           0 :                                 const uint32_t size = static_cast&lt;uint32_t&gt;(size0 - sizeof(MoneroBlockBroadcastHeader));</span></span>
