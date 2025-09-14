@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">39.2&nbsp;%</td>
-            <td class="headerCovTableEntry">436</td>
+            <td class="headerCovTableEntryLo">40.0&nbsp;%</td>
+            <td class="headerCovTableEntry">428</td>
             <td class="headerCovTableEntry">171</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-14 11:01:29</td>
+            <td class="headerValue">2025-09-14 12:46:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">33.3&nbsp;%</td>
@@ -503,492 +503,485 @@
 <span id="L441"><span class="lineNum">     441</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L442"><span class="lineNum">     442</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L443"><span class="lineNum">     443</span>              : </span>
-<span id="L444"><span class="lineNum">     444</span>              :         void wait()</span>
+<span id="L444"><span class="lineNum">     444</span>              :         std::vector&lt;std::pair&lt;const char*, int32_t&gt;&gt; get_jobs()</span>
 <span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC">           0 :                 uint64_t last_msg_time = 0;</span></span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 :                 do {</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC">           0 :                         {</span></span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaUNC">           0 :                                 MutexLock lock(m_lock);</span></span>
-<span id="L450"><span class="lineNum">     450</span>              :                                 // cppcheck-suppress knownConditionTrueFalse</span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC">           0 :                                 if (m_jobs.empty()) {</span></span>
-<span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :                                         return;</span></span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 :                                 const uint64_t t = seconds_since_epoch();</span></span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :                                 if (t != last_msg_time) {</span></span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :                                         last_msg_time = t;</span></span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC">           0 :                                         for (const auto&amp; job : m_jobs) {</span></span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :                                                 LOGINFO(1, &quot;waiting for &quot; &lt;&lt; job.second &lt;&lt; &quot; \&quot;&quot; &lt;&lt; job.first &lt;&lt; &quot;\&quot; jobs to finish&quot;);</span></span>
-<span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L460"><span class="lineNum">     460</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaUNC">           0 :                         std::this_thread::sleep_for(std::chrono::milliseconds(1));</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 :                 } while (1);</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L465"><span class="lineNum">     465</span>              : </span>
-<span id="L466"><span class="lineNum">     466</span>              :         void print_status()</span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_lock);</span></span>
-<span id="L469"><span class="lineNum">     469</span>              : </span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaUNC">           0 :                 if (m_jobs.empty()) {</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC">           0 :                         LOGINFO(0, &quot;no background jobs running&quot;);</span></span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 :                         return;</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC">           0 :                 std::vector&lt;std::pair&lt;const char*, int32_t&gt;&gt; result;</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC">           0 :                         MutexLock lock(m_lock);</span></span>
+<span id="L449"><span class="lineNum">     449</span>              : </span>
+<span id="L450"><span class="lineNum">     450</span> <span class="tlaUNC">           0 :                         result.reserve(m_jobs.size());</span></span>
+<span id="L451"><span class="lineNum">     451</span>              : </span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :                         for (const auto&amp; job : m_jobs) {</span></span>
+<span id="L453"><span class="lineNum">     453</span> <span class="tlaUNC">           0 :                                 result.emplace_back(job.first, job.second);</span></span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :                 return result;</span></span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L458"><span class="lineNum">     458</span>              : </span>
+<span id="L459"><span class="lineNum">     459</span>              :         void print_status()</span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_lock);</span></span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC">           0 :                 if (m_jobs.empty()) {</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :                         LOGINFO(0, &quot;no background jobs running&quot;);</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaUNC">           0 :                         return;</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L467"><span class="lineNum">     467</span>              : </span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 :                 char buf[log::Stream::BUF_SIZE + 1];</span></span>
+<span id="L469"><span class="lineNum">     469</span>              :                 // cppcheck-suppress uninitvar</span>
+<span id="L470"><span class="lineNum">     470</span> <span class="tlaUNC">           0 :                 log::Stream s(buf);</span></span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaUNC">           0 :                 for (const auto&amp; job : m_jobs) {</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaUNC">           0 :                         s &lt;&lt; '\n' &lt;&lt; job.first &lt;&lt; &quot; (&quot; &lt;&lt; job.second &lt;&lt; ')';</span></span>
 <span id="L473"><span class="lineNum">     473</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L474"><span class="lineNum">     474</span>              : </span>
-<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :                 char buf[log::Stream::BUF_SIZE + 1];</span></span>
-<span id="L476"><span class="lineNum">     476</span>              :                 // cppcheck-suppress uninitvar</span>
-<span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC">           0 :                 log::Stream s(buf);</span></span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :                 for (const auto&amp; job : m_jobs) {</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC">           0 :                         s &lt;&lt; '\n' &lt;&lt; job.first &lt;&lt; &quot; (&quot; &lt;&lt; job.second &lt;&lt; ')';</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L481"><span class="lineNum">     481</span>              : </span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaUNC">           0 :                 LOGINFO(0, &quot;background jobs running:&quot; &lt;&lt; log::const_buf(buf, s.m_pos));</span></span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L484"><span class="lineNum">     484</span>              : </span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaUNC">           0 :         struct Compare { FORCEINLINE bool operator()(const char* a, const char* b) const { return strcmp(a, b) &lt; 0; } };</span></span>
-<span id="L486"><span class="lineNum">     486</span>              : </span>
-<span id="L487"><span class="lineNum">     487</span>              :         uv_mutex_t m_lock;</span>
-<span id="L488"><span class="lineNum">     488</span>              :         std::map&lt;const char*, int32_t, Compare&gt; m_jobs;</span>
-<span id="L489"><span class="lineNum">     489</span>              : };</span>
-<span id="L490"><span class="lineNum">     490</span>              : </span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaUNC">           0 : BackgroundJobTracker::BackgroundJobTracker() : m_impl(new Impl())</span></span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L494"><span class="lineNum">     494</span>              : </span>
-<span id="L495"><span class="lineNum">     495</span>              : BackgroundJobTracker::~BackgroundJobTracker()</span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaUNC">           0 :         delete m_impl;</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L499"><span class="lineNum">     499</span>              : </span>
-<span id="L500"><span class="lineNum">     500</span>              : void BackgroundJobTracker::start_internal(const char* name)</span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaUNC">           0 :         m_impl-&gt;start(name);</span></span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L504"><span class="lineNum">     504</span>              : </span>
-<span id="L505"><span class="lineNum">     505</span>              : void BackgroundJobTracker::stop_internal(const char* name)</span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L507"><span class="lineNum">     507</span> <span class="tlaUNC">           0 :         m_impl-&gt;stop(name);</span></span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L509"><span class="lineNum">     509</span>              : </span>
-<span id="L510"><span class="lineNum">     510</span>              : void BackgroundJobTracker::wait()</span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaUNC">           0 :         m_impl-&gt;wait();</span></span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaUNC">           0 :                 LOGINFO(0, &quot;background jobs running:&quot; &lt;&lt; log::const_buf(buf, s.m_pos));</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L477"><span class="lineNum">     477</span>              : </span>
+<span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :         struct Compare { FORCEINLINE bool operator()(const char* a, const char* b) const { return strcmp(a, b) &lt; 0; } };</span></span>
+<span id="L479"><span class="lineNum">     479</span>              : </span>
+<span id="L480"><span class="lineNum">     480</span>              :         uv_mutex_t m_lock;</span>
+<span id="L481"><span class="lineNum">     481</span>              :         std::map&lt;const char*, int32_t, Compare&gt; m_jobs;</span>
+<span id="L482"><span class="lineNum">     482</span>              : };</span>
+<span id="L483"><span class="lineNum">     483</span>              : </span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaUNC">           0 : BackgroundJobTracker::BackgroundJobTracker() : m_impl(new Impl())</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L487"><span class="lineNum">     487</span>              : </span>
+<span id="L488"><span class="lineNum">     488</span>              : BackgroundJobTracker::~BackgroundJobTracker()</span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaUNC">           0 :         delete m_impl;</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L492"><span class="lineNum">     492</span>              : </span>
+<span id="L493"><span class="lineNum">     493</span>              : void BackgroundJobTracker::start_internal(const char* name)</span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaUNC">           0 :         m_impl-&gt;start(name);</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L497"><span class="lineNum">     497</span>              : </span>
+<span id="L498"><span class="lineNum">     498</span>              : void BackgroundJobTracker::stop_internal(const char* name)</span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaUNC">           0 :         m_impl-&gt;stop(name);</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L502"><span class="lineNum">     502</span>              : </span>
+<span id="L503"><span class="lineNum">     503</span>              : std::vector&lt;std::pair&lt;const char*, int32_t&gt;&gt; BackgroundJobTracker::get_jobs()</span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaUNC">           0 :         return m_impl-&gt;get_jobs();</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L507"><span class="lineNum">     507</span>              : </span>
+<span id="L508"><span class="lineNum">     508</span>              : void BackgroundJobTracker::print_status()</span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaUNC">           0 :         m_impl-&gt;print_status();</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L512"><span class="lineNum">     512</span>              : </span>
+<span id="L513"><span class="lineNum">     513</span>              : BackgroundJobTracker* bkg_jobs_tracker = nullptr;</span>
 <span id="L514"><span class="lineNum">     514</span>              : </span>
-<span id="L515"><span class="lineNum">     515</span>              : void BackgroundJobTracker::print_status()</span>
-<span id="L516"><span class="lineNum">     516</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :         m_impl-&gt;print_status();</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span>              : BackgroundJobTracker* bkg_jobs_tracker = nullptr;</span>
-<span id="L521"><span class="lineNum">     521</span>              : </span>
-<span id="L522"><span class="lineNum">     522</span>              : static thread_local bool main_thread = false;</span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC tlaBgGNC">           1 : void set_main_thread() { main_thread = true; }</span></span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">        6727 : bool is_main_thread() { return main_thread; }</span></span>
-<span id="L525"><span class="lineNum">     525</span>              : </span>
-<span id="L526"><span class="lineNum">     526</span>              : bool disable_resolve_host = false;</span>
+<span id="L515"><span class="lineNum">     515</span>              : static thread_local bool main_thread = false;</span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC tlaBgGNC">           1 : void set_main_thread() { main_thread = true; }</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">        6727 : bool is_main_thread() { return main_thread; }</span></span>
+<span id="L518"><span class="lineNum">     518</span>              : </span>
+<span id="L519"><span class="lineNum">     519</span>              : bool disable_resolve_host = false;</span>
+<span id="L520"><span class="lineNum">     520</span>              : </span>
+<span id="L521"><span class="lineNum">     521</span>              : bool resolve_host(std::string&amp; host, bool&amp; is_v6)</span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaUNC">           0 :         if (disable_resolve_host) {</span></span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;resolve_host was called with DNS disabled for host &quot; &lt;&lt; host);</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L527"><span class="lineNum">     527</span>              : </span>
-<span id="L528"><span class="lineNum">     528</span>              : bool resolve_host(std::string&amp; host, bool&amp; is_v6)</span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaUNC">           0 :         if (disable_resolve_host) {</span></span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;resolve_host was called with DNS disabled for host &quot; &lt;&lt; host);</span></span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L534"><span class="lineNum">     534</span>              : </span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaUNC">           0 :         addrinfo hints{};</span></span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaUNC">           0 :         hints.ai_family = AF_UNSPEC;</span></span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC">           0 :         hints.ai_socktype = SOCK_STREAM;</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :         hints.ai_flags = AI_ADDRCONFIG;</span></span>
-<span id="L539"><span class="lineNum">     539</span>              : </span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC">           0 :         addrinfo* r = nullptr;</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :         int err = getaddrinfo(host.c_str(), nullptr, &amp;hints, &amp;r);</span></span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :         if (err) {</span></span>
-<span id="L543"><span class="lineNum">     543</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;getaddrinfo failed for &quot; &lt;&lt; host &lt;&lt; &quot;: &quot; &lt;&lt; gai_strerror(err) &lt;&lt; &quot;, retrying with IPv4 only&quot;);</span></span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC">           0 :                 hints.ai_family = AF_INET;</span></span>
-<span id="L545"><span class="lineNum">     545</span> <span class="tlaUNC">           0 :                 err = getaddrinfo(host.c_str(), nullptr, &amp;hints, &amp;r);</span></span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :         if ((err == 0) &amp;&amp; r) {</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :                 const char* addr_str = nullptr;</span></span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaUNC">           0 :                 char addr_str_buf[64];</span></span>
-<span id="L550"><span class="lineNum">     550</span>              : </span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaUNC">           0 :                 void* addr;</span></span>
-<span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC">           0 :                 if (r-&gt;ai_family == AF_INET6) {</span></span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaUNC">           0 :                         addr = &amp;reinterpret_cast&lt;sockaddr_in6*&gt;(r-&gt;ai_addr)-&gt;sin6_addr;</span></span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaUNC">           0 :                         is_v6 = true;</span></span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaUNC">           0 :                         addr = &amp;reinterpret_cast&lt;sockaddr_in*&gt;(r-&gt;ai_addr)-&gt;sin_addr;</span></span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaUNC">           0 :                         is_v6 = false;</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L560"><span class="lineNum">     560</span>              : </span>
-<span id="L561"><span class="lineNum">     561</span> <span class="tlaUNC">           0 :                 addr_str = inet_ntop(r-&gt;ai_family, addr, addr_str_buf, sizeof(addr_str_buf));</span></span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaUNC">           0 :                 if (addr_str) {</span></span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaUNC">           0 :                         LOGINFO(5, log::LightCyan() &lt;&lt; host &lt;&lt; log::NoColor() &lt;&lt; &quot; resolved to &quot; &lt;&lt; log::Gray() &lt;&lt; addr_str);</span></span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC">           0 :                         host = addr_str;</span></span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 :                 freeaddrinfo(r);</span></span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaUNC">           0 :         else {</span></span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;getaddrinfo failed for &quot; &lt;&lt; host &lt;&lt; &quot;: &quot; &lt;&lt; gai_strerror(err));</span></span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L572"><span class="lineNum">     572</span>              : </span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC">           0 :         addrinfo hints{};</span></span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 :         hints.ai_family = AF_UNSPEC;</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaUNC">           0 :         hints.ai_socktype = SOCK_STREAM;</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaUNC">           0 :         hints.ai_flags = AI_ADDRCONFIG;</span></span>
+<span id="L532"><span class="lineNum">     532</span>              : </span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC">           0 :         addrinfo* r = nullptr;</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :         int err = getaddrinfo(host.c_str(), nullptr, &amp;hints, &amp;r);</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaUNC">           0 :         if (err) {</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;getaddrinfo failed for &quot; &lt;&lt; host &lt;&lt; &quot;: &quot; &lt;&lt; gai_strerror(err) &lt;&lt; &quot;, retrying with IPv4 only&quot;);</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC">           0 :                 hints.ai_family = AF_INET;</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :                 err = getaddrinfo(host.c_str(), nullptr, &amp;hints, &amp;r);</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC">           0 :         if ((err == 0) &amp;&amp; r) {</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :                 const char* addr_str = nullptr;</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :                 char addr_str_buf[64];</span></span>
+<span id="L543"><span class="lineNum">     543</span>              : </span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC">           0 :                 void* addr;</span></span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaUNC">           0 :                 if (r-&gt;ai_family == AF_INET6) {</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC">           0 :                         addr = &amp;reinterpret_cast&lt;sockaddr_in6*&gt;(r-&gt;ai_addr)-&gt;sin6_addr;</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :                         is_v6 = true;</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 :                         addr = &amp;reinterpret_cast&lt;sockaddr_in*&gt;(r-&gt;ai_addr)-&gt;sin_addr;</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaUNC">           0 :                         is_v6 = false;</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L553"><span class="lineNum">     553</span>              : </span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaUNC">           0 :                 addr_str = inet_ntop(r-&gt;ai_family, addr, addr_str_buf, sizeof(addr_str_buf));</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaUNC">           0 :                 if (addr_str) {</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaUNC">           0 :                         LOGINFO(5, log::LightCyan() &lt;&lt; host &lt;&lt; log::NoColor() &lt;&lt; &quot; resolved to &quot; &lt;&lt; log::Gray() &lt;&lt; addr_str);</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaUNC">           0 :                         host = addr_str;</span></span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC">           0 :                 freeaddrinfo(r);</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L561"><span class="lineNum">     561</span> <span class="tlaUNC">           0 :         else {</span></span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;getaddrinfo failed for &quot; &lt;&lt; host &lt;&lt; &quot;: &quot; &lt;&lt; gai_strerror(err));</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L565"><span class="lineNum">     565</span>              : </span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L568"><span class="lineNum">     568</span>              : </span>
+<span id="L569"><span class="lineNum">     569</span>              : bool get_dns_txt_records_base(const std::string&amp; host, Callback&lt;void, const char*, size_t&gt;::Base&amp;&amp; callback)</span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC">           0 :         if (disable_resolve_host) {</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;get_dns_txt_records was called with DNS disabled for host &quot; &lt;&lt; host);</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L575"><span class="lineNum">     575</span>              : </span>
-<span id="L576"><span class="lineNum">     576</span>              : bool get_dns_txt_records_base(const std::string&amp; host, Callback&lt;void, const char*, size_t&gt;::Base&amp;&amp; callback)</span>
-<span id="L577"><span class="lineNum">     577</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaUNC">           0 :         if (disable_resolve_host) {</span></span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;get_dns_txt_records was called with DNS disabled for host &quot; &lt;&lt; host);</span></span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L576"><span class="lineNum">     576</span>              : #ifdef _WIN32</span>
+<span id="L577"><span class="lineNum">     577</span>              :         try {</span>
+<span id="L578"><span class="lineNum">     578</span>              :                 PDNS_RECORD pQueryResults;</span>
+<span id="L579"><span class="lineNum">     579</span>              :                 if (DnsQuery(host.c_str(), DNS_TYPE_TEXT, DNS_QUERY_STANDARD, NULL, &amp;pQueryResults, NULL) != 0) {</span>
+<span id="L580"><span class="lineNum">     580</span>              :                         return false;</span>
+<span id="L581"><span class="lineNum">     581</span>              :                 }</span>
 <span id="L582"><span class="lineNum">     582</span>              : </span>
-<span id="L583"><span class="lineNum">     583</span>              : #ifdef _WIN32</span>
-<span id="L584"><span class="lineNum">     584</span>              :         try {</span>
-<span id="L585"><span class="lineNum">     585</span>              :                 PDNS_RECORD pQueryResults;</span>
-<span id="L586"><span class="lineNum">     586</span>              :                 if (DnsQuery(host.c_str(), DNS_TYPE_TEXT, DNS_QUERY_STANDARD, NULL, &amp;pQueryResults, NULL) != 0) {</span>
-<span id="L587"><span class="lineNum">     587</span>              :                         return false;</span>
-<span id="L588"><span class="lineNum">     588</span>              :                 }</span>
-<span id="L589"><span class="lineNum">     589</span>              : </span>
-<span id="L590"><span class="lineNum">     590</span>              :                 for (PDNS_RECORD p = pQueryResults; p; p = p-&gt;pNext) {</span>
-<span id="L591"><span class="lineNum">     591</span>              :                         for (size_t j = 0; j &lt; p-&gt;Data.TXT.dwStringCount; ++j) {</span>
-<span id="L592"><span class="lineNum">     592</span>              :                                 const char* s = p-&gt;Data.TXT.pStringArray[j];</span>
-<span id="L593"><span class="lineNum">     593</span>              :                                 if (s) {</span>
-<span id="L594"><span class="lineNum">     594</span>              :                                         const size_t n = strlen(s);</span>
-<span id="L595"><span class="lineNum">     595</span>              :                                         if (n &gt; 0) {</span>
-<span id="L596"><span class="lineNum">     596</span>              :                                                 callback(s, n);</span>
-<span id="L597"><span class="lineNum">     597</span>              :                                         }</span>
-<span id="L598"><span class="lineNum">     598</span>              :                                 }</span>
-<span id="L599"><span class="lineNum">     599</span>              :                         }</span>
-<span id="L600"><span class="lineNum">     600</span>              :                 }</span>
-<span id="L601"><span class="lineNum">     601</span>              : </span>
-<span id="L602"><span class="lineNum">     602</span>              :                 DnsRecordListFree(pQueryResults, DnsFreeRecordList);</span>
-<span id="L603"><span class="lineNum">     603</span>              :         }</span>
-<span id="L604"><span class="lineNum">     604</span>              :         catch (...) {</span>
+<span id="L583"><span class="lineNum">     583</span>              :                 for (PDNS_RECORD p = pQueryResults; p; p = p-&gt;pNext) {</span>
+<span id="L584"><span class="lineNum">     584</span>              :                         for (size_t j = 0; j &lt; p-&gt;Data.TXT.dwStringCount; ++j) {</span>
+<span id="L585"><span class="lineNum">     585</span>              :                                 const char* s = p-&gt;Data.TXT.pStringArray[j];</span>
+<span id="L586"><span class="lineNum">     586</span>              :                                 if (s) {</span>
+<span id="L587"><span class="lineNum">     587</span>              :                                         const size_t n = strlen(s);</span>
+<span id="L588"><span class="lineNum">     588</span>              :                                         if (n &gt; 0) {</span>
+<span id="L589"><span class="lineNum">     589</span>              :                                                 callback(s, n);</span>
+<span id="L590"><span class="lineNum">     590</span>              :                                         }</span>
+<span id="L591"><span class="lineNum">     591</span>              :                                 }</span>
+<span id="L592"><span class="lineNum">     592</span>              :                         }</span>
+<span id="L593"><span class="lineNum">     593</span>              :                 }</span>
+<span id="L594"><span class="lineNum">     594</span>              : </span>
+<span id="L595"><span class="lineNum">     595</span>              :                 DnsRecordListFree(pQueryResults, DnsFreeRecordList);</span>
+<span id="L596"><span class="lineNum">     596</span>              :         }</span>
+<span id="L597"><span class="lineNum">     597</span>              :         catch (...) {</span>
+<span id="L598"><span class="lineNum">     598</span>              :                 return false;</span>
+<span id="L599"><span class="lineNum">     599</span>              :         }</span>
+<span id="L600"><span class="lineNum">     600</span>              : </span>
+<span id="L601"><span class="lineNum">     601</span>              :         return true;</span>
+<span id="L602"><span class="lineNum">     602</span>              : #elif defined(HAVE_RES_QUERY)</span>
+<span id="L603"><span class="lineNum">     603</span>              :         static const int res_init_result = res_init();</span>
+<span id="L604"><span class="lineNum">     604</span>              :         if (res_init_result != 0) {</span>
 <span id="L605"><span class="lineNum">     605</span>              :                 return false;</span>
 <span id="L606"><span class="lineNum">     606</span>              :         }</span>
 <span id="L607"><span class="lineNum">     607</span>              : </span>
-<span id="L608"><span class="lineNum">     608</span>              :         return true;</span>
-<span id="L609"><span class="lineNum">     609</span>              : #elif defined(HAVE_RES_QUERY)</span>
-<span id="L610"><span class="lineNum">     610</span>              :         static const int res_init_result = res_init();</span>
-<span id="L611"><span class="lineNum">     611</span>              :         if (res_init_result != 0) {</span>
-<span id="L612"><span class="lineNum">     612</span>              :                 return false;</span>
-<span id="L613"><span class="lineNum">     613</span>              :         }</span>
-<span id="L614"><span class="lineNum">     614</span>              : </span>
-<span id="L615"><span class="lineNum">     615</span>              :         uint8_t answer[4096] = {};</span>
-<span id="L616"><span class="lineNum">     616</span>              :         const int anslen = res_query(host.c_str(), ns_c_in, ns_t_txt, answer, sizeof(answer));</span>
-<span id="L617"><span class="lineNum">     617</span>              :         if ((anslen &lt;= 0) || (anslen &gt; static_cast&lt;int&gt;(sizeof(answer)))) {</span>
-<span id="L618"><span class="lineNum">     618</span>              :                 return false;</span>
-<span id="L619"><span class="lineNum">     619</span>              :         }</span>
-<span id="L620"><span class="lineNum">     620</span>              : </span>
-<span id="L621"><span class="lineNum">     621</span>              :         ns_msg handle{};</span>
-<span id="L622"><span class="lineNum">     622</span>              :         if (ns_initparse(answer, anslen, &amp;handle) != 0) {</span>
-<span id="L623"><span class="lineNum">     623</span>              :                 return false;</span>
-<span id="L624"><span class="lineNum">     624</span>              :         }</span>
-<span id="L625"><span class="lineNum">     625</span>              : </span>
-<span id="L626"><span class="lineNum">     626</span>              :         for (int rrnum = 0, n = ns_msg_count(handle, ns_s_an); rrnum &lt; n; ++rrnum) {</span>
-<span id="L627"><span class="lineNum">     627</span>              :                 ns_rr rr{};</span>
-<span id="L628"><span class="lineNum">     628</span>              :                 if ((ns_parserr(&amp;handle, ns_s_an, rrnum, &amp;rr) == 0) &amp;&amp; (ns_rr_type(rr) == ns_t_txt)) {</span>
-<span id="L629"><span class="lineNum">     629</span>              :                         for (const uint8_t* data = ns_rr_rdata(rr), *e = data + ns_rr_rdlen(rr); data &lt; e;) {</span>
-<span id="L630"><span class="lineNum">     630</span>              :                                 const size_t k = *(data++);</span>
-<span id="L631"><span class="lineNum">     631</span>              :                                 if (k &amp;&amp; (data + k &lt;= e)) {</span>
-<span id="L632"><span class="lineNum">     632</span>              :                                         callback(reinterpret_cast&lt;const char*&gt;(data), k);</span>
-<span id="L633"><span class="lineNum">     633</span>              :                                 }</span>
-<span id="L634"><span class="lineNum">     634</span>              :                                 data += k;</span>
-<span id="L635"><span class="lineNum">     635</span>              :                         }</span>
-<span id="L636"><span class="lineNum">     636</span>              :                 }</span>
-<span id="L637"><span class="lineNum">     637</span>              :         }</span>
-<span id="L638"><span class="lineNum">     638</span>              : </span>
-<span id="L639"><span class="lineNum">     639</span>              :         return true;</span>
-<span id="L640"><span class="lineNum">     640</span>              : #else</span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaUNC">           0 :         (void)host;</span></span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaUNC">           0 :         (void)callback;</span></span>
-<span id="L643"><span class="lineNum">     643</span>              : </span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaUNC">           0 :         return false;</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaUNC">           0 : #endif</span></span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L647"><span class="lineNum">     647</span>              : </span>
-<span id="L648"><span class="lineNum">     648</span>              : RandomDeviceSeed RandomDeviceSeed::instance;</span>
-<span id="L649"><span class="lineNum">     649</span>              : </span>
-<span id="L650"><span class="lineNum">     650</span>              : struct BSR8</span>
-<span id="L651"><span class="lineNum">     651</span>              : {</span>
-<span id="L652"><span class="lineNum">     652</span>              :         uint8_t data[256];</span>
-<span id="L653"><span class="lineNum">     653</span>              : </span>
-<span id="L654"><span class="lineNum">     654</span> <span class="tlaUNC">           0 :         static constexpr BSR8 init() {</span></span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaUNC">           0 :                 BSR8 result = { 55 };</span></span>
-<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 : </span></span>
-<span id="L657"><span class="lineNum">     657</span> <span class="tlaUNC">           0 :                 for (int i = 1; i &lt; 256; ++i) {</span></span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaUNC">           0 :                         int x = i;</span></span>
-<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 :                         result.data[i] = 63;</span></span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 :                         while (x &lt; 0x80) {</span></span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaUNC">           0 :                                 --result.data[i];</span></span>
-<span id="L662"><span class="lineNum">     662</span> <span class="tlaUNC">           0 :                                 x &lt;&lt;= 1;</span></span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L664"><span class="lineNum">     664</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaUNC">           0 : </span></span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaUNC">           0 :                 return result;</span></span>
-<span id="L667"><span class="lineNum">     667</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L668"><span class="lineNum">     668</span>              : };</span>
-<span id="L669"><span class="lineNum">     669</span>              : </span>
-<span id="L670"><span class="lineNum">     670</span>              : static constexpr BSR8 bsr8_table = BSR8::init();</span>
-<span id="L671"><span class="lineNum">     671</span>              : </span>
-<span id="L672"><span class="lineNum">     672</span>              : NOINLINE uint64_t bsr_reference(uint64_t x)</span>
-<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC tlaBgGNC">         128 : {</span></span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">         128 :         uint32_t y = static_cast&lt;uint32_t&gt;(x);</span></span>
+<span id="L608"><span class="lineNum">     608</span>              :         uint8_t answer[4096] = {};</span>
+<span id="L609"><span class="lineNum">     609</span>              :         const int anslen = res_query(host.c_str(), ns_c_in, ns_t_txt, answer, sizeof(answer));</span>
+<span id="L610"><span class="lineNum">     610</span>              :         if ((anslen &lt;= 0) || (anslen &gt; static_cast&lt;int&gt;(sizeof(answer)))) {</span>
+<span id="L611"><span class="lineNum">     611</span>              :                 return false;</span>
+<span id="L612"><span class="lineNum">     612</span>              :         }</span>
+<span id="L613"><span class="lineNum">     613</span>              : </span>
+<span id="L614"><span class="lineNum">     614</span>              :         ns_msg handle{};</span>
+<span id="L615"><span class="lineNum">     615</span>              :         if (ns_initparse(answer, anslen, &amp;handle) != 0) {</span>
+<span id="L616"><span class="lineNum">     616</span>              :                 return false;</span>
+<span id="L617"><span class="lineNum">     617</span>              :         }</span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span>              :         for (int rrnum = 0, n = ns_msg_count(handle, ns_s_an); rrnum &lt; n; ++rrnum) {</span>
+<span id="L620"><span class="lineNum">     620</span>              :                 ns_rr rr{};</span>
+<span id="L621"><span class="lineNum">     621</span>              :                 if ((ns_parserr(&amp;handle, ns_s_an, rrnum, &amp;rr) == 0) &amp;&amp; (ns_rr_type(rr) == ns_t_txt)) {</span>
+<span id="L622"><span class="lineNum">     622</span>              :                         for (const uint8_t* data = ns_rr_rdata(rr), *e = data + ns_rr_rdlen(rr); data &lt; e;) {</span>
+<span id="L623"><span class="lineNum">     623</span>              :                                 const size_t k = *(data++);</span>
+<span id="L624"><span class="lineNum">     624</span>              :                                 if (k &amp;&amp; (data + k &lt;= e)) {</span>
+<span id="L625"><span class="lineNum">     625</span>              :                                         callback(reinterpret_cast&lt;const char*&gt;(data), k);</span>
+<span id="L626"><span class="lineNum">     626</span>              :                                 }</span>
+<span id="L627"><span class="lineNum">     627</span>              :                                 data += k;</span>
+<span id="L628"><span class="lineNum">     628</span>              :                         }</span>
+<span id="L629"><span class="lineNum">     629</span>              :                 }</span>
+<span id="L630"><span class="lineNum">     630</span>              :         }</span>
+<span id="L631"><span class="lineNum">     631</span>              : </span>
+<span id="L632"><span class="lineNum">     632</span>              :         return true;</span>
+<span id="L633"><span class="lineNum">     633</span>              : #else</span>
+<span id="L634"><span class="lineNum">     634</span> <span class="tlaUNC">           0 :         (void)host;</span></span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaUNC">           0 :         (void)callback;</span></span>
+<span id="L636"><span class="lineNum">     636</span>              : </span>
+<span id="L637"><span class="lineNum">     637</span> <span class="tlaUNC">           0 :         return false;</span></span>
+<span id="L638"><span class="lineNum">     638</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L640"><span class="lineNum">     640</span>              : </span>
+<span id="L641"><span class="lineNum">     641</span>              : RandomDeviceSeed RandomDeviceSeed::instance;</span>
+<span id="L642"><span class="lineNum">     642</span>              : </span>
+<span id="L643"><span class="lineNum">     643</span>              : struct BSR8</span>
+<span id="L644"><span class="lineNum">     644</span>              : {</span>
+<span id="L645"><span class="lineNum">     645</span>              :         uint8_t data[256];</span>
+<span id="L646"><span class="lineNum">     646</span>              : </span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaUNC">           0 :         static constexpr BSR8 init() {</span></span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaUNC">           0 :                 BSR8 result = { 55 };</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaUNC">           0 : </span></span>
+<span id="L650"><span class="lineNum">     650</span> <span class="tlaUNC">           0 :                 for (int i = 1; i &lt; 256; ++i) {</span></span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaUNC">           0 :                         int x = i;</span></span>
+<span id="L652"><span class="lineNum">     652</span> <span class="tlaUNC">           0 :                         result.data[i] = 63;</span></span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaUNC">           0 :                         while (x &lt; 0x80) {</span></span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaUNC">           0 :                                 --result.data[i];</span></span>
+<span id="L655"><span class="lineNum">     655</span> <span class="tlaUNC">           0 :                                 x &lt;&lt;= 1;</span></span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L657"><span class="lineNum">     657</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaUNC">           0 : </span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaUNC">           0 :                 return result;</span></span>
+<span id="L660"><span class="lineNum">     660</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L661"><span class="lineNum">     661</span>              : };</span>
+<span id="L662"><span class="lineNum">     662</span>              : </span>
+<span id="L663"><span class="lineNum">     663</span>              : static constexpr BSR8 bsr8_table = BSR8::init();</span>
+<span id="L664"><span class="lineNum">     664</span>              : </span>
+<span id="L665"><span class="lineNum">     665</span>              : NOINLINE uint64_t bsr_reference(uint64_t x)</span>
+<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC tlaBgGNC">         128 : {</span></span>
+<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">         128 :         uint32_t y = static_cast&lt;uint32_t&gt;(x);</span></span>
+<span id="L668"><span class="lineNum">     668</span>              : </span>
+<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">         128 :         uint64_t n0 = (x == y) ? 0 : 32;</span></span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">         128 :         y = static_cast&lt;uint32_t&gt;(x &gt;&gt; n0);</span></span>
+<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">         128 :         n0 ^= 32;</span></span>
+<span id="L672"><span class="lineNum">     672</span>              : </span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">         128 :         const uint64_t n1 = (y &amp; 0xFFFF0000UL) ? 0 : 16;</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">         128 :         y &lt;&lt;= n1;</span></span>
 <span id="L675"><span class="lineNum">     675</span>              : </span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">         128 :         uint64_t n0 = (x == y) ? 0 : 32;</span></span>
-<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">         128 :         y = static_cast&lt;uint32_t&gt;(x &gt;&gt; n0);</span></span>
-<span id="L678"><span class="lineNum">     678</span> <span class="tlaGNC">         128 :         n0 ^= 32;</span></span>
-<span id="L679"><span class="lineNum">     679</span>              : </span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">         128 :         const uint64_t n1 = (y &amp; 0xFFFF0000UL) ? 0 : 16;</span></span>
-<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">         128 :         y &lt;&lt;= n1;</span></span>
-<span id="L682"><span class="lineNum">     682</span>              : </span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">         128 :         const uint64_t n2 = (y &amp; 0xFF000000UL) ? 0 : 8;</span></span>
-<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">         128 :         y &lt;&lt;= n2;</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">         128 :         const uint64_t n2 = (y &amp; 0xFF000000UL) ? 0 : 8;</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">         128 :         y &lt;&lt;= n2;</span></span>
+<span id="L678"><span class="lineNum">     678</span>              : </span>
+<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">         128 :         return bsr8_table.data[y &gt;&gt; 24] - n0 - n1 - n2;</span></span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">         128 : }</span></span>
+<span id="L681"><span class="lineNum">     681</span>              : </span>
+<span id="L682"><span class="lineNum">     682</span>              : bool str_to_ip(bool is_v6, const char* ip, raw_ip&amp; result)</span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaUNC">           0 :         sockaddr_storage addr;</span></span>
 <span id="L685"><span class="lineNum">     685</span>              : </span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">         128 :         return bsr8_table.data[y &gt;&gt; 24] - n0 - n1 - n2;</span></span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">         128 : }</span></span>
-<span id="L688"><span class="lineNum">     688</span>              : </span>
-<span id="L689"><span class="lineNum">     689</span>              : bool str_to_ip(bool is_v6, const char* ip, raw_ip&amp; result)</span>
-<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 :         sockaddr_storage addr;</span></span>
-<span id="L692"><span class="lineNum">     692</span>              : </span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaUNC">           0 :         if (is_v6) {</span></span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaUNC">           0 :                 sockaddr_in6* addr6 = reinterpret_cast&lt;sockaddr_in6*&gt;(&amp;addr);</span></span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :                 const int err = uv_ip6_addr(ip, 0, addr6);</span></span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaUNC">           0 :                 if (err) {</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;failed to parse IPv6 address &quot; &lt;&lt; ip &lt;&lt; &quot;, error &quot; &lt;&lt; uv_err_name(err));</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L699"><span class="lineNum">     699</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaUNC">           0 :                 memcpy(result.data, &amp;addr6-&gt;sin6_addr, sizeof(in6_addr));</span></span>
-<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC">           0 :         else {</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 :                 sockaddr_in* addr4 = reinterpret_cast&lt;sockaddr_in*&gt;(&amp;addr);</span></span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :                 const int err = uv_ip4_addr(ip, 0, addr4);</span></span>
-<span id="L705"><span class="lineNum">     705</span> <span class="tlaUNC">           0 :                 if (err) {</span></span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;failed to parse IPv4 address &quot; &lt;&lt; ip &lt;&lt; &quot;, error &quot; &lt;&lt; uv_err_name(err));</span></span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaUNC">           0 :                 memcpy(result.data, raw_ip::ipv4_prefix, sizeof(raw_ip::ipv4_prefix));</span></span>
-<span id="L710"><span class="lineNum">     710</span> <span class="tlaUNC">           0 :                 memcpy(result.data + sizeof(raw_ip::ipv4_prefix), &amp;addr4-&gt;sin_addr, sizeof(in_addr));</span></span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L712"><span class="lineNum">     712</span>              : </span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L715"><span class="lineNum">     715</span>              : </span>
-<span id="L716"><span class="lineNum">     716</span>              : bool is_localhost(const std::string&amp; host)</span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaUNC">           0 :         if (host.empty()) {</span></span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L721"><span class="lineNum">     721</span>              : </span>
-<span id="L722"><span class="lineNum">     722</span> <span class="tlaUNC">           0 :         if (host.compare(&quot;localhost&quot;) == 0) {</span></span>
-<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L725"><span class="lineNum">     725</span>              : </span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :         if (host.find_first_not_of(&quot;0123456789.:&quot;) != std::string::npos) {</span></span>
-<span id="L727"><span class="lineNum">     727</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L729"><span class="lineNum">     729</span>              : </span>
-<span id="L730"><span class="lineNum">     730</span> <span class="tlaUNC">           0 :         raw_ip addr;</span></span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaUNC">           0 :         if (!str_to_ip(host.find(':') != std::string::npos, host.c_str(), addr)) {</span></span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L734"><span class="lineNum">     734</span>              : </span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaUNC">           0 :         return addr.is_localhost();</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaUNC">           0 :         if (is_v6) {</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaUNC">           0 :                 sockaddr_in6* addr6 = reinterpret_cast&lt;sockaddr_in6*&gt;(&amp;addr);</span></span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaUNC">           0 :                 const int err = uv_ip6_addr(ip, 0, addr6);</span></span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaUNC">           0 :                 if (err) {</span></span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;failed to parse IPv6 address &quot; &lt;&lt; ip &lt;&lt; &quot;, error &quot; &lt;&lt; uv_err_name(err));</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaUNC">           0 :                 memcpy(result.data, &amp;addr6-&gt;sin6_addr, sizeof(in6_addr));</span></span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaUNC">           0 :         else {</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaUNC">           0 :                 sockaddr_in* addr4 = reinterpret_cast&lt;sockaddr_in*&gt;(&amp;addr);</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaUNC">           0 :                 const int err = uv_ip4_addr(ip, 0, addr4);</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaUNC">           0 :                 if (err) {</span></span>
+<span id="L699"><span class="lineNum">     699</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;failed to parse IPv4 address &quot; &lt;&lt; ip &lt;&lt; &quot;, error &quot; &lt;&lt; uv_err_name(err));</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L701"><span class="lineNum">     701</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaUNC">           0 :                 memcpy(result.data, raw_ip::ipv4_prefix, sizeof(raw_ip::ipv4_prefix));</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaUNC">           0 :                 memcpy(result.data + sizeof(raw_ip::ipv4_prefix), &amp;addr4-&gt;sin_addr, sizeof(in_addr));</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L705"><span class="lineNum">     705</span>              : </span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L708"><span class="lineNum">     708</span>              : </span>
+<span id="L709"><span class="lineNum">     709</span>              : bool is_localhost(const std::string&amp; host)</span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaUNC">           0 :         if (host.empty()) {</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L714"><span class="lineNum">     714</span>              : </span>
+<span id="L715"><span class="lineNum">     715</span> <span class="tlaUNC">           0 :         if (host.compare(&quot;localhost&quot;) == 0) {</span></span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L718"><span class="lineNum">     718</span>              : </span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaUNC">           0 :         if (host.find_first_not_of(&quot;0123456789.:&quot;) != std::string::npos) {</span></span>
+<span id="L720"><span class="lineNum">     720</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L722"><span class="lineNum">     722</span>              : </span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaUNC">           0 :         raw_ip addr;</span></span>
+<span id="L724"><span class="lineNum">     724</span> <span class="tlaUNC">           0 :         if (!str_to_ip(host.find(':') != std::string::npos, host.c_str(), addr)) {</span></span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L727"><span class="lineNum">     727</span>              : </span>
+<span id="L728"><span class="lineNum">     728</span> <span class="tlaUNC">           0 :         return addr.is_localhost();</span></span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L730"><span class="lineNum">     730</span>              : </span>
+<span id="L731"><span class="lineNum">     731</span>              : UV_LoopUserData* GetLoopUserData(uv_loop_t* loop, bool create)</span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :         static_assert(sizeof(std::atomic&lt;UV_LoopUserData*&gt;) &lt;= sizeof(void*), &quot;loop-&gt;data size mismatch&quot;);</span></span>
+<span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 :         static_assert(alignof(std::atomic&lt;UV_LoopUserData*&gt;) &lt;= alignof(void*), &quot;loop-&gt;data alignment mismatch&quot;);</span></span>
+<span id="L735"><span class="lineNum">     735</span>              : </span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :         std::atomic&lt;UV_LoopUserData*&gt;&amp; data = reinterpret_cast&lt;std::atomic&lt;UV_LoopUserData*&gt;&amp;&gt;(loop-&gt;data);</span></span>
 <span id="L737"><span class="lineNum">     737</span>              : </span>
-<span id="L738"><span class="lineNum">     738</span>              : UV_LoopUserData* GetLoopUserData(uv_loop_t* loop, bool create)</span>
-<span id="L739"><span class="lineNum">     739</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC">           0 :         static_assert(sizeof(std::atomic&lt;UV_LoopUserData*&gt;) &lt;= sizeof(void*), &quot;loop-&gt;data size mismatch&quot;);</span></span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :         static_assert(alignof(std::atomic&lt;UV_LoopUserData*&gt;) &lt;= alignof(void*), &quot;loop-&gt;data alignment mismatch&quot;);</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaUNC">           0 :         UV_LoopUserData* result = data.load();</span></span>
+<span id="L739"><span class="lineNum">     739</span>              : </span>
+<span id="L740"><span class="lineNum">     740</span> <span class="tlaUNC">           0 :         if (!result &amp;&amp; create) {</span></span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaUNC">           0 :                 UV_LoopUserData* new_data = new UV_LoopUserData(loop);</span></span>
 <span id="L742"><span class="lineNum">     742</span>              : </span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :         std::atomic&lt;UV_LoopUserData*&gt;&amp; data = reinterpret_cast&lt;std::atomic&lt;UV_LoopUserData*&gt;&amp;&gt;(loop-&gt;data);</span></span>
-<span id="L744"><span class="lineNum">     744</span>              : </span>
-<span id="L745"><span class="lineNum">     745</span> <span class="tlaUNC">           0 :         UV_LoopUserData* result = data.load();</span></span>
-<span id="L746"><span class="lineNum">     746</span>              : </span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaUNC">           0 :         if (!result &amp;&amp; create) {</span></span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaUNC">           0 :                 UV_LoopUserData* new_data = new UV_LoopUserData(loop);</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaUNC">           0 :                 if (data.compare_exchange_strong(result, new_data)) {</span></span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaUNC">           0 :                         result = new_data;</span></span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaUNC">           0 :                 } else {</span></span>
+<span id="L746"><span class="lineNum">     746</span> <span class="tlaUNC">           0 :                         delete new_data;</span></span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L749"><span class="lineNum">     749</span>              : </span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :                 if (data.compare_exchange_strong(result, new_data)) {</span></span>
-<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 :                         result = new_data;</span></span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :                 } else {</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :                         delete new_data;</span></span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L756"><span class="lineNum">     756</span>              : </span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 :         return result;</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L759"><span class="lineNum">     759</span>              : </span>
-<span id="L760"><span class="lineNum">     760</span>              : void DeleteLoopUserData(uv_loop_t* loop)</span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaUNC">           0 :         std::atomic&lt;UV_LoopUserData*&gt;&amp; data = reinterpret_cast&lt;std::atomic&lt;UV_LoopUserData*&gt;&amp;&gt;(loop-&gt;data);</span></span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaUNC">           0 :         delete data.exchange(nullptr);</span></span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L765"><span class="lineNum">     765</span>              : </span>
-<span id="L766"><span class="lineNum">     766</span>              : #ifdef WITH_UPNP</span>
-<span id="L767"><span class="lineNum">     767</span>              : static struct UPnP_Discover</span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaUNC">           0 :         return result;</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L752"><span class="lineNum">     752</span>              : </span>
+<span id="L753"><span class="lineNum">     753</span>              : void DeleteLoopUserData(uv_loop_t* loop)</span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaUNC">           0 :         std::atomic&lt;UV_LoopUserData*&gt;&amp; data = reinterpret_cast&lt;std::atomic&lt;UV_LoopUserData*&gt;&amp;&gt;(loop-&gt;data);</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaUNC">           0 :         delete data.exchange(nullptr);</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L758"><span class="lineNum">     758</span>              : </span>
+<span id="L759"><span class="lineNum">     759</span>              : #ifdef WITH_UPNP</span>
+<span id="L760"><span class="lineNum">     760</span>              : static struct UPnP_Discover</span>
+<span id="L761"><span class="lineNum">     761</span>              : {</span>
+<span id="L762"><span class="lineNum">     762</span>              :         uv_mutex_t lock;</span>
+<span id="L763"><span class="lineNum">     763</span>              :         int error;</span>
+<span id="L764"><span class="lineNum">     764</span>              :         UPNPDev* devlist;</span>
+<span id="L765"><span class="lineNum">     765</span>              : } upnp_discover;</span>
+<span id="L766"><span class="lineNum">     766</span>              : </span>
+<span id="L767"><span class="lineNum">     767</span>              : void init_upnp()</span>
 <span id="L768"><span class="lineNum">     768</span>              : {</span>
-<span id="L769"><span class="lineNum">     769</span>              :         uv_mutex_t lock;</span>
-<span id="L770"><span class="lineNum">     770</span>              :         int error;</span>
-<span id="L771"><span class="lineNum">     771</span>              :         UPNPDev* devlist;</span>
-<span id="L772"><span class="lineNum">     772</span>              : } upnp_discover;</span>
-<span id="L773"><span class="lineNum">     773</span>              : </span>
-<span id="L774"><span class="lineNum">     774</span>              : void init_upnp()</span>
-<span id="L775"><span class="lineNum">     775</span>              : {</span>
-<span id="L776"><span class="lineNum">     776</span>              :         uv_mutex_init_checked(&amp;upnp_discover.lock);</span>
-<span id="L777"><span class="lineNum">     777</span>              : </span>
-<span id="L778"><span class="lineNum">     778</span>              :         uv_work_t* req = new uv_work_t{};</span>
-<span id="L779"><span class="lineNum">     779</span>              : </span>
-<span id="L780"><span class="lineNum">     780</span>              :         const int err = uv_queue_work(uv_default_loop_checked(), req,</span>
-<span id="L781"><span class="lineNum">     781</span>              :                 [](uv_work_t* /*req*/)</span>
-<span id="L782"><span class="lineNum">     782</span>              :                 {</span>
-<span id="L783"><span class="lineNum">     783</span>              :                         BACKGROUND_JOB_START(init_upnp);</span>
-<span id="L784"><span class="lineNum">     784</span>              :                         LOGINFO(1, &quot;UPnP: Started scanning for UPnP IGD devices&quot;);</span>
-<span id="L785"><span class="lineNum">     785</span>              :                         {</span>
-<span id="L786"><span class="lineNum">     786</span>              :                                 MutexLock lock(upnp_discover.lock);</span>
-<span id="L787"><span class="lineNum">     787</span>              :                                 upnp_discover.devlist = upnpDiscover(1000, nullptr, nullptr, UPNP_LOCAL_PORT_ANY, 0, 2, &amp;upnp_discover.error);</span>
-<span id="L788"><span class="lineNum">     788</span>              :                         }</span>
-<span id="L789"><span class="lineNum">     789</span>              :                         LOGINFO(1, &quot;UPnP: Finished scanning for UPnP IGD devices&quot;);</span>
-<span id="L790"><span class="lineNum">     790</span>              :                 },</span>
-<span id="L791"><span class="lineNum">     791</span>              :                 [](uv_work_t* req, int /*status*/)</span>
-<span id="L792"><span class="lineNum">     792</span>              :                 {</span>
-<span id="L793"><span class="lineNum">     793</span>              :                         delete req;</span>
-<span id="L794"><span class="lineNum">     794</span>              :                         BACKGROUND_JOB_STOP(init_upnp);</span>
-<span id="L795"><span class="lineNum">     795</span>              :                 }</span>
-<span id="L796"><span class="lineNum">     796</span>              :         );</span>
-<span id="L797"><span class="lineNum">     797</span>              : </span>
-<span id="L798"><span class="lineNum">     798</span>              :         if (err) {</span>
-<span id="L799"><span class="lineNum">     799</span>              :                 LOGERR(0, &quot;init_upnp: uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span>
-<span id="L800"><span class="lineNum">     800</span>              :                 delete req;</span>
-<span id="L801"><span class="lineNum">     801</span>              :         }</span>
-<span id="L802"><span class="lineNum">     802</span>              : }</span>
-<span id="L803"><span class="lineNum">     803</span>              : </span>
-<span id="L804"><span class="lineNum">     804</span>              : void destroy_upnp()</span>
-<span id="L805"><span class="lineNum">     805</span>              : {</span>
-<span id="L806"><span class="lineNum">     806</span>              :         {</span>
-<span id="L807"><span class="lineNum">     807</span>              :                 MutexLock lock(upnp_discover.lock);</span>
-<span id="L808"><span class="lineNum">     808</span>              : </span>
-<span id="L809"><span class="lineNum">     809</span>              :                 freeUPNPDevlist(upnp_discover.devlist);</span>
-<span id="L810"><span class="lineNum">     810</span>              :                 upnp_discover.devlist = nullptr;</span>
-<span id="L811"><span class="lineNum">     811</span>              :         }</span>
-<span id="L812"><span class="lineNum">     812</span>              :         uv_mutex_destroy(&amp;upnp_discover.lock);</span>
-<span id="L813"><span class="lineNum">     813</span>              : }</span>
-<span id="L814"><span class="lineNum">     814</span>              : </span>
-<span id="L815"><span class="lineNum">     815</span>              : int add_portmapping(int external_port, int internal_port)</span>
-<span id="L816"><span class="lineNum">     816</span>              : {</span>
-<span id="L817"><span class="lineNum">     817</span>              :         LOGINFO(1, &quot;UPnP: trying to map WAN:&quot; &lt;&lt; external_port &lt;&lt; &quot; to LAN:&quot; &lt;&lt; internal_port);</span>
+<span id="L769"><span class="lineNum">     769</span>              :         uv_mutex_init_checked(&amp;upnp_discover.lock);</span>
+<span id="L770"><span class="lineNum">     770</span>              : </span>
+<span id="L771"><span class="lineNum">     771</span>              :         uv_work_t* req = new uv_work_t{};</span>
+<span id="L772"><span class="lineNum">     772</span>              : </span>
+<span id="L773"><span class="lineNum">     773</span>              :         const int err = uv_queue_work(uv_default_loop_checked(), req,</span>
+<span id="L774"><span class="lineNum">     774</span>              :                 [](uv_work_t* /*req*/)</span>
+<span id="L775"><span class="lineNum">     775</span>              :                 {</span>
+<span id="L776"><span class="lineNum">     776</span>              :                         BACKGROUND_JOB_START(init_upnp);</span>
+<span id="L777"><span class="lineNum">     777</span>              :                         LOGINFO(1, &quot;UPnP: Started scanning for UPnP IGD devices&quot;);</span>
+<span id="L778"><span class="lineNum">     778</span>              :                         {</span>
+<span id="L779"><span class="lineNum">     779</span>              :                                 MutexLock lock(upnp_discover.lock);</span>
+<span id="L780"><span class="lineNum">     780</span>              :                                 upnp_discover.devlist = upnpDiscover(1000, nullptr, nullptr, UPNP_LOCAL_PORT_ANY, 0, 2, &amp;upnp_discover.error);</span>
+<span id="L781"><span class="lineNum">     781</span>              :                         }</span>
+<span id="L782"><span class="lineNum">     782</span>              :                         LOGINFO(1, &quot;UPnP: Finished scanning for UPnP IGD devices&quot;);</span>
+<span id="L783"><span class="lineNum">     783</span>              :                 },</span>
+<span id="L784"><span class="lineNum">     784</span>              :                 [](uv_work_t* req, int /*status*/)</span>
+<span id="L785"><span class="lineNum">     785</span>              :                 {</span>
+<span id="L786"><span class="lineNum">     786</span>              :                         delete req;</span>
+<span id="L787"><span class="lineNum">     787</span>              :                         BACKGROUND_JOB_STOP(init_upnp);</span>
+<span id="L788"><span class="lineNum">     788</span>              :                 }</span>
+<span id="L789"><span class="lineNum">     789</span>              :         );</span>
+<span id="L790"><span class="lineNum">     790</span>              : </span>
+<span id="L791"><span class="lineNum">     791</span>              :         if (err) {</span>
+<span id="L792"><span class="lineNum">     792</span>              :                 LOGERR(0, &quot;init_upnp: uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span>
+<span id="L793"><span class="lineNum">     793</span>              :                 delete req;</span>
+<span id="L794"><span class="lineNum">     794</span>              :         }</span>
+<span id="L795"><span class="lineNum">     795</span>              : }</span>
+<span id="L796"><span class="lineNum">     796</span>              : </span>
+<span id="L797"><span class="lineNum">     797</span>              : void destroy_upnp()</span>
+<span id="L798"><span class="lineNum">     798</span>              : {</span>
+<span id="L799"><span class="lineNum">     799</span>              :         {</span>
+<span id="L800"><span class="lineNum">     800</span>              :                 MutexLock lock(upnp_discover.lock);</span>
+<span id="L801"><span class="lineNum">     801</span>              : </span>
+<span id="L802"><span class="lineNum">     802</span>              :                 freeUPNPDevlist(upnp_discover.devlist);</span>
+<span id="L803"><span class="lineNum">     803</span>              :                 upnp_discover.devlist = nullptr;</span>
+<span id="L804"><span class="lineNum">     804</span>              :         }</span>
+<span id="L805"><span class="lineNum">     805</span>              :         uv_mutex_destroy(&amp;upnp_discover.lock);</span>
+<span id="L806"><span class="lineNum">     806</span>              : }</span>
+<span id="L807"><span class="lineNum">     807</span>              : </span>
+<span id="L808"><span class="lineNum">     808</span>              : int add_portmapping(int external_port, int internal_port)</span>
+<span id="L809"><span class="lineNum">     809</span>              : {</span>
+<span id="L810"><span class="lineNum">     810</span>              :         LOGINFO(1, &quot;UPnP: trying to map WAN:&quot; &lt;&lt; external_port &lt;&lt; &quot; to LAN:&quot; &lt;&lt; internal_port);</span>
+<span id="L811"><span class="lineNum">     811</span>              : </span>
+<span id="L812"><span class="lineNum">     812</span>              :         MutexLock lock(upnp_discover.lock);</span>
+<span id="L813"><span class="lineNum">     813</span>              : </span>
+<span id="L814"><span class="lineNum">     814</span>              :         if (!upnp_discover.devlist) {</span>
+<span id="L815"><span class="lineNum">     815</span>              :                 LOGWARN(1, &quot;upnpDiscover: no UPnP IGD devices found, error &quot; &lt;&lt; upnp_discover.error);</span>
+<span id="L816"><span class="lineNum">     816</span>              :                 return 0;</span>
+<span id="L817"><span class="lineNum">     817</span>              :         }</span>
 <span id="L818"><span class="lineNum">     818</span>              : </span>
-<span id="L819"><span class="lineNum">     819</span>              :         MutexLock lock(upnp_discover.lock);</span>
-<span id="L820"><span class="lineNum">     820</span>              : </span>
-<span id="L821"><span class="lineNum">     821</span>              :         if (!upnp_discover.devlist) {</span>
-<span id="L822"><span class="lineNum">     822</span>              :                 LOGWARN(1, &quot;upnpDiscover: no UPnP IGD devices found, error &quot; &lt;&lt; upnp_discover.error);</span>
-<span id="L823"><span class="lineNum">     823</span>              :                 return 0;</span>
-<span id="L824"><span class="lineNum">     824</span>              :         }</span>
-<span id="L825"><span class="lineNum">     825</span>              : </span>
-<span id="L826"><span class="lineNum">     826</span>              :         UPNPUrls urls;</span>
-<span id="L827"><span class="lineNum">     827</span>              :         IGDdatas data;</span>
-<span id="L828"><span class="lineNum">     828</span>              :         char local_addr[64] = {};</span>
-<span id="L829"><span class="lineNum">     829</span>              :         char wan_addr[64] = {};</span>
-<span id="L830"><span class="lineNum">     830</span>              : </span>
-<span id="L831"><span class="lineNum">     831</span>              :         int result = UPNP_GetValidIGD(upnp_discover.devlist, &amp;urls, &amp;data, local_addr, sizeof(local_addr), wan_addr, sizeof(wan_addr));</span>
-<span id="L832"><span class="lineNum">     832</span>              :         if (result != 1) {</span>
-<span id="L833"><span class="lineNum">     833</span>              :                 LOGWARN(1, &quot;UPNP_GetValidIGD returned &quot; &lt;&lt; result &lt;&lt; &quot;, no valid UPnP IGD devices found&quot;);</span>
-<span id="L834"><span class="lineNum">     834</span>              :                 return 0;</span>
-<span id="L835"><span class="lineNum">     835</span>              :         }</span>
-<span id="L836"><span class="lineNum">     836</span>              : </span>
-<span id="L837"><span class="lineNum">     837</span>              :         LOGINFO(1, &quot;UPnP: LAN IP address &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(local_addr) &lt;&lt; log::NoColor() &lt;&lt; &quot;, WAN IP address &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(wan_addr));</span>
-<span id="L838"><span class="lineNum">     838</span>              : </span>
-<span id="L839"><span class="lineNum">     839</span>              :         char eport[16] = {};</span>
-<span id="L840"><span class="lineNum">     840</span>              :         do { log::Stream s(eport); s &lt;&lt; external_port; } while (0);</span>
-<span id="L841"><span class="lineNum">     841</span>              : </span>
-<span id="L842"><span class="lineNum">     842</span>              :         char iport[16] = {};</span>
-<span id="L843"><span class="lineNum">     843</span>              :         do { log::Stream s(iport); s &lt;&lt; internal_port; } while (0);</span>
-<span id="L844"><span class="lineNum">     844</span>              : </span>
-<span id="L845"><span class="lineNum">     845</span>              :         result = UPNP_AddPortMapping(urls.controlURL, data.first.servicetype, eport, iport, local_addr, &quot;P2Pool&quot;, &quot;TCP&quot;, nullptr, nullptr);</span>
-<span id="L846"><span class="lineNum">     846</span>              : </span>
-<span id="L847"><span class="lineNum">     847</span>              :         // ConflictInMappingEntry: try to delete the old record and then add the new one again</span>
-<span id="L848"><span class="lineNum">     848</span>              :         if (result == 718) {</span>
-<span id="L849"><span class="lineNum">     849</span>              :                 LOGWARN(1, &quot;UPNP_AddPortMapping failed: ConflictInMappingEntry&quot;);</span>
-<span id="L850"><span class="lineNum">     850</span>              : </span>
-<span id="L851"><span class="lineNum">     851</span>              :                 result = UPNP_DeletePortMapping(urls.controlURL, data.first.servicetype, eport, &quot;TCP&quot;, nullptr);</span>
-<span id="L852"><span class="lineNum">     852</span>              :                 if (result) {</span>
-<span id="L853"><span class="lineNum">     853</span>              :                         LOGWARN(1, &quot;UPNP_DeletePortMapping returned error &quot; &lt;&lt; result);</span>
-<span id="L854"><span class="lineNum">     854</span>              :                         return 0;</span>
-<span id="L855"><span class="lineNum">     855</span>              :                 }</span>
-<span id="L856"><span class="lineNum">     856</span>              :                 else {</span>
-<span id="L857"><span class="lineNum">     857</span>              :                         LOGINFO(1, &quot;UPnP: Deleted mapping for external port &quot; &lt;&lt; external_port);</span>
-<span id="L858"><span class="lineNum">     858</span>              :                         result = UPNP_AddPortMapping(urls.controlURL, data.first.servicetype, eport, iport, local_addr, &quot;P2Pool&quot;, &quot;TCP&quot;, nullptr, nullptr);</span>
-<span id="L859"><span class="lineNum">     859</span>              :                 }</span>
-<span id="L860"><span class="lineNum">     860</span>              :         }</span>
-<span id="L861"><span class="lineNum">     861</span>              : </span>
-<span id="L862"><span class="lineNum">     862</span>              :         if (result) {</span>
-<span id="L863"><span class="lineNum">     863</span>              :                 LOGWARN(1, &quot;UPNP_AddPortMapping returned error &quot; &lt;&lt; result);</span>
-<span id="L864"><span class="lineNum">     864</span>              :                 return 0;</span>
-<span id="L865"><span class="lineNum">     865</span>              :         }</span>
-<span id="L866"><span class="lineNum">     866</span>              : </span>
-<span id="L867"><span class="lineNum">     867</span>              :         LOGINFO(1, &quot;UPnP: Mapped &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(wan_addr) &lt;&lt; ':' &lt;&lt; external_port &lt;&lt; log::NoColor() &lt;&lt; &quot; to &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(local_addr) &lt;&lt; ':' &lt;&lt; internal_port);</span>
-<span id="L868"><span class="lineNum">     868</span>              :         return external_port;</span>
-<span id="L869"><span class="lineNum">     869</span>              : }</span>
-<span id="L870"><span class="lineNum">     870</span>              : </span>
-<span id="L871"><span class="lineNum">     871</span>              : void remove_portmapping(int external_port)</span>
-<span id="L872"><span class="lineNum">     872</span>              : {</span>
-<span id="L873"><span class="lineNum">     873</span>              :         LOGINFO(1, &quot;UPnP: trying to delete mapping for external port &quot; &lt;&lt; external_port);</span>
+<span id="L819"><span class="lineNum">     819</span>              :         UPNPUrls urls;</span>
+<span id="L820"><span class="lineNum">     820</span>              :         IGDdatas data;</span>
+<span id="L821"><span class="lineNum">     821</span>              :         char local_addr[64] = {};</span>
+<span id="L822"><span class="lineNum">     822</span>              :         char wan_addr[64] = {};</span>
+<span id="L823"><span class="lineNum">     823</span>              : </span>
+<span id="L824"><span class="lineNum">     824</span>              :         int result = UPNP_GetValidIGD(upnp_discover.devlist, &amp;urls, &amp;data, local_addr, sizeof(local_addr), wan_addr, sizeof(wan_addr));</span>
+<span id="L825"><span class="lineNum">     825</span>              :         if (result != 1) {</span>
+<span id="L826"><span class="lineNum">     826</span>              :                 LOGWARN(1, &quot;UPNP_GetValidIGD returned &quot; &lt;&lt; result &lt;&lt; &quot;, no valid UPnP IGD devices found&quot;);</span>
+<span id="L827"><span class="lineNum">     827</span>              :                 return 0;</span>
+<span id="L828"><span class="lineNum">     828</span>              :         }</span>
+<span id="L829"><span class="lineNum">     829</span>              : </span>
+<span id="L830"><span class="lineNum">     830</span>              :         LOGINFO(1, &quot;UPnP: LAN IP address &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(local_addr) &lt;&lt; log::NoColor() &lt;&lt; &quot;, WAN IP address &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(wan_addr));</span>
+<span id="L831"><span class="lineNum">     831</span>              : </span>
+<span id="L832"><span class="lineNum">     832</span>              :         char eport[16] = {};</span>
+<span id="L833"><span class="lineNum">     833</span>              :         do { log::Stream s(eport); s &lt;&lt; external_port; } while (0);</span>
+<span id="L834"><span class="lineNum">     834</span>              : </span>
+<span id="L835"><span class="lineNum">     835</span>              :         char iport[16] = {};</span>
+<span id="L836"><span class="lineNum">     836</span>              :         do { log::Stream s(iport); s &lt;&lt; internal_port; } while (0);</span>
+<span id="L837"><span class="lineNum">     837</span>              : </span>
+<span id="L838"><span class="lineNum">     838</span>              :         result = UPNP_AddPortMapping(urls.controlURL, data.first.servicetype, eport, iport, local_addr, &quot;P2Pool&quot;, &quot;TCP&quot;, nullptr, nullptr);</span>
+<span id="L839"><span class="lineNum">     839</span>              : </span>
+<span id="L840"><span class="lineNum">     840</span>              :         // ConflictInMappingEntry: try to delete the old record and then add the new one again</span>
+<span id="L841"><span class="lineNum">     841</span>              :         if (result == 718) {</span>
+<span id="L842"><span class="lineNum">     842</span>              :                 LOGWARN(1, &quot;UPNP_AddPortMapping failed: ConflictInMappingEntry&quot;);</span>
+<span id="L843"><span class="lineNum">     843</span>              : </span>
+<span id="L844"><span class="lineNum">     844</span>              :                 result = UPNP_DeletePortMapping(urls.controlURL, data.first.servicetype, eport, &quot;TCP&quot;, nullptr);</span>
+<span id="L845"><span class="lineNum">     845</span>              :                 if (result) {</span>
+<span id="L846"><span class="lineNum">     846</span>              :                         LOGWARN(1, &quot;UPNP_DeletePortMapping returned error &quot; &lt;&lt; result);</span>
+<span id="L847"><span class="lineNum">     847</span>              :                         return 0;</span>
+<span id="L848"><span class="lineNum">     848</span>              :                 }</span>
+<span id="L849"><span class="lineNum">     849</span>              :                 else {</span>
+<span id="L850"><span class="lineNum">     850</span>              :                         LOGINFO(1, &quot;UPnP: Deleted mapping for external port &quot; &lt;&lt; external_port);</span>
+<span id="L851"><span class="lineNum">     851</span>              :                         result = UPNP_AddPortMapping(urls.controlURL, data.first.servicetype, eport, iport, local_addr, &quot;P2Pool&quot;, &quot;TCP&quot;, nullptr, nullptr);</span>
+<span id="L852"><span class="lineNum">     852</span>              :                 }</span>
+<span id="L853"><span class="lineNum">     853</span>              :         }</span>
+<span id="L854"><span class="lineNum">     854</span>              : </span>
+<span id="L855"><span class="lineNum">     855</span>              :         if (result) {</span>
+<span id="L856"><span class="lineNum">     856</span>              :                 LOGWARN(1, &quot;UPNP_AddPortMapping returned error &quot; &lt;&lt; result);</span>
+<span id="L857"><span class="lineNum">     857</span>              :                 return 0;</span>
+<span id="L858"><span class="lineNum">     858</span>              :         }</span>
+<span id="L859"><span class="lineNum">     859</span>              : </span>
+<span id="L860"><span class="lineNum">     860</span>              :         LOGINFO(1, &quot;UPnP: Mapped &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(wan_addr) &lt;&lt; ':' &lt;&lt; external_port &lt;&lt; log::NoColor() &lt;&lt; &quot; to &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;const char*&gt;(local_addr) &lt;&lt; ':' &lt;&lt; internal_port);</span>
+<span id="L861"><span class="lineNum">     861</span>              :         return external_port;</span>
+<span id="L862"><span class="lineNum">     862</span>              : }</span>
+<span id="L863"><span class="lineNum">     863</span>              : </span>
+<span id="L864"><span class="lineNum">     864</span>              : void remove_portmapping(int external_port)</span>
+<span id="L865"><span class="lineNum">     865</span>              : {</span>
+<span id="L866"><span class="lineNum">     866</span>              :         LOGINFO(1, &quot;UPnP: trying to delete mapping for external port &quot; &lt;&lt; external_port);</span>
+<span id="L867"><span class="lineNum">     867</span>              : </span>
+<span id="L868"><span class="lineNum">     868</span>              :         MutexLock lock(upnp_discover.lock);</span>
+<span id="L869"><span class="lineNum">     869</span>              : </span>
+<span id="L870"><span class="lineNum">     870</span>              :         if (!upnp_discover.devlist) {</span>
+<span id="L871"><span class="lineNum">     871</span>              :                 LOGWARN(1, &quot;upnpDiscover: no UPnP IGD devices found, error &quot; &lt;&lt; upnp_discover.error);</span>
+<span id="L872"><span class="lineNum">     872</span>              :                 return;</span>
+<span id="L873"><span class="lineNum">     873</span>              :         }</span>
 <span id="L874"><span class="lineNum">     874</span>              : </span>
-<span id="L875"><span class="lineNum">     875</span>              :         MutexLock lock(upnp_discover.lock);</span>
-<span id="L876"><span class="lineNum">     876</span>              : </span>
-<span id="L877"><span class="lineNum">     877</span>              :         if (!upnp_discover.devlist) {</span>
-<span id="L878"><span class="lineNum">     878</span>              :                 LOGWARN(1, &quot;upnpDiscover: no UPnP IGD devices found, error &quot; &lt;&lt; upnp_discover.error);</span>
-<span id="L879"><span class="lineNum">     879</span>              :                 return;</span>
-<span id="L880"><span class="lineNum">     880</span>              :         }</span>
-<span id="L881"><span class="lineNum">     881</span>              : </span>
-<span id="L882"><span class="lineNum">     882</span>              :         UPNPUrls urls;</span>
-<span id="L883"><span class="lineNum">     883</span>              :         IGDdatas data;</span>
-<span id="L884"><span class="lineNum">     884</span>              :         char local_addr[64] = {};</span>
-<span id="L885"><span class="lineNum">     885</span>              : </span>
-<span id="L886"><span class="lineNum">     886</span>              :         int result = UPNP_GetValidIGD(upnp_discover.devlist, &amp;urls, &amp;data, local_addr, sizeof(local_addr), nullptr, 0);</span>
-<span id="L887"><span class="lineNum">     887</span>              :         if (result != 1) {</span>
-<span id="L888"><span class="lineNum">     888</span>              :                 LOGWARN(1, &quot;UPNP_GetValidIGD returned &quot; &lt;&lt; result &lt;&lt; &quot;, no valid UPnP IGD devices found&quot;);</span>
-<span id="L889"><span class="lineNum">     889</span>              :                 return;</span>
-<span id="L890"><span class="lineNum">     890</span>              :         }</span>
-<span id="L891"><span class="lineNum">     891</span>              : </span>
-<span id="L892"><span class="lineNum">     892</span>              :         char eport[16] = {};</span>
-<span id="L893"><span class="lineNum">     893</span>              :         do { log::Stream s(eport); s &lt;&lt; external_port; } while (0);</span>
-<span id="L894"><span class="lineNum">     894</span>              : </span>
-<span id="L895"><span class="lineNum">     895</span>              :         result = UPNP_DeletePortMapping(urls.controlURL, data.first.servicetype, eport, &quot;TCP&quot;, nullptr);</span>
-<span id="L896"><span class="lineNum">     896</span>              :         if (result) {</span>
-<span id="L897"><span class="lineNum">     897</span>              :                 LOGWARN(1, &quot;UPNP_DeletePortMapping returned error &quot; &lt;&lt; result);</span>
-<span id="L898"><span class="lineNum">     898</span>              :         }</span>
-<span id="L899"><span class="lineNum">     899</span>              :         else {</span>
-<span id="L900"><span class="lineNum">     900</span>              :                 LOGINFO(1, &quot;UPnP: Deleted mapping for external port &quot; &lt;&lt; external_port);</span>
-<span id="L901"><span class="lineNum">     901</span>              :         }</span>
-<span id="L902"><span class="lineNum">     902</span>              : }</span>
-<span id="L903"><span class="lineNum">     903</span>              : #endif</span>
+<span id="L875"><span class="lineNum">     875</span>              :         UPNPUrls urls;</span>
+<span id="L876"><span class="lineNum">     876</span>              :         IGDdatas data;</span>
+<span id="L877"><span class="lineNum">     877</span>              :         char local_addr[64] = {};</span>
+<span id="L878"><span class="lineNum">     878</span>              : </span>
+<span id="L879"><span class="lineNum">     879</span>              :         int result = UPNP_GetValidIGD(upnp_discover.devlist, &amp;urls, &amp;data, local_addr, sizeof(local_addr), nullptr, 0);</span>
+<span id="L880"><span class="lineNum">     880</span>              :         if (result != 1) {</span>
+<span id="L881"><span class="lineNum">     881</span>              :                 LOGWARN(1, &quot;UPNP_GetValidIGD returned &quot; &lt;&lt; result &lt;&lt; &quot;, no valid UPnP IGD devices found&quot;);</span>
+<span id="L882"><span class="lineNum">     882</span>              :                 return;</span>
+<span id="L883"><span class="lineNum">     883</span>              :         }</span>
+<span id="L884"><span class="lineNum">     884</span>              : </span>
+<span id="L885"><span class="lineNum">     885</span>              :         char eport[16] = {};</span>
+<span id="L886"><span class="lineNum">     886</span>              :         do { log::Stream s(eport); s &lt;&lt; external_port; } while (0);</span>
+<span id="L887"><span class="lineNum">     887</span>              : </span>
+<span id="L888"><span class="lineNum">     888</span>              :         result = UPNP_DeletePortMapping(urls.controlURL, data.first.servicetype, eport, &quot;TCP&quot;, nullptr);</span>
+<span id="L889"><span class="lineNum">     889</span>              :         if (result) {</span>
+<span id="L890"><span class="lineNum">     890</span>              :                 LOGWARN(1, &quot;UPNP_DeletePortMapping returned error &quot; &lt;&lt; result);</span>
+<span id="L891"><span class="lineNum">     891</span>              :         }</span>
+<span id="L892"><span class="lineNum">     892</span>              :         else {</span>
+<span id="L893"><span class="lineNum">     893</span>              :                 LOGINFO(1, &quot;UPnP: Deleted mapping for external port &quot; &lt;&lt; external_port);</span>
+<span id="L894"><span class="lineNum">     894</span>              :         }</span>
+<span id="L895"><span class="lineNum">     895</span>              : }</span>
+<span id="L896"><span class="lineNum">     896</span>              : #endif</span>
+<span id="L897"><span class="lineNum">     897</span>              : </span>
+<span id="L898"><span class="lineNum">     898</span>              : NOINLINE PerfTimer::~PerfTimer()</span>
+<span id="L899"><span class="lineNum">     899</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L900"><span class="lineNum">     900</span> <span class="tlaUNC">           0 :         using namespace std::chrono;</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaUNC">           0 :         const duration&lt;double, std::milli&gt; dt = high_resolution_clock::now() - m_start;</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaUNC">           0 :         LOGINFO(m_level, m_name &lt;&lt; &quot; took &quot; &lt;&lt; dt.count() &lt;&lt; &quot; ms&quot;);</span></span>
+<span id="L903"><span class="lineNum">     903</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L904"><span class="lineNum">     904</span>              : </span>
-<span id="L905"><span class="lineNum">     905</span>              : NOINLINE PerfTimer::~PerfTimer()</span>
-<span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L907"><span class="lineNum">     907</span> <span class="tlaUNC">           0 :         using namespace std::chrono;</span></span>
-<span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 :         const duration&lt;double, std::milli&gt; dt = high_resolution_clock::now() - m_start;</span></span>
-<span id="L909"><span class="lineNum">     909</span> <span class="tlaUNC">           0 :         LOGINFO(m_level, m_name &lt;&lt; &quot; took &quot; &lt;&lt; dt.count() &lt;&lt; &quot; ms&quot;);</span></span>
-<span id="L910"><span class="lineNum">     910</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L911"><span class="lineNum">     911</span>              : </span>
-<span id="L912"><span class="lineNum">     912</span>              : void set_thread_name(const char* name)</span>
-<span id="L913"><span class="lineNum">     913</span> <span class="tlaGNC tlaBgGNC">          27 : {</span></span>
-<span id="L914"><span class="lineNum">     914</span>              : #if (UV_VERSION_MAJOR &gt; 1) || ((UV_VERSION_MAJOR == 1) &amp;&amp; (UV_VERSION_MINOR &gt;= 50))</span>
-<span id="L915"><span class="lineNum">     915</span>              :         const int err = uv_thread_setname(name);</span>
-<span id="L916"><span class="lineNum">     916</span>              :         if (err) {</span>
-<span id="L917"><span class="lineNum">     917</span>              :                 LOGERR(1, &quot;uv_thread_setname failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; uv_err_name(err));</span>
-<span id="L918"><span class="lineNum">     918</span>              :         }</span>
-<span id="L919"><span class="lineNum">     919</span>              : #elif defined(HAVE_PTHREAD_SETNAME_NP)</span>
-<span id="L920"><span class="lineNum">     920</span>              :         const int err = pthread_setname_np(pthread_self(), name);</span>
-<span id="L921"><span class="lineNum">     921</span>              :         if (err) {</span>
-<span id="L922"><span class="lineNum">     922</span>              :                 LOGERR(1, &quot;pthread_setname_np failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; err);</span>
-<span id="L923"><span class="lineNum">     923</span>              :         }</span>
-<span id="L924"><span class="lineNum">     924</span>              : #else</span>
-<span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC">          27 :         (void)name;</span></span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">          27 : #endif</span></span>
-<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">          27 : }</span></span>
-<span id="L928"><span class="lineNum">     928</span>              : </span>
-<span id="L929"><span class="lineNum">     929</span>              : } // namespace p2pool</span>
+<span id="L905"><span class="lineNum">     905</span>              : void set_thread_name(const char* name)</span>
+<span id="L906"><span class="lineNum">     906</span> <span class="tlaGNC tlaBgGNC">          27 : {</span></span>
+<span id="L907"><span class="lineNum">     907</span>              : #if (UV_VERSION_MAJOR &gt; 1) || ((UV_VERSION_MAJOR == 1) &amp;&amp; (UV_VERSION_MINOR &gt;= 50))</span>
+<span id="L908"><span class="lineNum">     908</span>              :         const int err = uv_thread_setname(name);</span>
+<span id="L909"><span class="lineNum">     909</span>              :         if (err) {</span>
+<span id="L910"><span class="lineNum">     910</span>              :                 LOGERR(1, &quot;uv_thread_setname failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; uv_err_name(err));</span>
+<span id="L911"><span class="lineNum">     911</span>              :         }</span>
+<span id="L912"><span class="lineNum">     912</span>              : #elif defined(HAVE_PTHREAD_SETNAME_NP)</span>
+<span id="L913"><span class="lineNum">     913</span>              :         const int err = pthread_setname_np(pthread_self(), name);</span>
+<span id="L914"><span class="lineNum">     914</span>              :         if (err) {</span>
+<span id="L915"><span class="lineNum">     915</span>              :                 LOGERR(1, &quot;pthread_setname_np failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; err);</span>
+<span id="L916"><span class="lineNum">     916</span>              :         }</span>
+<span id="L917"><span class="lineNum">     917</span>              : #else</span>
+<span id="L918"><span class="lineNum">     918</span> <span class="tlaGNC">          27 :         (void)name;</span></span>
+<span id="L919"><span class="lineNum">     919</span> <span class="tlaGNC">          27 : #endif</span></span>
+<span id="L920"><span class="lineNum">     920</span> <span class="tlaGNC">          27 : }</span></span>
+<span id="L921"><span class="lineNum">     921</span>              : </span>
+<span id="L922"><span class="lineNum">     922</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

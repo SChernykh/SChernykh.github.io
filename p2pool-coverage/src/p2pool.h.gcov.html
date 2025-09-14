@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-14 11:01:29</td>
+            <td class="headerValue">2025-09-14 12:46:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -353,9 +353,11 @@
 <span id="L291"><span class="lineNum">     291</span>              :         bool m_getMinerDataPending = false;</span>
 <span id="L292"><span class="lineNum">     292</span>              : </span>
 <span id="L293"><span class="lineNum">     293</span>              :         std::atomic&lt;uint64_t&gt; m_lastMinerDataReceived;</span>
-<span id="L294"><span class="lineNum">     294</span>              : };</span>
-<span id="L295"><span class="lineNum">     295</span>              : </span>
-<span id="L296"><span class="lineNum">     296</span>              : } // namespace p2pool</span>
+<span id="L294"><span class="lineNum">     294</span>              : </span>
+<span id="L295"><span class="lineNum">     295</span>              :         uv_timer_t m_timer;</span>
+<span id="L296"><span class="lineNum">     296</span>              : };</span>
+<span id="L297"><span class="lineNum">     297</span>              : </span>
+<span id="L298"><span class="lineNum">     298</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
