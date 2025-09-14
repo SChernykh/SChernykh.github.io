@@ -32,16 +32,16 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">2.1&nbsp;%</td>
-            <td class="headerCovTableEntry">2461</td>
+            <td class="headerCovTableEntry">2516</td>
             <td class="headerCovTableEntry">52</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-13 22:30:20</td>
+            <td class="headerValue">2025-09-14 10:44:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
-            <td class="headerCovTableEntry">109</td>
+            <td class="headerCovTableEntry">111</td>
             <td class="headerCovTableEntry">2</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -3072,7 +3072,7 @@
 <span id="L3010"><span class="lineNum">    3010</span> <span class="tlaUNC">           0 :         return true;</span></span>
 <span id="L3011"><span class="lineNum">    3011</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3012"><span class="lineNum">    3012</span>              : </span>
-<span id="L3013"><span class="lineNum">    3013</span>              : bool P2PServer::P2PClient::on_monero_block_broadcast(const uint8_t* buf, uint32_t size) const</span>
+<span id="L3013"><span class="lineNum">    3013</span>              : bool P2PServer::P2PClient::on_monero_block_broadcast(const uint8_t* buf, uint32_t size)</span>
 <span id="L3014"><span class="lineNum">    3014</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L3015"><span class="lineNum">    3015</span> <span class="tlaUNC">           0 :         P2PServer* server = static_cast&lt;P2PServer*&gt;(m_owner);</span></span>
 <span id="L3016"><span class="lineNum">    3016</span>              : </span>
@@ -3177,265 +3177,338 @@
 <span id="L3115"><span class="lineNum">    3115</span> <span class="tlaUNC">           0 :         blob.insert(blob.end(), root.h, root.h + HASH_SIZE);</span></span>
 <span id="L3116"><span class="lineNum">    3116</span> <span class="tlaUNC">           0 :         writeVarint(num_transactions + 1, blob);</span></span>
 <span id="L3117"><span class="lineNum">    3117</span>              : </span>
-<span id="L3118"><span class="lineNum">    3118</span> <span class="tlaUNC">           0 :         hash pow_hash;</span></span>
-<span id="L3119"><span class="lineNum">    3119</span> <span class="tlaUNC">           0 :         if (!pool-&gt;hasher()-&gt;calculate(blob.data(), blob.size(), height, seed, pow_hash, false)) {</span></span>
-<span id="L3120"><span class="lineNum">    3120</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;Invalid MONERO_BLOCK_BROADCAST: failed to calculate PoW hash&quot;);</span></span>
-<span id="L3121"><span class="lineNum">    3121</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L3122"><span class="lineNum">    3122</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3123"><span class="lineNum">    3123</span>              : </span>
-<span id="L3124"><span class="lineNum">    3124</span> <span class="tlaUNC">           0 :         if (!diff.check_pow(pow_hash)) {</span></span>
-<span id="L3125"><span class="lineNum">    3125</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;Invalid MONERO_BLOCK_BROADCAST: diff check failed, PoW hash = &quot; &lt;&lt; pow_hash);</span></span>
-<span id="L3126"><span class="lineNum">    3126</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L3127"><span class="lineNum">    3127</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3118"><span class="lineNum">    3118</span> <span class="tlaUNC">           0 :         struct Work</span></span>
+<span id="L3119"><span class="lineNum">    3119</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L3120"><span class="lineNum">    3120</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
+<span id="L3121"><span class="lineNum">    3121</span>              : </span>
+<span id="L3122"><span class="lineNum">    3122</span> <span class="tlaUNC">           0 :                 P2PServer* server;</span></span>
+<span id="L3123"><span class="lineNum">    3123</span> <span class="tlaUNC">           0 :                 P2PClient* client;</span></span>
+<span id="L3124"><span class="lineNum">    3124</span>              : </span>
+<span id="L3125"><span class="lineNum">    3125</span> <span class="tlaUNC">           0 :                 uint32_t reset_counter;</span></span>
+<span id="L3126"><span class="lineNum">    3126</span> <span class="tlaUNC">           0 :                 bool is_v6;</span></span>
+<span id="L3127"><span class="lineNum">    3127</span> <span class="tlaUNC">           0 :                 raw_ip addr;</span></span>
 <span id="L3128"><span class="lineNum">    3128</span>              : </span>
-<span id="L3129"><span class="lineNum">    3129</span> <span class="tlaUNC">           0 :         server-&gt;broadcast_monero_block(buf0, size0, this, true);</span></span>
+<span id="L3129"><span class="lineNum">    3129</span> <span class="tlaUNC">           0 :                 RandomX_Hasher_Base* hasher;</span></span>
 <span id="L3130"><span class="lineNum">    3130</span>              : </span>
-<span id="L3131"><span class="lineNum">    3131</span> <span class="tlaUNC">           0 :         std::string request;</span></span>
-<span id="L3132"><span class="lineNum">    3132</span> <span class="tlaUNC">           0 :         request.reserve(size * 2 + 128);</span></span>
-<span id="L3133"><span class="lineNum">    3133</span>              : </span>
-<span id="L3134"><span class="lineNum">    3134</span> <span class="tlaUNC">           0 :         request.append(&quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;submit_block\&quot;,\&quot;params\&quot;:[\&quot;&quot;);</span></span>
+<span id="L3131"><span class="lineNum">    3131</span> <span class="tlaUNC">           0 :                 std::vector&lt;uint8_t&gt; blob;</span></span>
+<span id="L3132"><span class="lineNum">    3132</span> <span class="tlaUNC">           0 :                 uint64_t height;</span></span>
+<span id="L3133"><span class="lineNum">    3133</span> <span class="tlaUNC">           0 :                 hash seed;</span></span>
+<span id="L3134"><span class="lineNum">    3134</span> <span class="tlaUNC">           0 :                 difficulty_type diff;</span></span>
 <span id="L3135"><span class="lineNum">    3135</span>              : </span>
-<span id="L3136"><span class="lineNum">    3136</span> <span class="tlaUNC">           0 :         for (size_t i = 0; i &lt; size; ++i) {</span></span>
-<span id="L3137"><span class="lineNum">    3137</span> <span class="tlaUNC">           0 :                 request.append(1, &quot;0123456789abcdef&quot;[buf[i] &gt;&gt; 4]);</span></span>
-<span id="L3138"><span class="lineNum">    3138</span> <span class="tlaUNC">           0 :                 request.append(1, &quot;0123456789abcdef&quot;[buf[i] &amp; 15]);</span></span>
-<span id="L3139"><span class="lineNum">    3139</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3136"><span class="lineNum">    3136</span> <span class="tlaUNC">           0 :                 std::vector&lt;uint8_t&gt; message;</span></span>
+<span id="L3137"><span class="lineNum">    3137</span>              : </span>
+<span id="L3138"><span class="lineNum">    3138</span> <span class="tlaUNC">           0 :                 bool pow_check_passed;</span></span>
+<span id="L3139"><span class="lineNum">    3139</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L3140"><span class="lineNum">    3140</span>              : </span>
-<span id="L3141"><span class="lineNum">    3141</span> <span class="tlaUNC">           0 :         request.append(&quot;\&quot;]}&quot;);</span></span>
-<span id="L3142"><span class="lineNum">    3142</span>              : </span>
-<span id="L3143"><span class="lineNum">    3143</span> <span class="tlaUNC">           0 :         server-&gt;m_MoneroBlocksToSubmit.emplace_back(std::move(request));</span></span>
-<span id="L3144"><span class="lineNum">    3144</span>              : </span>
-<span id="L3145"><span class="lineNum">    3145</span>              :         // Kick the JSON RPC request loop only when the first request arrives</span>
-<span id="L3146"><span class="lineNum">    3146</span>              :         // The other requests will be queued and submit_monero_blocks() will process them one by one</span>
-<span id="L3147"><span class="lineNum">    3147</span> <span class="tlaUNC">           0 :         if (server-&gt;m_MoneroBlocksToSubmit.size() == 1) {</span></span>
-<span id="L3148"><span class="lineNum">    3148</span> <span class="tlaUNC">           0 :                 server-&gt;submit_monero_blocks();</span></span>
-<span id="L3149"><span class="lineNum">    3149</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3141"><span class="lineNum">    3141</span> <span class="tlaUNC">           0 :         Work* work = new Work{ {}, server, this, m_resetCounter, m_isV6, m_addr, pool-&gt;hasher(), std::move(blob), height, seed, diff, { buf0, buf0 + size0 }, false };</span></span>
+<span id="L3142"><span class="lineNum">    3142</span> <span class="tlaUNC">           0 :         work-&gt;req.data = work;</span></span>
+<span id="L3143"><span class="lineNum">    3143</span>              : </span>
+<span id="L3144"><span class="lineNum">    3144</span> <span class="tlaUNC">           0 :         const int err = uv_queue_work(&amp;server-&gt;m_loop, &amp;work-&gt;req,</span></span>
+<span id="L3145"><span class="lineNum">    3145</span> <span class="tlaUNC">           0 :                 [](uv_work_t* req)</span></span>
+<span id="L3146"><span class="lineNum">    3146</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L3147"><span class="lineNum">    3147</span> <span class="tlaUNC">           0 :                         BACKGROUND_JOB_START(P2PServer::on_monero_block_broadcast);</span></span>
+<span id="L3148"><span class="lineNum">    3148</span>              : </span>
+<span id="L3149"><span class="lineNum">    3149</span> <span class="tlaUNC">           0 :                         Work* work = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
 <span id="L3150"><span class="lineNum">    3150</span>              : </span>
-<span id="L3151"><span class="lineNum">    3151</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L3152"><span class="lineNum">    3152</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L3153"><span class="lineNum">    3153</span>              : </span>
-<span id="L3154"><span class="lineNum">    3154</span>              : bool P2PServer::P2PClient::handle_incoming_block_async(const PoolBlock* block, uint64_t max_time_delta)</span>
-<span id="L3155"><span class="lineNum">    3155</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L3156"><span class="lineNum">    3156</span> <span class="tlaUNC">           0 :         P2PServer* server = static_cast&lt;P2PServer*&gt;(m_owner);</span></span>
-<span id="L3157"><span class="lineNum">    3157</span> <span class="tlaUNC">           0 :         SideChain&amp; side_chain = server-&gt;m_pool-&gt;side_chain();</span></span>
-<span id="L3158"><span class="lineNum">    3158</span>              : </span>
-<span id="L3159"><span class="lineNum">    3159</span>              :         // Limit system clock difference between connected peers</span>
-<span id="L3160"><span class="lineNum">    3160</span>              :         // Check only new blocks (not added to side_chain yet)</span>
-<span id="L3161"><span class="lineNum">    3161</span> <span class="tlaUNC">           0 :         if (max_time_delta &amp;&amp; !side_chain.find_block(block-&gt;m_sidechainId)) {</span></span>
-<span id="L3162"><span class="lineNum">    3162</span> <span class="tlaUNC">           0 :                 static hash prev_checked_blocks[2];</span></span>
-<span id="L3163"><span class="lineNum">    3163</span> <span class="tlaUNC">           0 :                 const bool is_new = (block-&gt;m_sidechainId != prev_checked_blocks[0]) &amp;&amp; (block-&gt;m_sidechainId != prev_checked_blocks[1]);</span></span>
-<span id="L3164"><span class="lineNum">    3164</span> <span class="tlaUNC">           0 :                 if (is_new) {</span></span>
-<span id="L3165"><span class="lineNum">    3165</span> <span class="tlaUNC">           0 :                         prev_checked_blocks[1] = prev_checked_blocks[0];</span></span>
-<span id="L3166"><span class="lineNum">    3166</span> <span class="tlaUNC">           0 :                         prev_checked_blocks[0] = block-&gt;m_sidechainId;</span></span>
-<span id="L3167"><span class="lineNum">    3167</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3151"><span class="lineNum">    3151</span> <span class="tlaUNC">           0 :                         hash pow_hash;</span></span>
+<span id="L3152"><span class="lineNum">    3152</span> <span class="tlaUNC">           0 :                         if (!work-&gt;hasher-&gt;calculate(work-&gt;blob.data(), work-&gt;blob.size(), work-&gt;height, work-&gt;seed, pow_hash, false)) {</span></span>
+<span id="L3153"><span class="lineNum">    3153</span> <span class="tlaUNC">           0 :                                 LOGWARN(3, &quot;Invalid MONERO_BLOCK_BROADCAST: failed to calculate PoW hash for height = &quot; &lt;&lt; work-&gt;height);</span></span>
+<span id="L3154"><span class="lineNum">    3154</span> <span class="tlaUNC">           0 :                                 return;</span></span>
+<span id="L3155"><span class="lineNum">    3155</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3156"><span class="lineNum">    3156</span>              : </span>
+<span id="L3157"><span class="lineNum">    3157</span> <span class="tlaUNC">           0 :                         if (!work-&gt;diff.check_pow(pow_hash)) {</span></span>
+<span id="L3158"><span class="lineNum">    3158</span> <span class="tlaUNC">           0 :                                 LOGWARN(3, &quot;Invalid MONERO_BLOCK_BROADCAST: diff check failed for height = &quot; &lt;&lt; work-&gt;height &lt;&lt; &quot;, PoW hash = &quot; &lt;&lt; pow_hash);</span></span>
+<span id="L3159"><span class="lineNum">    3159</span> <span class="tlaUNC">           0 :                                 return;</span></span>
+<span id="L3160"><span class="lineNum">    3160</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3161"><span class="lineNum">    3161</span>              : </span>
+<span id="L3162"><span class="lineNum">    3162</span> <span class="tlaUNC">           0 :                         LOGINFO(6, &quot;on_monero_block_broadcast: PoW check passed for height = &quot; &lt;&lt; work-&gt;height);</span></span>
+<span id="L3163"><span class="lineNum">    3163</span> <span class="tlaUNC">           0 :                         work-&gt;pow_check_passed = true;</span></span>
+<span id="L3164"><span class="lineNum">    3164</span> <span class="tlaUNC">           0 :                 },</span></span>
+<span id="L3165"><span class="lineNum">    3165</span> <span class="tlaUNC">           0 :                 [](uv_work_t* req, int /*status*/)</span></span>
+<span id="L3166"><span class="lineNum">    3166</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L3167"><span class="lineNum">    3167</span> <span class="tlaUNC">           0 :                         Work* work = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
 <span id="L3168"><span class="lineNum">    3168</span>              : </span>
-<span id="L3169"><span class="lineNum">    3169</span> <span class="tlaUNC">           0 :                 const uint64_t t = time(nullptr);</span></span>
-<span id="L3170"><span class="lineNum">    3170</span> <span class="tlaUNC">           0 :                 const uint32_t failed = ((block-&gt;m_timestamp + max_time_delta &lt; t) || (block-&gt;m_timestamp &gt; t + max_time_delta)) ? 1 : 0;</span></span>
-<span id="L3171"><span class="lineNum">    3171</span>              : </span>
-<span id="L3172"><span class="lineNum">    3172</span> <span class="tlaUNC">           0 :                 static uint32_t failed_history = 0;</span></span>
-<span id="L3173"><span class="lineNum">    3173</span> <span class="tlaUNC">           0 :                 if (is_new) {</span></span>
-<span id="L3174"><span class="lineNum">    3174</span> <span class="tlaUNC">           0 :                         failed_history = (failed_history &lt;&lt; 1) | failed;</span></span>
-<span id="L3175"><span class="lineNum">    3175</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3176"><span class="lineNum">    3176</span>              : </span>
-<span id="L3177"><span class="lineNum">    3177</span> <span class="tlaUNC">           0 :                 if (failed) {</span></span>
-<span id="L3178"><span class="lineNum">    3178</span> <span class="tlaUNC">           0 :                         if (is_new) {</span></span>
-<span id="L3179"><span class="lineNum">    3179</span> <span class="tlaUNC">           0 :                                 int64_t dt = static_cast&lt;int64_t&gt;(block-&gt;m_timestamp - t);</span></span>
-<span id="L3180"><span class="lineNum">    3180</span> <span class="tlaUNC">           0 :                                 char sign = '+';</span></span>
-<span id="L3181"><span class="lineNum">    3181</span> <span class="tlaUNC">           0 :                                 if (dt &lt; 0) {</span></span>
-<span id="L3182"><span class="lineNum">    3182</span> <span class="tlaUNC">           0 :                                         sign = '-';</span></span>
-<span id="L3183"><span class="lineNum">    3183</span> <span class="tlaUNC">           0 :                                         dt = -dt;</span></span>
-<span id="L3184"><span class="lineNum">    3184</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L3185"><span class="lineNum">    3185</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString)</span></span>
-<span id="L3186"><span class="lineNum">    3186</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot; sent a block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot; (mined by &quot; &lt;&lt; block-&gt;m_minerWallet &lt;&lt; &quot;) with an invalid timestamp &quot; &lt;&lt; block-&gt;m_timestamp</span></span>
-<span id="L3187"><span class="lineNum">    3187</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot; (&quot; &lt;&lt; sign &lt;&lt; dt &lt;&lt; &quot; seconds)&quot;);</span></span>
-<span id="L3188"><span class="lineNum">    3188</span>              : </span>
-<span id="L3189"><span class="lineNum">    3189</span> <span class="tlaUNC">           0 :                                 uint32_t failed_checks = 0;</span></span>
-<span id="L3190"><span class="lineNum">    3190</span>              : </span>
-<span id="L3191"><span class="lineNum">    3191</span> <span class="tlaUNC">           0 :                                 for (uint32_t k = 1; k != 0; k &lt;&lt;= 1) {</span></span>
-<span id="L3192"><span class="lineNum">    3192</span> <span class="tlaUNC">           0 :                                         if (failed_history &amp; k) {</span></span>
-<span id="L3193"><span class="lineNum">    3193</span> <span class="tlaUNC">           0 :                                                 ++failed_checks;</span></span>
-<span id="L3194"><span class="lineNum">    3194</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L3195"><span class="lineNum">    3195</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L3196"><span class="lineNum">    3196</span>              : </span>
-<span id="L3197"><span class="lineNum">    3197</span> <span class="tlaUNC">           0 :                                 if (failed_checks &gt; 16) {</span></span>
-<span id="L3198"><span class="lineNum">    3198</span> <span class="tlaUNC">           0 :                                         LOGWARN(1, &quot;Your system clock might be invalid: &quot; &lt;&lt; failed_checks &lt;&lt; &quot; of 32 last blocks were rejected due to high timestamp diff&quot;);</span></span>
-<span id="L3199"><span class="lineNum">    3199</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L3200"><span class="lineNum">    3200</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L3201"><span class="lineNum">    3201</span> <span class="tlaUNC">           0 :                         return true;</span></span>
-<span id="L3202"><span class="lineNum">    3202</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3203"><span class="lineNum">    3203</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3204"><span class="lineNum">    3204</span>              : </span>
-<span id="L3205"><span class="lineNum">    3205</span> <span class="tlaUNC">           0 :         if (side_chain.incoming_block_seen(*block)) {</span></span>
-<span id="L3206"><span class="lineNum">    3206</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot; (nonce &quot; &lt;&lt; block-&gt;m_nonce &lt;&lt; &quot;, extra_nonce &quot; &lt;&lt; block-&gt;m_extraNonce &lt;&lt; &quot;) was received before, skipping it&quot;);</span></span>
-<span id="L3207"><span class="lineNum">    3207</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L3208"><span class="lineNum">    3208</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3209"><span class="lineNum">    3209</span>              : </span>
-<span id="L3210"><span class="lineNum">    3210</span> <span class="tlaUNC">           0 :         struct Work</span></span>
-<span id="L3211"><span class="lineNum">    3211</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L3212"><span class="lineNum">    3212</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
-<span id="L3213"><span class="lineNum">    3213</span> <span class="tlaUNC">           0 :                 PoolBlock block;</span></span>
-<span id="L3214"><span class="lineNum">    3214</span> <span class="tlaUNC">           0 :                 P2PClient* client;</span></span>
-<span id="L3215"><span class="lineNum">    3215</span> <span class="tlaUNC">           0 :                 P2PServer* server;</span></span>
-<span id="L3216"><span class="lineNum">    3216</span> <span class="tlaUNC">           0 :                 uint32_t client_reset_counter;</span></span>
-<span id="L3217"><span class="lineNum">    3217</span> <span class="tlaUNC">           0 :                 bool client_isV6;</span></span>
-<span id="L3218"><span class="lineNum">    3218</span> <span class="tlaUNC">           0 :                 raw_ip client_ip;</span></span>
-<span id="L3219"><span class="lineNum">    3219</span> <span class="tlaUNC">           0 :                 std::vector&lt;hash&gt; missing_blocks;</span></span>
-<span id="L3220"><span class="lineNum">    3220</span> <span class="tlaUNC">           0 :                 bool result;</span></span>
-<span id="L3221"><span class="lineNum">    3221</span> <span class="tlaUNC">           0 :         };</span></span>
-<span id="L3222"><span class="lineNum">    3222</span>              : </span>
-<span id="L3223"><span class="lineNum">    3223</span> <span class="tlaUNC">           0 :         Work* work = new Work{ {}, *block, this, server, m_resetCounter.load(), m_isV6, m_addr, {}, true };</span></span>
-<span id="L3224"><span class="lineNum">    3224</span> <span class="tlaUNC">           0 :         work-&gt;req.data = work;</span></span>
-<span id="L3225"><span class="lineNum">    3225</span>              : </span>
-<span id="L3226"><span class="lineNum">    3226</span> <span class="tlaUNC">           0 :         const int err = uv_queue_work(&amp;server-&gt;m_loop, &amp;work-&gt;req,</span></span>
-<span id="L3227"><span class="lineNum">    3227</span> <span class="tlaUNC">           0 :                 [](uv_work_t* req)</span></span>
-<span id="L3228"><span class="lineNum">    3228</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L3229"><span class="lineNum">    3229</span> <span class="tlaUNC">           0 :                         BACKGROUND_JOB_START(P2PServer::handle_incoming_block_async);</span></span>
-<span id="L3230"><span class="lineNum">    3230</span> <span class="tlaUNC">           0 :                         Work* work = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
-<span id="L3231"><span class="lineNum">    3231</span> <span class="tlaUNC">           0 :                         work-&gt;client-&gt;handle_incoming_block(work-&gt;server-&gt;m_pool, work-&gt;block, work-&gt;missing_blocks, work-&gt;result);</span></span>
-<span id="L3232"><span class="lineNum">    3232</span> <span class="tlaUNC">           0 :                 },</span></span>
-<span id="L3233"><span class="lineNum">    3233</span> <span class="tlaUNC">           0 :                 [](uv_work_t* req, int /*status*/)</span></span>
-<span id="L3234"><span class="lineNum">    3234</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L3235"><span class="lineNum">    3235</span> <span class="tlaUNC">           0 :                         Work* work = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
-<span id="L3236"><span class="lineNum">    3236</span> <span class="tlaUNC">           0 :                         work-&gt;client-&gt;post_handle_incoming_block(work-&gt;server-&gt;m_pool, work-&gt;block, work-&gt;client_reset_counter, work-&gt;client_isV6, work-&gt;client_ip, work-&gt;missing_blocks, work-&gt;result);</span></span>
-<span id="L3237"><span class="lineNum">    3237</span> <span class="tlaUNC">           0 :                         delete work;</span></span>
-<span id="L3238"><span class="lineNum">    3238</span> <span class="tlaUNC">           0 :                         BACKGROUND_JOB_STOP(P2PServer::handle_incoming_block_async);</span></span>
-<span id="L3239"><span class="lineNum">    3239</span> <span class="tlaUNC">           0 :                 });</span></span>
-<span id="L3240"><span class="lineNum">    3240</span>              : </span>
-<span id="L3241"><span class="lineNum">    3241</span> <span class="tlaUNC">           0 :         if (err != 0) {</span></span>
-<span id="L3242"><span class="lineNum">    3242</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;handle_incoming_block_async: uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span></span>
-<span id="L3243"><span class="lineNum">    3243</span> <span class="tlaUNC">           0 :                 delete work;</span></span>
-<span id="L3244"><span class="lineNum">    3244</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L3245"><span class="lineNum">    3245</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3246"><span class="lineNum">    3246</span>              : </span>
-<span id="L3247"><span class="lineNum">    3247</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L3248"><span class="lineNum">    3248</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L3169"><span class="lineNum">    3169</span> <span class="tlaUNC">           0 :                         P2PServer* server = work-&gt;server;</span></span>
+<span id="L3170"><span class="lineNum">    3170</span>              : </span>
+<span id="L3171"><span class="lineNum">    3171</span> <span class="tlaUNC">           0 :                         if (work-&gt;pow_check_passed) {</span></span>
+<span id="L3172"><span class="lineNum">    3172</span> <span class="tlaUNC">           0 :                                 const uint8_t* buf0 = work-&gt;message.data();</span></span>
+<span id="L3173"><span class="lineNum">    3173</span> <span class="tlaUNC">           0 :                                 const uint32_t size0 = work-&gt;message.size();</span></span>
+<span id="L3174"><span class="lineNum">    3174</span>              : </span>
+<span id="L3175"><span class="lineNum">    3175</span> <span class="tlaUNC">           0 :                                 const uint8_t* buf = buf0 + sizeof(MoneroBlockBroadcastHeader);</span></span>
+<span id="L3176"><span class="lineNum">    3176</span> <span class="tlaUNC">           0 :                                 const uint32_t size = static_cast&lt;uint32_t&gt;(size0 - sizeof(MoneroBlockBroadcastHeader));</span></span>
+<span id="L3177"><span class="lineNum">    3177</span>              : </span>
+<span id="L3178"><span class="lineNum">    3178</span> <span class="tlaUNC">           0 :                                 server-&gt;broadcast_monero_block(buf0, size0, work-&gt;client, true);</span></span>
+<span id="L3179"><span class="lineNum">    3179</span>              : </span>
+<span id="L3180"><span class="lineNum">    3180</span> <span class="tlaUNC">           0 :                                 std::string request;</span></span>
+<span id="L3181"><span class="lineNum">    3181</span> <span class="tlaUNC">           0 :                                 request.reserve(size * 2 + 128);</span></span>
+<span id="L3182"><span class="lineNum">    3182</span>              : </span>
+<span id="L3183"><span class="lineNum">    3183</span> <span class="tlaUNC">           0 :                                 request.append(&quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;submit_block\&quot;,\&quot;params\&quot;:[\&quot;&quot;);</span></span>
+<span id="L3184"><span class="lineNum">    3184</span>              : </span>
+<span id="L3185"><span class="lineNum">    3185</span> <span class="tlaUNC">           0 :                                 for (size_t i = 0; i &lt; size; ++i) {</span></span>
+<span id="L3186"><span class="lineNum">    3186</span> <span class="tlaUNC">           0 :                                         request.append(1, &quot;0123456789abcdef&quot;[buf[i] &gt;&gt; 4]);</span></span>
+<span id="L3187"><span class="lineNum">    3187</span> <span class="tlaUNC">           0 :                                         request.append(1, &quot;0123456789abcdef&quot;[buf[i] &amp; 15]);</span></span>
+<span id="L3188"><span class="lineNum">    3188</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3189"><span class="lineNum">    3189</span>              : </span>
+<span id="L3190"><span class="lineNum">    3190</span> <span class="tlaUNC">           0 :                                 request.append(&quot;\&quot;]}&quot;);</span></span>
+<span id="L3191"><span class="lineNum">    3191</span>              : </span>
+<span id="L3192"><span class="lineNum">    3192</span> <span class="tlaUNC">           0 :                                 server-&gt;m_MoneroBlocksToSubmit.emplace_back(std::move(request));</span></span>
+<span id="L3193"><span class="lineNum">    3193</span>              : </span>
+<span id="L3194"><span class="lineNum">    3194</span>              :                                 // Kick the JSON RPC request loop only when the first request arrives</span>
+<span id="L3195"><span class="lineNum">    3195</span>              :                                 // The other requests will be queued and submit_monero_blocks() will process them one by one</span>
+<span id="L3196"><span class="lineNum">    3196</span> <span class="tlaUNC">           0 :                                 if (server-&gt;m_MoneroBlocksToSubmit.size() == 1) {</span></span>
+<span id="L3197"><span class="lineNum">    3197</span> <span class="tlaUNC">           0 :                                         server-&gt;submit_monero_blocks();</span></span>
+<span id="L3198"><span class="lineNum">    3198</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3199"><span class="lineNum">    3199</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3200"><span class="lineNum">    3200</span> <span class="tlaUNC">           0 :                         else {</span></span>
+<span id="L3201"><span class="lineNum">    3201</span> <span class="tlaUNC">           0 :                                 P2PClient* client = work-&gt;client;</span></span>
+<span id="L3202"><span class="lineNum">    3202</span>              : </span>
+<span id="L3203"><span class="lineNum">    3203</span> <span class="tlaUNC">           0 :                                 if (client-&gt;m_resetCounter == work-&gt;reset_counter) {</span></span>
+<span id="L3204"><span class="lineNum">    3204</span> <span class="tlaUNC">           0 :                                         client-&gt;close();</span></span>
+<span id="L3205"><span class="lineNum">    3205</span> <span class="tlaUNC">           0 :                                         LOGWARN(3, &quot;peer &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; banned for &quot; &lt;&lt; DEFAULT_BAN_TIME &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L3206"><span class="lineNum">    3206</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3207"><span class="lineNum">    3207</span> <span class="tlaUNC">           0 :                                 else {</span></span>
+<span id="L3208"><span class="lineNum">    3208</span> <span class="tlaUNC">           0 :                                         LOGWARN(3, work-&gt;addr &lt;&lt; &quot; banned for &quot; &lt;&lt; DEFAULT_BAN_TIME &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L3209"><span class="lineNum">    3209</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3210"><span class="lineNum">    3210</span>              : </span>
+<span id="L3211"><span class="lineNum">    3211</span> <span class="tlaUNC">           0 :                                 server-&gt;ban(work-&gt;is_v6, work-&gt;addr, DEFAULT_BAN_TIME);</span></span>
+<span id="L3212"><span class="lineNum">    3212</span> <span class="tlaUNC">           0 :                                 server-&gt;remove_peer_from_list(work-&gt;addr);</span></span>
+<span id="L3213"><span class="lineNum">    3213</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3214"><span class="lineNum">    3214</span>              : </span>
+<span id="L3215"><span class="lineNum">    3215</span> <span class="tlaUNC">           0 :                         delete work;</span></span>
+<span id="L3216"><span class="lineNum">    3216</span> <span class="tlaUNC">           0 :                         BACKGROUND_JOB_STOP(P2PServer::on_monero_block_broadcast);</span></span>
+<span id="L3217"><span class="lineNum">    3217</span> <span class="tlaUNC">           0 :                 });</span></span>
+<span id="L3218"><span class="lineNum">    3218</span>              : </span>
+<span id="L3219"><span class="lineNum">    3219</span> <span class="tlaUNC">           0 :         if (err) {</span></span>
+<span id="L3220"><span class="lineNum">    3220</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;on_monero_block_broadcast: uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span></span>
+<span id="L3221"><span class="lineNum">    3221</span> <span class="tlaUNC">           0 :                 delete work;</span></span>
+<span id="L3222"><span class="lineNum">    3222</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3223"><span class="lineNum">    3223</span>              : </span>
+<span id="L3224"><span class="lineNum">    3224</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L3225"><span class="lineNum">    3225</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L3226"><span class="lineNum">    3226</span>              : </span>
+<span id="L3227"><span class="lineNum">    3227</span>              : bool P2PServer::P2PClient::handle_incoming_block_async(const PoolBlock* block, uint64_t max_time_delta)</span>
+<span id="L3228"><span class="lineNum">    3228</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L3229"><span class="lineNum">    3229</span> <span class="tlaUNC">           0 :         P2PServer* server = static_cast&lt;P2PServer*&gt;(m_owner);</span></span>
+<span id="L3230"><span class="lineNum">    3230</span> <span class="tlaUNC">           0 :         SideChain&amp; side_chain = server-&gt;m_pool-&gt;side_chain();</span></span>
+<span id="L3231"><span class="lineNum">    3231</span>              : </span>
+<span id="L3232"><span class="lineNum">    3232</span>              :         // Limit system clock difference between connected peers</span>
+<span id="L3233"><span class="lineNum">    3233</span>              :         // Check only new blocks (not added to side_chain yet)</span>
+<span id="L3234"><span class="lineNum">    3234</span> <span class="tlaUNC">           0 :         if (max_time_delta &amp;&amp; !side_chain.find_block(block-&gt;m_sidechainId)) {</span></span>
+<span id="L3235"><span class="lineNum">    3235</span> <span class="tlaUNC">           0 :                 static hash prev_checked_blocks[2];</span></span>
+<span id="L3236"><span class="lineNum">    3236</span> <span class="tlaUNC">           0 :                 const bool is_new = (block-&gt;m_sidechainId != prev_checked_blocks[0]) &amp;&amp; (block-&gt;m_sidechainId != prev_checked_blocks[1]);</span></span>
+<span id="L3237"><span class="lineNum">    3237</span> <span class="tlaUNC">           0 :                 if (is_new) {</span></span>
+<span id="L3238"><span class="lineNum">    3238</span> <span class="tlaUNC">           0 :                         prev_checked_blocks[1] = prev_checked_blocks[0];</span></span>
+<span id="L3239"><span class="lineNum">    3239</span> <span class="tlaUNC">           0 :                         prev_checked_blocks[0] = block-&gt;m_sidechainId;</span></span>
+<span id="L3240"><span class="lineNum">    3240</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3241"><span class="lineNum">    3241</span>              : </span>
+<span id="L3242"><span class="lineNum">    3242</span> <span class="tlaUNC">           0 :                 const uint64_t t = time(nullptr);</span></span>
+<span id="L3243"><span class="lineNum">    3243</span> <span class="tlaUNC">           0 :                 const uint32_t failed = ((block-&gt;m_timestamp + max_time_delta &lt; t) || (block-&gt;m_timestamp &gt; t + max_time_delta)) ? 1 : 0;</span></span>
+<span id="L3244"><span class="lineNum">    3244</span>              : </span>
+<span id="L3245"><span class="lineNum">    3245</span> <span class="tlaUNC">           0 :                 static uint32_t failed_history = 0;</span></span>
+<span id="L3246"><span class="lineNum">    3246</span> <span class="tlaUNC">           0 :                 if (is_new) {</span></span>
+<span id="L3247"><span class="lineNum">    3247</span> <span class="tlaUNC">           0 :                         failed_history = (failed_history &lt;&lt; 1) | failed;</span></span>
+<span id="L3248"><span class="lineNum">    3248</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L3249"><span class="lineNum">    3249</span>              : </span>
-<span id="L3250"><span class="lineNum">    3250</span>              : void P2PServer::P2PClient::handle_incoming_block(p2pool* pool, PoolBlock&amp; block, std::vector&lt;hash&gt;&amp; missing_blocks, bool&amp; result)</span>
-<span id="L3251"><span class="lineNum">    3251</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L3252"><span class="lineNum">    3252</span> <span class="tlaUNC">           0 :         result = pool-&gt;side_chain().add_external_block(block, missing_blocks);</span></span>
-<span id="L3253"><span class="lineNum">    3253</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L3254"><span class="lineNum">    3254</span>              : </span>
-<span id="L3255"><span class="lineNum">    3255</span>              : void P2PServer::P2PClient::post_handle_incoming_block(p2pool* pool, const PoolBlock&amp; block, const uint32_t reset_counter, bool is_v6, const raw_ip&amp; addr, std::vector&lt;hash&gt;&amp; missing_blocks, const bool result)</span>
-<span id="L3256"><span class="lineNum">    3256</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L3257"><span class="lineNum">    3257</span> <span class="tlaUNC">           0 :         const uint32_t new_reset_counter = m_resetCounter.load();</span></span>
-<span id="L3258"><span class="lineNum">    3258</span>              : </span>
-<span id="L3259"><span class="lineNum">    3259</span> <span class="tlaUNC">           0 :         if (!result) {</span></span>
-<span id="L3260"><span class="lineNum">    3260</span>              :                 // Client sent bad data, disconnect and ban it</span>
-<span id="L3261"><span class="lineNum">    3261</span> <span class="tlaUNC">           0 :                 if (reset_counter == new_reset_counter) {</span></span>
-<span id="L3262"><span class="lineNum">    3262</span> <span class="tlaUNC">           0 :                         close();</span></span>
-<span id="L3263"><span class="lineNum">    3263</span> <span class="tlaUNC">           0 :                         LOGWARN(3, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; banned for &quot; &lt;&lt; DEFAULT_BAN_TIME &lt;&lt; &quot; seconds&quot;);</span></span>
-<span id="L3264"><span class="lineNum">    3264</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3265"><span class="lineNum">    3265</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L3266"><span class="lineNum">    3266</span> <span class="tlaUNC">           0 :                         LOGWARN(3, addr &lt;&lt; &quot; banned for &quot; &lt;&lt; DEFAULT_BAN_TIME &lt;&lt; &quot; seconds&quot;);</span></span>
-<span id="L3267"><span class="lineNum">    3267</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3268"><span class="lineNum">    3268</span>              : </span>
-<span id="L3269"><span class="lineNum">    3269</span> <span class="tlaUNC">           0 :                 P2PServer* server = pool-&gt;p2p_server();</span></span>
-<span id="L3270"><span class="lineNum">    3270</span> <span class="tlaUNC">           0 :                 server-&gt;ban(is_v6, addr, DEFAULT_BAN_TIME);</span></span>
-<span id="L3271"><span class="lineNum">    3271</span> <span class="tlaUNC">           0 :                 server-&gt;remove_peer_from_list(addr);</span></span>
-<span id="L3272"><span class="lineNum">    3272</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3273"><span class="lineNum">    3273</span>              : </span>
-<span id="L3274"><span class="lineNum">    3274</span>              :         // We might have been disconnected while side_chain was adding the block</span>
-<span id="L3275"><span class="lineNum">    3275</span>              :         // In this case we can't send BLOCK_REQUEST messages on this connection anymore</span>
-<span id="L3276"><span class="lineNum">    3276</span> <span class="tlaUNC">           0 :         if (reset_counter != new_reset_counter) {</span></span>
-<span id="L3277"><span class="lineNum">    3277</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L3278"><span class="lineNum">    3278</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3279"><span class="lineNum">    3279</span>              : </span>
-<span id="L3280"><span class="lineNum">    3280</span> <span class="tlaUNC">           0 :         if (missing_blocks.empty()) {</span></span>
-<span id="L3281"><span class="lineNum">    3281</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L3282"><span class="lineNum">    3282</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3283"><span class="lineNum">    3283</span>              : </span>
-<span id="L3284"><span class="lineNum">    3284</span> <span class="tlaUNC">           0 :         P2PServer* server = static_cast&lt;P2PServer*&gt;(m_owner);</span></span>
-<span id="L3285"><span class="lineNum">    3285</span>              : </span>
-<span id="L3286"><span class="lineNum">    3286</span>              :         // If the initial sync is not finished yet, try to ask the fastest peer instead</span>
-<span id="L3287"><span class="lineNum">    3287</span> <span class="tlaUNC">           0 :         if (!server-&gt;m_pool-&gt;side_chain().precalcFinished()) {</span></span>
-<span id="L3288"><span class="lineNum">    3288</span> <span class="tlaUNC">           0 :                 P2PClient* c = server-&gt;m_fastestPeer;</span></span>
-<span id="L3289"><span class="lineNum">    3289</span> <span class="tlaUNC">           0 :                 if (c &amp;&amp; (c != this) &amp;&amp; (c-&gt;m_broadcastMaxHeight &gt;= block.m_sidechainHeight)) {</span></span>
-<span id="L3290"><span class="lineNum">    3290</span> <span class="tlaUNC">           0 :                         LOGINFO(5, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(c-&gt;m_addrString) &lt;&lt; &quot; is faster, sending BLOCK_REQUEST to it instead&quot;);</span></span>
-<span id="L3291"><span class="lineNum">    3291</span> <span class="tlaUNC">           0 :                         c-&gt;post_handle_incoming_block(pool, block, c-&gt;m_resetCounter.load(), c-&gt;m_isV6, c-&gt;m_addr, missing_blocks, true);</span></span>
-<span id="L3292"><span class="lineNum">    3292</span> <span class="tlaUNC">           0 :                         return;</span></span>
-<span id="L3293"><span class="lineNum">    3293</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3294"><span class="lineNum">    3294</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3250"><span class="lineNum">    3250</span> <span class="tlaUNC">           0 :                 if (failed) {</span></span>
+<span id="L3251"><span class="lineNum">    3251</span> <span class="tlaUNC">           0 :                         if (is_new) {</span></span>
+<span id="L3252"><span class="lineNum">    3252</span> <span class="tlaUNC">           0 :                                 int64_t dt = static_cast&lt;int64_t&gt;(block-&gt;m_timestamp - t);</span></span>
+<span id="L3253"><span class="lineNum">    3253</span> <span class="tlaUNC">           0 :                                 char sign = '+';</span></span>
+<span id="L3254"><span class="lineNum">    3254</span> <span class="tlaUNC">           0 :                                 if (dt &lt; 0) {</span></span>
+<span id="L3255"><span class="lineNum">    3255</span> <span class="tlaUNC">           0 :                                         sign = '-';</span></span>
+<span id="L3256"><span class="lineNum">    3256</span> <span class="tlaUNC">           0 :                                         dt = -dt;</span></span>
+<span id="L3257"><span class="lineNum">    3257</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3258"><span class="lineNum">    3258</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString)</span></span>
+<span id="L3259"><span class="lineNum">    3259</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot; sent a block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot; (mined by &quot; &lt;&lt; block-&gt;m_minerWallet &lt;&lt; &quot;) with an invalid timestamp &quot; &lt;&lt; block-&gt;m_timestamp</span></span>
+<span id="L3260"><span class="lineNum">    3260</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot; (&quot; &lt;&lt; sign &lt;&lt; dt &lt;&lt; &quot; seconds)&quot;);</span></span>
+<span id="L3261"><span class="lineNum">    3261</span>              : </span>
+<span id="L3262"><span class="lineNum">    3262</span> <span class="tlaUNC">           0 :                                 uint32_t failed_checks = 0;</span></span>
+<span id="L3263"><span class="lineNum">    3263</span>              : </span>
+<span id="L3264"><span class="lineNum">    3264</span> <span class="tlaUNC">           0 :                                 for (uint32_t k = 1; k != 0; k &lt;&lt;= 1) {</span></span>
+<span id="L3265"><span class="lineNum">    3265</span> <span class="tlaUNC">           0 :                                         if (failed_history &amp; k) {</span></span>
+<span id="L3266"><span class="lineNum">    3266</span> <span class="tlaUNC">           0 :                                                 ++failed_checks;</span></span>
+<span id="L3267"><span class="lineNum">    3267</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L3268"><span class="lineNum">    3268</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3269"><span class="lineNum">    3269</span>              : </span>
+<span id="L3270"><span class="lineNum">    3270</span> <span class="tlaUNC">           0 :                                 if (failed_checks &gt; 16) {</span></span>
+<span id="L3271"><span class="lineNum">    3271</span> <span class="tlaUNC">           0 :                                         LOGWARN(1, &quot;Your system clock might be invalid: &quot; &lt;&lt; failed_checks &lt;&lt; &quot; of 32 last blocks were rejected due to high timestamp diff&quot;);</span></span>
+<span id="L3272"><span class="lineNum">    3272</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3273"><span class="lineNum">    3273</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3274"><span class="lineNum">    3274</span> <span class="tlaUNC">           0 :                         return true;</span></span>
+<span id="L3275"><span class="lineNum">    3275</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3276"><span class="lineNum">    3276</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3277"><span class="lineNum">    3277</span>              : </span>
+<span id="L3278"><span class="lineNum">    3278</span> <span class="tlaUNC">           0 :         if (side_chain.incoming_block_seen(*block)) {</span></span>
+<span id="L3279"><span class="lineNum">    3279</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot; (nonce &quot; &lt;&lt; block-&gt;m_nonce &lt;&lt; &quot;, extra_nonce &quot; &lt;&lt; block-&gt;m_extraNonce &lt;&lt; &quot;) was received before, skipping it&quot;);</span></span>
+<span id="L3280"><span class="lineNum">    3280</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L3281"><span class="lineNum">    3281</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3282"><span class="lineNum">    3282</span>              : </span>
+<span id="L3283"><span class="lineNum">    3283</span> <span class="tlaUNC">           0 :         struct Work</span></span>
+<span id="L3284"><span class="lineNum">    3284</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L3285"><span class="lineNum">    3285</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
+<span id="L3286"><span class="lineNum">    3286</span> <span class="tlaUNC">           0 :                 PoolBlock block;</span></span>
+<span id="L3287"><span class="lineNum">    3287</span> <span class="tlaUNC">           0 :                 P2PClient* client;</span></span>
+<span id="L3288"><span class="lineNum">    3288</span> <span class="tlaUNC">           0 :                 P2PServer* server;</span></span>
+<span id="L3289"><span class="lineNum">    3289</span> <span class="tlaUNC">           0 :                 uint32_t client_reset_counter;</span></span>
+<span id="L3290"><span class="lineNum">    3290</span> <span class="tlaUNC">           0 :                 bool client_isV6;</span></span>
+<span id="L3291"><span class="lineNum">    3291</span> <span class="tlaUNC">           0 :                 raw_ip client_ip;</span></span>
+<span id="L3292"><span class="lineNum">    3292</span> <span class="tlaUNC">           0 :                 std::vector&lt;hash&gt; missing_blocks;</span></span>
+<span id="L3293"><span class="lineNum">    3293</span> <span class="tlaUNC">           0 :                 bool result;</span></span>
+<span id="L3294"><span class="lineNum">    3294</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L3295"><span class="lineNum">    3295</span>              : </span>
-<span id="L3296"><span class="lineNum">    3296</span> <span class="tlaUNC">           0 :         ReadLock lock(server-&gt;m_cachedBlocksLock);</span></span>
-<span id="L3297"><span class="lineNum">    3297</span>              : </span>
-<span id="L3298"><span class="lineNum">    3298</span> <span class="tlaUNC">           0 :         for (const hash&amp; id : missing_blocks) {</span></span>
-<span id="L3299"><span class="lineNum">    3299</span> <span class="tlaUNC">           0 :                 if (server-&gt;m_cachedBlocks) {</span></span>
-<span id="L3300"><span class="lineNum">    3300</span> <span class="tlaUNC">           0 :                         auto it = server-&gt;m_cachedBlocks-&gt;find(id);</span></span>
-<span id="L3301"><span class="lineNum">    3301</span> <span class="tlaUNC">           0 :                         if (it != server-&gt;m_cachedBlocks-&gt;end()) {</span></span>
-<span id="L3302"><span class="lineNum">    3302</span> <span class="tlaUNC">           0 :                                 LOGINFO(5, &quot;using cached block for id = &quot; &lt;&lt; id);</span></span>
-<span id="L3303"><span class="lineNum">    3303</span> <span class="tlaUNC">           0 :                                 if (!handle_incoming_block_async(it-&gt;second)) {</span></span>
-<span id="L3304"><span class="lineNum">    3304</span> <span class="tlaUNC">           0 :                                         LOGERR(5, &quot;post_handle_incoming_block: handle_incoming_block_async failed&quot;);</span></span>
-<span id="L3305"><span class="lineNum">    3305</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L3306"><span class="lineNum">    3306</span> <span class="tlaUNC">           0 :                                 continue;</span></span>
-<span id="L3307"><span class="lineNum">    3307</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L3308"><span class="lineNum">    3308</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3309"><span class="lineNum">    3309</span>              : </span>
-<span id="L3310"><span class="lineNum">    3310</span> <span class="tlaUNC">           0 :                 if (!server-&gt;m_missingBlockRequests.emplace(m_peerId, *id.u64()).second) {</span></span>
-<span id="L3311"><span class="lineNum">    3311</span> <span class="tlaUNC">           0 :                         continue;</span></span>
-<span id="L3312"><span class="lineNum">    3312</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3296"><span class="lineNum">    3296</span> <span class="tlaUNC">           0 :         Work* work = new Work{ {}, *block, this, server, m_resetCounter.load(), m_isV6, m_addr, {}, true };</span></span>
+<span id="L3297"><span class="lineNum">    3297</span> <span class="tlaUNC">           0 :         work-&gt;req.data = work;</span></span>
+<span id="L3298"><span class="lineNum">    3298</span>              : </span>
+<span id="L3299"><span class="lineNum">    3299</span> <span class="tlaUNC">           0 :         const int err = uv_queue_work(&amp;server-&gt;m_loop, &amp;work-&gt;req,</span></span>
+<span id="L3300"><span class="lineNum">    3300</span> <span class="tlaUNC">           0 :                 [](uv_work_t* req)</span></span>
+<span id="L3301"><span class="lineNum">    3301</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L3302"><span class="lineNum">    3302</span> <span class="tlaUNC">           0 :                         BACKGROUND_JOB_START(P2PServer::handle_incoming_block_async);</span></span>
+<span id="L3303"><span class="lineNum">    3303</span> <span class="tlaUNC">           0 :                         Work* work = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
+<span id="L3304"><span class="lineNum">    3304</span> <span class="tlaUNC">           0 :                         work-&gt;client-&gt;handle_incoming_block(work-&gt;server-&gt;m_pool, work-&gt;block, work-&gt;missing_blocks, work-&gt;result);</span></span>
+<span id="L3305"><span class="lineNum">    3305</span> <span class="tlaUNC">           0 :                 },</span></span>
+<span id="L3306"><span class="lineNum">    3306</span> <span class="tlaUNC">           0 :                 [](uv_work_t* req, int /*status*/)</span></span>
+<span id="L3307"><span class="lineNum">    3307</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L3308"><span class="lineNum">    3308</span> <span class="tlaUNC">           0 :                         Work* work = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
+<span id="L3309"><span class="lineNum">    3309</span> <span class="tlaUNC">           0 :                         work-&gt;client-&gt;post_handle_incoming_block(work-&gt;server-&gt;m_pool, work-&gt;block, work-&gt;client_reset_counter, work-&gt;client_isV6, work-&gt;client_ip, work-&gt;missing_blocks, work-&gt;result);</span></span>
+<span id="L3310"><span class="lineNum">    3310</span> <span class="tlaUNC">           0 :                         delete work;</span></span>
+<span id="L3311"><span class="lineNum">    3311</span> <span class="tlaUNC">           0 :                         BACKGROUND_JOB_STOP(P2PServer::handle_incoming_block_async);</span></span>
+<span id="L3312"><span class="lineNum">    3312</span> <span class="tlaUNC">           0 :                 });</span></span>
 <span id="L3313"><span class="lineNum">    3313</span>              : </span>
-<span id="L3314"><span class="lineNum">    3314</span> <span class="tlaUNC">           0 :                 const bool send_result = server-&gt;send(this,</span></span>
-<span id="L3315"><span class="lineNum">    3315</span> <span class="tlaUNC">           0 :                         [this, &amp;id](uint8_t* buf, size_t buf_size) -&gt; size_t</span></span>
-<span id="L3316"><span class="lineNum">    3316</span> <span class="tlaUNC">           0 :                         {</span></span>
-<span id="L3317"><span class="lineNum">    3317</span> <span class="tlaUNC">           0 :                                 LOGINFO(5, &quot;[post_handle_incoming_block] sending BLOCK_REQUEST for id = &quot; &lt;&lt; id &lt;&lt; &quot; to &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
-<span id="L3318"><span class="lineNum">    3318</span>              : </span>
-<span id="L3319"><span class="lineNum">    3319</span> <span class="tlaUNC">           0 :                                 if (buf_size &lt; 1 + HASH_SIZE) {</span></span>
-<span id="L3320"><span class="lineNum">    3320</span> <span class="tlaUNC">           0 :                                         return 0;</span></span>
-<span id="L3321"><span class="lineNum">    3321</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3314"><span class="lineNum">    3314</span> <span class="tlaUNC">           0 :         if (err != 0) {</span></span>
+<span id="L3315"><span class="lineNum">    3315</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;handle_incoming_block_async: uv_queue_work failed, error &quot; &lt;&lt; uv_err_name(err));</span></span>
+<span id="L3316"><span class="lineNum">    3316</span> <span class="tlaUNC">           0 :                 delete work;</span></span>
+<span id="L3317"><span class="lineNum">    3317</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L3318"><span class="lineNum">    3318</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3319"><span class="lineNum">    3319</span>              : </span>
+<span id="L3320"><span class="lineNum">    3320</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L3321"><span class="lineNum">    3321</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L3322"><span class="lineNum">    3322</span>              : </span>
-<span id="L3323"><span class="lineNum">    3323</span> <span class="tlaUNC">           0 :                                 uint8_t* p = buf;</span></span>
-<span id="L3324"><span class="lineNum">    3324</span>              : </span>
-<span id="L3325"><span class="lineNum">    3325</span> <span class="tlaUNC">           0 :                                 *(p++) = static_cast&lt;uint8_t&gt;(MessageId::BLOCK_REQUEST);</span></span>
-<span id="L3326"><span class="lineNum">    3326</span>              : </span>
-<span id="L3327"><span class="lineNum">    3327</span> <span class="tlaUNC">           0 :                                 memcpy(p, id.h, HASH_SIZE);</span></span>
-<span id="L3328"><span class="lineNum">    3328</span> <span class="tlaUNC">           0 :                                 p += HASH_SIZE;</span></span>
-<span id="L3329"><span class="lineNum">    3329</span>              : </span>
-<span id="L3330"><span class="lineNum">    3330</span> <span class="tlaUNC">           0 :                                 return p - buf;</span></span>
-<span id="L3331"><span class="lineNum">    3331</span> <span class="tlaUNC">           0 :                         });</span></span>
-<span id="L3332"><span class="lineNum">    3332</span>              : </span>
-<span id="L3333"><span class="lineNum">    3333</span> <span class="tlaUNC">           0 :                 if (!send_result) {</span></span>
-<span id="L3334"><span class="lineNum">    3334</span> <span class="tlaUNC">           0 :                         return;</span></span>
-<span id="L3335"><span class="lineNum">    3335</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3336"><span class="lineNum">    3336</span>              : </span>
-<span id="L3337"><span class="lineNum">    3337</span> <span class="tlaUNC">           0 :                 m_blockPendingRequests.push_back(*id.u64());</span></span>
-<span id="L3338"><span class="lineNum">    3338</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3339"><span class="lineNum">    3339</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L3340"><span class="lineNum">    3340</span>              : </span>
-<span id="L3341"><span class="lineNum">    3341</span>              : template&lt;&gt; struct log::Stream::Entry&lt;P2PServer::P2PClient::SoftwareDisplayName&gt;</span>
-<span id="L3342"><span class="lineNum">    3342</span>              : {</span>
-<span id="L3343"><span class="lineNum">    3343</span>              :         static NOINLINE void put(P2PServer::P2PClient::SoftwareDisplayName value, Stream* wrapper)</span>
-<span id="L3344"><span class="lineNum">    3344</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L3345"><span class="lineNum">    3345</span> <span class="tlaUNC">           0 :                 switch (value.m_id) {</span></span>
-<span id="L3346"><span class="lineNum">    3346</span> <span class="tlaUNC">           0 :                 case SoftwareID::P2Pool:</span></span>
-<span id="L3347"><span class="lineNum">    3347</span> <span class="tlaUNC">           0 :                 case SoftwareID::GoObserver:</span></span>
-<span id="L3348"><span class="lineNum">    3348</span> <span class="tlaUNC">           0 :                         if (value.m_id == SoftwareID::P2Pool) {</span></span>
-<span id="L3349"><span class="lineNum">    3349</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; &quot;P2Pool v&quot;;</span></span>
-<span id="L3350"><span class="lineNum">    3350</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L3351"><span class="lineNum">    3351</span> <span class="tlaUNC">           0 :                         else {</span></span>
-<span id="L3352"><span class="lineNum">    3352</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; &quot;GoObserver v&quot;;</span></span>
-<span id="L3353"><span class="lineNum">    3353</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L3354"><span class="lineNum">    3354</span>              : </span>
-<span id="L3355"><span class="lineNum">    3355</span> <span class="tlaUNC">           0 :                         if (value.m_version &lt;= 0x3000A) {</span></span>
-<span id="L3356"><span class="lineNum">    3356</span>              :                                 // Encoding for versions &lt;= 3.10</span>
-<span id="L3357"><span class="lineNum">    3357</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; (value.m_version &gt;&gt; 16) &lt;&lt; '.' &lt;&lt; (value.m_version &amp; 0xFFFF);</span></span>
-<span id="L3358"><span class="lineNum">    3358</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L3359"><span class="lineNum">    3359</span> <span class="tlaUNC">           0 :                         else {</span></span>
-<span id="L3360"><span class="lineNum">    3360</span>              :                                 // Encoding for versions &gt; 3.10</span>
-<span id="L3361"><span class="lineNum">    3361</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; (value.m_version &gt;&gt; 16) &lt;&lt; '.' &lt;&lt; ((value.m_version &gt;&gt; 8) &amp; 0xFF);</span></span>
-<span id="L3362"><span class="lineNum">    3362</span> <span class="tlaUNC">           0 :                                 if (value.m_version &amp; 0xFF) {</span></span>
-<span id="L3363"><span class="lineNum">    3363</span> <span class="tlaUNC">           0 :                                         *wrapper &lt;&lt; '.' &lt;&lt; (value.m_version &amp; 0xFF);</span></span>
-<span id="L3364"><span class="lineNum">    3364</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L3365"><span class="lineNum">    3365</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L3366"><span class="lineNum">    3366</span>              : </span>
-<span id="L3367"><span class="lineNum">    3367</span> <span class="tlaUNC">           0 :                         break;</span></span>
+<span id="L3323"><span class="lineNum">    3323</span>              : void P2PServer::P2PClient::handle_incoming_block(p2pool* pool, PoolBlock&amp; block, std::vector&lt;hash&gt;&amp; missing_blocks, bool&amp; result)</span>
+<span id="L3324"><span class="lineNum">    3324</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L3325"><span class="lineNum">    3325</span> <span class="tlaUNC">           0 :         result = pool-&gt;side_chain().add_external_block(block, missing_blocks);</span></span>
+<span id="L3326"><span class="lineNum">    3326</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L3327"><span class="lineNum">    3327</span>              : </span>
+<span id="L3328"><span class="lineNum">    3328</span>              : void P2PServer::P2PClient::post_handle_incoming_block(p2pool* pool, const PoolBlock&amp; block, const uint32_t reset_counter, bool is_v6, const raw_ip&amp; addr, std::vector&lt;hash&gt;&amp; missing_blocks, const bool result)</span>
+<span id="L3329"><span class="lineNum">    3329</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L3330"><span class="lineNum">    3330</span> <span class="tlaUNC">           0 :         const uint32_t new_reset_counter = m_resetCounter.load();</span></span>
+<span id="L3331"><span class="lineNum">    3331</span>              : </span>
+<span id="L3332"><span class="lineNum">    3332</span> <span class="tlaUNC">           0 :         if (!result) {</span></span>
+<span id="L3333"><span class="lineNum">    3333</span>              :                 // Client sent bad data, disconnect and ban it</span>
+<span id="L3334"><span class="lineNum">    3334</span> <span class="tlaUNC">           0 :                 if (reset_counter == new_reset_counter) {</span></span>
+<span id="L3335"><span class="lineNum">    3335</span> <span class="tlaUNC">           0 :                         close();</span></span>
+<span id="L3336"><span class="lineNum">    3336</span> <span class="tlaUNC">           0 :                         LOGWARN(3, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; banned for &quot; &lt;&lt; DEFAULT_BAN_TIME &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L3337"><span class="lineNum">    3337</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3338"><span class="lineNum">    3338</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L3339"><span class="lineNum">    3339</span> <span class="tlaUNC">           0 :                         LOGWARN(3, addr &lt;&lt; &quot; banned for &quot; &lt;&lt; DEFAULT_BAN_TIME &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L3340"><span class="lineNum">    3340</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3341"><span class="lineNum">    3341</span>              : </span>
+<span id="L3342"><span class="lineNum">    3342</span> <span class="tlaUNC">           0 :                 P2PServer* server = pool-&gt;p2p_server();</span></span>
+<span id="L3343"><span class="lineNum">    3343</span> <span class="tlaUNC">           0 :                 server-&gt;ban(is_v6, addr, DEFAULT_BAN_TIME);</span></span>
+<span id="L3344"><span class="lineNum">    3344</span> <span class="tlaUNC">           0 :                 server-&gt;remove_peer_from_list(addr);</span></span>
+<span id="L3345"><span class="lineNum">    3345</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3346"><span class="lineNum">    3346</span>              : </span>
+<span id="L3347"><span class="lineNum">    3347</span>              :         // We might have been disconnected while side_chain was adding the block</span>
+<span id="L3348"><span class="lineNum">    3348</span>              :         // In this case we can't send BLOCK_REQUEST messages on this connection anymore</span>
+<span id="L3349"><span class="lineNum">    3349</span> <span class="tlaUNC">           0 :         if (reset_counter != new_reset_counter) {</span></span>
+<span id="L3350"><span class="lineNum">    3350</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L3351"><span class="lineNum">    3351</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3352"><span class="lineNum">    3352</span>              : </span>
+<span id="L3353"><span class="lineNum">    3353</span> <span class="tlaUNC">           0 :         if (missing_blocks.empty()) {</span></span>
+<span id="L3354"><span class="lineNum">    3354</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L3355"><span class="lineNum">    3355</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3356"><span class="lineNum">    3356</span>              : </span>
+<span id="L3357"><span class="lineNum">    3357</span> <span class="tlaUNC">           0 :         P2PServer* server = static_cast&lt;P2PServer*&gt;(m_owner);</span></span>
+<span id="L3358"><span class="lineNum">    3358</span>              : </span>
+<span id="L3359"><span class="lineNum">    3359</span>              :         // If the initial sync is not finished yet, try to ask the fastest peer instead</span>
+<span id="L3360"><span class="lineNum">    3360</span> <span class="tlaUNC">           0 :         if (!server-&gt;m_pool-&gt;side_chain().precalcFinished()) {</span></span>
+<span id="L3361"><span class="lineNum">    3361</span> <span class="tlaUNC">           0 :                 P2PClient* c = server-&gt;m_fastestPeer;</span></span>
+<span id="L3362"><span class="lineNum">    3362</span> <span class="tlaUNC">           0 :                 if (c &amp;&amp; (c != this) &amp;&amp; (c-&gt;m_broadcastMaxHeight &gt;= block.m_sidechainHeight)) {</span></span>
+<span id="L3363"><span class="lineNum">    3363</span> <span class="tlaUNC">           0 :                         LOGINFO(5, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(c-&gt;m_addrString) &lt;&lt; &quot; is faster, sending BLOCK_REQUEST to it instead&quot;);</span></span>
+<span id="L3364"><span class="lineNum">    3364</span> <span class="tlaUNC">           0 :                         c-&gt;post_handle_incoming_block(pool, block, c-&gt;m_resetCounter.load(), c-&gt;m_isV6, c-&gt;m_addr, missing_blocks, true);</span></span>
+<span id="L3365"><span class="lineNum">    3365</span> <span class="tlaUNC">           0 :                         return;</span></span>
+<span id="L3366"><span class="lineNum">    3366</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3367"><span class="lineNum">    3367</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L3368"><span class="lineNum">    3368</span>              : </span>
-<span id="L3369"><span class="lineNum">    3369</span> <span class="tlaUNC">           0 :                 default:</span></span>
-<span id="L3370"><span class="lineNum">    3370</span> <span class="tlaUNC">           0 :                         *wrapper &lt;&lt; &quot;Unknown v&quot; &lt;&lt; (value.m_version &gt;&gt; 16) &lt;&lt; '.' &lt;&lt; (value.m_version &amp; 0xFFFF);</span></span>
-<span id="L3371"><span class="lineNum">    3371</span> <span class="tlaUNC">           0 :                         break;</span></span>
-<span id="L3372"><span class="lineNum">    3372</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L3373"><span class="lineNum">    3373</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3374"><span class="lineNum">    3374</span>              : };</span>
-<span id="L3375"><span class="lineNum">    3375</span>              : </span>
-<span id="L3376"><span class="lineNum">    3376</span>              : } // namespace p2pool</span>
+<span id="L3369"><span class="lineNum">    3369</span> <span class="tlaUNC">           0 :         ReadLock lock(server-&gt;m_cachedBlocksLock);</span></span>
+<span id="L3370"><span class="lineNum">    3370</span>              : </span>
+<span id="L3371"><span class="lineNum">    3371</span> <span class="tlaUNC">           0 :         for (const hash&amp; id : missing_blocks) {</span></span>
+<span id="L3372"><span class="lineNum">    3372</span> <span class="tlaUNC">           0 :                 if (server-&gt;m_cachedBlocks) {</span></span>
+<span id="L3373"><span class="lineNum">    3373</span> <span class="tlaUNC">           0 :                         auto it = server-&gt;m_cachedBlocks-&gt;find(id);</span></span>
+<span id="L3374"><span class="lineNum">    3374</span> <span class="tlaUNC">           0 :                         if (it != server-&gt;m_cachedBlocks-&gt;end()) {</span></span>
+<span id="L3375"><span class="lineNum">    3375</span> <span class="tlaUNC">           0 :                                 LOGINFO(5, &quot;using cached block for id = &quot; &lt;&lt; id);</span></span>
+<span id="L3376"><span class="lineNum">    3376</span> <span class="tlaUNC">           0 :                                 if (!handle_incoming_block_async(it-&gt;second)) {</span></span>
+<span id="L3377"><span class="lineNum">    3377</span> <span class="tlaUNC">           0 :                                         LOGERR(5, &quot;post_handle_incoming_block: handle_incoming_block_async failed&quot;);</span></span>
+<span id="L3378"><span class="lineNum">    3378</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3379"><span class="lineNum">    3379</span> <span class="tlaUNC">           0 :                                 continue;</span></span>
+<span id="L3380"><span class="lineNum">    3380</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3381"><span class="lineNum">    3381</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3382"><span class="lineNum">    3382</span>              : </span>
+<span id="L3383"><span class="lineNum">    3383</span> <span class="tlaUNC">           0 :                 if (!server-&gt;m_missingBlockRequests.emplace(m_peerId, *id.u64()).second) {</span></span>
+<span id="L3384"><span class="lineNum">    3384</span> <span class="tlaUNC">           0 :                         continue;</span></span>
+<span id="L3385"><span class="lineNum">    3385</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3386"><span class="lineNum">    3386</span>              : </span>
+<span id="L3387"><span class="lineNum">    3387</span> <span class="tlaUNC">           0 :                 const bool send_result = server-&gt;send(this,</span></span>
+<span id="L3388"><span class="lineNum">    3388</span> <span class="tlaUNC">           0 :                         [this, &amp;id](uint8_t* buf, size_t buf_size) -&gt; size_t</span></span>
+<span id="L3389"><span class="lineNum">    3389</span> <span class="tlaUNC">           0 :                         {</span></span>
+<span id="L3390"><span class="lineNum">    3390</span> <span class="tlaUNC">           0 :                                 LOGINFO(5, &quot;[post_handle_incoming_block] sending BLOCK_REQUEST for id = &quot; &lt;&lt; id &lt;&lt; &quot; to &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
+<span id="L3391"><span class="lineNum">    3391</span>              : </span>
+<span id="L3392"><span class="lineNum">    3392</span> <span class="tlaUNC">           0 :                                 if (buf_size &lt; 1 + HASH_SIZE) {</span></span>
+<span id="L3393"><span class="lineNum">    3393</span> <span class="tlaUNC">           0 :                                         return 0;</span></span>
+<span id="L3394"><span class="lineNum">    3394</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3395"><span class="lineNum">    3395</span>              : </span>
+<span id="L3396"><span class="lineNum">    3396</span> <span class="tlaUNC">           0 :                                 uint8_t* p = buf;</span></span>
+<span id="L3397"><span class="lineNum">    3397</span>              : </span>
+<span id="L3398"><span class="lineNum">    3398</span> <span class="tlaUNC">           0 :                                 *(p++) = static_cast&lt;uint8_t&gt;(MessageId::BLOCK_REQUEST);</span></span>
+<span id="L3399"><span class="lineNum">    3399</span>              : </span>
+<span id="L3400"><span class="lineNum">    3400</span> <span class="tlaUNC">           0 :                                 memcpy(p, id.h, HASH_SIZE);</span></span>
+<span id="L3401"><span class="lineNum">    3401</span> <span class="tlaUNC">           0 :                                 p += HASH_SIZE;</span></span>
+<span id="L3402"><span class="lineNum">    3402</span>              : </span>
+<span id="L3403"><span class="lineNum">    3403</span> <span class="tlaUNC">           0 :                                 return p - buf;</span></span>
+<span id="L3404"><span class="lineNum">    3404</span> <span class="tlaUNC">           0 :                         });</span></span>
+<span id="L3405"><span class="lineNum">    3405</span>              : </span>
+<span id="L3406"><span class="lineNum">    3406</span> <span class="tlaUNC">           0 :                 if (!send_result) {</span></span>
+<span id="L3407"><span class="lineNum">    3407</span> <span class="tlaUNC">           0 :                         return;</span></span>
+<span id="L3408"><span class="lineNum">    3408</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3409"><span class="lineNum">    3409</span>              : </span>
+<span id="L3410"><span class="lineNum">    3410</span> <span class="tlaUNC">           0 :                 m_blockPendingRequests.push_back(*id.u64());</span></span>
+<span id="L3411"><span class="lineNum">    3411</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3412"><span class="lineNum">    3412</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L3413"><span class="lineNum">    3413</span>              : </span>
+<span id="L3414"><span class="lineNum">    3414</span>              : template&lt;&gt; struct log::Stream::Entry&lt;P2PServer::P2PClient::SoftwareDisplayName&gt;</span>
+<span id="L3415"><span class="lineNum">    3415</span>              : {</span>
+<span id="L3416"><span class="lineNum">    3416</span>              :         static NOINLINE void put(P2PServer::P2PClient::SoftwareDisplayName value, Stream* wrapper)</span>
+<span id="L3417"><span class="lineNum">    3417</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L3418"><span class="lineNum">    3418</span> <span class="tlaUNC">           0 :                 switch (value.m_id) {</span></span>
+<span id="L3419"><span class="lineNum">    3419</span> <span class="tlaUNC">           0 :                 case SoftwareID::P2Pool:</span></span>
+<span id="L3420"><span class="lineNum">    3420</span> <span class="tlaUNC">           0 :                 case SoftwareID::GoObserver:</span></span>
+<span id="L3421"><span class="lineNum">    3421</span> <span class="tlaUNC">           0 :                         if (value.m_id == SoftwareID::P2Pool) {</span></span>
+<span id="L3422"><span class="lineNum">    3422</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; &quot;P2Pool v&quot;;</span></span>
+<span id="L3423"><span class="lineNum">    3423</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3424"><span class="lineNum">    3424</span> <span class="tlaUNC">           0 :                         else {</span></span>
+<span id="L3425"><span class="lineNum">    3425</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; &quot;GoObserver v&quot;;</span></span>
+<span id="L3426"><span class="lineNum">    3426</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3427"><span class="lineNum">    3427</span>              : </span>
+<span id="L3428"><span class="lineNum">    3428</span> <span class="tlaUNC">           0 :                         if (value.m_version &lt;= 0x3000A) {</span></span>
+<span id="L3429"><span class="lineNum">    3429</span>              :                                 // Encoding for versions &lt;= 3.10</span>
+<span id="L3430"><span class="lineNum">    3430</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; (value.m_version &gt;&gt; 16) &lt;&lt; '.' &lt;&lt; (value.m_version &amp; 0xFFFF);</span></span>
+<span id="L3431"><span class="lineNum">    3431</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3432"><span class="lineNum">    3432</span> <span class="tlaUNC">           0 :                         else {</span></span>
+<span id="L3433"><span class="lineNum">    3433</span>              :                                 // Encoding for versions &gt; 3.10</span>
+<span id="L3434"><span class="lineNum">    3434</span> <span class="tlaUNC">           0 :                                 *wrapper &lt;&lt; (value.m_version &gt;&gt; 16) &lt;&lt; '.' &lt;&lt; ((value.m_version &gt;&gt; 8) &amp; 0xFF);</span></span>
+<span id="L3435"><span class="lineNum">    3435</span> <span class="tlaUNC">           0 :                                 if (value.m_version &amp; 0xFF) {</span></span>
+<span id="L3436"><span class="lineNum">    3436</span> <span class="tlaUNC">           0 :                                         *wrapper &lt;&lt; '.' &lt;&lt; (value.m_version &amp; 0xFF);</span></span>
+<span id="L3437"><span class="lineNum">    3437</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L3438"><span class="lineNum">    3438</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L3439"><span class="lineNum">    3439</span>              : </span>
+<span id="L3440"><span class="lineNum">    3440</span> <span class="tlaUNC">           0 :                         break;</span></span>
+<span id="L3441"><span class="lineNum">    3441</span>              : </span>
+<span id="L3442"><span class="lineNum">    3442</span> <span class="tlaUNC">           0 :                 default:</span></span>
+<span id="L3443"><span class="lineNum">    3443</span> <span class="tlaUNC">           0 :                         *wrapper &lt;&lt; &quot;Unknown v&quot; &lt;&lt; (value.m_version &gt;&gt; 16) &lt;&lt; '.' &lt;&lt; (value.m_version &amp; 0xFFFF);</span></span>
+<span id="L3444"><span class="lineNum">    3444</span> <span class="tlaUNC">           0 :                         break;</span></span>
+<span id="L3445"><span class="lineNum">    3445</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L3446"><span class="lineNum">    3446</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L3447"><span class="lineNum">    3447</span>              : };</span>
+<span id="L3448"><span class="lineNum">    3448</span>              : </span>
+<span id="L3449"><span class="lineNum">    3449</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
