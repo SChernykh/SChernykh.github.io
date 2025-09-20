@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-20 16:18:50</td>
+            <td class="headerValue">2025-09-20 17:27:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1400,7 +1400,7 @@
 <span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :                 s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_headers_range\&quot;,\&quot;params\&quot;:{\&quot;start_height\&quot;:&quot; &lt;&lt; start_height &lt;&lt; &quot;,\&quot;end_height\&quot;:&quot; &lt;&lt; next_height &lt;&lt; &quot;}}\0&quot;;</span></span>
 <span id="L1339"><span class="lineNum">    1339</span>              : </span>
 <span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :                 JSONRPCRequest::call(host.m_address, host.m_rpcPort, buf, host.m_rpcLogin, m_params-&gt;m_socks5Proxy, host.m_rpcSSL, host.m_rpcSSL_Fingerprint,</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :                         [this, start_height, next_height, host, current_height](const char* data, size_t size, double) {</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :                         [this, start_height, next_height, current_height](const char* data, size_t size, double) {</span></span>
 <span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC">           0 :                                 if (parse_block_headers_range(data, size) == next_height - start_height + 1) {</span></span>
 <span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :                                         download_block_headers3(next_height + 1, current_height);</span></span>
 <span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                                 }</span></span>
