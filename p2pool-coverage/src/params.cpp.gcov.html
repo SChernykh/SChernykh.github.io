@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">225</td>
+            <td class="headerCovTableEntry">229</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-20 17:27:44</td>
+            <td class="headerValue">2025-09-21 13:53:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -376,59 +376,64 @@
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L316"><span class="lineNum">     316</span>              : </span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC">           0 :         if (m_mergeMiningHosts.size() &gt; 10) {</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Too many merge mining blockchains.&quot;);</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaUNC">           0 :         if (m_wallet.is_subaddress()) {</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Wallet address must be a main address (starting with 4...). Try \&quot;p2pool --help\&quot;.&quot;);</span></span>
 <span id="L319"><span class="lineNum">     319</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L320"><span class="lineNum">     320</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span>              : #ifdef WITH_TLS</span>
-<span id="L323"><span class="lineNum">     323</span>              :         if (m_tlsCert.empty() != m_tlsCertKey.empty()) {</span>
-<span id="L324"><span class="lineNum">     324</span>              :                 LOGERR(1, &quot;Both --tls-cert and --tls-cert-key files must be specified&quot;);</span>
-<span id="L325"><span class="lineNum">     325</span>              :                 return false;</span>
-<span id="L326"><span class="lineNum">     326</span>              :         }</span>
-<span id="L327"><span class="lineNum">     327</span>              : #endif</span>
-<span id="L328"><span class="lineNum">     328</span>              : </span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaUNC">           0 :         if (m_mini &amp;&amp; m_nano) {</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;You can't have both --mini and --nano in the command line&quot;);</span></span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaUNC">           0 :         if (m_mergeMiningHosts.size() &gt; 10) {</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Too many merge mining blockchains.&quot;);</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span>              : #ifdef WITH_TLS</span>
+<span id="L328"><span class="lineNum">     328</span>              :         if (m_tlsCert.empty() != m_tlsCertKey.empty()) {</span>
+<span id="L329"><span class="lineNum">     329</span>              :                 LOGERR(1, &quot;Both --tls-cert and --tls-cert-key files must be specified&quot;);</span>
+<span id="L330"><span class="lineNum">     330</span>              :                 return false;</span>
+<span id="L331"><span class="lineNum">     331</span>              :         }</span>
+<span id="L332"><span class="lineNum">     332</span>              : #endif</span>
 <span id="L333"><span class="lineNum">     333</span>              : </span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L336"><span class="lineNum">     336</span>              : </span>
-<span id="L337"><span class="lineNum">     337</span>              : bool Params::Host::init_display_name(const Params&amp; p)</span>
-<span id="L338"><span class="lineNum">     338</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaUNC">           0 :         m_displayName = m_address;</span></span>
-<span id="L340"><span class="lineNum">     340</span>              : </span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaUNC">           0 :         if (p.m_socks5Proxy.empty()) {</span></span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaUNC">           0 :                 if (p.m_dns) {</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC">           0 :                         bool is_v6;</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaUNC">           0 :                         if (!resolve_host(m_address, is_v6)) {</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaUNC">           0 :                                 LOGERR(1, &quot;resolve_host failed for &quot; &lt;&lt; m_address);</span></span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaUNC">           0 :                 else if (m_address.find_first_not_of(&quot;0123456789.:&quot;) != std::string::npos) {</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;Can't resolve hostname &quot; &lt;&lt; m_address &lt;&lt; &quot; with DNS disabled&quot;);</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L354"><span class="lineNum">     354</span>              : </span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC">           0 :         char buf[log::Stream::BUF_SIZE + 1];</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaUNC">           0 :         buf[0] = '\0';</span></span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaUNC">           0 :         log::Stream s(buf);</span></span>
-<span id="L358"><span class="lineNum">     358</span>              : </span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaUNC">           0 :         s &lt;&lt; m_displayName &lt;&lt; (m_rpcSSL ? &quot;:RPC-SSL &quot; : &quot;:RPC &quot;) &lt;&lt; m_rpcPort &lt;&lt; &quot;:ZMQ &quot; &lt;&lt; m_zmqPort;</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC">           0 :         if (m_address != m_displayName) {</span></span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :                 s &lt;&lt; &quot; (&quot; &lt;&lt; m_address &lt;&lt; ')';</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :         if (m_mini &amp;&amp; m_nano) {</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;You can't have both --mini and --nano in the command line&quot;);</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L341"><span class="lineNum">     341</span>              : </span>
+<span id="L342"><span class="lineNum">     342</span>              : bool Params::Host::init_display_name(const Params&amp; p)</span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaUNC">           0 :         m_displayName = m_address;</span></span>
+<span id="L345"><span class="lineNum">     345</span>              : </span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC">           0 :         if (p.m_socks5Proxy.empty()) {</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 :                 if (p.m_dns) {</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaUNC">           0 :                         bool is_v6;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaUNC">           0 :                         if (!resolve_host(m_address, is_v6)) {</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaUNC">           0 :                                 LOGERR(1, &quot;resolve_host failed for &quot; &lt;&lt; m_address);</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L354"><span class="lineNum">     354</span> <span class="tlaUNC">           0 :                 else if (m_address.find_first_not_of(&quot;0123456789.:&quot;) != std::string::npos) {</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;Can't resolve hostname &quot; &lt;&lt; m_address &lt;&lt; &quot; with DNS disabled&quot;);</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L359"><span class="lineNum">     359</span>              : </span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaUNC">           0 :         char buf[log::Stream::BUF_SIZE + 1];</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaUNC">           0 :         buf[0] = '\0';</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaUNC">           0 :         log::Stream s(buf);</span></span>
 <span id="L363"><span class="lineNum">     363</span>              : </span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC">           0 :         m_displayName.assign(buf, s.m_pos);</span></span>
-<span id="L365"><span class="lineNum">     365</span>              : </span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaUNC">           0 :         s &lt;&lt; m_displayName &lt;&lt; (m_rpcSSL ? &quot;:RPC-SSL &quot; : &quot;:RPC &quot;) &lt;&lt; m_rpcPort &lt;&lt; &quot;:ZMQ &quot; &lt;&lt; m_zmqPort;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaUNC">           0 :         if (m_address != m_displayName) {</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaUNC">           0 :                 s &lt;&lt; &quot; (&quot; &lt;&lt; m_address &lt;&lt; ')';</span></span>
+<span id="L367"><span class="lineNum">     367</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L368"><span class="lineNum">     368</span>              : </span>
-<span id="L369"><span class="lineNum">     369</span>              : } // namespace p2pool</span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaUNC">           0 :         m_displayName.assign(buf, s.m_pos);</span></span>
+<span id="L370"><span class="lineNum">     370</span>              : </span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L373"><span class="lineNum">     373</span>              : </span>
+<span id="L374"><span class="lineNum">     374</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

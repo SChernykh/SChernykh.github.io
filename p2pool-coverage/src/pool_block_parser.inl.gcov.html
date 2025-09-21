@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-20 17:27:44</td>
+            <td class="headerValue">2025-09-21 13:53:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -346,7 +346,7 @@
 <span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       40249 :                 hash view_pub_key;</span></span>
 <span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">       40249 :                 READ_BUF(spend_pub_key.h, HASH_SIZE);</span></span>
 <span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">       40249 :                 READ_BUF(view_pub_key.h, HASH_SIZE);</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       40249 :                 if (!m_minerWallet.assign(spend_pub_key, view_pub_key, sidechain.network_type())) {</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       40249 :                 if (!m_minerWallet.assign(spend_pub_key, view_pub_key, sidechain.network_type(), false)) {</span></span>
 <span id="L288"><span class="lineNum">     288</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L290"><span class="lineNum">     290</span>              : </span>
