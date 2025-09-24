@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-23 15:23:33</td>
+            <td class="headerValue">2025-09-24 08:03:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1617,7 +1617,7 @@
 <span id="L1555"><span class="lineNum">    1555</span> <span class="tlaUNC">           0 :         uint32_t connections = m_numConnections;</span></span>
 <span id="L1556"><span class="lineNum">    1556</span> <span class="tlaUNC">           0 :         uint32_t incoming_connections = m_numIncomingConnections;</span></span>
 <span id="L1557"><span class="lineNum">    1557</span>              : </span>
-<span id="L1558"><span class="lineNum">    1558</span> <span class="tlaUNC">           0 :         const double block_reward_share_percent = m_pool-&gt;side_chain().get_reward_share(m_pool-&gt;params().m_miningWallet) * 100.0;</span></span>
+<span id="L1558"><span class="lineNum">    1558</span> <span class="tlaUNC">           0 :         const double block_reward_share_percent = m_pool-&gt;side_chain().get_reward_share(m_pool-&gt;params().m_wallet) * 100.0;</span></span>
 <span id="L1559"><span class="lineNum">    1559</span>              : </span>
 <span id="L1560"><span class="lineNum">    1560</span> <span class="tlaUNC">           0 :         CallOnLoop(&amp;m_loop, [=]() {</span></span>
 <span id="L1561"><span class="lineNum">    1561</span> <span class="tlaUNC">           0 :                 m_pool-&gt;api()-&gt;set(p2pool_api::Category::LOCAL, &quot;stratum&quot;, [=](log::Stream&amp; s) {</span></span>
@@ -1634,7 +1634,7 @@
 <span id="L1572"><span class="lineNum">    1572</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;connections\&quot;:&quot; &lt;&lt; connections</span></span>
 <span id="L1573"><span class="lineNum">    1573</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;incoming_connections\&quot;:&quot; &lt;&lt; incoming_connections</span></span>
 <span id="L1574"><span class="lineNum">    1574</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;block_reward_share_percent\&quot;:&quot; &lt;&lt; block_reward_share_percent</span></span>
-<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;wallet\&quot;:\&quot;&quot; &lt;&lt; m_pool-&gt;params().m_displayWallet &lt;&lt; '&quot;'</span></span>
+<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;wallet\&quot;:\&quot;&quot; &lt;&lt; m_pool-&gt;params().m_wallet &lt;&lt; '&quot;'</span></span>
 <span id="L1576"><span class="lineNum">    1576</span> <span class="tlaUNC">           0 :                                 &lt;&lt; &quot;,\&quot;workers\&quot;:[&quot;;</span></span>
 <span id="L1577"><span class="lineNum">    1577</span>              : </span>
 <span id="L1578"><span class="lineNum">    1578</span> <span class="tlaUNC">           0 :                         const difficulty_type pool_diff = m_pool-&gt;side_chain().difficulty();</span></span>
