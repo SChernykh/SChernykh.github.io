@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-25 13:04:09</td>
+            <td class="headerValue">2025-09-25 16:53:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -352,12 +352,12 @@
 <span id="L290"><span class="lineNum">     290</span> <span class="tlaUNC">           0 :         delete m_params;</span></span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :                 auto p = bkg_jobs_tracker;</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :                 auto* p = bkg_jobs_tracker;</span></span>
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC">           0 :                 bkg_jobs_tracker = nullptr;</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC">           0 :                 delete p;</span></span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaUNC">           0 :                 auto p = PoolBlock::s_precalculatedSharesLock;</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaUNC">           0 :                 auto* p = PoolBlock::s_precalculatedSharesLock;</span></span>
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaUNC">           0 :                 PoolBlock::s_precalculatedSharesLock = nullptr;</span></span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC">           0 :                 delete p;</span></span>
 <span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC">           0 :         }</span></span>
@@ -484,7 +484,7 @@
 <span id="L422"><span class="lineNum">     422</span>              :                 m_mempool-&gt;swap(data.tx_backlog);</span>
 <span id="L423"><span class="lineNum">     423</span>              :         }</span>
 <span id="L424"><span class="lineNum">     424</span>              : #else</span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :         m_mempool-&gt;swap(data.tx_backlog);</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaUNC">           0 :         m_mempool-&gt;swap_transactions(data.tx_backlog);</span></span>
 <span id="L426"><span class="lineNum">     426</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L427"><span class="lineNum">     427</span>              : </span>
 <span id="L428"><span class="lineNum">     428</span> <span class="tlaUNC">           0 :         {</span></span>
@@ -607,7 +607,7 @@
 <span id="L545"><span class="lineNum">     545</span>              : </span>
 <span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC">           0 :         char buf[log::Stream::BUF_SIZE + 1] = {};</span></span>
 <span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :         log::Stream s(buf);</span></span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_header_by_height\&quot;,\&quot;params\&quot;:{\&quot;height\&quot;:&quot; &lt;&lt; h &lt;&lt; &quot;}}\0&quot;;</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_header_by_height\&quot;,\&quot;params\&quot;:{\&quot;height\&quot;:&quot; &lt;&lt; h &lt;&lt; &quot;}}&quot; &lt;&lt; '\0';</span></span>
 <span id="L549"><span class="lineNum">     549</span>              : </span>
 <span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 :         const Params::Host&amp; host = current_host();</span></span>
 <span id="L551"><span class="lineNum">     551</span>              : </span>
@@ -1331,7 +1331,7 @@
 <span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :         const Params::Host&amp; host = current_host();</span></span>
 <span id="L1270"><span class="lineNum">    1270</span>              : </span>
 <span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :         s.m_pos = 0;</span></span>
-<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_header_by_height\&quot;,\&quot;params\&quot;:{\&quot;height\&quot;:&quot; &lt;&lt; prev_seed_height &lt;&lt; &quot;}}\0&quot;;</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_header_by_height\&quot;,\&quot;params\&quot;:{\&quot;height\&quot;:&quot; &lt;&lt; prev_seed_height &lt;&lt; &quot;}}&quot; &lt;&lt; '\0';</span></span>
 <span id="L1273"><span class="lineNum">    1273</span>              : </span>
 <span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :         JSONRPCRequest::call(host.m_address, host.m_rpcPort, buf, host.m_rpcLogin, m_params-&gt;m_socks5Proxy, host.m_rpcSSL, host.m_rpcSSL_Fingerprint,</span></span>
 <span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :                 [this, prev_seed_height, current_height](const char* data, size_t size, double) {</span></span>
@@ -1364,7 +1364,7 @@
 <span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :         const Params::Host&amp; host = current_host();</span></span>
 <span id="L1303"><span class="lineNum">    1303</span>              : </span>
 <span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :         s.m_pos = 0;</span></span>
-<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_header_by_height\&quot;,\&quot;params\&quot;:{\&quot;height\&quot;:&quot; &lt;&lt; seed_height &lt;&lt; &quot;}}\0&quot;;</span></span>
+<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_header_by_height\&quot;,\&quot;params\&quot;:{\&quot;height\&quot;:&quot; &lt;&lt; seed_height &lt;&lt; &quot;}}&quot; &lt;&lt; '\0';</span></span>
 <span id="L1306"><span class="lineNum">    1306</span>              : </span>
 <span id="L1307"><span class="lineNum">    1307</span> <span class="tlaUNC">           0 :         JSONRPCRequest::call(host.m_address, host.m_rpcPort, buf, host.m_rpcLogin, m_params-&gt;m_socks5Proxy, host.m_rpcSSL, host.m_rpcSSL_Fingerprint,</span></span>
 <span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :                 [this, seed_height, current_height](const char* data, size_t size, double) {</span></span>
@@ -1400,7 +1400,7 @@
 <span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :                 const uint64_t next_height = start_height + RESTRICTED_BLOCK_HEADER_RANGE;</span></span>
 <span id="L1339"><span class="lineNum">    1339</span>              : </span>
 <span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :                 s.m_pos = 0;</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :                 s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_headers_range\&quot;,\&quot;params\&quot;:{\&quot;start_height\&quot;:&quot; &lt;&lt; start_height &lt;&lt; &quot;,\&quot;end_height\&quot;:&quot; &lt;&lt; next_height &lt;&lt; &quot;}}\0&quot;;</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :                 s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_headers_range\&quot;,\&quot;params\&quot;:{\&quot;start_height\&quot;:&quot; &lt;&lt; start_height &lt;&lt; &quot;,\&quot;end_height\&quot;:&quot; &lt;&lt; next_height &lt;&lt; &quot;}}&quot; &lt;&lt; '\0';</span></span>
 <span id="L1342"><span class="lineNum">    1342</span>              : </span>
 <span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :                 JSONRPCRequest::call(host.m_address, host.m_rpcPort, buf, host.m_rpcLogin, m_params-&gt;m_socks5Proxy, host.m_rpcSSL, host.m_rpcSSL_Fingerprint,</span></span>
 <span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                         [this, start_height, next_height, current_height](const char* data, size_t size, double) {</span></span>
@@ -1433,7 +1433,7 @@
 <span id="L1371"><span class="lineNum">    1371</span> <span class="tlaUNC">           0 :         const Params::Host&amp; host = current_host();</span></span>
 <span id="L1372"><span class="lineNum">    1372</span>              : </span>
 <span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :         s.m_pos = 0;</span></span>
-<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_headers_range\&quot;,\&quot;params\&quot;:{\&quot;start_height\&quot;:&quot; &lt;&lt; start_height &lt;&lt; &quot;,\&quot;end_height\&quot;:&quot; &lt;&lt; current_height - 1 &lt;&lt; &quot;}}\0&quot;;</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 :         s &lt;&lt; &quot;{\&quot;jsonrpc\&quot;:\&quot;2.0\&quot;,\&quot;id\&quot;:\&quot;0\&quot;,\&quot;method\&quot;:\&quot;get_block_headers_range\&quot;,\&quot;params\&quot;:{\&quot;start_height\&quot;:&quot; &lt;&lt; start_height &lt;&lt; &quot;,\&quot;end_height\&quot;:&quot; &lt;&lt; current_height - 1 &lt;&lt; &quot;}}&quot; &lt;&lt; '\0';</span></span>
 <span id="L1375"><span class="lineNum">    1375</span>              : </span>
 <span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 :         JSONRPCRequest::call(host.m_address, host.m_rpcPort, buf, host.m_rpcLogin, m_params-&gt;m_socks5Proxy, host.m_rpcSSL, host.m_rpcSSL_Fingerprint,</span></span>
 <span id="L1377"><span class="lineNum">    1377</span> <span class="tlaUNC">           0 :                 [this, start_height, current_height, host](const char* data, size_t size, double)</span></span>
@@ -1925,7 +1925,7 @@
 <span id="L1863"><span class="lineNum">    1863</span> <span class="tlaUNC">           0 :         auto headers = it2-&gt;value.GetArray();</span></span>
 <span id="L1864"><span class="lineNum">    1864</span> <span class="tlaUNC">           0 :         uint64_t min_height = std::numeric_limits&lt;uint64_t&gt;::max();</span></span>
 <span id="L1865"><span class="lineNum">    1865</span> <span class="tlaUNC">           0 :         uint64_t max_height = 0;</span></span>
-<span id="L1866"><span class="lineNum">    1866</span> <span class="tlaUNC">           0 :         for (auto i = headers.begin(); i != headers.end(); ++i) {</span></span>
+<span id="L1866"><span class="lineNum">    1866</span> <span class="tlaUNC">           0 :         for (auto* i = headers.begin(); i != headers.end(); ++i) {</span></span>
 <span id="L1867"><span class="lineNum">    1867</span> <span class="tlaUNC">           0 :                 if (!i-&gt;IsObject()) {</span></span>
 <span id="L1868"><span class="lineNum">    1868</span> <span class="tlaUNC">           0 :                         continue;</span></span>
 <span id="L1869"><span class="lineNum">    1869</span> <span class="tlaUNC">           0 :                 }</span></span>
@@ -2155,7 +2155,7 @@
 <span id="L2093"><span class="lineNum">    2093</span> <span class="tlaUNC">           0 :                 if (data) {</span></span>
 <span id="L2094"><span class="lineNum">    2094</span> <span class="tlaUNC">           0 :                         m_foundBlocks.emplace_back(cur_time, data-&gt;height, data-&gt;id, diff, total_hashes);</span></span>
 <span id="L2095"><span class="lineNum">    2095</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2096"><span class="lineNum">    2096</span> <span class="tlaUNC">           0 :                 found_blocks.assign(m_foundBlocks.end() - std::min&lt;size_t&gt;(m_foundBlocks.size(), 51), m_foundBlocks.end());</span></span>
+<span id="L2096"><span class="lineNum">    2096</span> <span class="tlaUNC">           0 :                 found_blocks.assign(m_foundBlocks.end() - std::min&lt;int&gt;(static_cast&lt;int&gt;(m_foundBlocks.size()), 51), m_foundBlocks.end());</span></span>
 <span id="L2097"><span class="lineNum">    2097</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2098"><span class="lineNum">    2098</span>              : </span>
 <span id="L2099"><span class="lineNum">    2099</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::POOL, &quot;blocks&quot;,</span></span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-25 13:04:09</td>
+            <td class="headerValue">2025-09-25 16:53:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -929,7 +929,7 @@
 <span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.reserve(data-&gt;pruned_blob.capacity() + (N - 1));</span></span>
 <span id="L868"><span class="lineNum">     868</span>              : </span>
 <span id="L869"><span class="lineNum">     869</span>              :                 // Copy pruned_blob without the transaction list</span>
-<span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.assign(data-&gt;pruned_blob.begin(), data-&gt;pruned_blob.end() - (N - 1) * HASH_SIZE);</span></span>
+<span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.assign(data-&gt;pruned_blob.begin(), data-&gt;pruned_blob.end() - static_cast&lt;uint32_t&gt;((N - 1) * HASH_SIZE));</span></span>
 <span id="L871"><span class="lineNum">     871</span>              : </span>
 <span id="L872"><span class="lineNum">     872</span>              :                 // Process transaction hashes one by one</span>
 <span id="L873"><span class="lineNum">     873</span> <span class="tlaGNC">           6 :                 size_t num_found = 0;</span></span>
@@ -1664,7 +1664,7 @@
 <span id="L1602"><span class="lineNum">    1602</span>              : </span>
 <span id="L1603"><span class="lineNum">    1603</span> <span class="tlaUNC">           0 :         for (auto it = m_auxJobMessages.begin(); it != m_auxJobMessages.end();) {</span></span>
 <span id="L1604"><span class="lineNum">    1604</span>              :                 // Delete old messages only after 3x the timeout to give some leeway for system clock adjustments</span>
-<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaUNC">           0 :                 if (cur_time &gt; it-&gt;second + AUX_JOB_TIMEOUT * 3) {</span></span>
+<span id="L1605"><span class="lineNum">    1605</span> <span class="tlaUNC">           0 :                 if (cur_time &gt; it-&gt;second + static_cast&lt;uint64_t&gt;(AUX_JOB_TIMEOUT * 3)) {</span></span>
 <span id="L1606"><span class="lineNum">    1606</span> <span class="tlaUNC">           0 :                         it = m_auxJobMessages.erase(it);</span></span>
 <span id="L1607"><span class="lineNum">    1607</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1608"><span class="lineNum">    1608</span> <span class="tlaUNC">           0 :                 else {</span></span>

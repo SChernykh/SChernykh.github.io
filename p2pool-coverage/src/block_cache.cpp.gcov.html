@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-25 13:04:09</td>
+            <td class="headerValue">2025-09-25 16:53:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -106,16 +106,16 @@
 <span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :                         return;</span></span>
 <span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :                 int result = lseek(m_fd, static_cast&lt;off_t&gt;(CACHE_SIZE) - 1, SEEK_SET);</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :                 if (result == -1) {</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :                 auto result1 = lseek(m_fd, static_cast&lt;off_t&gt;(CACHE_SIZE) - 1, SEEK_SET);</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :                 if (result1 == -1) {</span></span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;lseek failed&quot;);</span></span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :                         close(m_fd);</span></span>
 <span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC">           0 :                         m_fd = -1;</span></span>
 <span id="L52"><span class="lineNum">      52</span> <span class="tlaUNC">           0 :                         return;</span></span>
 <span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L54"><span class="lineNum">      54</span>              : </span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :                 result = write(m_fd, &quot;&quot;, 1);</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :                 if (result != 1) {</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :                 auto result2 = write(m_fd, &quot;&quot;, 1);</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :                 if (result2 != 1) {</span></span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;write failed&quot;);</span></span>
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :                         close(m_fd);</span></span>
 <span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :                         m_fd = -1;</span></span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-09-25 13:04:09</td>
+            <td class="headerValue">2025-09-25 16:53:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -214,7 +214,7 @@
 <span id="L152"><span class="lineNum">     152</span>              :         void on_new_client(uv_stream_t* server);</span>
 <span id="L153"><span class="lineNum">     153</span>              :         void on_new_client(uv_stream_t* server, Client* client);</span>
 <span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span>              :         [[nodiscard]] bool send_internal(Client* client, Callback&lt;size_t, uint8_t*, size_t&gt;::Base&amp;&amp; callback, bool raw);</span>
+<span id="L155"><span class="lineNum">     155</span>              :         [[nodiscard]] bool send_internal(Client* client, const Callback&lt;size_t, uint8_t*, size_t&gt;::Base&amp; callback, bool raw);</span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
 <span id="L157"><span class="lineNum">     157</span>              :         allocate_client_callback m_allocateNewClient;</span>
 <span id="L158"><span class="lineNum">     158</span>              : </span>
@@ -235,7 +235,7 @@
 <span id="L173"><span class="lineNum">     173</span>              : </span>
 <span id="L174"><span class="lineNum">     174</span>              :         static void loop(void* data);</span>
 <span id="L175"><span class="lineNum">     175</span>              : </span>
-<span id="L176"><span class="lineNum">     176</span>              :         static void parse_address_list_internal(const std::string&amp; address_list, Callback&lt;void, bool, const std::string&amp;, const std::string&amp;, int&gt;::Base&amp;&amp; callback);</span>
+<span id="L176"><span class="lineNum">     176</span>              :         static void parse_address_list_internal(const std::string&amp; address_list, const Callback&lt;void, bool, const std::string&amp;, const std::string&amp;, int&gt;::Base&amp; callback);</span>
 <span id="L177"><span class="lineNum">     177</span>              :         void start_listening(const std::string&amp; listen_addresses, bool upnp);</span>
 <span id="L178"><span class="lineNum">     178</span>              :         bool start_listening(bool is_v6, const std::string&amp; ip, int port, std::string address = std::string());</span>
 <span id="L179"><span class="lineNum">     179</span>              : </span>
