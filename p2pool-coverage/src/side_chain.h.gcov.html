@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-01 13:07:05</td>
+            <td class="headerValue">2025-10-01 15:20:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -115,8 +115,8 @@
 <span id="L53"><span class="lineNum">      53</span>              :         [[nodiscard]] bool add_block(const PoolBlock&amp; block);</span>
 <span id="L54"><span class="lineNum">      54</span>              :         void get_missing_blocks(unordered_set&lt;hash&gt;&amp; missing_blocks) const;</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span>              :         [[nodiscard]] PoolBlock* find_block(const hash&amp; id) const;</span>
-<span id="L57"><span class="lineNum">      57</span>              :         [[nodiscard]] PoolBlock* find_block_by_merkle_root(const root_hash&amp; merkle_root) const;</span>
+<span id="L56"><span class="lineNum">      56</span>              :         [[nodiscard]] const PoolBlock* find_block(const hash&amp; id) const;</span>
+<span id="L57"><span class="lineNum">      57</span>              :         [[nodiscard]] const PoolBlock* find_block_by_merkle_root(const root_hash&amp; merkle_root) const;</span>
 <span id="L58"><span class="lineNum">      58</span>              :         void watch_mainchain_block(const ChainMain&amp; data, const hash&amp; possible_merkle_root);</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span>              :         [[nodiscard]] const PoolBlock* get_block_blob(const hash&amp; id, std::vector&lt;uint8_t&gt;&amp; blob) const;</span>
@@ -129,7 +129,7 @@
 <span id="L67"><span class="lineNum">      67</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L68"><span class="lineNum">      68</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">       46973 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       64411 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">       64413 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">        6487 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">       40249 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L73"><span class="lineNum">      73</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
