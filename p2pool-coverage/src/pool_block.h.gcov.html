@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">27</td>
-            <td class="headerCovTableEntry">27</td>
+            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">26</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-03 11:38:20</td>
+            <td class="headerValue">2025-10-04 10:46:27</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">42.1&nbsp;%</td>
-            <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntryLo">38.9&nbsp;%</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntry">7</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -85,14 +85,14 @@
 <span id="L23"><span class="lineNum">      23</span>              : #include &lt;map&gt;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : #if defined(_DEBUG) || defined(DEV_DEBUG)</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       24141 : #define POOL_BLOCK_DEBUG 1</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       24139 : #define POOL_BLOCK_DEBUG 1</span></span>
 <span id="L27"><span class="lineNum">      27</span>              : #else</span>
 <span id="L28"><span class="lineNum">      28</span>              : #define POOL_BLOCK_DEBUG 0</span>
 <span id="L29"><span class="lineNum">      29</span>              : #endif</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              : namespace p2pool {</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       24141 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       24139 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : class RandomX_Hasher_Base;</span>
 <span id="L36"><span class="lineNum">      36</span>              : class SideChain;</span>
@@ -256,43 +256,39 @@
 <span id="L194"><span class="lineNum">     194</span>              : </span>
 <span id="L195"><span class="lineNum">     195</span>              :         uint64_t get_payout(const Wallet&amp; w) const;</span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
-<span id="L197"><span class="lineNum">     197</span>              :         // Both tx types are allowed by Monero consensus during v15 because it needs to process pre-fork mempool transactions,</span>
-<span id="L198"><span class="lineNum">     198</span>              :         // but P2Pool can switch to using only TXOUT_TO_TAGGED_KEY for miner payouts starting from v15</span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       97169 :         FORCEINLINE uint8_t get_tx_type() const { return (m_majorVersion &lt; HARDFORK_VIEW_TAGS_VERSION) ? TXOUT_TO_KEY : TXOUT_TO_TAGGED_KEY; }</span></span>
-<span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span>              :         typedef std::array&lt;uint8_t, HASH_SIZE + NONCE_SIZE + EXTRA_NONCE_SIZE&gt; full_id;</span>
-<span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span>              :         FORCEINLINE full_id get_full_id() const</span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        6720 :         {</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        6720 :                 full_id key;</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        6720 :                 uint8_t* p = key.data();</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        6720 :                 memcpy(p, m_sidechainId.h, HASH_SIZE);</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">        6720 :                 memcpy(p + HASH_SIZE, &amp;m_nonce, NONCE_SIZE);</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">        6720 :                 memcpy(p + HASH_SIZE + NONCE_SIZE, &amp;m_extraNonce, EXTRA_NONCE_SIZE);</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">        6720 :                 return key;</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">        6720 :         }</span></span>
-<span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span>              :         hash calculate_tx_key_seed() const;</span>
-<span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span>              :         static FORCEINLINE uint64_t encode_merkle_tree_data(uint32_t n_aux_chains, uint32_t nonce)</span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       23113 :         {</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       23113 :                 uint32_t n_bits = 1U;</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">      121571 :                 while (((1U &lt;&lt; n_bits) &lt; n_aux_chains) &amp;&amp; (n_bits &lt; 8)) {</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       98458 :                         ++n_bits;</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       98458 :                 }</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       23113 :                 return (n_bits - 1U) | ((n_aux_chains - 1U) &lt;&lt; 3U) | (static_cast&lt;uint64_t&gt;(nonce) &lt;&lt; (3U + n_bits));</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       23113 :         }</span></span>
-<span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">       56639 :         {</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       56639 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       56639 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       56639 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">       56639 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       56639 :         }</span></span>
-<span id="L231"><span class="lineNum">     231</span>              : };</span>
-<span id="L232"><span class="lineNum">     232</span>              : </span>
-<span id="L233"><span class="lineNum">     233</span>              : } // namespace p2pool</span>
+<span id="L197"><span class="lineNum">     197</span>              :         typedef std::array&lt;uint8_t, HASH_SIZE + NONCE_SIZE + EXTRA_NONCE_SIZE&gt; full_id;</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :         FORCEINLINE full_id get_full_id() const</span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">        6720 :         {</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">        6720 :                 full_id key;</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">        6720 :                 uint8_t* p = key.data();</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">        6720 :                 memcpy(p, m_sidechainId.h, HASH_SIZE);</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">        6720 :                 memcpy(p + HASH_SIZE, &amp;m_nonce, NONCE_SIZE);</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">        6720 :                 memcpy(p + HASH_SIZE + NONCE_SIZE, &amp;m_extraNonce, EXTRA_NONCE_SIZE);</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">        6720 :                 return key;</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        6720 :         }</span></span>
+<span id="L208"><span class="lineNum">     208</span>              : </span>
+<span id="L209"><span class="lineNum">     209</span>              :         hash calculate_tx_key_seed() const;</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :         static FORCEINLINE uint64_t encode_merkle_tree_data(uint32_t n_aux_chains, uint32_t nonce)</span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">       23113 :         {</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">       23113 :                 uint32_t n_bits = 1U;</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">      121571 :                 while (((1U &lt;&lt; n_bits) &lt; n_aux_chains) &amp;&amp; (n_bits &lt; 8)) {</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">       98458 :                         ++n_bits;</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       98458 :                 }</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       23113 :                 return (n_bits - 1U) | ((n_aux_chains - 1U) &lt;&lt; 3U) | (static_cast&lt;uint64_t&gt;(nonce) &lt;&lt; (3U + n_bits));</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">       23113 :         }</span></span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       56639 :         {</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       56639 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">       56639 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       56639 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">       56639 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       56639 :         }</span></span>
+<span id="L227"><span class="lineNum">     227</span>              : };</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
