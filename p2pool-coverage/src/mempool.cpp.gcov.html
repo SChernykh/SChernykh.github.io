@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-11 14:37:48</td>
+            <td class="headerValue">2025-10-12 15:14:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -85,23 +85,23 @@
 <span id="L23"><span class="lineNum">      23</span>              : namespace p2pool {</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : Mempool::Mempool()</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">           2 : {</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           2 :         uv_rwlock_init_checked(&amp;m_lock);</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">           8 : {</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           8 :         uv_rwlock_init_checked(&amp;m_lock);</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           8 : }</span></span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              : Mempool::~Mempool()</span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           2 : {</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :         uv_rwlock_destroy(&amp;m_lock);</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           2 : }</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           8 : {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           8 :         uv_rwlock_destroy(&amp;m_lock);</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           8 : }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : void Mempool::add(const TxMempoolData&amp; tx)</span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">       10513 : {</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">       10513 :         WriteLock lock(m_lock);</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">       59665 : {</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">       59665 :         WriteLock lock(m_lock);</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       10513 :         if (!m_transactions.emplace(tx.id, tx).second) {</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       59665 :         if (!m_transactions.emplace(tx.id, tx).second) {</span></span>
 <span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGWARN(1, &quot;duplicate transaction with id = &quot; &lt;&lt; tx.id &lt;&lt; &quot;, skipped&quot;);</span></span>
 <span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">       10513 : }</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">       59665 : }</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : </span>
 <span id="L44"><span class="lineNum">      44</span>              : void Mempool::swap_transactions(std::vector&lt;TxMempoolData&gt;&amp; transactions)</span>
 <span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 : {</span></span>

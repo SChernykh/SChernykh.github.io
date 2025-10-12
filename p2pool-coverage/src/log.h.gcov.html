@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-11 14:37:48</td>
+            <td class="headerValue">2025-10-12 15:14:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">12.7&nbsp;%</td>
-            <td class="headerCovTableEntry">353</td>
+            <td class="headerCovTableEntryLo">13.2&nbsp;%</td>
+            <td class="headerCovTableEntry">342</td>
             <td class="headerCovTableEntry">45</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -631,7 +631,7 @@
 <span id="L569"><span class="lineNum">     569</span>              : #define SIDE_EFFECT_CHECK(level, ...)</span>
 <span id="L570"><span class="lineNum">     570</span>              : #else</span>
 <span id="L571"><span class="lineNum">     571</span>              : #define SIDE_EFFECT_CHECK(level, ...) \</span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">      187569 :         if (0) { \</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC tlaBgGNC">      187625 :         if (0) { \</span></span>
 <span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC tlaBgUNC">           0 :                 MSVC_PRAGMA(warning(suppress:26444)) \</span></span>
 <span id="L574"><span class="lineNum">     574</span> <span class="tlaUNC">           0 :                 [=]() { \</span></span>
 <span id="L575"><span class="lineNum">     575</span> <span class="tlaUNC">           0 :                         log::DummyStream x; \</span></span>
@@ -644,36 +644,41 @@
 <span id="L582"><span class="lineNum">     582</span>              : </span>
 <span id="L583"><span class="lineNum">     583</span>              : #ifdef P2POOL_LOG_DISABLE</span>
 <span id="L584"><span class="lineNum">     584</span>              : </span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC tlaBgGNC">      166434 : #define LOGINFO(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">       21135 : #define LOGWARN(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaUNC tlaBgUNC">           0 : #define LOGERR(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
-<span id="L588"><span class="lineNum">     588</span>              : </span>
-<span id="L589"><span class="lineNum">     589</span>              : #else</span>
-<span id="L590"><span class="lineNum">     590</span>              : </span>
-<span id="L591"><span class="lineNum">     591</span>              : #define LOG(level, severity, ...) \</span>
-<span id="L592"><span class="lineNum">     592</span>              :         do { \</span>
-<span id="L593"><span class="lineNum">     593</span>              :                 SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__); \</span>
-<span id="L594"><span class="lineNum">     594</span>              :                 if ((level) &lt;= log::GLOBAL_LOG_LEVEL) { \</span>
-<span id="L595"><span class="lineNum">     595</span>              :                         log::Writer CONCAT(log_wrapper_, __LINE__)(severity); \</span>
-<span id="L596"><span class="lineNum">     596</span>              :                         CONCAT(log_wrapper_, __LINE__) &lt;&lt; log::Gray() &lt;&lt; log_category_prefix; \</span>
-<span id="L597"><span class="lineNum">     597</span>              :                         log::apply_severity&lt;severity&gt;(CONCAT(log_wrapper_, __LINE__)); \</span>
-<span id="L598"><span class="lineNum">     598</span>              :                         CONCAT(log_wrapper_, __LINE__) &lt;&lt; __VA_ARGS__ &lt;&lt; log::NoColor(); \</span>
-<span id="L599"><span class="lineNum">     599</span>              :                 } \</span>
-<span id="L600"><span class="lineNum">     600</span>              :         } while (0)</span>
-<span id="L601"><span class="lineNum">     601</span>              : </span>
-<span id="L602"><span class="lineNum">     602</span>              : #define LOGINFO(level, ...) LOG(level, log::Severity::Info, __VA_ARGS__)</span>
-<span id="L603"><span class="lineNum">     603</span>              : #define LOGWARN(level, ...) LOG(level, log::Severity::Warning, __VA_ARGS__)</span>
-<span id="L604"><span class="lineNum">     604</span>              : #define LOGERR(level, ...)  LOG(level, log::Severity::Error, __VA_ARGS__)</span>
-<span id="L605"><span class="lineNum">     605</span>              : </span>
-<span id="L606"><span class="lineNum">     606</span>              : #endif</span>
-<span id="L607"><span class="lineNum">     607</span>              : </span>
-<span id="L608"><span class="lineNum">     608</span>              : void start();</span>
-<span id="L609"><span class="lineNum">     609</span>              : void reopen();</span>
-<span id="L610"><span class="lineNum">     610</span>              : void stop();</span>
-<span id="L611"><span class="lineNum">     611</span>              : </span>
-<span id="L612"><span class="lineNum">     612</span>              : } // namespace log</span>
-<span id="L613"><span class="lineNum">     613</span>              : </span>
-<span id="L614"><span class="lineNum">     614</span>              : } // namespace p2pool</span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC tlaBgGNC">      166480 : #define LOGINFO(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">       21145 : #define LOGWARN(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span></span>
+<span id="L587"><span class="lineNum">     587</span>              : </span>
+<span id="L588"><span class="lineNum">     588</span>              : #ifdef P2POOL_ABORT_ON_LOG_ERROR</span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaUNC tlaBgUNC">           0 : #define LOGERR(level, ...) abort()</span></span>
+<span id="L590"><span class="lineNum">     590</span>              : #else</span>
+<span id="L591"><span class="lineNum">     591</span>              : #define LOGERR(level, ...) SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__)</span>
+<span id="L592"><span class="lineNum">     592</span>              : #endif</span>
+<span id="L593"><span class="lineNum">     593</span>              : </span>
+<span id="L594"><span class="lineNum">     594</span>              : #else</span>
+<span id="L595"><span class="lineNum">     595</span>              : </span>
+<span id="L596"><span class="lineNum">     596</span>              : #define LOG(level, severity, ...) \</span>
+<span id="L597"><span class="lineNum">     597</span>              :         do { \</span>
+<span id="L598"><span class="lineNum">     598</span>              :                 SIDE_EFFECT_CHECK(level, log_category_prefix &lt;&lt; __VA_ARGS__); \</span>
+<span id="L599"><span class="lineNum">     599</span>              :                 if ((level) &lt;= log::GLOBAL_LOG_LEVEL) { \</span>
+<span id="L600"><span class="lineNum">     600</span>              :                         log::Writer CONCAT(log_wrapper_, __LINE__)(severity); \</span>
+<span id="L601"><span class="lineNum">     601</span>              :                         CONCAT(log_wrapper_, __LINE__) &lt;&lt; log::Gray() &lt;&lt; log_category_prefix; \</span>
+<span id="L602"><span class="lineNum">     602</span>              :                         log::apply_severity&lt;severity&gt;(CONCAT(log_wrapper_, __LINE__)); \</span>
+<span id="L603"><span class="lineNum">     603</span>              :                         CONCAT(log_wrapper_, __LINE__) &lt;&lt; __VA_ARGS__ &lt;&lt; log::NoColor(); \</span>
+<span id="L604"><span class="lineNum">     604</span>              :                 } \</span>
+<span id="L605"><span class="lineNum">     605</span>              :         } while (0)</span>
+<span id="L606"><span class="lineNum">     606</span>              : </span>
+<span id="L607"><span class="lineNum">     607</span>              : #define LOGINFO(level, ...) LOG(level, log::Severity::Info, __VA_ARGS__)</span>
+<span id="L608"><span class="lineNum">     608</span>              : #define LOGWARN(level, ...) LOG(level, log::Severity::Warning, __VA_ARGS__)</span>
+<span id="L609"><span class="lineNum">     609</span>              : #define LOGERR(level, ...)  LOG(level, log::Severity::Error, __VA_ARGS__)</span>
+<span id="L610"><span class="lineNum">     610</span>              : </span>
+<span id="L611"><span class="lineNum">     611</span>              : #endif</span>
+<span id="L612"><span class="lineNum">     612</span>              : </span>
+<span id="L613"><span class="lineNum">     613</span>              : void start();</span>
+<span id="L614"><span class="lineNum">     614</span>              : void reopen();</span>
+<span id="L615"><span class="lineNum">     615</span>              : void stop();</span>
+<span id="L616"><span class="lineNum">     616</span>              : </span>
+<span id="L617"><span class="lineNum">     617</span>              : } // namespace log</span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
