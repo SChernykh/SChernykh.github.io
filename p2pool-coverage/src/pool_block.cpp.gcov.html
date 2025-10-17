@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-17 18:50:28</td>
+            <td class="headerValue">2025-10-17 19:42:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -94,40 +94,40 @@
 <span id="L32"><span class="lineNum">      32</span>              : ReadWriteLock* PoolBlock::s_precalculatedSharesLock = nullptr;</span>
 <span id="L33"><span class="lineNum">      33</span>              : </span>
 <span id="L34"><span class="lineNum">      34</span>              : PoolBlock::PoolBlock()</span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">       40312 :         : m_majorVersion(0)</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">       40312 :         , m_minorVersion(0)</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">       40312 :         , m_timestamp(0)</span></span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">       40312 :         , m_prevId{}</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       40312 :         , m_nonce(0)</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       40312 :         , m_txinGenHeight(0)</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       40312 :         , m_txkeyPub{}</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">       40312 :         , m_extraNonceSize(0)</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">       40312 :         , m_extraNonce(0)</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">       40312 :         , m_merkleTreeDataSize(1)</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">       40312 :         , m_merkleTreeData(0)</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">       40312 :         , m_merkleRoot{}</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">       40312 :         , m_txkeySecSeed{}</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       40312 :         , m_txkeySec{}</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       40312 :         , m_parent{}</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       40312 :         , m_sidechainHeight(0)</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       40312 :         , m_difficulty{}</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       40312 :         , m_cumulativeDifficulty{}</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       40312 :         , m_merkleProof{}</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       40312 :         , m_merkleProofPath(0)</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       40312 :         , m_mergeMiningExtra{}</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       40312 :         , m_sidechainExtraBuf{}</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       40312 :         , m_sidechainId{}</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       40312 :         , m_depth(0)</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">       40312 :         , m_verified(false)</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">       40312 :         , m_invalid(false)</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       40312 :         , m_broadcasted(false)</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">       40312 :         , m_wantBroadcast(false)</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       40312 :         , m_precalculated(false)</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">       40312 :         , m_localTimestamp(seconds_since_epoch())</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       40312 :         , m_receivedTimestamp(0)</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       40312 :         , m_auxNonce(0)</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       40312 : {</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       40312 : }</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">       40282 :         : m_majorVersion(0)</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">       40282 :         , m_minorVersion(0)</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">       40282 :         , m_timestamp(0)</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">       40282 :         , m_prevId{}</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">       40282 :         , m_nonce(0)</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">       40282 :         , m_txinGenHeight(0)</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">       40282 :         , m_txkeyPub{}</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">       40282 :         , m_extraNonceSize(0)</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">       40282 :         , m_extraNonce(0)</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">       40282 :         , m_merkleTreeDataSize(1)</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">       40282 :         , m_merkleTreeData(0)</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">       40282 :         , m_merkleRoot{}</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">       40282 :         , m_txkeySecSeed{}</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">       40282 :         , m_txkeySec{}</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">       40282 :         , m_parent{}</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">       40282 :         , m_sidechainHeight(0)</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">       40282 :         , m_difficulty{}</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">       40282 :         , m_cumulativeDifficulty{}</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">       40282 :         , m_merkleProof{}</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">       40282 :         , m_merkleProofPath(0)</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">       40282 :         , m_mergeMiningExtra{}</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">       40282 :         , m_sidechainExtraBuf{}</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       40282 :         , m_sidechainId{}</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       40282 :         , m_depth(0)</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">       40282 :         , m_verified(false)</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">       40282 :         , m_invalid(false)</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">       40282 :         , m_broadcasted(false)</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">       40282 :         , m_wantBroadcast(false)</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">       40282 :         , m_precalculated(false)</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">       40282 :         , m_localTimestamp(seconds_since_epoch())</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       40282 :         , m_receivedTimestamp(0)</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">       40282 :         , m_auxNonce(0)</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       40282 : {</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">       40282 : }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
 <span id="L70"><span class="lineNum">      70</span>              : PoolBlock::PoolBlock(const PoolBlock&amp; b)</span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">       33513 : {</span></span>
@@ -136,67 +136,67 @@
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              : // cppcheck-suppress operatorEqVarError</span>
 <span id="L76"><span class="lineNum">      76</span>              : PoolBlock&amp; PoolBlock::operator=(const PoolBlock&amp; b)</span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40273 : {</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       40273 :         if (this == &amp;b) {</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40243 : {</span></span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">       40243 :         if (this == &amp;b) {</span></span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           1 :                 return *this;</span></span>
 <span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">       40272 : #if POOL_BLOCK_DEBUG</span></span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       40272 :         m_mainChainDataDebug = b.m_mainChainDataDebug;</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       40272 :         m_sideChainDataDebug = b.m_sideChainDataDebug;</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       40272 : #endif</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">       40242 : #if POOL_BLOCK_DEBUG</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       40242 :         m_mainChainDataDebug = b.m_mainChainDataDebug;</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       40242 :         m_sideChainDataDebug = b.m_sideChainDataDebug;</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       40242 : #endif</span></span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       40272 :         m_majorVersion = b.m_majorVersion;</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">       40272 :         m_minorVersion = b.m_minorVersion;</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">       40272 :         m_timestamp = b.m_timestamp;</span></span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       40272 :         m_prevId = b.m_prevId;</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       40272 :         m_nonce = b.m_nonce;</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       40272 :         m_txinGenHeight = b.m_txinGenHeight;</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       40272 :         m_outputs = b.m_outputs;</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       40272 :         m_txkeyPub = b.m_txkeyPub;</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">       40272 :         m_extraNonceSize = b.m_extraNonceSize;</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">       40272 :         m_extraNonce = b.m_extraNonce;</span></span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">       40272 :         m_merkleTreeDataSize = b.m_merkleTreeDataSize;</span></span>
-<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">       40272 :         m_merkleTreeData = b.m_merkleTreeData;</span></span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       40272 :         m_merkleRoot = b.m_merkleRoot;</span></span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       40272 :         m_transactions = b.m_transactions;</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">       40272 :         m_minerWallet = b.m_minerWallet;</span></span>
-<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       40272 :         m_txkeySecSeed = b.m_txkeySecSeed;</span></span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">       40272 :         m_txkeySec = b.m_txkeySec;</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">       40272 :         m_parent = b.m_parent;</span></span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">       40272 :         m_uncles = b.m_uncles;</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       40272 :         m_sidechainHeight = b.m_sidechainHeight;</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">       40272 :         m_difficulty = b.m_difficulty;</span></span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">       40272 :         m_cumulativeDifficulty = b.m_cumulativeDifficulty;</span></span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">       40272 :         m_merkleProof = b.m_merkleProof;</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       40272 :         m_merkleProofPath = b.m_merkleProofPath;</span></span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">       40272 :         m_mergeMiningExtra = b.m_mergeMiningExtra;</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       40272 :         memcpy(m_sidechainExtraBuf, b.m_sidechainExtraBuf, sizeof(m_sidechainExtraBuf));</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       40272 :         m_sidechainId = b.m_sidechainId;</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">       40272 :         m_depth = b.m_depth;</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       40272 :         m_verified = b.m_verified;</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       40272 :         m_invalid = b.m_invalid;</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       40272 :         m_broadcasted = b.m_broadcasted;</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       40272 :         m_wantBroadcast = b.m_wantBroadcast;</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       40272 :         m_precalculated = b.m_precalculated;</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       40272 :         {</span></span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       40272 :                 WriteLock lock(*s_precalculatedSharesLock);</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       40272 :                 m_precalculatedShares = b.m_precalculatedShares;</span></span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       40272 :         }</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       40242 :         m_majorVersion = b.m_majorVersion;</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">       40242 :         m_minorVersion = b.m_minorVersion;</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">       40242 :         m_timestamp = b.m_timestamp;</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       40242 :         m_prevId = b.m_prevId;</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       40242 :         m_nonce = b.m_nonce;</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       40242 :         m_txinGenHeight = b.m_txinGenHeight;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       40242 :         m_outputs = b.m_outputs;</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       40242 :         m_txkeyPub = b.m_txkeyPub;</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">       40242 :         m_extraNonceSize = b.m_extraNonceSize;</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">       40242 :         m_extraNonce = b.m_extraNonce;</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">       40242 :         m_merkleTreeDataSize = b.m_merkleTreeDataSize;</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">       40242 :         m_merkleTreeData = b.m_merkleTreeData;</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       40242 :         m_merkleRoot = b.m_merkleRoot;</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       40242 :         m_transactions = b.m_transactions;</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">       40242 :         m_minerWallet = b.m_minerWallet;</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       40242 :         m_txkeySecSeed = b.m_txkeySecSeed;</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">       40242 :         m_txkeySec = b.m_txkeySec;</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">       40242 :         m_parent = b.m_parent;</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">       40242 :         m_uncles = b.m_uncles;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       40242 :         m_sidechainHeight = b.m_sidechainHeight;</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">       40242 :         m_difficulty = b.m_difficulty;</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">       40242 :         m_cumulativeDifficulty = b.m_cumulativeDifficulty;</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">       40242 :         m_merkleProof = b.m_merkleProof;</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       40242 :         m_merkleProofPath = b.m_merkleProofPath;</span></span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">       40242 :         m_mergeMiningExtra = b.m_mergeMiningExtra;</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       40242 :         memcpy(m_sidechainExtraBuf, b.m_sidechainExtraBuf, sizeof(m_sidechainExtraBuf));</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       40242 :         m_sidechainId = b.m_sidechainId;</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">       40242 :         m_depth = b.m_depth;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       40242 :         m_verified = b.m_verified;</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       40242 :         m_invalid = b.m_invalid;</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">       40242 :         m_broadcasted = b.m_broadcasted;</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       40242 :         m_wantBroadcast = b.m_wantBroadcast;</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       40242 :         m_precalculated = b.m_precalculated;</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       40242 :         {</span></span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">       40242 :                 WriteLock lock(*s_precalculatedSharesLock);</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">       40242 :                 m_precalculatedShares = b.m_precalculatedShares;</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">       40242 :         }</span></span>
 <span id="L124"><span class="lineNum">     124</span>              : </span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       40272 :         m_localTimestamp = seconds_since_epoch();</span></span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       40272 :         m_receivedTimestamp = b.m_receivedTimestamp;</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">       40242 :         m_localTimestamp = seconds_since_epoch();</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">       40242 :         m_receivedTimestamp = b.m_receivedTimestamp;</span></span>
 <span id="L127"><span class="lineNum">     127</span>              : </span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       40272 :         m_auxChains = b.m_auxChains;</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       40272 :         m_auxNonce = b.m_auxNonce;</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">       40242 :         m_auxChains = b.m_auxChains;</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">       40242 :         m_auxNonce = b.m_auxNonce;</span></span>
 <span id="L130"><span class="lineNum">     130</span>              : </span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">       40272 :         m_hashingBlob = b.m_hashingBlob;</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">       40242 :         m_hashingBlob = b.m_hashingBlob;</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">       40272 :         m_powHash = b.m_powHash;</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">       40272 :         m_seed = b.m_seed;</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">       40242 :         m_powHash = b.m_powHash;</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">       40242 :         m_seed = b.m_seed;</span></span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">       40272 :         return *this;</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       40273 : }</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">       40242 :         return *this;</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">       40243 : }</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span>              : std::vector&lt;uint8_t&gt; PoolBlock::serialize_mainchain_data(size_t* header_size, size_t* miner_tx_size, int* outputs_offset, int* outputs_blob_size, const uint32_t* nonce, const uint32_t* extra_nonce) const</span>
 <span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">       30166 : {</span></span>

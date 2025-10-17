@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-17 18:50:28</td>
+            <td class="headerValue">2025-10-17 19:42:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">37.5&nbsp;%</td>
@@ -169,43 +169,47 @@
 <span id="L107"><span class="lineNum">     107</span>              : </span>
 <span id="L108"><span class="lineNum">     108</span>              :         PoolBlock* m_poolBlockTemplate;</span>
 <span id="L109"><span class="lineNum">     109</span>              : </span>
-<span id="L110"><span class="lineNum">     110</span>              :         BlockTemplate* m_oldTemplates[4] = {};</span>
-<span id="L111"><span class="lineNum">     111</span>              : </span>
-<span id="L112"><span class="lineNum">     112</span>              :         std::atomic&lt;uint64_t&gt; m_finalReward;</span>
-<span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span>              :         // Temp vectors, will be cleaned up after use and skipped in copy constructor/assignment operators</span>
-<span id="L115"><span class="lineNum">     115</span>              :         std::vector&lt;uint8_t&gt; m_minerTx;</span>
-<span id="L116"><span class="lineNum">     116</span>              :         std::array&lt;uint64_t, 25&gt; m_minerTxKeccakState;</span>
-<span id="L117"><span class="lineNum">     117</span>              :         size_t m_minerTxKeccakStateInputLength;</span>
-<span id="L118"><span class="lineNum">     118</span>              : </span>
-<span id="L119"><span class="lineNum">     119</span>              :         std::vector&lt;uint8_t&gt; m_sidechainHashBlob;</span>
-<span id="L120"><span class="lineNum">     120</span>              :         std::array&lt;uint64_t, 25&gt; m_sidechainHashKeccakState;</span>
-<span id="L121"><span class="lineNum">     121</span>              :         size_t m_sidechainHashInputLength;</span>
+<span id="L110"><span class="lineNum">     110</span>              : #ifdef P2POOL_UNIT_TESTS</span>
+<span id="L111"><span class="lineNum">     111</span>              :         BlockTemplate* m_oldTemplates[1] = {};</span>
+<span id="L112"><span class="lineNum">     112</span>              : #else</span>
+<span id="L113"><span class="lineNum">     113</span>              :         BlockTemplate* m_oldTemplates[4] = {};</span>
+<span id="L114"><span class="lineNum">     114</span>              : #endif</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :         std::atomic&lt;uint64_t&gt; m_finalReward;</span>
+<span id="L117"><span class="lineNum">     117</span>              : </span>
+<span id="L118"><span class="lineNum">     118</span>              :         // Temp vectors, will be cleaned up after use and skipped in copy constructor/assignment operators</span>
+<span id="L119"><span class="lineNum">     119</span>              :         std::vector&lt;uint8_t&gt; m_minerTx;</span>
+<span id="L120"><span class="lineNum">     120</span>              :         std::array&lt;uint64_t, 25&gt; m_minerTxKeccakState;</span>
+<span id="L121"><span class="lineNum">     121</span>              :         size_t m_minerTxKeccakStateInputLength;</span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span>              :         std::vector&lt;uint8_t&gt; m_blockHeader;</span>
-<span id="L124"><span class="lineNum">     124</span>              :         std::vector&lt;uint8_t&gt; m_minerTxExtra;</span>
-<span id="L125"><span class="lineNum">     125</span>              :         std::vector&lt;uint8_t&gt; m_transactionHashes;</span>
-<span id="L126"><span class="lineNum">     126</span>              :         unordered_set&lt;hash&gt; m_transactionHashesSet;</span>
-<span id="L127"><span class="lineNum">     127</span>              :         std::vector&lt;uint64_t&gt; m_rewards;</span>
-<span id="L128"><span class="lineNum">     128</span>              :         std::vector&lt;TxMempoolData&gt; m_mempoolTxs;</span>
-<span id="L129"><span class="lineNum">     129</span>              :         std::vector&lt;int&gt; m_mempoolTxsOrder;</span>
-<span id="L130"><span class="lineNum">     130</span>              :         std::vector&lt;int&gt; m_mempoolTxsOrder2;</span>
-<span id="L131"><span class="lineNum">     131</span>              :         std::vector&lt;MinerShare&gt; m_shares;</span>
-<span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span>              :         std::mt19937_64 m_rng;</span>
-<span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span>              :         void shuffle_tx_order();</span>
+<span id="L123"><span class="lineNum">     123</span>              :         std::vector&lt;uint8_t&gt; m_sidechainHashBlob;</span>
+<span id="L124"><span class="lineNum">     124</span>              :         std::array&lt;uint64_t, 25&gt; m_sidechainHashKeccakState;</span>
+<span id="L125"><span class="lineNum">     125</span>              :         size_t m_sidechainHashInputLength;</span>
+<span id="L126"><span class="lineNum">     126</span>              : </span>
+<span id="L127"><span class="lineNum">     127</span>              :         std::vector&lt;uint8_t&gt; m_blockHeader;</span>
+<span id="L128"><span class="lineNum">     128</span>              :         std::vector&lt;uint8_t&gt; m_minerTxExtra;</span>
+<span id="L129"><span class="lineNum">     129</span>              :         std::vector&lt;uint8_t&gt; m_transactionHashes;</span>
+<span id="L130"><span class="lineNum">     130</span>              :         unordered_set&lt;hash&gt; m_transactionHashesSet;</span>
+<span id="L131"><span class="lineNum">     131</span>              :         std::vector&lt;uint64_t&gt; m_rewards;</span>
+<span id="L132"><span class="lineNum">     132</span>              :         std::vector&lt;TxMempoolData&gt; m_mempoolTxs;</span>
+<span id="L133"><span class="lineNum">     133</span>              :         std::vector&lt;int&gt; m_mempoolTxsOrder;</span>
+<span id="L134"><span class="lineNum">     134</span>              :         std::vector&lt;int&gt; m_mempoolTxsOrder2;</span>
+<span id="L135"><span class="lineNum">     135</span>              :         std::vector&lt;MinerShare&gt; m_shares;</span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span>              : #if TEST_MEMPOOL_PICKING_ALGORITHM</span>
-<span id="L138"><span class="lineNum">     138</span>              :         void fill_optimal_knapsack(const MinerData&amp; data, uint64_t base_reward, uint64_t miner_tx_weight, uint64_t&amp; best_reward, uint64_t&amp; final_fees, uint64_t&amp; final_weight);</span>
-<span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span>              :         std::vector&lt;uint32_t&gt; m_knapsack;</span>
-<span id="L141"><span class="lineNum">     141</span>              : #endif</span>
-<span id="L142"><span class="lineNum">     142</span>              : </span>
-<span id="L143"><span class="lineNum">     143</span>              :         void init_merge_mining_merkle_proof();</span>
-<span id="L144"><span class="lineNum">     144</span>              : };</span>
-<span id="L145"><span class="lineNum">     145</span>              : </span>
-<span id="L146"><span class="lineNum">     146</span>              : } // namespace p2pool</span>
+<span id="L137"><span class="lineNum">     137</span>              :         std::mt19937_64 m_rng;</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              :         void shuffle_tx_order();</span>
+<span id="L140"><span class="lineNum">     140</span>              : </span>
+<span id="L141"><span class="lineNum">     141</span>              : #if TEST_MEMPOOL_PICKING_ALGORITHM</span>
+<span id="L142"><span class="lineNum">     142</span>              :         void fill_optimal_knapsack(const MinerData&amp; data, uint64_t base_reward, uint64_t miner_tx_weight, uint64_t&amp; best_reward, uint64_t&amp; final_fees, uint64_t&amp; final_weight);</span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span>              :         std::vector&lt;uint32_t&gt; m_knapsack;</span>
+<span id="L145"><span class="lineNum">     145</span>              : #endif</span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span>              :         void init_merge_mining_merkle_proof();</span>
+<span id="L148"><span class="lineNum">     148</span>              : };</span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
