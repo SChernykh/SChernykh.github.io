@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-17 20:24:28</td>
+            <td class="headerValue">2025-10-17 22:04:36</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -904,7 +904,7 @@
 <span id="L842"><span class="lineNum">     842</span>              :         // 0 outputs in the pruned blob</span>
 <span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC">           6 :         data-&gt;pruned_blob.push_back(0);</span></span>
 <span id="L844"><span class="lineNum">     844</span>              : </span>
-<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">           6 :         const uint64_t total_reward = std::accumulate(block.m_outputs.begin(), block.m_outputs.end(), 0ULL,</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">           6 :         const uint64_t total_reward = std::accumulate(block.m_outputAmounts.begin(), block.m_outputAmounts.end(), 0ULL,</span></span>
 <span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">           6 :                 [](uint64_t a, const PoolBlock::TxOutput&amp; b)</span></span>
 <span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">        1486 :                 {</span></span>
 <span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">        1486 :                         return a + b.m_reward;</span></span>
