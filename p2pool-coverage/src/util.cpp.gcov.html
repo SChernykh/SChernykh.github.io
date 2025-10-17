@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-17 19:42:08</td>
+            <td class="headerValue">2025-10-17 20:24:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">32.6&nbsp;%</td>
@@ -993,7 +993,7 @@
 <span id="L931"><span class="lineNum">     931</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L932"><span class="lineNum">     932</span>              : </span>
 <span id="L933"><span class="lineNum">     933</span>              : void set_thread_name(const char* name)</span>
-<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC tlaBgGNC">          26 : {</span></span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC tlaBgGNC">          27 : {</span></span>
 <span id="L935"><span class="lineNum">     935</span>              : #if (UV_VERSION_MAJOR &gt; 1) || ((UV_VERSION_MAJOR == 1) &amp;&amp; (UV_VERSION_MINOR &gt;= 50))</span>
 <span id="L936"><span class="lineNum">     936</span>              :         const int err = uv_thread_setname(name);</span>
 <span id="L937"><span class="lineNum">     937</span>              :         if (err) {</span>
@@ -1005,9 +1005,9 @@
 <span id="L943"><span class="lineNum">     943</span>              :                 LOGERR(1, &quot;pthread_setname_np failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; err);</span>
 <span id="L944"><span class="lineNum">     944</span>              :         }</span>
 <span id="L945"><span class="lineNum">     945</span>              : #else</span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">          26 :         (void)name;</span></span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">          26 : #endif</span></span>
-<span id="L948"><span class="lineNum">     948</span> <span class="tlaGNC">          26 : }</span></span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">          27 :         (void)name;</span></span>
+<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">          27 : #endif</span></span>
+<span id="L948"><span class="lineNum">     948</span> <span class="tlaGNC">          27 : }</span></span>
 <span id="L949"><span class="lineNum">     949</span>              : </span>
 <span id="L950"><span class="lineNum">     950</span>              : } // namespace p2pool</span>
         </pre>
