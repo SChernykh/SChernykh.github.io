@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">46.4&nbsp;%</td>
-            <td class="headerCovTableEntry">491</td>
-            <td class="headerCovTableEntry">228</td>
+            <td class="headerCovTableEntryLo">46.9&nbsp;%</td>
+            <td class="headerCovTableEntry">495</td>
+            <td class="headerCovTableEntry">232</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 17:11:56</td>
+            <td class="headerValue">2025-10-20 18:55:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">37.8&nbsp;%</td>
@@ -1014,86 +1014,92 @@
 <span id="L952"><span class="lineNum">     952</span> <span class="tlaGNC">          27 : }</span></span>
 <span id="L953"><span class="lineNum">     953</span>              : </span>
 <span id="L954"><span class="lineNum">     954</span>              : std::string to_onion_v3(const hash&amp; pubkey)</span>
-<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">         208 : {</span></span>
-<span id="L956"><span class="lineNum">     956</span> <span class="tlaGNC">         208 :         static constexpr uint8_t prefix[] = &quot;.onion checksum&quot;;</span></span>
-<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">         208 :         static constexpr uint8_t version = 3;</span></span>
+<span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">         210 : {</span></span>
+<span id="L956"><span class="lineNum">     956</span> <span class="tlaGNC">         210 :         static constexpr uint8_t prefix[] = &quot;.onion checksum&quot;;</span></span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">         210 :         static constexpr uint8_t version = 3;</span></span>
 <span id="L958"><span class="lineNum">     958</span>              : </span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">         208 :         hash h;</span></span>
-<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">        9984 :         keccak_custom([&amp;pubkey](int offset) -&gt; uint8_t {</span></span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">        9984 :                 size_t k = static_cast&lt;size_t&gt;(offset);</span></span>
-<span id="L962"><span class="lineNum">     962</span> <span class="tlaGNC">        9984 :                 if (k &lt; sizeof(prefix) - 1) {</span></span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">        3120 :                         return prefix[k];</span></span>
-<span id="L964"><span class="lineNum">     964</span> <span class="tlaGNC">        3120 :                 }</span></span>
-<span id="L965"><span class="lineNum">     965</span> <span class="tlaGNC">        6864 :                 k -= sizeof(prefix) - 1;</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">         210 :         hash h;</span></span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">       10080 :         keccak_custom([&amp;pubkey](int offset) -&gt; uint8_t {</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">       10080 :                 size_t k = static_cast&lt;size_t&gt;(offset);</span></span>
+<span id="L962"><span class="lineNum">     962</span> <span class="tlaGNC">       10080 :                 if (k &lt; sizeof(prefix) - 1) {</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">        3150 :                         return prefix[k];</span></span>
+<span id="L964"><span class="lineNum">     964</span> <span class="tlaGNC">        3150 :                 }</span></span>
+<span id="L965"><span class="lineNum">     965</span> <span class="tlaGNC">        6930 :                 k -= sizeof(prefix) - 1;</span></span>
 <span id="L966"><span class="lineNum">     966</span>              : </span>
-<span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">        6864 :                 return (k &lt; HASH_SIZE) ? pubkey.h[k] : version;</span></span>
-<span id="L968"><span class="lineNum">     968</span> <span class="tlaGNC">        9984 :         }, sizeof(prefix) + HASH_SIZE, h.h, HASH_SIZE, true);</span></span>
+<span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">        6930 :                 return (k &lt; HASH_SIZE) ? pubkey.h[k] : version;</span></span>
+<span id="L968"><span class="lineNum">     968</span> <span class="tlaGNC">       10080 :         }, sizeof(prefix) + HASH_SIZE, h.h, HASH_SIZE, true);</span></span>
 <span id="L969"><span class="lineNum">     969</span>              : </span>
 <span id="L970"><span class="lineNum">     970</span>              :         // pubkey (32 bytes), checksum (2 bytes), version (1 byte), and a zero byte for padding</span>
-<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC">         208 :         uint8_t buf[HASH_SIZE + 4];</span></span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC">         210 :         uint8_t buf[HASH_SIZE + 4];</span></span>
 <span id="L972"><span class="lineNum">     972</span>              : </span>
-<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">         208 :         memcpy(buf, pubkey.h, HASH_SIZE);</span></span>
-<span id="L974"><span class="lineNum">     974</span> <span class="tlaGNC">         208 :         memcpy(buf + HASH_SIZE, h.h, 2);</span></span>
-<span id="L975"><span class="lineNum">     975</span> <span class="tlaGNC">         208 :         buf[HASH_SIZE + 2] = version;</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">         208 :         buf[HASH_SIZE + 3] = 0;</span></span>
+<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">         210 :         memcpy(buf, pubkey.h, HASH_SIZE);</span></span>
+<span id="L974"><span class="lineNum">     974</span> <span class="tlaGNC">         210 :         memcpy(buf + HASH_SIZE, h.h, 2);</span></span>
+<span id="L975"><span class="lineNum">     975</span> <span class="tlaGNC">         210 :         buf[HASH_SIZE + 2] = version;</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">         210 :         buf[HASH_SIZE + 3] = 0;</span></span>
 <span id="L977"><span class="lineNum">     977</span>              : </span>
-<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">         208 :         std::string result;</span></span>
-<span id="L979"><span class="lineNum">     979</span> <span class="tlaGNC">         208 :         result.reserve(62);</span></span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">         210 :         std::string result;</span></span>
+<span id="L979"><span class="lineNum">     979</span> <span class="tlaGNC">         210 :         result.reserve(62);</span></span>
 <span id="L980"><span class="lineNum">     980</span>              : </span>
-<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC">         208 :         uint64_t data = 0;</span></span>
-<span id="L982"><span class="lineNum">     982</span> <span class="tlaGNC">         208 :         uint64_t bit_size = 0;</span></span>
+<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC">         210 :         uint64_t data = 0;</span></span>
+<span id="L982"><span class="lineNum">     982</span> <span class="tlaGNC">         210 :         uint64_t bit_size = 0;</span></span>
 <span id="L983"><span class="lineNum">     983</span>              : </span>
-<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">        7488 :         for (size_t i = 0; i &lt; HASH_SIZE + 3; ++i) {</span></span>
-<span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">        7280 :                 data = (data &lt;&lt; 8) | buf[i];</span></span>
-<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">        7280 :                 bit_size += 8;</span></span>
+<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">        7560 :         for (size_t i = 0; i &lt; HASH_SIZE + 3; ++i) {</span></span>
+<span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">        7350 :                 data = (data &lt;&lt; 8) | buf[i];</span></span>
+<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">        7350 :                 bit_size += 8;</span></span>
 <span id="L987"><span class="lineNum">     987</span>              : </span>
-<span id="L988"><span class="lineNum">     988</span> <span class="tlaGNC">       18928 :                 while (bit_size &gt;= 5) {</span></span>
-<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">       11648 :                         bit_size -= 5;</span></span>
-<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">       11648 :                         result += &quot;abcdefghijklmnopqrstuvwxyz234567&quot;[(data &gt;&gt; bit_size) &amp; 31];</span></span>
-<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">       11648 :                 }</span></span>
-<span id="L992"><span class="lineNum">     992</span> <span class="tlaGNC">        7280 :         }</span></span>
+<span id="L988"><span class="lineNum">     988</span> <span class="tlaGNC">       19110 :                 while (bit_size &gt;= 5) {</span></span>
+<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">       11760 :                         bit_size -= 5;</span></span>
+<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">       11760 :                         result += &quot;abcdefghijklmnopqrstuvwxyz234567&quot;[(data &gt;&gt; bit_size) &amp; 31];</span></span>
+<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">       11760 :                 }</span></span>
+<span id="L992"><span class="lineNum">     992</span> <span class="tlaGNC">        7350 :         }</span></span>
 <span id="L993"><span class="lineNum">     993</span>              : </span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">         208 :         result.append(&quot;.onion&quot;);</span></span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">         210 :         result.append(&quot;.onion&quot;);</span></span>
 <span id="L995"><span class="lineNum">     995</span>              : </span>
-<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">         208 :         return result;</span></span>
-<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">         208 : }</span></span>
+<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">         210 :         return result;</span></span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">         210 : }</span></span>
 <span id="L998"><span class="lineNum">     998</span>              : </span>
 <span id="L999"><span class="lineNum">     999</span>              : hash from_onion_v3(const std::string&amp; address)</span>
-<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">         108 : {</span></span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">         108 :         if ((address.length() &lt; 6) || (address.find(&quot;.onion&quot;) != address.length() - 6)) {</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">         109 : {</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">         109 :         if ((address.length() &lt; 6) || (address.find(&quot;.onion&quot;) != address.length() - 6)) {</span></span>
 <span id="L1002"><span class="lineNum">    1002</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: doesn't end with \&quot;.onion\&quot;&quot;);</span></span>
 <span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">           1 :                 return {};</span></span>
 <span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1005"><span class="lineNum">    1005</span>              : </span>
-<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">         107 :         if (address.length() != 62) {</span></span>
+<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">         108 :         if (address.length() != 62) {</span></span>
 <span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: expected length 62, got &quot; &lt;&lt; address.length() );</span></span>
 <span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">           1 :                 return {};</span></span>
 <span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1010"><span class="lineNum">    1010</span>              : </span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">         106 :         const hash result = from_onion_v3_const(address.c_str());</span></span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">         107 :         const hash result = from_onion_v3_const(address.c_str());</span></span>
 <span id="L1012"><span class="lineNum">    1012</span>              : </span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">         106 :         if (result.empty()) {</span></span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">         107 :         if (result.empty()) {</span></span>
 <span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: has invalid character(s)&quot;);</span></span>
 <span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">           1 :                 return {};</span></span>
 <span id="L1016"><span class="lineNum">    1016</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1017"><span class="lineNum">    1017</span>              : </span>
-<span id="L1018"><span class="lineNum">    1018</span>              :         // Checksum validation</span>
-<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">         105 :         if (to_onion_v3(result) != address) {</span></span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
-<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1018"><span class="lineNum">    1018</span>              :         // Convert address to lowercase</span>
+<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">         106 :         std::string s = address;</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">        6572 :         for (char&amp; c : s) {</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">        6572 :                 c = std::tolower(c);</span></span>
+<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">        6572 :         }</span></span>
 <span id="L1023"><span class="lineNum">    1023</span>              : </span>
-<span id="L1024"><span class="lineNum">    1024</span>              :         // Pubkey validation</span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">         104 :         ge_p3 point;</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">         104 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
-<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1030"><span class="lineNum">    1030</span>              : </span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">         103 :         return result;</span></span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">         104 : }</span></span>
-<span id="L1033"><span class="lineNum">    1033</span>              : </span>
-<span id="L1034"><span class="lineNum">    1034</span>              : } // namespace p2pool</span>
+<span id="L1024"><span class="lineNum">    1024</span>              :         // Checksum validation</span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">         106 :         if (to_onion_v3(result) != s) {</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1029"><span class="lineNum">    1029</span>              : </span>
+<span id="L1030"><span class="lineNum">    1030</span>              :         // Pubkey validation</span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">         105 :         ge_p3 point;</span></span>
+<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">         105 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1036"><span class="lineNum">    1036</span>              : </span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">         104 :         return result;</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">         105 : }</span></span>
+<span id="L1039"><span class="lineNum">    1039</span>              : </span>
+<span id="L1040"><span class="lineNum">    1040</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
