@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 11:10:40</td>
+            <td class="headerValue">2025-10-20 13:16:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">37.8&nbsp;%</td>
@@ -1019,7 +1019,7 @@
 <span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">         208 :         static constexpr uint8_t version = 3;</span></span>
 <span id="L958"><span class="lineNum">     958</span>              : </span>
 <span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">         208 :         hash h;</span></span>
-<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">        9984 :         keccak_custom([&amp;pubkey](int offset) {</span></span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">        9984 :         keccak_custom([&amp;pubkey](int offset) -&gt; uint8_t {</span></span>
 <span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">        9984 :                 size_t k = static_cast&lt;size_t&gt;(offset);</span></span>
 <span id="L962"><span class="lineNum">     962</span> <span class="tlaGNC">        9984 :                 if (k &lt; sizeof(prefix) - 1) {</span></span>
 <span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">        3120 :                         return prefix[k];</span></span>
