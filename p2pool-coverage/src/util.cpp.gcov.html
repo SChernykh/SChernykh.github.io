@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">48.5&nbsp;%</td>
-            <td class="headerCovTableEntry">515</td>
-            <td class="headerCovTableEntry">250</td>
+            <td class="headerCovTableEntryLo">46.4&nbsp;%</td>
+            <td class="headerCovTableEntry">491</td>
+            <td class="headerCovTableEntry">228</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 13:16:02</td>
+            <td class="headerValue">2025-10-20 17:11:56</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">37.8&nbsp;%</td>
@@ -1070,59 +1070,30 @@
 <span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">           1 :                 return {};</span></span>
 <span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1010"><span class="lineNum">    1010</span>              : </span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">         106 :         uint8_t buf[HASH_SIZE + 4] = {};</span></span>
-<span id="L1012"><span class="lineNum">    1012</span> <span class="tlaGNC">         106 :         uint8_t* p = buf;</span></span>
-<span id="L1013"><span class="lineNum">    1013</span>              : </span>
-<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">         106 :         uint64_t data = 0;</span></span>
-<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">         106 :         uint64_t bit_size = 0;</span></span>
-<span id="L1016"><span class="lineNum">    1016</span>              : </span>
-<span id="L1017"><span class="lineNum">    1017</span> <span class="tlaGNC">        5991 :         for (size_t i = 0; i &lt; 56; ++i) {</span></span>
-<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">        5886 :                 const char c = address[i];</span></span>
-<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">        5886 :                 uint64_t digit;</span></span>
-<span id="L1020"><span class="lineNum">    1020</span>              : </span>
-<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">        5886 :                 if ('a' &lt;= c &amp;&amp; c &lt;= 'z') {</span></span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">        4875 :                         digit = static_cast&lt;uint64_t&gt;(c - 'a');</span></span>
-<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">        4875 :                 }</span></span>
-<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">        1011 :                 else if ('A' &lt;= c &amp;&amp; c &lt;= 'Z') {</span></span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaUNC tlaBgUNC">           0 :                         digit = static_cast&lt;uint64_t&gt;(c - 'A');</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC tlaBgGNC">        1011 :                 else if ('2' &lt;= c &amp;&amp; c &lt;= '7') {</span></span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">        1010 :                         digit = static_cast&lt;uint64_t&gt;(c - '2') + 26;</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">        1010 :                 }</span></span>
-<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC">           1 :                 else {</span></span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">           1 :                         LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: has an invalid character \&quot;&quot; &lt;&lt; c &lt;&lt; '&quot;');</span></span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">           1 :                         return {};</span></span>
-<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">           1 :                 }</span></span>
-<span id="L1034"><span class="lineNum">    1034</span>              : </span>
-<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">        5885 :                 data = (data &lt;&lt; 5) | digit;</span></span>
-<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaGNC">        5885 :                 bit_size += 5;</span></span>
-<span id="L1037"><span class="lineNum">    1037</span>              : </span>
-<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">        9563 :                 while (bit_size &gt;= 8) {</span></span>
-<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">        3678 :                         bit_size -= 8;</span></span>
-<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">        3678 :                         *(p++) = static_cast&lt;uint8_t&gt;(data &gt;&gt; bit_size);</span></span>
-<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">        3678 :                 }</span></span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">        5885 :         }</span></span>
-<span id="L1043"><span class="lineNum">    1043</span>              : </span>
-<span id="L1044"><span class="lineNum">    1044</span> <span class="tlaGNC">         105 :         hash result;</span></span>
-<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC">         105 :         memcpy(result.h, buf, HASH_SIZE);</span></span>
-<span id="L1046"><span class="lineNum">    1046</span>              : </span>
-<span id="L1047"><span class="lineNum">    1047</span>              :         // Checksum validation</span>
-<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">         105 :         if (to_onion_v3(result) != address) {</span></span>
-<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
-<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1051"><span class="lineNum">    1051</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1052"><span class="lineNum">    1052</span>              : </span>
-<span id="L1053"><span class="lineNum">    1053</span>              :         // Pubkey validation</span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">         104 :         ge_p3 point;</span></span>
-<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaGNC">         104 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
-<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
-<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1059"><span class="lineNum">    1059</span>              : </span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">         103 :         return result;</span></span>
-<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">         104 : }</span></span>
-<span id="L1062"><span class="lineNum">    1062</span>              : </span>
-<span id="L1063"><span class="lineNum">    1063</span>              : } // namespace p2pool</span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">         106 :         const hash result = from_onion_v3_const(address.c_str());</span></span>
+<span id="L1012"><span class="lineNum">    1012</span>              : </span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">         106 :         if (result.empty()) {</span></span>
+<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: has invalid character(s)&quot;);</span></span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1016"><span class="lineNum">    1016</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1017"><span class="lineNum">    1017</span>              : </span>
+<span id="L1018"><span class="lineNum">    1018</span>              :         // Checksum validation</span>
+<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">         105 :         if (to_onion_v3(result) != address) {</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1023"><span class="lineNum">    1023</span>              : </span>
+<span id="L1024"><span class="lineNum">    1024</span>              :         // Pubkey validation</span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">         104 :         ge_p3 point;</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">         104 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1030"><span class="lineNum">    1030</span>              : </span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">         103 :         return result;</span></span>
+<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">         104 : }</span></span>
+<span id="L1033"><span class="lineNum">    1033</span>              : </span>
+<span id="L1034"><span class="lineNum">    1034</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
