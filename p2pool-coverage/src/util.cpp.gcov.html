@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 18:55:03</td>
+            <td class="headerValue">2025-10-20 21:38:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">37.8&nbsp;%</td>
@@ -1080,7 +1080,7 @@
 <span id="L1018"><span class="lineNum">    1018</span>              :         // Convert address to lowercase</span>
 <span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">         106 :         std::string s = address;</span></span>
 <span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">        6572 :         for (char&amp; c : s) {</span></span>
-<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">        6572 :                 c = std::tolower(c);</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">        6572 :                 c = static_cast&lt;char&gt;(std::tolower(c));</span></span>
 <span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">        6572 :         }</span></span>
 <span id="L1023"><span class="lineNum">    1023</span>              : </span>
 <span id="L1024"><span class="lineNum">    1024</span>              :         // Checksum validation</span>
