@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-19 15:29:28</td>
+            <td class="headerValue">2025-10-20 11:10:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1308,7 +1308,7 @@
 <span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :         if (m_updateSeed.exchange(false)) {</span></span>
 <span id="L1247"><span class="lineNum">    1247</span> <span class="tlaUNC">           0 :                 m_hasher-&gt;set_seed_async(data.seed_hash);</span></span>
 <span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :         m_blockTemplate-&gt;update(data, *m_mempool, m_params-&gt;m_miningWallet, m_params-&gt;m_subaddress);</span></span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :         m_blockTemplate-&gt;update(data, *m_mempool, m_params);</span></span>
 <span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :         stratum_on_block();</span></span>
 <span id="L1251"><span class="lineNum">    1251</span> <span class="tlaUNC">           0 :         api_update_pool_stats();</span></span>
 <span id="L1252"><span class="lineNum">    1252</span>              : </span>
