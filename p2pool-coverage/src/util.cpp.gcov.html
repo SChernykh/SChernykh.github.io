@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-21 07:37:14</td>
+            <td class="headerValue">2025-10-21 08:42:45</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">39.1&nbsp;%</td>
@@ -1079,7 +1079,7 @@
 <span id="L1017"><span class="lineNum">    1017</span>              : </span>
 <span id="L1018"><span class="lineNum">    1018</span>              :         // Convert address to lowercase</span>
 <span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">         106 :         std::string s = address;</span></span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">        6572 :         std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c){ return std::tolower(c); });</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">        6572 :         std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return static_cast&lt;char&gt;(std::tolower(c)); });</span></span>
 <span id="L1021"><span class="lineNum">    1021</span>              : </span>
 <span id="L1022"><span class="lineNum">    1022</span>              :         // Checksum validation</span>
 <span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">         106 :         if (to_onion_v3(result) != s) {</span></span>
