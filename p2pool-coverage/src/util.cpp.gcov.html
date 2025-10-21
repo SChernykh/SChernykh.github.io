@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">46.9&nbsp;%</td>
-            <td class="headerCovTableEntry">495</td>
-            <td class="headerCovTableEntry">232</td>
+            <td class="headerCovTableEntryLo">46.7&nbsp;%</td>
+            <td class="headerCovTableEntry">493</td>
+            <td class="headerCovTableEntry">230</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-20 21:38:59</td>
+            <td class="headerValue">2025-10-21 07:37:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">37.8&nbsp;%</td>
-            <td class="headerCovTableEntry">45</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntryLo">39.1&nbsp;%</td>
+            <td class="headerCovTableEntry">46</td>
+            <td class="headerCovTableEntry">18</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -1079,27 +1079,25 @@
 <span id="L1017"><span class="lineNum">    1017</span>              : </span>
 <span id="L1018"><span class="lineNum">    1018</span>              :         // Convert address to lowercase</span>
 <span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">         106 :         std::string s = address;</span></span>
-<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">        6572 :         for (char&amp; c : s) {</span></span>
-<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">        6572 :                 c = static_cast&lt;char&gt;(std::tolower(c));</span></span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">        6572 :         }</span></span>
-<span id="L1023"><span class="lineNum">    1023</span>              : </span>
-<span id="L1024"><span class="lineNum">    1024</span>              :         // Checksum validation</span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">         106 :         if (to_onion_v3(result) != s) {</span></span>
-<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
-<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1029"><span class="lineNum">    1029</span>              : </span>
-<span id="L1030"><span class="lineNum">    1030</span>              :         // Pubkey validation</span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">         105 :         ge_p3 point;</span></span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">         105 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
-<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
-<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1036"><span class="lineNum">    1036</span>              : </span>
-<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">         104 :         return result;</span></span>
-<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">         105 : }</span></span>
-<span id="L1039"><span class="lineNum">    1039</span>              : </span>
-<span id="L1040"><span class="lineNum">    1040</span>              : } // namespace p2pool</span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">        6572 :         std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c){ return std::tolower(c); });</span></span>
+<span id="L1021"><span class="lineNum">    1021</span>              : </span>
+<span id="L1022"><span class="lineNum">    1022</span>              :         // Checksum validation</span>
+<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">         106 :         if (to_onion_v3(result) != s) {</span></span>
+<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1027"><span class="lineNum">    1027</span>              : </span>
+<span id="L1028"><span class="lineNum">    1028</span>              :         // Pubkey validation</span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">         105 :         ge_p3 point;</span></span>
+<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC">         105 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
+<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1034"><span class="lineNum">    1034</span>              : </span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">         104 :         return result;</span></span>
+<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaGNC">         105 : }</span></span>
+<span id="L1037"><span class="lineNum">    1037</span>              : </span>
+<span id="L1038"><span class="lineNum">    1038</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
