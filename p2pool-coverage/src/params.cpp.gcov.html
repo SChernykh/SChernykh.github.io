@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-23 09:57:07</td>
+            <td class="headerValue">2025-10-23 10:29:56</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -450,7 +450,7 @@
 <span id="L388"><span class="lineNum">     388</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L389"><span class="lineNum">     389</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L390"><span class="lineNum">     390</span>              : </span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC">           0 :         if (!m_subaddress.torsion_check()) {</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC">           0 :         if (m_subaddress.valid() &amp;&amp; !m_subaddress.torsion_check()) {</span></span>
 <span id="L392"><span class="lineNum">     392</span> <span class="tlaUNC">           0 :                 LOGERR(1, m_subaddress &lt;&lt; &quot; didn't pass the torsion check. It will be incompatible with FCMP++.&quot;);</span></span>
 <span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L394"><span class="lineNum">     394</span> <span class="tlaUNC">           0 :         }</span></span>
