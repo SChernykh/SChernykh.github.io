@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">83.3&nbsp;%</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">14</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-23 15:05:27</td>
+            <td class="headerValue">2025-10-23 17:09:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">50.0&nbsp;%</td>
+            <td class="headerCovTableEntryLo">66.7&nbsp;%</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">2</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -89,10 +89,10 @@
 <span id="L27"><span class="lineNum">      27</span>              : </span>
 <span id="L28"><span class="lineNum">      28</span>              : namespace p2pool {</span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC tlaBgUNC">           0 : IMergeMiningClient* IMergeMiningClient::create(p2pool*, const std::string&amp;, const std::string&amp;) noexcept { return nullptr; }</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 : IMergeMiningClient* IMergeMiningClient::create(p2pool*, const std::string&amp;, const std::string&amp;) noexcept { return nullptr; }</span></span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
 <span id="L32"><span class="lineNum">      32</span>              : namespace JSONRPCRequest {</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :         void Call(const std::string&amp;, int, const std::string&amp;, const std::string&amp;, const std::string&amp;, bool, const std::string&amp;, CallbackBase*, CallbackBase*, uv_loop_t*) {}</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :         void Call(const std::string&amp;, int, const std::string&amp;, const std::string&amp;, const std::string&amp;, bool, const std::string&amp;, CallbackBase*, CallbackBase*, uv_loop_t*) {}</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : }</span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
 <span id="L36"><span class="lineNum">      36</span>              : }</span>
@@ -100,19 +100,21 @@
 <span id="L38"><span class="lineNum">      38</span>              : using namespace p2pool;</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
 <span id="L40"><span class="lineNum">      40</span>              : int main(int argc, char** argv)</span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           1 : {</span></span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :         set_main_thread();</span></span>
 <span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :         p2pool_usage();</span></span>
-<span id="L44"><span class="lineNum">      44</span>              : </span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :         PoolBlock::s_precalculatedSharesLock = new ReadWriteLock();</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :         IMergeMiningClient::create({}, {}, {});</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :         JSONRPCRequest::call({}, 0, {}, {}, {}, false, {}, [](const char*, size_t, double){}, [](const char*, size_t, double){});</span></span>
 <span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           1 :         testing::InitGoogleTest(&amp;argc, argv);</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 :         const int result = RUN_ALL_TESTS();</span></span>
-<span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :         delete PoolBlock::s_precalculatedSharesLock;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           1 :         PoolBlock::s_precalculatedSharesLock = new ReadWriteLock();</span></span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           1 :         testing::InitGoogleTest(&amp;argc, argv);</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :         const int result = RUN_ALL_TESTS();</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :         return result;</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :         delete PoolBlock::s_precalculatedSharesLock;</span></span>
+<span id="L53"><span class="lineNum">      53</span>              : </span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           1 :         return result;</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 : }</span></span>
         </pre>
               </td>
             </tr>
