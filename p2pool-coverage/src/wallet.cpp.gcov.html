@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">79.7&nbsp;%</td>
-            <td class="headerCovTableEntry">148</td>
-            <td class="headerCovTableEntry">118</td>
+            <td class="headerCovTableEntryMed">79.0&nbsp;%</td>
+            <td class="headerCovTableEntry">167</td>
+            <td class="headerCovTableEntry">132</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-21 16:44:21</td>
+            <td class="headerValue">2025-10-23 09:57:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryMed">87.5&nbsp;%</td>
+            <td class="headerCovTableEntryMed">88.9&nbsp;%</td>
+            <td class="headerCovTableEntry">9</td>
             <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntry">7</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -89,236 +89,267 @@
 <span id="L27"><span class="lineNum">      27</span>              : #include &quot;crypto-ops.h&quot;</span>
 <span id="L28"><span class="lineNum">      28</span>              : }</span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
-<span id="L30"><span class="lineNum">      30</span>              : namespace {</span>
+<span id="L30"><span class="lineNum">      30</span>              : #include &quot;fcmp_pp_crypto.h&quot;</span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span>              : // Allow only regular addresses (no integrated addresses, no subaddresses)</span>
-<span id="L33"><span class="lineNum">      33</span>              : // Values taken from cryptonote_config.h (CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX)</span>
-<span id="L34"><span class="lineNum">      34</span>              : constexpr uint64_t valid_prefixes[] = { 18, 53, 24 };</span>
+<span id="L32"><span class="lineNum">      32</span>              : LOG_CATEGORY(Wallet)</span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span>              : namespace {</span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span>              : constexpr uint64_t valid_prefixes_subaddress[] = { 42, 63, 36 };</span>
-<span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span>              : constexpr std::array&lt;int, 9&gt; block_sizes{ 0, 2, 3, 5, 6, 7, 9, 10, 11 };</span>
-<span id="L39"><span class="lineNum">      39</span>              : constexpr int num_full_blocks = p2pool::Wallet::ADDRESS_LENGTH / block_sizes.back();</span>
-<span id="L40"><span class="lineNum">      40</span>              : constexpr int last_block_size = p2pool::Wallet::ADDRESS_LENGTH % block_sizes.back();</span>
+<span id="L36"><span class="lineNum">      36</span>              : // Allow only regular addresses (no integrated addresses, no subaddresses)</span>
+<span id="L37"><span class="lineNum">      37</span>              : // Values taken from cryptonote_config.h (CRYPTONOTE_PUBLIC_ADDRESS_BASE58_PREFIX)</span>
+<span id="L38"><span class="lineNum">      38</span>              : constexpr uint64_t valid_prefixes[] = { 18, 53, 24 };</span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span>              : constexpr uint64_t valid_prefixes_subaddress[] = { 42, 63, 36 };</span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
-<span id="L42"><span class="lineNum">      42</span>              : constexpr int block_sizes_lookup[11] = { 0, -1, 1, 2, -1, 3, 4, 5, -1, 6, 7 };</span>
-<span id="L43"><span class="lineNum">      43</span>              : </span>
-<span id="L44"><span class="lineNum">      44</span>              : constexpr char alphabet[] = &quot;123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz&quot;;</span>
-<span id="L45"><span class="lineNum">      45</span>              : constexpr size_t alphabet_size = sizeof(alphabet) - 1;</span>
-<span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span>              : static_assert(alphabet_size == 58, &quot;Check alphabet&quot;);</span>
-<span id="L48"><span class="lineNum">      48</span>              : </span>
-<span id="L49"><span class="lineNum">      49</span>              : struct ReverseAlphabet</span>
-<span id="L50"><span class="lineNum">      50</span>              : {</span>
-<span id="L51"><span class="lineNum">      51</span>              :         int8_t data[256];</span>
-<span id="L52"><span class="lineNum">      52</span>              :         int num_symbols;</span>
-<span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span>              :         static constexpr ReverseAlphabet init()</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaUNC">           0 :                 ReverseAlphabet result = {};</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 : </span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :                 for (int i = 0; i &lt; 256; ++i) {</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :                         result.data[i] = -1;</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L42"><span class="lineNum">      42</span>              : constexpr std::array&lt;int, 9&gt; block_sizes{ 0, 2, 3, 5, 6, 7, 9, 10, 11 };</span>
+<span id="L43"><span class="lineNum">      43</span>              : constexpr int num_full_blocks = p2pool::Wallet::ADDRESS_LENGTH / block_sizes.back();</span>
+<span id="L44"><span class="lineNum">      44</span>              : constexpr int last_block_size = p2pool::Wallet::ADDRESS_LENGTH % block_sizes.back();</span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span>              : constexpr int block_sizes_lookup[11] = { 0, -1, 1, 2, -1, 3, 4, 5, -1, 6, 7 };</span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span>              : constexpr char alphabet[] = &quot;123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz&quot;;</span>
+<span id="L49"><span class="lineNum">      49</span>              : constexpr size_t alphabet_size = sizeof(alphabet) - 1;</span>
+<span id="L50"><span class="lineNum">      50</span>              : </span>
+<span id="L51"><span class="lineNum">      51</span>              : static_assert(alphabet_size == 58, &quot;Check alphabet&quot;);</span>
+<span id="L52"><span class="lineNum">      52</span>              : </span>
+<span id="L53"><span class="lineNum">      53</span>              : struct ReverseAlphabet</span>
+<span id="L54"><span class="lineNum">      54</span>              : {</span>
+<span id="L55"><span class="lineNum">      55</span>              :         int8_t data[256];</span>
+<span id="L56"><span class="lineNum">      56</span>              :         int num_symbols;</span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span>              :         static constexpr ReverseAlphabet init()</span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :                 ReverseAlphabet result = {};</span></span>
 <span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 : </span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :                 result.num_symbols = 0;</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :                 for (size_t i = 0; i &lt; alphabet_size; ++i) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :                         if (result.data[static_cast&lt;uint8_t&gt;(alphabet[i])] &lt; 0) {</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :                                 result.data[static_cast&lt;uint8_t&gt;(alphabet[i])] = static_cast&lt;int8_t&gt;(i);</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :                                 ++result.num_symbols;</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC">           0 : </span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :                 return result;</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L72"><span class="lineNum">      72</span>              : };</span>
-<span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span>              : constexpr ReverseAlphabet rev_alphabet = ReverseAlphabet::init();</span>
-<span id="L75"><span class="lineNum">      75</span>              : </span>
-<span id="L76"><span class="lineNum">      76</span>              : static_assert(rev_alphabet.num_symbols == 58, &quot;Check alphabet&quot;);</span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :                 for (int i = 0; i &lt; 256; ++i) {</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :                         result.data[i] = -1;</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 : </span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :                 result.num_symbols = 0;</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :                 for (size_t i = 0; i &lt; alphabet_size; ++i) {</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :                         if (result.data[static_cast&lt;uint8_t&gt;(alphabet[i])] &lt; 0) {</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC">           0 :                                 result.data[static_cast&lt;uint8_t&gt;(alphabet[i])] = static_cast&lt;int8_t&gt;(i);</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :                                 ++result.num_symbols;</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaUNC">           0 : </span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC">           0 :                 return result;</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L76"><span class="lineNum">      76</span>              : };</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span>              : } // namespace</span>
+<span id="L78"><span class="lineNum">      78</span>              : constexpr ReverseAlphabet rev_alphabet = ReverseAlphabet::init();</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
-<span id="L80"><span class="lineNum">      80</span>              : namespace p2pool {</span>
+<span id="L80"><span class="lineNum">      80</span>              : static_assert(rev_alphabet.num_symbols == 58, &quot;Check alphabet&quot;);</span>
 <span id="L81"><span class="lineNum">      81</span>              : </span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC tlaBgGNC">       73866 : Wallet::Wallet(const char* address) : m_prefix(0), m_checksum(0), m_type(NetworkType::Invalid), m_subaddress(false)</span></span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       73866 : {</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">       73866 :         decode(address);</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">       73866 : }</span></span>
-<span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span>              : Wallet::Wallet(const Wallet&amp; w)</span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          12 : {</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">          12 :         operator=(w);</span></span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">          12 : }</span></span>
-<span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span>              : Wallet&amp; Wallet::operator=(const Wallet&amp; w)</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       53726 : {</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       53726 :         if (this == &amp;w) {</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC tlaBgUNC">           0 :                 return *this;</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L82"><span class="lineNum">      82</span>              : } // namespace</span>
+<span id="L83"><span class="lineNum">      83</span>              : </span>
+<span id="L84"><span class="lineNum">      84</span>              : namespace p2pool {</span>
+<span id="L85"><span class="lineNum">      85</span>              : </span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC tlaBgGNC">       73866 : Wallet::Wallet(const char* address) : m_prefix(0), m_checksum(0), m_type(NetworkType::Invalid), m_subaddress(false)</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">       73866 : {</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">       73866 :         if (!decode(address)) {</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">       73836 :                 LOGWARN(1, address &lt;&lt; &quot; failed to decode&quot;);</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       73836 :         }</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       73866 : }</span></span>
+<span id="L92"><span class="lineNum">      92</span>              : </span>
+<span id="L93"><span class="lineNum">      93</span>              : Wallet::Wallet(const Wallet&amp; w)</span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">          12 : {</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">          12 :         operator=(w);</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">          12 : }</span></span>
 <span id="L97"><span class="lineNum">      97</span>              : </span>
-<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC tlaBgGNC">       53726 :         m_prefix = w.m_prefix;</span></span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       53726 :         m_spendPublicKey = w.m_spendPublicKey;</span></span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       53726 :         m_viewPublicKey = w.m_viewPublicKey;</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">       53726 :         m_checksum = w.m_checksum;</span></span>
-<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">       53726 :         m_type = w.m_type;</span></span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">       53726 :         m_subaddress = w.m_subaddress;</span></span>
-<span id="L104"><span class="lineNum">     104</span>              : </span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">       53726 :         return *this;</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       53726 : }</span></span>
-<span id="L107"><span class="lineNum">     107</span>              : </span>
-<span id="L108"><span class="lineNum">     108</span>              : bool Wallet::decode(const char* address)</span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">       73872 : {</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">       73872 :         m_type = NetworkType::Invalid;</span></span>
-<span id="L111"><span class="lineNum">     111</span>              : </span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       73872 :         if (!address || (strlen(address) != ADDRESS_LENGTH)) {</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">       73833 :                 return false;</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">       73833 :         }</span></span>
-<span id="L115"><span class="lineNum">     115</span>              : </span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">          39 :         constexpr int last_block_size_index = block_sizes_lookup[last_block_size];</span></span>
+<span id="L98"><span class="lineNum">      98</span>              : Wallet&amp; Wallet::operator=(const Wallet&amp; w)</span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">       53726 : {</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">       53726 :         if (this == &amp;w) {</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaUNC tlaBgUNC">           0 :                 return *this;</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L103"><span class="lineNum">     103</span>              : </span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC tlaBgGNC">       53726 :         m_prefix = w.m_prefix;</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">       53726 :         m_spendPublicKey = w.m_spendPublicKey;</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">       53726 :         m_viewPublicKey = w.m_viewPublicKey;</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">       53726 :         m_checksum = w.m_checksum;</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">       53726 :         m_type = w.m_type;</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">       53726 :         m_subaddress = w.m_subaddress;</span></span>
+<span id="L110"><span class="lineNum">     110</span>              : </span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">       53726 :         return *this;</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">       53726 : }</span></span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span>              : bool Wallet::decode(const char* address)</span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       73872 : {</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">       73872 :         m_type = NetworkType::Invalid;</span></span>
 <span id="L117"><span class="lineNum">     117</span>              : </span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">          39 :         static_assert(last_block_size_index &gt;= 0, &quot;Check ADDRESS_LENGTH&quot;);</span></span>
-<span id="L119"><span class="lineNum">     119</span>              : </span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">          39 :         uint8_t data[static_cast&lt;size_t&gt;(num_full_blocks) * sizeof(uint64_t) + last_block_size_index] = {};</span></span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          39 :         int data_index = 0;</span></span>
-<span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         373 :         for (int i = 0; i &lt;= num_full_blocks; ++i) {</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         336 :                 uint64_t num = 0;</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         336 :                 uint64_t order = 1;</span></span>
-<span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">        3881 :                 for (int j = ((i &lt; num_full_blocks) ? block_sizes.back() : last_block_size) - 1; j &gt;= 0; --j) {</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">        3547 :                         const int8_t digit = rev_alphabet.data[static_cast&lt;uint8_t&gt;(address[j])];</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">        3547 :                         if (digit &lt; 0) {</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           1 :                                 return false;</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           1 :                         }</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">       73872 :         if (!address || (strlen(address) != ADDRESS_LENGTH)) {</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">       73833 :                 return false;</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">       73833 :         }</span></span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">          39 :         constexpr int last_block_size_index = block_sizes_lookup[last_block_size];</span></span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">          39 :         static_assert(last_block_size_index &gt;= 0, &quot;Check ADDRESS_LENGTH&quot;);</span></span>
+<span id="L125"><span class="lineNum">     125</span>              : </span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">          39 :         uint8_t data[static_cast&lt;size_t&gt;(num_full_blocks) * sizeof(uint64_t) + last_block_size_index] = {};</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">          39 :         int data_index = 0;</span></span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">         373 :         for (int i = 0; i &lt;= num_full_blocks; ++i) {</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         336 :                 uint64_t num = 0;</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         336 :                 uint64_t order = 1;</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">        3546 :                         uint64_t hi;</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        3546 :                         const uint64_t tmp = num + umul128(order, static_cast&lt;uint64_t&gt;(digit), &amp;hi);</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        3546 :                         if ((tmp &lt; num) || hi) {</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">        3881 :                 for (int j = ((i &lt; num_full_blocks) ? block_sizes.back() : last_block_size) - 1; j &gt;= 0; --j) {</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">        3547 :                         const int8_t digit = rev_alphabet.data[static_cast&lt;uint8_t&gt;(address[j])];</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">        3547 :                         if (digit &lt; 0) {</span></span>
 <span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">           1 :                                 return false;</span></span>
 <span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">           1 :                         }</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">        3545 :                         num = tmp;</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        3545 :                         order *= alphabet_size;</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        3545 :                 }</span></span>
-<span id="L142"><span class="lineNum">     142</span>              : </span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         334 :                 address += block_sizes.back();</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">        3546 :                         uint64_t hi;</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">        3546 :                         const uint64_t tmp = num + umul128(order, static_cast&lt;uint64_t&gt;(digit), &amp;hi);</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">        3546 :                         if ((tmp &lt; num) || hi) {</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">           1 :                                 return false;</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">           1 :                         }</span></span>
 <span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">        2895 :                 for (int j = static_cast&lt;int&gt;((i &lt; num_full_blocks) ? sizeof(num) : last_block_size_index) - 1; j &gt;= 0; --j) {</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">        2561 :                         data[data_index++] = static_cast&lt;uint8_t&gt;(num &gt;&gt; (j * 8));</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        2561 :                 }</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         334 :         }</span></span>
-<span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">          37 :         m_prefix = data[0];</span></span>
-<span id="L151"><span class="lineNum">     151</span>              : </span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">          37 :         switch (m_prefix)</span></span>
-<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">          37 :         {</span></span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">          22 :         case valid_prefixes[0]: m_type = NetworkType::Mainnet;  break;</span></span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">           3 :         case valid_prefixes[1]: m_type = NetworkType::Testnet;  break;</span></span>
-<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">           3 :         case valid_prefixes[2]: m_type = NetworkType::Stagenet; break;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">        3545 :                         num = tmp;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">        3545 :                         order *= alphabet_size;</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">        3545 :                 }</span></span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         334 :                 address += block_sizes.back();</span></span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">        2895 :                 for (int j = static_cast&lt;int&gt;((i &lt; num_full_blocks) ? sizeof(num) : last_block_size_index) - 1; j &gt;= 0; --j) {</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">        2561 :                         data[data_index++] = static_cast&lt;uint8_t&gt;(num &gt;&gt; (j * 8));</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">        2561 :                 }</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">         334 :         }</span></span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">          37 :         m_prefix = data[0];</span></span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">           7 :         case valid_prefixes_subaddress[0]: m_type = NetworkType::Mainnet;  m_subaddress = true; break;</span></span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">           1 :         case valid_prefixes_subaddress[1]: m_type = NetworkType::Testnet;  m_subaddress = true; break;</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">           1 :         case valid_prefixes_subaddress[2]: m_type = NetworkType::Stagenet; m_subaddress = true; break;</span></span>
-<span id="L161"><span class="lineNum">     161</span>              : </span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaUNC tlaBgUNC">           0 :         default:</span></span>
-<span id="L163"><span class="lineNum">     163</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">          37 :         }</span></span>
-<span id="L165"><span class="lineNum">     165</span>              : </span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">          37 :         memcpy(m_spendPublicKey.h, data + 1, HASH_SIZE);</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">          37 :         memcpy(m_viewPublicKey.h, data + 1 + HASH_SIZE, HASH_SIZE);</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">          37 :         memcpy(&amp;m_checksum, data + 1 + HASH_SIZE * 2, sizeof(m_checksum));</span></span>
-<span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">          37 :         uint8_t md[200];</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">          37 :         keccak(data, sizeof(data) - sizeof(m_checksum), md);</span></span>
-<span id="L172"><span class="lineNum">     172</span>              : </span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          37 :         if (memcmp(&amp;m_checksum, md, sizeof(m_checksum)) != 0) {</span></span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">           1 :                 m_type = NetworkType::Invalid;</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L176"><span class="lineNum">     176</span>              : </span>
-<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          37 :         ge_p3 point;</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">          37 :         if ((ge_frombytes_vartime(&amp;point, m_spendPublicKey.h) != 0) || (ge_frombytes_vartime(&amp;point, m_viewPublicKey.h) != 0)) {</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC tlaBgUNC">           0 :                 m_type = NetworkType::Invalid;</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L181"><span class="lineNum">     181</span>              : </span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC tlaBgGNC">          37 :         return valid();</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          37 : }</span></span>
-<span id="L184"><span class="lineNum">     184</span>              : </span>
-<span id="L185"><span class="lineNum">     185</span>              : bool Wallet::assign(const hash&amp; spend_pub_key, const hash&amp; view_pub_key, NetworkType type, bool subaddress)</span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">       40267 : {</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">       40267 :         ge_p3 point;</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">       40267 :         if ((ge_frombytes_vartime(&amp;point, spend_pub_key.h) != 0) || (ge_frombytes_vartime(&amp;point, view_pub_key.h) != 0)) {</span></span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC tlaBgGNC">       40267 :         switch (type)</span></span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       40267 :         {</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       40259 :         case NetworkType::Mainnet:  m_prefix = subaddress ? valid_prefixes_subaddress[0] : valid_prefixes[0]; break;</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">           4 :         case NetworkType::Testnet:  m_prefix = subaddress ? valid_prefixes_subaddress[1] : valid_prefixes[1]; break;</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">           4 :         case NetworkType::Stagenet: m_prefix = subaddress ? valid_prefixes_subaddress[2] : valid_prefixes[2]; break;</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaUNC tlaBgUNC">           0 :         default:                    m_prefix = 0;                 break;</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC tlaBgGNC">       40267 :         }</span></span>
-<span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">       40267 :         m_spendPublicKey = spend_pub_key;</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">       40267 :         m_viewPublicKey = view_pub_key;</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">          37 :         switch (m_prefix)</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">          37 :         {</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">          22 :         case valid_prefixes[0]: m_type = NetworkType::Mainnet;  break;</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           3 :         case valid_prefixes[1]: m_type = NetworkType::Testnet;  break;</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">           3 :         case valid_prefixes[2]: m_type = NetworkType::Stagenet; break;</span></span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">           7 :         case valid_prefixes_subaddress[0]: m_type = NetworkType::Mainnet;  m_subaddress = true; break;</span></span>
+<span id="L165"><span class="lineNum">     165</span> <span class="tlaGNC">           1 :         case valid_prefixes_subaddress[1]: m_type = NetworkType::Testnet;  m_subaddress = true; break;</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">           1 :         case valid_prefixes_subaddress[2]: m_type = NetworkType::Stagenet; m_subaddress = true; break;</span></span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 :         default:</span></span>
+<span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC tlaBgGNC">          37 :         }</span></span>
+<span id="L171"><span class="lineNum">     171</span>              : </span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">          37 :         memcpy(m_spendPublicKey.h, data + 1, HASH_SIZE);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">          37 :         memcpy(m_viewPublicKey.h, data + 1 + HASH_SIZE, HASH_SIZE);</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">          37 :         memcpy(&amp;m_checksum, data + 1 + HASH_SIZE * 2, sizeof(m_checksum));</span></span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">          37 :         uint8_t md[200];</span></span>
+<span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">          37 :         keccak(data, sizeof(data) - sizeof(m_checksum), md);</span></span>
+<span id="L178"><span class="lineNum">     178</span>              : </span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">          37 :         if (memcmp(&amp;m_checksum, md, sizeof(m_checksum)) != 0) {</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">           1 :                 m_type = NetworkType::Invalid;</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L182"><span class="lineNum">     182</span>              : </span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          37 :         ge_p3 point;</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          37 :         if ((ge_frombytes_vartime(&amp;point, m_spendPublicKey.h) != 0) || (ge_frombytes_vartime(&amp;point, m_viewPublicKey.h) != 0)) {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC tlaBgUNC">           0 :                 m_type = NetworkType::Invalid;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L187"><span class="lineNum">     187</span>              : </span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC tlaBgGNC">          37 :         if (!torsion_check()) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          37 :                 LOGWARN(1, &quot;Torsion check failed for wallet &quot; &lt;&lt; *this &lt;&lt; &quot;! It will not be compatible with FCMP++.&quot;);</span></span>
+<span id="L190"><span class="lineNum">     190</span>              :                 // TODO: add &quot;m_type = NetworkType::Invalid;&quot; and return false in a later release, closer to FCMP++ hardfork</span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">          37 :         }</span></span>
+<span id="L192"><span class="lineNum">     192</span>              : </span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">          37 :         return valid();</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">          37 : }</span></span>
+<span id="L195"><span class="lineNum">     195</span>              : </span>
+<span id="L196"><span class="lineNum">     196</span>              : bool Wallet::assign(const hash&amp; spend_pub_key, const hash&amp; view_pub_key, NetworkType type, bool subaddress)</span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">       40267 : {</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       40267 :         ge_p3 point;</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       40267 :         if ((ge_frombytes_vartime(&amp;point, spend_pub_key.h) != 0) || (ge_frombytes_vartime(&amp;point, view_pub_key.h) != 0)) {</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">       40267 :         uint8_t data[1 + HASH_SIZE * 2];</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       40267 :         data[0] = static_cast&lt;uint8_t&gt;(m_prefix);</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">       40267 :         memcpy(data + 1, spend_pub_key.h, HASH_SIZE);</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">       40267 :         memcpy(data + 1 + HASH_SIZE, view_pub_key.h, HASH_SIZE);</span></span>
-<span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">       40267 :         uint8_t md[200];</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       40267 :         keccak(data, sizeof(data), md);</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC tlaBgGNC">       40267 :         switch (type)</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">       40267 :         {</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">       40259 :         case NetworkType::Mainnet:  m_prefix = subaddress ? valid_prefixes_subaddress[0] : valid_prefixes[0]; break;</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">           4 :         case NetworkType::Testnet:  m_prefix = subaddress ? valid_prefixes_subaddress[1] : valid_prefixes[1]; break;</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">           4 :         case NetworkType::Stagenet: m_prefix = subaddress ? valid_prefixes_subaddress[2] : valid_prefixes[2]; break;</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC tlaBgUNC">           0 :         default:                    m_prefix = 0;                 break;</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC tlaBgGNC">       40267 :         }</span></span>
 <span id="L210"><span class="lineNum">     210</span>              : </span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">       40267 :         memcpy(&amp;m_checksum, md, sizeof(m_checksum));</span></span>
-<span id="L212"><span class="lineNum">     212</span>              : </span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">       40267 :         m_type = type;</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       40267 :         m_subaddress = subaddress;</span></span>
-<span id="L215"><span class="lineNum">     215</span>              : </span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       40267 :         return true;</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       40267 : }</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">       40267 :         m_spendPublicKey = spend_pub_key;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">       40267 :         m_viewPublicKey = view_pub_key;</span></span>
+<span id="L213"><span class="lineNum">     213</span>              : </span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       40267 :         uint8_t data[1 + HASH_SIZE * 2];</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">       40267 :         data[0] = static_cast&lt;uint8_t&gt;(m_prefix);</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       40267 :         memcpy(data + 1, spend_pub_key.h, HASH_SIZE);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       40267 :         memcpy(data + 1 + HASH_SIZE, view_pub_key.h, HASH_SIZE);</span></span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span>              : void Wallet::encode(char (&amp;buf)[ADDRESS_LENGTH]) const</span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">          48 : {</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">          48 :         uint8_t data[1 + HASH_SIZE * 2 + sizeof(m_checksum)];</span></span>
-<span id="L222"><span class="lineNum">     222</span>              : </span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          48 :         data[0] = static_cast&lt;uint8_t&gt;(m_prefix);</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          48 :         memcpy(data + 1, m_spendPublicKey.h, HASH_SIZE);</span></span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">          48 :         memcpy(data + 1 + HASH_SIZE, m_viewPublicKey.h, HASH_SIZE);</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">          48 :         memcpy(data + 1 + HASH_SIZE * 2, &amp;m_checksum, sizeof(m_checksum));</span></span>
-<span id="L227"><span class="lineNum">     227</span>              : </span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">         480 :         for (int i = 0; i &lt;= num_full_blocks; ++i) {</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         432 :                 uint64_t n = 0;</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        3744 :                 for (int j = 0; (j &lt; 8) &amp;&amp; (i * sizeof(uint64_t) + j &lt; sizeof(data)); ++j) {</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        3312 :                         n = (n &lt;&lt; 8) | data[i * sizeof(uint64_t) + j];</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        3312 :                 }</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        4992 :                 for (int j = ((i &lt; num_full_blocks) ? block_sizes.back() : last_block_size) - 1; j &gt;= 0; --j) {</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        4560 :                         const int digit = static_cast&lt;int&gt;(n % alphabet_size);</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        4560 :                         n /= alphabet_size;</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        4560 :                         buf[i * block_sizes.back() + j] = alphabet[digit];</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        4560 :                 }</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">         432 :         }</span></span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">          48 : }</span></span>
-<span id="L240"><span class="lineNum">     240</span>              : </span>
-<span id="L241"><span class="lineNum">     241</span>              : bool Wallet::get_eph_public_key(const hash&amp; txkey_sec, size_t output_index, hash&amp; eph_public_key, uint8_t&amp; view_tag, const uint8_t* expected_view_tag) const</span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">     3686341 : {</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">     3686341 :         hash derivation;</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">     3686341 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC tlaBgGNC">     3686341 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">          54 :                 return false;</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">          54 :         }</span></span>
-<span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">     3686287 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L255"><span class="lineNum">     255</span>              : </span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC tlaBgGNC">     3686287 :         return true;</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     3686287 : }</span></span>
-<span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span>              : } // namespace p2pool</span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">       40267 :         uint8_t md[200];</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       40267 :         keccak(data, sizeof(data), md);</span></span>
+<span id="L221"><span class="lineNum">     221</span>              : </span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       40267 :         memcpy(&amp;m_checksum, md, sizeof(m_checksum));</span></span>
+<span id="L223"><span class="lineNum">     223</span>              : </span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">       40267 :         m_type = type;</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">       40267 :         m_subaddress = subaddress;</span></span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       40267 :         if (!torsion_check()) {</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       40267 :                 LOGWARN(1, &quot;Torsion check failed for wallet &quot; &lt;&lt; *this &lt;&lt; &quot;! It will not be compatible with FCMP++.&quot;);          </span></span>
+<span id="L229"><span class="lineNum">     229</span>              :                 // TODO: add &quot;m_type = NetworkType::Invalid;&quot; and return false in a later release, closer to FCMP++ hardfork</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       40267 :         }</span></span>
+<span id="L231"><span class="lineNum">     231</span>              : </span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       40267 :         return true;</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       40267 : }</span></span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span>              : void Wallet::encode(char (&amp;buf)[ADDRESS_LENGTH]) const</span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">          48 : {</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">          48 :         uint8_t data[1 + HASH_SIZE * 2 + sizeof(m_checksum)];</span></span>
+<span id="L238"><span class="lineNum">     238</span>              : </span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">          48 :         data[0] = static_cast&lt;uint8_t&gt;(m_prefix);</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">          48 :         memcpy(data + 1, m_spendPublicKey.h, HASH_SIZE);</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">          48 :         memcpy(data + 1 + HASH_SIZE, m_viewPublicKey.h, HASH_SIZE);</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">          48 :         memcpy(data + 1 + HASH_SIZE * 2, &amp;m_checksum, sizeof(m_checksum));</span></span>
+<span id="L243"><span class="lineNum">     243</span>              : </span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">         480 :         for (int i = 0; i &lt;= num_full_blocks; ++i) {</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">         432 :                 uint64_t n = 0;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">        3744 :                 for (int j = 0; (j &lt; 8) &amp;&amp; (i * sizeof(uint64_t) + j &lt; sizeof(data)); ++j) {</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">        3312 :                         n = (n &lt;&lt; 8) | data[i * sizeof(uint64_t) + j];</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        3312 :                 }</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        4992 :                 for (int j = ((i &lt; num_full_blocks) ? block_sizes.back() : last_block_size) - 1; j &gt;= 0; --j) {</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">        4560 :                         const int digit = static_cast&lt;int&gt;(n % alphabet_size);</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        4560 :                         n /= alphabet_size;</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">        4560 :                         buf[i * block_sizes.back() + j] = alphabet[digit];</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        4560 :                 }</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         432 :         }</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          48 : }</span></span>
+<span id="L256"><span class="lineNum">     256</span>              : </span>
+<span id="L257"><span class="lineNum">     257</span>              : bool Wallet::get_eph_public_key(const hash&amp; txkey_sec, size_t output_index, hash&amp; eph_public_key, uint8_t&amp; view_tag, const uint8_t* expected_view_tag) const</span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     3686363 : {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     3686363 :         hash derivation;</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     3686363 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC tlaBgGNC">     3686363 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          54 :                 return false;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          54 :         }</span></span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">     3686309 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">     3686309 :         return true;</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">     3686309 : }</span></span>
+<span id="L274"><span class="lineNum">     274</span>              : </span>
+<span id="L275"><span class="lineNum">     275</span>              : bool Wallet::torsion_check() const</span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       40304 : {</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       40304 :         ge_p3 p1, p2;</span></span>
+<span id="L278"><span class="lineNum">     278</span>              : </span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">       40304 :         if (!ge_frombytes_vartime(&amp;p1, m_spendPublicKey.h) || !ge_frombytes_vartime(&amp;p2, m_viewPublicKey.h)) {</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">       40304 :                 return false;</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       40304 :         }</span></span>
+<span id="L282"><span class="lineNum">     282</span>              : </span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaUNC tlaBgUNC">           0 :         return</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :                 !fcmp_pp::mul8_is_identity(p1) &amp;&amp;</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :                 !fcmp_pp::mul8_is_identity(p2) &amp;&amp;</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaUNC">           0 :                 fcmp_pp::torsion_check_vartime(p1) &amp;&amp;</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaUNC">           0 :                 fcmp_pp::torsion_check_vartime(p2);</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC tlaBgGNC">       40304 : }</span></span>
+<span id="L289"><span class="lineNum">     289</span>              : </span>
+<span id="L290"><span class="lineNum">     290</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

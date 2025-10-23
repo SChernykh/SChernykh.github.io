@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-10-21 16:44:21</td>
+            <td class="headerValue">2025-10-23 09:57:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">39.1&nbsp;%</td>
@@ -428,32 +428,32 @@
 <span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">           5 : }</span></span>
 <span id="L367"><span class="lineNum">     367</span>              : </span>
 <span id="L368"><span class="lineNum">     368</span>              : std::istream&amp; operator&gt;&gt;(std::istream&amp; s, hash&amp; h)</span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        8284 : {</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">        8284 :         memset(h.h, 0, HASH_SIZE);</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">        9888 : {</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">        9888 :         memset(h.h, 0, HASH_SIZE);</span></span>
 <span id="L371"><span class="lineNum">     371</span>              : </span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">        8284 :         bool found_number = false;</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        8284 :         uint32_t index = 0;</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">        8284 :         char c;</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">      538456 :         while (s.good() &amp;&amp; !s.eof()) {</span></span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">      538456 :                 s.read(&amp;c, 1);</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">      538456 :                 if (!s.good() || s.eof()) {</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">        9888 :         bool found_number = false;</span></span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">        9888 :         uint32_t index = 0;</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">        9888 :         char c;</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">      642716 :         while (s.good() &amp;&amp; !s.eof()) {</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">      642716 :                 s.read(&amp;c, 1);</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">      642716 :                 if (!s.good() || s.eof()) {</span></span>
 <span id="L378"><span class="lineNum">     378</span> <span class="tlaUNC tlaBgUNC">           0 :                         break;</span></span>
 <span id="L379"><span class="lineNum">     379</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC tlaBgGNC">      538456 :                 uint8_t digit;</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">      538456 :                 if (from_hex(c, digit)) {</span></span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">      530176 :                         found_number = true;</span></span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">      530176 :                         h.h[index &gt;&gt; 1] = (h.h[index &gt;&gt; 1] &lt;&lt; 4) | digit;</span></span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">      530176 :                         ++index;</span></span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">      530176 :                         if (index &gt;= HASH_SIZE * 2) {</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">        8284 :                                 return s;</span></span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">        8284 :                         }</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">      530176 :                 }</span></span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">        8280 :                 else if (found_number) {</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC tlaBgGNC">      642716 :                 uint8_t digit;</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">      642716 :                 if (from_hex(c, digit)) {</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">      632832 :                         found_number = true;</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">      632832 :                         h.h[index &gt;&gt; 1] = (h.h[index &gt;&gt; 1] &lt;&lt; 4) | digit;</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">      632832 :                         ++index;</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">      632832 :                         if (index &gt;= HASH_SIZE * 2) {</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">        9888 :                                 return s;</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">        9888 :                         }</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">      632832 :                 }</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">        9884 :                 else if (found_number) {</span></span>
 <span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC tlaBgUNC">           0 :                         return s;</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC tlaBgGNC">      538456 :         }</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC tlaBgGNC">      642716 :         }</span></span>
 <span id="L393"><span class="lineNum">     393</span> <span class="tlaUNC tlaBgUNC">           0 :         return s;</span></span>
-<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC tlaBgGNC">        8284 : }</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC tlaBgGNC">        9888 : }</span></span>
 <span id="L395"><span class="lineNum">     395</span>              : </span>
 <span id="L396"><span class="lineNum">     396</span>              : void uv_cond_init_checked(uv_cond_t* cond)</span>
 <span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">           9 : {</span></span>
