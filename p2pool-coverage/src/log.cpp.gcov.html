@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-20 13:34:02</td>
+            <td class="headerValue">2025-11-20 15:59:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -194,7 +194,7 @@
 <span id="L132"><span class="lineNum">     132</span>              : </span>
 <span id="L133"><span class="lineNum">     133</span>              :                 std::setlocale(LC_ALL, &quot;en_001&quot;);</span>
 <span id="L134"><span class="lineNum">     134</span>              : </span>
-<span id="L135"><span class="lineNum">     135</span>              :                 m_logFilePath = DATA_DIR + log_file_name;</span>
+<span id="L135"><span class="lineNum">     135</span>              :                 m_logFilePath = LOG_FILE_PATH.empty() ? (DATA_DIR + log_file_name) : LOG_FILE_PATH;</span>
 <span id="L136"><span class="lineNum">     136</span>              : </span>
 <span id="L137"><span class="lineNum">     137</span>              :                 m_buf.resize(BUF_SIZE);</span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
