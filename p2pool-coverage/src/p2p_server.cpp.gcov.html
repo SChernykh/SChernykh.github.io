@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-20 15:59:37</td>
+            <td class="headerValue">2025-11-20 16:27:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -1954,7 +1954,7 @@
 <span id="L1892"><span class="lineNum">    1892</span> <span class="tlaUNC">           0 :                 if (server-&gt;m_fastestPeer == this) {</span></span>
 <span id="L1893"><span class="lineNum">    1893</span> <span class="tlaUNC">           0 :                         server-&gt;m_fastestPeer = nullptr;</span></span>
 <span id="L1894"><span class="lineNum">    1894</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1895"><span class="lineNum">    1895</span> <span class="tlaUNC">           0 :                 if (m_addressType == AddressType::DomainName) {</span></span>
+<span id="L1895"><span class="lineNum">    1895</span> <span class="tlaUNC">           0 :                 if ((m_addressType == AddressType::DomainName) &amp;&amp; m_connectedTime) {</span></span>
 <span id="L1896"><span class="lineNum">    1896</span> <span class="tlaUNC">           0 :                         --server-&gt;m_numOnionConnections;</span></span>
 <span id="L1897"><span class="lineNum">    1897</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1898"><span class="lineNum">    1898</span> <span class="tlaUNC">           0 :         }</span></span>
