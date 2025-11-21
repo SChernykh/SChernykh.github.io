@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">188</td>
-            <td class="headerCovTableEntry">188</td>
+            <td class="headerCovTableEntry">231</td>
+            <td class="headerCovTableEntry">231</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-21 17:19:56</td>
+            <td class="headerValue">2025-11-21 19:31:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -309,7 +309,68 @@
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(from_onion_v3(&quot;civ5tgldg3yx73ytse6hvvk3nm6q3zctbqvytpszihm35b33ze73kxad.onion&quot;).empty());</span></span>
 <span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span>              : }</span>
+<span id="L250"><span class="lineNum">     250</span>              : TEST(util, parse_config)</span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">           1 :         const std::vector&lt;std::vector&lt;std::string&gt;&gt; args = parse_config(&quot;test_params.conf&quot;);</span></span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args.size(), 10);</span></span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[0].size(), 2);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[0][0], &quot;param1&quot;);</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[0][1], &quot;value1&quot;);</span></span>
+<span id="L259"><span class="lineNum">     259</span>              : </span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[1].size(), 2);</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[1][0], &quot;param2&quot;);</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[1][1], &quot;value2&quot;);</span></span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[2].size(), 2);</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[2][0], &quot;param3&quot;);</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[2][1], &quot;value3&quot;);</span></span>
+<span id="L267"><span class="lineNum">     267</span>              : </span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[3].size(), 2);</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[3][0], &quot;param4&quot;);</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[3][1], &quot;value with spaces # not a comment&quot;);</span></span>
+<span id="L271"><span class="lineNum">     271</span>              : </span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[4].size(), 2);</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[4][0], &quot;param5&quot;);</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[4][1], &quot;spaces and quotes \&quot; and \\ slashes&quot;);</span></span>
+<span id="L275"><span class="lineNum">     275</span>              : </span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[5].size(), 4);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[5][0], &quot;param6&quot;);</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[5][1], &quot;value1&quot;);</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[5][2], &quot;value2&quot;);</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[5][3], &quot;value3&quot;);</span></span>
+<span id="L281"><span class="lineNum">     281</span>              : </span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[6].size(), 2);</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[6][0], &quot;param7&quot;);</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[6][1], &quot;value7&quot;);</span></span>
+<span id="L285"><span class="lineNum">     285</span>              : </span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[7].size(), 1);</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[7][0], &quot;param8&quot;);</span></span>
+<span id="L288"><span class="lineNum">     288</span>              : </span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[8].size(), 1);</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[8][0], &quot;param9&quot;);</span></span>
+<span id="L291"><span class="lineNum">     291</span>              : </span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[9].size(), 2);</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[9][0], &quot;abcdefghijklmnopqrstuvwxyz-ABCDEFGHIJKLMNOPQRSTUVWXYZ-0123456789&quot;);</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           1 :         ASSERT_EQ(args[9][1], &quot;0123456789-ABCDEFGHIJKLMNOPQRSTUVWXYZ-abcdefghijklmnopqrstuvwxyz=://&quot;);</span></span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 :         bool exception_thrown = false;</span></span>
+<span id="L297"><span class="lineNum">     297</span>              : </span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           1 :         try {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           1 :                 parse_config(&quot;non_existent_file.conf&quot;);</span></span>
+<span id="L300"><span class="lineNum">     300</span>              : </span>
+<span id="L301"><span class="lineNum">     301</span>              :                 // Execution shouldn't reach this line</span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           1 :                 FAIL();</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           1 :         catch (const std::exception&amp;) {</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           1 :                 exception_thrown = true;</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L307"><span class="lineNum">     307</span>              : </span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(exception_thrown);</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              : }</span>
         </pre>
               </td>
             </tr>

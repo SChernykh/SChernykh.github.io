@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-21 17:19:56</td>
+            <td class="headerValue">2025-11-21 19:31:41</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -92,7 +92,7 @@
 <span id="L30"><span class="lineNum">      30</span>              : static constexpr uint64_t MIN_STRATUM_BAN_TIME = UINT64_C(1);</span>
 <span id="L31"><span class="lineNum">      31</span>              : static constexpr uint64_t MAX_STRATUM_BAN_TIME = (UINT64_C(1) &lt;&lt; 34) - 1;</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span>              : Params::Params(const std::vector&lt;std::vector&lt;std::string_view&gt;&gt;&amp; args)</span>
+<span id="L33"><span class="lineNum">      33</span>              : Params::Params(const std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; args)</span>
 <span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
 <span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :         auto has1 = [](const auto&amp; v) { return (v.size() &gt; 1) &amp;&amp; !v[1].empty();};</span></span>
 <span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :         auto has2 = [](const auto&amp; v) { return (v.size() &gt; 2) &amp;&amp; !v[2].empty();};</span></span>
@@ -106,7 +106,7 @@
 <span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :                 bool ok = false;</span></span>
 <span id="L45"><span class="lineNum">      45</span>              : </span>
 <span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;host&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :                         const char* address = arg[1].data();</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :                         const char* address = arg[1].c_str();</span></span>
 <span id="L48"><span class="lineNum">      48</span>              : </span>
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :                         if (m_hosts.empty()) {</span></span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :                                 m_hosts.emplace_back();</span></span>
@@ -125,7 +125,7 @@
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :                                 m_hosts.emplace_back();</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :                         m_hosts.back().m_rpcPort = static_cast&lt;int32_t&gt;(std::min(std::max(strtoul(arg[1].data(), nullptr, 10), 1UL), 65535UL));</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaUNC">           0 :                         m_hosts.back().m_rpcPort = static_cast&lt;int32_t&gt;(std::min(std::max(strtoul(arg[1].c_str(), nullptr, 10), 1UL), 65535UL));</span></span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
@@ -134,7 +134,7 @@
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaUNC">           0 :                                 m_hosts.emplace_back();</span></span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L74"><span class="lineNum">      74</span>              : </span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaUNC">           0 :                         m_hosts.back().m_zmqPort = static_cast&lt;int32_t&gt;(std::min(std::max(strtoul(arg[1].data(), nullptr, 10), 1UL), 65535UL));</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaUNC">           0 :                         m_hosts.back().m_zmqPort = static_cast&lt;int32_t&gt;(std::min(std::max(strtoul(arg[1].c_str(), nullptr, 10), 1UL), 65535UL));</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L77"><span class="lineNum">      77</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              : </span>
@@ -144,7 +144,7 @@
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L83"><span class="lineNum">      83</span>              : </span>
 <span id="L84"><span class="lineNum">      84</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;wallet&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaUNC">           0 :                         const char* s = arg[1].data();</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaUNC">           0 :                         const char* s = arg[1].c_str();</span></span>
 <span id="L86"><span class="lineNum">      86</span>              : </span>
 <span id="L87"><span class="lineNum">      87</span> <span class="tlaUNC">           0 :                         if (!m_mainWallet.decode(s)) {</span></span>
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaUNC">           0 :                                 LOGERR(1, &quot;Wallet &quot; &lt;&lt; s &lt;&lt; &quot; failed to decode&quot;);</span></span>
@@ -154,7 +154,7 @@
 <span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L93"><span class="lineNum">      93</span>              : </span>
 <span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;subaddress&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC">           0 :                         const char* s = arg[1].data();</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC">           0 :                         const char* s = arg[1].c_str();</span></span>
 <span id="L96"><span class="lineNum">      96</span>              : </span>
 <span id="L97"><span class="lineNum">      97</span> <span class="tlaUNC">           0 :                         if (!m_subaddress.decode(s)) {</span></span>
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaUNC">           0 :                                 LOGERR(1, &quot;Subaddress &quot; &lt;&lt; s &lt;&lt; &quot; failed to decode&quot;);</span></span>
@@ -169,7 +169,7 @@
 <span id="L107"><span class="lineNum">     107</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L108"><span class="lineNum">     108</span>              : </span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;stratum-ban-time&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaUNC">           0 :                         m_stratumBanTime = strtoull(arg[1].data(), nullptr, 10);</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaUNC">           0 :                         m_stratumBanTime = strtoull(arg[1].c_str(), nullptr, 10);</span></span>
 <span id="L111"><span class="lineNum">     111</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L112"><span class="lineNum">     112</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
@@ -184,7 +184,7 @@
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L123"><span class="lineNum">     123</span>              : </span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;loglevel&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC">           0 :                         const int level = std::min(std::max&lt;int&gt;(static_cast&lt;int&gt;(strtol(arg[1].data(), nullptr, 10)), 0), log::MAX_GLOBAL_LOG_LEVEL);</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaUNC">           0 :                         const int level = std::min(std::max&lt;int&gt;(static_cast&lt;int&gt;(strtol(arg[1].c_str(), nullptr, 10)), 0), log::MAX_GLOBAL_LOG_LEVEL);</span></span>
 <span id="L126"><span class="lineNum">     126</span> <span class="tlaUNC">           0 :                         log::GLOBAL_LOG_LEVEL = level;</span></span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :                 }</span></span>
@@ -232,17 +232,17 @@
 <span id="L170"><span class="lineNum">     170</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L171"><span class="lineNum">     171</span>              : </span>
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaUNC">           0 :                 if (((arg[0] == &quot;out-peers&quot;) || (arg[0] == &quot;outpeers&quot;)) &amp;&amp; has1(arg)) {</span></span>
-<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :                         m_maxOutgoingPeers = std::min(std::max(strtoul(arg[1].data(), nullptr, 10), 10UL), 450UL);</span></span>
+<span id="L173"><span class="lineNum">     173</span> <span class="tlaUNC">           0 :                         m_maxOutgoingPeers = std::min(std::max(strtoul(arg[1].c_str(), nullptr, 10), 10UL), 450UL);</span></span>
 <span id="L174"><span class="lineNum">     174</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L175"><span class="lineNum">     175</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaUNC">           0 :                 if (((arg[0] == &quot;in-peers&quot;) || (arg[0] == &quot;inpeers&quot;)) &amp;&amp; has1(arg)) {</span></span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :                         m_maxIncomingPeers = std::min(std::max(strtoul(arg[1].data(), nullptr, 10), 10UL), 450UL);</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :                         m_maxIncomingPeers = std::min(std::max(strtoul(arg[1].c_str(), nullptr, 10), 10UL), 450UL);</span></span>
 <span id="L179"><span class="lineNum">     179</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L181"><span class="lineNum">     181</span>              : </span>
 <span id="L182"><span class="lineNum">     182</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;start-mining&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC">           0 :                         m_minerThreads = std::min(std::max(strtoul(arg[1].data(), nullptr, 10), 1UL), 64UL);</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaUNC">           0 :                         m_minerThreads = std::min(std::max(strtoul(arg[1].c_str(), nullptr, 10), 1UL), 64UL);</span></span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L186"><span class="lineNum">     186</span>              : </span>
@@ -302,7 +302,7 @@
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaUNC">           0 :                 if ((arg[0] == &quot;p2p-external-port&quot;) &amp;&amp; has1(arg)) {</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 :                         m_p2pExternalPort = static_cast&lt;int32_t&gt;(std::min(std::max(strtoul(arg[1].data(), nullptr, 10), 1UL), 65535UL));</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaUNC">           0 :                         m_p2pExternalPort = static_cast&lt;int32_t&gt;(std::min(std::max(strtoul(arg[1].c_str(), nullptr, 10), 1UL), 65535UL));</span></span>
 <span id="L244"><span class="lineNum">     244</span> <span class="tlaUNC">           0 :                         ok = true;</span></span>
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
@@ -363,7 +363,7 @@
 <span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L302"><span class="lineNum">     302</span>              : </span>
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaUNC">           0 :                 if (!ok) {</span></span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaUNC">           0 :                         fprintf(stderr, &quot;Unknown or invalid command line parameter \&quot;%s\&quot;\n\n&quot;, arg[0].data());</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaUNC">           0 :                         fprintf(stderr, &quot;Unknown or invalid command line parameter \&quot;%s\&quot;\n\n&quot;, arg[0].c_str());</span></span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaUNC">           0 :                         p2pool_usage();</span></span>
 <span id="L306"><span class="lineNum">     306</span> <span class="tlaUNC">           0 :                         throw std::exception();</span></span>
 <span id="L307"><span class="lineNum">     307</span> <span class="tlaUNC">           0 :                 }</span></span>
