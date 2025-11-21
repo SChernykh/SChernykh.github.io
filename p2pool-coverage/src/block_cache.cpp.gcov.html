@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-21 11:52:09</td>
+            <td class="headerValue">2025-11-21 12:26:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -151,8 +151,8 @@
 <span id="L89"><span class="lineNum">      89</span>              : </span>
 <span id="L90"><span class="lineNum">      90</span>              : #elif defined(_WIN32)</span>
 <span id="L91"><span class="lineNum">      91</span>              : </span>
-<span id="L92"><span class="lineNum">      92</span>              :         Impl()</span>
-<span id="L93"><span class="lineNum">      93</span>              :                 : m_cachePath(DATA_DIR + cache_name)</span>
+<span id="L92"><span class="lineNum">      92</span>              :         explicit Impl(const Params&amp; params)</span>
+<span id="L93"><span class="lineNum">      93</span>              :                 : m_cachePath(params.m_dataDir + cache_name)</span>
 <span id="L94"><span class="lineNum">      94</span>              :                 , m_file(CreateFile(m_cachePath.c_str(), GENERIC_ALL, FILE_SHARE_READ, NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_HIDDEN, NULL))</span>
 <span id="L95"><span class="lineNum">      95</span>              :                 , m_map(0)</span>
 <span id="L96"><span class="lineNum">      96</span>              :         {</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-21 11:52:09</td>
+            <td class="headerValue">2025-11-21 12:26:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -541,57 +541,62 @@
 <span id="L479"><span class="lineNum">     479</span> <span class="tlaUNC">           0 :         m_buf[2] = static_cast&lt;char&gt;(static_cast&lt;uint8_t&gt;(size &gt;&gt; 8));</span></span>
 <span id="L480"><span class="lineNum">     480</span> <span class="tlaUNC">           0 :         m_buf[m_pos] = '\n';</span></span>
 <span id="L481"><span class="lineNum">     481</span>              : #ifndef P2POOL_LOG_DISABLE</span>
-<span id="L482"><span class="lineNum">     482</span>              :         worker-&gt;write(m_buf, size);</span>
-<span id="L483"><span class="lineNum">     483</span>              : #endif</span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L485"><span class="lineNum">     485</span>              : </span>
-<span id="L486"><span class="lineNum">     486</span>              : void start(const Params&amp; p)</span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L488"><span class="lineNum">     488</span>              : #ifndef P2POOL_LOG_DISABLE</span>
-<span id="L489"><span class="lineNum">     489</span>              :         worker = new Worker(p);</span>
+<span id="L482"><span class="lineNum">     482</span>              :         if (worker) {</span>
+<span id="L483"><span class="lineNum">     483</span>              :                 worker-&gt;write(m_buf, size);</span>
+<span id="L484"><span class="lineNum">     484</span>              :         }</span>
+<span id="L485"><span class="lineNum">     485</span>              :         else {</span>
+<span id="L486"><span class="lineNum">     486</span>              :                 fwrite(m_buf + 3, 1, size - 3, (m_buf[0] == 1) ? stdout : stderr);</span>
+<span id="L487"><span class="lineNum">     487</span>              :         }</span>
+<span id="L488"><span class="lineNum">     488</span>              : #endif</span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L490"><span class="lineNum">     490</span>              : </span>
-<span id="L491"><span class="lineNum">     491</span>              :         LOGINFO(0, &quot;started&quot;);</span>
-<span id="L492"><span class="lineNum">     492</span>              : #else</span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaUNC">           0 :         (void)p;</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaUNC">           0 : #endif</span></span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L496"><span class="lineNum">     496</span>              : </span>
-<span id="L497"><span class="lineNum">     497</span>              : void reopen()</span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L499"><span class="lineNum">     499</span>              :         // This will trigger the worker thread which will then reopen log file if it's been moved</span>
-<span id="L500"><span class="lineNum">     500</span>              : #ifndef P2POOL_LOG_DISABLE</span>
-<span id="L501"><span class="lineNum">     501</span>              :         worker-&gt;schedule_reopen();</span>
-<span id="L502"><span class="lineNum">     502</span>              : #endif</span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L504"><span class="lineNum">     504</span>              : </span>
-<span id="L505"><span class="lineNum">     505</span>              : void stop()</span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L507"><span class="lineNum">     507</span>              : #ifndef P2POOL_LOG_DISABLE</span>
-<span id="L508"><span class="lineNum">     508</span>              :         delete worker;</span>
-<span id="L509"><span class="lineNum">     509</span>              :         worker = nullptr;</span>
-<span id="L510"><span class="lineNum">     510</span>              : #endif</span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L512"><span class="lineNum">     512</span>              : </span>
-<span id="L513"><span class="lineNum">     513</span>              : NOINLINE void Stream::Entry&lt;raw_ip&gt;::put(const raw_ip&amp; value, Stream* wrapper)</span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :         const bool is_ipv4 = value.is_ipv4_prefix();</span></span>
-<span id="L516"><span class="lineNum">     516</span>              : </span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :         char addr_str_buf[64];</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :         const char* addr_str = inet_ntop(is_ipv4 ? AF_INET : AF_INET6, value.data + (is_ipv4 ? 12 : 0), addr_str_buf, sizeof(addr_str_buf));</span></span>
-<span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :         *wrapper &lt;&lt; (addr_str ? addr_str : &quot;N/A&quot;);</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L522"><span class="lineNum">     522</span>              : </span>
-<span id="L523"><span class="lineNum">     523</span>              : NOINLINE void Stream::Entry&lt;Wallet&gt;::put(const Wallet&amp; w, Stream* wrapper)</span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaUNC">           0 :         char buf[Wallet::ADDRESS_LENGTH];</span></span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 :         w.encode(buf);</span></span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaUNC">           0 :         wrapper-&gt;writeBuf(buf, Wallet::ADDRESS_LENGTH);</span></span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L529"><span class="lineNum">     529</span>              : </span>
-<span id="L530"><span class="lineNum">     530</span>              : } // namespace log</span>
-<span id="L531"><span class="lineNum">     531</span>              : </span>
-<span id="L532"><span class="lineNum">     532</span>              : } // namespace p2pool</span>
+<span id="L491"><span class="lineNum">     491</span>              : void start(const Params&amp; p)</span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L493"><span class="lineNum">     493</span>              : #ifndef P2POOL_LOG_DISABLE</span>
+<span id="L494"><span class="lineNum">     494</span>              :         worker = new Worker(p);</span>
+<span id="L495"><span class="lineNum">     495</span>              : </span>
+<span id="L496"><span class="lineNum">     496</span>              :         LOGINFO(0, &quot;started&quot;);</span>
+<span id="L497"><span class="lineNum">     497</span>              : #else</span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaUNC">           0 :         (void)p;</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L501"><span class="lineNum">     501</span>              : </span>
+<span id="L502"><span class="lineNum">     502</span>              : void reopen()</span>
+<span id="L503"><span class="lineNum">     503</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L504"><span class="lineNum">     504</span>              :         // This will trigger the worker thread which will then reopen log file if it's been moved</span>
+<span id="L505"><span class="lineNum">     505</span>              : #ifndef P2POOL_LOG_DISABLE</span>
+<span id="L506"><span class="lineNum">     506</span>              :         worker-&gt;schedule_reopen();</span>
+<span id="L507"><span class="lineNum">     507</span>              : #endif</span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L509"><span class="lineNum">     509</span>              : </span>
+<span id="L510"><span class="lineNum">     510</span>              : void stop()</span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L512"><span class="lineNum">     512</span>              : #ifndef P2POOL_LOG_DISABLE</span>
+<span id="L513"><span class="lineNum">     513</span>              :         delete worker;</span>
+<span id="L514"><span class="lineNum">     514</span>              :         worker = nullptr;</span>
+<span id="L515"><span class="lineNum">     515</span>              : #endif</span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L517"><span class="lineNum">     517</span>              : </span>
+<span id="L518"><span class="lineNum">     518</span>              : NOINLINE void Stream::Entry&lt;raw_ip&gt;::put(const raw_ip&amp; value, Stream* wrapper)</span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaUNC">           0 :         const bool is_ipv4 = value.is_ipv4_prefix();</span></span>
+<span id="L521"><span class="lineNum">     521</span>              : </span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC">           0 :         char addr_str_buf[64];</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaUNC">           0 :         const char* addr_str = inet_ntop(is_ipv4 ? AF_INET : AF_INET6, value.data + (is_ipv4 ? 12 : 0), addr_str_buf, sizeof(addr_str_buf));</span></span>
+<span id="L524"><span class="lineNum">     524</span>              : </span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaUNC">           0 :         *wrapper &lt;&lt; (addr_str ? addr_str : &quot;N/A&quot;);</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L527"><span class="lineNum">     527</span>              : </span>
+<span id="L528"><span class="lineNum">     528</span>              : NOINLINE void Stream::Entry&lt;Wallet&gt;::put(const Wallet&amp; w, Stream* wrapper)</span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaUNC">           0 :         char buf[Wallet::ADDRESS_LENGTH];</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaUNC">           0 :         w.encode(buf);</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaUNC">           0 :         wrapper-&gt;writeBuf(buf, Wallet::ADDRESS_LENGTH);</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L534"><span class="lineNum">     534</span>              : </span>
+<span id="L535"><span class="lineNum">     535</span>              : } // namespace log</span>
+<span id="L536"><span class="lineNum">     536</span>              : </span>
+<span id="L537"><span class="lineNum">     537</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
