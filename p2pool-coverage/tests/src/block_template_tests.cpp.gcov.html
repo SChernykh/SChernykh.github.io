@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-20 16:27:34</td>
+            <td class="headerValue">2025-11-21 11:52:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -120,7 +120,7 @@
 <span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :         params.m_miningWallet = Wallet(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span>              :         // Test 1: empty template</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, &amp;params);</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
 <span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_reward(), 600000000000ULL);</span></span>
 <span id="L63"><span class="lineNum">      63</span>              : </span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           1 :         const PoolBlock* b = tpl.pool_block_template();</span></span>
@@ -175,7 +175,7 @@
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           1 :         ASSERT_EQ(mempool.size(), 512);</span></span>
 <span id="L115"><span class="lineNum">     115</span>              : </span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, &amp;params);</span></span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_reward(), 612054770773ULL);</span></span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_sidechainId, H(&quot;c9df4853003ab436416b9fc9a5a072d16b4dede849e697a8be2ebb9c88c8ec72&quot;));</span></span>
@@ -216,7 +216,7 @@
 <span id="L154"><span class="lineNum">     154</span>              : </span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">           1 :         data.aux_chains.emplace_back(H(&quot;01f0cf665bd4cd31cbb2b2470236389c483522b350335e10a4a5dca34cb85990&quot;), H(&quot;d9de1cfba7cdbd47f12f77addcb39b24c1ae7a16c35372bf28d6aee5d7579ee6&quot;), difficulty_type(1000000));</span></span>
 <span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, &amp;params);</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
 <span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_reward(), 600300000000ULL);</span></span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
 <span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_sidechainId, H(&quot;c32abac2cad40e263a94f5f43f90e0a7d7d4b151305b79951dbc8c88c3180613&quot;));</span></span>
@@ -253,7 +253,7 @@
 <span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">       10000 :         }</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">           1 :         ASSERT_EQ(mempool.size(), 10000);</span></span>
 <span id="L193"><span class="lineNum">     193</span>              : </span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, &amp;params);</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
 <span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_reward(), 619742028747ULL);</span></span>
 <span id="L196"><span class="lineNum">     196</span>              : </span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_sidechainId, H(&quot;69e7dd43dd99ac6be3f57ca333cc0d814189e83aee1773c99a341aca085c0d46&quot;));</span></span>
@@ -313,13 +313,13 @@
 <span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           1 :         std::mt19937_64 rng(101112);</span></span>
 <span id="L252"><span class="lineNum">     252</span>              : </span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        6481 :         for (uint64_t i = 0, i2 = 0, i3 = 0; i &lt; sidechain.chain_window_size() * 3; ++i) {</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">        6480 :                 tpl.update(data, mempool, &amp;params);</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">        6480 :                 tpl.update(data, mempool, params);</span></span>
 <span id="L255"><span class="lineNum">     255</span>              : </span>
 <span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">        6480 :                 if ((rng() % 31) == 0) {</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         213 :                         tpl2.update(data, mempool, &amp;params);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         213 :                         tpl2.update(data, mempool, params);</span></span>
 <span id="L258"><span class="lineNum">     258</span>              : </span>
 <span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         213 :                         if ((rng() % 11) == 0) {</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">          26 :                                 tpl3.update(data, mempool, &amp;params);</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">          26 :                                 tpl3.update(data, mempool, params);</span></span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">          26 :                                 ++i3;</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          26 :                                 ASSERT_TRUE(tpl3.submit_sidechain_block(i3, 0, 0));</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          26 :                         }</span></span>
