@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-11-21 20:25:03</td>
+            <td class="headerValue">2025-11-22 08:27:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">42.9&nbsp;%</td>
@@ -1111,7 +1111,7 @@
 <span id="L1049"><span class="lineNum">    1049</span>              : </span>
 <span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">           1 :         std::string s;</span></span>
 <span id="L1051"><span class="lineNum">    1051</span>              : </span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">          18 :         while (std::getline(f, s).good()) {</span></span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">          18 :         while (f.good() &amp;&amp; std::getline(f, s)) {</span></span>
 <span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">          17 :                 if (s.empty()) {</span></span>
 <span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">           6 :                         continue;</span></span>
 <span id="L1055"><span class="lineNum">    1055</span> <span class="tlaGNC">           6 :                 }</span></span>
