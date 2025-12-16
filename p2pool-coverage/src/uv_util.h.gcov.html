@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-16 18:24:29</td>
+            <td class="headerValue">2025-12-16 21:22:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">57.7&nbsp;%</td>
@@ -91,7 +91,7 @@
 <span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC tlaBgGNC">          74 :         FORCEINLINE  ReadWriteLock() { uv_rwlock_init(&amp;m_lock);    }</span></span>
 <span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">          10 :         FORCEINLINE ~ReadWriteLock() { uv_rwlock_destroy(&amp;m_lock); }</span></span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">    39732044 :         FORCEINLINE operator uv_rwlock_t&amp;() { return m_lock; }</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">    39730826 :         FORCEINLINE operator uv_rwlock_t&amp;() { return m_lock; }</span></span>
 <span id="L33"><span class="lineNum">      33</span>              : </span>
 <span id="L34"><span class="lineNum">      34</span>              : private:</span>
 <span id="L35"><span class="lineNum">      35</span>              :         uv_rwlock_t m_lock;</span>
@@ -110,8 +110,8 @@
 <span id="L48"><span class="lineNum">      48</span>              : </span>
 <span id="L49"><span class="lineNum">      49</span>              : template&lt;&gt; struct RWLock&lt;false&gt; : public nocopy_nomove</span>
 <span id="L50"><span class="lineNum">      50</span>              : {</span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">    14778509 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_rdlock(&amp;handle); }</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">    14778134 :         FORCEINLINE ~RWLock() { uv_rwlock_rdunlock(m_handle); }</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">    14779978 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_rdlock(&amp;handle); }</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">    14779625 :         FORCEINLINE ~RWLock() { uv_rwlock_rdunlock(m_handle); }</span></span>
 <span id="L53"><span class="lineNum">      53</span>              : </span>
 <span id="L54"><span class="lineNum">      54</span>              : private:</span>
 <span id="L55"><span class="lineNum">      55</span>              :         uv_rwlock_t* m_handle;</span>
@@ -121,8 +121,8 @@
 <span id="L59"><span class="lineNum">      59</span>              : </span>
 <span id="L60"><span class="lineNum">      60</span>              : template&lt;&gt; struct RWLock&lt;true&gt; : public nocopy_nomove</span>
 <span id="L61"><span class="lineNum">      61</span>              : {</span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">    33785883 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_wrlock(&amp;handle); }</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">    33784903 :         FORCEINLINE ~RWLock() { uv_rwlock_wrunlock(m_handle); }</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">    33781666 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_wrlock(&amp;handle); }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">    33780608 :         FORCEINLINE ~RWLock() { uv_rwlock_wrunlock(m_handle); }</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span>              : private:</span>
 <span id="L66"><span class="lineNum">      66</span>              :         uv_rwlock_t* m_handle;</span>
@@ -271,10 +271,10 @@
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">       20217 :                 const int err = uv_queue_work(loop, &amp;w-&gt;req,</span></span>
 <span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">       20217 :                         [](uv_work_t* req)</span></span>
 <span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">       20217 :                         {</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">       20205 :                                 std::shared_ptr&lt;Callback&gt;&amp; cb = reinterpret_cast&lt;Work*&gt;(req-&gt;data)-&gt;cb;</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">       20205 :                                 cb-&gt;m_func();</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       20205 :                                 cb.reset();</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">       20205 :                         },</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">       20210 :                                 std::shared_ptr&lt;Callback&gt;&amp; cb = reinterpret_cast&lt;Work*&gt;(req-&gt;data)-&gt;cb;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">       20210 :                                 cb-&gt;m_func();</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">       20210 :                                 cb.reset();</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">       20210 :                         },</span></span>
 <span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">       20217 :                         [](uv_work_t* req, int)</span></span>
 <span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">       20217 :                         {</span></span>
 <span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC tlaBgUNC">           0 :                                 delete reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
@@ -288,9 +288,9 @@
 <span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">        6739 :         if (wait) {</span></span>
 <span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">          10 :                 cb-&gt;m_func();</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         763 :                 while (cb.use_count() &gt; 1) {</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">         753 :                         std::this_thread::yield();</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">         753 :                 }</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">         385 :                 while (cb.use_count() &gt; 1) {</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">         375 :                         std::this_thread::yield();</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">         375 :                 }</span></span>
 <span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">          10 :         }</span></span>
 <span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        6739 : }</span></span>
 <span id="L234"><span class="lineNum">     234</span>              : </span>
