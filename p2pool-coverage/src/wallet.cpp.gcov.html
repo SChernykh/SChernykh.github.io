@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-12-18 11:31:12</td>
+            <td class="headerValue">2026-01-01 21:46:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.9&nbsp;%</td>
@@ -62,7 +62,7 @@
 <pre class="source">
 <span id="L1"><span class="lineNum">       1</span>              : /*</span>
 <span id="L2"><span class="lineNum">       2</span>              :  * This file is part of the Monero P2Pool &lt;https://github.com/SChernykh/p2pool&gt;</span>
-<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (c) 2021-2025 SChernykh &lt;https://github.com/SChernykh&gt;</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (c) 2021-2026 SChernykh &lt;https://github.com/SChernykh&gt;</span>
 <span id="L4"><span class="lineNum">       4</span>              :  * Portions Copyright (c) 2012-2013 The Cryptonote developers</span>
 <span id="L5"><span class="lineNum">       5</span>              :  * Portions Copyright (c) 2014-2021 The Monero Project</span>
 <span id="L6"><span class="lineNum">       6</span>              :  * Portions Copyright (c) 2021 XMRig &lt;https://github.com/xmrig&gt;</span>
@@ -317,22 +317,22 @@
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          48 : }</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : </span>
 <span id="L257"><span class="lineNum">     257</span>              : bool Wallet::get_eph_public_key(const hash&amp; txkey_sec, size_t output_index, hash&amp; eph_public_key, uint8_t&amp; view_tag, const uint8_t* expected_view_tag) const</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     3686221 : {</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     3686221 :         hash derivation;</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     3686221 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     3686347 : {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     3686347 :         hash derivation;</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     3686347 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC tlaBgGNC">     3686221 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC tlaBgGNC">     3686347 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          54 :                 return false;</span></span>
 <span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          54 :         }</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">     3686167 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">     3686293 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">     3686167 :         return true;</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">     3686167 : }</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">     3686293 :         return true;</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">     3686293 : }</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
 <span id="L275"><span class="lineNum">     275</span>              : bool Wallet::torsion_check() const</span>
 <span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       40308 : {</span></span>
