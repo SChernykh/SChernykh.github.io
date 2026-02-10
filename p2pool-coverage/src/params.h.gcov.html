@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-07 12:45:55</td>
+            <td class="headerValue">2026-02-10 20:29:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">20.0&nbsp;%</td>
@@ -170,40 +170,50 @@
 <span id="L108"><span class="lineNum">     108</span>              :         bool m_mini = false;</span>
 <span id="L109"><span class="lineNum">     109</span>              :         bool m_nano = false;</span>
 <span id="L110"><span class="lineNum">     110</span>              :         bool m_autoDiff = true;</span>
-<span id="L111"><span class="lineNum">     111</span>              :         std::string m_socks5Proxy;</span>
-<span id="L112"><span class="lineNum">     112</span>              :         bool m_dns = true;</span>
-<span id="L113"><span class="lineNum">     113</span>              :         int32_t m_p2pExternalPort = 0;</span>
-<span id="L114"><span class="lineNum">     114</span>              : #ifdef WITH_UPNP</span>
-<span id="L115"><span class="lineNum">     115</span>              :         bool m_upnp = true;</span>
-<span id="L116"><span class="lineNum">     116</span>              :         bool m_upnpStratum = false;</span>
-<span id="L117"><span class="lineNum">     117</span>              : #else</span>
-<span id="L118"><span class="lineNum">     118</span>              :         bool m_upnp = false;</span>
-<span id="L119"><span class="lineNum">     119</span>              :         bool m_upnpStratum = false;</span>
-<span id="L120"><span class="lineNum">     120</span>              : #endif</span>
-<span id="L121"><span class="lineNum">     121</span>              : #ifdef WITH_TLS</span>
-<span id="L122"><span class="lineNum">     122</span>              :         std::string m_tlsCert;</span>
-<span id="L123"><span class="lineNum">     123</span>              :         std::string m_tlsCertKey;</span>
-<span id="L124"><span class="lineNum">     124</span>              : #endif</span>
-<span id="L125"><span class="lineNum">     125</span>              :         bool m_enableStratumHTTP = true;</span>
-<span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
-<span id="L128"><span class="lineNum">     128</span>              :         std::string m_authorKeyFile;</span>
-<span id="L129"><span class="lineNum">     129</span>              : </span>
-<span id="L130"><span class="lineNum">     130</span>              :         struct AuthorKey {</span>
-<span id="L131"><span class="lineNum">     131</span>              :                 uint8_t pub_key[32];</span>
-<span id="L132"><span class="lineNum">     132</span>              :                 uint8_t expiration_time[8];</span>
-<span id="L133"><span class="lineNum">     133</span>              :                 uint8_t master_key_signature[64];</span>
-<span id="L134"><span class="lineNum">     134</span>              :                 uint8_t priv_key[64];</span>
-<span id="L135"><span class="lineNum">     135</span>              :         };</span>
-<span id="L136"><span class="lineNum">     136</span>              : #endif</span>
-<span id="L137"><span class="lineNum">     137</span>              :         bool m_enableFullValidation = false;</span>
-<span id="L138"><span class="lineNum">     138</span>              : </span>
-<span id="L139"><span class="lineNum">     139</span>              :         std::string m_onionAddress;</span>
-<span id="L140"><span class="lineNum">     140</span>              :         hash m_onionPubkey;</span>
-<span id="L141"><span class="lineNum">     141</span>              :         bool m_noClearnetP2P = false;</span>
-<span id="L142"><span class="lineNum">     142</span>              : };</span>
-<span id="L143"><span class="lineNum">     143</span>              : </span>
-<span id="L144"><span class="lineNum">     144</span>              : } // namespace p2pool</span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span>              :         std::string m_socks5Proxy;</span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span>              :         enum ProxyType {</span>
+<span id="L115"><span class="lineNum">     115</span>              :                 INVALID = -1,</span>
+<span id="L116"><span class="lineNum">     116</span>              :                 AUTO    =  0,</span>
+<span id="L117"><span class="lineNum">     117</span>              :                 PLAIN   =  1,</span>
+<span id="L118"><span class="lineNum">     118</span>              :                 TOR     =  2,</span>
+<span id="L119"><span class="lineNum">     119</span>              :                 MAX     =  2,</span>
+<span id="L120"><span class="lineNum">     120</span>              :         } m_socks5ProxyType = ProxyType::AUTO;</span>
+<span id="L121"><span class="lineNum">     121</span>              : </span>
+<span id="L122"><span class="lineNum">     122</span>              :         bool m_dns = true;</span>
+<span id="L123"><span class="lineNum">     123</span>              :         int32_t m_p2pExternalPort = 0;</span>
+<span id="L124"><span class="lineNum">     124</span>              : #ifdef WITH_UPNP</span>
+<span id="L125"><span class="lineNum">     125</span>              :         bool m_upnp = true;</span>
+<span id="L126"><span class="lineNum">     126</span>              :         bool m_upnpStratum = false;</span>
+<span id="L127"><span class="lineNum">     127</span>              : #else</span>
+<span id="L128"><span class="lineNum">     128</span>              :         bool m_upnp = false;</span>
+<span id="L129"><span class="lineNum">     129</span>              :         bool m_upnpStratum = false;</span>
+<span id="L130"><span class="lineNum">     130</span>              : #endif</span>
+<span id="L131"><span class="lineNum">     131</span>              : #ifdef WITH_TLS</span>
+<span id="L132"><span class="lineNum">     132</span>              :         std::string m_tlsCert;</span>
+<span id="L133"><span class="lineNum">     133</span>              :         std::string m_tlsCertKey;</span>
+<span id="L134"><span class="lineNum">     134</span>              : #endif</span>
+<span id="L135"><span class="lineNum">     135</span>              :         bool m_enableStratumHTTP = true;</span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
+<span id="L138"><span class="lineNum">     138</span>              :         std::string m_authorKeyFile;</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              :         struct AuthorKey {</span>
+<span id="L141"><span class="lineNum">     141</span>              :                 uint8_t pub_key[32];</span>
+<span id="L142"><span class="lineNum">     142</span>              :                 uint8_t expiration_time[8];</span>
+<span id="L143"><span class="lineNum">     143</span>              :                 uint8_t master_key_signature[64];</span>
+<span id="L144"><span class="lineNum">     144</span>              :                 uint8_t priv_key[64];</span>
+<span id="L145"><span class="lineNum">     145</span>              :         };</span>
+<span id="L146"><span class="lineNum">     146</span>              : #endif</span>
+<span id="L147"><span class="lineNum">     147</span>              :         bool m_enableFullValidation = false;</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span>              :         std::string m_onionAddress;</span>
+<span id="L150"><span class="lineNum">     150</span>              :         hash m_onionPubkey;</span>
+<span id="L151"><span class="lineNum">     151</span>              :         bool m_noClearnetP2P = false;</span>
+<span id="L152"><span class="lineNum">     152</span>              : };</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

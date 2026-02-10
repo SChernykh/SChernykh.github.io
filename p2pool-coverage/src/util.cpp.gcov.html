@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">55.2&nbsp;%</td>
-            <td class="headerCovTableEntry">587</td>
-            <td class="headerCovTableEntry">324</td>
+            <td class="headerCovTableEntryLo">55.0&nbsp;%</td>
+            <td class="headerCovTableEntry">585</td>
+            <td class="headerCovTableEntry">322</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-07 12:45:55</td>
+            <td class="headerValue">2026-02-10 20:29:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">42.9&nbsp;%</td>
-            <td class="headerCovTableEntry">49</td>
-            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryLo">41.7&nbsp;%</td>
+            <td class="headerCovTableEntry">48</td>
+            <td class="headerCovTableEntry">20</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -1076,137 +1076,133 @@
 <span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">           1 :                 return {};</span></span>
 <span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1016"><span class="lineNum">    1016</span>              : </span>
-<span id="L1017"><span class="lineNum">    1017</span>              :         // Convert address to lowercase</span>
-<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">         106 :         std::string s = address;</span></span>
-<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">        6572 :         std::transform(s.begin(), s.end(), s.begin(), [](unsigned char c) { return static_cast&lt;char&gt;(std::tolower(c)); });</span></span>
-<span id="L1020"><span class="lineNum">    1020</span>              : </span>
-<span id="L1021"><span class="lineNum">    1021</span>              :         // Checksum validation</span>
-<span id="L1022"><span class="lineNum">    1022</span> <span class="tlaGNC">         106 :         if (to_onion_v3(result) != s) {</span></span>
-<span id="L1023"><span class="lineNum">    1023</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
-<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1026"><span class="lineNum">    1026</span>              : </span>
-<span id="L1027"><span class="lineNum">    1027</span>              :         // Pubkey validation</span>
-<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">         105 :         ge_p3 point;</span></span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">         105 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
-<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">           1 :                 return {};</span></span>
-<span id="L1032"><span class="lineNum">    1032</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1033"><span class="lineNum">    1033</span>              : </span>
-<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">         104 :         return result;</span></span>
-<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">         105 : }</span></span>
+<span id="L1017"><span class="lineNum">    1017</span>              :         // Checksum validation</span>
+<span id="L1018"><span class="lineNum">    1018</span> <span class="tlaGNC">         106 :         if (to_onion_v3(result) != tolower(address)) {</span></span>
+<span id="L1019"><span class="lineNum">    1019</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: checksum failed&quot;);</span></span>
+<span id="L1020"><span class="lineNum">    1020</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1021"><span class="lineNum">    1021</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1022"><span class="lineNum">    1022</span>              : </span>
+<span id="L1023"><span class="lineNum">    1023</span>              :         // Pubkey validation</span>
+<span id="L1024"><span class="lineNum">    1024</span> <span class="tlaGNC">         105 :         ge_p3 point;</span></span>
+<span id="L1025"><span class="lineNum">    1025</span> <span class="tlaGNC">         105 :         if (ge_frombytes_vartime(&amp;point, result.h) != 0) {</span></span>
+<span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid onion address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: invalid ed25519 pubkey&quot;);</span></span>
+<span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L1028"><span class="lineNum">    1028</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L1029"><span class="lineNum">    1029</span>              : </span>
+<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC">         104 :         return result;</span></span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">         105 : }</span></span>
+<span id="L1032"><span class="lineNum">    1032</span>              : </span>
+<span id="L1033"><span class="lineNum">    1033</span>              : std::vector&lt;std::vector&lt;std::string&gt;&gt; parse_config(const std::string&amp; file_name)</span>
+<span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">           2 : {</span></span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">           2 :         std::ifstream f(file_name);</span></span>
 <span id="L1036"><span class="lineNum">    1036</span>              : </span>
-<span id="L1037"><span class="lineNum">    1037</span>              : std::vector&lt;std::vector&lt;std::string&gt;&gt; parse_config(const std::string&amp; file_name)</span>
-<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">           2 : {</span></span>
-<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">           2 :         std::ifstream f(file_name);</span></span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">           2 :         if (!f.is_open() || !f.good()) {</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">           1 :                 throw std::exception();</span></span>
+<span id="L1039"><span class="lineNum">    1039</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1040"><span class="lineNum">    1040</span>              : </span>
-<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">           2 :         if (!f.is_open() || !f.good()) {</span></span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">           1 :                 throw std::exception();</span></span>
-<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L1044"><span class="lineNum">    1044</span>              : </span>
-<span id="L1045"><span class="lineNum">    1045</span> <span class="tlaGNC">           1 :         std::vector&lt;std::vector&lt;std::string&gt;&gt; args;</span></span>
-<span id="L1046"><span class="lineNum">    1046</span>              : </span>
-<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">         135 :         auto is_alpha = [](char c) { return ('a' &lt;= c &amp;&amp; c &lt;= 'z') || ('A' &lt;= c &amp;&amp; c &lt;= 'Z'); };</span></span>
-<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">          30 :         auto is_num = [](char c) { return ('0' &lt;= c &amp;&amp; c &lt;= '9'); };</span></span>
-<span id="L1049"><span class="lineNum">    1049</span>              : </span>
-<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">           1 :         std::string s;</span></span>
-<span id="L1051"><span class="lineNum">    1051</span>              : </span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">          18 :         while (f.good() &amp;&amp; std::getline(f, s)) {</span></span>
-<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">          17 :                 if (s.empty()) {</span></span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">           6 :                         continue;</span></span>
-<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L1056"><span class="lineNum">    1056</span>              : </span>
-<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">          11 :                 bool quoted = false;</span></span>
-<span id="L1058"><span class="lineNum">    1058</span>              : </span>
-<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaGNC">          11 :                 enum {</span></span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">          11 :                         BEFORE_NAME,</span></span>
-<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">          11 :                         COMMENT,</span></span>
-<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaGNC">          11 :                         NAME,</span></span>
-<span id="L1063"><span class="lineNum">    1063</span> <span class="tlaGNC">          11 :                         AFTER_NAME,</span></span>
-<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaGNC">          11 :                         VALUE,</span></span>
-<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaGNC">          11 :                         VALUE_ESCAPE_CHAR,</span></span>
-<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">          11 :                 } state = BEFORE_NAME;</span></span>
-<span id="L1067"><span class="lineNum">    1067</span>              : </span>
-<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaGNC">         384 :                 for (const char c : s) {</span></span>
-<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">         384 :                         switch (state) {</span></span>
-<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC">          18 :                                 case BEFORE_NAME:</span></span>
-<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">          18 :                                         if (is_alpha(c)) {</span></span>
-<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaGNC">          10 :                                                 state = NAME;</span></span>
-<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">          10 :                                                 args.emplace_back(1, std::string(1, c));</span></span>
-<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaGNC">          10 :                                         }</span></span>
-<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaGNC">           8 :                                         else if (c == '#') {</span></span>
-<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaGNC">           1 :                                                 state = COMMENT;</span></span>
-<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">           1 :                                         }</span></span>
-<span id="L1078"><span class="lineNum">    1078</span> <span class="tlaGNC">          18 :                                         break;</span></span>
-<span id="L1079"><span class="lineNum">    1079</span>              : </span>
-<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC">          52 :                                 case COMMENT:</span></span>
-<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">          52 :                                         break;</span></span>
-<span id="L1082"><span class="lineNum">    1082</span>              : </span>
-<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaGNC">         117 :                                 case NAME:</span></span>
-<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">         117 :                                         if (is_alpha(c) || is_num(c) || (c == '-')) {</span></span>
-<span id="L1085"><span class="lineNum">    1085</span> <span class="tlaGNC">         108 :                                                 args.back()[0] += c;</span></span>
-<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">         108 :                                         }</span></span>
-<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaGNC">           9 :                                         else if (c == '#') {</span></span>
-<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaGNC">           1 :                                                 state = COMMENT;</span></span>
-<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaGNC">           1 :                                         }</span></span>
-<span id="L1090"><span class="lineNum">    1090</span> <span class="tlaGNC">           8 :                                         else {</span></span>
-<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaGNC">           8 :                                                 state = AFTER_NAME;</span></span>
-<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaGNC">           8 :                                         }</span></span>
-<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaGNC">         117 :                                         break;</span></span>
-<span id="L1094"><span class="lineNum">    1094</span>              : </span>
-<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaGNC">          21 :                                 case AFTER_NAME:</span></span>
-<span id="L1096"><span class="lineNum">    1096</span> <span class="tlaGNC">          21 :                                         if (c == '#') {</span></span>
-<span id="L1097"><span class="lineNum">    1097</span> <span class="tlaGNC">           2 :                                                 state = COMMENT;</span></span>
-<span id="L1098"><span class="lineNum">    1098</span> <span class="tlaGNC">           2 :                                         }</span></span>
-<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaGNC">          19 :                                         else if ((c != '\t') &amp;&amp; (c != ' ') &amp;&amp; (c != '=')) {</span></span>
-<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaGNC">          10 :                                                 state = VALUE;</span></span>
-<span id="L1101"><span class="lineNum">    1101</span> <span class="tlaGNC">          10 :                                                 quoted = (c == '&quot;');</span></span>
-<span id="L1102"><span class="lineNum">    1102</span> <span class="tlaGNC">          10 :                                                 if (quoted) {</span></span>
-<span id="L1103"><span class="lineNum">    1103</span> <span class="tlaGNC">           2 :                                                         args.back().emplace_back();</span></span>
-<span id="L1104"><span class="lineNum">    1104</span> <span class="tlaGNC">           2 :                                                 }</span></span>
-<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaGNC">           8 :                                                 else {</span></span>
-<span id="L1106"><span class="lineNum">    1106</span> <span class="tlaGNC">           8 :                                                         args.back().emplace_back(1, c);</span></span>
-<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaGNC">           8 :                                                 }</span></span>
-<span id="L1108"><span class="lineNum">    1108</span> <span class="tlaGNC">          10 :                                         }</span></span>
-<span id="L1109"><span class="lineNum">    1109</span> <span class="tlaGNC">          21 :                                         break;</span></span>
-<span id="L1110"><span class="lineNum">    1110</span>              : </span>
-<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC">         174 :                                 case VALUE:</span></span>
-<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaGNC">         174 :                                         if (quoted) {</span></span>
-<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaGNC">          68 :                                                 if (c == '&quot;') {</span></span>
-<span id="L1114"><span class="lineNum">    1114</span> <span class="tlaGNC">           2 :                                                         state = AFTER_NAME;</span></span>
-<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaGNC">           2 :                                                 }</span></span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">          66 :                                                 else if (c == '\\') {</span></span>
-<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaGNC">           2 :                                                         state = VALUE_ESCAPE_CHAR;</span></span>
-<span id="L1118"><span class="lineNum">    1118</span> <span class="tlaGNC">           2 :                                                 }</span></span>
-<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaGNC">          64 :                                                 else {</span></span>
-<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaGNC">          64 :                                                         args.back().back() += c;</span></span>
-<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaGNC">          64 :                                                 }</span></span>
-<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaGNC">          68 :                                         }</span></span>
-<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaGNC">         106 :                                         else {</span></span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC">         106 :                                                 if (c == ' ') {</span></span>
-<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaGNC">           3 :                                                         state = AFTER_NAME;</span></span>
-<span id="L1126"><span class="lineNum">    1126</span> <span class="tlaGNC">           3 :                                                 }</span></span>
-<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaGNC">         103 :                                                 else if (c == '#') {</span></span>
-<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaGNC">           1 :                                                         state = COMMENT;</span></span>
-<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaGNC">           1 :                                                 }</span></span>
-<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaGNC">         102 :                                                 else {</span></span>
-<span id="L1131"><span class="lineNum">    1131</span> <span class="tlaGNC">         102 :                                                         args.back().back() += c;</span></span>
-<span id="L1132"><span class="lineNum">    1132</span> <span class="tlaGNC">         102 :                                                 }</span></span>
-<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaGNC">         106 :                                         }</span></span>
-<span id="L1134"><span class="lineNum">    1134</span> <span class="tlaGNC">         174 :                                         break;</span></span>
-<span id="L1135"><span class="lineNum">    1135</span>              : </span>
-<span id="L1136"><span class="lineNum">    1136</span> <span class="tlaGNC">           2 :                                 case VALUE_ESCAPE_CHAR:</span></span>
-<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaGNC">           2 :                                         args.back().back() += c;</span></span>
-<span id="L1138"><span class="lineNum">    1138</span> <span class="tlaGNC">           2 :                                         state = VALUE;</span></span>
-<span id="L1139"><span class="lineNum">    1139</span> <span class="tlaGNC">           2 :                                         break;</span></span>
-<span id="L1140"><span class="lineNum">    1140</span> <span class="tlaGNC">         384 :                         }</span></span>
-<span id="L1141"><span class="lineNum">    1141</span> <span class="tlaGNC">         384 :                 }</span></span>
-<span id="L1142"><span class="lineNum">    1142</span> <span class="tlaGNC">          11 :         }</span></span>
-<span id="L1143"><span class="lineNum">    1143</span>              : </span>
-<span id="L1144"><span class="lineNum">    1144</span> <span class="tlaGNC">           1 :         return args;</span></span>
-<span id="L1145"><span class="lineNum">    1145</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L1146"><span class="lineNum">    1146</span>              : </span>
-<span id="L1147"><span class="lineNum">    1147</span>              : } // namespace p2pool</span>
+<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">           1 :         std::vector&lt;std::vector&lt;std::string&gt;&gt; args;</span></span>
+<span id="L1042"><span class="lineNum">    1042</span>              : </span>
+<span id="L1043"><span class="lineNum">    1043</span> <span class="tlaGNC">         135 :         auto is_alpha = [](char c) { return ('a' &lt;= c &amp;&amp; c &lt;= 'z') || ('A' &lt;= c &amp;&amp; c &lt;= 'Z'); };</span></span>
+<span id="L1044"><span class="lineNum">    1044</span> <span class="tlaGNC">          30 :         auto is_num = [](char c) { return ('0' &lt;= c &amp;&amp; c &lt;= '9'); };</span></span>
+<span id="L1045"><span class="lineNum">    1045</span>              : </span>
+<span id="L1046"><span class="lineNum">    1046</span> <span class="tlaGNC">           1 :         std::string s;</span></span>
+<span id="L1047"><span class="lineNum">    1047</span>              : </span>
+<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">          18 :         while (f.good() &amp;&amp; std::getline(f, s)) {</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC">          17 :                 if (s.empty()) {</span></span>
+<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">           6 :                         continue;</span></span>
+<span id="L1051"><span class="lineNum">    1051</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L1052"><span class="lineNum">    1052</span>              : </span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">          11 :                 bool quoted = false;</span></span>
+<span id="L1054"><span class="lineNum">    1054</span>              : </span>
+<span id="L1055"><span class="lineNum">    1055</span> <span class="tlaGNC">          11 :                 enum {</span></span>
+<span id="L1056"><span class="lineNum">    1056</span> <span class="tlaGNC">          11 :                         BEFORE_NAME,</span></span>
+<span id="L1057"><span class="lineNum">    1057</span> <span class="tlaGNC">          11 :                         COMMENT,</span></span>
+<span id="L1058"><span class="lineNum">    1058</span> <span class="tlaGNC">          11 :                         NAME,</span></span>
+<span id="L1059"><span class="lineNum">    1059</span> <span class="tlaGNC">          11 :                         AFTER_NAME,</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC">          11 :                         VALUE,</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">          11 :                         VALUE_ESCAPE_CHAR,</span></span>
+<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaGNC">          11 :                 } state = BEFORE_NAME;</span></span>
+<span id="L1063"><span class="lineNum">    1063</span>              : </span>
+<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaGNC">         384 :                 for (const char c : s) {</span></span>
+<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaGNC">         384 :                         switch (state) {</span></span>
+<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">          18 :                                 case BEFORE_NAME:</span></span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">          18 :                                         if (is_alpha(c)) {</span></span>
+<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaGNC">          10 :                                                 state = NAME;</span></span>
+<span id="L1069"><span class="lineNum">    1069</span> <span class="tlaGNC">          10 :                                                 args.emplace_back(1, std::string(1, c));</span></span>
+<span id="L1070"><span class="lineNum">    1070</span> <span class="tlaGNC">          10 :                                         }</span></span>
+<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">           8 :                                         else if (c == '#') {</span></span>
+<span id="L1072"><span class="lineNum">    1072</span> <span class="tlaGNC">           1 :                                                 state = COMMENT;</span></span>
+<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">           1 :                                         }</span></span>
+<span id="L1074"><span class="lineNum">    1074</span> <span class="tlaGNC">          18 :                                         break;</span></span>
+<span id="L1075"><span class="lineNum">    1075</span>              : </span>
+<span id="L1076"><span class="lineNum">    1076</span> <span class="tlaGNC">          52 :                                 case COMMENT:</span></span>
+<span id="L1077"><span class="lineNum">    1077</span> <span class="tlaGNC">          52 :                                         break;</span></span>
+<span id="L1078"><span class="lineNum">    1078</span>              : </span>
+<span id="L1079"><span class="lineNum">    1079</span> <span class="tlaGNC">         117 :                                 case NAME:</span></span>
+<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC">         117 :                                         if (is_alpha(c) || is_num(c) || (c == '-')) {</span></span>
+<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">         108 :                                                 args.back()[0] += c;</span></span>
+<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaGNC">         108 :                                         }</span></span>
+<span id="L1083"><span class="lineNum">    1083</span> <span class="tlaGNC">           9 :                                         else if (c == '#') {</span></span>
+<span id="L1084"><span class="lineNum">    1084</span> <span class="tlaGNC">           1 :                                                 state = COMMENT;</span></span>
+<span id="L1085"><span class="lineNum">    1085</span> <span class="tlaGNC">           1 :                                         }</span></span>
+<span id="L1086"><span class="lineNum">    1086</span> <span class="tlaGNC">           8 :                                         else {</span></span>
+<span id="L1087"><span class="lineNum">    1087</span> <span class="tlaGNC">           8 :                                                 state = AFTER_NAME;</span></span>
+<span id="L1088"><span class="lineNum">    1088</span> <span class="tlaGNC">           8 :                                         }</span></span>
+<span id="L1089"><span class="lineNum">    1089</span> <span class="tlaGNC">         117 :                                         break;</span></span>
+<span id="L1090"><span class="lineNum">    1090</span>              : </span>
+<span id="L1091"><span class="lineNum">    1091</span> <span class="tlaGNC">          21 :                                 case AFTER_NAME:</span></span>
+<span id="L1092"><span class="lineNum">    1092</span> <span class="tlaGNC">          21 :                                         if (c == '#') {</span></span>
+<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaGNC">           2 :                                                 state = COMMENT;</span></span>
+<span id="L1094"><span class="lineNum">    1094</span> <span class="tlaGNC">           2 :                                         }</span></span>
+<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaGNC">          19 :                                         else if ((c != '\t') &amp;&amp; (c != ' ') &amp;&amp; (c != '=')) {</span></span>
+<span id="L1096"><span class="lineNum">    1096</span> <span class="tlaGNC">          10 :                                                 state = VALUE;</span></span>
+<span id="L1097"><span class="lineNum">    1097</span> <span class="tlaGNC">          10 :                                                 quoted = (c == '&quot;');</span></span>
+<span id="L1098"><span class="lineNum">    1098</span> <span class="tlaGNC">          10 :                                                 if (quoted) {</span></span>
+<span id="L1099"><span class="lineNum">    1099</span> <span class="tlaGNC">           2 :                                                         args.back().emplace_back();</span></span>
+<span id="L1100"><span class="lineNum">    1100</span> <span class="tlaGNC">           2 :                                                 }</span></span>
+<span id="L1101"><span class="lineNum">    1101</span> <span class="tlaGNC">           8 :                                                 else {</span></span>
+<span id="L1102"><span class="lineNum">    1102</span> <span class="tlaGNC">           8 :                                                         args.back().emplace_back(1, c);</span></span>
+<span id="L1103"><span class="lineNum">    1103</span> <span class="tlaGNC">           8 :                                                 }</span></span>
+<span id="L1104"><span class="lineNum">    1104</span> <span class="tlaGNC">          10 :                                         }</span></span>
+<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaGNC">          21 :                                         break;</span></span>
+<span id="L1106"><span class="lineNum">    1106</span>              : </span>
+<span id="L1107"><span class="lineNum">    1107</span> <span class="tlaGNC">         174 :                                 case VALUE:</span></span>
+<span id="L1108"><span class="lineNum">    1108</span> <span class="tlaGNC">         174 :                                         if (quoted) {</span></span>
+<span id="L1109"><span class="lineNum">    1109</span> <span class="tlaGNC">          68 :                                                 if (c == '&quot;') {</span></span>
+<span id="L1110"><span class="lineNum">    1110</span> <span class="tlaGNC">           2 :                                                         state = AFTER_NAME;</span></span>
+<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC">           2 :                                                 }</span></span>
+<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaGNC">          66 :                                                 else if (c == '\\') {</span></span>
+<span id="L1113"><span class="lineNum">    1113</span> <span class="tlaGNC">           2 :                                                         state = VALUE_ESCAPE_CHAR;</span></span>
+<span id="L1114"><span class="lineNum">    1114</span> <span class="tlaGNC">           2 :                                                 }</span></span>
+<span id="L1115"><span class="lineNum">    1115</span> <span class="tlaGNC">          64 :                                                 else {</span></span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">          64 :                                                         args.back().back() += c;</span></span>
+<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaGNC">          64 :                                                 }</span></span>
+<span id="L1118"><span class="lineNum">    1118</span> <span class="tlaGNC">          68 :                                         }</span></span>
+<span id="L1119"><span class="lineNum">    1119</span> <span class="tlaGNC">         106 :                                         else {</span></span>
+<span id="L1120"><span class="lineNum">    1120</span> <span class="tlaGNC">         106 :                                                 if (c == ' ') {</span></span>
+<span id="L1121"><span class="lineNum">    1121</span> <span class="tlaGNC">           3 :                                                         state = AFTER_NAME;</span></span>
+<span id="L1122"><span class="lineNum">    1122</span> <span class="tlaGNC">           3 :                                                 }</span></span>
+<span id="L1123"><span class="lineNum">    1123</span> <span class="tlaGNC">         103 :                                                 else if (c == '#') {</span></span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC">           1 :                                                         state = COMMENT;</span></span>
+<span id="L1125"><span class="lineNum">    1125</span> <span class="tlaGNC">           1 :                                                 }</span></span>
+<span id="L1126"><span class="lineNum">    1126</span> <span class="tlaGNC">         102 :                                                 else {</span></span>
+<span id="L1127"><span class="lineNum">    1127</span> <span class="tlaGNC">         102 :                                                         args.back().back() += c;</span></span>
+<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaGNC">         102 :                                                 }</span></span>
+<span id="L1129"><span class="lineNum">    1129</span> <span class="tlaGNC">         106 :                                         }</span></span>
+<span id="L1130"><span class="lineNum">    1130</span> <span class="tlaGNC">         174 :                                         break;</span></span>
+<span id="L1131"><span class="lineNum">    1131</span>              : </span>
+<span id="L1132"><span class="lineNum">    1132</span> <span class="tlaGNC">           2 :                                 case VALUE_ESCAPE_CHAR:</span></span>
+<span id="L1133"><span class="lineNum">    1133</span> <span class="tlaGNC">           2 :                                         args.back().back() += c;</span></span>
+<span id="L1134"><span class="lineNum">    1134</span> <span class="tlaGNC">           2 :                                         state = VALUE;</span></span>
+<span id="L1135"><span class="lineNum">    1135</span> <span class="tlaGNC">           2 :                                         break;</span></span>
+<span id="L1136"><span class="lineNum">    1136</span> <span class="tlaGNC">         384 :                         }</span></span>
+<span id="L1137"><span class="lineNum">    1137</span> <span class="tlaGNC">         384 :                 }</span></span>
+<span id="L1138"><span class="lineNum">    1138</span> <span class="tlaGNC">          11 :         }</span></span>
+<span id="L1139"><span class="lineNum">    1139</span>              : </span>
+<span id="L1140"><span class="lineNum">    1140</span> <span class="tlaGNC">           1 :         return args;</span></span>
+<span id="L1141"><span class="lineNum">    1141</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L1142"><span class="lineNum">    1142</span>              : </span>
+<span id="L1143"><span class="lineNum">    1143</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

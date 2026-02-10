@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">89.6&nbsp;%</td>
-            <td class="headerCovTableEntry">183</td>
-            <td class="headerCovTableEntry">164</td>
+            <td class="headerCovTableEntryHi">90.1&nbsp;%</td>
+            <td class="headerCovTableEntry">191</td>
+            <td class="headerCovTableEntry">172</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-07 12:45:55</td>
+            <td class="headerValue">2026-02-10 20:29:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">15.3&nbsp;%</td>
-            <td class="headerCovTableEntry">412</td>
-            <td class="headerCovTableEntry">63</td>
+            <td class="headerCovTableEntryLo">15.5&nbsp;%</td>
+            <td class="headerCovTableEntry">413</td>
+            <td class="headerCovTableEntry">64</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -126,14 +126,14 @@
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="util.h.gcov.html#L484">robin_hood::hash&lt;p2pool::raw_ip, void&gt;::operator()(p2pool::raw_ip const&amp;) const</a></td>
+              <td class="coverFn"><a href="util.h.gcov.html#L496">robin_hood::hash&lt;p2pool::raw_ip, void&gt;::operator()(p2pool::raw_ip const&amp;) const</a></td>
               
               <td class="coverFnLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="util.h.gcov.html#L493">robin_hood::hash&lt;std::pair&lt;unsigned long, unsigned long&gt;, void&gt;::operator()(std::pair&lt;unsigned long, unsigned long&gt; const&amp;) const</a></td>
+              <td class="coverFn"><a href="util.h.gcov.html#L505">robin_hood::hash&lt;std::pair&lt;unsigned long, unsigned long&gt;, void&gt;::operator()(std::pair&lt;unsigned long, unsigned long&gt; const&amp;) const</a></td>
               
               <td class="coverFnLo">0</td>
               
@@ -567,7 +567,7 @@
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L363">tcp_server.cpp:p2pool::Callback<void, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int>::Derived<p2pool::TCPServer::TCPServer(int, p2pool::TCPServer::Client* (*)(), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::$_0>::operator()(bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int) const</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L363">tcp_server.cpp:p2pool::Callback<void, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int>::Derived<p2pool::TCPServer::TCPServer(int, p2pool::TCPServer::Client* (*)(), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, p2pool::Params::ProxyType)::$_0>::operator()(bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int) const</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
@@ -1127,7 +1127,7 @@
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L362">tcp_server.cpp:p2pool::Callback<void, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int>::Derived<p2pool::TCPServer::TCPServer(int, p2pool::TCPServer::Client* (*)(), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::$_0>::Derived(p2pool::TCPServer::TCPServer(int, p2pool::TCPServer::Client* (*)(), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)::$_0&&)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L362">tcp_server.cpp:p2pool::Callback<void, bool, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, int>::Derived<p2pool::TCPServer::TCPServer(int, p2pool::TCPServer::Client* (*)(), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, p2pool::Params::ProxyType)::$_0>::Derived(p2pool::TCPServer::TCPServer(int, p2pool::TCPServer::Client* (*)(), std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, p2pool::Params::ProxyType)::$_0&&)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
@@ -1792,238 +1792,245 @@
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="util.h.gcov.html#L400">log.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFn"><a href="util.h.gcov.html#L397">p2pool::tolower(std::__cxx11::basic_string&lt;char, std::char_traits&lt;char&gt;, std::allocator&lt;char&gt; &gt; const&amp;)</a></td>
+              
+              <td class="coverFnHi">106</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="util.h.gcov.html#L412">log.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnHi">107</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">block_cache.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">block_cache.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">block_template.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">block_template.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">block_template_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">block_template_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">crypto.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">crypto.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">crypto_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">crypto_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">difficulty_type_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">difficulty_type_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">hash_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">hash_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">indexed_hash.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">indexed_hash.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">keccak.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">keccak.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">keccak_bmi.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">keccak_bmi.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">keccak_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">keccak_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">log.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">log.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">log_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">log_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">main.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">main.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">memory_leak_debug.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">memory_leak_debug.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">mempool.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">mempool.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">merkle.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">merkle.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">merkle_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">merkle_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">p2p_server.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">p2p_server.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">p2pool.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">p2pool.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">p2pool_api.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">p2pool_api.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">params.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">params.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">pool_block.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">pool_block.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">pool_block_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">pool_block_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">pow_hash.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">pow_hash.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">sha256_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">sha256_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">side_chain.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">side_chain.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">stratum_server.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">stratum_server.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">tcp_server.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">tcp_server.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">util_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">util_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">wallet.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">wallet.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">wallet_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">wallet_tests.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasLo">0</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L400">util.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L412">util.cpp:p2pool::from_onion_v3_const(char const*)</a></td>
               
               <td class="coverFnAliasHi">107</td>
               
@@ -2345,7 +2352,7 @@
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="util.h.gcov.html#L466">robin_hood::hash&lt;p2pool::root_hash, void&gt;::operator()(p2pool::root_hash const&amp;) const</a></td>
+              <td class="coverFn"><a href="util.h.gcov.html#L478">robin_hood::hash&lt;p2pool::root_hash, void&gt;::operator()(p2pool::root_hash const&amp;) const</a></td>
               
               <td class="coverFnHi">81663</td>
               
@@ -2354,7 +2361,7 @@
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L213">long p2pool::read_unaligned&lt;long&gt;(long const*)</a></td>
               
-              <td class="coverFnHi">666046</td>
+              <td class="coverFnHi">666127</td>
               
               
             </tr>
@@ -2375,21 +2382,21 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L213">unsigned long p2pool::read_unaligned<unsigned long>(unsigned long const*)</a></td>
               
-              <td class="coverFnAliasHi">666046</td>
+              <td class="coverFnAliasHi">666127</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L297">p2pool::seconds_since_epoch()</a></td>
               
-              <td class="coverFnHi">1413317</td>
+              <td class="coverFnHi">1413887</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L221">unsigned long p2pool::array_size&lt;int const, 4ul&gt;(int const (&amp;) [4ul])</a></td>
               
-              <td class="coverFnHi">2332440</td>
+              <td class="coverFnHi">2328935</td>
               
               
             </tr>
@@ -2438,7 +2445,7 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L221">unsigned long p2pool::array_size<unsigned char, 72ul>(unsigned char (&) [72ul])</a></td>
               
-              <td class="coverFnAliasHi">2327319</td>
+              <td class="coverFnAliasHi">2323814</td>
               
               
             </tr>
@@ -2725,7 +2732,7 @@
             <tr>
               <td class="coverFn"><a href="util.h.gcov.html#L155">crypto.cpp:void p2pool::writeVarint&lt;unsigned long, p2pool::derive_view_tag(p2pool::hash const&amp;, unsigned long, unsigned char&amp;)::$_0&gt;(unsigned long, p2pool::derive_view_tag(p2pool::hash const&amp;, unsigned long, unsigned char&amp;)::$_0&amp;&amp;)</a></td>
               
-              <td class="coverFnHi">4563610</td>
+              <td class="coverFnHi">4564087</td>
               
               
             </tr>
@@ -2781,7 +2788,7 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L155">block_template.cpp:void p2pool::writeVarint<unsigned long, p2pool::BlockTemplate::get_hashing_blob_nolock(unsigned int, unsigned char*) const::$_0>(unsigned long, p2pool::BlockTemplate::get_hashing_blob_nolock(unsigned int, unsigned char*) const::$_0&&)</a></td>
               
-              <td class="coverFnAliasHi">9991</td>
+              <td class="coverFnAliasHi">9988</td>
               
               
             </tr>
@@ -2802,14 +2809,14 @@
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L155">crypto.cpp:void p2pool::writeVarint<unsigned long, p2pool::derive_view_tag(p2pool::hash const&, unsigned long, unsigned char&)::$_0>(unsigned long, p2pool::derive_view_tag(p2pool::hash const&, unsigned long, unsigned char&)::$_0&&)</a></td>
               
-              <td class="coverFnAliasHi">595011</td>
+              <td class="coverFnAliasHi">595393</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="util.h.gcov.html#L155">crypto.cpp:void p2pool::writeVarint<unsigned long, p2pool::derivation_to_scalar(p2pool::hash const&, unsigned long, unsigned char (&) [32])::{lambda(unsigned char)#1}>(unsigned long, p2pool::derivation_to_scalar(p2pool::hash const&, unsigned long, unsigned char (&) [32])::{lambda(unsigned char)#1}&&)</a></td>
               
-              <td class="coverFnAliasHi">627570</td>
+              <td class="coverFnAliasHi">627668</td>
               
               
             </tr>
@@ -3080,30 +3087,30 @@
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="util.h.gcov.html#L475">robin_hood::hash&lt;std::array&lt;unsigned char, 40ul&gt;, void&gt;::operator()(std::array&lt;unsigned char, 40ul&gt; const&amp;) const</a></td>
+              <td class="coverFn"><a href="util.h.gcov.html#L487">robin_hood::hash&lt;std::array&lt;unsigned char, 40ul&gt;, void&gt;::operator()(std::array&lt;unsigned char, 40ul&gt; const&amp;) const</a></td>
               
-              <td class="coverFnHi">9623944</td>
+              <td class="coverFnHi">9624401</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L475">robin_hood::hash<std::array<unsigned char, 40ul>, void>::operator()(std::array<unsigned char, 40ul> const&) const</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L487">robin_hood::hash<std::array<unsigned char, 40ul>, void>::operator()(std::array<unsigned char, 40ul> const&) const</a></td>
               
               <td class="coverFnAliasHi">19836</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L475">robin_hood::hash<std::array<unsigned char, 64ul>, void>::operator()(std::array<unsigned char, 64ul> const&) const</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L487">robin_hood::hash<std::array<unsigned char, 64ul>, void>::operator()(std::array<unsigned char, 64ul> const&) const</a></td>
               
-              <td class="coverFnAliasHi">4657745</td>
+              <td class="coverFnAliasHi">4658007</td>
               
               
             </tr>
             <tr>
-              <td class="coverFnAlias"><a href="util.h.gcov.html#L475">robin_hood::hash<std::array<unsigned char, 72ul>, void>::operator()(std::array<unsigned char, 72ul> const&) const</a></td>
+              <td class="coverFnAlias"><a href="util.h.gcov.html#L487">robin_hood::hash<std::array<unsigned char, 72ul>, void>::operator()(std::array<unsigned char, 72ul> const&) const</a></td>
               
-              <td class="coverFnAliasHi">4946363</td>
+              <td class="coverFnAliasHi">4946558</td>
               
               
             </tr>
@@ -3136,7 +3143,7 @@
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="util.h.gcov.html#L457">robin_hood::hash&lt;p2pool::hash, void&gt;::operator()(p2pool::hash const&amp;) const</a></td>
+              <td class="coverFn"><a href="util.h.gcov.html#L469">robin_hood::hash&lt;p2pool::hash, void&gt;::operator()(p2pool::hash const&amp;) const</a></td>
               
               <td class="coverFnHi">91108455</td>
               
