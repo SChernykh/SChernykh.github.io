@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-20 15:27:38</td>
+            <td class="headerValue">2026-02-22 21:22:07</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -126,7 +126,7 @@
 <span id="L64"><span class="lineNum">      64</span>              : };</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
 <span id="L66"><span class="lineNum">      66</span>              : P2PServer::P2PServer(p2pool* pool)</span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :         : TCPServer(DEFAULT_BACKLOG, P2PClient::allocate, pool-&gt;params().m_socks5Proxy, pool-&gt;params().m_socks5ProxyType)</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaUNC">           0 :         : TCPServer(DEFAULT_BACKLOG, P2PClient::allocate, pool-&gt;params().m_socks5Proxy, pool-&gt;params().m_socks5ProxyType, pool-&gt;params().m_p2pProxyProtocol)</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaUNC">           0 :         , m_pool(pool)</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaUNC">           0 :         , m_cache(pool-&gt;params().m_blockCache ? new BlockCache(pool-&gt;params()) : nullptr)</span></span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaUNC">           0 :         , m_cacheLoaded(false)</span></span>
