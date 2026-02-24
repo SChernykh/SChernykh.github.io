@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-22 21:22:07</td>
+            <td class="headerValue">2026-02-24 19:40:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -518,7 +518,7 @@
 <span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :                 const size_t k = m_socks5Proxy.find_last_of(':');</span></span>
 <span id="L457"><span class="lineNum">     457</span>              : </span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :                 if ((k != std::string::npos) &amp;&amp; (k &lt; m_socks5Proxy.length() - 1)) {</span></span>
-<span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :                         const uint32_t port = std::stoul(m_socks5Proxy.substr(k + 1), nullptr, 10);</span></span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaUNC">           0 :                         const unsigned long port = strtoul(m_socks5Proxy.substr(k + 1).c_str(), nullptr, 10);</span></span>
 <span id="L460"><span class="lineNum">     460</span>              : </span>
 <span id="L461"><span class="lineNum">     461</span> <span class="tlaUNC">           0 :                         if ((port &gt; 0) &amp;&amp; (port &lt; 65536)) {</span></span>
 <span id="L462"><span class="lineNum">     462</span> <span class="tlaUNC">           0 :                                 switch (port) {</span></span>
@@ -586,7 +586,7 @@
 <span id="L524"><span class="lineNum">     524</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L525"><span class="lineNum">     525</span>              : </span>
 <span id="L526"><span class="lineNum">     526</span> <span class="tlaUNC">           0 :         if (m_socks5ProxyType == ProxyType::INVALID) {</span></span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Invalid SOCKS5 proxy type. Check the --socks5-proxy-type parameter.&quot;);</span></span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Invalid SOCKS5 proxy type. Check the --socks5 and --socks5-proxy-type parameters.&quot;);</span></span>
 <span id="L528"><span class="lineNum">     528</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L529"><span class="lineNum">     529</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L530"><span class="lineNum">     530</span>              : </span>
