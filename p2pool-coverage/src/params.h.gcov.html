@@ -31,17 +31,17 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">10.0&nbsp;%</td>
-            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryLo">8.3&nbsp;%</td>
+            <td class="headerCovTableEntry">12</td>
             <td class="headerCovTableEntry">1</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-25 06:41:27</td>
+            <td class="headerValue">2026-02-25 10:06:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">20.0&nbsp;%</td>
-            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntryLo">14.3&nbsp;%</td>
+            <td class="headerCovTableEntry">7</td>
             <td class="headerCovTableEntry">1</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -93,17 +93,17 @@
 <span id="L31"><span class="lineNum">      31</span>              : </span>
 <span id="L32"><span class="lineNum">      32</span>              :         explicit Params(const std::vector&lt;std::vector&lt;std::string&gt;&gt;&amp; args);</span>
 <span id="L33"><span class="lineNum">      33</span>              : </span>
-<span id="L34"><span class="lineNum">      34</span>              :         bool valid() const;</span>
+<span id="L34"><span class="lineNum">      34</span>              :         [[nodiscard]] bool valid() const;</span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
 <span id="L36"><span class="lineNum">      36</span>              : #ifdef WITH_GRPC</span>
-<span id="L37"><span class="lineNum">      37</span>              :         bool grpc_needed() const;</span>
+<span id="L37"><span class="lineNum">      37</span>              :         [[nodiscard]] bool grpc_needed() const;</span>
 <span id="L38"><span class="lineNum">      38</span>              : #endif</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
 <span id="L40"><span class="lineNum">      40</span>              :         struct Host</span>
 <span id="L41"><span class="lineNum">      41</span>              :         {</span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC tlaBgUNC">           0 :                 Host() : m_address(&quot;127.0.0.1&quot;), m_rpcPort(18081), m_zmqPort(18083), m_rpcSSL(false) {}</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : </span>
-<span id="L44"><span class="lineNum">      44</span>              :                 Host(const char* address, int32_t rpcPort, int32_t zmqPort, const char* rpcLogin)</span>
+<span id="L44"><span class="lineNum">      44</span>              :                 Host(const std::string&amp; address, int32_t rpcPort, int32_t zmqPort, const std::string&amp; rpcLogin)</span>
 <span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :                         : m_address(address)</span></span>
 <span id="L46"><span class="lineNum">      46</span> <span class="tlaUNC">           0 :                         , m_rpcPort(rpcPort)</span></span>
 <span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :                         , m_zmqPort(zmqPort)</span></span>
@@ -111,9 +111,9 @@
 <span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :                         , m_rpcSSL(false)</span></span>
 <span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :                 {}</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaUNC">           0 :                 bool valid() const { return !m_address.empty() &amp;&amp; m_rpcPort &amp;&amp; m_zmqPort &amp;&amp; (m_rpcPort != m_zmqPort); }</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaUNC">           0 :                 [[nodiscard]] bool valid() const { return !m_address.empty() &amp;&amp; m_rpcPort &amp;&amp; m_zmqPort &amp;&amp; (m_rpcPort != m_zmqPort); }</span></span>
 <span id="L53"><span class="lineNum">      53</span>              : </span>
-<span id="L54"><span class="lineNum">      54</span>              :                 bool init_display_name(const Params&amp; p);</span>
+<span id="L54"><span class="lineNum">      54</span>              :                 [[nodiscard]] bool init_display_name(const Params&amp; p);</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span>              :                 std::string m_address;</span>
 <span id="L57"><span class="lineNum">      57</span>              :                 int32_t m_rpcPort;</span>
@@ -213,9 +213,15 @@
 <span id="L151"><span class="lineNum">     151</span>              :         bool m_noClearnetP2P = false;</span>
 <span id="L152"><span class="lineNum">     152</span>              :         bool m_stratumProxyProtocol = false;</span>
 <span id="L153"><span class="lineNum">     153</span>              :         bool m_p2pProxyProtocol = false;</span>
-<span id="L154"><span class="lineNum">     154</span>              : };</span>
-<span id="L155"><span class="lineNum">     155</span>              : </span>
-<span id="L156"><span class="lineNum">     156</span>              : } // namespace p2pool</span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span>              : private:</span>
+<span id="L156"><span class="lineNum">     156</span>              :         [[nodiscard]] bool process_arg(const std::vector&lt;std::string&gt;&amp; arg);</span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaUNC">           0 :         [[nodiscard]] static bool has1(const std::vector&lt;std::string&gt;&amp; arg) { return (arg.size() &gt; 1) &amp;&amp; !arg[1].empty();}</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaUNC">           0 :         [[nodiscard]] static bool has2(const std::vector&lt;std::string&gt;&amp; arg) { return (arg.size() &gt; 2) &amp;&amp; !arg[2].empty();}</span></span>
+<span id="L160"><span class="lineNum">     160</span>              : };</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
