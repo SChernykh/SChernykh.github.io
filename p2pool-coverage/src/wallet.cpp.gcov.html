@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-02-24 19:40:33</td>
+            <td class="headerValue">2026-02-25 06:41:27</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.9&nbsp;%</td>
@@ -317,22 +317,22 @@
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          48 : }</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : </span>
 <span id="L257"><span class="lineNum">     257</span>              : bool Wallet::get_eph_public_key(const hash&amp; txkey_sec, size_t output_index, hash&amp; eph_public_key, uint8_t&amp; view_tag, const uint8_t* expected_view_tag) const</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     3686432 : {</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     3686432 :         hash derivation;</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     3686432 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">     3686355 : {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     3686355 :         hash derivation;</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     3686355 :         if (!generate_key_derivation(m_viewPublicKey, txkey_sec, output_index, derivation, view_tag)) {</span></span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L263"><span class="lineNum">     263</span>              : </span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC tlaBgGNC">     3686432 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC tlaBgGNC">     3686355 :         if (expected_view_tag &amp;&amp; (view_tag != *expected_view_tag)) {</span></span>
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          54 :                 return false;</span></span>
 <span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          54 :         }</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">     3686378 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">     3686301 :         if (!derive_public_key(derivation, output_index, m_spendPublicKey, eph_public_key)) {</span></span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">     3686378 :         return true;</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">     3686378 : }</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC tlaBgGNC">     3686301 :         return true;</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">     3686301 : }</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
 <span id="L275"><span class="lineNum">     275</span>              : bool Wallet::torsion_check() const</span>
 <span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">       40308 : {</span></span>
