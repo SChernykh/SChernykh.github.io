@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-08 16:22:31</td>
+            <td class="headerValue">2026-03-08 19:34:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">41.7&nbsp;%</td>
@@ -1048,7 +1048,7 @@
 <span id="L986"><span class="lineNum">     986</span>              : </span>
 <span id="L987"><span class="lineNum">     987</span> <span class="tlaGNC">       19110 :                 while (bit_size &gt;= 5) {</span></span>
 <span id="L988"><span class="lineNum">     988</span> <span class="tlaGNC">       11760 :                         bit_size -= 5;</span></span>
-<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">       11760 :                         result += &quot;abcdefghijklmnopqrstuvwxyz234567&quot;[(data &gt;&gt; bit_size) &amp; 31];</span></span>
+<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">       11760 :                         result += base32_alphabet[(data &gt;&gt; bit_size) &amp; 31];</span></span>
 <span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">       11760 :                 }</span></span>
 <span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">        7350 :         }</span></span>
 <span id="L992"><span class="lineNum">     992</span>              : </span>

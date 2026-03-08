@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">84.8&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">33</td>
-            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">33</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-08 16:22:31</td>
+            <td class="headerValue">2026-03-08 19:34:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">25.0&nbsp;%</td>
@@ -87,47 +87,47 @@
 <span id="L25"><span class="lineNum">      25</span>              : namespace p2pool {</span>
 <span id="L26"><span class="lineNum">      26</span>              : </span>
 <span id="L27"><span class="lineNum">      27</span>              : static FORCEINLINE constexpr hash from_i2p_b32_const(const char* dest_hash)</span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :         uint8_t buf[HASH_SIZE + 4] = {};</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :         uint8_t* p = buf;</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">           3 : {</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           3 :         uint8_t buf[HASH_SIZE + 4] = {};</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           3 :         uint8_t* p = buf;</span></span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           1 :         uint64_t data = 0;</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :         uint64_t bit_size = 0;</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           3 :         uint64_t data = 0;</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           3 :         uint64_t bit_size = 0;</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">          53 :         for (size_t i = 0; i &lt; 52; ++i) {</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">          52 :                 const char c = dest_hash[i];</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">          52 :                 uint64_t digit = 0;</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">         107 :         for (size_t i = 0; i &lt; 52; ++i) {</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">         105 :                 const char c = dest_hash[i];</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">         105 :                 uint64_t digit = 0;</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">          52 :                 if ('a' &lt;= c &amp;&amp; c &lt;= 'z') {</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">          45 :                         digit = static_cast&lt;uint64_t&gt;(c - 'a');</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">          45 :                 }</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           7 :                 else if ('A' &lt;= c &amp;&amp; c &lt;= 'Z') {</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC tlaBgUNC">           0 :                         digit = static_cast&lt;uint64_t&gt;(c - 'A');</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC tlaBgGNC">           7 :                 else if ('2' &lt;= c &amp;&amp; c &lt;= '7') {</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           7 :                         digit = static_cast&lt;uint64_t&gt;(c - '2') + 26;</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           7 :                 }</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC tlaBgUNC">           0 :                 else {</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :                         return {};</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">         105 :                 if ('a' &lt;= c &amp;&amp; c &lt;= 'z') {</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">          85 :                         digit = static_cast&lt;uint64_t&gt;(c - 'a');</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">          85 :                 }</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">          20 :                 else if ('A' &lt;= c &amp;&amp; c &lt;= 'Z') {</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           5 :                         digit = static_cast&lt;uint64_t&gt;(c - 'A');</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           5 :                 }</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">          15 :                 else if ('2' &lt;= c &amp;&amp; c &lt;= '7') {</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">          14 :                         digit = static_cast&lt;uint64_t&gt;(c - '2') + 26;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">          14 :                 }</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 :                 else {</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           1 :                         return {};</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :                 }</span></span>
 <span id="L51"><span class="lineNum">      51</span>              : </span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC tlaBgGNC">          52 :                 data = (data &lt;&lt; 5) | digit;</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          52 :                 bit_size += 5;</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">         104 :                 data = (data &lt;&lt; 5) | digit;</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">         104 :                 bit_size += 5;</span></span>
 <span id="L54"><span class="lineNum">      54</span>              : </span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">          84 :                 while (bit_size &gt;= 8) {</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">          32 :                         bit_size -= 8;</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          32 :                         *(p++) = static_cast&lt;uint8_t&gt;(data &gt;&gt; bit_size);</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">          32 :                 }</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">          52 :         }</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">         168 :                 while (bit_size &gt;= 8) {</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">          64 :                         bit_size -= 8;</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">          64 :                         *(p++) = static_cast&lt;uint8_t&gt;(data &gt;&gt; bit_size);</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">          64 :                 }</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">         104 :         }</span></span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           1 :         hash result;</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           2 :         hash result;</span></span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          33 :         for (size_t i = 0; i &lt; HASH_SIZE; ++i) {</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          32 :                 result.h[i] = buf[i];</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          32 :         }</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          66 :         for (size_t i = 0; i &lt; HASH_SIZE; ++i) {</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          64 :                 result.h[i] = buf[i];</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          64 :         }</span></span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           1 :         return result;</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           2 :         return result;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           3 : }</span></span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
 <span id="L70"><span class="lineNum">      70</span>              : hash from_i2p_b32(const std::string&amp; address);</span>
 <span id="L71"><span class="lineNum">      71</span>              : std::string to_i2p_b32(const hash&amp; dest_hash);</span>

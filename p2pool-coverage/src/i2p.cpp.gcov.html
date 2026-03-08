@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">75.7&nbsp;%</td>
-            <td class="headerCovTableEntry">37</td>
-            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntry">35</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-08 16:22:31</td>
+            <td class="headerValue">2026-03-08 19:34:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -79,64 +79,63 @@
 <span id="L17"><span class="lineNum">      17</span>              :  */</span>
 <span id="L18"><span class="lineNum">      18</span>              : </span>
 <span id="L19"><span class="lineNum">      19</span>              : #include &quot;common.h&quot;</span>
-<span id="L20"><span class="lineNum">      20</span>              : #include &quot;i2p.h&quot;</span>
-<span id="L21"><span class="lineNum">      21</span>              : </span>
-<span id="L22"><span class="lineNum">      22</span>              : LOG_CATEGORY(I2P)</span>
-<span id="L23"><span class="lineNum">      23</span>              : </span>
-<span id="L24"><span class="lineNum">      24</span>              : namespace p2pool {</span>
-<span id="L25"><span class="lineNum">      25</span>              : </span>
-<span id="L26"><span class="lineNum">      26</span>              : hash from_i2p_b32(const std::string&amp; address)</span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           1 :         if ((address.length() &lt; 8) || (address.find(&quot;.b32.i2p&quot;) != address.length() - 8)) {</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGWARN(3, &quot;Invalid I2P address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: doesn't end with \&quot;.b32.i2p\&quot;&quot;);</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC">           0 :                 return {};</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">           1 :         if (address.length() != 60) {</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGWARN(3, &quot;Invalid I2P address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: expected length 60, got &quot; &lt;&lt; address.length());</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :                 return {};</span></span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">           1 :         size_t pos = address.find('.');</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :         const std::string dest_hash = address.substr(0, pos);</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         const hash result = from_i2p_b32_const(dest_hash.c_str());</span></span>
-<span id="L41"><span class="lineNum">      41</span>              : </span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :         if (result.empty()) {</span></span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGWARN(3, &quot;Invalid I2P address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: has invalid character(s)&quot;);</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaUNC">           0 :                 return {};</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L46"><span class="lineNum">      46</span>              : </span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC tlaBgGNC">           1 :         return result;</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span>              : std::string to_i2p_b32(const hash&amp; dest_hash)</span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 : {</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :         uint8_t buf[HASH_SIZE + 1];</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :         memcpy(buf, dest_hash.h, HASH_SIZE);</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           1 :         buf[HASH_SIZE] = 0;</span></span>
-<span id="L55"><span class="lineNum">      55</span>              : </span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           1 :         std::string result;</span></span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :         result.reserve(60);</span></span>
-<span id="L58"><span class="lineNum">      58</span>              : </span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           1 :         uint64_t data = 0;</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 :         uint64_t bit_size = 0;</span></span>
-<span id="L61"><span class="lineNum">      61</span>              : </span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          34 :         for (size_t i = 0; i &lt; HASH_SIZE + 1; ++i) {</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          33 :                 data = (data &lt;&lt; 8) | buf[i];</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">          33 :                 bit_size += 8;</span></span>
-<span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          85 :                 while (bit_size &gt;= 5) {</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">          52 :                         bit_size -= 5;</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          52 :                         result += &quot;abcdefghijklmnopqrstuvwxyz234567&quot;[(data &gt;&gt; bit_size) &amp; 31];</span></span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          52 :                 }</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">          33 :         }</span></span>
-<span id="L71"><span class="lineNum">      71</span>              : </span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :         result.append(&quot;.b32.i2p&quot;);</span></span>
-<span id="L73"><span class="lineNum">      73</span>              : </span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :         return result;</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span>              : } // namespace p2pool</span>
+<span id="L20"><span class="lineNum">      20</span>              : #include &quot;util.h&quot;</span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &quot;i2p.h&quot;</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : LOG_CATEGORY(I2P)</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : namespace p2pool {</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : hash from_i2p_b32(const std::string&amp; address)</span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">           6 : {</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           6 :         if ((address.length() &lt; 8) || (address.find(&quot;.b32.i2p&quot;) != address.length() - 8)) {</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           2 :                 LOGWARN(3, &quot;Invalid I2P address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: doesn't end with \&quot;.b32.i2p\&quot;&quot;);</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           2 :                 return {};</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           2 :         }</span></span>
+<span id="L33"><span class="lineNum">      33</span>              : </span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           4 :         if (address.length() != 60) {</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid I2P address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: expected length 60, got &quot; &lt;&lt; address.length());</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L38"><span class="lineNum">      38</span>              : </span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           3 :         const hash result = from_i2p_b32_const(address.c_str());</span></span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           3 :         if (result.empty()) {</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :                 LOGWARN(3, &quot;Invalid I2P address \&quot;&quot; &lt;&lt; address &lt;&lt; &quot;\&quot;: has invalid character(s)&quot;);</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :                 return {};</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L45"><span class="lineNum">      45</span>              : </span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           2 :         return result;</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           3 : }</span></span>
+<span id="L48"><span class="lineNum">      48</span>              : </span>
+<span id="L49"><span class="lineNum">      49</span>              : std::string to_i2p_b32(const hash&amp; dest_hash)</span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 :         uint8_t buf[HASH_SIZE + 1];</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :         memcpy(buf, dest_hash.h, HASH_SIZE);</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :         buf[HASH_SIZE] = 0;</span></span>
+<span id="L54"><span class="lineNum">      54</span>              : </span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :         std::string result;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           1 :         result.reserve(60);</span></span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :         uint64_t data = 0;</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           1 :         uint64_t bit_size = 0;</span></span>
+<span id="L60"><span class="lineNum">      60</span>              : </span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">          34 :         for (size_t i = 0; i &lt; HASH_SIZE + 1; ++i) {</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          33 :                 data = (data &lt;&lt; 8) | buf[i];</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">          33 :                 bit_size += 8;</span></span>
+<span id="L64"><span class="lineNum">      64</span>              : </span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">          85 :                 while (bit_size &gt;= 5) {</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">          52 :                         bit_size -= 5;</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">          52 :                         result += base32_alphabet[(data &gt;&gt; bit_size) &amp; 31];</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">          52 :                 }</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">          33 :         }</span></span>
+<span id="L70"><span class="lineNum">      70</span>              : </span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :         result.append(&quot;.b32.i2p&quot;);</span></span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 :         return result;</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L75"><span class="lineNum">      75</span>              : </span>
+<span id="L76"><span class="lineNum">      76</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
