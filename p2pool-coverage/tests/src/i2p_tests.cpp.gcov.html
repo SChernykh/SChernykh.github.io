@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - coverage.info - tests/src/i2p_tests.cpp</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="title">LCOV - code coverage report</td></tr>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+            <tr>
+              <td width="100%">
+                <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="10%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">tests/src</a> - i2p_tests.cpp<span style="font-size: 80%;"> (source / <a href="i2p_tests.cpp.func-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="5%"></td>
+            <td width="5%" class="headerCovTableHead">Coverage</td>
+            <td width="5%" class="headerCovTableHead" title="Covered + Uncovered code">Total</td>
+            <td width="5%" class="headerCovTableHead" title="Exercised code only">Hit</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">coverage.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test Date:</td>
+            <td class="headerValue">2026-03-08 15:54:48</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
+            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">1</td>
+          </tr>
+                  <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+                </table>
+              </td>
+            </tr>
+
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+          </table>
+
+          <table cellpadding=0 cellspacing=0 border=0>
+            <tr>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td>
+<pre class="sourceHeading">            Line data    Source code</pre>
+<pre class="source">
+<span id="L1"><span class="lineNum">       1</span>              : /*</span>
+<span id="L2"><span class="lineNum">       2</span>              :  * This file is part of the Monero P2Pool &lt;https://github.com/SChernykh/p2pool&gt;</span>
+<span id="L3"><span class="lineNum">       3</span>              :  * Copyright (c) 2021-2024 SChernykh &lt;https://github.com/SChernykh&gt;</span>
+<span id="L4"><span class="lineNum">       4</span>              :  * Copyright (c) 2026 jpk68</span>
+<span id="L5"><span class="lineNum">       5</span>              :  *</span>
+<span id="L6"><span class="lineNum">       6</span>              :  * This program is free software: you can redistribute it and/or modify</span>
+<span id="L7"><span class="lineNum">       7</span>              :  * it under the terms of the GNU General Public License as published by</span>
+<span id="L8"><span class="lineNum">       8</span>              :  * the Free Software Foundation, version 3.</span>
+<span id="L9"><span class="lineNum">       9</span>              :  *</span>
+<span id="L10"><span class="lineNum">      10</span>              :  * This program is distributed in the hope that it will be useful, but</span>
+<span id="L11"><span class="lineNum">      11</span>              :  * WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span id="L12"><span class="lineNum">      12</span>              :  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU</span>
+<span id="L13"><span class="lineNum">      13</span>              :  * General Public License for more details.</span>
+<span id="L14"><span class="lineNum">      14</span>              :  *</span>
+<span id="L15"><span class="lineNum">      15</span>              :  * You should have received a copy of the GNU General Public License</span>
+<span id="L16"><span class="lineNum">      16</span>              :  * along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span id="L17"><span class="lineNum">      17</span>              :  */</span>
+<span id="L18"><span class="lineNum">      18</span>              : </span>
+<span id="L19"><span class="lineNum">      19</span>              : #include &lt;string&gt;</span>
+<span id="L20"><span class="lineNum">      20</span>              : #include &lt;cstdint&gt;</span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &quot;gtest/gtest.h&quot;</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &quot;i2p.h&quot;</span>
+<span id="L23"><span class="lineNum">      23</span>              : #include &quot;common.h&quot;</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : namespace p2pool {</span>
+<span id="L26"><span class="lineNum">      26</span>              : </span>
+<span id="L27"><span class="lineNum">      27</span>              : TEST(i2p, decode_encode)</span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           1 :         const std::string addr1 = &quot;vxghq7uoi3m5juvfk2otmxlh4qhwb42xdbytehtahqeksoclcetq.b32.i2p&quot;;</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           1 :         const hash result1 = from_i2p_b32(addr1);</span></span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           1 :         const hash expected1{</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :                 0xad, 0xcc, 0x78, 0x7e, 0x8e, 0x46, 0xd9, 0xd4,</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           1 :                 0xd2, 0xa5, 0x56, 0x9d, 0x36, 0x5d, 0x67, 0xe4,</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :                 0x0f, 0x60, 0xf3, 0x57, 0x18, 0x71, 0x32, 0x1e,</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 :                 0x60, 0x3c, 0x08, 0xa9, 0x38, 0x4b, 0x11, 0x27</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           1 :         EXPECT_EQ(result1, expected1);</span></span>
+<span id="L39"><span class="lineNum">      39</span>              : </span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         const std::string result2 = to_i2p_b32(result1);</span></span>
+<span id="L41"><span class="lineNum">      41</span>              :         EXPECT_EQ(result2, addr1);</span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span>              : } // namespace p2pool</span>
+        </pre>
+              </td>
+            </tr>
+          </table>
+          <br>
+
+          <table width="100%" border=0 cellspacing=0 cellpadding=0>
+            <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+            <tr><td class="versionInfo">Generated by: <a href="https://github.com//linux-test-project/lcov" target="_parent">LCOV version 2.0-1</a></td></tr>
+          </table>
+          <br>
+
+</body>
+</html>

@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-03-07 19:48:24</td>
+            <td class="headerValue">2026-03-08 15:54:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">68</td>
+            <td class="headerCovTableEntry">84</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
@@ -87,14 +87,14 @@
 <span id="L25"><span class="lineNum">      25</span>              : template&lt;int ROUNDS&gt;</span>
 <span id="L26"><span class="lineNum">      26</span>              : static FORCEINLINE constexpr void keccakf(std::array&lt;uint64_t, 25&gt;&amp; st)</span>
 <span id="L27"><span class="lineNum">      27</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaUNC">           0 :         constexpr uint64_t round_constants[24] = </span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaUNC">           0 :         constexpr uint64_t round_constants[24] =</span></span>
 <span id="L29"><span class="lineNum">      29</span> <span class="tlaUNC">           0 :         {</span></span>
 <span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC">           0 :                 0x0000000000000001, 0x0000000000008082, 0x800000000000808a,</span></span>
 <span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC">           0 :                 0x8000000080008000, 0x000000000000808b, 0x0000000080000001,</span></span>
 <span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC">           0 :                 0x8000000080008081, 0x8000000000008009, 0x000000000000008a,</span></span>
 <span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :                 0x0000000000000088, 0x0000000080008009, 0x000000008000000a,</span></span>
 <span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC">           0 :                 0x000000008000808b, 0x800000000000008b, 0x8000000000008089,</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :                 0x8000000000008003, 0x8000000000008002, 0x8000000000000080, </span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :                 0x8000000000008003, 0x8000000000008002, 0x8000000000000080,</span></span>
 <span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :                 0x000000000000800a, 0x800000008000000a, 0x8000000080008081,</span></span>
 <span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC">           0 :                 0x8000000000008080, 0x0000000080000001, 0x8000000080008008</span></span>
 <span id="L38"><span class="lineNum">      38</span> <span class="tlaUNC">           0 :         };</span></span>
@@ -169,10 +169,11 @@
 <span id="L107"><span class="lineNum">     107</span>              : constexpr hash keccak_0x00 = keccak(&quot;\0&quot;);</span>
 <span id="L108"><span class="lineNum">     108</span>              : constexpr hash keccak_subaddress_viewpub = keccak(&quot;subaddress_viewpub&quot;);</span>
 <span id="L109"><span class="lineNum">     109</span>              : constexpr hash keccak_onion_address_v3 = keccak(&quot;onion_address_v3&quot;);</span>
-<span id="L110"><span class="lineNum">     110</span>              : </span>
-<span id="L111"><span class="lineNum">     111</span>              : static_assert(keccak_0x00.u64&lt;0&gt;() == 0x14281E7A9E7836BCULL, &quot;constexpr keccak code check failed&quot;);</span>
-<span id="L112"><span class="lineNum">     112</span>              : </span>
-<span id="L113"><span class="lineNum">     113</span>              : } // namespace p2pool</span>
+<span id="L110"><span class="lineNum">     110</span>              : constexpr hash keccak_i2p_b32_address = keccak(&quot;i2p_b32_address&quot;);</span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span>              : static_assert(keccak_0x00.u64&lt;0&gt;() == 0x14281E7A9E7836BCULL, &quot;constexpr keccak code check failed&quot;);</span>
+<span id="L113"><span class="lineNum">     113</span>              : </span>
+<span id="L114"><span class="lineNum">     114</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
