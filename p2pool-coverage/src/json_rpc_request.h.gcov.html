@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-26 08:19:56</td>
+            <td class="headerValue">2026-04-26 17:39:13</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">5.6&nbsp;%</td>
@@ -94,7 +94,7 @@
 <span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           1 :         typedef Callback&lt;void, const char*, size_t, double&gt;::Derived&lt;T&gt; CallbackT;</span></span>
 <span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           1 :         typedef Callback&lt;void, const char*, size_t, double&gt;::Derived&lt;U&gt; CallbackU;</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :         Call(address, port, req, auth, proxy, ssl, ssl_fingerprint, new CallbackT(std::move(cb)), new CallbackU(std::move(close_cb)), loop);</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           1 :         Call(address, port, req, auth, proxy, ssl, ssl_fingerprint, new CallbackT(std::forward&lt;T&gt;(cb)), new CallbackU(std::forward&lt;U&gt;(close_cb)), loop);</span></span>
 <span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
 <span id="L38"><span class="lineNum">      38</span>              : } // namespace JSONRPCRequest</span>
