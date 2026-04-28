@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-04-28 13:57:31</td>
+            <td class="headerValue">2026-04-28 16:53:15</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">14.3&nbsp;%</td>
@@ -154,81 +154,83 @@
 <span id="L92"><span class="lineNum">      92</span>              :         std::string m_p2pPeerList;</span>
 <span id="L93"><span class="lineNum">      93</span>              :         std::string m_dataDir;</span>
 <span id="L94"><span class="lineNum">      94</span>              :         std::string m_logFilePath;</span>
-<span id="L95"><span class="lineNum">      95</span>              :         std::string m_sidechainConfig;</span>
-<span id="L96"><span class="lineNum">      96</span>              :         std::string m_apiPath;</span>
-<span id="L97"><span class="lineNum">      97</span>              :         uint64_t m_stratumBanTime = DEFAULT_STRATUM_BAN_TIME;</span>
-<span id="L98"><span class="lineNum">      98</span>              :         bool m_localStats = false;</span>
-<span id="L99"><span class="lineNum">      99</span>              :         bool m_blockCache = true;</span>
-<span id="L100"><span class="lineNum">     100</span>              : #ifdef WITH_RANDOMX</span>
-<span id="L101"><span class="lineNum">     101</span>              :         bool m_disableRandomX = false;</span>
-<span id="L102"><span class="lineNum">     102</span>              : #else</span>
-<span id="L103"><span class="lineNum">     103</span>              :         bool m_disableRandomX = true;</span>
-<span id="L104"><span class="lineNum">     104</span>              : #endif</span>
-<span id="L105"><span class="lineNum">     105</span>              :         uint32_t m_maxOutgoingPeers = 10;</span>
-<span id="L106"><span class="lineNum">     106</span>              :         uint32_t m_maxIncomingPeers = 450;</span>
-<span id="L107"><span class="lineNum">     107</span>              :         uint32_t m_minerThreads = 0;</span>
-<span id="L108"><span class="lineNum">     108</span>              :         bool m_mini = false;</span>
-<span id="L109"><span class="lineNum">     109</span>              :         bool m_nano = false;</span>
-<span id="L110"><span class="lineNum">     110</span>              :         bool m_autoDiff = true;</span>
-<span id="L111"><span class="lineNum">     111</span>              : </span>
-<span id="L112"><span class="lineNum">     112</span>              :         std::string m_socks5Proxy;</span>
+<span id="L95"><span class="lineNum">      95</span>              :         bool m_consoleLogEnabled = true;</span>
+<span id="L96"><span class="lineNum">      96</span>              :         bool m_logFileEnabled = true;</span>
+<span id="L97"><span class="lineNum">      97</span>              :         std::string m_sidechainConfig;</span>
+<span id="L98"><span class="lineNum">      98</span>              :         std::string m_apiPath;</span>
+<span id="L99"><span class="lineNum">      99</span>              :         uint64_t m_stratumBanTime = DEFAULT_STRATUM_BAN_TIME;</span>
+<span id="L100"><span class="lineNum">     100</span>              :         bool m_localStats = false;</span>
+<span id="L101"><span class="lineNum">     101</span>              :         bool m_blockCache = true;</span>
+<span id="L102"><span class="lineNum">     102</span>              : #ifdef WITH_RANDOMX</span>
+<span id="L103"><span class="lineNum">     103</span>              :         bool m_disableRandomX = false;</span>
+<span id="L104"><span class="lineNum">     104</span>              : #else</span>
+<span id="L105"><span class="lineNum">     105</span>              :         bool m_disableRandomX = true;</span>
+<span id="L106"><span class="lineNum">     106</span>              : #endif</span>
+<span id="L107"><span class="lineNum">     107</span>              :         uint32_t m_maxOutgoingPeers = 10;</span>
+<span id="L108"><span class="lineNum">     108</span>              :         uint32_t m_maxIncomingPeers = 450;</span>
+<span id="L109"><span class="lineNum">     109</span>              :         uint32_t m_minerThreads = 0;</span>
+<span id="L110"><span class="lineNum">     110</span>              :         bool m_mini = false;</span>
+<span id="L111"><span class="lineNum">     111</span>              :         bool m_nano = false;</span>
+<span id="L112"><span class="lineNum">     112</span>              :         bool m_autoDiff = true;</span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span>              :         enum ProxyType {</span>
-<span id="L115"><span class="lineNum">     115</span>              :                 INVALID = -1,</span>
-<span id="L116"><span class="lineNum">     116</span>              :                 AUTO    =  0,</span>
-<span id="L117"><span class="lineNum">     117</span>              :                 PLAIN   =  1,</span>
-<span id="L118"><span class="lineNum">     118</span>              :                 TOR     =  2,</span>
-<span id="L119"><span class="lineNum">     119</span>              :                 I2P     =  3,</span>
-<span id="L120"><span class="lineNum">     120</span>              :                 MAX     =  4,</span>
-<span id="L121"><span class="lineNum">     121</span>              :         } m_socks5ProxyType = ProxyType::AUTO;</span>
-<span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span>              :         bool m_dns = true;</span>
-<span id="L124"><span class="lineNum">     124</span>              :         int32_t m_p2pExternalPort = 0;</span>
-<span id="L125"><span class="lineNum">     125</span>              : #ifdef WITH_UPNP</span>
-<span id="L126"><span class="lineNum">     126</span>              :         bool m_upnp = true;</span>
-<span id="L127"><span class="lineNum">     127</span>              :         bool m_upnpStratum = false;</span>
-<span id="L128"><span class="lineNum">     128</span>              : #else</span>
-<span id="L129"><span class="lineNum">     129</span>              :         bool m_upnp = false;</span>
-<span id="L130"><span class="lineNum">     130</span>              :         bool m_upnpStratum = false;</span>
-<span id="L131"><span class="lineNum">     131</span>              : #endif</span>
-<span id="L132"><span class="lineNum">     132</span>              : #ifdef WITH_TLS</span>
-<span id="L133"><span class="lineNum">     133</span>              :         std::string m_tlsCert;</span>
-<span id="L134"><span class="lineNum">     134</span>              :         std::string m_tlsCertKey;</span>
-<span id="L135"><span class="lineNum">     135</span>              : #endif</span>
-<span id="L136"><span class="lineNum">     136</span>              :         bool m_enableStratumHTTP = true;</span>
-<span id="L137"><span class="lineNum">     137</span>              : </span>
-<span id="L138"><span class="lineNum">     138</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
-<span id="L139"><span class="lineNum">     139</span>              :         std::string m_authorKeyFile;</span>
-<span id="L140"><span class="lineNum">     140</span>              : </span>
-<span id="L141"><span class="lineNum">     141</span>              :         struct AuthorKey {</span>
-<span id="L142"><span class="lineNum">     142</span>              :                 uint8_t pub_key[32];</span>
-<span id="L143"><span class="lineNum">     143</span>              :                 uint8_t expiration_time[8];</span>
-<span id="L144"><span class="lineNum">     144</span>              :                 uint8_t master_key_signature[64];</span>
-<span id="L145"><span class="lineNum">     145</span>              :                 uint8_t priv_key[64];</span>
-<span id="L146"><span class="lineNum">     146</span>              :         };</span>
-<span id="L147"><span class="lineNum">     147</span>              : #endif</span>
-<span id="L148"><span class="lineNum">     148</span>              :         bool m_enableFullValidation = false;</span>
-<span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span>              :         std::string m_onionAddress;</span>
-<span id="L151"><span class="lineNum">     151</span>              :         hash m_onionPubkey;</span>
-<span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span>              :         // Hidden service address provided by the user</span>
-<span id="L154"><span class="lineNum">     154</span>              :         std::string m_i2pAddress;</span>
-<span id="L155"><span class="lineNum">     155</span>              :         // Raw hash of the destination info; decoded Base32 address with suffix removed</span>
-<span id="L156"><span class="lineNum">     156</span>              :         hash m_i2pDestinationHash;</span>
-<span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span>              :         bool m_noClearnetP2P = false;</span>
-<span id="L159"><span class="lineNum">     159</span>              :         bool m_stratumProxyProtocol = false;</span>
-<span id="L160"><span class="lineNum">     160</span>              :         bool m_p2pProxyProtocol = false;</span>
-<span id="L161"><span class="lineNum">     161</span>              : </span>
-<span id="L162"><span class="lineNum">     162</span>              : private:</span>
-<span id="L163"><span class="lineNum">     163</span>              :         [[nodiscard]] bool process_arg(const std::vector&lt;std::string&gt;&amp; arg);</span>
-<span id="L164"><span class="lineNum">     164</span>              : </span>
-<span id="L165"><span class="lineNum">     165</span> <span class="tlaUNC">           0 :         [[nodiscard]] static bool has1(const std::vector&lt;std::string&gt;&amp; arg) { return (arg.size() &gt; 1) &amp;&amp; !arg[1].empty();}</span></span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC">           0 :         [[nodiscard]] static bool has2(const std::vector&lt;std::string&gt;&amp; arg) { return (arg.size() &gt; 2) &amp;&amp; !arg[2].empty();}</span></span>
-<span id="L167"><span class="lineNum">     167</span>              : };</span>
-<span id="L168"><span class="lineNum">     168</span>              : </span>
-<span id="L169"><span class="lineNum">     169</span>              : } // namespace p2pool</span>
+<span id="L114"><span class="lineNum">     114</span>              :         std::string m_socks5Proxy;</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :         enum ProxyType {</span>
+<span id="L117"><span class="lineNum">     117</span>              :                 INVALID = -1,</span>
+<span id="L118"><span class="lineNum">     118</span>              :                 AUTO    =  0,</span>
+<span id="L119"><span class="lineNum">     119</span>              :                 PLAIN   =  1,</span>
+<span id="L120"><span class="lineNum">     120</span>              :                 TOR     =  2,</span>
+<span id="L121"><span class="lineNum">     121</span>              :                 I2P     =  3,</span>
+<span id="L122"><span class="lineNum">     122</span>              :                 MAX     =  4,</span>
+<span id="L123"><span class="lineNum">     123</span>              :         } m_socks5ProxyType = ProxyType::AUTO;</span>
+<span id="L124"><span class="lineNum">     124</span>              : </span>
+<span id="L125"><span class="lineNum">     125</span>              :         bool m_dns = true;</span>
+<span id="L126"><span class="lineNum">     126</span>              :         int32_t m_p2pExternalPort = 0;</span>
+<span id="L127"><span class="lineNum">     127</span>              : #ifdef WITH_UPNP</span>
+<span id="L128"><span class="lineNum">     128</span>              :         bool m_upnp = true;</span>
+<span id="L129"><span class="lineNum">     129</span>              :         bool m_upnpStratum = false;</span>
+<span id="L130"><span class="lineNum">     130</span>              : #else</span>
+<span id="L131"><span class="lineNum">     131</span>              :         bool m_upnp = false;</span>
+<span id="L132"><span class="lineNum">     132</span>              :         bool m_upnpStratum = false;</span>
+<span id="L133"><span class="lineNum">     133</span>              : #endif</span>
+<span id="L134"><span class="lineNum">     134</span>              : #ifdef WITH_TLS</span>
+<span id="L135"><span class="lineNum">     135</span>              :         std::string m_tlsCert;</span>
+<span id="L136"><span class="lineNum">     136</span>              :         std::string m_tlsCertKey;</span>
+<span id="L137"><span class="lineNum">     137</span>              : #endif</span>
+<span id="L138"><span class="lineNum">     138</span>              :         bool m_enableStratumHTTP = true;</span>
+<span id="L139"><span class="lineNum">     139</span>              : </span>
+<span id="L140"><span class="lineNum">     140</span>              : #ifdef WITH_MERGE_MINING_DONATION</span>
+<span id="L141"><span class="lineNum">     141</span>              :         std::string m_authorKeyFile;</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span>              :         struct AuthorKey {</span>
+<span id="L144"><span class="lineNum">     144</span>              :                 uint8_t pub_key[32];</span>
+<span id="L145"><span class="lineNum">     145</span>              :                 uint8_t expiration_time[8];</span>
+<span id="L146"><span class="lineNum">     146</span>              :                 uint8_t master_key_signature[64];</span>
+<span id="L147"><span class="lineNum">     147</span>              :                 uint8_t priv_key[64];</span>
+<span id="L148"><span class="lineNum">     148</span>              :         };</span>
+<span id="L149"><span class="lineNum">     149</span>              : #endif</span>
+<span id="L150"><span class="lineNum">     150</span>              :         bool m_enableFullValidation = false;</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span>              :         std::string m_onionAddress;</span>
+<span id="L153"><span class="lineNum">     153</span>              :         hash m_onionPubkey;</span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span>              :         // Hidden service address provided by the user</span>
+<span id="L156"><span class="lineNum">     156</span>              :         std::string m_i2pAddress;</span>
+<span id="L157"><span class="lineNum">     157</span>              :         // Raw hash of the destination info; decoded Base32 address with suffix removed</span>
+<span id="L158"><span class="lineNum">     158</span>              :         hash m_i2pDestinationHash;</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              :         bool m_noClearnetP2P = false;</span>
+<span id="L161"><span class="lineNum">     161</span>              :         bool m_stratumProxyProtocol = false;</span>
+<span id="L162"><span class="lineNum">     162</span>              :         bool m_p2pProxyProtocol = false;</span>
+<span id="L163"><span class="lineNum">     163</span>              : </span>
+<span id="L164"><span class="lineNum">     164</span>              : private:</span>
+<span id="L165"><span class="lineNum">     165</span>              :         [[nodiscard]] bool process_arg(const std::vector&lt;std::string&gt;&amp; arg);</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaUNC">           0 :         [[nodiscard]] static bool has1(const std::vector&lt;std::string&gt;&amp; arg) { return (arg.size() &gt; 1) &amp;&amp; !arg[1].empty();}</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC">           0 :         [[nodiscard]] static bool has2(const std::vector&lt;std::string&gt;&amp; arg) { return (arg.size() &gt; 2) &amp;&amp; !arg[2].empty();}</span></span>
+<span id="L169"><span class="lineNum">     169</span>              : };</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
