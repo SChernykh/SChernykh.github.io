@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-01 08:36:41</td>
+            <td class="headerValue">2026-05-02 05:49:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -181,7 +181,7 @@
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">     6680407 :                                 READ_VARINT(reward);</span></span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span>              :                                 // TxOutput max value check</span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">     6680407 :                                 if (reward &gt;= (1ULL &lt;&lt; 56)) {</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">     6680407 :                                 if (reward &gt; MAX_OUTPUT_VALUE) {</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaUNC tlaBgUNC">           0 :                                         return __LINE__;</span></span>
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaUNC">           0 :                                 }</span></span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
