@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1571</td>
+            <td class="headerCovTableEntry">1570</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-12 09:46:53</td>
+            <td class="headerValue">2026-05-13 17:50:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -2061,368 +2061,367 @@
 <span id="L1999"><span class="lineNum">    1999</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2000"><span class="lineNum">    2000</span>              : </span>
 <span id="L2001"><span class="lineNum">    2001</span> <span class="tlaUNC">           0 :         const uint64_t round_hashes = total_hashes.lo - last_block_total_hashes.lo;</span></span>
-<span id="L2002"><span class="lineNum">    2002</span> <span class="tlaUNC">           0 :         const int stratum_port = DEFAULT_STRATUM_PORT;</span></span>
-<span id="L2003"><span class="lineNum">    2003</span>              : </span>
-<span id="L2004"><span class="lineNum">    2004</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::GLOBAL, &quot;stats_mod&quot;,</span></span>
-<span id="L2005"><span class="lineNum">    2005</span> <span class="tlaUNC">           0 :                 [&amp;mainnet_tip, last_block_found_time, &amp;last_block_found_buf, last_block_found_height, miners, hashrate, round_hashes, stratum_port](log::Stream&amp; s)</span></span>
-<span id="L2006"><span class="lineNum">    2006</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L2007"><span class="lineNum">    2007</span> <span class="tlaUNC">           0 :                         s &lt;&lt; &quot;{\&quot;config\&quot;:{\&quot;ports\&quot;:[{\&quot;port\&quot;:&quot; &lt;&lt; stratum_port &lt;&lt; &quot;,\&quot;tls\&quot;:false}],\&quot;fee\&quot;:0,\&quot;minPaymentThreshold\&quot;:300000000},\&quot;network\&quot;:{\&quot;height\&quot;:&quot;</span></span>
-<span id="L2008"><span class="lineNum">    2008</span> <span class="tlaUNC">           0 :                                 &lt;&lt; mainnet_tip.height &lt;&lt; &quot;},\&quot;pool\&quot;:{\&quot;stats\&quot;:{\&quot;lastBlockFound\&quot;:\&quot;&quot;</span></span>
-<span id="L2009"><span class="lineNum">    2009</span> <span class="tlaUNC">           0 :                                 &lt;&lt; last_block_found_time &lt;&lt; &quot;000\&quot;},\&quot;blocks\&quot;:[\&quot;&quot;</span></span>
-<span id="L2010"><span class="lineNum">    2010</span> <span class="tlaUNC">           0 :                                 &lt;&lt; static_cast&lt;char*&gt;(last_block_found_buf) &lt;&lt; static_cast&lt;char*&gt;(last_block_found_buf) + HASH_SIZE * 2 - 4 &lt;&lt; ':'</span></span>
-<span id="L2011"><span class="lineNum">    2011</span> <span class="tlaUNC">           0 :                                 &lt;&lt; last_block_found_time &lt;&lt; &quot;\&quot;,\&quot;&quot;</span></span>
-<span id="L2012"><span class="lineNum">    2012</span> <span class="tlaUNC">           0 :                                 &lt;&lt; last_block_found_height &lt;&lt; &quot;\&quot;],\&quot;miners\&quot;:&quot;</span></span>
-<span id="L2013"><span class="lineNum">    2013</span> <span class="tlaUNC">           0 :                                 &lt;&lt; miners &lt;&lt; &quot;,\&quot;hashrate\&quot;:&quot;</span></span>
-<span id="L2014"><span class="lineNum">    2014</span> <span class="tlaUNC">           0 :                                 &lt;&lt; hashrate &lt;&lt; &quot;,\&quot;roundHashes\&quot;:&quot;</span></span>
-<span id="L2015"><span class="lineNum">    2015</span> <span class="tlaUNC">           0 :                                 &lt;&lt; round_hashes &lt;&lt; &quot;}}&quot;;</span></span>
-<span id="L2016"><span class="lineNum">    2016</span> <span class="tlaUNC">           0 :                 });</span></span>
-<span id="L2017"><span class="lineNum">    2017</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2018"><span class="lineNum">    2018</span>              : </span>
-<span id="L2019"><span class="lineNum">    2019</span>              : void p2pool::cleanup_mainchain_data(uint64_t height)</span>
-<span id="L2020"><span class="lineNum">    2020</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2021"><span class="lineNum">    2021</span>              :         // Expects m_mainchainLock to be already locked here</span>
-<span id="L2022"><span class="lineNum">    2022</span>              :         // Deletes everything older than 720 blocks, except for the 3 latest RandomX seed heights</span>
-<span id="L2023"><span class="lineNum">    2023</span>              : </span>
-<span id="L2024"><span class="lineNum">    2024</span> <span class="tlaUNC">           0 :         const uint64_t PRUNE_DISTANCE = BLOCK_HEADERS_REQUIRED;</span></span>
-<span id="L2025"><span class="lineNum">    2025</span> <span class="tlaUNC">           0 :         const uint64_t seed_height = get_seed_height(height);</span></span>
-<span id="L2026"><span class="lineNum">    2026</span> <span class="tlaUNC">           0 :         const std::array&lt;uint64_t, 3&gt; seed_heights{ seed_height, seed_height - SEEDHASH_EPOCH_BLOCKS, seed_height - SEEDHASH_EPOCH_BLOCKS * 2 };</span></span>
-<span id="L2027"><span class="lineNum">    2027</span>              : </span>
-<span id="L2028"><span class="lineNum">    2028</span> <span class="tlaUNC">           0 :         for (auto it = m_mainchainByHeight.begin(); it != m_mainchainByHeight.end();) {</span></span>
-<span id="L2029"><span class="lineNum">    2029</span> <span class="tlaUNC">           0 :                 const uint64_t h = it-&gt;first;</span></span>
-<span id="L2030"><span class="lineNum">    2030</span> <span class="tlaUNC">           0 :                 if (h + PRUNE_DISTANCE &gt;= height) {</span></span>
-<span id="L2031"><span class="lineNum">    2031</span> <span class="tlaUNC">           0 :                         break;</span></span>
-<span id="L2032"><span class="lineNum">    2032</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2033"><span class="lineNum">    2033</span>              : </span>
-<span id="L2034"><span class="lineNum">    2034</span> <span class="tlaUNC">           0 :                 if (std::find(seed_heights.begin(), seed_heights.end(), h) == seed_heights.end()) {</span></span>
-<span id="L2035"><span class="lineNum">    2035</span> <span class="tlaUNC">           0 :                         m_mainchainByHash.erase(it-&gt;second.id);</span></span>
-<span id="L2036"><span class="lineNum">    2036</span> <span class="tlaUNC">           0 :                         it = m_mainchainByHeight.erase(it);</span></span>
-<span id="L2037"><span class="lineNum">    2037</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2038"><span class="lineNum">    2038</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L2039"><span class="lineNum">    2039</span> <span class="tlaUNC">           0 :                         ++it;</span></span>
-<span id="L2040"><span class="lineNum">    2040</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2041"><span class="lineNum">    2041</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2042"><span class="lineNum">    2042</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2043"><span class="lineNum">    2043</span>              : </span>
-<span id="L2044"><span class="lineNum">    2044</span>              : void p2pool::api_update_block_found(const ChainMain* data, const PoolBlock* block, bool update_stats_mod)</span>
-<span id="L2045"><span class="lineNum">    2045</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2046"><span class="lineNum">    2046</span> <span class="tlaUNC">           0 :         if (!m_api || m_stopped) {</span></span>
-<span id="L2047"><span class="lineNum">    2047</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L2048"><span class="lineNum">    2048</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2049"><span class="lineNum">    2049</span>              : </span>
-<span id="L2050"><span class="lineNum">    2050</span> <span class="tlaUNC">           0 :         const time_t cur_time = time(nullptr);</span></span>
-<span id="L2051"><span class="lineNum">    2051</span> <span class="tlaUNC">           0 :         const difficulty_type total_hashes = block ? block-&gt;m_cumulativeDifficulty : m_sideChain-&gt;total_hashes();</span></span>
-<span id="L2052"><span class="lineNum">    2052</span> <span class="tlaUNC">           0 :         difficulty_type diff;</span></span>
-<span id="L2053"><span class="lineNum">    2053</span>              : </span>
-<span id="L2054"><span class="lineNum">    2054</span> <span class="tlaUNC">           0 :         if (data &amp;&amp; get_difficulty_at_height(data-&gt;height, diff)) {</span></span>
-<span id="L2055"><span class="lineNum">    2055</span> <span class="tlaUNC">           0 :                 const std::string path = m_params.m_dataDir + FOUND_BLOCKS_FILE;</span></span>
-<span id="L2056"><span class="lineNum">    2056</span> <span class="tlaUNC">           0 :                 std::ofstream f(path, std::ios::app);</span></span>
-<span id="L2057"><span class="lineNum">    2057</span> <span class="tlaUNC">           0 :                 if (f.is_open()) {</span></span>
-<span id="L2058"><span class="lineNum">    2058</span> <span class="tlaUNC">           0 :                         f &lt;&lt; cur_time &lt;&lt; ' ' &lt;&lt; data-&gt;height &lt;&lt; ' ' &lt;&lt; data-&gt;id &lt;&lt; ' ' &lt;&lt; diff &lt;&lt; ' ' &lt;&lt; total_hashes &lt;&lt; '\n';</span></span>
-<span id="L2059"><span class="lineNum">    2059</span> <span class="tlaUNC">           0 :                         f.flush();</span></span>
-<span id="L2060"><span class="lineNum">    2060</span> <span class="tlaUNC">           0 :                         f.close();</span></span>
-<span id="L2061"><span class="lineNum">    2061</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2062"><span class="lineNum">    2062</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L2063"><span class="lineNum">    2063</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;Failed to update &quot; &lt;&lt; path &lt;&lt; &quot;: error &quot; &lt;&lt; errno);</span></span>
-<span id="L2064"><span class="lineNum">    2064</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2065"><span class="lineNum">    2065</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2066"><span class="lineNum">    2066</span>              : </span>
-<span id="L2067"><span class="lineNum">    2067</span> <span class="tlaUNC">           0 :         std::vector&lt;FoundBlock&gt; found_blocks;</span></span>
-<span id="L2068"><span class="lineNum">    2068</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L2069"><span class="lineNum">    2069</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_foundBlocksLock);</span></span>
-<span id="L2070"><span class="lineNum">    2070</span> <span class="tlaUNC">           0 :                 if (data) {</span></span>
-<span id="L2071"><span class="lineNum">    2071</span> <span class="tlaUNC">           0 :                         m_foundBlocks.emplace_back(cur_time, data-&gt;height, data-&gt;id, diff, total_hashes);</span></span>
-<span id="L2072"><span class="lineNum">    2072</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2073"><span class="lineNum">    2073</span> <span class="tlaUNC">           0 :                 found_blocks.assign(m_foundBlocks.end() - std::min&lt;int&gt;(static_cast&lt;int&gt;(m_foundBlocks.size()), 51), m_foundBlocks.end());</span></span>
-<span id="L2074"><span class="lineNum">    2074</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2075"><span class="lineNum">    2075</span>              : </span>
-<span id="L2076"><span class="lineNum">    2076</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::POOL, &quot;blocks&quot;,</span></span>
-<span id="L2077"><span class="lineNum">    2077</span> <span class="tlaUNC">           0 :                 [&amp;found_blocks](log::Stream&amp; s)</span></span>
-<span id="L2078"><span class="lineNum">    2078</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L2079"><span class="lineNum">    2079</span> <span class="tlaUNC">           0 :                         s &lt;&lt; '[';</span></span>
-<span id="L2080"><span class="lineNum">    2080</span> <span class="tlaUNC">           0 :                         bool first = true;</span></span>
-<span id="L2081"><span class="lineNum">    2081</span> <span class="tlaUNC">           0 :                         for (auto i = found_blocks.rbegin(); i != found_blocks.rend(); ++i) {</span></span>
-<span id="L2082"><span class="lineNum">    2082</span> <span class="tlaUNC">           0 :                                 if (!first) {</span></span>
-<span id="L2083"><span class="lineNum">    2083</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; ',';</span></span>
-<span id="L2084"><span class="lineNum">    2084</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L2085"><span class="lineNum">    2085</span> <span class="tlaUNC">           0 :                                 s &lt;&lt; &quot;{\&quot;height\&quot;:&quot; &lt;&lt; i-&gt;height &lt;&lt; ','</span></span>
-<span id="L2086"><span class="lineNum">    2086</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;hash\&quot;:\&quot;&quot; &lt;&lt; i-&gt;id &lt;&lt; &quot;\&quot;,&quot;</span></span>
-<span id="L2087"><span class="lineNum">    2087</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;difficulty\&quot;:&quot; &lt;&lt; i-&gt;block_diff &lt;&lt; ','</span></span>
-<span id="L2088"><span class="lineNum">    2088</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;totalHashes\&quot;:&quot; &lt;&lt; i-&gt;total_hashes &lt;&lt; ','</span></span>
-<span id="L2089"><span class="lineNum">    2089</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;ts\&quot;:&quot; &lt;&lt; i-&gt;timestamp &lt;&lt; '}';</span></span>
-<span id="L2090"><span class="lineNum">    2090</span> <span class="tlaUNC">           0 :                                 first = false;</span></span>
-<span id="L2091"><span class="lineNum">    2091</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2092"><span class="lineNum">    2092</span> <span class="tlaUNC">           0 :                         s &lt;&lt; ']';</span></span>
-<span id="L2093"><span class="lineNum">    2093</span> <span class="tlaUNC">           0 :                 });</span></span>
-<span id="L2094"><span class="lineNum">    2094</span>              : </span>
-<span id="L2095"><span class="lineNum">    2095</span> <span class="tlaUNC">           0 :         if (update_stats_mod) {</span></span>
-<span id="L2096"><span class="lineNum">    2096</span> <span class="tlaUNC">           0 :                 api_update_stats_mod();</span></span>
-<span id="L2097"><span class="lineNum">    2097</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2098"><span class="lineNum">    2098</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2099"><span class="lineNum">    2099</span>              : </span>
-<span id="L2100"><span class="lineNum">    2100</span>              : void p2pool::on_external_block(const PoolBlock&amp; block)</span>
-<span id="L2101"><span class="lineNum">    2101</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2102"><span class="lineNum">    2102</span> <span class="tlaUNC">           0 :         ReadLock lock(m_mergeMiningClientsLock);</span></span>
-<span id="L2103"><span class="lineNum">    2103</span>              : </span>
-<span id="L2104"><span class="lineNum">    2104</span> <span class="tlaUNC">           0 :         for (IMergeMiningClient* c : m_mergeMiningClients) {</span></span>
-<span id="L2105"><span class="lineNum">    2105</span> <span class="tlaUNC">           0 :                 c-&gt;on_external_block(block);</span></span>
-<span id="L2106"><span class="lineNum">    2106</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2107"><span class="lineNum">    2107</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2108"><span class="lineNum">    2108</span>              : </span>
-<span id="L2109"><span class="lineNum">    2109</span>              : void p2pool::api_update_aux_data()</span>
-<span id="L2110"><span class="lineNum">    2110</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaUNC">           0 :         if (!m_api || !m_params.m_localStats || m_stopped) {</span></span>
-<span id="L2112"><span class="lineNum">    2112</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L2113"><span class="lineNum">    2113</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2114"><span class="lineNum">    2114</span>              : </span>
-<span id="L2115"><span class="lineNum">    2115</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::LOCAL, &quot;merge_mining&quot;,</span></span>
-<span id="L2116"><span class="lineNum">    2116</span> <span class="tlaUNC">           0 :                 [this](log::Stream&amp; s)</span></span>
-<span id="L2117"><span class="lineNum">    2117</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L2118"><span class="lineNum">    2118</span> <span class="tlaUNC">           0 :                         s &lt;&lt; &quot;{\&quot;chains\&quot;:[&quot;;</span></span>
-<span id="L2119"><span class="lineNum">    2119</span> <span class="tlaUNC">           0 :                         {</span></span>
-<span id="L2120"><span class="lineNum">    2120</span> <span class="tlaUNC">           0 :                                 ReadLock lock(m_mergeMiningClientsLock);</span></span>
-<span id="L2121"><span class="lineNum">    2121</span>              : </span>
-<span id="L2122"><span class="lineNum">    2122</span> <span class="tlaUNC">           0 :                                 for (size_t i = 0, n = m_mergeMiningClients.size(); i &lt; n; ++i) {</span></span>
-<span id="L2123"><span class="lineNum">    2123</span> <span class="tlaUNC">           0 :                                         if (i &gt; 0) {</span></span>
-<span id="L2124"><span class="lineNum">    2124</span> <span class="tlaUNC">           0 :                                                 s &lt;&lt; ',';</span></span>
-<span id="L2125"><span class="lineNum">    2125</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L2126"><span class="lineNum">    2126</span> <span class="tlaUNC">           0 :                                         m_mergeMiningClients[i]-&gt;api_status(s);</span></span>
-<span id="L2127"><span class="lineNum">    2127</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L2128"><span class="lineNum">    2128</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2129"><span class="lineNum">    2129</span> <span class="tlaUNC">           0 :                         s &lt;&lt; &quot;]}&quot;;</span></span>
-<span id="L2130"><span class="lineNum">    2130</span> <span class="tlaUNC">           0 :                 });</span></span>
-<span id="L2131"><span class="lineNum">    2131</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2132"><span class="lineNum">    2132</span>              : </span>
-<span id="L2133"><span class="lineNum">    2133</span>              : bool p2pool::get_difficulty_at_height(uint64_t height, difficulty_type&amp; diff)</span>
-<span id="L2134"><span class="lineNum">    2134</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2135"><span class="lineNum">    2135</span> <span class="tlaUNC">           0 :         ReadLock lock(m_mainchainLock);</span></span>
-<span id="L2136"><span class="lineNum">    2136</span>              : </span>
-<span id="L2137"><span class="lineNum">    2137</span> <span class="tlaUNC">           0 :         auto it = m_mainchainByHeight.find(height);</span></span>
-<span id="L2138"><span class="lineNum">    2138</span> <span class="tlaUNC">           0 :         if (it == m_mainchainByHeight.end()) {</span></span>
-<span id="L2139"><span class="lineNum">    2139</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2140"><span class="lineNum">    2140</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2141"><span class="lineNum">    2141</span>              : </span>
-<span id="L2142"><span class="lineNum">    2142</span> <span class="tlaUNC">           0 :         diff = it-&gt;second.difficulty;</span></span>
-<span id="L2143"><span class="lineNum">    2143</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2144"><span class="lineNum">    2144</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2145"><span class="lineNum">    2145</span>              : </span>
-<span id="L2146"><span class="lineNum">    2146</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
-<span id="L2147"><span class="lineNum">    2147</span>              : void p2pool::start_mining(uint32_t threads)</span>
-<span id="L2148"><span class="lineNum">    2148</span>              : {</span>
-<span id="L2149"><span class="lineNum">    2149</span>              :         stop_mining();</span>
-<span id="L2150"><span class="lineNum">    2150</span>              : </span>
-<span id="L2151"><span class="lineNum">    2151</span>              :         MutexLock lock(m_minerLock);</span>
-<span id="L2152"><span class="lineNum">    2152</span>              :         m_miner = new Miner(this, threads);</span>
-<span id="L2153"><span class="lineNum">    2153</span>              : }</span>
-<span id="L2154"><span class="lineNum">    2154</span>              : </span>
-<span id="L2155"><span class="lineNum">    2155</span>              : void p2pool::stop_mining()</span>
-<span id="L2156"><span class="lineNum">    2156</span>              : {</span>
-<span id="L2157"><span class="lineNum">    2157</span>              :         MutexLock lock(m_minerLock);</span>
-<span id="L2158"><span class="lineNum">    2158</span>              : </span>
-<span id="L2159"><span class="lineNum">    2159</span>              :         if (m_miner) {</span>
-<span id="L2160"><span class="lineNum">    2160</span>              :                 delete m_miner;</span>
-<span id="L2161"><span class="lineNum">    2161</span>              :                 m_miner = nullptr;</span>
-<span id="L2162"><span class="lineNum">    2162</span>              :         }</span>
-<span id="L2163"><span class="lineNum">    2163</span>              : }</span>
-<span id="L2164"><span class="lineNum">    2164</span>              : #endif</span>
-<span id="L2165"><span class="lineNum">    2165</span>              : </span>
-<span id="L2166"><span class="lineNum">    2166</span>              : static void on_signal(uv_signal_t* handle, int signum)</span>
-<span id="L2167"><span class="lineNum">    2167</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2168"><span class="lineNum">    2168</span> <span class="tlaUNC">           0 :         p2pool* pool = reinterpret_cast&lt;p2pool*&gt;(handle-&gt;data);</span></span>
-<span id="L2169"><span class="lineNum">    2169</span>              : </span>
-<span id="L2170"><span class="lineNum">    2170</span> <span class="tlaUNC">           0 :         switch (signum) {</span></span>
-<span id="L2171"><span class="lineNum">    2171</span> <span class="tlaUNC">           0 :         case SIGHUP:</span></span>
-<span id="L2172"><span class="lineNum">    2172</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught SIGHUP&quot;);</span></span>
-<span id="L2173"><span class="lineNum">    2173</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L2174"><span class="lineNum">    2174</span> <span class="tlaUNC">           0 :         case SIGINT:</span></span>
-<span id="L2175"><span class="lineNum">    2175</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught SIGINT&quot;);</span></span>
-<span id="L2176"><span class="lineNum">    2176</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L2177"><span class="lineNum">    2177</span> <span class="tlaUNC">           0 :         case SIGTERM:</span></span>
-<span id="L2178"><span class="lineNum">    2178</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught SIGTERM&quot;);</span></span>
-<span id="L2179"><span class="lineNum">    2179</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L2180"><span class="lineNum">    2180</span>              : #ifdef SIGBREAK</span>
-<span id="L2181"><span class="lineNum">    2181</span>              :         case SIGBREAK:</span>
-<span id="L2182"><span class="lineNum">    2182</span>              :                 LOGINFO(1, &quot;caught SIGBREAK&quot;);</span>
-<span id="L2183"><span class="lineNum">    2183</span>              :                 break;</span>
-<span id="L2184"><span class="lineNum">    2184</span>              : #endif</span>
-<span id="L2185"><span class="lineNum">    2185</span> <span class="tlaUNC">           0 : #ifdef SIGUSR1</span></span>
-<span id="L2186"><span class="lineNum">    2186</span> <span class="tlaUNC">           0 :         case SIGUSR1:</span></span>
-<span id="L2187"><span class="lineNum">    2187</span> <span class="tlaUNC">           0 :                 log::reopen();</span></span>
-<span id="L2188"><span class="lineNum">    2188</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L2189"><span class="lineNum">    2189</span> <span class="tlaUNC">           0 : #endif</span></span>
-<span id="L2190"><span class="lineNum">    2190</span> <span class="tlaUNC">           0 :         default:</span></span>
-<span id="L2191"><span class="lineNum">    2191</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught signal &quot; &lt;&lt; signum);</span></span>
-<span id="L2192"><span class="lineNum">    2192</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2193"><span class="lineNum">    2193</span>              : </span>
-<span id="L2194"><span class="lineNum">    2194</span> <span class="tlaUNC">           0 :         LOGINFO(1, &quot;stopping&quot;);</span></span>
-<span id="L2195"><span class="lineNum">    2195</span>              : </span>
-<span id="L2196"><span class="lineNum">    2196</span> <span class="tlaUNC">           0 :         uv_signal_stop(handle);</span></span>
-<span id="L2197"><span class="lineNum">    2197</span> <span class="tlaUNC">           0 :         pool-&gt;stop();</span></span>
-<span id="L2198"><span class="lineNum">    2198</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2199"><span class="lineNum">    2199</span>              : </span>
-<span id="L2200"><span class="lineNum">    2200</span>              : bool init_signals(p2pool* pool, bool init)</span>
-<span id="L2201"><span class="lineNum">    2201</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2202"><span class="lineNum">    2202</span> <span class="tlaUNC">           0 : #ifdef SIGPIPE</span></span>
-<span id="L2203"><span class="lineNum">    2203</span> <span class="tlaUNC">           0 :         signal(SIGPIPE, SIG_IGN);</span></span>
-<span id="L2204"><span class="lineNum">    2204</span> <span class="tlaUNC">           0 : #endif</span></span>
-<span id="L2205"><span class="lineNum">    2205</span>              : </span>
-<span id="L2206"><span class="lineNum">    2206</span> <span class="tlaUNC">           0 :         constexpr int signal_names[] = {</span></span>
-<span id="L2207"><span class="lineNum">    2207</span> <span class="tlaUNC">           0 :                 SIGHUP,</span></span>
-<span id="L2208"><span class="lineNum">    2208</span> <span class="tlaUNC">           0 :                 SIGINT,</span></span>
-<span id="L2209"><span class="lineNum">    2209</span> <span class="tlaUNC">           0 :                 SIGTERM,</span></span>
-<span id="L2210"><span class="lineNum">    2210</span>              : #ifdef SIGBREAK</span>
-<span id="L2211"><span class="lineNum">    2211</span>              :                 SIGBREAK,</span>
-<span id="L2212"><span class="lineNum">    2212</span>              : #endif</span>
-<span id="L2213"><span class="lineNum">    2213</span> <span class="tlaUNC">           0 : #ifdef SIGUSR1</span></span>
-<span id="L2214"><span class="lineNum">    2214</span> <span class="tlaUNC">           0 :                 SIGUSR1,</span></span>
-<span id="L2215"><span class="lineNum">    2215</span> <span class="tlaUNC">           0 : #endif</span></span>
-<span id="L2216"><span class="lineNum">    2216</span> <span class="tlaUNC">           0 :         };</span></span>
-<span id="L2217"><span class="lineNum">    2217</span>              : </span>
-<span id="L2218"><span class="lineNum">    2218</span> <span class="tlaUNC">           0 :         static uv_signal_t signals[array_size(signal_names)];</span></span>
-<span id="L2219"><span class="lineNum">    2219</span>              : </span>
-<span id="L2220"><span class="lineNum">    2220</span> <span class="tlaUNC">           0 :         if (!init) {</span></span>
-<span id="L2221"><span class="lineNum">    2221</span> <span class="tlaUNC">           0 :                 for (size_t i = 0; i &lt; array_size(signals); ++i) {</span></span>
-<span id="L2222"><span class="lineNum">    2222</span> <span class="tlaUNC">           0 :                         uv_signal_stop(&amp;signals[i]);</span></span>
-<span id="L2223"><span class="lineNum">    2223</span> <span class="tlaUNC">           0 :                         uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;signals[i]), nullptr);</span></span>
-<span id="L2224"><span class="lineNum">    2224</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2225"><span class="lineNum">    2225</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L2226"><span class="lineNum">    2226</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2227"><span class="lineNum">    2227</span>              : </span>
-<span id="L2228"><span class="lineNum">    2228</span> <span class="tlaUNC">           0 :         for (size_t i = 0; i &lt; array_size(signal_names); ++i) {</span></span>
-<span id="L2229"><span class="lineNum">    2229</span> <span class="tlaUNC">           0 :                 uv_signal_init(uv_default_loop_checked(), &amp;signals[i]);</span></span>
-<span id="L2230"><span class="lineNum">    2230</span> <span class="tlaUNC">           0 :                 signals[i].data = pool;</span></span>
-<span id="L2231"><span class="lineNum">    2231</span> <span class="tlaUNC">           0 :                 const int rc = uv_signal_start(&amp;signals[i], on_signal, signal_names[i]);</span></span>
-<span id="L2232"><span class="lineNum">    2232</span> <span class="tlaUNC">           0 :                 if (rc != 0) {</span></span>
-<span id="L2233"><span class="lineNum">    2233</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;failed to initialize signal, error &quot; &lt;&lt; rc);</span></span>
-<span id="L2234"><span class="lineNum">    2234</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L2235"><span class="lineNum">    2235</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2236"><span class="lineNum">    2236</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2237"><span class="lineNum">    2237</span>              : </span>
-<span id="L2238"><span class="lineNum">    2238</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2239"><span class="lineNum">    2239</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2240"><span class="lineNum">    2240</span>              : </span>
-<span id="L2241"><span class="lineNum">    2241</span>              : void p2pool::stop()</span>
-<span id="L2242"><span class="lineNum">    2242</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2243"><span class="lineNum">    2243</span>              :         // Can be called only once</span>
-<span id="L2244"><span class="lineNum">    2244</span> <span class="tlaUNC">           0 :         if (m_stopped.exchange(true) == false) {</span></span>
-<span id="L2245"><span class="lineNum">    2245</span> <span class="tlaUNC">           0 :                 uv_async_send(&amp;m_stopAsync);</span></span>
-<span id="L2246"><span class="lineNum">    2246</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2247"><span class="lineNum">    2247</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2248"><span class="lineNum">    2248</span>              : </span>
-<span id="L2249"><span class="lineNum">    2249</span>              : bool p2pool::zmq_running() const</span>
-<span id="L2250"><span class="lineNum">    2250</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2251"><span class="lineNum">    2251</span> <span class="tlaUNC">           0 : #ifdef P2POOL_UNIT_TESTS</span></span>
-<span id="L2252"><span class="lineNum">    2252</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2253"><span class="lineNum">    2253</span>              : #else</span>
-<span id="L2254"><span class="lineNum">    2254</span>              :         ReadLock lock(m_ZMQReaderLock);</span>
-<span id="L2255"><span class="lineNum">    2255</span>              :         return m_ZMQReader &amp;&amp; m_ZMQReader-&gt;is_running();</span>
-<span id="L2256"><span class="lineNum">    2256</span>              : #endif</span>
-<span id="L2257"><span class="lineNum">    2257</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2258"><span class="lineNum">    2258</span>              : </span>
-<span id="L2259"><span class="lineNum">    2259</span>              : const Params::Host&amp; p2pool::switch_host()</span>
-<span id="L2260"><span class="lineNum">    2260</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2261"><span class="lineNum">    2261</span> <span class="tlaUNC">           0 :         const std::vector&lt;Params::Host&gt;&amp; v = m_params.m_hosts;</span></span>
-<span id="L2262"><span class="lineNum">    2262</span> <span class="tlaUNC">           0 :         return v[++m_currentHostIndex % v.size()];</span></span>
-<span id="L2263"><span class="lineNum">    2263</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2264"><span class="lineNum">    2264</span>              : </span>
-<span id="L2265"><span class="lineNum">    2265</span>              : void p2pool::reconnect_to_host()</span>
-<span id="L2266"><span class="lineNum">    2266</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2267"><span class="lineNum">    2267</span>              :         // If p2pool is stopped, m_reconnectToHostAsync is most likely already closed</span>
-<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaUNC">           0 :         if (m_stopped) {</span></span>
-<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L2270"><span class="lineNum">    2270</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2271"><span class="lineNum">    2271</span>              : </span>
-<span id="L2272"><span class="lineNum">    2272</span> <span class="tlaUNC">           0 :         if (!is_main_thread()) {</span></span>
-<span id="L2273"><span class="lineNum">    2273</span> <span class="tlaUNC">           0 :                 uv_async_send(&amp;m_reconnectToHostAsync);</span></span>
-<span id="L2274"><span class="lineNum">    2274</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L2275"><span class="lineNum">    2275</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2276"><span class="lineNum">    2276</span>              : </span>
-<span id="L2277"><span class="lineNum">    2277</span>              : #ifndef P2POOL_UNIT_TESTS</span>
-<span id="L2278"><span class="lineNum">    2278</span>              :         const Params::Host&amp; new_host = switch_host();</span>
-<span id="L2279"><span class="lineNum">    2279</span>              : </span>
-<span id="L2280"><span class="lineNum">    2280</span>              :         WriteLock lock(m_ZMQReaderLock);</span>
-<span id="L2281"><span class="lineNum">    2281</span>              : </span>
-<span id="L2282"><span class="lineNum">    2282</span>              :         delete m_ZMQReader;</span>
-<span id="L2283"><span class="lineNum">    2283</span>              :         m_ZMQReader = nullptr;</span>
-<span id="L2284"><span class="lineNum">    2284</span>              : </span>
-<span id="L2285"><span class="lineNum">    2285</span>              :         try {</span>
-<span id="L2286"><span class="lineNum">    2286</span>              :                 ZMQReader* new_reader = new ZMQReader(new_host.m_address, new_host.m_zmqPort, m_params.m_socks5Proxy, this);</span>
-<span id="L2287"><span class="lineNum">    2287</span>              :                 m_zmqLastActive = seconds_since_epoch();</span>
-<span id="L2288"><span class="lineNum">    2288</span>              :                 m_ZMQReader = new_reader;</span>
-<span id="L2289"><span class="lineNum">    2289</span>              :         }</span>
-<span id="L2290"><span class="lineNum">    2290</span>              :         catch (const std::exception&amp; e) {</span>
-<span id="L2291"><span class="lineNum">    2291</span>              :                 LOGERR(1, &quot;Couldn't restart ZMQ reader: exception &quot; &lt;&lt; e.what());</span>
-<span id="L2292"><span class="lineNum">    2292</span>              :         }</span>
-<span id="L2293"><span class="lineNum">    2293</span>              : </span>
-<span id="L2294"><span class="lineNum">    2294</span>              :         if (m_ZMQReader) {</span>
-<span id="L2295"><span class="lineNum">    2295</span>              :                 get_miner_data(false);</span>
-<span id="L2296"><span class="lineNum">    2296</span>              :         }</span>
-<span id="L2297"><span class="lineNum">    2297</span>              : #endif</span>
-<span id="L2298"><span class="lineNum">    2298</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2299"><span class="lineNum">    2299</span>              : </span>
-<span id="L2300"><span class="lineNum">    2300</span>              : int p2pool::run()</span>
-<span id="L2301"><span class="lineNum">    2301</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2302"><span class="lineNum">    2302</span> <span class="tlaUNC">           0 :         if (!m_params.valid()) {</span></span>
-<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Invalid or missing command line. Try \&quot;p2pool --help\&quot;.&quot;);</span></span>
-<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaUNC">           0 :                 return 1;</span></span>
-<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2306"><span class="lineNum">    2306</span>              : </span>
-<span id="L2307"><span class="lineNum">    2307</span> <span class="tlaUNC">           0 :         if (!init_signals(this, true)) {</span></span>
-<span id="L2308"><span class="lineNum">    2308</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;failed to initialize signal handlers&quot;);</span></span>
-<span id="L2309"><span class="lineNum">    2309</span> <span class="tlaUNC">           0 :                 return 1;</span></span>
-<span id="L2310"><span class="lineNum">    2310</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2311"><span class="lineNum">    2311</span>              : </span>
-<span id="L2312"><span class="lineNum">    2312</span>              : #ifdef WITH_TLS</span>
-<span id="L2313"><span class="lineNum">    2313</span>              :         if (!m_params.m_tlsCert.empty() &amp;&amp; !m_params.m_tlsCertKey.empty()) {</span>
-<span id="L2314"><span class="lineNum">    2314</span>              :                 if (!ServerTls::load_from_files(m_params.m_tlsCert.c_str(), m_params.m_tlsCertKey.c_str())) {</span>
-<span id="L2315"><span class="lineNum">    2315</span>              :                         LOGERR(1, &quot;Failed to load TLS files&quot;);</span>
-<span id="L2316"><span class="lineNum">    2316</span>              :                         return 1;</span>
-<span id="L2317"><span class="lineNum">    2317</span>              :                 }</span>
-<span id="L2318"><span class="lineNum">    2318</span>              :         }</span>
-<span id="L2319"><span class="lineNum">    2319</span>              : #endif</span>
-<span id="L2320"><span class="lineNum">    2320</span>              : </span>
-<span id="L2321"><span class="lineNum">    2321</span>              :         // Init default loop user data before running it</span>
-<span id="L2322"><span class="lineNum">    2322</span> <span class="tlaUNC">           0 :         uv_loop_t* loop = uv_default_loop_checked();</span></span>
-<span id="L2323"><span class="lineNum">    2323</span> <span class="tlaUNC">           0 :         loop-&gt;data = nullptr;</span></span>
-<span id="L2324"><span class="lineNum">    2324</span> <span class="tlaUNC">           0 :         GetLoopUserData(loop);</span></span>
-<span id="L2325"><span class="lineNum">    2325</span>              : </span>
-<span id="L2326"><span class="lineNum">    2326</span> <span class="tlaUNC">           0 :         set_thread_name(&quot;p2pool&quot;);</span></span>
-<span id="L2327"><span class="lineNum">    2327</span>              : </span>
-<span id="L2328"><span class="lineNum">    2328</span> <span class="tlaUNC">           0 :         try {</span></span>
-<span id="L2329"><span class="lineNum">    2329</span> <span class="tlaUNC">           0 :                 get_info();</span></span>
-<span id="L2330"><span class="lineNum">    2330</span> <span class="tlaUNC">           0 :                 load_found_blocks();</span></span>
-<span id="L2331"><span class="lineNum">    2331</span> <span class="tlaUNC">           0 :                 const int rc = uv_run(uv_default_loop_checked(), UV_RUN_DEFAULT);</span></span>
-<span id="L2332"><span class="lineNum">    2332</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;uv_run exited, result = &quot; &lt;&lt; rc);</span></span>
-<span id="L2333"><span class="lineNum">    2333</span>              : </span>
-<span id="L2334"><span class="lineNum">    2334</span>              : #ifndef P2POOL_UNIT_TESTS</span>
-<span id="L2335"><span class="lineNum">    2335</span>              :                 WriteLock lock(m_ZMQReaderLock);</span>
-<span id="L2336"><span class="lineNum">    2336</span>              : </span>
-<span id="L2337"><span class="lineNum">    2337</span>              :                 delete m_ZMQReader;</span>
-<span id="L2338"><span class="lineNum">    2338</span>              :                 m_ZMQReader = nullptr;</span>
-<span id="L2339"><span class="lineNum">    2339</span>              : #endif</span>
-<span id="L2340"><span class="lineNum">    2340</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2341"><span class="lineNum">    2341</span> <span class="tlaUNC">           0 :         catch (const std::exception&amp; e) {</span></span>
-<span id="L2342"><span class="lineNum">    2342</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;exception &quot; &lt;&lt; e.what());</span></span>
-<span id="L2343"><span class="lineNum">    2343</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
-<span id="L2344"><span class="lineNum">    2344</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2345"><span class="lineNum">    2345</span>              : </span>
-<span id="L2346"><span class="lineNum">    2346</span> <span class="tlaUNC">           0 :         m_stopped = true;</span></span>
-<span id="L2347"><span class="lineNum">    2347</span>              : </span>
-<span id="L2348"><span class="lineNum">    2348</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
-<span id="L2349"><span class="lineNum">    2349</span>              :         {</span>
-<span id="L2350"><span class="lineNum">    2350</span>              :                 MutexLock lock(m_minerLock);</span>
-<span id="L2351"><span class="lineNum">    2351</span>              : </span>
-<span id="L2352"><span class="lineNum">    2352</span>              :                 delete m_miner;</span>
-<span id="L2353"><span class="lineNum">    2353</span>              :                 m_miner = nullptr;</span>
-<span id="L2354"><span class="lineNum">    2354</span>              :         }</span>
-<span id="L2355"><span class="lineNum">    2355</span>              : #endif</span>
-<span id="L2356"><span class="lineNum">    2356</span> <span class="tlaUNC">           0 :         delete m_stratumServer;</span></span>
-<span id="L2357"><span class="lineNum">    2357</span> <span class="tlaUNC">           0 :         delete m_p2pServer;</span></span>
-<span id="L2358"><span class="lineNum">    2358</span>              : </span>
-<span id="L2359"><span class="lineNum">    2359</span> <span class="tlaUNC">           0 :         LOGINFO(1, &quot;stopped&quot;);</span></span>
-<span id="L2360"><span class="lineNum">    2360</span> <span class="tlaUNC">           0 :         return 0;</span></span>
-<span id="L2361"><span class="lineNum">    2361</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2362"><span class="lineNum">    2362</span>              : </span>
-<span id="L2363"><span class="lineNum">    2363</span>              : } // namespace p2pool</span>
+<span id="L2002"><span class="lineNum">    2002</span>              : </span>
+<span id="L2003"><span class="lineNum">    2003</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::GLOBAL, &quot;stats_mod&quot;,</span></span>
+<span id="L2004"><span class="lineNum">    2004</span> <span class="tlaUNC">           0 :                 [&amp;mainnet_tip, last_block_found_time, &amp;last_block_found_buf, last_block_found_height, miners, hashrate, round_hashes](log::Stream&amp; s)</span></span>
+<span id="L2005"><span class="lineNum">    2005</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L2006"><span class="lineNum">    2006</span> <span class="tlaUNC">           0 :                         s &lt;&lt; &quot;{\&quot;config\&quot;:{\&quot;ports\&quot;:[{\&quot;port\&quot;:&quot; &lt;&lt; DEFAULT_STRATUM_PORT &lt;&lt; &quot;,\&quot;tls\&quot;:false}],\&quot;fee\&quot;:0,\&quot;minPaymentThreshold\&quot;:300000000},\&quot;network\&quot;:{\&quot;height\&quot;:&quot;</span></span>
+<span id="L2007"><span class="lineNum">    2007</span> <span class="tlaUNC">           0 :                                 &lt;&lt; mainnet_tip.height &lt;&lt; &quot;},\&quot;pool\&quot;:{\&quot;stats\&quot;:{\&quot;lastBlockFound\&quot;:\&quot;&quot;</span></span>
+<span id="L2008"><span class="lineNum">    2008</span> <span class="tlaUNC">           0 :                                 &lt;&lt; last_block_found_time &lt;&lt; &quot;000\&quot;},\&quot;blocks\&quot;:[\&quot;&quot;</span></span>
+<span id="L2009"><span class="lineNum">    2009</span> <span class="tlaUNC">           0 :                                 &lt;&lt; static_cast&lt;char*&gt;(last_block_found_buf) &lt;&lt; static_cast&lt;char*&gt;(last_block_found_buf) + HASH_SIZE * 2 - 4 &lt;&lt; ':'</span></span>
+<span id="L2010"><span class="lineNum">    2010</span> <span class="tlaUNC">           0 :                                 &lt;&lt; last_block_found_time &lt;&lt; &quot;\&quot;,\&quot;&quot;</span></span>
+<span id="L2011"><span class="lineNum">    2011</span> <span class="tlaUNC">           0 :                                 &lt;&lt; last_block_found_height &lt;&lt; &quot;\&quot;],\&quot;miners\&quot;:&quot;</span></span>
+<span id="L2012"><span class="lineNum">    2012</span> <span class="tlaUNC">           0 :                                 &lt;&lt; miners &lt;&lt; &quot;,\&quot;hashrate\&quot;:&quot;</span></span>
+<span id="L2013"><span class="lineNum">    2013</span> <span class="tlaUNC">           0 :                                 &lt;&lt; hashrate &lt;&lt; &quot;,\&quot;roundHashes\&quot;:&quot;</span></span>
+<span id="L2014"><span class="lineNum">    2014</span> <span class="tlaUNC">           0 :                                 &lt;&lt; round_hashes &lt;&lt; &quot;}}&quot;;</span></span>
+<span id="L2015"><span class="lineNum">    2015</span> <span class="tlaUNC">           0 :                 });</span></span>
+<span id="L2016"><span class="lineNum">    2016</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2017"><span class="lineNum">    2017</span>              : </span>
+<span id="L2018"><span class="lineNum">    2018</span>              : void p2pool::cleanup_mainchain_data(uint64_t height)</span>
+<span id="L2019"><span class="lineNum">    2019</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2020"><span class="lineNum">    2020</span>              :         // Expects m_mainchainLock to be already locked here</span>
+<span id="L2021"><span class="lineNum">    2021</span>              :         // Deletes everything older than 720 blocks, except for the 3 latest RandomX seed heights</span>
+<span id="L2022"><span class="lineNum">    2022</span>              : </span>
+<span id="L2023"><span class="lineNum">    2023</span> <span class="tlaUNC">           0 :         const uint64_t PRUNE_DISTANCE = BLOCK_HEADERS_REQUIRED;</span></span>
+<span id="L2024"><span class="lineNum">    2024</span> <span class="tlaUNC">           0 :         const uint64_t seed_height = get_seed_height(height);</span></span>
+<span id="L2025"><span class="lineNum">    2025</span> <span class="tlaUNC">           0 :         const std::array&lt;uint64_t, 3&gt; seed_heights{ seed_height, seed_height - SEEDHASH_EPOCH_BLOCKS, seed_height - SEEDHASH_EPOCH_BLOCKS * 2 };</span></span>
+<span id="L2026"><span class="lineNum">    2026</span>              : </span>
+<span id="L2027"><span class="lineNum">    2027</span> <span class="tlaUNC">           0 :         for (auto it = m_mainchainByHeight.begin(); it != m_mainchainByHeight.end();) {</span></span>
+<span id="L2028"><span class="lineNum">    2028</span> <span class="tlaUNC">           0 :                 const uint64_t h = it-&gt;first;</span></span>
+<span id="L2029"><span class="lineNum">    2029</span> <span class="tlaUNC">           0 :                 if (h + PRUNE_DISTANCE &gt;= height) {</span></span>
+<span id="L2030"><span class="lineNum">    2030</span> <span class="tlaUNC">           0 :                         break;</span></span>
+<span id="L2031"><span class="lineNum">    2031</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2032"><span class="lineNum">    2032</span>              : </span>
+<span id="L2033"><span class="lineNum">    2033</span> <span class="tlaUNC">           0 :                 if (std::find(seed_heights.begin(), seed_heights.end(), h) == seed_heights.end()) {</span></span>
+<span id="L2034"><span class="lineNum">    2034</span> <span class="tlaUNC">           0 :                         m_mainchainByHash.erase(it-&gt;second.id);</span></span>
+<span id="L2035"><span class="lineNum">    2035</span> <span class="tlaUNC">           0 :                         it = m_mainchainByHeight.erase(it);</span></span>
+<span id="L2036"><span class="lineNum">    2036</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2037"><span class="lineNum">    2037</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L2038"><span class="lineNum">    2038</span> <span class="tlaUNC">           0 :                         ++it;</span></span>
+<span id="L2039"><span class="lineNum">    2039</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2040"><span class="lineNum">    2040</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2041"><span class="lineNum">    2041</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2042"><span class="lineNum">    2042</span>              : </span>
+<span id="L2043"><span class="lineNum">    2043</span>              : void p2pool::api_update_block_found(const ChainMain* data, const PoolBlock* block, bool update_stats_mod)</span>
+<span id="L2044"><span class="lineNum">    2044</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2045"><span class="lineNum">    2045</span> <span class="tlaUNC">           0 :         if (!m_api || m_stopped) {</span></span>
+<span id="L2046"><span class="lineNum">    2046</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L2047"><span class="lineNum">    2047</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2048"><span class="lineNum">    2048</span>              : </span>
+<span id="L2049"><span class="lineNum">    2049</span> <span class="tlaUNC">           0 :         const time_t cur_time = time(nullptr);</span></span>
+<span id="L2050"><span class="lineNum">    2050</span> <span class="tlaUNC">           0 :         const difficulty_type total_hashes = block ? block-&gt;m_cumulativeDifficulty : m_sideChain-&gt;total_hashes();</span></span>
+<span id="L2051"><span class="lineNum">    2051</span> <span class="tlaUNC">           0 :         difficulty_type diff;</span></span>
+<span id="L2052"><span class="lineNum">    2052</span>              : </span>
+<span id="L2053"><span class="lineNum">    2053</span> <span class="tlaUNC">           0 :         if (data &amp;&amp; get_difficulty_at_height(data-&gt;height, diff)) {</span></span>
+<span id="L2054"><span class="lineNum">    2054</span> <span class="tlaUNC">           0 :                 const std::string path = m_params.m_dataDir + FOUND_BLOCKS_FILE;</span></span>
+<span id="L2055"><span class="lineNum">    2055</span> <span class="tlaUNC">           0 :                 std::ofstream f(path, std::ios::app);</span></span>
+<span id="L2056"><span class="lineNum">    2056</span> <span class="tlaUNC">           0 :                 if (f.is_open()) {</span></span>
+<span id="L2057"><span class="lineNum">    2057</span> <span class="tlaUNC">           0 :                         f &lt;&lt; cur_time &lt;&lt; ' ' &lt;&lt; data-&gt;height &lt;&lt; ' ' &lt;&lt; data-&gt;id &lt;&lt; ' ' &lt;&lt; diff &lt;&lt; ' ' &lt;&lt; total_hashes &lt;&lt; '\n';</span></span>
+<span id="L2058"><span class="lineNum">    2058</span> <span class="tlaUNC">           0 :                         f.flush();</span></span>
+<span id="L2059"><span class="lineNum">    2059</span> <span class="tlaUNC">           0 :                         f.close();</span></span>
+<span id="L2060"><span class="lineNum">    2060</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2061"><span class="lineNum">    2061</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L2062"><span class="lineNum">    2062</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;Failed to update &quot; &lt;&lt; path &lt;&lt; &quot;: error &quot; &lt;&lt; errno);</span></span>
+<span id="L2063"><span class="lineNum">    2063</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2064"><span class="lineNum">    2064</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2065"><span class="lineNum">    2065</span>              : </span>
+<span id="L2066"><span class="lineNum">    2066</span> <span class="tlaUNC">           0 :         std::vector&lt;FoundBlock&gt; found_blocks;</span></span>
+<span id="L2067"><span class="lineNum">    2067</span> <span class="tlaUNC">           0 :         {</span></span>
+<span id="L2068"><span class="lineNum">    2068</span> <span class="tlaUNC">           0 :                 MutexLock lock(m_foundBlocksLock);</span></span>
+<span id="L2069"><span class="lineNum">    2069</span> <span class="tlaUNC">           0 :                 if (data) {</span></span>
+<span id="L2070"><span class="lineNum">    2070</span> <span class="tlaUNC">           0 :                         m_foundBlocks.emplace_back(cur_time, data-&gt;height, data-&gt;id, diff, total_hashes);</span></span>
+<span id="L2071"><span class="lineNum">    2071</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2072"><span class="lineNum">    2072</span> <span class="tlaUNC">           0 :                 found_blocks.assign(m_foundBlocks.end() - std::min&lt;int&gt;(static_cast&lt;int&gt;(m_foundBlocks.size()), 51), m_foundBlocks.end());</span></span>
+<span id="L2073"><span class="lineNum">    2073</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2074"><span class="lineNum">    2074</span>              : </span>
+<span id="L2075"><span class="lineNum">    2075</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::POOL, &quot;blocks&quot;,</span></span>
+<span id="L2076"><span class="lineNum">    2076</span> <span class="tlaUNC">           0 :                 [&amp;found_blocks](log::Stream&amp; s)</span></span>
+<span id="L2077"><span class="lineNum">    2077</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L2078"><span class="lineNum">    2078</span> <span class="tlaUNC">           0 :                         s &lt;&lt; '[';</span></span>
+<span id="L2079"><span class="lineNum">    2079</span> <span class="tlaUNC">           0 :                         bool first = true;</span></span>
+<span id="L2080"><span class="lineNum">    2080</span> <span class="tlaUNC">           0 :                         for (auto i = found_blocks.rbegin(); i != found_blocks.rend(); ++i) {</span></span>
+<span id="L2081"><span class="lineNum">    2081</span> <span class="tlaUNC">           0 :                                 if (!first) {</span></span>
+<span id="L2082"><span class="lineNum">    2082</span> <span class="tlaUNC">           0 :                                         s &lt;&lt; ',';</span></span>
+<span id="L2083"><span class="lineNum">    2083</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L2084"><span class="lineNum">    2084</span> <span class="tlaUNC">           0 :                                 s &lt;&lt; &quot;{\&quot;height\&quot;:&quot; &lt;&lt; i-&gt;height &lt;&lt; ','</span></span>
+<span id="L2085"><span class="lineNum">    2085</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;hash\&quot;:\&quot;&quot; &lt;&lt; i-&gt;id &lt;&lt; &quot;\&quot;,&quot;</span></span>
+<span id="L2086"><span class="lineNum">    2086</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;difficulty\&quot;:&quot; &lt;&lt; i-&gt;block_diff &lt;&lt; ','</span></span>
+<span id="L2087"><span class="lineNum">    2087</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;totalHashes\&quot;:&quot; &lt;&lt; i-&gt;total_hashes &lt;&lt; ','</span></span>
+<span id="L2088"><span class="lineNum">    2088</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot;\&quot;ts\&quot;:&quot; &lt;&lt; i-&gt;timestamp &lt;&lt; '}';</span></span>
+<span id="L2089"><span class="lineNum">    2089</span> <span class="tlaUNC">           0 :                                 first = false;</span></span>
+<span id="L2090"><span class="lineNum">    2090</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2091"><span class="lineNum">    2091</span> <span class="tlaUNC">           0 :                         s &lt;&lt; ']';</span></span>
+<span id="L2092"><span class="lineNum">    2092</span> <span class="tlaUNC">           0 :                 });</span></span>
+<span id="L2093"><span class="lineNum">    2093</span>              : </span>
+<span id="L2094"><span class="lineNum">    2094</span> <span class="tlaUNC">           0 :         if (update_stats_mod) {</span></span>
+<span id="L2095"><span class="lineNum">    2095</span> <span class="tlaUNC">           0 :                 api_update_stats_mod();</span></span>
+<span id="L2096"><span class="lineNum">    2096</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2097"><span class="lineNum">    2097</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2098"><span class="lineNum">    2098</span>              : </span>
+<span id="L2099"><span class="lineNum">    2099</span>              : void p2pool::on_external_block(const PoolBlock&amp; block)</span>
+<span id="L2100"><span class="lineNum">    2100</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2101"><span class="lineNum">    2101</span> <span class="tlaUNC">           0 :         ReadLock lock(m_mergeMiningClientsLock);</span></span>
+<span id="L2102"><span class="lineNum">    2102</span>              : </span>
+<span id="L2103"><span class="lineNum">    2103</span> <span class="tlaUNC">           0 :         for (IMergeMiningClient* c : m_mergeMiningClients) {</span></span>
+<span id="L2104"><span class="lineNum">    2104</span> <span class="tlaUNC">           0 :                 c-&gt;on_external_block(block);</span></span>
+<span id="L2105"><span class="lineNum">    2105</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2106"><span class="lineNum">    2106</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2107"><span class="lineNum">    2107</span>              : </span>
+<span id="L2108"><span class="lineNum">    2108</span>              : void p2pool::api_update_aux_data()</span>
+<span id="L2109"><span class="lineNum">    2109</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2110"><span class="lineNum">    2110</span> <span class="tlaUNC">           0 :         if (!m_api || !m_params.m_localStats || m_stopped) {</span></span>
+<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L2112"><span class="lineNum">    2112</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2113"><span class="lineNum">    2113</span>              : </span>
+<span id="L2114"><span class="lineNum">    2114</span> <span class="tlaUNC">           0 :         m_api-&gt;set(p2pool_api::Category::LOCAL, &quot;merge_mining&quot;,</span></span>
+<span id="L2115"><span class="lineNum">    2115</span> <span class="tlaUNC">           0 :                 [this](log::Stream&amp; s)</span></span>
+<span id="L2116"><span class="lineNum">    2116</span> <span class="tlaUNC">           0 :                 {</span></span>
+<span id="L2117"><span class="lineNum">    2117</span> <span class="tlaUNC">           0 :                         s &lt;&lt; &quot;{\&quot;chains\&quot;:[&quot;;</span></span>
+<span id="L2118"><span class="lineNum">    2118</span> <span class="tlaUNC">           0 :                         {</span></span>
+<span id="L2119"><span class="lineNum">    2119</span> <span class="tlaUNC">           0 :                                 ReadLock lock(m_mergeMiningClientsLock);</span></span>
+<span id="L2120"><span class="lineNum">    2120</span>              : </span>
+<span id="L2121"><span class="lineNum">    2121</span> <span class="tlaUNC">           0 :                                 for (size_t i = 0, n = m_mergeMiningClients.size(); i &lt; n; ++i) {</span></span>
+<span id="L2122"><span class="lineNum">    2122</span> <span class="tlaUNC">           0 :                                         if (i &gt; 0) {</span></span>
+<span id="L2123"><span class="lineNum">    2123</span> <span class="tlaUNC">           0 :                                                 s &lt;&lt; ',';</span></span>
+<span id="L2124"><span class="lineNum">    2124</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L2125"><span class="lineNum">    2125</span> <span class="tlaUNC">           0 :                                         m_mergeMiningClients[i]-&gt;api_status(s);</span></span>
+<span id="L2126"><span class="lineNum">    2126</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L2127"><span class="lineNum">    2127</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2128"><span class="lineNum">    2128</span> <span class="tlaUNC">           0 :                         s &lt;&lt; &quot;]}&quot;;</span></span>
+<span id="L2129"><span class="lineNum">    2129</span> <span class="tlaUNC">           0 :                 });</span></span>
+<span id="L2130"><span class="lineNum">    2130</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2131"><span class="lineNum">    2131</span>              : </span>
+<span id="L2132"><span class="lineNum">    2132</span>              : bool p2pool::get_difficulty_at_height(uint64_t height, difficulty_type&amp; diff)</span>
+<span id="L2133"><span class="lineNum">    2133</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2134"><span class="lineNum">    2134</span> <span class="tlaUNC">           0 :         ReadLock lock(m_mainchainLock);</span></span>
+<span id="L2135"><span class="lineNum">    2135</span>              : </span>
+<span id="L2136"><span class="lineNum">    2136</span> <span class="tlaUNC">           0 :         auto it = m_mainchainByHeight.find(height);</span></span>
+<span id="L2137"><span class="lineNum">    2137</span> <span class="tlaUNC">           0 :         if (it == m_mainchainByHeight.end()) {</span></span>
+<span id="L2138"><span class="lineNum">    2138</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2139"><span class="lineNum">    2139</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2140"><span class="lineNum">    2140</span>              : </span>
+<span id="L2141"><span class="lineNum">    2141</span> <span class="tlaUNC">           0 :         diff = it-&gt;second.difficulty;</span></span>
+<span id="L2142"><span class="lineNum">    2142</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L2143"><span class="lineNum">    2143</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2144"><span class="lineNum">    2144</span>              : </span>
+<span id="L2145"><span class="lineNum">    2145</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
+<span id="L2146"><span class="lineNum">    2146</span>              : void p2pool::start_mining(uint32_t threads)</span>
+<span id="L2147"><span class="lineNum">    2147</span>              : {</span>
+<span id="L2148"><span class="lineNum">    2148</span>              :         stop_mining();</span>
+<span id="L2149"><span class="lineNum">    2149</span>              : </span>
+<span id="L2150"><span class="lineNum">    2150</span>              :         MutexLock lock(m_minerLock);</span>
+<span id="L2151"><span class="lineNum">    2151</span>              :         m_miner = new Miner(this, threads);</span>
+<span id="L2152"><span class="lineNum">    2152</span>              : }</span>
+<span id="L2153"><span class="lineNum">    2153</span>              : </span>
+<span id="L2154"><span class="lineNum">    2154</span>              : void p2pool::stop_mining()</span>
+<span id="L2155"><span class="lineNum">    2155</span>              : {</span>
+<span id="L2156"><span class="lineNum">    2156</span>              :         MutexLock lock(m_minerLock);</span>
+<span id="L2157"><span class="lineNum">    2157</span>              : </span>
+<span id="L2158"><span class="lineNum">    2158</span>              :         if (m_miner) {</span>
+<span id="L2159"><span class="lineNum">    2159</span>              :                 delete m_miner;</span>
+<span id="L2160"><span class="lineNum">    2160</span>              :                 m_miner = nullptr;</span>
+<span id="L2161"><span class="lineNum">    2161</span>              :         }</span>
+<span id="L2162"><span class="lineNum">    2162</span>              : }</span>
+<span id="L2163"><span class="lineNum">    2163</span>              : #endif</span>
+<span id="L2164"><span class="lineNum">    2164</span>              : </span>
+<span id="L2165"><span class="lineNum">    2165</span>              : static void on_signal(uv_signal_t* handle, int signum)</span>
+<span id="L2166"><span class="lineNum">    2166</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2167"><span class="lineNum">    2167</span> <span class="tlaUNC">           0 :         p2pool* pool = reinterpret_cast&lt;p2pool*&gt;(handle-&gt;data);</span></span>
+<span id="L2168"><span class="lineNum">    2168</span>              : </span>
+<span id="L2169"><span class="lineNum">    2169</span> <span class="tlaUNC">           0 :         switch (signum) {</span></span>
+<span id="L2170"><span class="lineNum">    2170</span> <span class="tlaUNC">           0 :         case SIGHUP:</span></span>
+<span id="L2171"><span class="lineNum">    2171</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught SIGHUP&quot;);</span></span>
+<span id="L2172"><span class="lineNum">    2172</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L2173"><span class="lineNum">    2173</span> <span class="tlaUNC">           0 :         case SIGINT:</span></span>
+<span id="L2174"><span class="lineNum">    2174</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught SIGINT&quot;);</span></span>
+<span id="L2175"><span class="lineNum">    2175</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L2176"><span class="lineNum">    2176</span> <span class="tlaUNC">           0 :         case SIGTERM:</span></span>
+<span id="L2177"><span class="lineNum">    2177</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught SIGTERM&quot;);</span></span>
+<span id="L2178"><span class="lineNum">    2178</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L2179"><span class="lineNum">    2179</span>              : #ifdef SIGBREAK</span>
+<span id="L2180"><span class="lineNum">    2180</span>              :         case SIGBREAK:</span>
+<span id="L2181"><span class="lineNum">    2181</span>              :                 LOGINFO(1, &quot;caught SIGBREAK&quot;);</span>
+<span id="L2182"><span class="lineNum">    2182</span>              :                 break;</span>
+<span id="L2183"><span class="lineNum">    2183</span>              : #endif</span>
+<span id="L2184"><span class="lineNum">    2184</span> <span class="tlaUNC">           0 : #ifdef SIGUSR1</span></span>
+<span id="L2185"><span class="lineNum">    2185</span> <span class="tlaUNC">           0 :         case SIGUSR1:</span></span>
+<span id="L2186"><span class="lineNum">    2186</span> <span class="tlaUNC">           0 :                 log::reopen();</span></span>
+<span id="L2187"><span class="lineNum">    2187</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L2188"><span class="lineNum">    2188</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L2189"><span class="lineNum">    2189</span> <span class="tlaUNC">           0 :         default:</span></span>
+<span id="L2190"><span class="lineNum">    2190</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;caught signal &quot; &lt;&lt; signum);</span></span>
+<span id="L2191"><span class="lineNum">    2191</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2192"><span class="lineNum">    2192</span>              : </span>
+<span id="L2193"><span class="lineNum">    2193</span> <span class="tlaUNC">           0 :         LOGINFO(1, &quot;stopping&quot;);</span></span>
+<span id="L2194"><span class="lineNum">    2194</span>              : </span>
+<span id="L2195"><span class="lineNum">    2195</span> <span class="tlaUNC">           0 :         uv_signal_stop(handle);</span></span>
+<span id="L2196"><span class="lineNum">    2196</span> <span class="tlaUNC">           0 :         pool-&gt;stop();</span></span>
+<span id="L2197"><span class="lineNum">    2197</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2198"><span class="lineNum">    2198</span>              : </span>
+<span id="L2199"><span class="lineNum">    2199</span>              : bool init_signals(p2pool* pool, bool init)</span>
+<span id="L2200"><span class="lineNum">    2200</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2201"><span class="lineNum">    2201</span> <span class="tlaUNC">           0 : #ifdef SIGPIPE</span></span>
+<span id="L2202"><span class="lineNum">    2202</span> <span class="tlaUNC">           0 :         signal(SIGPIPE, SIG_IGN);</span></span>
+<span id="L2203"><span class="lineNum">    2203</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L2204"><span class="lineNum">    2204</span>              : </span>
+<span id="L2205"><span class="lineNum">    2205</span> <span class="tlaUNC">           0 :         constexpr int signal_names[] = {</span></span>
+<span id="L2206"><span class="lineNum">    2206</span> <span class="tlaUNC">           0 :                 SIGHUP,</span></span>
+<span id="L2207"><span class="lineNum">    2207</span> <span class="tlaUNC">           0 :                 SIGINT,</span></span>
+<span id="L2208"><span class="lineNum">    2208</span> <span class="tlaUNC">           0 :                 SIGTERM,</span></span>
+<span id="L2209"><span class="lineNum">    2209</span>              : #ifdef SIGBREAK</span>
+<span id="L2210"><span class="lineNum">    2210</span>              :                 SIGBREAK,</span>
+<span id="L2211"><span class="lineNum">    2211</span>              : #endif</span>
+<span id="L2212"><span class="lineNum">    2212</span> <span class="tlaUNC">           0 : #ifdef SIGUSR1</span></span>
+<span id="L2213"><span class="lineNum">    2213</span> <span class="tlaUNC">           0 :                 SIGUSR1,</span></span>
+<span id="L2214"><span class="lineNum">    2214</span> <span class="tlaUNC">           0 : #endif</span></span>
+<span id="L2215"><span class="lineNum">    2215</span> <span class="tlaUNC">           0 :         };</span></span>
+<span id="L2216"><span class="lineNum">    2216</span>              : </span>
+<span id="L2217"><span class="lineNum">    2217</span> <span class="tlaUNC">           0 :         static uv_signal_t signals[array_size(signal_names)];</span></span>
+<span id="L2218"><span class="lineNum">    2218</span>              : </span>
+<span id="L2219"><span class="lineNum">    2219</span> <span class="tlaUNC">           0 :         if (!init) {</span></span>
+<span id="L2220"><span class="lineNum">    2220</span> <span class="tlaUNC">           0 :                 for (size_t i = 0; i &lt; array_size(signals); ++i) {</span></span>
+<span id="L2221"><span class="lineNum">    2221</span> <span class="tlaUNC">           0 :                         uv_signal_stop(&amp;signals[i]);</span></span>
+<span id="L2222"><span class="lineNum">    2222</span> <span class="tlaUNC">           0 :                         uv_close(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;signals[i]), nullptr);</span></span>
+<span id="L2223"><span class="lineNum">    2223</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2224"><span class="lineNum">    2224</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L2225"><span class="lineNum">    2225</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2226"><span class="lineNum">    2226</span>              : </span>
+<span id="L2227"><span class="lineNum">    2227</span> <span class="tlaUNC">           0 :         for (size_t i = 0; i &lt; array_size(signal_names); ++i) {</span></span>
+<span id="L2228"><span class="lineNum">    2228</span> <span class="tlaUNC">           0 :                 uv_signal_init(uv_default_loop_checked(), &amp;signals[i]);</span></span>
+<span id="L2229"><span class="lineNum">    2229</span> <span class="tlaUNC">           0 :                 signals[i].data = pool;</span></span>
+<span id="L2230"><span class="lineNum">    2230</span> <span class="tlaUNC">           0 :                 const int rc = uv_signal_start(&amp;signals[i], on_signal, signal_names[i]);</span></span>
+<span id="L2231"><span class="lineNum">    2231</span> <span class="tlaUNC">           0 :                 if (rc != 0) {</span></span>
+<span id="L2232"><span class="lineNum">    2232</span> <span class="tlaUNC">           0 :                         LOGERR(1, &quot;failed to initialize signal, error &quot; &lt;&lt; rc);</span></span>
+<span id="L2233"><span class="lineNum">    2233</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L2234"><span class="lineNum">    2234</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2235"><span class="lineNum">    2235</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2236"><span class="lineNum">    2236</span>              : </span>
+<span id="L2237"><span class="lineNum">    2237</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L2238"><span class="lineNum">    2238</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2239"><span class="lineNum">    2239</span>              : </span>
+<span id="L2240"><span class="lineNum">    2240</span>              : void p2pool::stop()</span>
+<span id="L2241"><span class="lineNum">    2241</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2242"><span class="lineNum">    2242</span>              :         // Can be called only once</span>
+<span id="L2243"><span class="lineNum">    2243</span> <span class="tlaUNC">           0 :         if (m_stopped.exchange(true) == false) {</span></span>
+<span id="L2244"><span class="lineNum">    2244</span> <span class="tlaUNC">           0 :                 uv_async_send(&amp;m_stopAsync);</span></span>
+<span id="L2245"><span class="lineNum">    2245</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2246"><span class="lineNum">    2246</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2247"><span class="lineNum">    2247</span>              : </span>
+<span id="L2248"><span class="lineNum">    2248</span>              : bool p2pool::zmq_running() const</span>
+<span id="L2249"><span class="lineNum">    2249</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2250"><span class="lineNum">    2250</span> <span class="tlaUNC">           0 : #ifdef P2POOL_UNIT_TESTS</span></span>
+<span id="L2251"><span class="lineNum">    2251</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L2252"><span class="lineNum">    2252</span>              : #else</span>
+<span id="L2253"><span class="lineNum">    2253</span>              :         ReadLock lock(m_ZMQReaderLock);</span>
+<span id="L2254"><span class="lineNum">    2254</span>              :         return m_ZMQReader &amp;&amp; m_ZMQReader-&gt;is_running();</span>
+<span id="L2255"><span class="lineNum">    2255</span>              : #endif</span>
+<span id="L2256"><span class="lineNum">    2256</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2257"><span class="lineNum">    2257</span>              : </span>
+<span id="L2258"><span class="lineNum">    2258</span>              : const Params::Host&amp; p2pool::switch_host()</span>
+<span id="L2259"><span class="lineNum">    2259</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2260"><span class="lineNum">    2260</span> <span class="tlaUNC">           0 :         const std::vector&lt;Params::Host&gt;&amp; v = m_params.m_hosts;</span></span>
+<span id="L2261"><span class="lineNum">    2261</span> <span class="tlaUNC">           0 :         return v[++m_currentHostIndex % v.size()];</span></span>
+<span id="L2262"><span class="lineNum">    2262</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2263"><span class="lineNum">    2263</span>              : </span>
+<span id="L2264"><span class="lineNum">    2264</span>              : void p2pool::reconnect_to_host()</span>
+<span id="L2265"><span class="lineNum">    2265</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2266"><span class="lineNum">    2266</span>              :         // If p2pool is stopped, m_reconnectToHostAsync is most likely already closed</span>
+<span id="L2267"><span class="lineNum">    2267</span> <span class="tlaUNC">           0 :         if (m_stopped) {</span></span>
+<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2270"><span class="lineNum">    2270</span>              : </span>
+<span id="L2271"><span class="lineNum">    2271</span> <span class="tlaUNC">           0 :         if (!is_main_thread()) {</span></span>
+<span id="L2272"><span class="lineNum">    2272</span> <span class="tlaUNC">           0 :                 uv_async_send(&amp;m_reconnectToHostAsync);</span></span>
+<span id="L2273"><span class="lineNum">    2273</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L2274"><span class="lineNum">    2274</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2275"><span class="lineNum">    2275</span>              : </span>
+<span id="L2276"><span class="lineNum">    2276</span>              : #ifndef P2POOL_UNIT_TESTS</span>
+<span id="L2277"><span class="lineNum">    2277</span>              :         const Params::Host&amp; new_host = switch_host();</span>
+<span id="L2278"><span class="lineNum">    2278</span>              : </span>
+<span id="L2279"><span class="lineNum">    2279</span>              :         WriteLock lock(m_ZMQReaderLock);</span>
+<span id="L2280"><span class="lineNum">    2280</span>              : </span>
+<span id="L2281"><span class="lineNum">    2281</span>              :         delete m_ZMQReader;</span>
+<span id="L2282"><span class="lineNum">    2282</span>              :         m_ZMQReader = nullptr;</span>
+<span id="L2283"><span class="lineNum">    2283</span>              : </span>
+<span id="L2284"><span class="lineNum">    2284</span>              :         try {</span>
+<span id="L2285"><span class="lineNum">    2285</span>              :                 ZMQReader* new_reader = new ZMQReader(new_host.m_address, new_host.m_zmqPort, m_params.m_socks5Proxy, this);</span>
+<span id="L2286"><span class="lineNum">    2286</span>              :                 m_zmqLastActive = seconds_since_epoch();</span>
+<span id="L2287"><span class="lineNum">    2287</span>              :                 m_ZMQReader = new_reader;</span>
+<span id="L2288"><span class="lineNum">    2288</span>              :         }</span>
+<span id="L2289"><span class="lineNum">    2289</span>              :         catch (const std::exception&amp; e) {</span>
+<span id="L2290"><span class="lineNum">    2290</span>              :                 LOGERR(1, &quot;Couldn't restart ZMQ reader: exception &quot; &lt;&lt; e.what());</span>
+<span id="L2291"><span class="lineNum">    2291</span>              :         }</span>
+<span id="L2292"><span class="lineNum">    2292</span>              : </span>
+<span id="L2293"><span class="lineNum">    2293</span>              :         if (m_ZMQReader) {</span>
+<span id="L2294"><span class="lineNum">    2294</span>              :                 get_miner_data(false);</span>
+<span id="L2295"><span class="lineNum">    2295</span>              :         }</span>
+<span id="L2296"><span class="lineNum">    2296</span>              : #endif</span>
+<span id="L2297"><span class="lineNum">    2297</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2298"><span class="lineNum">    2298</span>              : </span>
+<span id="L2299"><span class="lineNum">    2299</span>              : int p2pool::run()</span>
+<span id="L2300"><span class="lineNum">    2300</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2301"><span class="lineNum">    2301</span> <span class="tlaUNC">           0 :         if (!m_params.valid()) {</span></span>
+<span id="L2302"><span class="lineNum">    2302</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;Invalid or missing command line. Try \&quot;p2pool --help\&quot;.&quot;);</span></span>
+<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaUNC">           0 :                 return 1;</span></span>
+<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2305"><span class="lineNum">    2305</span>              : </span>
+<span id="L2306"><span class="lineNum">    2306</span> <span class="tlaUNC">           0 :         if (!init_signals(this, true)) {</span></span>
+<span id="L2307"><span class="lineNum">    2307</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;failed to initialize signal handlers&quot;);</span></span>
+<span id="L2308"><span class="lineNum">    2308</span> <span class="tlaUNC">           0 :                 return 1;</span></span>
+<span id="L2309"><span class="lineNum">    2309</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2310"><span class="lineNum">    2310</span>              : </span>
+<span id="L2311"><span class="lineNum">    2311</span>              : #ifdef WITH_TLS</span>
+<span id="L2312"><span class="lineNum">    2312</span>              :         if (!m_params.m_tlsCert.empty() &amp;&amp; !m_params.m_tlsCertKey.empty()) {</span>
+<span id="L2313"><span class="lineNum">    2313</span>              :                 if (!ServerTls::load_from_files(m_params.m_tlsCert.c_str(), m_params.m_tlsCertKey.c_str())) {</span>
+<span id="L2314"><span class="lineNum">    2314</span>              :                         LOGERR(1, &quot;Failed to load TLS files&quot;);</span>
+<span id="L2315"><span class="lineNum">    2315</span>              :                         return 1;</span>
+<span id="L2316"><span class="lineNum">    2316</span>              :                 }</span>
+<span id="L2317"><span class="lineNum">    2317</span>              :         }</span>
+<span id="L2318"><span class="lineNum">    2318</span>              : #endif</span>
+<span id="L2319"><span class="lineNum">    2319</span>              : </span>
+<span id="L2320"><span class="lineNum">    2320</span>              :         // Init default loop user data before running it</span>
+<span id="L2321"><span class="lineNum">    2321</span> <span class="tlaUNC">           0 :         uv_loop_t* loop = uv_default_loop_checked();</span></span>
+<span id="L2322"><span class="lineNum">    2322</span> <span class="tlaUNC">           0 :         loop-&gt;data = nullptr;</span></span>
+<span id="L2323"><span class="lineNum">    2323</span> <span class="tlaUNC">           0 :         GetLoopUserData(loop);</span></span>
+<span id="L2324"><span class="lineNum">    2324</span>              : </span>
+<span id="L2325"><span class="lineNum">    2325</span> <span class="tlaUNC">           0 :         set_thread_name(&quot;p2pool&quot;);</span></span>
+<span id="L2326"><span class="lineNum">    2326</span>              : </span>
+<span id="L2327"><span class="lineNum">    2327</span> <span class="tlaUNC">           0 :         try {</span></span>
+<span id="L2328"><span class="lineNum">    2328</span> <span class="tlaUNC">           0 :                 get_info();</span></span>
+<span id="L2329"><span class="lineNum">    2329</span> <span class="tlaUNC">           0 :                 load_found_blocks();</span></span>
+<span id="L2330"><span class="lineNum">    2330</span> <span class="tlaUNC">           0 :                 const int rc = uv_run(uv_default_loop_checked(), UV_RUN_DEFAULT);</span></span>
+<span id="L2331"><span class="lineNum">    2331</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;uv_run exited, result = &quot; &lt;&lt; rc);</span></span>
+<span id="L2332"><span class="lineNum">    2332</span>              : </span>
+<span id="L2333"><span class="lineNum">    2333</span>              : #ifndef P2POOL_UNIT_TESTS</span>
+<span id="L2334"><span class="lineNum">    2334</span>              :                 WriteLock lock(m_ZMQReaderLock);</span>
+<span id="L2335"><span class="lineNum">    2335</span>              : </span>
+<span id="L2336"><span class="lineNum">    2336</span>              :                 delete m_ZMQReader;</span>
+<span id="L2337"><span class="lineNum">    2337</span>              :                 m_ZMQReader = nullptr;</span>
+<span id="L2338"><span class="lineNum">    2338</span>              : #endif</span>
+<span id="L2339"><span class="lineNum">    2339</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2340"><span class="lineNum">    2340</span> <span class="tlaUNC">           0 :         catch (const std::exception&amp; e) {</span></span>
+<span id="L2341"><span class="lineNum">    2341</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;exception &quot; &lt;&lt; e.what());</span></span>
+<span id="L2342"><span class="lineNum">    2342</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
+<span id="L2343"><span class="lineNum">    2343</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2344"><span class="lineNum">    2344</span>              : </span>
+<span id="L2345"><span class="lineNum">    2345</span> <span class="tlaUNC">           0 :         m_stopped = true;</span></span>
+<span id="L2346"><span class="lineNum">    2346</span>              : </span>
+<span id="L2347"><span class="lineNum">    2347</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
+<span id="L2348"><span class="lineNum">    2348</span>              :         {</span>
+<span id="L2349"><span class="lineNum">    2349</span>              :                 MutexLock lock(m_minerLock);</span>
+<span id="L2350"><span class="lineNum">    2350</span>              : </span>
+<span id="L2351"><span class="lineNum">    2351</span>              :                 delete m_miner;</span>
+<span id="L2352"><span class="lineNum">    2352</span>              :                 m_miner = nullptr;</span>
+<span id="L2353"><span class="lineNum">    2353</span>              :         }</span>
+<span id="L2354"><span class="lineNum">    2354</span>              : #endif</span>
+<span id="L2355"><span class="lineNum">    2355</span> <span class="tlaUNC">           0 :         delete m_stratumServer;</span></span>
+<span id="L2356"><span class="lineNum">    2356</span> <span class="tlaUNC">           0 :         delete m_p2pServer;</span></span>
+<span id="L2357"><span class="lineNum">    2357</span>              : </span>
+<span id="L2358"><span class="lineNum">    2358</span> <span class="tlaUNC">           0 :         LOGINFO(1, &quot;stopped&quot;);</span></span>
+<span id="L2359"><span class="lineNum">    2359</span> <span class="tlaUNC">           0 :         return 0;</span></span>
+<span id="L2360"><span class="lineNum">    2360</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2361"><span class="lineNum">    2361</span>              : </span>
+<span id="L2362"><span class="lineNum">    2362</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
