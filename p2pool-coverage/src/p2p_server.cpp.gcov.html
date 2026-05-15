@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-15 07:30:52</td>
+            <td class="headerValue">2026-05-15 10:23:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -966,14 +966,14 @@
 <span id="L904"><span class="lineNum">     904</span> <span class="tlaUNC">           0 :         const Params::Host&amp; host = m_pool-&gt;current_host();</span></span>
 <span id="L905"><span class="lineNum">     905</span>              : </span>
 <span id="L906"><span class="lineNum">     906</span> <span class="tlaUNC">           0 :         JSONRPCRequest::call(host.m_address, host.m_rpcPort, &quot;/get_peer_list&quot;, host.m_rpcLogin, m_socks5Proxy, host.m_rpcSSL, host.m_rpcSSL_Fingerprint,</span></span>
-<span id="L907"><span class="lineNum">     907</span> <span class="tlaUNC">           0 :                 [this](const char* data, size_t size, double)</span></span>
+<span id="L907"><span class="lineNum">     907</span> <span class="tlaUNC">           0 :                 [this](const JSONRPCRequest::CallbackData&amp; data)</span></span>
 <span id="L908"><span class="lineNum">     908</span> <span class="tlaUNC">           0 :                 {</span></span>
 <span id="L909"><span class="lineNum">     909</span> <span class="tlaUNC">           0 : #define ERR_STR &quot;/get_peer_list RPC request returned invalid JSON &quot;</span></span>
 <span id="L910"><span class="lineNum">     910</span>              : </span>
 <span id="L911"><span class="lineNum">     911</span> <span class="tlaUNC">           0 :                         using namespace rapidjson;</span></span>
 <span id="L912"><span class="lineNum">     912</span>              : </span>
 <span id="L913"><span class="lineNum">     913</span> <span class="tlaUNC">           0 :                         Document doc;</span></span>
-<span id="L914"><span class="lineNum">     914</span> <span class="tlaUNC">           0 :                         if (doc.Parse(data, size).HasParseError()) {</span></span>
+<span id="L914"><span class="lineNum">     914</span> <span class="tlaUNC">           0 :                         if (doc.Parse(data.m_response.data(), data.m_response.size()).HasParseError()) {</span></span>
 <span id="L915"><span class="lineNum">     915</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, ERR_STR &quot;(parse error)&quot;);</span></span>
 <span id="L916"><span class="lineNum">     916</span> <span class="tlaUNC">           0 :                                 return;</span></span>
 <span id="L917"><span class="lineNum">     917</span> <span class="tlaUNC">           0 :                         }</span></span>
@@ -1033,10 +1033,10 @@
 <span id="L971"><span class="lineNum">     971</span>              : </span>
 <span id="L972"><span class="lineNum">     972</span> <span class="tlaUNC">           0 :                         LOGINFO(4, &quot;monerod peer list loaded (&quot; &lt;&lt; m_peerListMonero.size() &lt;&lt; &quot; peers)&quot;);</span></span>
 <span id="L973"><span class="lineNum">     973</span> <span class="tlaUNC">           0 :                 },</span></span>
-<span id="L974"><span class="lineNum">     974</span> <span class="tlaUNC">           0 :                 [](const char* data, size_t size, double)</span></span>
+<span id="L974"><span class="lineNum">     974</span> <span class="tlaUNC">           0 :                 [](const JSONRPCRequest::CallbackData&amp; data)</span></span>
 <span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 :                         if (size &gt; 0) {</span></span>
-<span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;/get_peer_list RPC request failed: error &quot; &lt;&lt; log::const_buf(data, size));</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 :                         if (!data.m_error.empty()) {</span></span>
+<span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;/get_peer_list RPC request failed: error &quot; &lt;&lt; data.m_error);</span></span>
 <span id="L978"><span class="lineNum">     978</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L979"><span class="lineNum">     979</span> <span class="tlaUNC">           0 :                 }, &amp;m_loop);</span></span>
 <span id="L980"><span class="lineNum">     980</span> <span class="tlaUNC">           0 : }</span></span>
@@ -1944,10 +1944,10 @@
 <span id="L1882"><span class="lineNum">    1882</span> <span class="tlaUNC">           0 :                 host.m_rpcSSL,</span></span>
 <span id="L1883"><span class="lineNum">    1883</span> <span class="tlaUNC">           0 :                 host.m_rpcSSL_Fingerprint,</span></span>
 <span id="L1884"><span class="lineNum">    1884</span> <span class="tlaUNC">           0 :                 JSONRPCRequest::dummy_callback,</span></span>
-<span id="L1885"><span class="lineNum">    1885</span> <span class="tlaUNC">           0 :                 [this, t1](const char* data, size_t size, double)</span></span>
+<span id="L1885"><span class="lineNum">    1885</span> <span class="tlaUNC">           0 :                 [this, t1](const JSONRPCRequest::CallbackData&amp; data)</span></span>
 <span id="L1886"><span class="lineNum">    1886</span> <span class="tlaUNC">           0 :                 {</span></span>
-<span id="L1887"><span class="lineNum">    1887</span> <span class="tlaUNC">           0 :                         if (size &gt; 0) {</span></span>
-<span id="L1888"><span class="lineNum">    1888</span> <span class="tlaUNC">           0 :                                 LOGERR(3, &quot;submit_monero_blocks: submit_block RPC request failed, error &quot; &lt;&lt; log::const_buf(data, size));</span></span>
+<span id="L1887"><span class="lineNum">    1887</span> <span class="tlaUNC">           0 :                         if (!data.m_error.empty()) {</span></span>
+<span id="L1888"><span class="lineNum">    1888</span> <span class="tlaUNC">           0 :                                 LOGERR(3, &quot;submit_monero_blocks: submit_block RPC request failed, error &quot; &lt;&lt; data.m_error);</span></span>
 <span id="L1889"><span class="lineNum">    1889</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L1890"><span class="lineNum">    1890</span> <span class="tlaUNC">           0 :                         else {</span></span>
 <span id="L1891"><span class="lineNum">    1891</span> <span class="tlaUNC">           0 :                                 LOGINFO(4, &quot;submit_monero_blocks: submit_block RPC completed in &quot; &lt;&lt; static_cast&lt;double&gt;(microseconds_since_epoch() - t1) / 1e3 &lt;&lt; &quot; ms&quot;);</span></span>

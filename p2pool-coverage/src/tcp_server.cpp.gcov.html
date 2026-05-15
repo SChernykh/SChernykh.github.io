@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-15 07:30:52</td>
+            <td class="headerValue">2026-05-15 10:23:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -792,7 +792,7 @@
 <span id="L730"><span class="lineNum">     730</span>              : </span>
 <span id="L731"><span class="lineNum">     731</span> <span class="tlaUNC">           0 :         for (Client* c : server-&gt;m_preallocatedClients) {</span></span>
 <span id="L732"><span class="lineNum">     732</span> <span class="tlaUNC">           0 :                 ASAN_UNPOISON_MEMORY_REGION(c, sizeof(Client));</span></span>
-<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :                 ASAN_UNPOISON_MEMORY_REGION(c, c-&gt;size());</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :                 ASAN_UNPOISON_MEMORY_REGION(c, c-&gt;get_size());</span></span>
 <span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 :                 delete c;</span></span>
 <span id="L735"><span class="lineNum">     735</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L736"><span class="lineNum">     736</span> <span class="tlaUNC">           0 :         server-&gt;m_preallocatedClients.clear();</span></span>
@@ -1134,7 +1134,7 @@
 <span id="L1072"><span class="lineNum">    1072</span> <span class="tlaUNC">           0 :                 c = m_preallocatedClients.back();</span></span>
 <span id="L1073"><span class="lineNum">    1073</span> <span class="tlaUNC">           0 :                 m_preallocatedClients.pop_back();</span></span>
 <span id="L1074"><span class="lineNum">    1074</span> <span class="tlaUNC">           0 :                 ASAN_UNPOISON_MEMORY_REGION(c, sizeof(Client));</span></span>
-<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaUNC">           0 :                 ASAN_UNPOISON_MEMORY_REGION(c, c-&gt;size());</span></span>
+<span id="L1075"><span class="lineNum">    1075</span> <span class="tlaUNC">           0 :                 ASAN_UNPOISON_MEMORY_REGION(c, c-&gt;get_size());</span></span>
 <span id="L1076"><span class="lineNum">    1076</span> <span class="tlaUNC">           0 :                 c-&gt;reset();</span></span>
 <span id="L1077"><span class="lineNum">    1077</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1078"><span class="lineNum">    1078</span> <span class="tlaUNC">           0 :         else {</span></span>
@@ -1620,7 +1620,7 @@
 <span id="L1558"><span class="lineNum">    1558</span>              :         const uint8_t* begin = reinterpret_cast&lt;const uint8_t*&gt;(this);</span>
 <span id="L1559"><span class="lineNum">    1559</span>              :         const uint8_t* counter_begin = reinterpret_cast&lt;const uint8_t*&gt;(&amp;m_resetCounter);</span>
 <span id="L1560"><span class="lineNum">    1560</span>              :         const uint8_t* counter_end = counter_begin + sizeof(m_resetCounter);</span>
-<span id="L1561"><span class="lineNum">    1561</span>              :         const uint8_t* end = begin + size();</span>
+<span id="L1561"><span class="lineNum">    1561</span>              :         const uint8_t* end = begin + get_size();</span>
 <span id="L1562"><span class="lineNum">    1562</span>              : </span>
 <span id="L1563"><span class="lineNum">    1563</span>              :         ASAN_POISON_MEMORY_REGION(begin, counter_begin - begin);</span>
 <span id="L1564"><span class="lineNum">    1564</span>              :         ASAN_POISON_MEMORY_REGION(counter_end, end - counter_end);</span>
