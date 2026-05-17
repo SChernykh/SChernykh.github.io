@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-17 08:29:12</td>
+            <td class="headerValue">2026-05-17 12:21:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">40.0&nbsp;%</td>
@@ -854,9 +854,9 @@
 <span id="L792"><span class="lineNum">     792</span>              : #ifdef WITH_UPNP</span>
 <span id="L793"><span class="lineNum">     793</span>              : static struct UPnP_Discover</span>
 <span id="L794"><span class="lineNum">     794</span>              : {</span>
-<span id="L795"><span class="lineNum">     795</span>              :         uv_mutex_t lock;</span>
-<span id="L796"><span class="lineNum">     796</span>              :         int error;</span>
-<span id="L797"><span class="lineNum">     797</span>              :         UPNPDev* devlist;</span>
+<span id="L795"><span class="lineNum">     795</span>              :         uv_mutex_t lock = {};</span>
+<span id="L796"><span class="lineNum">     796</span>              :         int error = 0;</span>
+<span id="L797"><span class="lineNum">     797</span>              :         UPNPDev* devlist = nullptr;</span>
 <span id="L798"><span class="lineNum">     798</span>              : } upnp_discover;</span>
 <span id="L799"><span class="lineNum">     799</span>              : </span>
 <span id="L800"><span class="lineNum">     800</span>              : void init_upnp()</span>

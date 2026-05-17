@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-17 08:29:12</td>
+            <td class="headerValue">2026-05-17 12:21:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -342,11 +342,11 @@
 <span id="L280"><span class="lineNum">     280</span>              :         {</span>
 <span id="L281"><span class="lineNum">     281</span>              :                 void normalize();</span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
-<span id="L283"><span class="lineNum">     283</span>              :                 bool m_isV6;</span>
+<span id="L283"><span class="lineNum">     283</span>              :                 bool m_isV6 = false;</span>
 <span id="L284"><span class="lineNum">     284</span>              :                 raw_ip m_addr;</span>
-<span id="L285"><span class="lineNum">     285</span>              :                 int m_port;</span>
-<span id="L286"><span class="lineNum">     286</span>              :                 uint32_t m_numFailedConnections;</span>
-<span id="L287"><span class="lineNum">     287</span>              :                 uint64_t m_lastSeen;</span>
+<span id="L285"><span class="lineNum">     285</span>              :                 int m_port = 0;</span>
+<span id="L286"><span class="lineNum">     286</span>              :                 uint32_t m_numFailedConnections = 0;</span>
+<span id="L287"><span class="lineNum">     287</span>              :                 uint64_t m_lastSeen = 0;</span>
 <span id="L288"><span class="lineNum">     288</span>              :         };</span>
 <span id="L289"><span class="lineNum">     289</span>              : </span>
 <span id="L290"><span class="lineNum">     290</span>              :         std::atomic&lt;bool&gt; m_seenGoodPeers;</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-17 08:29:12</td>
+            <td class="headerValue">2026-05-17 12:21:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -2524,15 +2524,15 @@
 <span id="L2462"><span class="lineNum">    2462</span>              : </span>
 <span id="L2463"><span class="lineNum">    2463</span> <span class="tlaUNC">           0 :         struct Work</span></span>
 <span id="L2464"><span class="lineNum">    2464</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L2465"><span class="lineNum">    2465</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
-<span id="L2466"><span class="lineNum">    2466</span> <span class="tlaUNC">           0 :                 P2PClient* client;</span></span>
-<span id="L2467"><span class="lineNum">    2467</span> <span class="tlaUNC">           0 :                 P2PServer* server;</span></span>
-<span id="L2468"><span class="lineNum">    2468</span> <span class="tlaUNC">           0 :                 uint32_t reset_counter;</span></span>
-<span id="L2469"><span class="lineNum">    2469</span> <span class="tlaUNC">           0 :                 bool is_incoming;</span></span>
+<span id="L2465"><span class="lineNum">    2465</span> <span class="tlaUNC">           0 :                 uv_work_t req = {};</span></span>
+<span id="L2466"><span class="lineNum">    2466</span> <span class="tlaUNC">           0 :                 P2PClient* client = nullptr;</span></span>
+<span id="L2467"><span class="lineNum">    2467</span> <span class="tlaUNC">           0 :                 P2PServer* server = nullptr;</span></span>
+<span id="L2468"><span class="lineNum">    2468</span> <span class="tlaUNC">           0 :                 uint32_t reset_counter = 0;</span></span>
+<span id="L2469"><span class="lineNum">    2469</span> <span class="tlaUNC">           0 :                 bool is_incoming = false;</span></span>
 <span id="L2470"><span class="lineNum">    2470</span>              : </span>
-<span id="L2471"><span class="lineNum">    2471</span> <span class="tlaUNC">           0 :                 uint8_t challenge[CHALLENGE_SIZE];</span></span>
-<span id="L2472"><span class="lineNum">    2472</span> <span class="tlaUNC">           0 :                 uint64_t salt;</span></span>
-<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaUNC">           0 :                 uint8_t solution_salt[CHALLENGE_SIZE];</span></span>
+<span id="L2471"><span class="lineNum">    2471</span> <span class="tlaUNC">           0 :                 uint8_t challenge[CHALLENGE_SIZE] = {};</span></span>
+<span id="L2472"><span class="lineNum">    2472</span> <span class="tlaUNC">           0 :                 uint64_t salt = 0;</span></span>
+<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaUNC">           0 :                 uint8_t solution_salt[CHALLENGE_SIZE] = {};</span></span>
 <span id="L2474"><span class="lineNum">    2474</span> <span class="tlaUNC">           0 :                 hash solution;</span></span>
 <span id="L2475"><span class="lineNum">    2475</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L2476"><span class="lineNum">    2476</span>              : </span>
@@ -3488,25 +3488,25 @@
 <span id="L3426"><span class="lineNum">    3426</span>              : </span>
 <span id="L3427"><span class="lineNum">    3427</span> <span class="tlaUNC">           0 :         struct Work</span></span>
 <span id="L3428"><span class="lineNum">    3428</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L3429"><span class="lineNum">    3429</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
+<span id="L3429"><span class="lineNum">    3429</span> <span class="tlaUNC">           0 :                 uv_work_t req = {};</span></span>
 <span id="L3430"><span class="lineNum">    3430</span>              : </span>
-<span id="L3431"><span class="lineNum">    3431</span> <span class="tlaUNC">           0 :                 P2PServer* server;</span></span>
-<span id="L3432"><span class="lineNum">    3432</span> <span class="tlaUNC">           0 :                 P2PClient* client;</span></span>
+<span id="L3431"><span class="lineNum">    3431</span> <span class="tlaUNC">           0 :                 P2PServer* server = nullptr;</span></span>
+<span id="L3432"><span class="lineNum">    3432</span> <span class="tlaUNC">           0 :                 P2PClient* client = nullptr;</span></span>
 <span id="L3433"><span class="lineNum">    3433</span>              : </span>
-<span id="L3434"><span class="lineNum">    3434</span> <span class="tlaUNC">           0 :                 uint32_t reset_counter;</span></span>
-<span id="L3435"><span class="lineNum">    3435</span> <span class="tlaUNC">           0 :                 bool is_v6;</span></span>
+<span id="L3434"><span class="lineNum">    3434</span> <span class="tlaUNC">           0 :                 uint32_t reset_counter = 0;</span></span>
+<span id="L3435"><span class="lineNum">    3435</span> <span class="tlaUNC">           0 :                 bool is_v6 = false;</span></span>
 <span id="L3436"><span class="lineNum">    3436</span> <span class="tlaUNC">           0 :                 raw_ip addr;</span></span>
 <span id="L3437"><span class="lineNum">    3437</span>              : </span>
-<span id="L3438"><span class="lineNum">    3438</span> <span class="tlaUNC">           0 :                 RandomX_Hasher_Base* hasher;</span></span>
+<span id="L3438"><span class="lineNum">    3438</span> <span class="tlaUNC">           0 :                 RandomX_Hasher_Base* hasher = nullptr;</span></span>
 <span id="L3439"><span class="lineNum">    3439</span>              : </span>
 <span id="L3440"><span class="lineNum">    3440</span> <span class="tlaUNC">           0 :                 std::vector&lt;uint8_t&gt; blob;</span></span>
-<span id="L3441"><span class="lineNum">    3441</span> <span class="tlaUNC">           0 :                 uint64_t height;</span></span>
+<span id="L3441"><span class="lineNum">    3441</span> <span class="tlaUNC">           0 :                 uint64_t height = 0;</span></span>
 <span id="L3442"><span class="lineNum">    3442</span> <span class="tlaUNC">           0 :                 hash seed;</span></span>
 <span id="L3443"><span class="lineNum">    3443</span> <span class="tlaUNC">           0 :                 difficulty_type diff;</span></span>
 <span id="L3444"><span class="lineNum">    3444</span>              : </span>
 <span id="L3445"><span class="lineNum">    3445</span> <span class="tlaUNC">           0 :                 std::vector&lt;uint8_t&gt; message;</span></span>
 <span id="L3446"><span class="lineNum">    3446</span>              : </span>
-<span id="L3447"><span class="lineNum">    3447</span> <span class="tlaUNC">           0 :                 bool pow_check_passed;</span></span>
+<span id="L3447"><span class="lineNum">    3447</span> <span class="tlaUNC">           0 :                 bool pow_check_passed = false;</span></span>
 <span id="L3448"><span class="lineNum">    3448</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L3449"><span class="lineNum">    3449</span>              : </span>
 <span id="L3450"><span class="lineNum">    3450</span> <span class="tlaUNC">           0 :         Work* work = new Work{ {}, server, this, m_resetCounter, isV6(), m_addr, pool-&gt;hasher(), std::move(blob), height, seed, diff, { buf0, buf0 + size0 }, false };</span></span>
@@ -3653,15 +3653,15 @@
 <span id="L3591"><span class="lineNum">    3591</span>              : </span>
 <span id="L3592"><span class="lineNum">    3592</span> <span class="tlaUNC">           0 :         struct Work</span></span>
 <span id="L3593"><span class="lineNum">    3593</span> <span class="tlaUNC">           0 :         {</span></span>
-<span id="L3594"><span class="lineNum">    3594</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
+<span id="L3594"><span class="lineNum">    3594</span> <span class="tlaUNC">           0 :                 uv_work_t req = {};</span></span>
 <span id="L3595"><span class="lineNum">    3595</span> <span class="tlaUNC">           0 :                 PoolBlock block;</span></span>
-<span id="L3596"><span class="lineNum">    3596</span> <span class="tlaUNC">           0 :                 P2PClient* client;</span></span>
-<span id="L3597"><span class="lineNum">    3597</span> <span class="tlaUNC">           0 :                 P2PServer* server;</span></span>
-<span id="L3598"><span class="lineNum">    3598</span> <span class="tlaUNC">           0 :                 uint32_t client_reset_counter;</span></span>
-<span id="L3599"><span class="lineNum">    3599</span> <span class="tlaUNC">           0 :                 bool client_isV6;</span></span>
+<span id="L3596"><span class="lineNum">    3596</span> <span class="tlaUNC">           0 :                 P2PClient* client = nullptr;</span></span>
+<span id="L3597"><span class="lineNum">    3597</span> <span class="tlaUNC">           0 :                 P2PServer* server = nullptr;</span></span>
+<span id="L3598"><span class="lineNum">    3598</span> <span class="tlaUNC">           0 :                 uint32_t client_reset_counter = 0;</span></span>
+<span id="L3599"><span class="lineNum">    3599</span> <span class="tlaUNC">           0 :                 bool client_isV6 = false;</span></span>
 <span id="L3600"><span class="lineNum">    3600</span> <span class="tlaUNC">           0 :                 raw_ip client_ip;</span></span>
 <span id="L3601"><span class="lineNum">    3601</span> <span class="tlaUNC">           0 :                 std::vector&lt;hash&gt; missing_blocks;</span></span>
-<span id="L3602"><span class="lineNum">    3602</span> <span class="tlaUNC">           0 :                 bool result;</span></span>
+<span id="L3602"><span class="lineNum">    3602</span> <span class="tlaUNC">           0 :                 bool result = false;</span></span>
 <span id="L3603"><span class="lineNum">    3603</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L3604"><span class="lineNum">    3604</span>              : </span>
 <span id="L3605"><span class="lineNum">    3605</span> <span class="tlaUNC">           0 :         Work* work = new Work{ {}, *block, this, server, m_resetCounter.load(), isV6(), m_addr, {}, true };</span></span>
