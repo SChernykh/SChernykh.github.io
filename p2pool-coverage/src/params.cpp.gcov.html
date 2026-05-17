@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-15 12:54:05</td>
+            <td class="headerValue">2026-05-17 08:29:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -515,7 +515,7 @@
 <span id="L453"><span class="lineNum">     453</span>              : #endif</span>
 <span id="L454"><span class="lineNum">     454</span>              : </span>
 <span id="L455"><span class="lineNum">     455</span> <span class="tlaUNC">           0 :         if ((arg[0] == &quot;merge-mine&quot;) &amp;&amp; has1(arg) &amp;&amp; has2(arg)) {</span></span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :                 m_mergeMiningHosts.emplace_back(arg[1], arg[2]);</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaUNC">           0 :                 m_mergeMiningHosts.emplace_back(arg[1], arg[2], has3(arg) ? arg[3] : std::string());</span></span>
 <span id="L457"><span class="lineNum">     457</span> <span class="tlaUNC">           0 :                 return true;</span></span>
 <span id="L458"><span class="lineNum">     458</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L459"><span class="lineNum">     459</span>              : </span>
