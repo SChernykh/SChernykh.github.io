@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-22 12:46:39</td>
+            <td class="headerValue">2026-05-23 09:43:49</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">18.8&nbsp;%</td>
@@ -125,80 +125,98 @@
 <span id="L63"><span class="lineNum">      63</span>              : </span>
 <span id="L64"><span class="lineNum">      64</span>              : #undef JSON_VALUE_PARSER</span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span>              : template&lt;typename T&gt;</span>
-<span id="L67"><span class="lineNum">      67</span>              : struct parse_wrapper&lt;T, hash&gt;</span>
+<span id="L66"><span class="lineNum">      66</span>              : template&lt;typename T, typename U&gt;</span>
+<span id="L67"><span class="lineNum">      67</span>              : struct parse_wrapper&lt;T, std::optional&lt;U&gt;&gt;</span>
 <span id="L68"><span class="lineNum">      68</span>              : {</span>
-<span id="L69"><span class="lineNum">      69</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, hash&amp; out_value)</span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           4 :         {</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           4 :                 const char* s = nullptr;</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           4 :                 if (!parseValue(v, name, s) || !s || (strlen(s) != HASH_SIZE * 2)) {</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L75"><span class="lineNum">      75</span>              : </span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC tlaBgGNC">         132 :                 for (size_t i = 0; i &lt; HASH_SIZE; ++i) {</span></span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">         128 :                         uint8_t d[2];</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">         128 :                         if (!from_hex(s[i * 2], d[0]) || !from_hex(s[i * 2 + 1], d[1])) {</span></span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">         128 :                         out_value.h[i] = (d[0] &lt;&lt; 4) | d[1];</span></span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">         128 :                 }</span></span>
+<span id="L69"><span class="lineNum">      69</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, std::optional&lt;U&gt;&amp; out_value)</span>
+<span id="L70"><span class="lineNum">      70</span>              :         {</span>
+<span id="L71"><span class="lineNum">      71</span>              :                 U tmp{};</span>
+<span id="L72"><span class="lineNum">      72</span>              : </span>
+<span id="L73"><span class="lineNum">      73</span>              :                 if (parseValue(v, name, tmp)) {</span>
+<span id="L74"><span class="lineNum">      74</span>              :                         out_value = std::move(tmp);</span>
+<span id="L75"><span class="lineNum">      75</span>              :                         return true;</span>
+<span id="L76"><span class="lineNum">      76</span>              :                 }</span>
+<span id="L77"><span class="lineNum">      77</span>              : </span>
+<span id="L78"><span class="lineNum">      78</span>              :                 // Optional value is always parsed successfully, it will just be &quot;N/A&quot; if the actual parsing failed</span>
+<span id="L79"><span class="lineNum">      79</span>              :                 out_value.reset();</span>
+<span id="L80"><span class="lineNum">      80</span>              :                 return true;</span>
+<span id="L81"><span class="lineNum">      81</span>              :         }</span>
+<span id="L82"><span class="lineNum">      82</span>              : };</span>
 <span id="L83"><span class="lineNum">      83</span>              : </span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           4 :                 return true;</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           4 :         }</span></span>
-<span id="L86"><span class="lineNum">      86</span>              : };</span>
-<span id="L87"><span class="lineNum">      87</span>              : </span>
-<span id="L88"><span class="lineNum">      88</span>              : #ifdef WITH_INDEXED_HASHES</span>
-<span id="L89"><span class="lineNum">      89</span>              : template&lt;typename T&gt;</span>
-<span id="L90"><span class="lineNum">      90</span>              : struct parse_wrapper&lt;T, indexed_hash&gt;</span>
-<span id="L91"><span class="lineNum">      91</span>              : {</span>
-<span id="L92"><span class="lineNum">      92</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, indexed_hash&amp; out_value)</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC">           0 :                 hash h;</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC">           0 :                 if (!parse_wrapper&lt;T, hash&gt;::parse(v, name, h)) {</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L98"><span class="lineNum">      98</span>              : </span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC">           0 :                 out_value = static_cast&lt;indexed_hash&gt;(h);</span></span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L102"><span class="lineNum">     102</span>              : };</span>
-<span id="L103"><span class="lineNum">     103</span>              : #endif</span>
-<span id="L104"><span class="lineNum">     104</span>              : </span>
-<span id="L105"><span class="lineNum">     105</span>              : template&lt;typename T&gt;</span>
-<span id="L106"><span class="lineNum">     106</span>              : struct parse_wrapper&lt;T, difficulty_type&gt;</span>
-<span id="L107"><span class="lineNum">     107</span>              : {</span>
-<span id="L108"><span class="lineNum">     108</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, difficulty_type &amp;out_value)</span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC tlaBgGNC">           9 :         {</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">           9 :                 const char* s = nullptr;</span></span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           9 :                 if (!parseValue(v, name, s) || !s) {</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L114"><span class="lineNum">     114</span>              : </span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC tlaBgGNC">           9 :                 size_t N = strlen(s);</span></span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           9 :                 if ((N &gt;= 2) &amp;&amp; (s[0] == '0') &amp;&amp; (s[1] == 'x')) {</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           9 :                         s += 2;</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           9 :                         N -= 2;</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           9 :                 }</span></span>
-<span id="L120"><span class="lineNum">     120</span>              : </span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           9 :                 out_value.lo = 0;</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           9 :                 out_value.hi = 0;</span></span>
-<span id="L123"><span class="lineNum">     123</span>              : </span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         155 :                 for (size_t i = 0; i &lt; N; ++i) {</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         146 :                         uint8_t d;</span></span>
-<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">         146 :                         if (!from_hex(s[i], d)) {</span></span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC tlaBgGNC">         146 :                         out_value.hi = (out_value.hi &lt;&lt; 4) | (out_value.lo &gt;&gt; 60);</span></span>
-<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">         146 :                         out_value.lo = (out_value.lo &lt;&lt; 4) | d;</span></span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">         146 :                 }</span></span>
+<span id="L84"><span class="lineNum">      84</span>              : template&lt;typename T&gt;</span>
+<span id="L85"><span class="lineNum">      85</span>              : struct parse_wrapper&lt;T, hash&gt;</span>
+<span id="L86"><span class="lineNum">      86</span>              : {</span>
+<span id="L87"><span class="lineNum">      87</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, hash&amp; out_value)</span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">           4 :         {</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">           4 :                 const char* s = nullptr;</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">           4 :                 if (!parseValue(v, name, s) || !s || (strlen(s) != HASH_SIZE * 2)) {</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L93"><span class="lineNum">      93</span>              : </span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC tlaBgGNC">         132 :                 for (size_t i = 0; i &lt; HASH_SIZE; ++i) {</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">         128 :                         uint8_t d[2];</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">         128 :                         if (!from_hex(s[i * 2], d[0]) || !from_hex(s[i * 2 + 1], d[1])) {</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC tlaBgGNC">         128 :                         out_value.h[i] = (d[0] &lt;&lt; 4) | d[1];</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">         128 :                 }</span></span>
+<span id="L101"><span class="lineNum">     101</span>              : </span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">           4 :                 return true;</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           4 :         }</span></span>
+<span id="L104"><span class="lineNum">     104</span>              : };</span>
+<span id="L105"><span class="lineNum">     105</span>              : </span>
+<span id="L106"><span class="lineNum">     106</span>              : #ifdef WITH_INDEXED_HASHES</span>
+<span id="L107"><span class="lineNum">     107</span>              : template&lt;typename T&gt;</span>
+<span id="L108"><span class="lineNum">     108</span>              : struct parse_wrapper&lt;T, indexed_hash&gt;</span>
+<span id="L109"><span class="lineNum">     109</span>              : {</span>
+<span id="L110"><span class="lineNum">     110</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, indexed_hash&amp; out_value)</span>
+<span id="L111"><span class="lineNum">     111</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaUNC">           0 :                 hash h;</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaUNC">           0 :                 if (!parse_wrapper&lt;T, hash&gt;::parse(v, name, h)) {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L116"><span class="lineNum">     116</span>              : </span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaUNC">           0 :                 out_value = static_cast&lt;indexed_hash&gt;(h);</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L120"><span class="lineNum">     120</span>              : };</span>
+<span id="L121"><span class="lineNum">     121</span>              : #endif</span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span>              : template&lt;typename T&gt;</span>
+<span id="L124"><span class="lineNum">     124</span>              : struct parse_wrapper&lt;T, difficulty_type&gt;</span>
+<span id="L125"><span class="lineNum">     125</span>              : {</span>
+<span id="L126"><span class="lineNum">     126</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, difficulty_type &amp;out_value)</span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">           9 :         {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           9 :                 const char* s = nullptr;</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           9 :                 if (!parseValue(v, name, s) || !s) {</span></span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">           9 :                 return true;</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           9 :         }</span></span>
-<span id="L135"><span class="lineNum">     135</span>              : };</span>
-<span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC tlaBgUNC">           0 : #define PARSE(doc, var, name) parseValue(doc, #name, var.name)</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC tlaBgGNC">           9 :                 size_t N = strlen(s);</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           9 :                 if ((N &gt;= 2) &amp;&amp; (s[0] == '0') &amp;&amp; (s[1] == 'x')) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">           9 :                         s += 2;</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">           9 :                         N -= 2;</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">           9 :                 }</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
-<span id="L139"><span class="lineNum">     139</span>              : } // namespace p2pool</span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">           9 :                 out_value.lo = 0;</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">           9 :                 out_value.hi = 0;</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         155 :                 for (size_t i = 0; i &lt; N; ++i) {</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         146 :                         uint8_t d;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         146 :                         if (!from_hex(s[i], d)) {</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC tlaBgGNC">         146 :                         out_value.hi = (out_value.hi &lt;&lt; 4) | (out_value.lo &gt;&gt; 60);</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         146 :                         out_value.lo = (out_value.lo &lt;&lt; 4) | d;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         146 :                 }</span></span>
+<span id="L150"><span class="lineNum">     150</span>              : </span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">           9 :                 return true;</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           9 :         }</span></span>
+<span id="L153"><span class="lineNum">     153</span>              : };</span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC tlaBgUNC">           0 : #define PARSE(doc, var, name) parseValue(doc, #name, var.name)</span></span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
