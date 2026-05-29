@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-05-29 07:42:22</td>
+            <td class="headerValue">2026-05-29 09:31:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -291,37 +291,37 @@
 <span id="L229"><span class="lineNum">     229</span>              : </span>
 <span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       40255 :                 uint64_t num_transactions;</span></span>
 <span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       40255 :                 READ_VARINT(num_transactions);</span></span>
-<span id="L232"><span class="lineNum">     232</span>              : </span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       40255 :                 const int transactions_offset = static_cast&lt;int&gt;(data - data_begin);</span></span>
-<span id="L234"><span class="lineNum">     234</span>              : </span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">       40255 :                 std::vector&lt;uint64_t&gt; parent_indices;</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">       40255 :                 std::vector&lt;hash&gt; transactions;</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">       40255 :                 if (compact) {</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">           6 :                         if (static_cast&lt;uint64_t&gt;(data_end - data) &lt; num_transactions) return __LINE__;</span></span>
-<span id="L239"><span class="lineNum">     239</span>              : </span>
-<span id="L240"><span class="lineNum">     240</span>              :                         // limit reserved memory size because we can't check &quot;num_transactions&quot; properly here</span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">           6 :                         const uint64_t k = std::min&lt;uint64_t&gt;(num_transactions + 1, 256);</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           6 :                         transactions.reserve(k);</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">           6 :                         parent_indices.reserve(k);</span></span>
-<span id="L244"><span class="lineNum">     244</span>              : </span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">           6 :                         transactions.resize(1);</span></span>
-<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           6 :                         parent_indices.resize(1);</span></span>
-<span id="L247"><span class="lineNum">     247</span>              : </span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">         304 :                         for (uint64_t i = 0; i &lt; num_transactions; ++i) {</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">         298 :                                 uint64_t parent_index;</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">         298 :                                 READ_VARINT(parent_index);</span></span>
-<span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">         298 :                                 hash id;</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         298 :                                 if (parent_index == 0) {</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">          80 :                                         READ_BUF(id.h, HASH_SIZE);</span></span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          80 :                                 }</span></span>
-<span id="L256"><span class="lineNum">     256</span>              : </span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         298 :                                 transactions.emplace_back(id);</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         298 :                                 parent_indices.emplace_back(parent_index);</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         298 :                         }</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">       40249 :                 else {</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">       40249 :                         if (num_transactions &gt; std::numeric_limits&lt;uint64_t&gt;::max() / HASH_SIZE) return __LINE__;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       40255 :                 if (num_transactions &gt; MAX_BLOCK_SIZE / HASH_SIZE) return __LINE__;</span></span>
+<span id="L233"><span class="lineNum">     233</span>              : </span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">       40255 :                 const int transactions_offset = static_cast&lt;int&gt;(data - data_begin);</span></span>
+<span id="L235"><span class="lineNum">     235</span>              : </span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">       40255 :                 std::vector&lt;uint64_t&gt; parent_indices;</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">       40255 :                 std::vector&lt;hash&gt; transactions;</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">       40255 :                 if (compact) {</span></span>
+<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">           6 :                         if (static_cast&lt;uint64_t&gt;(data_end - data) &lt; num_transactions) return __LINE__;</span></span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              :                         // limit reserved memory size because we can't check &quot;num_transactions&quot; properly here</span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           6 :                         const uint64_t k = std::min&lt;uint64_t&gt;(num_transactions + 1, 256);</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">           6 :                         transactions.reserve(k);</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">           6 :                         parent_indices.reserve(k);</span></span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           6 :                         transactions.resize(1);</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           6 :                         parent_indices.resize(1);</span></span>
+<span id="L248"><span class="lineNum">     248</span>              : </span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">         304 :                         for (uint64_t i = 0; i &lt; num_transactions; ++i) {</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">         298 :                                 uint64_t parent_index;</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">         298 :                                 READ_VARINT(parent_index);</span></span>
+<span id="L252"><span class="lineNum">     252</span>              : </span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         298 :                                 hash id;</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">         298 :                                 if (parent_index == 0) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">          80 :                                         READ_BUF(id.h, HASH_SIZE);</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          80 :                                 }</span></span>
+<span id="L257"><span class="lineNum">     257</span>              : </span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         298 :                                 transactions.emplace_back(id);</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         298 :                                 parent_indices.emplace_back(parent_index);</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">         298 :                         }</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">       40249 :                 else {</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">       40249 :                         if (static_cast&lt;uint64_t&gt;(data_end - data) &lt; num_transactions * HASH_SIZE) return __LINE__;</span></span>
 <span id="L264"><span class="lineNum">     264</span>              : </span>
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">       40249 :                         transactions.reserve(num_transactions + 1);</span></span>
