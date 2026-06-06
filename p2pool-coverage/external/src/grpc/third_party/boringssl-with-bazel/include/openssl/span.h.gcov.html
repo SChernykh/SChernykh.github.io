@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">18</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryLo">36.0&nbsp;%</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntry">9</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-06 14:02:28</td>
+            <td class="headerValue">2026-06-06 15:37:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryLo">60.0&nbsp;%</td>
+            <td class="headerCovTableEntry">10</td>
             <td class="headerCovTableEntry">6</td>
-            <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -152,9 +152,9 @@
 <span id="L90"><span class="lineNum">      90</span>              : template &lt;typename T&gt;</span>
 <span id="L91"><span class="lineNum">      91</span>              : class SpanStorage&lt;T, dynamic_extent&gt; : private SpanBase&lt;const T&gt; {</span>
 <span id="L92"><span class="lineNum">      92</span>              :  public:</span>
-<span id="L93"><span class="lineNum">      93</span>              :   constexpr SpanStorage(T *data, size_t size) : data_(data), size_(size) {}</span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC tlaBgUNC">           0 :   constexpr T *data() const { return data_; }</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaUNC">           0 :   constexpr size_t size() const { return size_; }</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">      160553 :   constexpr SpanStorage(T *data, size_t size) : data_(data), size_(size) {}</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      160553 :   constexpr T *data() const { return data_; }</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">     1123853 :   constexpr size_t size() const { return size_; }</span></span>
 <span id="L96"><span class="lineNum">      96</span>              : </span>
 <span id="L97"><span class="lineNum">      97</span>              :  private:</span>
 <span id="L98"><span class="lineNum">      98</span>              :   T *data_;</span>
@@ -225,7 +225,7 @@
 <span id="L163"><span class="lineNum">     163</span>              : </span>
 <span id="L164"><span class="lineNum">     164</span>              :   // NOTE: This constructor may abort() at runtime if len differs from the</span>
 <span id="L165"><span class="lineNum">     165</span>              :   // compile-time size, if any.</span>
-<span id="L166"><span class="lineNum">     166</span>              :   constexpr Span(T *ptr, size_t len) : internal::SpanStorage&lt;T, N&gt;(ptr, len) {}</span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      160555 :   constexpr Span(T *ptr, size_t len) : internal::SpanStorage&lt;T, N&gt;(ptr, len) {}</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span>              :   template &lt;size_t NA,</span>
 <span id="L169"><span class="lineNum">     169</span>              :             typename = std::enable_if_t&lt;N == NA || N == dynamic_extent&gt;&gt;</span>
@@ -280,7 +280,7 @@
 <span id="L218"><span class="lineNum">     218</span>              : </span>
 <span id="L219"><span class="lineNum">     219</span>              :   using internal::SpanStorage&lt;T, N&gt;::data;</span>
 <span id="L220"><span class="lineNum">     220</span>              :   using internal::SpanStorage&lt;T, N&gt;::size;</span>
-<span id="L221"><span class="lineNum">     221</span>              :   constexpr bool empty() const { return size() == 0; }</span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      321101 :   constexpr bool empty() const { return size() == 0; }</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
 <span id="L223"><span class="lineNum">     223</span>              :   constexpr iterator begin() const { return data(); }</span>
 <span id="L224"><span class="lineNum">     224</span>              :   constexpr const_iterator cbegin() const { return data(); }</span>
@@ -307,7 +307,7 @@
 <span id="L245"><span class="lineNum">     245</span>              :     return len != dynamic_extent ? len : size - pos;</span>
 <span id="L246"><span class="lineNum">     246</span>              :   }</span>
 <span id="L247"><span class="lineNum">     247</span>              :   static constexpr size_t SubspanTypeOutLen(size_t size, size_t pos,</span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC">           0 :                                             size_t len) {</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaUNC tlaBgUNC">           0 :                                             size_t len) {</span></span>
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaUNC">           0 :     // This differs from SubspanOutLen in that if both size and len are</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaUNC">           0 :     // dynamic_extent, dynamic_extent will be returned.</span></span>
 <span id="L251"><span class="lineNum">     251</span> <span class="tlaUNC">           0 :     return len != dynamic_extent</span></span>
@@ -330,11 +330,11 @@
 <span id="L268"><span class="lineNum">     268</span>              :   }</span>
 <span id="L269"><span class="lineNum">     269</span>              : </span>
 <span id="L270"><span class="lineNum">     270</span>              :   // NOTE: This method may abort() at runtime if pos is out of range.</span>
-<span id="L271"><span class="lineNum">     271</span>              :   constexpr Span&lt;T&gt; subspan(size_t pos) const {</span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC tlaBgGNC">           1 :   constexpr Span&lt;T&gt; subspan(size_t pos) const {</span></span>
 <span id="L272"><span class="lineNum">     272</span>              :     // absl::Span throws an exception here.</span>
-<span id="L273"><span class="lineNum">     273</span>              :     BSSL_CHECK(pos &lt;= size());</span>
-<span id="L274"><span class="lineNum">     274</span>              :     return Span&lt;T&gt;(data() + pos, size() - pos);</span>
-<span id="L275"><span class="lineNum">     275</span>              :   }</span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">           1 :     BSSL_CHECK(pos &lt;= size());</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">           1 :     return Span&lt;T&gt;(data() + pos, size() - pos);</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">           1 :   }</span></span>
 <span id="L276"><span class="lineNum">     276</span>              : </span>
 <span id="L277"><span class="lineNum">     277</span>              :   // NOTE: This method may abort() at runtime if len is out of range.</span>
 <span id="L278"><span class="lineNum">     278</span>              :   template &lt;size_t pos, size_t len = dynamic_extent&gt;</span>
@@ -406,7 +406,7 @@
 <span id="L344"><span class="lineNum">     344</span>              : }</span>
 <span id="L345"><span class="lineNum">     345</span>              : </span>
 <span id="L346"><span class="lineNum">     346</span>              : template &lt;typename T&gt;</span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC">           0 : constexpr Span&lt;const T&gt; MakeConstSpan(T *ptr, size_t size) {</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaUNC tlaBgUNC">           0 : constexpr Span&lt;const T&gt; MakeConstSpan(T *ptr, size_t size) {</span></span>
 <span id="L348"><span class="lineNum">     348</span> <span class="tlaUNC">           0 :   return Span&lt;const T&gt;(ptr, size);</span></span>
 <span id="L349"><span class="lineNum">     349</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L350"><span class="lineNum">     350</span>              : </span>

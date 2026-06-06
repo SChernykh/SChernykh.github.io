@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-06 14:02:28</td>
+            <td class="headerValue">2026-06-06 15:37:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -94,10 +94,10 @@
 <span id="L32"><span class="lineNum">      32</span>              : #include &quot;stratum_server.h&quot;</span>
 <span id="L33"><span class="lineNum">      33</span>              : #include &quot;rapidjson_wrapper.h&quot;</span>
 <span id="L34"><span class="lineNum">      34</span>              : #include &quot;merge_mining_client.h&quot;</span>
-<span id="L35"><span class="lineNum">      35</span>              : #include &quot;sha256.h&quot;</span>
-<span id="L36"><span class="lineNum">      36</span>              : #include &quot;i2p.h&quot;</span>
-<span id="L37"><span class="lineNum">      37</span>              : </span>
-<span id="L38"><span class="lineNum">      38</span>              : #include &lt;openssl/curve25519.h&gt;</span>
+<span id="L35"><span class="lineNum">      35</span>              : #include &quot;i2p.h&quot;</span>
+<span id="L36"><span class="lineNum">      36</span>              : </span>
+<span id="L37"><span class="lineNum">      37</span>              : #include &lt;openssl/curve25519.h&gt;</span>
+<span id="L38"><span class="lineNum">      38</span>              : #include &lt;openssl/sha2.h&gt;</span>
 <span id="L39"><span class="lineNum">      39</span>              : </span>
 <span id="L40"><span class="lineNum">      40</span>              : #include &lt;fstream&gt;</span>
 <span id="L41"><span class="lineNum">      41</span>              : #include &lt;numeric&gt;</span>
@@ -1840,7 +1840,7 @@
 <span id="L1778"><span class="lineNum">    1778</span>              : </span>
 <span id="L1779"><span class="lineNum">    1779</span> <span class="tlaUNC">           0 :         if (!duplicate_check_done) {</span></span>
 <span id="L1780"><span class="lineNum">    1780</span> <span class="tlaUNC">           0 :                 hash digest;</span></span>
-<span id="L1781"><span class="lineNum">    1781</span> <span class="tlaUNC">           0 :                 sha256(data, data_size, digest.h);</span></span>
+<span id="L1781"><span class="lineNum">    1781</span> <span class="tlaUNC">           0 :                 SHA256(data, data_size, digest.h);</span></span>
 <span id="L1782"><span class="lineNum">    1782</span>              : </span>
 <span id="L1783"><span class="lineNum">    1783</span>              :                 // Every message can be received from multiple peers, so broadcast it only once</span>
 <span id="L1784"><span class="lineNum">    1784</span> <span class="tlaUNC">           0 :                 if (!m_auxJobMessages.emplace(*digest.u64(), timestamp).second) {</span></span>
@@ -2014,7 +2014,7 @@
 <span id="L1952"><span class="lineNum">    1952</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1953"><span class="lineNum">    1953</span>              : </span>
 <span id="L1954"><span class="lineNum">    1954</span> <span class="tlaUNC">           0 :         hash digest;</span></span>
-<span id="L1955"><span class="lineNum">    1955</span> <span class="tlaUNC">           0 :         sha256(data + sizeof(MoneroBlockBroadcastHeader), data_size - sizeof(MoneroBlockBroadcastHeader), digest.h);</span></span>
+<span id="L1955"><span class="lineNum">    1955</span> <span class="tlaUNC">           0 :         SHA256(data + sizeof(MoneroBlockBroadcastHeader), data_size - sizeof(MoneroBlockBroadcastHeader), digest.h);</span></span>
 <span id="L1956"><span class="lineNum">    1956</span>              : </span>
 <span id="L1957"><span class="lineNum">    1957</span> <span class="tlaUNC">           0 :         if (!duplicate_check_done &amp;&amp; !store_monero_block_broadcast(digest)) {</span></span>
 <span id="L1958"><span class="lineNum">    1958</span> <span class="tlaUNC">           0 :                 LOGINFO(6, &quot;broadcast_monero_block: skipping duplicate broadcast&quot;);</span></span>
@@ -3380,7 +3380,7 @@
 <span id="L3318"><span class="lineNum">    3318</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L3319"><span class="lineNum">    3319</span>              : </span>
 <span id="L3320"><span class="lineNum">    3320</span> <span class="tlaUNC">           0 :         hash digest;</span></span>
-<span id="L3321"><span class="lineNum">    3321</span> <span class="tlaUNC">           0 :         sha256(buf, size, digest.h);</span></span>
+<span id="L3321"><span class="lineNum">    3321</span> <span class="tlaUNC">           0 :         SHA256(buf, size, digest.h);</span></span>
 <span id="L3322"><span class="lineNum">    3322</span>              : </span>
 <span id="L3323"><span class="lineNum">    3323</span>              :         // Ignore repeated old messages</span>
 <span id="L3324"><span class="lineNum">    3324</span> <span class="tlaUNC">           0 :         if (!server-&gt;m_auxJobMessages.emplace(*digest.u64(), data_timestamp).second) {</span></span>
@@ -3475,7 +3475,7 @@
 <span id="L3413"><span class="lineNum">    3413</span> <span class="tlaUNC">           0 :                 return true;</span></span>
 <span id="L3414"><span class="lineNum">    3414</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L3415"><span class="lineNum">    3415</span>              : </span>
-<span id="L3416"><span class="lineNum">    3416</span> <span class="tlaUNC">           0 :         sha256(buf, size, m_lastMoneroBlockBroadcastDigest.h);</span></span>
+<span id="L3416"><span class="lineNum">    3416</span> <span class="tlaUNC">           0 :         SHA256(buf, size, m_lastMoneroBlockBroadcastDigest.h);</span></span>
 <span id="L3417"><span class="lineNum">    3417</span>              : </span>
 <span id="L3418"><span class="lineNum">    3418</span>              :         // Ignore repeated old messages</span>
 <span id="L3419"><span class="lineNum">    3419</span> <span class="tlaUNC">           0 :         if (!server-&gt;store_monero_block_broadcast(m_lastMoneroBlockBroadcastDigest)) {</span></span>

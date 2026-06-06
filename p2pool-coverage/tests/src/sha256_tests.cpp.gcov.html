@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-06 14:02:28</td>
+            <td class="headerValue">2026-06-06 15:37:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -78,31 +78,32 @@
 <span id="L16"><span class="lineNum">      16</span>              :  */</span>
 <span id="L17"><span class="lineNum">      17</span>              : </span>
 <span id="L18"><span class="lineNum">      18</span>              : #include &quot;common.h&quot;</span>
-<span id="L19"><span class="lineNum">      19</span>              : #include &quot;sha256.h&quot;</span>
-<span id="L20"><span class="lineNum">      20</span>              : #include &quot;gtest/gtest.h&quot;</span>
-<span id="L21"><span class="lineNum">      21</span>              : </span>
-<span id="L22"><span class="lineNum">      22</span>              : namespace p2pool {</span>
-<span id="L23"><span class="lineNum">      23</span>              : </span>
-<span id="L24"><span class="lineNum">      24</span>              : TEST(sha256, hashing)</span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           4 :         auto check = [](const char* input, const char* output) {</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           4 :                 hash h;</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           4 :                 sha256(input, static_cast&lt;uint32_t&gt;(strlen(input)), h.h);</span></span>
-<span id="L29"><span class="lineNum">      29</span>              : </span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           4 :                 char buf[128];</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           4 :                 log::Stream s(buf);</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           4 :                 s &lt;&lt; h &lt;&lt; '\0';</span></span>
-<span id="L33"><span class="lineNum">      33</span>              : </span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(std::string(buf), std::string(output));</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           4 :         };</span></span>
-<span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           1 :         check(&quot;&quot;, &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;);</span></span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           1 :         check(&quot;test&quot;, &quot;9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08&quot;);</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :         check(&quot;The quick brown fox jumps over the lazy dog&quot;, &quot;d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592&quot;);</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         check(&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;, &quot;2d8c2f6d978ca21712b5f6de36c9d31fa8e96a4fa5d8ff8b0188dfb9e7c171bb&quot;);</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L42"><span class="lineNum">      42</span>              : </span>
-<span id="L43"><span class="lineNum">      43</span>              : }</span>
+<span id="L19"><span class="lineNum">      19</span>              : #include &quot;gtest/gtest.h&quot;</span>
+<span id="L20"><span class="lineNum">      20</span>              : </span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &lt;openssl/sha2.h&gt;</span>
+<span id="L22"><span class="lineNum">      22</span>              : </span>
+<span id="L23"><span class="lineNum">      23</span>              : namespace p2pool {</span>
+<span id="L24"><span class="lineNum">      24</span>              : </span>
+<span id="L25"><span class="lineNum">      25</span>              : TEST(sha256, hashing)</span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           4 :         auto check = [](const char* input, const char* output) {</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           4 :                 hash h;</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           4 :                 SHA256(reinterpret_cast&lt;const uint8_t*&gt;(input), static_cast&lt;uint32_t&gt;(strlen(input)), h.h);</span></span>
+<span id="L30"><span class="lineNum">      30</span>              : </span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           4 :                 char buf[128];</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           4 :                 log::Stream s(buf);</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           4 :                 s &lt;&lt; h &lt;&lt; '\0';</span></span>
+<span id="L34"><span class="lineNum">      34</span>              : </span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(std::string(buf), std::string(output));</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           4 :         };</span></span>
+<span id="L37"><span class="lineNum">      37</span>              : </span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           1 :         check(&quot;&quot;, &quot;e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855&quot;);</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :         check(&quot;test&quot;, &quot;9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08&quot;);</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         check(&quot;The quick brown fox jumps over the lazy dog&quot;, &quot;d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592&quot;);</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           1 :         check(&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot;, &quot;2d8c2f6d978ca21712b5f6de36c9d31fa8e96a4fa5d8ff8b0188dfb9e7c171bb&quot;);</span></span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L43"><span class="lineNum">      43</span>              : </span>
+<span id="L44"><span class="lineNum">      44</span>              : }</span>
         </pre>
               </td>
             </tr>
