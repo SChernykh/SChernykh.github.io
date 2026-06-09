@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-08 19:29:34</td>
+            <td class="headerValue">2026-06-09 05:53:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -2484,7 +2484,7 @@
 <span id="L2422"><span class="lineNum">    2422</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2423"><span class="lineNum">    2423</span>              : </span>
 <span id="L2424"><span class="lineNum">    2424</span>              :         // If we have more than 1 MB pending writes to this peer, disconnect - because this peer is either dead or malicious</span>
-<span id="L2425"><span class="lineNum">    2425</span> <span class="tlaUNC">           0 :         if (uv_stream_get_write_queue_size(reinterpret_cast&lt;uv_stream_t*&gt;(&amp;m_socket)) &gt; 1024 * 1024) {</span></span>
+<span id="L2425"><span class="lineNum">    2425</span> <span class="tlaUNC">           0 :         if (uv_stream_get_write_queue_size(reinterpret_cast&lt;uv_stream_t*&gt;(&amp;m_socket)) &gt; 1048576U) {</span></span>
 <span id="L2426"><span class="lineNum">    2426</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; write queue is full, disconnecting this peer&quot;);</span></span>
 <span id="L2427"><span class="lineNum">    2427</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L2428"><span class="lineNum">    2428</span> <span class="tlaUNC">           0 :         }</span></span>
