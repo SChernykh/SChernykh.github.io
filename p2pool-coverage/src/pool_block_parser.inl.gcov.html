@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-09 11:11:34</td>
+            <td class="headerValue">2026-06-13 15:04:08</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -417,7 +417,7 @@
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">       40255 :                 uint64_t num_uncles;</span></span>
 <span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">       40255 :                 READ_VARINT(num_uncles);</span></span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       40255 :                 if (num_uncles &gt; std::numeric_limits&lt;uint64_t&gt;::max() / HASH_SIZE) return __LINE__;</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">       40255 :                 if (num_uncles &gt; MAX_UNCLES_PER_BLOCK) return __LINE__;</span></span>
 <span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">       40255 :                 if (static_cast&lt;uint64_t&gt;(data_end - data) &lt; num_uncles * HASH_SIZE) return __LINE__;</span></span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
 <span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">       40255 :                 m_uncles.clear();</span></span>
