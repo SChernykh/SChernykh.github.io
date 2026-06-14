@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">68.3&nbsp;%</td>
-            <td class="headerCovTableEntry">60</td>
-            <td class="headerCovTableEntry">41</td>
+            <td class="headerCovTableEntryLo">69.8&nbsp;%</td>
+            <td class="headerCovTableEntry">63</td>
+            <td class="headerCovTableEntry">44</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-14 04:32:43</td>
+            <td class="headerValue">2026-06-14 06:06:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">18.8&nbsp;%</td>
@@ -92,27 +92,27 @@
 <span id="L30"><span class="lineNum">      30</span>              : };</span>
 <span id="L31"><span class="lineNum">      31</span>              : </span>
 <span id="L32"><span class="lineNum">      32</span>              : template&lt;typename T, typename U&gt;</span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">          26 : FORCEINLINE bool parseValue(T&amp; v, const char* name, U&amp; out_value) { return parse_wrapper&lt;T, U&gt;::parse(v, name, out_value); }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">          28 : FORCEINLINE bool parseValue(T&amp; v, const char* name, U&amp; out_value) { return parse_wrapper&lt;T, U&gt;::parse(v, name, out_value); }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : #define JSON_VALUE_PARSER(type, out_type) \</span>
 <span id="L36"><span class="lineNum">      36</span>              : template&lt;typename T&gt; \</span>
 <span id="L37"><span class="lineNum">      37</span>              : struct parse_wrapper&lt;T, out_type&gt; \</span>
 <span id="L38"><span class="lineNum">      38</span>              : { \</span>
 <span id="L39"><span class="lineNum">      39</span>              :         static FORCEINLINE bool parse(T&amp; v, const char* name, out_type&amp; out_value) \</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">          13 :         { \</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">          13 :                 if (!v.IsObject()) { \</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">          14 :         { \</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">          14 :                 if (!v.IsObject()) { \</span></span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false; \</span></span>
 <span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC">           0 :                 } \</span></span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC tlaBgGNC">          13 :                 const auto t = v.FindMember(name); \</span></span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">          13 :                 if (t != v.MemberEnd()) { \</span></span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">          13 :                         const auto&amp; value = t-&gt;value; \</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">          13 :                         if (value.Is##type()) { \</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">          13 :                                 out_value = static_cast&lt;out_type&gt;(value.Get##type()); \</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          13 :                                 return true; \</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">          13 :                         } \</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">          13 :                 } \</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">          13 :                 return false; \</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          13 :         } \</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC tlaBgGNC">          14 :                 const auto t = v.FindMember(name); \</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">          14 :                 if (t != v.MemberEnd()) { \</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">          14 :                         const auto&amp; value = t-&gt;value; \</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">          14 :                         if (value.Is##type()) { \</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">          14 :                                 out_value = static_cast&lt;out_type&gt;(value.Get##type()); \</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">          14 :                                 return true; \</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">          14 :                         } \</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">          14 :                 } \</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">          14 :                 return false; \</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">          14 :         } \</span></span>
 <span id="L54"><span class="lineNum">      54</span>              : };</span>
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
@@ -186,37 +186,42 @@
 <span id="L124"><span class="lineNum">     124</span>              : struct parse_wrapper&lt;T, difficulty_type&gt;</span>
 <span id="L125"><span class="lineNum">     125</span>              : {</span>
 <span id="L126"><span class="lineNum">     126</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, difficulty_type &amp;out_value)</span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">           9 :         {</span></span>
-<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           9 :                 const char* s = nullptr;</span></span>
-<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           9 :                 if (!parseValue(v, name, s) || !s) {</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">          10 :         {</span></span>
+<span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          10 :                 const char* s = nullptr;</span></span>
+<span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          10 :                 if (!parseValue(v, name, s) || !s) {</span></span>
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
 <span id="L131"><span class="lineNum">     131</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L132"><span class="lineNum">     132</span>              : </span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC tlaBgGNC">           9 :                 size_t N = strlen(s);</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           9 :                 if ((N &gt;= 2) &amp;&amp; (s[0] == '0') &amp;&amp; (s[1] == 'x')) {</span></span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">           9 :                         s += 2;</span></span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">           9 :                         N -= 2;</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">           9 :                 }</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC tlaBgGNC">          10 :                 size_t N = strlen(s);</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">          10 :                 if ((N &gt;= 2) &amp;&amp; (s[0] == '0') &amp;&amp; (s[1] == 'x')) {</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">          10 :                         s += 2;</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">          10 :                         N -= 2;</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">          10 :                 }</span></span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">           9 :                 out_value.lo = 0;</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">           9 :                 out_value.hi = 0;</span></span>
-<span id="L141"><span class="lineNum">     141</span>              : </span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">         155 :                 for (size_t i = 0; i &lt; N; ++i) {</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">         146 :                         uint8_t d;</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">         146 :                         if (!from_hex(s[i], d)) {</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC tlaBgGNC">         146 :                         out_value.hi = (out_value.hi &lt;&lt; 4) | (out_value.lo &gt;&gt; 60);</span></span>
-<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         146 :                         out_value.lo = (out_value.lo &lt;&lt; 4) | d;</span></span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         146 :                 }</span></span>
-<span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">           9 :                 return true;</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           9 :         }</span></span>
-<span id="L153"><span class="lineNum">     153</span>              : };</span>
-<span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span> <span class="tlaUNC tlaBgUNC">           0 : #define PARSE(doc, var, name) parseValue(doc, #name, var.name)</span></span>
-<span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span>              : } // namespace p2pool</span>
+<span id="L139"><span class="lineNum">     139</span>              :                 // Max 32 hex characters (128 bit)</span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">          10 :                 if (N &gt; 32) {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">           1 :                         return false;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">           1 :                 }</span></span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">           9 :                 out_value.lo = 0;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           9 :                 out_value.hi = 0;</span></span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">         155 :                 for (size_t i = 0; i &lt; N; ++i) {</span></span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">         146 :                         uint8_t d;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">         146 :                         if (!from_hex(s[i], d)) {</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC tlaBgGNC">         146 :                         out_value.hi = (out_value.hi &lt;&lt; 4) | (out_value.lo &gt;&gt; 60);</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">         146 :                         out_value.lo = (out_value.lo &lt;&lt; 4) | d;</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">         146 :                 }</span></span>
+<span id="L155"><span class="lineNum">     155</span>              : </span>
+<span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">           9 :                 return true;</span></span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           9 :         }</span></span>
+<span id="L158"><span class="lineNum">     158</span>              : };</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC tlaBgUNC">           0 : #define PARSE(doc, var, name) parseValue(doc, #name, var.name)</span></span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

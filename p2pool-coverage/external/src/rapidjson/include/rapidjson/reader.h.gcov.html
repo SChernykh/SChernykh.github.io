@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-14 04:32:43</td>
+            <td class="headerValue">2026-06-14 06:06:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">19.8&nbsp;%</td>
@@ -120,12 +120,12 @@
 <span id="L58"><span class="lineNum">      58</span>              : #define RAPIDJSON_NOTHING /* deliberately empty */</span>
 <span id="L59"><span class="lineNum">      59</span>              : #ifndef RAPIDJSON_PARSE_ERROR_EARLY_RETURN</span>
 <span id="L60"><span class="lineNum">      60</span>              : #define RAPIDJSON_PARSE_ERROR_EARLY_RETURN(value) \</span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">         143 :     RAPIDJSON_MULTILINEMACRO_BEGIN \</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         143 :     if (RAPIDJSON_UNLIKELY(HasParseError())) { return value; } \</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         143 :     RAPIDJSON_MULTILINEMACRO_END</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC tlaBgGNC">         154 :     RAPIDJSON_MULTILINEMACRO_BEGIN \</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">         154 :     if (RAPIDJSON_UNLIKELY(HasParseError())) { return value; } \</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">         154 :     RAPIDJSON_MULTILINEMACRO_END</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : #endif</span>
 <span id="L65"><span class="lineNum">      65</span>              : #define RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID \</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">         104 :     RAPIDJSON_PARSE_ERROR_EARLY_RETURN(RAPIDJSON_NOTHING)</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">         112 :     RAPIDJSON_PARSE_ERROR_EARLY_RETURN(RAPIDJSON_NOTHING)</span></span>
 <span id="L67"><span class="lineNum">      67</span>              : //!@endcond</span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
 <span id="L69"><span class="lineNum">      69</span>              : /*! \def RAPIDJSON_PARSE_ERROR_NORETURN</span>
@@ -292,8 +292,8 @@
 <span id="L230"><span class="lineNum">     230</span>              : template&lt;typename Stream&gt;</span>
 <span id="L231"><span class="lineNum">     231</span>              : class StreamLocalCopy&lt;Stream, 1&gt; {</span>
 <span id="L232"><span class="lineNum">     232</span>              : public:</span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC tlaBgGNC">         104 :     StreamLocalCopy(Stream&amp; original) : s(original), original_(original) {}</span></span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">         104 :     ~StreamLocalCopy() { original_ = s; }</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC tlaBgGNC">         112 :     StreamLocalCopy(Stream&amp; original) : s(original), original_(original) {}</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">         112 :     ~StreamLocalCopy() { original_ = s; }</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
 <span id="L236"><span class="lineNum">     236</span>              :     Stream s;</span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
@@ -325,14 +325,14 @@
 <span id="L263"><span class="lineNum">     263</span>              :     \note This function has SSE2/SSE4.2 specialization.</span>
 <span id="L264"><span class="lineNum">     264</span>              : */</span>
 <span id="L265"><span class="lineNum">     265</span>              : template&lt;typename InputStream&gt;</span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC tlaBgGNC">          78 : void SkipWhitespace(InputStream&amp; is) {</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">          78 :     internal::StreamLocalCopy&lt;InputStream&gt; copy(is);</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">          78 :     InputStream&amp; s(copy.s);</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC tlaBgGNC">          84 : void SkipWhitespace(InputStream&amp; is) {</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">          84 :     internal::StreamLocalCopy&lt;InputStream&gt; copy(is);</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">          84 :     InputStream&amp; s(copy.s);</span></span>
 <span id="L269"><span class="lineNum">     269</span>              : </span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          78 :     typename InputStream::Ch c;</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">          78 :     while ((c = s.Peek()) == ' ' || c == '\n' || c == '\r' || c == '\t')</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">          84 :     typename InputStream::Ch c;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">          84 :     while ((c = s.Peek()) == ' ' || c == '\n' || c == '\r' || c == '\t')</span></span>
 <span id="L272"><span class="lineNum">     272</span> <span class="tlaUNC tlaBgUNC">           0 :         s.Take();</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC tlaBgGNC">          78 : }</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC tlaBgGNC">          84 : }</span></span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
 <span id="L275"><span class="lineNum">     275</span> <span class="tlaUNC tlaBgUNC">           0 : inline const char* SkipWhitespace(const char* p, const char* end) {</span></span>
 <span id="L276"><span class="lineNum">     276</span> <span class="tlaUNC">           0 :     while (p != end &amp;&amp; (*p == ' ' || *p == '\n' || *p == '\r' || *p == '\t'))</span></span>
@@ -607,7 +607,7 @@
 <span id="L545"><span class="lineNum">     545</span>              :         \param stackCapacity stack capacity in bytes for storing a single decoded string.  (Only use for non-destructive parsing)</span>
 <span id="L546"><span class="lineNum">     546</span>              :     */</span>
 <span id="L547"><span class="lineNum">     547</span>              :     GenericReader(StackAllocator* stackAllocator = 0, size_t stackCapacity = kDefaultStackCapacity) :</span>
-<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC tlaBgGNC">          13 :         stack_(stackAllocator, stackCapacity), parseResult_(), state_(IterativeParsingStartState) {}</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC tlaBgGNC">          14 :         stack_(stackAllocator, stackCapacity), parseResult_(), state_(IterativeParsingStartState) {}</span></span>
 <span id="L549"><span class="lineNum">     549</span>              : </span>
 <span id="L550"><span class="lineNum">     550</span>              :     //! Parse JSON text.</span>
 <span id="L551"><span class="lineNum">     551</span>              :     /*! \tparam parseFlags Combination of \ref ParseFlag.</span>
@@ -618,38 +618,38 @@
 <span id="L556"><span class="lineNum">     556</span>              :         \return Whether the parsing is successful.</span>
 <span id="L557"><span class="lineNum">     557</span>              :     */</span>
 <span id="L558"><span class="lineNum">     558</span>              :     template &lt;unsigned parseFlags, typename InputStream, typename Handler&gt;</span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">          13 :     ParseResult Parse(InputStream&amp; is, Handler&amp; handler) {</span></span>
-<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">          13 :         if (parseFlags &amp; kParseIterativeFlag)</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">          14 :     ParseResult Parse(InputStream&amp; is, Handler&amp; handler) {</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">          14 :         if (parseFlags &amp; kParseIterativeFlag)</span></span>
 <span id="L561"><span class="lineNum">     561</span> <span class="tlaUNC tlaBgUNC">           0 :             return IterativeParse&lt;parseFlags&gt;(is, handler);</span></span>
 <span id="L562"><span class="lineNum">     562</span>              : </span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC tlaBgGNC">          13 :         parseResult_.Clear();</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC tlaBgGNC">          14 :         parseResult_.Clear();</span></span>
 <span id="L564"><span class="lineNum">     564</span>              : </span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">          13 :         ClearStackOnExit scope(*this);</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">          14 :         ClearStackOnExit scope(*this);</span></span>
 <span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">          13 :         SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">          13 :         RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">          14 :         SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">          14 :         RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
 <span id="L569"><span class="lineNum">     569</span>              : </span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">          13 :         if (RAPIDJSON_UNLIKELY(is.Peek() == '\0')) {</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">          14 :         if (RAPIDJSON_UNLIKELY(is.Peek() == '\0')) {</span></span>
 <span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC tlaBgUNC">           0 :             RAPIDJSON_PARSE_ERROR_NORETURN(kParseErrorDocumentEmpty, is.Tell());</span></span>
 <span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
 <span id="L573"><span class="lineNum">     573</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC tlaBgGNC">          13 :         else {</span></span>
-<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">          13 :             ParseValue&lt;parseFlags&gt;(is, handler);</span></span>
-<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC tlaBgGNC">          14 :         else {</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">          14 :             ParseValue&lt;parseFlags&gt;(is, handler);</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
 <span id="L577"><span class="lineNum">     577</span>              : </span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">          13 :             if (!(parseFlags &amp; kParseStopWhenDoneFlag)) {</span></span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">          13 :                 SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">          13 :                 RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
+<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">          14 :             if (!(parseFlags &amp; kParseStopWhenDoneFlag)) {</span></span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">          14 :                 SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">          14 :                 RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
 <span id="L581"><span class="lineNum">     581</span>              : </span>
-<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">          13 :                 if (RAPIDJSON_UNLIKELY(is.Peek() != '\0')) {</span></span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">          14 :                 if (RAPIDJSON_UNLIKELY(is.Peek() != '\0')) {</span></span>
 <span id="L583"><span class="lineNum">     583</span> <span class="tlaUNC tlaBgUNC">           0 :                     RAPIDJSON_PARSE_ERROR_NORETURN(kParseErrorDocumentRootNotSingular, is.Tell());</span></span>
 <span id="L584"><span class="lineNum">     584</span> <span class="tlaUNC">           0 :                     RAPIDJSON_PARSE_ERROR_EARLY_RETURN(parseResult_);</span></span>
 <span id="L585"><span class="lineNum">     585</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC tlaBgGNC">          13 :             }</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">          13 :         }</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC tlaBgGNC">          14 :             }</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">          14 :         }</span></span>
 <span id="L588"><span class="lineNum">     588</span>              : </span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          13 :         return parseResult_;</span></span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          13 :     }</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">          14 :         return parseResult_;</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">          14 :     }</span></span>
 <span id="L591"><span class="lineNum">     591</span>              : </span>
 <span id="L592"><span class="lineNum">     592</span>              :     //! Parse JSON text (with \ref kParseDefaultFlags)</span>
 <span id="L593"><span class="lineNum">     593</span>              :     /*! \tparam InputStream Type of input stream, implementing Stream concept</span>
@@ -741,7 +741,7 @@
 <span id="L679"><span class="lineNum">     679</span>              :     }</span>
 <span id="L680"><span class="lineNum">     680</span>              : </span>
 <span id="L681"><span class="lineNum">     681</span>              :     //! Whether a parse error has occurred in the last parsing.</span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">         143 :     bool HasParseError() const { return parseResult_.IsError(); }</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">         154 :     bool HasParseError() const { return parseResult_.IsError(); }</span></span>
 <span id="L683"><span class="lineNum">     683</span>              : </span>
 <span id="L684"><span class="lineNum">     684</span>              :     //! Get the \ref ParseErrorCode of last parsing.</span>
 <span id="L685"><span class="lineNum">     685</span>              :     ParseErrorCode GetParseErrorCode() const { return parseResult_.Code(); }</span>
@@ -757,12 +757,12 @@
 <span id="L695"><span class="lineNum">     695</span>              :     GenericReader(const GenericReader&amp;);</span>
 <span id="L696"><span class="lineNum">     696</span>              :     GenericReader&amp; operator=(const GenericReader&amp;);</span>
 <span id="L697"><span class="lineNum">     697</span>              : </span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC tlaBgGNC">          13 :     void ClearStack() { stack_.Clear(); }</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC tlaBgGNC">          14 :     void ClearStack() { stack_.Clear(); }</span></span>
 <span id="L699"><span class="lineNum">     699</span>              : </span>
 <span id="L700"><span class="lineNum">     700</span>              :     // clear stack on any exit from ParseStream, e.g. due to exception</span>
 <span id="L701"><span class="lineNum">     701</span>              :     struct ClearStackOnExit {</span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">          13 :         explicit ClearStackOnExit(GenericReader&amp; r) : r_(r) {}</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">          13 :         ~ClearStackOnExit() { r_.ClearStack(); }</span></span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">          14 :         explicit ClearStackOnExit(GenericReader&amp; r) : r_(r) {}</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">          14 :         ~ClearStackOnExit() { r_.ClearStack(); }</span></span>
 <span id="L704"><span class="lineNum">     704</span>              :     private:</span>
 <span id="L705"><span class="lineNum">     705</span>              :         GenericReader&amp; r_;</span>
 <span id="L706"><span class="lineNum">     706</span>              :         ClearStackOnExit(const ClearStackOnExit&amp;);</span>
@@ -770,10 +770,10 @@
 <span id="L708"><span class="lineNum">     708</span>              :     };</span>
 <span id="L709"><span class="lineNum">     709</span>              : </span>
 <span id="L710"><span class="lineNum">     710</span>              :     template&lt;unsigned parseFlags, typename InputStream&gt;</span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">          78 :     void SkipWhitespaceAndComments(InputStream&amp; is) {</span></span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">          78 :         SkipWhitespace(is);</span></span>
+<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">          84 :     void SkipWhitespaceAndComments(InputStream&amp; is) {</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">          84 :         SkipWhitespace(is);</span></span>
 <span id="L713"><span class="lineNum">     713</span>              : </span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">          78 :         if (parseFlags &amp; kParseCommentsFlag) {</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">          84 :         if (parseFlags &amp; kParseCommentsFlag) {</span></span>
 <span id="L715"><span class="lineNum">     715</span> <span class="tlaUNC tlaBgUNC">           0 :             while (RAPIDJSON_UNLIKELY(Consume(is, '/'))) {</span></span>
 <span id="L716"><span class="lineNum">     716</span> <span class="tlaUNC">           0 :                 if (Consume(is, '*')) {</span></span>
 <span id="L717"><span class="lineNum">     717</span> <span class="tlaUNC">           0 :                     while (true) {</span></span>
@@ -795,64 +795,64 @@
 <span id="L733"><span class="lineNum">     733</span> <span class="tlaUNC">           0 :                 SkipWhitespace(is);</span></span>
 <span id="L734"><span class="lineNum">     734</span> <span class="tlaUNC">           0 :             }</span></span>
 <span id="L735"><span class="lineNum">     735</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC tlaBgGNC">          78 :     }</span></span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC tlaBgGNC">          84 :     }</span></span>
 <span id="L737"><span class="lineNum">     737</span>              : </span>
 <span id="L738"><span class="lineNum">     738</span>              :     // Parse object: { string : value, ... }</span>
 <span id="L739"><span class="lineNum">     739</span>              :     template&lt;unsigned parseFlags, typename InputStream, typename Handler&gt;</span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaGNC">          13 :     void ParseObject(InputStream&amp; is, Handler&amp; handler) {</span></span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">          13 :         RAPIDJSON_ASSERT(is.Peek() == '{');</span></span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">          13 :         is.Take();  // Skip '{'</span></span>
+<span id="L740"><span class="lineNum">     740</span> <span class="tlaGNC">          14 :     void ParseObject(InputStream&amp; is, Handler&amp; handler) {</span></span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">          14 :         RAPIDJSON_ASSERT(is.Peek() == '{');</span></span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">          14 :         is.Take();  // Skip '{'</span></span>
 <span id="L743"><span class="lineNum">     743</span>              : </span>
-<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">          13 :         if (RAPIDJSON_UNLIKELY(!handler.StartObject()))</span></span>
-<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR(kParseErrorTermination, is.Tell());</span></span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">          14 :         if (RAPIDJSON_UNLIKELY(!handler.StartObject()))</span></span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR(kParseErrorTermination, is.Tell());</span></span>
 <span id="L746"><span class="lineNum">     746</span>              : </span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">          13 :         SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">          13 :         RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">          14 :         SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">          14 :         RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L749"><span class="lineNum">     749</span>              : </span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">          13 :         if (Consume(is, '}')) {</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">          14 :         if (Consume(is, '}')) {</span></span>
 <span id="L751"><span class="lineNum">     751</span> <span class="tlaUNC tlaBgUNC">           0 :             if (RAPIDJSON_UNLIKELY(!handler.EndObject(0)))  // empty object</span></span>
 <span id="L752"><span class="lineNum">     752</span> <span class="tlaUNC">           0 :                 RAPIDJSON_PARSE_ERROR(kParseErrorTermination, is.Tell());</span></span>
 <span id="L753"><span class="lineNum">     753</span> <span class="tlaUNC">           0 :             return;</span></span>
 <span id="L754"><span class="lineNum">     754</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L755"><span class="lineNum">     755</span>              : </span>
-<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC tlaBgGNC">          13 :         for (SizeType memberCount = 0;;) {</span></span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">          13 :             if (RAPIDJSON_UNLIKELY(is.Peek() != '&quot;'))</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">          13 :                 RAPIDJSON_PARSE_ERROR(kParseErrorObjectMissName, is.Tell());</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC tlaBgGNC">          14 :         for (SizeType memberCount = 0;;) {</span></span>
+<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">          14 :             if (RAPIDJSON_UNLIKELY(is.Peek() != '&quot;'))</span></span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">          14 :                 RAPIDJSON_PARSE_ERROR(kParseErrorObjectMissName, is.Tell());</span></span>
 <span id="L759"><span class="lineNum">     759</span>              : </span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">          13 :             ParseString&lt;parseFlags&gt;(is, handler, true);</span></span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">          14 :             ParseString&lt;parseFlags&gt;(is, handler, true);</span></span>
+<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L762"><span class="lineNum">     762</span>              : </span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">          13 :             SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
-<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">          14 :             SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
+<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L765"><span class="lineNum">     765</span>              : </span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">          13 :             if (RAPIDJSON_UNLIKELY(!Consume(is, ':')))</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">          13 :                 RAPIDJSON_PARSE_ERROR(kParseErrorObjectMissColon, is.Tell());</span></span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">          14 :             if (RAPIDJSON_UNLIKELY(!Consume(is, ':')))</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">          14 :                 RAPIDJSON_PARSE_ERROR(kParseErrorObjectMissColon, is.Tell());</span></span>
 <span id="L768"><span class="lineNum">     768</span>              : </span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">          13 :             SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">          14 :             SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L771"><span class="lineNum">     771</span>              : </span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">          13 :             ParseValue&lt;parseFlags&gt;(is, handler);</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">          14 :             ParseValue&lt;parseFlags&gt;(is, handler);</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L774"><span class="lineNum">     774</span>              : </span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">          13 :             SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
-<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">          13 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">          14 :             SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">          14 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L777"><span class="lineNum">     777</span>              : </span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">          13 :             ++memberCount;</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">          14 :             ++memberCount;</span></span>
 <span id="L779"><span class="lineNum">     779</span>              : </span>
-<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">          13 :             switch (is.Peek()) {</span></span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">          14 :             switch (is.Peek()) {</span></span>
 <span id="L781"><span class="lineNum">     781</span> <span class="tlaUNC tlaBgUNC">           0 :                 case ',':</span></span>
 <span id="L782"><span class="lineNum">     782</span> <span class="tlaUNC">           0 :                     is.Take();</span></span>
 <span id="L783"><span class="lineNum">     783</span> <span class="tlaUNC">           0 :                     SkipWhitespaceAndComments&lt;parseFlags&gt;(is);</span></span>
 <span id="L784"><span class="lineNum">     784</span> <span class="tlaUNC">           0 :                     RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
 <span id="L785"><span class="lineNum">     785</span> <span class="tlaUNC">           0 :                     break;</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC tlaBgGNC">          13 :                 case '}':</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">          13 :                     is.Take();</span></span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">          13 :                     if (RAPIDJSON_UNLIKELY(!handler.EndObject(memberCount)))</span></span>
-<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">          13 :                         RAPIDJSON_PARSE_ERROR(kParseErrorTermination, is.Tell());</span></span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">          13 :                     return;</span></span>
-<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">          13 :                 default:</span></span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC tlaBgGNC">          14 :                 case '}':</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">          14 :                     is.Take();</span></span>
+<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">          14 :                     if (RAPIDJSON_UNLIKELY(!handler.EndObject(memberCount)))</span></span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">          14 :                         RAPIDJSON_PARSE_ERROR(kParseErrorTermination, is.Tell());</span></span>
+<span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">          14 :                     return;</span></span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">          14 :                 default:</span></span>
 <span id="L792"><span class="lineNum">     792</span> <span class="tlaUNC tlaBgUNC">           0 :                     RAPIDJSON_PARSE_ERROR(kParseErrorObjectMissCommaOrCurlyBracket, is.Tell()); break; // This useless break is only for making warning and coverage happy</span></span>
-<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC tlaBgGNC">          13 :             }</span></span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC tlaBgGNC">          14 :             }</span></span>
 <span id="L794"><span class="lineNum">     794</span>              : </span>
 <span id="L795"><span class="lineNum">     795</span> <span class="tlaUNC tlaBgUNC">           0 :             if (parseFlags &amp; kParseTrailingCommasFlag) {</span></span>
 <span id="L796"><span class="lineNum">     796</span> <span class="tlaUNC">           0 :                 if (is.Peek() == '}') {</span></span>
@@ -863,7 +863,7 @@
 <span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :             }</span></span>
 <span id="L803"><span class="lineNum">     803</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC tlaBgGNC">          13 :     }</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC tlaBgGNC">          14 :     }</span></span>
 <span id="L805"><span class="lineNum">     805</span>              : </span>
 <span id="L806"><span class="lineNum">     806</span>              :     // Parse array: [ value, ... ]</span>
 <span id="L807"><span class="lineNum">     807</span>              :     template&lt;unsigned parseFlags, typename InputStream, typename Handler&gt;</span>
@@ -954,14 +954,14 @@
 <span id="L892"><span class="lineNum">     892</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L893"><span class="lineNum">     893</span>              : </span>
 <span id="L894"><span class="lineNum">     894</span>              :     template&lt;typename InputStream&gt;</span>
-<span id="L895"><span class="lineNum">     895</span> <span class="tlaGNC tlaBgGNC">          26 :     RAPIDJSON_FORCEINLINE static bool Consume(InputStream&amp; is, typename InputStream::Ch expect) {</span></span>
-<span id="L896"><span class="lineNum">     896</span> <span class="tlaGNC">          26 :         if (RAPIDJSON_LIKELY(is.Peek() == expect)) {</span></span>
-<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">          13 :             is.Take();</span></span>
-<span id="L898"><span class="lineNum">     898</span> <span class="tlaGNC">          13 :             return true;</span></span>
-<span id="L899"><span class="lineNum">     899</span> <span class="tlaGNC">          13 :         }</span></span>
-<span id="L900"><span class="lineNum">     900</span> <span class="tlaGNC">          13 :         else</span></span>
-<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">          13 :             return false;</span></span>
-<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">          26 :     }</span></span>
+<span id="L895"><span class="lineNum">     895</span> <span class="tlaGNC tlaBgGNC">          28 :     RAPIDJSON_FORCEINLINE static bool Consume(InputStream&amp; is, typename InputStream::Ch expect) {</span></span>
+<span id="L896"><span class="lineNum">     896</span> <span class="tlaGNC">          28 :         if (RAPIDJSON_LIKELY(is.Peek() == expect)) {</span></span>
+<span id="L897"><span class="lineNum">     897</span> <span class="tlaGNC">          14 :             is.Take();</span></span>
+<span id="L898"><span class="lineNum">     898</span> <span class="tlaGNC">          14 :             return true;</span></span>
+<span id="L899"><span class="lineNum">     899</span> <span class="tlaGNC">          14 :         }</span></span>
+<span id="L900"><span class="lineNum">     900</span> <span class="tlaGNC">          14 :         else</span></span>
+<span id="L901"><span class="lineNum">     901</span> <span class="tlaGNC">          14 :             return false;</span></span>
+<span id="L902"><span class="lineNum">     902</span> <span class="tlaGNC">          28 :     }</span></span>
 <span id="L903"><span class="lineNum">     903</span>              : </span>
 <span id="L904"><span class="lineNum">     904</span>              :     // Helper function to parse four hexadecimal digits in \uXXXX in ParseString().</span>
 <span id="L905"><span class="lineNum">     905</span>              :     template&lt;typename InputStream&gt;</span>
@@ -991,22 +991,22 @@
 <span id="L929"><span class="lineNum">     929</span>              :     public:</span>
 <span id="L930"><span class="lineNum">     930</span>              :         typedef CharType Ch;</span>
 <span id="L931"><span class="lineNum">     931</span>              : </span>
-<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC tlaBgGNC">          26 :         StackStream(internal::Stack&lt;StackAllocator&gt;&amp; stack) : stack_(stack), length_(0) {}</span></span>
-<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">         498 :         RAPIDJSON_FORCEINLINE void Put(Ch c) {</span></span>
-<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC">         498 :             *stack_.template Push&lt;Ch&gt;() = c;</span></span>
-<span id="L935"><span class="lineNum">     935</span> <span class="tlaGNC">         498 :             ++length_;</span></span>
-<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">         498 :         }</span></span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC tlaBgGNC">          28 :         StackStream(internal::Stack&lt;StackAllocator&gt;&amp; stack) : stack_(stack), length_(0) {}</span></span>
+<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">         554 :         RAPIDJSON_FORCEINLINE void Put(Ch c) {</span></span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC">         554 :             *stack_.template Push&lt;Ch&gt;() = c;</span></span>
+<span id="L935"><span class="lineNum">     935</span> <span class="tlaGNC">         554 :             ++length_;</span></span>
+<span id="L936"><span class="lineNum">     936</span> <span class="tlaGNC">         554 :         }</span></span>
 <span id="L937"><span class="lineNum">     937</span>              : </span>
 <span id="L938"><span class="lineNum">     938</span>              :         RAPIDJSON_FORCEINLINE void* Push(SizeType count) {</span>
 <span id="L939"><span class="lineNum">     939</span>              :             length_ += count;</span>
 <span id="L940"><span class="lineNum">     940</span>              :             return stack_.template Push&lt;Ch&gt;(count);</span>
 <span id="L941"><span class="lineNum">     941</span>              :         }</span>
 <span id="L942"><span class="lineNum">     942</span>              : </span>
-<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">          26 :         size_t Length() const { return length_; }</span></span>
+<span id="L943"><span class="lineNum">     943</span> <span class="tlaGNC">          28 :         size_t Length() const { return length_; }</span></span>
 <span id="L944"><span class="lineNum">     944</span>              : </span>
-<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">          26 :         Ch* Pop() {</span></span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">          26 :             return stack_.template Pop&lt;Ch&gt;(length_);</span></span>
-<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">          26 :         }</span></span>
+<span id="L945"><span class="lineNum">     945</span> <span class="tlaGNC">          28 :         Ch* Pop() {</span></span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC">          28 :             return stack_.template Pop&lt;Ch&gt;(length_);</span></span>
+<span id="L947"><span class="lineNum">     947</span> <span class="tlaGNC">          28 :         }</span></span>
 <span id="L948"><span class="lineNum">     948</span>              : </span>
 <span id="L949"><span class="lineNum">     949</span>              :     private:</span>
 <span id="L950"><span class="lineNum">     950</span>              :         StackStream(const StackStream&amp;);</span>
@@ -1018,15 +1018,15 @@
 <span id="L956"><span class="lineNum">     956</span>              : </span>
 <span id="L957"><span class="lineNum">     957</span>              :     // Parse string and generate String event. Different code paths for kParseInsituFlag.</span>
 <span id="L958"><span class="lineNum">     958</span>              :     template&lt;unsigned parseFlags, typename InputStream, typename Handler&gt;</span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          26 :     void ParseString(InputStream&amp; is, Handler&amp; handler, bool isKey = false) {</span></span>
-<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">          26 :         internal::StreamLocalCopy&lt;InputStream&gt; copy(is);</span></span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">          26 :         InputStream&amp; s(copy.s);</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          28 :     void ParseString(InputStream&amp; is, Handler&amp; handler, bool isKey = false) {</span></span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">          28 :         internal::StreamLocalCopy&lt;InputStream&gt; copy(is);</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">          28 :         InputStream&amp; s(copy.s);</span></span>
 <span id="L962"><span class="lineNum">     962</span>              : </span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">          26 :         RAPIDJSON_ASSERT(s.Peek() == '\&quot;');</span></span>
-<span id="L964"><span class="lineNum">     964</span> <span class="tlaGNC">          26 :         s.Take();  // Skip '\&quot;'</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaGNC">          28 :         RAPIDJSON_ASSERT(s.Peek() == '\&quot;');</span></span>
+<span id="L964"><span class="lineNum">     964</span> <span class="tlaGNC">          28 :         s.Take();  // Skip '\&quot;'</span></span>
 <span id="L965"><span class="lineNum">     965</span>              : </span>
-<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">          26 :         bool success = false;</span></span>
-<span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">          26 :         if (parseFlags &amp; kParseInsituFlag) {</span></span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">          28 :         bool success = false;</span></span>
+<span id="L967"><span class="lineNum">     967</span> <span class="tlaGNC">          28 :         if (parseFlags &amp; kParseInsituFlag) {</span></span>
 <span id="L968"><span class="lineNum">     968</span> <span class="tlaUNC tlaBgUNC">           0 :             typename InputStream::Ch *head = s.PutBegin();</span></span>
 <span id="L969"><span class="lineNum">     969</span> <span class="tlaUNC">           0 :             ParseStringToStream&lt;parseFlags, SourceEncoding, SourceEncoding&gt;(s, s);</span></span>
 <span id="L970"><span class="lineNum">     970</span> <span class="tlaUNC">           0 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
@@ -1035,41 +1035,41 @@
 <span id="L973"><span class="lineNum">     973</span> <span class="tlaUNC">           0 :             const typename TargetEncoding::Ch* const str = reinterpret_cast&lt;typename TargetEncoding::Ch*&gt;(head);</span></span>
 <span id="L974"><span class="lineNum">     974</span> <span class="tlaUNC">           0 :             success = (isKey ? handler.Key(str, SizeType(length), false) : handler.String(str, SizeType(length), false));</span></span>
 <span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC tlaBgGNC">          26 :         else {</span></span>
-<span id="L977"><span class="lineNum">     977</span> <span class="tlaGNC">          26 :             StackStream&lt;typename TargetEncoding::Ch&gt; stackStream(stack_);</span></span>
-<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">          26 :             ParseStringToStream&lt;parseFlags, SourceEncoding, TargetEncoding&gt;(s, stackStream);</span></span>
-<span id="L979"><span class="lineNum">     979</span> <span class="tlaGNC">          26 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
-<span id="L980"><span class="lineNum">     980</span> <span class="tlaGNC">          26 :             SizeType length = static_cast&lt;SizeType&gt;(stackStream.Length()) - 1;</span></span>
-<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC">          26 :             const typename TargetEncoding::Ch* const str = stackStream.Pop();</span></span>
-<span id="L982"><span class="lineNum">     982</span> <span class="tlaGNC">          26 :             success = (isKey ? handler.Key(str, length, true) : handler.String(str, length, true));</span></span>
-<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">          26 :         }</span></span>
-<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">          26 :         if (RAPIDJSON_UNLIKELY(!success))</span></span>
-<span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">          26 :             RAPIDJSON_PARSE_ERROR(kParseErrorTermination, s.Tell());</span></span>
-<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">          26 :     }</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC tlaBgGNC">          28 :         else {</span></span>
+<span id="L977"><span class="lineNum">     977</span> <span class="tlaGNC">          28 :             StackStream&lt;typename TargetEncoding::Ch&gt; stackStream(stack_);</span></span>
+<span id="L978"><span class="lineNum">     978</span> <span class="tlaGNC">          28 :             ParseStringToStream&lt;parseFlags, SourceEncoding, TargetEncoding&gt;(s, stackStream);</span></span>
+<span id="L979"><span class="lineNum">     979</span> <span class="tlaGNC">          28 :             RAPIDJSON_PARSE_ERROR_EARLY_RETURN_VOID;</span></span>
+<span id="L980"><span class="lineNum">     980</span> <span class="tlaGNC">          28 :             SizeType length = static_cast&lt;SizeType&gt;(stackStream.Length()) - 1;</span></span>
+<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC">          28 :             const typename TargetEncoding::Ch* const str = stackStream.Pop();</span></span>
+<span id="L982"><span class="lineNum">     982</span> <span class="tlaGNC">          28 :             success = (isKey ? handler.Key(str, length, true) : handler.String(str, length, true));</span></span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">          28 :         }</span></span>
+<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">          28 :         if (RAPIDJSON_UNLIKELY(!success))</span></span>
+<span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">          28 :             RAPIDJSON_PARSE_ERROR(kParseErrorTermination, s.Tell());</span></span>
+<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">          28 :     }</span></span>
 <span id="L987"><span class="lineNum">     987</span>              : </span>
 <span id="L988"><span class="lineNum">     988</span>              :     // Parse string to an output is</span>
 <span id="L989"><span class="lineNum">     989</span>              :     // This function handles the prefix/suffix double quotes, escaping, and optional encoding validation.</span>
 <span id="L990"><span class="lineNum">     990</span>              :     template&lt;unsigned parseFlags, typename SEncoding, typename TEncoding, typename InputStream, typename OutputStream&gt;</span>
-<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">          26 :     RAPIDJSON_FORCEINLINE void ParseStringToStream(InputStream&amp; is, OutputStream&amp; os) {</span></span>
+<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">          28 :     RAPIDJSON_FORCEINLINE void ParseStringToStream(InputStream&amp; is, OutputStream&amp; os) {</span></span>
 <span id="L992"><span class="lineNum">     992</span>              : //!@cond RAPIDJSON_HIDDEN_FROM_DOXYGEN</span>
-<span id="L993"><span class="lineNum">     993</span> <span class="tlaGNC">         312 : #define Z16 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</span></span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">          26 :         static const char escape[256] = {</span></span>
-<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">          26 :             Z16, Z16, 0, 0,'\&quot;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '/',</span></span>
-<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">          26 :             Z16, Z16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'\\', 0, 0, 0,</span></span>
-<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">          26 :             0, 0,'\b', 0, 0, 0,'\f', 0, 0, 0, 0, 0, 0, 0,'\n', 0,</span></span>
-<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">          26 :             0, 0,'\r', 0,'\t', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></span>
-<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">          26 :             Z16, Z16, Z16, Z16, Z16, Z16, Z16, Z16</span></span>
-<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">          26 :         };</span></span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">          26 : #undef Z16</span></span>
+<span id="L993"><span class="lineNum">     993</span> <span class="tlaGNC">         336 : #define Z16 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</span></span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">          28 :         static const char escape[256] = {</span></span>
+<span id="L995"><span class="lineNum">     995</span> <span class="tlaGNC">          28 :             Z16, Z16, 0, 0,'\&quot;', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '/',</span></span>
+<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">          28 :             Z16, Z16, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,'\\', 0, 0, 0,</span></span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">          28 :             0, 0,'\b', 0, 0, 0,'\f', 0, 0, 0, 0, 0, 0, 0,'\n', 0,</span></span>
+<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">          28 :             0, 0,'\r', 0,'\t', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></span>
+<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">          28 :             Z16, Z16, Z16, Z16, Z16, Z16, Z16, Z16</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">          28 :         };</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">          28 : #undef Z16</span></span>
 <span id="L1002"><span class="lineNum">    1002</span>              : //!@endcond</span>
 <span id="L1003"><span class="lineNum">    1003</span>              : </span>
-<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">         498 :         for (;;) {</span></span>
+<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">         554 :         for (;;) {</span></span>
 <span id="L1005"><span class="lineNum">    1005</span>              :             // Scan and copy string before &quot;\\\&quot;&quot; or &lt; 0x20. This is an optional optimzation.</span>
-<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">         498 :             if (!(parseFlags &amp; kParseValidateEncodingFlag))</span></span>
-<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">         498 :                 ScanCopyUnescapedString(is, os);</span></span>
+<span id="L1006"><span class="lineNum">    1006</span> <span class="tlaGNC">         554 :             if (!(parseFlags &amp; kParseValidateEncodingFlag))</span></span>
+<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">         554 :                 ScanCopyUnescapedString(is, os);</span></span>
 <span id="L1008"><span class="lineNum">    1008</span>              : </span>
-<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">         498 :             Ch c = is.Peek();</span></span>
-<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">         498 :             if (RAPIDJSON_UNLIKELY(c == '\\')) {    // Escape</span></span>
+<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">         554 :             Ch c = is.Peek();</span></span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">         554 :             if (RAPIDJSON_UNLIKELY(c == '\\')) {    // Escape</span></span>
 <span id="L1011"><span class="lineNum">    1011</span> <span class="tlaUNC tlaBgUNC">           0 :                 size_t escapeOffset = is.Tell();    // For invalid escaping, report the initial '\\' as error offset</span></span>
 <span id="L1012"><span class="lineNum">    1012</span> <span class="tlaUNC">           0 :                 is.Take();</span></span>
 <span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC">           0 :                 Ch e = is.Peek();</span></span>
@@ -1108,31 +1108,31 @@
 <span id="L1046"><span class="lineNum">    1046</span> <span class="tlaUNC">           0 :                 else</span></span>
 <span id="L1047"><span class="lineNum">    1047</span> <span class="tlaUNC">           0 :                     RAPIDJSON_PARSE_ERROR(kParseErrorStringEscapeInvalid, escapeOffset);</span></span>
 <span id="L1048"><span class="lineNum">    1048</span> <span class="tlaUNC">           0 :             }</span></span>
-<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC tlaBgGNC">         498 :             else if (RAPIDJSON_UNLIKELY(c == '&quot;')) {    // Closing double quote</span></span>
-<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">          26 :                 is.Take();</span></span>
-<span id="L1051"><span class="lineNum">    1051</span> <span class="tlaGNC">          26 :                 os.Put('\0');   // null-terminate the string</span></span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">          26 :                 return;</span></span>
-<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">          26 :             }</span></span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">         472 :             else if (RAPIDJSON_UNLIKELY(static_cast&lt;unsigned&gt;(c) &lt; 0x20)) { // RFC 4627: unescaped = %x20-21 / %x23-5B / %x5D-10FFFF</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC tlaBgGNC">         554 :             else if (RAPIDJSON_UNLIKELY(c == '&quot;')) {    // Closing double quote</span></span>
+<span id="L1050"><span class="lineNum">    1050</span> <span class="tlaGNC">          28 :                 is.Take();</span></span>
+<span id="L1051"><span class="lineNum">    1051</span> <span class="tlaGNC">          28 :                 os.Put('\0');   // null-terminate the string</span></span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">          28 :                 return;</span></span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">          28 :             }</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">         526 :             else if (RAPIDJSON_UNLIKELY(static_cast&lt;unsigned&gt;(c) &lt; 0x20)) { // RFC 4627: unescaped = %x20-21 / %x23-5B / %x5D-10FFFF</span></span>
 <span id="L1055"><span class="lineNum">    1055</span> <span class="tlaUNC tlaBgUNC">           0 :                 if (c == '\0')</span></span>
 <span id="L1056"><span class="lineNum">    1056</span> <span class="tlaUNC">           0 :                     RAPIDJSON_PARSE_ERROR(kParseErrorStringMissQuotationMark, is.Tell());</span></span>
 <span id="L1057"><span class="lineNum">    1057</span> <span class="tlaUNC">           0 :                 else</span></span>
 <span id="L1058"><span class="lineNum">    1058</span> <span class="tlaUNC">           0 :                     RAPIDJSON_PARSE_ERROR(kParseErrorStringInvalidEncoding, is.Tell());</span></span>
 <span id="L1059"><span class="lineNum">    1059</span> <span class="tlaUNC">           0 :             }</span></span>
-<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC tlaBgGNC">         472 :             else {</span></span>
-<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">         472 :                 size_t offset = is.Tell();</span></span>
-<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaGNC">         472 :                 if (RAPIDJSON_UNLIKELY((parseFlags &amp; kParseValidateEncodingFlag ?</span></span>
-<span id="L1063"><span class="lineNum">    1063</span> <span class="tlaGNC">         472 :                     !Transcoder&lt;SEncoding, TEncoding&gt;::Validate(is, os) :</span></span>
-<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaGNC">         472 :                     !Transcoder&lt;SEncoding, TEncoding&gt;::Transcode(is, os))))</span></span>
-<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaGNC">         472 :                     RAPIDJSON_PARSE_ERROR(kParseErrorStringInvalidEncoding, offset);</span></span>
-<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">         472 :             }</span></span>
-<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">         498 :         }</span></span>
-<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaGNC">          26 :     }</span></span>
+<span id="L1060"><span class="lineNum">    1060</span> <span class="tlaGNC tlaBgGNC">         526 :             else {</span></span>
+<span id="L1061"><span class="lineNum">    1061</span> <span class="tlaGNC">         526 :                 size_t offset = is.Tell();</span></span>
+<span id="L1062"><span class="lineNum">    1062</span> <span class="tlaGNC">         526 :                 if (RAPIDJSON_UNLIKELY((parseFlags &amp; kParseValidateEncodingFlag ?</span></span>
+<span id="L1063"><span class="lineNum">    1063</span> <span class="tlaGNC">         526 :                     !Transcoder&lt;SEncoding, TEncoding&gt;::Validate(is, os) :</span></span>
+<span id="L1064"><span class="lineNum">    1064</span> <span class="tlaGNC">         526 :                     !Transcoder&lt;SEncoding, TEncoding&gt;::Transcode(is, os))))</span></span>
+<span id="L1065"><span class="lineNum">    1065</span> <span class="tlaGNC">         526 :                     RAPIDJSON_PARSE_ERROR(kParseErrorStringInvalidEncoding, offset);</span></span>
+<span id="L1066"><span class="lineNum">    1066</span> <span class="tlaGNC">         526 :             }</span></span>
+<span id="L1067"><span class="lineNum">    1067</span> <span class="tlaGNC">         554 :         }</span></span>
+<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaGNC">          28 :     }</span></span>
 <span id="L1069"><span class="lineNum">    1069</span>              : </span>
 <span id="L1070"><span class="lineNum">    1070</span>              :     template&lt;typename InputStream, typename OutputStream&gt;</span>
-<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">         498 :     static RAPIDJSON_FORCEINLINE void ScanCopyUnescapedString(InputStream&amp;, OutputStream&amp;) {</span></span>
+<span id="L1071"><span class="lineNum">    1071</span> <span class="tlaGNC">         554 :     static RAPIDJSON_FORCEINLINE void ScanCopyUnescapedString(InputStream&amp;, OutputStream&amp;) {</span></span>
 <span id="L1072"><span class="lineNum">    1072</span>              :             // Do nothing for generic version</span>
-<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">         498 :     }</span></span>
+<span id="L1073"><span class="lineNum">    1073</span> <span class="tlaGNC">         554 :     }</span></span>
 <span id="L1074"><span class="lineNum">    1074</span>              : </span>
 <span id="L1075"><span class="lineNum">    1075</span>              : #if defined(RAPIDJSON_SSE2) || defined(RAPIDJSON_SSE42)</span>
 <span id="L1076"><span class="lineNum">    1076</span>              :     // StringStream -&gt; StackStream&lt;char&gt;</span>
@@ -1811,20 +1811,20 @@
 <span id="L1749"><span class="lineNum">    1749</span>              : </span>
 <span id="L1750"><span class="lineNum">    1750</span>              :     // Parse any JSON value</span>
 <span id="L1751"><span class="lineNum">    1751</span>              :     template&lt;unsigned parseFlags, typename InputStream, typename Handler&gt;</span>
-<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC tlaBgGNC">          26 :     void ParseValue(InputStream&amp; is, Handler&amp; handler) {</span></span>
-<span id="L1753"><span class="lineNum">    1753</span> <span class="tlaGNC">          26 :         switch (is.Peek()) {</span></span>
+<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC tlaBgGNC">          28 :     void ParseValue(InputStream&amp; is, Handler&amp; handler) {</span></span>
+<span id="L1753"><span class="lineNum">    1753</span> <span class="tlaGNC">          28 :         switch (is.Peek()) {</span></span>
 <span id="L1754"><span class="lineNum">    1754</span> <span class="tlaUNC tlaBgUNC">           0 :             case 'n': ParseNull  &lt;parseFlags&gt;(is, handler); break;</span></span>
 <span id="L1755"><span class="lineNum">    1755</span> <span class="tlaUNC">           0 :             case 't': ParseTrue  &lt;parseFlags&gt;(is, handler); break;</span></span>
 <span id="L1756"><span class="lineNum">    1756</span> <span class="tlaUNC">           0 :             case 'f': ParseFalse &lt;parseFlags&gt;(is, handler); break;</span></span>
-<span id="L1757"><span class="lineNum">    1757</span> <span class="tlaGNC tlaBgGNC">          13 :             case '&quot;': ParseString&lt;parseFlags&gt;(is, handler); break;</span></span>
-<span id="L1758"><span class="lineNum">    1758</span> <span class="tlaGNC">          13 :             case '{': ParseObject&lt;parseFlags&gt;(is, handler); break;</span></span>
+<span id="L1757"><span class="lineNum">    1757</span> <span class="tlaGNC tlaBgGNC">          14 :             case '&quot;': ParseString&lt;parseFlags&gt;(is, handler); break;</span></span>
+<span id="L1758"><span class="lineNum">    1758</span> <span class="tlaGNC">          14 :             case '{': ParseObject&lt;parseFlags&gt;(is, handler); break;</span></span>
 <span id="L1759"><span class="lineNum">    1759</span> <span class="tlaUNC tlaBgUNC">           0 :             case '[': ParseArray &lt;parseFlags&gt;(is, handler); break;</span></span>
 <span id="L1760"><span class="lineNum">    1760</span> <span class="tlaUNC">           0 :             default :</span></span>
 <span id="L1761"><span class="lineNum">    1761</span> <span class="tlaUNC">           0 :                       ParseNumber&lt;parseFlags&gt;(is, handler);</span></span>
 <span id="L1762"><span class="lineNum">    1762</span> <span class="tlaUNC">           0 :                       break;</span></span>
 <span id="L1763"><span class="lineNum">    1763</span>              : </span>
-<span id="L1764"><span class="lineNum">    1764</span> <span class="tlaGNC tlaBgGNC">          26 :         }</span></span>
-<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">          26 :     }</span></span>
+<span id="L1764"><span class="lineNum">    1764</span> <span class="tlaGNC tlaBgGNC">          28 :         }</span></span>
+<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">          28 :     }</span></span>
 <span id="L1766"><span class="lineNum">    1766</span>              : </span>
 <span id="L1767"><span class="lineNum">    1767</span>              :     // Iterative Parsing</span>
 <span id="L1768"><span class="lineNum">    1768</span>              : </span>

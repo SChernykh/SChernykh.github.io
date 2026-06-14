@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-14 04:32:43</td>
+            <td class="headerValue">2026-06-14 06:06:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">40.0&nbsp;%</td>
@@ -1022,7 +1022,7 @@
 <span id="L960"><span class="lineNum">     960</span>              : #define putenv _putenv</span>
 <span id="L961"><span class="lineNum">     961</span>              : #endif</span>
 <span id="L962"><span class="lineNum">     962</span>              : </span>
-<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :         const uint32_t N = std::min(std::max(std::thread::hardware_concurrency(), 4U), 8U);</span></span>
+<span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :         const uint32_t N = std::min(std::max(std::thread::hardware_concurrency(), MIN_UV_THREADPOOL_SIZE), MAX_UV_THREADPOOL_SIZE);</span></span>
 <span id="L964"><span class="lineNum">     964</span>              : </span>
 <span id="L965"><span class="lineNum">     965</span> <span class="tlaUNC">           0 :         static char buf[40] = {};</span></span>
 <span id="L966"><span class="lineNum">     966</span> <span class="tlaUNC">           0 :         log::Stream s(buf);</span></span>

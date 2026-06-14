@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-14 04:32:43</td>
+            <td class="headerValue">2026-06-14 06:06:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -366,7 +366,7 @@
 <span id="L304"><span class="lineNum">     304</span>              :     User can customize by defining the RAPIDJSON_ALIGN function macro.</span>
 <span id="L305"><span class="lineNum">     305</span>              : */</span>
 <span id="L306"><span class="lineNum">     306</span>              : #ifndef RAPIDJSON_ALIGN</span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC tlaBgGNC">          24 : #define RAPIDJSON_ALIGN(x) (((x) + static_cast&lt;size_t&gt;(7u)) &amp; ~static_cast&lt;size_t&gt;(7u))</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC tlaBgGNC">          26 : #define RAPIDJSON_ALIGN(x) (((x) + static_cast&lt;size_t&gt;(7u)) &amp; ~static_cast&lt;size_t&gt;(7u))</span></span>
 <span id="L308"><span class="lineNum">     308</span>              : #endif</span>
 <span id="L309"><span class="lineNum">     309</span>              : </span>
 <span id="L310"><span class="lineNum">     310</span>              : ///////////////////////////////////////////////////////////////////////////////</span>
@@ -379,7 +379,7 @@
 <span id="L317"><span class="lineNum">     317</span>              :     Use this macro to define 64-bit constants by a pair of 32-bit integer.</span>
 <span id="L318"><span class="lineNum">     318</span>              : */</span>
 <span id="L319"><span class="lineNum">     319</span>              : #ifndef RAPIDJSON_UINT64_C2</span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         100 : #define RAPIDJSON_UINT64_C2(high32, low32) ((static_cast&lt;uint64_t&gt;(high32) &lt;&lt; 32) | static_cast&lt;uint64_t&gt;(low32))</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">         108 : #define RAPIDJSON_UINT64_C2(high32, low32) ((static_cast&lt;uint64_t&gt;(high32) &lt;&lt; 32) | static_cast&lt;uint64_t&gt;(low32))</span></span>
 <span id="L321"><span class="lineNum">     321</span>              : #endif</span>
 <span id="L322"><span class="lineNum">     322</span>              : </span>
 <span id="L323"><span class="lineNum">     323</span>              : ///////////////////////////////////////////////////////////////////////////////</span>
@@ -405,8 +405,8 @@
 <span id="L343"><span class="lineNum">     343</span>              : #if RAPIDJSON_64BIT != 1</span>
 <span id="L344"><span class="lineNum">     344</span>              : #error RAPIDJSON_48BITPOINTER_OPTIMIZATION can only be set to 1 when RAPIDJSON_64BIT=1</span>
 <span id="L345"><span class="lineNum">     345</span>              : #endif</span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">          37 : #define RAPIDJSON_SETPOINTER(type, p, x) (p = reinterpret_cast&lt;type *&gt;((reinterpret_cast&lt;uintptr_t&gt;(p) &amp; static_cast&lt;uintptr_t&gt;(RAPIDJSON_UINT64_C2(0xFFFF0000, 0x00000000))) | reinterpret_cast&lt;uintptr_t&gt;(reinterpret_cast&lt;const void*&gt;(x))))</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          63 : #define RAPIDJSON_GETPOINTER(type, p) (reinterpret_cast&lt;type *&gt;(reinterpret_cast&lt;uintptr_t&gt;(p) &amp; static_cast&lt;uintptr_t&gt;(RAPIDJSON_UINT64_C2(0x0000FFFF, 0xFFFFFFFF))))</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">          40 : #define RAPIDJSON_SETPOINTER(type, p, x) (p = reinterpret_cast&lt;type *&gt;((reinterpret_cast&lt;uintptr_t&gt;(p) &amp; static_cast&lt;uintptr_t&gt;(RAPIDJSON_UINT64_C2(0xFFFF0000, 0x00000000))) | reinterpret_cast&lt;uintptr_t&gt;(reinterpret_cast&lt;const void*&gt;(x))))</span></span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">          68 : #define RAPIDJSON_GETPOINTER(type, p) (reinterpret_cast&lt;type *&gt;(reinterpret_cast&lt;uintptr_t&gt;(p) &amp; static_cast&lt;uintptr_t&gt;(RAPIDJSON_UINT64_C2(0x0000FFFF, 0xFFFFFFFF))))</span></span>
 <span id="L348"><span class="lineNum">     348</span>              : #else</span>
 <span id="L349"><span class="lineNum">     349</span>              : #define RAPIDJSON_SETPOINTER(type, p, x) (p = (x))</span>
 <span id="L350"><span class="lineNum">     350</span>              : #define RAPIDJSON_GETPOINTER(type, p) (p)</span>
@@ -496,7 +496,7 @@
 <span id="L434"><span class="lineNum">     434</span>              : */</span>
 <span id="L435"><span class="lineNum">     435</span>              : #ifndef RAPIDJSON_ASSERT</span>
 <span id="L436"><span class="lineNum">     436</span>              : #include &lt;cassert&gt;</span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">        1527 : #define RAPIDJSON_ASSERT(x) assert(x)</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">        1680 : #define RAPIDJSON_ASSERT(x) assert(x)</span></span>
 <span id="L438"><span class="lineNum">     438</span>              : #endif // RAPIDJSON_ASSERT</span>
 <span id="L439"><span class="lineNum">     439</span>              : </span>
 <span id="L440"><span class="lineNum">     440</span>              : ///////////////////////////////////////////////////////////////////////////////</span>
@@ -551,7 +551,7 @@
 <span id="L489"><span class="lineNum">     489</span>              : */</span>
 <span id="L490"><span class="lineNum">     490</span>              : #ifndef RAPIDJSON_LIKELY</span>
 <span id="L491"><span class="lineNum">     491</span>              : #if defined(__GNUC__) || defined(__clang__)</span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC tlaBgGNC">          65 : #define RAPIDJSON_LIKELY(x) __builtin_expect(!!(x), 1)</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC tlaBgGNC">          70 : #define RAPIDJSON_LIKELY(x) __builtin_expect(!!(x), 1)</span></span>
 <span id="L493"><span class="lineNum">     493</span>              : #else</span>
 <span id="L494"><span class="lineNum">     494</span>              : #define RAPIDJSON_LIKELY(x) (x)</span>
 <span id="L495"><span class="lineNum">     495</span>              : #endif</span>
@@ -564,7 +564,7 @@
 <span id="L502"><span class="lineNum">     502</span>              : */</span>
 <span id="L503"><span class="lineNum">     503</span>              : #ifndef RAPIDJSON_UNLIKELY</span>
 <span id="L504"><span class="lineNum">     504</span>              : #if defined(__GNUC__) || defined(__clang__)</span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">        2748 : #define RAPIDJSON_UNLIKELY(x) __builtin_expect(!!(x), 0)</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">        3048 : #define RAPIDJSON_UNLIKELY(x) __builtin_expect(!!(x), 0)</span></span>
 <span id="L506"><span class="lineNum">     506</span>              : #else</span>
 <span id="L507"><span class="lineNum">     507</span>              : #define RAPIDJSON_UNLIKELY(x) (x)</span>
 <span id="L508"><span class="lineNum">     508</span>              : #endif</span>
@@ -575,9 +575,9 @@
 <span id="L513"><span class="lineNum">     513</span>              : </span>
 <span id="L514"><span class="lineNum">     514</span>              : //!@cond RAPIDJSON_HIDDEN_FROM_DOXYGEN</span>
 <span id="L515"><span class="lineNum">     515</span>              : </span>
-<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">         143 : #define RAPIDJSON_MULTILINEMACRO_BEGIN do {</span></span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">         143 : #define RAPIDJSON_MULTILINEMACRO_END \</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">         143 : } while((void)0, 0)</span></span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">         154 : #define RAPIDJSON_MULTILINEMACRO_BEGIN do {</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">         154 : #define RAPIDJSON_MULTILINEMACRO_END \</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">         154 : } while((void)0, 0)</span></span>
 <span id="L519"><span class="lineNum">     519</span>              : </span>
 <span id="L520"><span class="lineNum">     520</span>              : // adopted from Boost</span>
 <span id="L521"><span class="lineNum">     521</span>              : #define RAPIDJSON_VERSION_CODE(x,y,z) \</span>
@@ -746,7 +746,7 @@
 <span id="L684"><span class="lineNum">     684</span>              : #include &lt;cassert&gt;</span>
 <span id="L685"><span class="lineNum">     685</span>              : #define RAPIDJSON_NOEXCEPT_ASSERT(x) assert(x)</span>
 <span id="L686"><span class="lineNum">     686</span>              : #else</span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">          63 : #define RAPIDJSON_NOEXCEPT_ASSERT(x) RAPIDJSON_ASSERT(x)</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">          68 : #define RAPIDJSON_NOEXCEPT_ASSERT(x) RAPIDJSON_ASSERT(x)</span></span>
 <span id="L688"><span class="lineNum">     688</span>              : #endif // RAPIDJSON_ASSERT_THROWS</span>
 <span id="L689"><span class="lineNum">     689</span>              : #endif // RAPIDJSON_NOEXCEPT_ASSERT</span>
 <span id="L690"><span class="lineNum">     690</span>              : </span>
@@ -755,15 +755,15 @@
 <span id="L693"><span class="lineNum">     693</span>              : </span>
 <span id="L694"><span class="lineNum">     694</span>              : #ifndef RAPIDJSON_MALLOC</span>
 <span id="L695"><span class="lineNum">     695</span>              : ///! customization point for global \c malloc</span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">          26 : #define RAPIDJSON_MALLOC(size) std::malloc(size)</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">          28 : #define RAPIDJSON_MALLOC(size) std::malloc(size)</span></span>
 <span id="L697"><span class="lineNum">     697</span>              : #endif</span>
 <span id="L698"><span class="lineNum">     698</span>              : #ifndef RAPIDJSON_REALLOC</span>
 <span id="L699"><span class="lineNum">     699</span>              : ///! customization point for global \c realloc</span>
-<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">          26 : #define RAPIDJSON_REALLOC(ptr, new_size) std::realloc(ptr, new_size)</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">          28 : #define RAPIDJSON_REALLOC(ptr, new_size) std::realloc(ptr, new_size)</span></span>
 <span id="L701"><span class="lineNum">     701</span>              : #endif</span>
 <span id="L702"><span class="lineNum">     702</span>              : #ifndef RAPIDJSON_FREE</span>
 <span id="L703"><span class="lineNum">     703</span>              : ///! customization point for global \c free</span>
-<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">          65 : #define RAPIDJSON_FREE(ptr) std::free(ptr)</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">          70 : #define RAPIDJSON_FREE(ptr) std::free(ptr)</span></span>
 <span id="L705"><span class="lineNum">     705</span>              : #endif</span>
 <span id="L706"><span class="lineNum">     706</span>              : </span>
 <span id="L707"><span class="lineNum">     707</span>              : ///////////////////////////////////////////////////////////////////////////////</span>
@@ -771,11 +771,11 @@
 <span id="L709"><span class="lineNum">     709</span>              : </span>
 <span id="L710"><span class="lineNum">     710</span>              : #ifndef RAPIDJSON_NEW</span>
 <span id="L711"><span class="lineNum">     711</span>              : ///! customization point for global \c new</span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">          52 : #define RAPIDJSON_NEW(TypeName) new TypeName</span></span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">          56 : #define RAPIDJSON_NEW(TypeName) new TypeName</span></span>
 <span id="L713"><span class="lineNum">     713</span>              : #endif</span>
 <span id="L714"><span class="lineNum">     714</span>              : #ifndef RAPIDJSON_DELETE</span>
 <span id="L715"><span class="lineNum">     715</span>              : ///! customization point for global \c delete</span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">          52 : #define RAPIDJSON_DELETE(x) delete x</span></span>
+<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">          56 : #define RAPIDJSON_DELETE(x) delete x</span></span>
 <span id="L717"><span class="lineNum">     717</span>              : #endif</span>
 <span id="L718"><span class="lineNum">     718</span>              : </span>
 <span id="L719"><span class="lineNum">     719</span>              : ///////////////////////////////////////////////////////////////////////////////</span>
