@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-13 15:04:08</td>
+            <td class="headerValue">2026-06-14 04:32:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">40.0&nbsp;%</td>
@@ -465,13 +465,13 @@
 <span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC tlaBgGNC">           9 : }</span></span>
 <span id="L404"><span class="lineNum">     404</span>              : </span>
 <span id="L405"><span class="lineNum">     405</span>              : void uv_mutex_init_checked(uv_mutex_t* mutex)</span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          26 : {</span></span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          26 :         const int result = uv_mutex_init(mutex);</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          26 :         if (result) {</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          21 : {</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">          21 :         const int result = uv_mutex_init(mutex);</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">          21 :         if (result) {</span></span>
 <span id="L409"><span class="lineNum">     409</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;failed to create mutex, error &quot; &lt;&lt; uv_err_name(result));</span></span>
 <span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC tlaBgGNC">          26 : }</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC tlaBgGNC">          21 : }</span></span>
 <span id="L413"><span class="lineNum">     413</span>              : </span>
 <span id="L414"><span class="lineNum">     414</span>              : void uv_rwlock_init_checked(uv_rwlock_t* lock)</span>
 <span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">          72 : {</span></span>
