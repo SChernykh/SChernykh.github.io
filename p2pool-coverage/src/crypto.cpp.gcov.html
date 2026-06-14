@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-14 12:07:38</td>
+            <td class="headerValue">2026-06-14 14:57:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -145,25 +145,25 @@
 <span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">       40257 : }</span></span>
 <span id="L84"><span class="lineNum">      84</span>              : </span>
 <span id="L85"><span class="lineNum">      85</span>              : static FORCEINLINE void hash_to_scalar(const uint8_t* data, int length, uint8_t (&amp;res)[HASH_SIZE])</span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">      627569 : {</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">      627569 :         keccak(data, length, res);</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">      627569 :         sc_reduce32(res);</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">      627569 : }</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">      627017 : {</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">      627017 :         keccak(data, length, res);</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">      627017 :         sc_reduce32(res);</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">      627017 : }</span></span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span>              : static FORCEINLINE void derivation_to_scalar(const hash&amp; derivation, size_t output_index, uint8_t (&amp;res)[HASH_SIZE])</span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">      627765 : {</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">      627765 :         struct {</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      627765 :                 uint8_t derivation[HASH_SIZE];</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">      627765 :                 uint8_t output_index[(sizeof(size_t) * 8 + 6) / 7];</span></span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">      627765 :         } buf;</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">      627193 : {</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">      627193 :         struct {</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      627193 :                 uint8_t derivation[HASH_SIZE];</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">      627193 :                 uint8_t output_index[(sizeof(size_t) * 8 + 6) / 7];</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">      627193 :         } buf;</span></span>
 <span id="L97"><span class="lineNum">      97</span>              : </span>
-<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">      627765 :         memcpy(buf.derivation, derivation.h, sizeof(buf.derivation));</span></span>
+<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">      627193 :         memcpy(buf.derivation, derivation.h, sizeof(buf.derivation));</span></span>
 <span id="L99"><span class="lineNum">      99</span>              : </span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">      627765 :         uint8_t* p = buf.output_index;</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">     1023321 :         writeVarint(output_index, [&amp;p](uint8_t b) { *(p++) = b; });</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">      627193 :         uint8_t* p = buf.output_index;</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">     1022189 :         writeVarint(output_index, [&amp;p](uint8_t b) { *(p++) = b; });</span></span>
 <span id="L102"><span class="lineNum">     102</span>              : </span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">      627765 :         hash_to_scalar(buf.derivation, static_cast&lt;int&gt;(sizeof(buf.derivation) + (p - buf.output_index)), res);</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">      627765 : }</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">      627193 :         hash_to_scalar(buf.derivation, static_cast&lt;int&gt;(sizeof(buf.derivation) + (p - buf.output_index)), res);</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">      627193 : }</span></span>
 <span id="L105"><span class="lineNum">     105</span>              : </span>
 <span id="L106"><span class="lineNum">     106</span>              : class Cache : public nocopy_nomove</span>
 <span id="L107"><span class="lineNum">     107</span>              : {</span>
@@ -190,94 +190,94 @@
 <span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">           5 :         }</span></span>
 <span id="L129"><span class="lineNum">     129</span>              : </span>
 <span id="L130"><span class="lineNum">     130</span>              :         bool get_derivation(const hash&amp; key1, const hash&amp; key2, size_t output_index, hash&amp; derivation, uint8_t&amp; view_tag)</span>
-<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">     3699018 :         {</span></span>
-<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">     3699018 :                 std::array&lt;uint8_t, HASH_SIZE * 2&gt; index;</span></span>
-<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">     3699018 :                 memcpy(index.data(), key1.h, HASH_SIZE);</span></span>
-<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">     3699018 :                 memcpy(index.data() + HASH_SIZE, key2.h, HASH_SIZE);</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">     3699020 :         {</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">     3699020 :                 std::array&lt;uint8_t, HASH_SIZE * 2&gt; index;</span></span>
+<span id="L133"><span class="lineNum">     133</span> <span class="tlaGNC">     3699020 :                 memcpy(index.data(), key1.h, HASH_SIZE);</span></span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">     3699020 :                 memcpy(index.data() + HASH_SIZE, key2.h, HASH_SIZE);</span></span>
 <span id="L135"><span class="lineNum">     135</span>              : </span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">     3699018 :                 derivation = {};</span></span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">     3699018 :                 {</span></span>
-<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">     3699018 :                         ReadLock lock(derivations_lock);</span></span>
-<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">     3699018 :                         auto it = derivations-&gt;find(index);</span></span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">     3699018 :                         if (it != derivations-&gt;end()) {</span></span>
-<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">     3332008 :                                 const DerivationEntry&amp; entry = it-&gt;second;</span></span>
-<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">     3332008 :                                 derivation = entry.m_derivation;</span></span>
-<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">     3332008 :                                 if (entry.find_view_tag(output_index, view_tag)) {</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">     3103468 :                                         return true;</span></span>
-<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">     3103468 :                                 }</span></span>
-<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">     3332008 :                         }</span></span>
-<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">     3699018 :                 }</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">     3699020 :                 derivation = {};</span></span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">     3699020 :                 {</span></span>
+<span id="L138"><span class="lineNum">     138</span> <span class="tlaGNC">     3699020 :                         ReadLock lock(derivations_lock);</span></span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">     3699020 :                         auto it = derivations-&gt;find(index);</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">     3699020 :                         if (it != derivations-&gt;end()) {</span></span>
+<span id="L141"><span class="lineNum">     141</span> <span class="tlaGNC">     3332352 :                                 const DerivationEntry&amp; entry = it-&gt;second;</span></span>
+<span id="L142"><span class="lineNum">     142</span> <span class="tlaGNC">     3332352 :                                 derivation = entry.m_derivation;</span></span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">     3332352 :                                 if (entry.find_view_tag(output_index, view_tag)) {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">     3103306 :                                         return true;</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">     3103306 :                                 }</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">     3332352 :                         }</span></span>
+<span id="L147"><span class="lineNum">     147</span> <span class="tlaGNC">     3699020 :                 }</span></span>
 <span id="L148"><span class="lineNum">     148</span>              : </span>
-<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">      595550 :                 if (derivation.empty()) {</span></span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">      367005 :                         ge_p3 point;</span></span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">      367005 :                         ge_p2 point2;</span></span>
-<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">      367005 :                         ge_p1p1 point3;</span></span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaGNC">      595714 :                 if (derivation.empty()) {</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">      366614 :                         ge_p3 point;</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">      366614 :                         ge_p2 point2;</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">      366614 :                         ge_p1p1 point3;</span></span>
 <span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">      367005 :                         if (ge_frombytes_vartime(&amp;point, key1.h) != 0) {</span></span>
+<span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">      366614 :                         if (ge_frombytes_vartime(&amp;point, key1.h) != 0) {</span></span>
 <span id="L155"><span class="lineNum">     155</span> <span class="tlaGNC">         256 :                                 return false;</span></span>
 <span id="L156"><span class="lineNum">     156</span> <span class="tlaGNC">         256 :                         }</span></span>
 <span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">      366749 :                         ge_scalarmult_vartime(&amp;point2, key2.h, &amp;point);</span></span>
-<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">      366749 :                         ge_mul8(&amp;point3, &amp;point2);</span></span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">      366749 :                         ge_p1p1_to_p2(&amp;point2, &amp;point3);</span></span>
-<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">      366749 :                         ge_tobytes(reinterpret_cast&lt;uint8_t*&gt;(&amp;derivation), &amp;point2);</span></span>
-<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">      366749 :                 }</span></span>
+<span id="L158"><span class="lineNum">     158</span> <span class="tlaGNC">      366358 :                         ge_scalarmult_vartime(&amp;point2, key2.h, &amp;point);</span></span>
+<span id="L159"><span class="lineNum">     159</span> <span class="tlaGNC">      366358 :                         ge_mul8(&amp;point3, &amp;point2);</span></span>
+<span id="L160"><span class="lineNum">     160</span> <span class="tlaGNC">      366358 :                         ge_p1p1_to_p2(&amp;point2, &amp;point3);</span></span>
+<span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">      366358 :                         ge_tobytes(reinterpret_cast&lt;uint8_t*&gt;(&amp;derivation), &amp;point2);</span></span>
+<span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">      366358 :                 }</span></span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">      595294 :                 derive_view_tag(derivation, output_index, view_tag);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">      595458 :                 derive_view_tag(derivation, output_index, view_tag);</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      595294 :                 const uint64_t t = seconds_since_epoch();</span></span>
-<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">      595294 :                 {</span></span>
-<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">      595294 :                         WriteLock lock(derivations_lock);</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      595458 :                 const uint64_t t = seconds_since_epoch();</span></span>
+<span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">      595458 :                 {</span></span>
+<span id="L168"><span class="lineNum">     168</span> <span class="tlaGNC">      595458 :                         WriteLock lock(derivations_lock);</span></span>
 <span id="L169"><span class="lineNum">     169</span>              : </span>
-<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">      595294 :                         auto entry = derivations-&gt;emplace(index, DerivationEntry{ derivation, { 0xFFFFFFFFUL, 0xFFFFFFFFUL }, {}, static_cast&lt;uint32_t&gt;(t) }).first;</span></span>
-<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      595294 :                         entry-&gt;second.add_view_tag(static_cast&lt;uint32_t&gt;(output_index &lt;&lt; 8) | view_tag);</span></span>
-<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">      595294 :                 }</span></span>
+<span id="L170"><span class="lineNum">     170</span> <span class="tlaGNC">      595458 :                         auto entry = derivations-&gt;emplace(index, DerivationEntry{ derivation, { 0xFFFFFFFFUL, 0xFFFFFFFFUL }, {}, static_cast&lt;uint32_t&gt;(t) }).first;</span></span>
+<span id="L171"><span class="lineNum">     171</span> <span class="tlaGNC">      595458 :                         entry-&gt;second.add_view_tag(static_cast&lt;uint32_t&gt;(output_index &lt;&lt; 8) | view_tag);</span></span>
+<span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">      595458 :                 }</span></span>
 <span id="L173"><span class="lineNum">     173</span>              : </span>
-<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">      595294 :                 return true;</span></span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      595550 :         }</span></span>
+<span id="L174"><span class="lineNum">     174</span> <span class="tlaGNC">      595458 :                 return true;</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">      595714 :         }</span></span>
 <span id="L176"><span class="lineNum">     176</span>              : </span>
 <span id="L177"><span class="lineNum">     177</span>              :         bool get_public_key(const hash&amp; derivation, size_t output_index, const hash&amp; base, hash&amp; derived_key)</span>
-<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">     3695702 :         {</span></span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">     3695702 :                 std::array&lt;uint8_t, HASH_SIZE * 2 + sizeof(size_t)&gt; index;</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">     3695702 :                 memcpy(index.data(), derivation.h, HASH_SIZE);</span></span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">     3695702 :                 memcpy(index.data() + HASH_SIZE, base.h, HASH_SIZE);</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">     3695702 :                 memcpy(index.data() + HASH_SIZE * 2, &amp;output_index, sizeof(size_t));</span></span>
+<span id="L178"><span class="lineNum">     178</span> <span class="tlaGNC">     3695491 :         {</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">     3695491 :                 std::array&lt;uint8_t, HASH_SIZE * 2 + sizeof(size_t)&gt; index;</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">     3695491 :                 memcpy(index.data(), derivation.h, HASH_SIZE);</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">     3695491 :                 memcpy(index.data() + HASH_SIZE, base.h, HASH_SIZE);</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">     3695491 :                 memcpy(index.data() + HASH_SIZE * 2, &amp;output_index, sizeof(size_t));</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">     3695702 :                 {</span></span>
-<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">     3695702 :                         ReadLock lock(public_keys_lock);</span></span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">     3695702 :                         auto it = public_keys-&gt;find(index);</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">     3695702 :                         if (it != public_keys-&gt;end()) {</span></span>
-<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">     3067895 :                                 derived_key = it-&gt;second.m_key;</span></span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">     3067895 :                                 return true;</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">     3067895 :                         }</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">     3695702 :                 }</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">     3695491 :                 {</span></span>
+<span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">     3695491 :                         ReadLock lock(public_keys_lock);</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">     3695491 :                         auto it = public_keys-&gt;find(index);</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">     3695491 :                         if (it != public_keys-&gt;end()) {</span></span>
+<span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">     3068259 :                                 derived_key = it-&gt;second.m_key;</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">     3068259 :                                 return true;</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">     3068259 :                         }</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">     3695491 :                 }</span></span>
 <span id="L192"><span class="lineNum">     192</span>              : </span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">      627807 :                 uint8_t scalar[HASH_SIZE];</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">      627807 :                 ge_p3 point1;</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">      627807 :                 ge_p3 point2;</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">      627807 :                 ge_cached point3;</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">      627807 :                 ge_p1p1 point4;</span></span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">      627807 :                 ge_p2 point5;</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">      627232 :                 uint8_t scalar[HASH_SIZE];</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">      627232 :                 ge_p3 point1;</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">      627232 :                 ge_p3 point2;</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">      627232 :                 ge_cached point3;</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">      627232 :                 ge_p1p1 point4;</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">      627232 :                 ge_p2 point5;</span></span>
 <span id="L199"><span class="lineNum">     199</span>              : </span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">      627807 :                 if (ge_frombytes_vartime(&amp;point1, base.h) != 0) {</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">      627232 :                 if (ge_frombytes_vartime(&amp;point1, base.h) != 0) {</span></span>
 <span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">          64 :                         return false;</span></span>
 <span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          64 :                 }</span></span>
 <span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      627743 :                 derivation_to_scalar(derivation, output_index, scalar);</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">      627743 :                 ge_scalarmult_base_vartime(&amp;point2, reinterpret_cast&lt;uint8_t*&gt;(&amp;scalar));</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">      627743 :                 ge_p3_to_cached(&amp;point3, &amp;point2);</span></span>
-<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">      627743 :                 ge_add(&amp;point4, &amp;point1, &amp;point3);</span></span>
-<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">      627743 :                 ge_p1p1_to_p2(&amp;point5, &amp;point4);</span></span>
-<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">      627743 :                 ge_tobytes(derived_key.h, &amp;point5);</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      627168 :                 derivation_to_scalar(derivation, output_index, scalar);</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">      627168 :                 ge_scalarmult_base_vartime(&amp;point2, reinterpret_cast&lt;uint8_t*&gt;(&amp;scalar));</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">      627168 :                 ge_p3_to_cached(&amp;point3, &amp;point2);</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">      627168 :                 ge_add(&amp;point4, &amp;point1, &amp;point3);</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">      627168 :                 ge_p1p1_to_p2(&amp;point5, &amp;point4);</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">      627168 :                 ge_tobytes(derived_key.h, &amp;point5);</span></span>
 <span id="L210"><span class="lineNum">     210</span>              : </span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">      627743 :                 const uint64_t t = seconds_since_epoch();</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">      627743 :                 {</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">      627743 :                         WriteLock lock(public_keys_lock);</span></span>
-<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">      627743 :                         public_keys-&gt;emplace(index, PublicKeyEntry{ static_cast&lt;indexed_hash&gt;(derived_key), static_cast&lt;uint32_t&gt;(t) });</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">      627743 :                 }</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">      627168 :                 const uint64_t t = seconds_since_epoch();</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">      627168 :                 {</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">      627168 :                         WriteLock lock(public_keys_lock);</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">      627168 :                         public_keys-&gt;emplace(index, PublicKeyEntry{ static_cast&lt;indexed_hash&gt;(derived_key), static_cast&lt;uint32_t&gt;(t) });</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">      627168 :                 }</span></span>
 <span id="L216"><span class="lineNum">     216</span>              : </span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">      627743 :                 return true;</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">      627807 :         }</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">      627168 :                 return true;</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">      627232 :         }</span></span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
 <span id="L220"><span class="lineNum">     220</span>              :         void get_tx_keys(hash&amp; pub, hash&amp; sec, const hash&amp; seed, const hash&amp; monero_block_id)</span>
 <span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">       47390 :         {</span></span>
@@ -372,49 +372,49 @@
 <span id="L310"><span class="lineNum">     310</span>              :                 uint32_t m_timestamp = 0;</span>
 <span id="L311"><span class="lineNum">     311</span>              : </span>
 <span id="L312"><span class="lineNum">     312</span>              :                 FORCEINLINE bool find_view_tag(size_t output_index, uint8_t&amp; view_tag) const</span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">     3331984 :                 {</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">     4787843 : #define ITER(i) do { \</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">     4787843 :                                 const uint32_t k = m_viewTags1[i]; \</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">     4787843 :                                 if ((k &gt;&gt; 8) == output_index) { \</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">     2524666 :                                         view_tag = static_cast&lt;uint8_t&gt;(k); \</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">     2524666 :                                         return true; \</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">     2524666 :                                 } \</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">     4787843 :                         } while(0)</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">     3332304 :                 {</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">     4793685 : #define ITER(i) do { \</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">     4793685 :                                 const uint32_t k = m_viewTags1[i]; \</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">     4793685 :                                 if ((k &gt;&gt; 8) == output_index) { \</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">     2520349 :                                         view_tag = static_cast&lt;uint8_t&gt;(k); \</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">     2520349 :                                         return true; \</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">     2520349 :                                 } \</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">     4793685 :                         } while(0)</span></span>
 <span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">     3331984 :                         ITER(0);</span></span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">     1455859 :                         ITER(1);</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">      807318 : #undef ITER</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">     3332304 :                         ITER(0);</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">     1461381 :                         ITER(1);</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">      811955 : #undef ITER</span></span>
 <span id="L325"><span class="lineNum">     325</span>              : </span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">     1265613 :                         for (const uint32_t k : m_viewTags2) {</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">     1265613 :                                 if ((k &gt;&gt; 8) == output_index) {</span></span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">      578804 :                                         view_tag = static_cast&lt;uint8_t&gt;(k);</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">      578804 :                                         return true;</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">      578804 :                                 }</span></span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">     1265613 :                         }</span></span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">      228514 :                         return false;</span></span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">      807318 :                 }</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">     1269004 :                         for (const uint32_t k : m_viewTags2) {</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">     1269004 :                                 if ((k &gt;&gt; 8) == output_index) {</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">      582968 :                                         view_tag = static_cast&lt;uint8_t&gt;(k);</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">      582968 :                                         return true;</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">      582968 :                                 }</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">     1269004 :                         }</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">      228987 :                         return false;</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">      811955 :                 }</span></span>
 <span id="L334"><span class="lineNum">     334</span>              : </span>
 <span id="L335"><span class="lineNum">     335</span>              :                 FORCEINLINE void add_view_tag(uint32_t k)</span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">      595352 :                 {</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">      824543 : #define ITER(i) do { \</span></span>
-<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">      824543 :                                 const uint32_t t = m_viewTags1[i]; \</span></span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">      824543 :                                 if (t == 0xFFFFFFFFUL) { \</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">      595461 :                 {</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">      825206 : #define ITER(i) do { \</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">      825206 :                                 const uint32_t t = m_viewTags1[i]; \</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">      825206 :                                 if (t == 0xFFFFFFFFUL) { \</span></span>
 <span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">      429518 :                                         m_viewTags1[i] = k; \</span></span>
 <span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">      429518 :                                         return; \</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">      429518 :                                 } \</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">      824543 :                                 if (t == k) { \</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">       59513 :                                         return; \</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       59513 :                                 } \</span></span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">      395025 :                         } while (0)</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">      825206 :                                 if (t == k) { \</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">       59518 :                                         return; \</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">       59518 :                                 } \</span></span>
+<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">      395688 :                         } while (0)</span></span>
 <span id="L347"><span class="lineNum">     347</span>              : </span>
-<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">      595352 :                         ITER(0);</span></span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">      229191 :                         ITER(1);</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">      106321 : #undef ITER</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">      595461 :                         ITER(0);</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">      229745 :                         ITER(1);</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">      106425 : #undef ITER</span></span>
 <span id="L351"><span class="lineNum">     351</span>              : </span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">      106321 :                         if (std::find(m_viewTags2.begin(), m_viewTags2.end(), k) == m_viewTags2.end()) {</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">      106425 :                         if (std::find(m_viewTags2.begin(), m_viewTags2.end(), k) == m_viewTags2.end()) {</span></span>
 <span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">      105084 :                                 m_viewTags2.emplace_back(k);</span></span>
 <span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">      105084 :                         }</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">      106321 :                 }</span></span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">      106425 :                 }</span></span>
 <span id="L356"><span class="lineNum">     356</span>              :         };</span>
 <span id="L357"><span class="lineNum">     357</span>              : </span>
 <span id="L358"><span class="lineNum">     358</span>              :         struct PublicKeyEntry</span>
@@ -449,14 +449,14 @@
 <span id="L387"><span class="lineNum">     387</span>              : static Cache* cache = nullptr;</span>
 <span id="L388"><span class="lineNum">     388</span>              : </span>
 <span id="L389"><span class="lineNum">     389</span>              : bool generate_key_derivation(const hash&amp; key1, const hash&amp; key2, size_t output_index, hash&amp; derivation, uint8_t&amp; view_tag)</span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">     3699014 : {</span></span>
-<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">     3699014 :         return cache-&gt;get_derivation(key1, key2, output_index, derivation, view_tag);</span></span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">     3699014 : }</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">     3699013 : {</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">     3699013 :         return cache-&gt;get_derivation(key1, key2, output_index, derivation, view_tag);</span></span>
+<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">     3699013 : }</span></span>
 <span id="L393"><span class="lineNum">     393</span>              : </span>
 <span id="L394"><span class="lineNum">     394</span>              : bool derive_public_key(const hash&amp; derivation, size_t output_index, const hash&amp; base, hash&amp; derived_key)</span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">     3695688 : {</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">     3695688 :         return cache-&gt;get_public_key(derivation, output_index, base, derived_key);</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">     3695688 : }</span></span>
+<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">     3695468 : {</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">     3695468 :         return cache-&gt;get_public_key(derivation, output_index, base, derived_key);</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">     3695468 : }</span></span>
 <span id="L398"><span class="lineNum">     398</span>              : </span>
 <span id="L399"><span class="lineNum">     399</span>              : void get_tx_keys(hash&amp; pub, hash&amp; sec, const hash&amp; seed, const hash&amp; monero_block_id)</span>
 <span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">       47390 : {</span></span>
@@ -464,20 +464,20 @@
 <span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">       47390 : }</span></span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
 <span id="L404"><span class="lineNum">     404</span>              : void derive_view_tag(const hash&amp; derivation, size_t output_index, uint8_t&amp; view_tag)</span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">      595610 : {</span></span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">      595610 :         constexpr uint8_t salt[] = &quot;view_tag&quot;;</span></span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">      595610 :         constexpr size_t SALT_SIZE = sizeof(salt) - 1;</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">      595669 : {</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">      595669 :         constexpr uint8_t salt[] = &quot;view_tag&quot;;</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">      595669 :         constexpr size_t SALT_SIZE = sizeof(salt) - 1;</span></span>
 <span id="L408"><span class="lineNum">     408</span>              : </span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">      595610 :         uint8_t buf[64];</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">      595610 :         memcpy(buf, salt, SALT_SIZE);</span></span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">      595610 :         memcpy(buf + SALT_SIZE, derivation.h, HASH_SIZE);</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">      595610 :         uint8_t* p = buf + SALT_SIZE + HASH_SIZE;</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">      956954 :         writeVarint(output_index, [&amp;p](uint8_t b) { *(p++) = b; });</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">      595669 :         uint8_t buf[64];</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">      595669 :         memcpy(buf, salt, SALT_SIZE);</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">      595669 :         memcpy(buf + SALT_SIZE, derivation.h, HASH_SIZE);</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">      595669 :         uint8_t* p = buf + SALT_SIZE + HASH_SIZE;</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">      957258 :         writeVarint(output_index, [&amp;p](uint8_t b) { *(p++) = b; });</span></span>
 <span id="L414"><span class="lineNum">     414</span>              : </span>
-<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">      595610 :         hash view_tag_full;</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">      595610 :         keccak(buf, static_cast&lt;int&gt;(p - buf), view_tag_full.h);</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">      595610 :         view_tag = view_tag_full.h[0];</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">      595610 : }</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">      595669 :         hash view_tag_full;</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">      595669 :         keccak(buf, static_cast&lt;int&gt;(p - buf), view_tag_full.h);</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">      595669 :         view_tag = view_tag_full.h[0];</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">      595669 : }</span></span>
 <span id="L419"><span class="lineNum">     419</span>              : </span>
 <span id="L420"><span class="lineNum">     420</span>              : void init_crypto_cache()</span>
 <span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           5 : {</span></span>
