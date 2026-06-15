@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-14 19:43:28</td>
+            <td class="headerValue">2026-06-15 08:39:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -741,7 +741,7 @@
 <span id="L679"><span class="lineNum">     679</span> <span class="tlaUNC">           0 :                 ReadLock lock(m_hashrateDataLock);</span></span>
 <span id="L680"><span class="lineNum">     680</span>              : </span>
 <span id="L681"><span class="lineNum">     681</span> <span class="tlaUNC">           0 :                 total_hashes = m_cumulativeHashes;</span></span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :                 hashes_since_last_share = m_cumulativeHashes - m_cumulativeHashesAtLastShare;</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaUNC">           0 :                 hashes_since_last_share = (m_cumulativeHashes &gt; m_cumulativeHashesAtLastShare) ? (m_cumulativeHashes - m_cumulativeHashesAtLastShare) : 0;</span></span>
 <span id="L683"><span class="lineNum">     683</span>              : </span>
 <span id="L684"><span class="lineNum">     684</span> <span class="tlaUNC">           0 :                 const HashrateData* data = m_hashrateData;</span></span>
 <span id="L685"><span class="lineNum">     685</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; head = data[m_hashrateDataHead];</span></span>
@@ -1648,7 +1648,7 @@
 <span id="L1586"><span class="lineNum">    1586</span> <span class="tlaUNC">           0 :                 ReadLock lock(m_hashrateDataLock);</span></span>
 <span id="L1587"><span class="lineNum">    1587</span>              : </span>
 <span id="L1588"><span class="lineNum">    1588</span> <span class="tlaUNC">           0 :                 total_hashes = m_cumulativeHashes;</span></span>
-<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaUNC">           0 :                 hashes_since_last_share = m_cumulativeHashes - m_cumulativeHashesAtLastShare;</span></span>
+<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaUNC">           0 :                 hashes_since_last_share = (m_cumulativeHashes &gt; m_cumulativeHashesAtLastShare) ? (m_cumulativeHashes - m_cumulativeHashesAtLastShare) : 0;</span></span>
 <span id="L1590"><span class="lineNum">    1590</span>              : </span>
 <span id="L1591"><span class="lineNum">    1591</span> <span class="tlaUNC">           0 :                 const HashrateData* data = m_hashrateData;</span></span>
 <span id="L1592"><span class="lineNum">    1592</span> <span class="tlaUNC">           0 :                 const HashrateData&amp; head = data[m_hashrateDataHead];</span></span>
