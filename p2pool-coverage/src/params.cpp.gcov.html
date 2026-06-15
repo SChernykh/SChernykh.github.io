@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-15 19:01:34</td>
+            <td class="headerValue">2026-06-15 19:53:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -352,7 +352,7 @@
 <span id="L290"><span class="lineNum">     290</span>              : </span>
 <span id="L291"><span class="lineNum">     291</span> <span class="tlaUNC">           0 :         if ((arg[0] == &quot;loglevel&quot;) &amp;&amp; has1(arg)) {</span></span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaUNC">           0 :                 const int level = std::min(std::max&lt;int&gt;(static_cast&lt;int&gt;(strtol(arg[1].c_str(), nullptr, 10)), 0), log::MAX_GLOBAL_LOG_LEVEL);</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :                 log::GLOBAL_LOG_LEVEL = level;</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :                 log::GLOBAL_LOG_LEVEL.store(level, std::memory_order_relaxed);</span></span>
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC">           0 :                 return true;</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
