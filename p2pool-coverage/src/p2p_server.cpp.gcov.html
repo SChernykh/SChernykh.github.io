@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-17 08:35:09</td>
+            <td class="headerValue">2026-06-17 08:47:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.8&nbsp;%</td>
@@ -3162,7 +3162,7 @@
 <span id="L3100"><span class="lineNum">    3100</span> <span class="tlaUNC">           0 :                         if (data.m_count[i] &gt; BroadcastThrottle::LIMITS[i][1]) {</span></span>
 <span id="L3101"><span class="lineNum">    3101</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString)</span></span>
 <span id="L3102"><span class="lineNum">    3102</span> <span class="tlaUNC">           0 :                                         &lt;&lt; &quot; broadcasted &quot; &lt;&lt; data.m_count[i] &lt;&lt; &quot; blocks in &quot;</span></span>
-<span id="L3103"><span class="lineNum">    3103</span> <span class="tlaUNC">           0 :                                         &lt;&lt; ((timestamp_mcs - data.m_startTime[i]) * 1e-6) &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L3103"><span class="lineNum">    3103</span> <span class="tlaUNC">           0 :                                         &lt;&lt; (static_cast&lt;double&gt;(timestamp_mcs - data.m_startTime[i]) * 1e-6) &lt;&lt; &quot; seconds&quot;);</span></span>
 <span id="L3104"><span class="lineNum">    3104</span>              : </span>
 <span id="L3105"><span class="lineNum">    3105</span> <span class="tlaUNC">           0 :                                 return true;</span></span>
 <span id="L3106"><span class="lineNum">    3106</span> <span class="tlaUNC">           0 :                         }</span></span>
