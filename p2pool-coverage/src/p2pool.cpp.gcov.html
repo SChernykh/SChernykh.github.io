@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-17 09:24:18</td>
+            <td class="headerValue">2026-06-18 15:45:38</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -355,7 +355,7 @@
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaUNC">           0 :                 LOGINFO(1, display_name &lt;&lt; &quot; ping is &quot; &lt;&lt; ping &lt;&lt; &quot; ms&quot;);</span></span>
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC">           0 :         else {</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC">           0 :                 LOGWARN(1, display_name &lt;&lt; &quot; ping is &quot; &lt;&lt; ping &lt;&lt; &quot; ms, this is too high for an efficient mining. Try to use a different node, or your own local node.&quot;);</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaUNC">           0 :                 LOGWARN(1, display_name &lt;&lt; &quot; ping is &quot; &lt;&lt; ping &lt;&lt; &quot; ms, this is too high for efficient mining. Try to use a different node, or your own local node.&quot;);</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L298"><span class="lineNum">     298</span>              : </span>
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaUNC">           0 :         const std::vector&lt;Params::Host&gt;&amp; v = m_params.m_hosts;</span></span>
@@ -1220,7 +1220,7 @@
 <span id="L1158"><span class="lineNum">    1158</span> <span class="tlaUNC">           0 :                                 auto&amp; err = doc[&quot;error&quot;];</span></span>
 <span id="L1159"><span class="lineNum">    1159</span>              : </span>
 <span id="L1160"><span class="lineNum">    1160</span> <span class="tlaUNC">           0 :                                 if (!err.IsObject()) {</span></span>
-<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :                                         LOGERR(0, &quot;submit_block: invalid JSON reponse from daemon: 'error' is not an object&quot;);</span></span>
+<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :                                         LOGERR(0, &quot;submit_block: invalid JSON response from daemon: 'error' is not an object&quot;);</span></span>
 <span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 :                                         return;</span></span>
 <span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 :                                 }</span></span>
 <span id="L1164"><span class="lineNum">    1164</span>              : </span>
