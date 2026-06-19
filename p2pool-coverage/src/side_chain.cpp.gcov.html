@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-19 02:15:09</td>
+            <td class="headerValue">2026-06-19 11:16:05</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">59.3&nbsp;%</td>
@@ -628,7 +628,7 @@
 <span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L568"><span class="lineNum">     568</span>              : </span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaUNC">           0 :         LOGINFO(4, &quot;add_external_block: height = &quot; &lt;&lt; block.m_sidechainHeight &lt;&lt; &quot;, id = &quot; &lt;&lt; block.m_sidechainId &lt;&lt; &quot;, mainchain height = &quot; &lt;&lt; block.m_txinGenHeight);</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaUNC">           0 :         LOGINFO(4, &quot;add_external_block: height = &quot; &lt;&lt; block.m_sidechainHeight &lt;&lt; &quot;, id = &quot; &lt;&lt; block.m_sidechainId &lt;&lt; &quot;, mainchain height = &quot; &lt;&lt; block.m_txinGenHeight &lt;&lt; &quot;, difficulty = &quot; &lt;&lt; block.m_difficulty);</span></span>
 <span id="L570"><span class="lineNum">     570</span>              : </span>
 <span id="L571"><span class="lineNum">     571</span> <span class="tlaUNC">           0 :         if (too_low_diff) {</span></span>
 <span id="L572"><span class="lineNum">     572</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;add_external_block: block mined by &quot; &lt;&lt; block.m_minerWallet &lt;&lt; &quot; has too low difficulty &quot; &lt;&lt; block.m_difficulty &lt;&lt; &quot;, expected &gt;= ~&quot; &lt;&lt; expected_diff &lt;&lt; &quot;. Ignoring it.&quot;);</span></span>
@@ -2631,22 +2631,22 @@
 <span id="L2569"><span class="lineNum">    2569</span>              : </span>
 <span id="L2570"><span class="lineNum">    2570</span> <span class="tlaGNC">       13983 :                         const size_t n = job-&gt;m_precalculatedShares.size();</span></span>
 <span id="L2571"><span class="lineNum">    2571</span>              : </span>
-<span id="L2572"><span class="lineNum">    2572</span> <span class="tlaGNC">     2340345 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2573"><span class="lineNum">    2573</span> <span class="tlaGNC">     2326362 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
-<span id="L2574"><span class="lineNum">    2574</span> <span class="tlaGNC">     2326362 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
-<span id="L2575"><span class="lineNum">    2575</span> <span class="tlaGNC">     2326362 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
-<span id="L2576"><span class="lineNum">    2576</span> <span class="tlaGNC">      374024 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
-<span id="L2577"><span class="lineNum">    2577</span> <span class="tlaGNC">      374024 :                                 }</span></span>
-<span id="L2578"><span class="lineNum">    2578</span> <span class="tlaGNC">     2326362 :                         }</span></span>
+<span id="L2572"><span class="lineNum">    2572</span> <span class="tlaGNC">     2337193 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2573"><span class="lineNum">    2573</span> <span class="tlaGNC">     2323210 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
+<span id="L2574"><span class="lineNum">    2574</span> <span class="tlaGNC">     2323210 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
+<span id="L2575"><span class="lineNum">    2575</span> <span class="tlaGNC">     2323210 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
+<span id="L2576"><span class="lineNum">    2576</span> <span class="tlaGNC">      373818 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
+<span id="L2577"><span class="lineNum">    2577</span> <span class="tlaGNC">      373818 :                                 }</span></span>
+<span id="L2578"><span class="lineNum">    2578</span> <span class="tlaGNC">     2323210 :                         }</span></span>
 <span id="L2579"><span class="lineNum">    2579</span> <span class="tlaGNC">       13983 :                 }</span></span>
 <span id="L2580"><span class="lineNum">    2580</span>              : </span>
-<span id="L2581"><span class="lineNum">    2581</span> <span class="tlaGNC">      374024 :                 for (const std::pair&lt;size_t, const Wallet*&gt;&amp; w : wallets) {</span></span>
-<span id="L2582"><span class="lineNum">    2582</span> <span class="tlaGNC">      374024 :                         hash eph_public_key;</span></span>
-<span id="L2583"><span class="lineNum">    2583</span> <span class="tlaGNC">      374024 :                         uint8_t view_tag;</span></span>
-<span id="L2584"><span class="lineNum">    2584</span> <span class="tlaGNC">      374024 :                         if (!w.second-&gt;get_eph_public_key(job-&gt;m_txkeySec, w.first, eph_public_key, view_tag)) {</span></span>
+<span id="L2581"><span class="lineNum">    2581</span> <span class="tlaGNC">      373818 :                 for (const std::pair&lt;size_t, const Wallet*&gt;&amp; w : wallets) {</span></span>
+<span id="L2582"><span class="lineNum">    2582</span> <span class="tlaGNC">      373818 :                         hash eph_public_key;</span></span>
+<span id="L2583"><span class="lineNum">    2583</span> <span class="tlaGNC">      373818 :                         uint8_t view_tag;</span></span>
+<span id="L2584"><span class="lineNum">    2584</span> <span class="tlaGNC">      373818 :                         if (!w.second-&gt;get_eph_public_key(job-&gt;m_txkeySec, w.first, eph_public_key, view_tag)) {</span></span>
 <span id="L2585"><span class="lineNum">    2585</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(6, &quot;get_eph_public_key failed in precalc_worker&quot;);</span></span>
 <span id="L2586"><span class="lineNum">    2586</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2587"><span class="lineNum">    2587</span> <span class="tlaGNC tlaBgGNC">      374024 :                 }</span></span>
+<span id="L2587"><span class="lineNum">    2587</span> <span class="tlaGNC tlaBgGNC">      373818 :                 }</span></span>
 <span id="L2588"><span class="lineNum">    2588</span> <span class="tlaGNC">       13983 :         } while (true);</span></span>
 <span id="L2589"><span class="lineNum">    2589</span> <span class="tlaGNC">          27 : }</span></span>
 <span id="L2590"><span class="lineNum">    2590</span>              : </span>
