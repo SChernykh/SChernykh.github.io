@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-19 13:27:00</td>
+            <td class="headerValue">2026-06-20 03:41:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -113,7 +113,7 @@
 <span id="L51"><span class="lineNum">      51</span>              : </span>
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : #if defined(__APPLE__)</span>
-<span id="L54"><span class="lineNum">      54</span>              : // Note |TARGET_OS_MAC| is set for all Apple OS variants. |TARGET_OS_OSX|</span>
+<span id="L54"><span class="lineNum">      54</span>              : // Note `TARGET_OS_MAC` is set for all Apple OS variants. `TARGET_OS_OSX`</span>
 <span id="L55"><span class="lineNum">      55</span>              : // targets macOS specifically.</span>
 <span id="L56"><span class="lineNum">      56</span>              : #if defined(TARGET_OS_OSX) &amp;&amp; TARGET_OS_OSX</span>
 <span id="L57"><span class="lineNum">      57</span>              : #define OPENSSL_MACOS</span>
@@ -135,7 +135,7 @@
 <span id="L73"><span class="lineNum">      73</span>              : // A consumer may use this symbol in the preprocessor to temporarily build</span>
 <span id="L74"><span class="lineNum">      74</span>              : // against multiple revisions of BoringSSL at the same time. It is not</span>
 <span id="L75"><span class="lineNum">      75</span>              : // recommended to do so for longer than is necessary.</span>
-<span id="L76"><span class="lineNum">      76</span>              : #define BORINGSSL_API_VERSION 39</span>
+<span id="L76"><span class="lineNum">      76</span>              : #define BORINGSSL_API_VERSION 42</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
 <span id="L78"><span class="lineNum">      78</span>              : #if defined(BORINGSSL_SHARED_LIBRARY)</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
@@ -244,7 +244,7 @@
 <span id="L182"><span class="lineNum">     182</span>              : </span>
 <span id="L183"><span class="lineNum">     183</span>              : #if defined(BORINGSSL_ALWAYS_USE_STATIC_INLINE)</span>
 <span id="L184"><span class="lineNum">     184</span>              : // Add OPENSSL_UNUSED so that, should an inline function be emitted via macro</span>
-<span id="L185"><span class="lineNum">     185</span>              : // (e.g. a |STACK_OF(T)| implementation) in a source file without tripping</span>
+<span id="L185"><span class="lineNum">     185</span>              : // (e.g. a `STACK_OF(T)` implementation) in a source file without tripping</span>
 <span id="L186"><span class="lineNum">     186</span>              : // clang's -Wunused-function.</span>
 <span id="L187"><span class="lineNum">     187</span>              : #define OPENSSL_INLINE static inline OPENSSL_UNUSED</span>
 <span id="L188"><span class="lineNum">     188</span>              : #else</span>
@@ -270,23 +270,23 @@
 <span id="L208"><span class="lineNum">     208</span>              : #endif</span>
 <span id="L209"><span class="lineNum">     209</span>              : </span>
 <span id="L210"><span class="lineNum">     210</span>              : // ossl_ssize_t is a signed type which is large enough to fit the size of any</span>
-<span id="L211"><span class="lineNum">     211</span>              : // valid memory allocation. We prefer using |size_t|, but sometimes we need a</span>
+<span id="L211"><span class="lineNum">     211</span>              : // valid memory allocation. We prefer using `size_t`, but sometimes we need a</span>
 <span id="L212"><span class="lineNum">     212</span>              : // signed type for OpenSSL API compatibility. This type can be used in such</span>
 <span id="L213"><span class="lineNum">     213</span>              : // cases to avoid overflow.</span>
 <span id="L214"><span class="lineNum">     214</span>              : //</span>
-<span id="L215"><span class="lineNum">     215</span>              : // Not all |size_t| values fit in |ossl_ssize_t|, but all |size_t| values that</span>
+<span id="L215"><span class="lineNum">     215</span>              : // Not all `size_t` values fit in `ossl_ssize_t`, but all `size_t` values that</span>
 <span id="L216"><span class="lineNum">     216</span>              : // are sizes of or indices into C objects, can be converted without overflow.</span>
 <span id="L217"><span class="lineNum">     217</span>              : typedef ptrdiff_t ossl_ssize_t;</span>
 <span id="L218"><span class="lineNum">     218</span>              : </span>
-<span id="L219"><span class="lineNum">     219</span>              : // CBS_ASN1_TAG is the type used by |CBS| and |CBB| for ASN.1 tags. See that</span>
+<span id="L219"><span class="lineNum">     219</span>              : // CBS_ASN1_TAG is the type used by `CBS` and `CBB` for ASN.1 tags. See that</span>
 <span id="L220"><span class="lineNum">     220</span>              : // header for details. This type is defined in base.h as a forward declaration.</span>
 <span id="L221"><span class="lineNum">     221</span>              : typedef uint32_t CBS_ASN1_TAG;</span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
 <span id="L223"><span class="lineNum">     223</span>              : // CRYPTO_THREADID is a dummy value.</span>
 <span id="L224"><span class="lineNum">     224</span>              : typedef int CRYPTO_THREADID;</span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span>              : // An |ASN1_NULL| is an opaque type. asn1.h represents the ASN.1 NULL value as</span>
-<span id="L227"><span class="lineNum">     227</span>              : // an opaque, non-NULL |ASN1_NULL*| pointer.</span>
+<span id="L226"><span class="lineNum">     226</span>              : // An `ASN1_NULL` is an opaque type. asn1.h represents the ASN.1 NULL value as</span>
+<span id="L227"><span class="lineNum">     227</span>              : // an opaque, non-NULL `ASN1_NULL*` pointer.</span>
 <span id="L228"><span class="lineNum">     228</span>              : typedef struct asn1_null_st ASN1_NULL;</span>
 <span id="L229"><span class="lineNum">     229</span>              : </span>
 <span id="L230"><span class="lineNum">     230</span>              : // CRYPTO_MUST_BE_NULL is an opaque type that is never returned from BoringSSL.</span>
@@ -427,13 +427,13 @@
 <span id="L365"><span class="lineNum">     365</span>              : </span>
 <span id="L366"><span class="lineNum">     366</span>              : typedef void *OPENSSL_BLOCK;</span>
 <span id="L367"><span class="lineNum">     367</span>              : </span>
-<span id="L368"><span class="lineNum">     368</span>              : // BSSL_CHECK aborts if |condition| is not true.</span>
+<span id="L368"><span class="lineNum">     368</span>              : // BSSL_CHECK aborts if `condition` is not true.</span>
 <span id="L369"><span class="lineNum">     369</span>              : #define BSSL_CHECK(condition) \</span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC tlaBgGNC">      160556 :   do {                        \</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">      160556 :     if (!(condition)) {       \</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC tlaBgGNC">      160558 :   do {                        \</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">      160558 :     if (!(condition)) {       \</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC tlaBgUNC">           0 :       abort();                \</span></span>
 <span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :     }                         \</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC tlaBgGNC">      160556 :   } while (0);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC tlaBgGNC">      160558 :   } while (0);</span></span>
 <span id="L375"><span class="lineNum">     375</span>              : </span>
 <span id="L376"><span class="lineNum">     376</span>              : #if defined(__cplusplus)</span>
 <span id="L377"><span class="lineNum">     377</span>              : }  // extern C</span>

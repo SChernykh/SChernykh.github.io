@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-19 13:27:00</td>
+            <td class="headerValue">2026-06-20 03:41:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">60.0&nbsp;%</td>
@@ -152,9 +152,9 @@
 <span id="L90"><span class="lineNum">      90</span>              : template &lt;typename T&gt;</span>
 <span id="L91"><span class="lineNum">      91</span>              : class SpanStorage&lt;T, dynamic_extent&gt; : private SpanBase&lt;const T&gt; {</span>
 <span id="L92"><span class="lineNum">      92</span>              :  public:</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">      160557 :   constexpr SpanStorage(T *data, size_t size) : data_(data), size_(size) {}</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      160553 :   constexpr T *data() const { return data_; }</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">     1123868 :   constexpr size_t size() const { return size_; }</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">      160555 :   constexpr SpanStorage(T *data, size_t size) : data_(data), size_(size) {}</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      160555 :   constexpr T *data() const { return data_; }</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">     1123879 :   constexpr size_t size() const { return size_; }</span></span>
 <span id="L96"><span class="lineNum">      96</span>              : </span>
 <span id="L97"><span class="lineNum">      97</span>              :  private:</span>
 <span id="L98"><span class="lineNum">      98</span>              :   T *data_;</span>
@@ -175,12 +175,12 @@
 <span id="L113"><span class="lineNum">     113</span>              : }  // namespace internal</span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
 <span id="L115"><span class="lineNum">     115</span>              : // A Span&lt;T&gt; is a non-owning reference to a contiguous array of objects of type</span>
-<span id="L116"><span class="lineNum">     116</span>              : // |T|. Conceptually, a Span is a simple a pointer to |T| and a count of</span>
+<span id="L116"><span class="lineNum">     116</span>              : // `T`. Conceptually, a Span is a simple a pointer to `T` and a count of</span>
 <span id="L117"><span class="lineNum">     117</span>              : // elements accessible via that pointer. The elements referenced by the Span can</span>
-<span id="L118"><span class="lineNum">     118</span>              : // be mutated if |T| is mutable.</span>
+<span id="L118"><span class="lineNum">     118</span>              : // be mutated if `T` is mutable.</span>
 <span id="L119"><span class="lineNum">     119</span>              : //</span>
-<span id="L120"><span class="lineNum">     120</span>              : // A Span can be constructed from container types implementing |data()| and</span>
-<span id="L121"><span class="lineNum">     121</span>              : // |size()| methods. If |T| is constant, construction from a container type is</span>
+<span id="L120"><span class="lineNum">     120</span>              : // A Span can be constructed from container types implementing `data()` and</span>
+<span id="L121"><span class="lineNum">     121</span>              : // `size()` methods. If `T` is constant, construction from a container type is</span>
 <span id="L122"><span class="lineNum">     122</span>              : // implicit. This allows writing methods that accept data from some unspecified</span>
 <span id="L123"><span class="lineNum">     123</span>              : // container type:</span>
 <span id="L124"><span class="lineNum">     124</span>              : //</span>
@@ -225,7 +225,7 @@
 <span id="L163"><span class="lineNum">     163</span>              : </span>
 <span id="L164"><span class="lineNum">     164</span>              :   // NOTE: This constructor may abort() at runtime if len differs from the</span>
 <span id="L165"><span class="lineNum">     165</span>              :   // compile-time size, if any.</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      160557 :   constexpr Span(T *ptr, size_t len) : internal::SpanStorage&lt;T, N&gt;(ptr, len) {}</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      160555 :   constexpr Span(T *ptr, size_t len) : internal::SpanStorage&lt;T, N&gt;(ptr, len) {}</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span>              :   template &lt;size_t NA,</span>
 <span id="L169"><span class="lineNum">     169</span>              :             typename = std::enable_if_t&lt;N == NA || N == dynamic_extent&gt;&gt;</span>
@@ -317,7 +317,7 @@
 <span id="L255"><span class="lineNum">     255</span>              : </span>
 <span id="L256"><span class="lineNum">     256</span>              :  public:</span>
 <span id="L257"><span class="lineNum">     257</span>              :   // NOTE: This method may abort() at runtime if pos or len are out of range.</span>
-<span id="L258"><span class="lineNum">     258</span>              :   // NOTE: As opposed to std::span, the |dynamic_extent| value of |len| is not</span>
+<span id="L258"><span class="lineNum">     258</span>              :   // NOTE: As opposed to std::span, the `dynamic_extent` value of `len` is not</span>
 <span id="L259"><span class="lineNum">     259</span>              :   // magical here. This gets rid of a lot of runtime checks.</span>
 <span id="L260"><span class="lineNum">     260</span>              :   constexpr Span&lt;T&gt; subspan(size_t pos, size_t len) const {</span>
 <span id="L261"><span class="lineNum">     261</span>              :     // absl::Span throws an exception here. Note std::span and Chromium</span>

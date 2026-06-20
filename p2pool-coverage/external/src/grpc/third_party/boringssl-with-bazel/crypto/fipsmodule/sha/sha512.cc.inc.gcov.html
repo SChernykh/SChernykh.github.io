@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-19 13:27:00</td>
+            <td class="headerValue">2026-06-20 03:41:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -154,8 +154,8 @@
 <span id="L92"><span class="lineNum">      92</span>              : </span>
 <span id="L93"><span class="lineNum">      93</span>              : bcm_infallible bssl::BCM_sha384_final(uint8_t out[SHA384_DIGEST_LENGTH],</span>
 <span id="L94"><span class="lineNum">      94</span> <span class="tlaUNC">           0 :                                       SHA512_CTX *sha) {</span></span>
-<span id="L95"><span class="lineNum">      95</span>              :   // This function must be paired with |BCM_sha384_init|, which sets</span>
-<span id="L96"><span class="lineNum">      96</span>              :   // |sha-&gt;md_len| to |SHA384_DIGEST_LENGTH|.</span>
+<span id="L95"><span class="lineNum">      95</span>              :   // This function must be paired with `BCM_sha384_init`, which sets</span>
+<span id="L96"><span class="lineNum">      96</span>              :   // `sha-&gt;md_len` to `SHA384_DIGEST_LENGTH`.</span>
 <span id="L97"><span class="lineNum">      97</span> <span class="tlaUNC">           0 :   assert(sha-&gt;md_len == SHA384_DIGEST_LENGTH);</span></span>
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaUNC">           0 :   sha512_final_impl(out, SHA384_DIGEST_LENGTH, sha);</span></span>
 <span id="L99"><span class="lineNum">      99</span> <span class="tlaUNC">           0 :   return bcm_infallible::approved;</span></span>
@@ -173,8 +173,8 @@
 <span id="L111"><span class="lineNum">     111</span>              : </span>
 <span id="L112"><span class="lineNum">     112</span>              : bcm_infallible bssl::BCM_sha512_256_final(uint8_t out[SHA512_256_DIGEST_LENGTH],</span>
 <span id="L113"><span class="lineNum">     113</span> <span class="tlaUNC">           0 :                                           SHA512_CTX *sha) {</span></span>
-<span id="L114"><span class="lineNum">     114</span>              :   // This function must be paired with |BCM_sha512_256_init|, which sets</span>
-<span id="L115"><span class="lineNum">     115</span>              :   // |sha-&gt;md_len| to |SHA512_256_DIGEST_LENGTH|.</span>
+<span id="L114"><span class="lineNum">     114</span>              :   // This function must be paired with `BCM_sha512_256_init`, which sets</span>
+<span id="L115"><span class="lineNum">     115</span>              :   // `sha-&gt;md_len` to `SHA512_256_DIGEST_LENGTH`.</span>
 <span id="L116"><span class="lineNum">     116</span> <span class="tlaUNC">           0 :   assert(sha-&gt;md_len == SHA512_256_DIGEST_LENGTH);</span></span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaUNC">           0 :   sha512_final_impl(out, SHA512_256_DIGEST_LENGTH, sha);</span></span>
 <span id="L118"><span class="lineNum">     118</span> <span class="tlaUNC">           0 :   return bcm_infallible::approved;</span></span>
@@ -232,9 +232,9 @@
 <span id="L170"><span class="lineNum">     170</span>              : </span>
 <span id="L171"><span class="lineNum">     171</span>              : bcm_infallible bssl::BCM_sha512_final(uint8_t out[SHA512_DIGEST_LENGTH],</span>
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaUNC">           0 :                                       SHA512_CTX *sha) {</span></span>
-<span id="L173"><span class="lineNum">     173</span>              :   // Ideally we would assert |sha-&gt;md_len| is |SHA512_DIGEST_LENGTH| to match</span>
-<span id="L174"><span class="lineNum">     174</span>              :   // the size hint, but calling code often pairs |BCM_sha384_init| with</span>
-<span id="L175"><span class="lineNum">     175</span>              :   // |BCM_sha512_final| and expects |sha-&gt;md_len| to carry the size over.</span>
+<span id="L173"><span class="lineNum">     173</span>              :   // Ideally we would assert `sha-&gt;md_len` is `SHA512_DIGEST_LENGTH` to match</span>
+<span id="L174"><span class="lineNum">     174</span>              :   // the size hint, but calling code often pairs `BCM_sha384_init` with</span>
+<span id="L175"><span class="lineNum">     175</span>              :   // `BCM_sha512_final` and expects `sha-&gt;md_len` to carry the size over.</span>
 <span id="L176"><span class="lineNum">     176</span>              :   //</span>
 <span id="L177"><span class="lineNum">     177</span>              :   // TODO(davidben): Add an assert and fix code to match them up.</span>
 <span id="L178"><span class="lineNum">     178</span> <span class="tlaUNC">           0 :   sha512_final_impl(out, sha-&gt;md_len, sha);</span></span>

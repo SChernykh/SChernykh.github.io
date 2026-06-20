@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-19 13:27:00</td>
+            <td class="headerValue">2026-06-20 03:41:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">8.3&nbsp;%</td>
@@ -82,21 +82,21 @@
 <span id="L20"><span class="lineNum">      20</span>              : </span>
 <span id="L21"><span class="lineNum">      21</span>              : BSSL_NAMESPACE_BEGIN</span>
 <span id="L22"><span class="lineNum">      22</span>              : </span>
-<span id="L23"><span class="lineNum">      23</span>              : // FIPS_service_indicator_before_call and |FIPS_service_indicator_after_call|</span>
+<span id="L23"><span class="lineNum">      23</span>              : // FIPS_service_indicator_before_call and `FIPS_service_indicator_after_call`</span>
 <span id="L24"><span class="lineNum">      24</span>              : // both currently return the same local thread counter which is slowly</span>
 <span id="L25"><span class="lineNum">      25</span>              : // incremented whenever approved services are called. The</span>
-<span id="L26"><span class="lineNum">      26</span>              : // |CALL_SERVICE_AND_CHECK_APPROVED| macro is strongly recommended over calling</span>
+<span id="L26"><span class="lineNum">      26</span>              : // `CALL_SERVICE_AND_CHECK_APPROVED` macro is strongly recommended over calling</span>
 <span id="L27"><span class="lineNum">      27</span>              : // these functions directly.</span>
 <span id="L28"><span class="lineNum">      28</span>              : //</span>
-<span id="L29"><span class="lineNum">      29</span>              : // |FIPS_service_indicator_before_call| is intended to be called immediately</span>
-<span id="L30"><span class="lineNum">      30</span>              : // before an approved service, while |FIPS_service_indicator_after_call| should</span>
+<span id="L29"><span class="lineNum">      29</span>              : // `FIPS_service_indicator_before_call` is intended to be called immediately</span>
+<span id="L30"><span class="lineNum">      30</span>              : // before an approved service, while `FIPS_service_indicator_after_call` should</span>
 <span id="L31"><span class="lineNum">      31</span>              : // be called immediately after. If the values returned from these two functions</span>
 <span id="L32"><span class="lineNum">      32</span>              : // are not equal, this means that the service called in between is deemed to be</span>
 <span id="L33"><span class="lineNum">      33</span>              : // approved. If the values are still the same, this means the counter has not</span>
 <span id="L34"><span class="lineNum">      34</span>              : // been incremented, and the service called is not approved for FIPS.</span>
 <span id="L35"><span class="lineNum">      35</span>              : //</span>
-<span id="L36"><span class="lineNum">      36</span>              : // In non-FIPS builds, |FIPS_service_indicator_before_call| always returns zero</span>
-<span id="L37"><span class="lineNum">      37</span>              : // and |FIPS_service_indicator_after_call| always returns one. Thus calls always</span>
+<span id="L36"><span class="lineNum">      36</span>              : // In non-FIPS builds, `FIPS_service_indicator_before_call` always returns zero</span>
+<span id="L37"><span class="lineNum">      37</span>              : // and `FIPS_service_indicator_after_call` always returns one. Thus calls always</span>
 <span id="L38"><span class="lineNum">      38</span>              : // appear to be approved. This is intended to simplify testing.</span>
 <span id="L39"><span class="lineNum">      39</span>              : OPENSSL_EXPORT uint64_t FIPS_service_indicator_before_call();</span>
 <span id="L40"><span class="lineNum">      40</span>              : OPENSSL_EXPORT uint64_t FIPS_service_indicator_after_call();</span>
@@ -107,11 +107,11 @@
 <span id="L45"><span class="lineNum">      45</span>              : // invoked.</span>
 <span id="L46"><span class="lineNum">      46</span>              : void FIPS_service_indicator_update_state();</span>
 <span id="L47"><span class="lineNum">      47</span>              : </span>
-<span id="L48"><span class="lineNum">      48</span>              : // FIPS_service_indicator_lock_state and |FIPS_service_indicator_unlock_state|</span>
-<span id="L49"><span class="lineNum">      49</span>              : // stop |FIPS_service_indicator_update_state| from actually updating the service</span>
+<span id="L48"><span class="lineNum">      48</span>              : // FIPS_service_indicator_lock_state and `FIPS_service_indicator_unlock_state`</span>
+<span id="L49"><span class="lineNum">      49</span>              : // stop `FIPS_service_indicator_update_state` from actually updating the service</span>
 <span id="L50"><span class="lineNum">      50</span>              : // indicator. This is used when a primitive calls a potentially approved</span>
 <span id="L51"><span class="lineNum">      51</span>              : // primitive to avoid false positives. For example, just because a key</span>
-<span id="L52"><span class="lineNum">      52</span>              : // generation calls |BCM_rand_bytes| (and thus the approved DRBG) doesn't mean</span>
+<span id="L52"><span class="lineNum">      52</span>              : // generation calls `BCM_rand_bytes` (and thus the approved DRBG) doesn't mean</span>
 <span id="L53"><span class="lineNum">      53</span>              : // that the key generation operation itself is approved.</span>
 <span id="L54"><span class="lineNum">      54</span>              : //</span>
 <span id="L55"><span class="lineNum">      55</span>              : // This lock nests: i.e. locking twice is fine so long as each lock is paired</span>
@@ -119,7 +119,7 @@
 <span id="L57"><span class="lineNum">      57</span>              : void FIPS_service_indicator_lock_state();</span>
 <span id="L58"><span class="lineNum">      58</span>              : void FIPS_service_indicator_unlock_state();</span>
 <span id="L59"><span class="lineNum">      59</span>              : </span>
-<span id="L60"><span class="lineNum">      60</span>              : // The following functions may call |FIPS_service_indicator_update_state| if</span>
+<span id="L60"><span class="lineNum">      60</span>              : // The following functions may call `FIPS_service_indicator_update_state` if</span>
 <span id="L61"><span class="lineNum">      61</span>              : // their parameter specifies an approved operation.</span>
 <span id="L62"><span class="lineNum">      62</span>              : </span>
 <span id="L63"><span class="lineNum">      63</span>              : void AEAD_GCM_verify_service_indicator(const EVP_AEAD_CTX *ctx);</span>
@@ -136,7 +136,7 @@
 <span id="L74"><span class="lineNum">      74</span>              : </span>
 <span id="L75"><span class="lineNum">      75</span>              : // Service indicator functions are no-ops in non-FIPS builds.</span>
 <span id="L76"><span class="lineNum">      76</span>              : </span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">      160559 : inline void FIPS_service_indicator_update_state() {}</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC tlaBgGNC">      160561 : inline void FIPS_service_indicator_update_state() {}</span></span>
 <span id="L78"><span class="lineNum">      78</span> <span class="tlaUNC tlaBgUNC">           0 : inline void FIPS_service_indicator_lock_state() {}</span></span>
 <span id="L79"><span class="lineNum">      79</span> <span class="tlaUNC">           0 : inline void FIPS_service_indicator_unlock_state() {}</span></span>
 <span id="L80"><span class="lineNum">      80</span>              : </span>
