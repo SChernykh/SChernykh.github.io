@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">230</td>
-            <td class="headerCovTableEntry">230</td>
+            <td class="headerCovTableEntry">231</td>
+            <td class="headerCovTableEntry">231</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-22 09:35:14</td>
+            <td class="headerValue">2026-06-22 10:47:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -125,7 +125,7 @@
 <span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           1 :         f.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
 <span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           1 :         ASSERT_EQ(f.good(), true);</span></span>
 <span id="L65"><span class="lineNum">      65</span>              : </span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b.deserialize(buf.data(), buf.size(), sidechain, nullptr, false), 0);</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b.deserialize(buf.data(), buf.size(), sidechain, nullptr, false, false), 0);</span></span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 :         {</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 :                 const PoolBlock::full_id id = b.get_full_id();</span></span>
@@ -246,7 +246,7 @@
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(p + n &lt;= e);</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
 <span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">       26794 :                         PoolBlock* b = new PoolBlock();</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">       26794 :                         ASSERT_EQ(b-&gt;deserialize(p, n, sidechain, nullptr, false), 0);</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">       26794 :                         ASSERT_EQ(b-&gt;deserialize(p, n, sidechain, nullptr, false, false), 0);</span></span>
 <span id="L188"><span class="lineNum">     188</span> <span class="tlaGNC">       26794 :                         p += n;</span></span>
 <span id="L189"><span class="lineNum">     189</span>              : </span>
 <span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">       26794 :                         blocks.push_back(b);</span></span>
@@ -353,46 +353,48 @@
 <span id="L291"><span class="lineNum">     291</span>              : </span>
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           6 :                 {</span></span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           6 :                         PoolBlock block2;</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, nullptr, false), 0);</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, nullptr, false, true), 0);</span></span>
 <span id="L295"><span class="lineNum">     295</span>              : </span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           6 :                         auto v1 = block2.serialize_mainchain_data();</span></span>
 <span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           6 :                         v2 = block2.serialize_sidechain_data();</span></span>
 <span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
 <span id="L299"><span class="lineNum">     299</span>              : </span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L302"><span class="lineNum">     302</span>              : </span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_blob.empty()) {</span></span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           6 :                         PoolBlock block3;</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block3.deserialize(broadcast.compact_blob.data(), broadcast.compact_blob.size(), sidechain, nullptr, true), 0);</span></span>
-<span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           6 :                         auto v1 = block3.serialize_mainchain_data();</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           6 :                         v2 = block3.serialize_sidechain_data();</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
-<span id="L310"><span class="lineNum">     310</span>              : </span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L313"><span class="lineNum">     313</span>              : </span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_unpruned_blob.empty()) {</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           6 :                         PoolBlock block4;</span></span>
-<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block4.deserialize(broadcast.compact_unpruned_blob.data(), broadcast.compact_unpruned_blob.size(), sidechain, nullptr, true), 0);</span></span>
-<span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           6 :                         auto v1 = block4.serialize_mainchain_data();</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           6 :                         v2 = block4.serialize_sidechain_data();</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
-<span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">           6 :         }</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">           1 : #ifdef WITH_INDEXED_HASHES</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">           1 :         indexed_hash::cleanup_storage();</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           1 : #endif</span></span>
-<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L332"><span class="lineNum">     332</span>              : </span>
-<span id="L333"><span class="lineNum">     333</span>              : }</span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           6 :                         ASSERT_NE(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, nullptr, false, false), 0);</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L304"><span class="lineNum">     304</span>              : </span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_blob.empty()) {</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           6 :                         PoolBlock block3;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block3.deserialize(broadcast.compact_blob.data(), broadcast.compact_blob.size(), sidechain, nullptr, true, true), 0);</span></span>
+<span id="L308"><span class="lineNum">     308</span>              : </span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           6 :                         auto v1 = block3.serialize_mainchain_data();</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">           6 :                         v2 = block3.serialize_sidechain_data();</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
+<span id="L312"><span class="lineNum">     312</span>              : </span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_unpruned_blob.empty()) {</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           6 :                         PoolBlock block4;</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block4.deserialize(broadcast.compact_unpruned_blob.data(), broadcast.compact_unpruned_blob.size(), sidechain, nullptr, true, false), 0);</span></span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           6 :                         auto v1 = block4.serialize_mainchain_data();</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           6 :                         v2 = block4.serialize_sidechain_data();</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
+<span id="L323"><span class="lineNum">     323</span>              : </span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">           6 :         }</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           1 : #ifdef WITH_INDEXED_HASHES</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           1 :         indexed_hash::cleanup_storage();</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           1 : #endif</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span>              : }</span>
         </pre>
               </td>
             </tr>

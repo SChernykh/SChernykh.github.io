@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-22 09:35:14</td>
+            <td class="headerValue">2026-06-22 10:47:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">6.5&nbsp;%</td>
@@ -859,7 +859,7 @@
 <span id="L797"><span class="lineNum">     797</span>              : #if defined(__GNUC__) &amp;&amp; __GNUC__ &gt;= 2</span>
 <span id="L798"><span class="lineNum">     798</span> <span class="tlaUNC">           0 : inline uint16_t CRYPTO_bswap2(uint16_t x) { return __builtin_bswap16(x); }</span></span>
 <span id="L799"><span class="lineNum">     799</span>              : </span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC tlaBgGNC">     4174175 : inline uint32_t CRYPTO_bswap4(uint32_t x) { return __builtin_bswap32(x); }</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC tlaBgGNC">     4174177 : inline uint32_t CRYPTO_bswap4(uint32_t x) { return __builtin_bswap32(x); }</span></span>
 <span id="L801"><span class="lineNum">     801</span>              : </span>
 <span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC tlaBgUNC">           0 : inline uint64_t CRYPTO_bswap8(uint64_t x) { return __builtin_bswap64(x); }</span></span>
 <span id="L803"><span class="lineNum">     803</span>              : #elif defined(_MSC_VER)</span>
@@ -922,13 +922,13 @@
 <span id="L860"><span class="lineNum">     860</span> <span class="tlaUNC">           0 :   return memcmp(s1, s2, n);</span></span>
 <span id="L861"><span class="lineNum">     861</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L862"><span class="lineNum">     862</span>              : </span>
-<span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC tlaBgGNC">     4334718 : inline void *OPENSSL_memcpy(void *dst, const void *src, size_t n) {</span></span>
-<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">     4334718 :   if (n == 0) {</span></span>
+<span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC tlaBgGNC">     4334695 : inline void *OPENSSL_memcpy(void *dst, const void *src, size_t n) {</span></span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">     4334695 :   if (n == 0) {</span></span>
 <span id="L865"><span class="lineNum">     865</span> <span class="tlaUNC tlaBgUNC">           0 :     return dst;</span></span>
 <span id="L866"><span class="lineNum">     866</span> <span class="tlaUNC">           0 :   }</span></span>
 <span id="L867"><span class="lineNum">     867</span>              : </span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC tlaBgGNC">     4334718 :   return memcpy(dst, src, n);</span></span>
-<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">     4334718 : }</span></span>
+<span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC tlaBgGNC">     4334695 :   return memcpy(dst, src, n);</span></span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">     4334695 : }</span></span>
 <span id="L870"><span class="lineNum">     870</span>              : </span>
 <span id="L871"><span class="lineNum">     871</span> <span class="tlaUNC tlaBgUNC">           0 : inline void *OPENSSL_memmove(void *dst, const void *src, size_t n) {</span></span>
 <span id="L872"><span class="lineNum">     872</span> <span class="tlaUNC">           0 :   if (n == 0) {</span></span>
@@ -938,13 +938,13 @@
 <span id="L876"><span class="lineNum">     876</span> <span class="tlaUNC">           0 :   return memmove(dst, src, n);</span></span>
 <span id="L877"><span class="lineNum">     877</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L878"><span class="lineNum">     878</span>              : </span>
-<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC tlaBgGNC">      481675 : inline void *OPENSSL_memset(void *dst, int c, size_t n) {</span></span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">      481675 :   if (n == 0) {</span></span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC tlaBgGNC">      481678 : inline void *OPENSSL_memset(void *dst, int c, size_t n) {</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">      481678 :   if (n == 0) {</span></span>
 <span id="L881"><span class="lineNum">     881</span> <span class="tlaUNC tlaBgUNC">           0 :     return dst;</span></span>
 <span id="L882"><span class="lineNum">     882</span> <span class="tlaUNC">           0 :   }</span></span>
 <span id="L883"><span class="lineNum">     883</span>              : </span>
-<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC tlaBgGNC">      481675 :   return memset(dst, c, n);</span></span>
-<span id="L885"><span class="lineNum">     885</span> <span class="tlaGNC">      481675 : }</span></span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC tlaBgGNC">      481678 :   return memset(dst, c, n);</span></span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaGNC">      481678 : }</span></span>
 <span id="L886"><span class="lineNum">     886</span>              : </span>
 <span id="L887"><span class="lineNum">     887</span>              : </span>
 <span id="L888"><span class="lineNum">     888</span>              : // Loads and stores.</span>
@@ -984,16 +984,16 @@
 <span id="L922"><span class="lineNum">     922</span> <span class="tlaUNC">           0 :   OPENSSL_memcpy(out, &amp;v, sizeof(v));</span></span>
 <span id="L923"><span class="lineNum">     923</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L924"><span class="lineNum">     924</span>              : </span>
-<span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC tlaBgGNC">     2568868 : inline uint32_t CRYPTO_load_u32_be(const void *in) {</span></span>
-<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">     2568868 :   uint32_t v;</span></span>
-<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">     2568868 :   OPENSSL_memcpy(&amp;v, in, sizeof(v));</span></span>
-<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">     2568868 :   return CRYPTO_bswap4(v);</span></span>
-<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">     2568868 : }</span></span>
+<span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC tlaBgGNC">     2568789 : inline uint32_t CRYPTO_load_u32_be(const void *in) {</span></span>
+<span id="L926"><span class="lineNum">     926</span> <span class="tlaGNC">     2568789 :   uint32_t v;</span></span>
+<span id="L927"><span class="lineNum">     927</span> <span class="tlaGNC">     2568789 :   OPENSSL_memcpy(&amp;v, in, sizeof(v));</span></span>
+<span id="L928"><span class="lineNum">     928</span> <span class="tlaGNC">     2568789 :   return CRYPTO_bswap4(v);</span></span>
+<span id="L929"><span class="lineNum">     929</span> <span class="tlaGNC">     2568789 : }</span></span>
 <span id="L930"><span class="lineNum">     930</span>              : </span>
-<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">     1605537 : inline void CRYPTO_store_u32_be(void *out, uint32_t v) {</span></span>
-<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">     1605537 :   v = CRYPTO_bswap4(v);</span></span>
-<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">     1605537 :   OPENSSL_memcpy(out, &amp;v, sizeof(v));</span></span>
-<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC">     1605537 : }</span></span>
+<span id="L931"><span class="lineNum">     931</span> <span class="tlaGNC">     1605528 : inline void CRYPTO_store_u32_be(void *out, uint32_t v) {</span></span>
+<span id="L932"><span class="lineNum">     932</span> <span class="tlaGNC">     1605528 :   v = CRYPTO_bswap4(v);</span></span>
+<span id="L933"><span class="lineNum">     933</span> <span class="tlaGNC">     1605528 :   OPENSSL_memcpy(out, &amp;v, sizeof(v));</span></span>
+<span id="L934"><span class="lineNum">     934</span> <span class="tlaGNC">     1605528 : }</span></span>
 <span id="L935"><span class="lineNum">     935</span>              : </span>
 <span id="L936"><span class="lineNum">     936</span> <span class="tlaUNC tlaBgUNC">           0 : inline uint64_t CRYPTO_load_u64_le(const void *in) {</span></span>
 <span id="L937"><span class="lineNum">     937</span> <span class="tlaUNC">           0 :   uint64_t v;</span></span>
@@ -1053,13 +1053,13 @@
 <span id="L991"><span class="lineNum">     991</span> <span class="tlaUNC">           0 : #endif</span></span>
 <span id="L992"><span class="lineNum">     992</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L993"><span class="lineNum">     993</span>              : </span>
-<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC tlaBgGNC">    92458602 : inline uint32_t CRYPTO_rotr_u32(uint32_t value, int shift) {</span></span>
+<span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC tlaBgGNC">    92450004 : inline uint32_t CRYPTO_rotr_u32(uint32_t value, int shift) {</span></span>
 <span id="L995"><span class="lineNum">     995</span>              : #if defined(_MSC_VER)</span>
 <span id="L996"><span class="lineNum">     996</span>              :   return _rotr(value, shift);</span>
 <span id="L997"><span class="lineNum">     997</span>              : #else</span>
-<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">    92458602 :   return (value &gt;&gt; shift) | (value &lt;&lt; ((-shift) &amp; 31));</span></span>
-<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">    92458602 : #endif</span></span>
-<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">    92458602 : }</span></span>
+<span id="L998"><span class="lineNum">     998</span> <span class="tlaGNC">    92450004 :   return (value &gt;&gt; shift) | (value &lt;&lt; ((-shift) &amp; 31));</span></span>
+<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">    92450004 : #endif</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">    92450004 : }</span></span>
 <span id="L1001"><span class="lineNum">    1001</span>              : </span>
 <span id="L1002"><span class="lineNum">    1002</span> <span class="tlaUNC tlaBgUNC">           0 : inline uint64_t CRYPTO_rotl_u64(uint64_t value, int shift) {</span></span>
 <span id="L1003"><span class="lineNum">    1003</span> <span class="tlaUNC">           0 : #if defined(_MSC_VER)</span></span>
