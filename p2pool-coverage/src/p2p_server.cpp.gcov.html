@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-22 06:12:15</td>
+            <td class="headerValue">2026-06-22 07:59:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.7&nbsp;%</td>
@@ -2593,26 +2593,26 @@
 <span id="L2531"><span class="lineNum">    2531</span> <span class="tlaUNC">           0 :                         break;</span></span>
 <span id="L2532"><span class="lineNum">    2532</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L2533"><span class="lineNum">    2533</span>              : </span>
-<span id="L2534"><span class="lineNum">    2534</span> <span class="tlaUNC">           0 :                 if (bytes_read) {</span></span>
-<span id="L2535"><span class="lineNum">    2535</span> <span class="tlaUNC">           0 :                         buf += bytes_read;</span></span>
-<span id="L2536"><span class="lineNum">    2536</span> <span class="tlaUNC">           0 :                         bytes_left -= bytes_read;</span></span>
-<span id="L2537"><span class="lineNum">    2537</span> <span class="tlaUNC">           0 :                         m_lastAlive = seconds_since_epoch();</span></span>
-<span id="L2538"><span class="lineNum">    2538</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2539"><span class="lineNum">    2539</span> <span class="tlaUNC">           0 :         } while (bytes_read &amp;&amp; bytes_left);</span></span>
+<span id="L2534"><span class="lineNum">    2534</span>              :                 // If we have more than 4 MB pending writes to this peer, disconnect - because this peer is either dead or malicious</span>
+<span id="L2535"><span class="lineNum">    2535</span> <span class="tlaUNC">           0 :                 const size_t n = uv_stream_get_write_queue_size(reinterpret_cast&lt;uv_stream_t*&gt;(&amp;m_socket));</span></span>
+<span id="L2536"><span class="lineNum">    2536</span> <span class="tlaUNC">           0 :                 if (n &gt; 4194304U) {</span></span>
+<span id="L2537"><span class="lineNum">    2537</span> <span class="tlaUNC">           0 :                         LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; write queue is full (&quot; &lt;&lt; n &lt;&lt; &quot; bytes), disconnecting this peer&quot;);</span></span>
+<span id="L2538"><span class="lineNum">    2538</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L2539"><span class="lineNum">    2539</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L2540"><span class="lineNum">    2540</span>              : </span>
-<span id="L2541"><span class="lineNum">    2541</span>              :         // Move the possible unfinished message to the beginning of m_readBuf to free up more space for reading</span>
-<span id="L2542"><span class="lineNum">    2542</span> <span class="tlaUNC">           0 :         if (buf != buf_begin) {</span></span>
-<span id="L2543"><span class="lineNum">    2543</span> <span class="tlaUNC">           0 :                 m_numRead = static_cast&lt;uint32_t&gt;(buf_begin + m_numRead - buf);</span></span>
-<span id="L2544"><span class="lineNum">    2544</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt; 0) {</span></span>
-<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaUNC">           0 :                         memmove(m_readBuf, buf, m_numRead);</span></span>
-<span id="L2546"><span class="lineNum">    2546</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2547"><span class="lineNum">    2547</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2548"><span class="lineNum">    2548</span>              : </span>
-<span id="L2549"><span class="lineNum">    2549</span>              :         // If we have more than 4 MB pending writes to this peer, disconnect - because this peer is either dead or malicious</span>
-<span id="L2550"><span class="lineNum">    2550</span> <span class="tlaUNC">           0 :         const size_t n = uv_stream_get_write_queue_size(reinterpret_cast&lt;uv_stream_t*&gt;(&amp;m_socket));</span></span>
-<span id="L2551"><span class="lineNum">    2551</span> <span class="tlaUNC">           0 :         if (n &gt; 4194304U) {</span></span>
-<span id="L2552"><span class="lineNum">    2552</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; write queue is full (&quot; &lt;&lt; n &lt;&lt; &quot; bytes), disconnecting this peer&quot;);</span></span>
-<span id="L2553"><span class="lineNum">    2553</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2541"><span class="lineNum">    2541</span> <span class="tlaUNC">           0 :                 if (bytes_read) {</span></span>
+<span id="L2542"><span class="lineNum">    2542</span> <span class="tlaUNC">           0 :                         buf += bytes_read;</span></span>
+<span id="L2543"><span class="lineNum">    2543</span> <span class="tlaUNC">           0 :                         bytes_left -= bytes_read;</span></span>
+<span id="L2544"><span class="lineNum">    2544</span> <span class="tlaUNC">           0 :                         m_lastAlive = seconds_since_epoch();</span></span>
+<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2546"><span class="lineNum">    2546</span> <span class="tlaUNC">           0 :         } while (bytes_read &amp;&amp; bytes_left);</span></span>
+<span id="L2547"><span class="lineNum">    2547</span>              : </span>
+<span id="L2548"><span class="lineNum">    2548</span>              :         // Move the possible unfinished message to the beginning of m_readBuf to free up more space for reading</span>
+<span id="L2549"><span class="lineNum">    2549</span> <span class="tlaUNC">           0 :         if (buf != buf_begin) {</span></span>
+<span id="L2550"><span class="lineNum">    2550</span> <span class="tlaUNC">           0 :                 m_numRead = static_cast&lt;uint32_t&gt;(buf_begin + m_numRead - buf);</span></span>
+<span id="L2551"><span class="lineNum">    2551</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt; 0) {</span></span>
+<span id="L2552"><span class="lineNum">    2552</span> <span class="tlaUNC">           0 :                         memmove(m_readBuf, buf, m_numRead);</span></span>
+<span id="L2553"><span class="lineNum">    2553</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L2554"><span class="lineNum">    2554</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2555"><span class="lineNum">    2555</span>              : </span>
 <span id="L2556"><span class="lineNum">    2556</span> <span class="tlaUNC">           0 :         return true;</span></span>
