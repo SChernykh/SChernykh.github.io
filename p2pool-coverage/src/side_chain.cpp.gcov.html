@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">47.5&nbsp;%</td>
-            <td class="headerCovTableEntry">1948</td>
-            <td class="headerCovTableEntry">925</td>
+            <td class="headerCovTableEntryLo">47.6&nbsp;%</td>
+            <td class="headerCovTableEntry">1947</td>
+            <td class="headerCovTableEntry">927</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-23 06:47:32</td>
+            <td class="headerValue">2026-06-23 08:27:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">55.2&nbsp;%</td>
@@ -2323,51 +2323,51 @@
 <span id="L2261"><span class="lineNum">    2261</span> <span class="tlaGNC">       62087 :                 for (const PoolBlock* child : it-&gt;second) {</span></span>
 <span id="L2262"><span class="lineNum">    2262</span> <span class="tlaGNC">       62087 :                         if (child-&gt;m_parent == block-&gt;m_sidechainId) {</span></span>
 <span id="L2263"><span class="lineNum">    2263</span> <span class="tlaGNC">       20066 :                                 if (i != 1) {</span></span>
-<span id="L2264"><span class="lineNum">    2264</span> <span class="tlaUNC tlaBgUNC">           0 :                                         LOGWARN(3, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with child's m_sidechainHeight.&quot;);</span></span>
-<span id="L2265"><span class="lineNum">    2265</span> <span class="tlaUNC">           0 :                                         return;</span></span>
-<span id="L2266"><span class="lineNum">    2266</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L2267"><span class="lineNum">    2267</span> <span class="tlaGNC tlaBgGNC">       20066 :                                 update_depth(block, child-&gt;m_depth + 1);</span></span>
-<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaGNC">       20066 :                         }</span></span>
-<span id="L2269"><span class="lineNum">    2269</span>              : </span>
-<span id="L2270"><span class="lineNum">    2270</span> <span class="tlaGNC">       62087 :                         if (std::find(child-&gt;m_uncles.begin(), child-&gt;m_uncles.end(), block-&gt;m_sidechainId) != child-&gt;m_uncles.end()) {</span></span>
-<span id="L2271"><span class="lineNum">    2271</span> <span class="tlaGNC">         603 :                                 update_depth(block, child-&gt;m_depth + i);</span></span>
-<span id="L2272"><span class="lineNum">    2272</span> <span class="tlaGNC">         603 :                         }</span></span>
-<span id="L2273"><span class="lineNum">    2273</span> <span class="tlaGNC">       62087 :                 }</span></span>
-<span id="L2274"><span class="lineNum">    2274</span> <span class="tlaGNC">       60442 :         }</span></span>
-<span id="L2275"><span class="lineNum">    2275</span>              : </span>
-<span id="L2276"><span class="lineNum">    2276</span> <span class="tlaGNC">       33513 :         std::vector&lt;PoolBlock*&gt; blocks_to_update(1, block);</span></span>
-<span id="L2277"><span class="lineNum">    2277</span>              : </span>
-<span id="L2278"><span class="lineNum">    2278</span> <span class="tlaGNC">    19543414 :         do {</span></span>
-<span id="L2279"><span class="lineNum">    2279</span> <span class="tlaGNC">    19543414 :                 block = blocks_to_update.back();</span></span>
-<span id="L2280"><span class="lineNum">    2280</span> <span class="tlaGNC">    19543414 :                 blocks_to_update.pop_back();</span></span>
-<span id="L2281"><span class="lineNum">    2281</span>              : </span>
-<span id="L2282"><span class="lineNum">    2282</span>              :                 // Verify this block and possibly other blocks on top of it when we're sure it will get verified</span>
-<span id="L2283"><span class="lineNum">    2283</span>              :                 //</span>
-<span id="L2284"><span class="lineNum">    2284</span>              :                 // Block at exactly &quot;N = (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH&quot; can have an uncle at &quot;N + UNCLE_BLOCK_DEPTH&quot;</span>
-<span id="L2285"><span class="lineNum">    2285</span>              :                 // This uncle has a parent at &quot;N + UNCLE_BLOCK_DEPTH + 1&quot;</span>
-<span id="L2286"><span class="lineNum">    2286</span>              :                 //</span>
-<span id="L2287"><span class="lineNum">    2287</span>              :                 // So a block at &quot;N = (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH&quot; can be safely validated if there is a block</span>
-<span id="L2288"><span class="lineNum">    2288</span>              :                 // at depth &gt; (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH * 2</span>
-<span id="L2289"><span class="lineNum">    2289</span>              :                 //</span>
-<span id="L2290"><span class="lineNum">    2290</span>              : </span>
-<span id="L2291"><span class="lineNum">    2291</span> <span class="tlaGNC">    19543414 :                 if (!block-&gt;m_verified &amp;&amp; ((block-&gt;m_depth &gt; (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH * 2) || (block-&gt;m_sidechainHeight == 0))) {</span></span>
-<span id="L2292"><span class="lineNum">    2292</span> <span class="tlaGNC">          50 :                         verify_loop(block);</span></span>
-<span id="L2293"><span class="lineNum">    2293</span> <span class="tlaGNC">          50 :                 }</span></span>
-<span id="L2294"><span class="lineNum">    2294</span>              : </span>
-<span id="L2295"><span class="lineNum">    2295</span> <span class="tlaGNC">    78173656 :                 for (size_t i = 1; i &lt;= UNCLE_BLOCK_DEPTH; ++i) {</span></span>
-<span id="L2296"><span class="lineNum">    2296</span> <span class="tlaGNC">    58630242 :                         auto it = m_blocksByHeight.find(block-&gt;m_sidechainHeight + i);</span></span>
-<span id="L2297"><span class="lineNum">    2297</span> <span class="tlaGNC">    58630242 :                         if (it == m_blocksByHeight.end()) {</span></span>
-<span id="L2298"><span class="lineNum">    2298</span> <span class="tlaGNC">       65783 :                                 continue;</span></span>
-<span id="L2299"><span class="lineNum">    2299</span> <span class="tlaGNC">       65783 :                         }</span></span>
-<span id="L2300"><span class="lineNum">    2300</span> <span class="tlaGNC">    60745241 :                         for (PoolBlock* child : it-&gt;second) {</span></span>
-<span id="L2301"><span class="lineNum">    2301</span> <span class="tlaGNC">    60745241 :                                 const uint64_t old_depth = child-&gt;m_depth;</span></span>
-<span id="L2302"><span class="lineNum">    2302</span>              : </span>
-<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaGNC">    60745241 :                                 if (child-&gt;m_parent == block-&gt;m_sidechainId) {</span></span>
-<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaGNC">    19529570 :                                         if (i != 1) {</span></span>
-<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaUNC tlaBgUNC">           0 :                                                 LOGWARN(3, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with child's m_sidechainHeight.&quot;);</span></span>
-<span id="L2306"><span class="lineNum">    2306</span> <span class="tlaUNC">           0 :                                                 return;</span></span>
+<span id="L2264"><span class="lineNum">    2264</span> <span class="tlaUNC tlaBgUNC">           0 :                                         LOGWARN(4, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with child's m_sidechainHeight.&quot;);</span></span>
+<span id="L2265"><span class="lineNum">    2265</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L2266"><span class="lineNum">    2266</span> <span class="tlaGNC tlaBgGNC">       20066 :                                 else {</span></span>
+<span id="L2267"><span class="lineNum">    2267</span> <span class="tlaGNC">       20066 :                                         update_depth(block, child-&gt;m_depth + 1);</span></span>
+<span id="L2268"><span class="lineNum">    2268</span> <span class="tlaGNC">       20066 :                                 }</span></span>
+<span id="L2269"><span class="lineNum">    2269</span> <span class="tlaGNC">       20066 :                         }</span></span>
+<span id="L2270"><span class="lineNum">    2270</span>              : </span>
+<span id="L2271"><span class="lineNum">    2271</span> <span class="tlaGNC">       62087 :                         if (std::find(child-&gt;m_uncles.begin(), child-&gt;m_uncles.end(), block-&gt;m_sidechainId) != child-&gt;m_uncles.end()) {</span></span>
+<span id="L2272"><span class="lineNum">    2272</span> <span class="tlaGNC">         603 :                                 update_depth(block, child-&gt;m_depth + i);</span></span>
+<span id="L2273"><span class="lineNum">    2273</span> <span class="tlaGNC">         603 :                         }</span></span>
+<span id="L2274"><span class="lineNum">    2274</span> <span class="tlaGNC">       62087 :                 }</span></span>
+<span id="L2275"><span class="lineNum">    2275</span> <span class="tlaGNC">       60442 :         }</span></span>
+<span id="L2276"><span class="lineNum">    2276</span>              : </span>
+<span id="L2277"><span class="lineNum">    2277</span> <span class="tlaGNC">       33513 :         std::vector&lt;PoolBlock*&gt; blocks_to_update(1, block);</span></span>
+<span id="L2278"><span class="lineNum">    2278</span>              : </span>
+<span id="L2279"><span class="lineNum">    2279</span> <span class="tlaGNC">    19543414 :         do {</span></span>
+<span id="L2280"><span class="lineNum">    2280</span> <span class="tlaGNC">    19543414 :                 block = blocks_to_update.back();</span></span>
+<span id="L2281"><span class="lineNum">    2281</span> <span class="tlaGNC">    19543414 :                 blocks_to_update.pop_back();</span></span>
+<span id="L2282"><span class="lineNum">    2282</span>              : </span>
+<span id="L2283"><span class="lineNum">    2283</span>              :                 // Verify this block and possibly other blocks on top of it when we're sure it will get verified</span>
+<span id="L2284"><span class="lineNum">    2284</span>              :                 //</span>
+<span id="L2285"><span class="lineNum">    2285</span>              :                 // Block at exactly &quot;N = (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH&quot; can have an uncle at &quot;N + UNCLE_BLOCK_DEPTH&quot;</span>
+<span id="L2286"><span class="lineNum">    2286</span>              :                 // This uncle has a parent at &quot;N + UNCLE_BLOCK_DEPTH + 1&quot;</span>
+<span id="L2287"><span class="lineNum">    2287</span>              :                 //</span>
+<span id="L2288"><span class="lineNum">    2288</span>              :                 // So a block at &quot;N = (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH&quot; can be safely validated if there is a block</span>
+<span id="L2289"><span class="lineNum">    2289</span>              :                 // at depth &gt; (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH * 2</span>
+<span id="L2290"><span class="lineNum">    2290</span>              :                 //</span>
+<span id="L2291"><span class="lineNum">    2291</span>              : </span>
+<span id="L2292"><span class="lineNum">    2292</span> <span class="tlaGNC">    19543414 :                 if (!block-&gt;m_verified &amp;&amp; ((block-&gt;m_depth &gt; (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH * 2) || (block-&gt;m_sidechainHeight == 0))) {</span></span>
+<span id="L2293"><span class="lineNum">    2293</span> <span class="tlaGNC">          50 :                         verify_loop(block);</span></span>
+<span id="L2294"><span class="lineNum">    2294</span> <span class="tlaGNC">          50 :                 }</span></span>
+<span id="L2295"><span class="lineNum">    2295</span>              : </span>
+<span id="L2296"><span class="lineNum">    2296</span> <span class="tlaGNC">    78173656 :                 for (size_t i = 1; i &lt;= UNCLE_BLOCK_DEPTH; ++i) {</span></span>
+<span id="L2297"><span class="lineNum">    2297</span> <span class="tlaGNC">    58630242 :                         auto it = m_blocksByHeight.find(block-&gt;m_sidechainHeight + i);</span></span>
+<span id="L2298"><span class="lineNum">    2298</span> <span class="tlaGNC">    58630242 :                         if (it == m_blocksByHeight.end()) {</span></span>
+<span id="L2299"><span class="lineNum">    2299</span> <span class="tlaGNC">       65783 :                                 continue;</span></span>
+<span id="L2300"><span class="lineNum">    2300</span> <span class="tlaGNC">       65783 :                         }</span></span>
+<span id="L2301"><span class="lineNum">    2301</span> <span class="tlaGNC">    60745241 :                         for (PoolBlock* child : it-&gt;second) {</span></span>
+<span id="L2302"><span class="lineNum">    2302</span> <span class="tlaGNC">    60745241 :                                 const uint64_t old_depth = child-&gt;m_depth;</span></span>
+<span id="L2303"><span class="lineNum">    2303</span>              : </span>
+<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaGNC">    60745241 :                                 if (child-&gt;m_parent == block-&gt;m_sidechainId) {</span></span>
+<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaGNC">    19529570 :                                         if (i != 1) {</span></span>
+<span id="L2306"><span class="lineNum">    2306</span> <span class="tlaUNC tlaBgUNC">           0 :                                                 LOGWARN(4, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with child's m_sidechainHeight.&quot;);</span></span>
 <span id="L2307"><span class="lineNum">    2307</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L2308"><span class="lineNum">    2308</span> <span class="tlaGNC tlaBgGNC">    19529570 :                                         if (block-&gt;m_depth &gt; 0) {</span></span>
+<span id="L2308"><span class="lineNum">    2308</span> <span class="tlaGNC tlaBgGNC">    19529570 :                                         else if (block-&gt;m_depth &gt; 0) {</span></span>
 <span id="L2309"><span class="lineNum">    2309</span> <span class="tlaGNC">    19529570 :                                                 update_depth(child, block-&gt;m_depth - 1);</span></span>
 <span id="L2310"><span class="lineNum">    2310</span> <span class="tlaGNC">    19529570 :                                         }</span></span>
 <span id="L2311"><span class="lineNum">    2311</span> <span class="tlaGNC">    19529570 :                                 }</span></span>
@@ -2387,410 +2387,408 @@
 <span id="L2325"><span class="lineNum">    2325</span> <span class="tlaGNC">    19543414 :                 auto it = m_blocksById.find(block-&gt;m_parent);</span></span>
 <span id="L2326"><span class="lineNum">    2326</span> <span class="tlaGNC">    19543414 :                 if (it != m_blocksById.end()) {</span></span>
 <span id="L2327"><span class="lineNum">    2327</span> <span class="tlaGNC">    19510005 :                         if (it-&gt;second-&gt;m_sidechainHeight + 1 != block-&gt;m_sidechainHeight) {</span></span>
-<span id="L2328"><span class="lineNum">    2328</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(3, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with parent's m_sidechainHeight.&quot;);</span></span>
-<span id="L2329"><span class="lineNum">    2329</span> <span class="tlaUNC">           0 :                                 return;</span></span>
-<span id="L2330"><span class="lineNum">    2330</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2331"><span class="lineNum">    2331</span>              : </span>
-<span id="L2332"><span class="lineNum">    2332</span> <span class="tlaGNC tlaBgGNC">    19510005 :                         if (it-&gt;second-&gt;m_depth &lt; block-&gt;m_depth + 1) {</span></span>
-<span id="L2333"><span class="lineNum">    2333</span> <span class="tlaGNC">    18800606 :                                 update_depth(it-&gt;second, block-&gt;m_depth + 1);</span></span>
-<span id="L2334"><span class="lineNum">    2334</span> <span class="tlaGNC">    18800606 :                                 blocks_to_update.push_back(it-&gt;second);</span></span>
-<span id="L2335"><span class="lineNum">    2335</span> <span class="tlaGNC">    18800606 :                         }</span></span>
-<span id="L2336"><span class="lineNum">    2336</span> <span class="tlaGNC">    19510005 :                 }</span></span>
-<span id="L2337"><span class="lineNum">    2337</span>              : </span>
-<span id="L2338"><span class="lineNum">    2338</span> <span class="tlaGNC">    19543414 :                 for (const hash&amp; uncle_id : block-&gt;m_uncles) {</span></span>
-<span id="L2339"><span class="lineNum">    2339</span> <span class="tlaGNC">      718887 :                         it = m_blocksById.find(uncle_id);</span></span>
-<span id="L2340"><span class="lineNum">    2340</span> <span class="tlaGNC">      718887 :                         if (it == m_blocksById.end()) {</span></span>
-<span id="L2341"><span class="lineNum">    2341</span> <span class="tlaGNC">         909 :                                 continue;</span></span>
-<span id="L2342"><span class="lineNum">    2342</span> <span class="tlaGNC">         909 :                         }</span></span>
-<span id="L2343"><span class="lineNum">    2343</span>              : </span>
-<span id="L2344"><span class="lineNum">    2344</span> <span class="tlaGNC">      717978 :                         if ((it-&gt;second-&gt;m_sidechainHeight &gt;= block-&gt;m_sidechainHeight) || (it-&gt;second-&gt;m_sidechainHeight + UNCLE_BLOCK_DEPTH &lt; block-&gt;m_sidechainHeight)) {</span></span>
-<span id="L2345"><span class="lineNum">    2345</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(3, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with uncle's m_sidechainHeight.&quot;);</span></span>
-<span id="L2346"><span class="lineNum">    2346</span> <span class="tlaUNC">           0 :                                 return;</span></span>
-<span id="L2347"><span class="lineNum">    2347</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2348"><span class="lineNum">    2348</span>              : </span>
-<span id="L2349"><span class="lineNum">    2349</span> <span class="tlaGNC tlaBgGNC">      717978 :                         const uint64_t d = block-&gt;m_sidechainHeight - it-&gt;second-&gt;m_sidechainHeight;</span></span>
-<span id="L2350"><span class="lineNum">    2350</span> <span class="tlaGNC">      717978 :                         if (it-&gt;second-&gt;m_depth &lt; block-&gt;m_depth + d) {</span></span>
-<span id="L2351"><span class="lineNum">    2351</span> <span class="tlaGNC">      709075 :                                 update_depth(it-&gt;second, block-&gt;m_depth + d);</span></span>
-<span id="L2352"><span class="lineNum">    2352</span> <span class="tlaGNC">      709075 :                                 blocks_to_update.push_back(it-&gt;second);</span></span>
-<span id="L2353"><span class="lineNum">    2353</span> <span class="tlaGNC">      709075 :                         }</span></span>
-<span id="L2354"><span class="lineNum">    2354</span> <span class="tlaGNC">      717978 :                 }</span></span>
-<span id="L2355"><span class="lineNum">    2355</span> <span class="tlaGNC">    19543414 :         } while (!blocks_to_update.empty());</span></span>
-<span id="L2356"><span class="lineNum">    2356</span> <span class="tlaGNC">       33513 : }</span></span>
-<span id="L2357"><span class="lineNum">    2357</span>              : </span>
-<span id="L2358"><span class="lineNum">    2358</span>              : void SideChain::prune_old_blocks()</span>
-<span id="L2359"><span class="lineNum">    2359</span> <span class="tlaGNC">        6486 : {</span></span>
-<span id="L2360"><span class="lineNum">    2360</span>              :         // Leave &gt;2 minutes worth of spare blocks in addition to 2xPPLNS window for lagging nodes which need to sync</span>
-<span id="L2361"><span class="lineNum">    2361</span> <span class="tlaGNC">        6486 :         const uint64_t prune_distance = (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH * 2 + MONERO_BLOCK_TIME / m_targetBlockTime + 1;</span></span>
-<span id="L2362"><span class="lineNum">    2362</span>              : </span>
-<span id="L2363"><span class="lineNum">    2363</span>              :         // Remove old blocks from alternative unconnected chains after long enough time</span>
-<span id="L2364"><span class="lineNum">    2364</span> <span class="tlaGNC">        6486 :         const uint64_t cur_time = seconds_since_epoch();</span></span>
-<span id="L2365"><span class="lineNum">    2365</span> <span class="tlaGNC">        6486 :         const uint64_t prune_delay = m_chainWindowSize * 4 * m_targetBlockTime;</span></span>
+<span id="L2328"><span class="lineNum">    2328</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(4, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with parent's m_sidechainHeight.&quot;);</span></span>
+<span id="L2329"><span class="lineNum">    2329</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2330"><span class="lineNum">    2330</span> <span class="tlaGNC tlaBgGNC">    19510005 :                         else if (it-&gt;second-&gt;m_depth &lt; block-&gt;m_depth + 1) {</span></span>
+<span id="L2331"><span class="lineNum">    2331</span> <span class="tlaGNC">    18800606 :                                 update_depth(it-&gt;second, block-&gt;m_depth + 1);</span></span>
+<span id="L2332"><span class="lineNum">    2332</span> <span class="tlaGNC">    18800606 :                                 blocks_to_update.push_back(it-&gt;second);</span></span>
+<span id="L2333"><span class="lineNum">    2333</span> <span class="tlaGNC">    18800606 :                         }</span></span>
+<span id="L2334"><span class="lineNum">    2334</span> <span class="tlaGNC">    19510005 :                 }</span></span>
+<span id="L2335"><span class="lineNum">    2335</span>              : </span>
+<span id="L2336"><span class="lineNum">    2336</span> <span class="tlaGNC">    19543414 :                 for (const hash&amp; uncle_id : block-&gt;m_uncles) {</span></span>
+<span id="L2337"><span class="lineNum">    2337</span> <span class="tlaGNC">      718887 :                         it = m_blocksById.find(uncle_id);</span></span>
+<span id="L2338"><span class="lineNum">    2338</span> <span class="tlaGNC">      718887 :                         if (it == m_blocksById.end()) {</span></span>
+<span id="L2339"><span class="lineNum">    2339</span> <span class="tlaGNC">         909 :                                 continue;</span></span>
+<span id="L2340"><span class="lineNum">    2340</span> <span class="tlaGNC">         909 :                         }</span></span>
+<span id="L2341"><span class="lineNum">    2341</span>              : </span>
+<span id="L2342"><span class="lineNum">    2342</span> <span class="tlaGNC">      717978 :                         if ((it-&gt;second-&gt;m_sidechainHeight &gt;= block-&gt;m_sidechainHeight) || (it-&gt;second-&gt;m_sidechainHeight + UNCLE_BLOCK_DEPTH &lt; block-&gt;m_sidechainHeight)) {</span></span>
+<span id="L2343"><span class="lineNum">    2343</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(4, &quot;Block &quot; &lt;&lt; block-&gt;m_sidechainId &lt;&lt; &quot;: m_sidechainHeight is inconsistent with uncle's m_sidechainHeight.&quot;);</span></span>
+<span id="L2344"><span class="lineNum">    2344</span> <span class="tlaUNC">           0 :                                 continue;</span></span>
+<span id="L2345"><span class="lineNum">    2345</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2346"><span class="lineNum">    2346</span>              : </span>
+<span id="L2347"><span class="lineNum">    2347</span> <span class="tlaGNC tlaBgGNC">      717978 :                         const uint64_t d = block-&gt;m_sidechainHeight - it-&gt;second-&gt;m_sidechainHeight;</span></span>
+<span id="L2348"><span class="lineNum">    2348</span> <span class="tlaGNC">      717978 :                         if (it-&gt;second-&gt;m_depth &lt; block-&gt;m_depth + d) {</span></span>
+<span id="L2349"><span class="lineNum">    2349</span> <span class="tlaGNC">      709075 :                                 update_depth(it-&gt;second, block-&gt;m_depth + d);</span></span>
+<span id="L2350"><span class="lineNum">    2350</span> <span class="tlaGNC">      709075 :                                 blocks_to_update.push_back(it-&gt;second);</span></span>
+<span id="L2351"><span class="lineNum">    2351</span> <span class="tlaGNC">      709075 :                         }</span></span>
+<span id="L2352"><span class="lineNum">    2352</span> <span class="tlaGNC">      717978 :                 }</span></span>
+<span id="L2353"><span class="lineNum">    2353</span> <span class="tlaGNC">    19543414 :         } while (!blocks_to_update.empty());</span></span>
+<span id="L2354"><span class="lineNum">    2354</span> <span class="tlaGNC">       33513 : }</span></span>
+<span id="L2355"><span class="lineNum">    2355</span>              : </span>
+<span id="L2356"><span class="lineNum">    2356</span>              : void SideChain::prune_old_blocks()</span>
+<span id="L2357"><span class="lineNum">    2357</span> <span class="tlaGNC">        6486 : {</span></span>
+<span id="L2358"><span class="lineNum">    2358</span>              :         // Leave &gt;2 minutes worth of spare blocks in addition to 2xPPLNS window for lagging nodes which need to sync</span>
+<span id="L2359"><span class="lineNum">    2359</span> <span class="tlaGNC">        6486 :         const uint64_t prune_distance = (m_chainWindowSize - 1) * 2 + UNCLE_BLOCK_DEPTH * 2 + MONERO_BLOCK_TIME / m_targetBlockTime + 1;</span></span>
+<span id="L2360"><span class="lineNum">    2360</span>              : </span>
+<span id="L2361"><span class="lineNum">    2361</span>              :         // Remove old blocks from alternative unconnected chains after long enough time</span>
+<span id="L2362"><span class="lineNum">    2362</span> <span class="tlaGNC">        6486 :         const uint64_t cur_time = seconds_since_epoch();</span></span>
+<span id="L2363"><span class="lineNum">    2363</span> <span class="tlaGNC">        6486 :         const uint64_t prune_delay = m_chainWindowSize * 4 * m_targetBlockTime;</span></span>
+<span id="L2364"><span class="lineNum">    2364</span>              : </span>
+<span id="L2365"><span class="lineNum">    2365</span> <span class="tlaGNC">        6486 :         const PoolBlock* tip = m_chainTip;</span></span>
 <span id="L2366"><span class="lineNum">    2366</span>              : </span>
-<span id="L2367"><span class="lineNum">    2367</span> <span class="tlaGNC">        6486 :         const PoolBlock* tip = m_chainTip;</span></span>
-<span id="L2368"><span class="lineNum">    2368</span>              : </span>
-<span id="L2369"><span class="lineNum">    2369</span> <span class="tlaGNC">        6486 :         if (!tip || (tip-&gt;m_sidechainHeight &lt; prune_distance)) {</span></span>
-<span id="L2370"><span class="lineNum">    2370</span> <span class="tlaGNC">        4337 :                 return;</span></span>
-<span id="L2371"><span class="lineNum">    2371</span> <span class="tlaGNC">        4337 :         }</span></span>
-<span id="L2372"><span class="lineNum">    2372</span>              : </span>
-<span id="L2373"><span class="lineNum">    2373</span>              :         // Free blocks that were pruned at least 1 minute ago. By now any raw pointer to them that another</span>
-<span id="L2374"><span class="lineNum">    2374</span>              :         // thread might have grabbed (via find_block()/get_block_blob() without m_sidechainLock) is long gone.</span>
-<span id="L2375"><span class="lineNum">    2375</span> <span class="tlaGNC">        2149 :         while (!m_blocksToDelete.empty() &amp;&amp; (cur_time &gt;= m_blocksToDelete.front().first + 60)) {</span></span>
-<span id="L2376"><span class="lineNum">    2376</span> <span class="tlaUNC tlaBgUNC">           0 :                 delete m_blocksToDelete.front().second;</span></span>
-<span id="L2377"><span class="lineNum">    2377</span> <span class="tlaUNC">           0 :                 m_blocksToDelete.pop_front();</span></span>
-<span id="L2378"><span class="lineNum">    2378</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2367"><span class="lineNum">    2367</span> <span class="tlaGNC">        6486 :         if (!tip || (tip-&gt;m_sidechainHeight &lt; prune_distance)) {</span></span>
+<span id="L2368"><span class="lineNum">    2368</span> <span class="tlaGNC">        4337 :                 return;</span></span>
+<span id="L2369"><span class="lineNum">    2369</span> <span class="tlaGNC">        4337 :         }</span></span>
+<span id="L2370"><span class="lineNum">    2370</span>              : </span>
+<span id="L2371"><span class="lineNum">    2371</span>              :         // Free blocks that were pruned at least 1 minute ago. By now any raw pointer to them that another</span>
+<span id="L2372"><span class="lineNum">    2372</span>              :         // thread might have grabbed (via find_block()/get_block_blob() without m_sidechainLock) is long gone.</span>
+<span id="L2373"><span class="lineNum">    2373</span> <span class="tlaGNC">        2149 :         while (!m_blocksToDelete.empty() &amp;&amp; (cur_time &gt;= m_blocksToDelete.front().first + 60)) {</span></span>
+<span id="L2374"><span class="lineNum">    2374</span> <span class="tlaUNC tlaBgUNC">           0 :                 delete m_blocksToDelete.front().second;</span></span>
+<span id="L2375"><span class="lineNum">    2375</span> <span class="tlaUNC">           0 :                 m_blocksToDelete.pop_front();</span></span>
+<span id="L2376"><span class="lineNum">    2376</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2377"><span class="lineNum">    2377</span>              : </span>
+<span id="L2378"><span class="lineNum">    2378</span> <span class="tlaGNC tlaBgGNC">        2149 :         const uint64_t h = tip-&gt;m_sidechainHeight - prune_distance;</span></span>
 <span id="L2379"><span class="lineNum">    2379</span>              : </span>
-<span id="L2380"><span class="lineNum">    2380</span> <span class="tlaGNC tlaBgGNC">        2149 :         const uint64_t h = tip-&gt;m_sidechainHeight - prune_distance;</span></span>
+<span id="L2380"><span class="lineNum">    2380</span> <span class="tlaGNC">        2149 :         std::vector&lt;PoolBlock*&gt; blocks_to_prune;</span></span>
 <span id="L2381"><span class="lineNum">    2381</span>              : </span>
-<span id="L2382"><span class="lineNum">    2382</span> <span class="tlaGNC">        2149 :         std::vector&lt;PoolBlock*&gt; blocks_to_prune;</span></span>
-<span id="L2383"><span class="lineNum">    2383</span>              : </span>
-<span id="L2384"><span class="lineNum">    2384</span> <span class="tlaGNC">        4291 :         for (auto it = m_blocksByHeight.begin(); (it != m_blocksByHeight.end()) &amp;&amp; (it-&gt;first &lt; h);) {</span></span>
-<span id="L2385"><span class="lineNum">    2385</span> <span class="tlaGNC">        2142 :                 const uint64_t height = it-&gt;first;</span></span>
-<span id="L2386"><span class="lineNum">    2386</span> <span class="tlaGNC">        2142 :                 std::vector&lt;PoolBlock*&gt;&amp; v = it-&gt;second;</span></span>
-<span id="L2387"><span class="lineNum">    2387</span>              : </span>
-<span id="L2388"><span class="lineNum">    2388</span> <span class="tlaGNC">        2142 :                 v.erase(std::remove_if(v.begin(), v.end(),</span></span>
-<span id="L2389"><span class="lineNum">    2389</span> <span class="tlaGNC">        2142 :                         [this, prune_distance, cur_time, prune_delay, &amp;blocks_to_prune, height](PoolBlock* block)</span></span>
-<span id="L2390"><span class="lineNum">    2390</span> <span class="tlaGNC">        2226 :                         {</span></span>
-<span id="L2391"><span class="lineNum">    2391</span> <span class="tlaGNC">        2226 :                                 if ((block-&gt;m_depth &gt; prune_distance) || (cur_time &gt;= block-&gt;m_localTimestamp + prune_delay)) {</span></span>
-<span id="L2392"><span class="lineNum">    2392</span> <span class="tlaGNC">        2226 :                                         blocks_to_prune.push_back(block);</span></span>
-<span id="L2393"><span class="lineNum">    2393</span>              : </span>
-<span id="L2394"><span class="lineNum">    2394</span> <span class="tlaGNC">        2226 :                                         auto it2 = m_blocksById.find(block-&gt;m_sidechainId);</span></span>
-<span id="L2395"><span class="lineNum">    2395</span> <span class="tlaGNC">        2226 :                                         if (it2 != m_blocksById.end()) {</span></span>
-<span id="L2396"><span class="lineNum">    2396</span> <span class="tlaGNC">        2226 :                                                 m_blocksById.erase(it2);</span></span>
-<span id="L2397"><span class="lineNum">    2397</span> <span class="tlaGNC">        2226 :                                         }</span></span>
-<span id="L2398"><span class="lineNum">    2398</span> <span class="tlaUNC tlaBgUNC">           0 :                                         else {</span></span>
-<span id="L2399"><span class="lineNum">    2399</span> <span class="tlaUNC">           0 :                                                 LOGERR(1, &quot;m_blocksByHeight and m_blocksById are inconsistent at height &quot; &lt;&lt; height &lt;&lt; &quot;. Fix the code!&quot;);</span></span>
-<span id="L2400"><span class="lineNum">    2400</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L2401"><span class="lineNum">    2401</span>              : </span>
-<span id="L2402"><span class="lineNum">    2402</span> <span class="tlaGNC tlaBgGNC">        2226 :                                         auto it3 = m_blocksByMerkleRoot.find(block-&gt;m_merkleRoot);</span></span>
-<span id="L2403"><span class="lineNum">    2403</span> <span class="tlaGNC">        2226 :                                         if (it3 != m_blocksByMerkleRoot.end()) {</span></span>
-<span id="L2404"><span class="lineNum">    2404</span> <span class="tlaGNC">        2226 :                                                 m_blocksByMerkleRoot.erase(it3);</span></span>
-<span id="L2405"><span class="lineNum">    2405</span> <span class="tlaGNC">        2226 :                                         }</span></span>
-<span id="L2406"><span class="lineNum">    2406</span> <span class="tlaUNC tlaBgUNC">           0 :                                         else {</span></span>
-<span id="L2407"><span class="lineNum">    2407</span> <span class="tlaUNC">           0 :                                                 LOGERR(1, &quot;m_blocksByHeight and m_blocksByMerkleRoot are inconsistent at height &quot; &lt;&lt; height &lt;&lt; &quot;. Fix the code!&quot;);</span></span>
-<span id="L2408"><span class="lineNum">    2408</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L2409"><span class="lineNum">    2409</span>              : </span>
-<span id="L2410"><span class="lineNum">    2410</span> <span class="tlaGNC tlaBgGNC">        2226 :                                         return true;</span></span>
-<span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC">        2226 :                                 }</span></span>
-<span id="L2412"><span class="lineNum">    2412</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
-<span id="L2413"><span class="lineNum">    2413</span> <span class="tlaGNC tlaBgGNC">        2226 :                         }), v.end());</span></span>
-<span id="L2414"><span class="lineNum">    2414</span>              : </span>
-<span id="L2415"><span class="lineNum">    2415</span> <span class="tlaGNC">        2142 :                 if (v.empty()) {</span></span>
-<span id="L2416"><span class="lineNum">    2416</span> <span class="tlaGNC">        2142 :                         it = m_blocksByHeight.erase(it);</span></span>
-<span id="L2417"><span class="lineNum">    2417</span> <span class="tlaGNC">        2142 :                 }</span></span>
-<span id="L2418"><span class="lineNum">    2418</span> <span class="tlaUNC tlaBgUNC">           0 :                 else {</span></span>
-<span id="L2419"><span class="lineNum">    2419</span> <span class="tlaUNC">           0 :                         ++it;</span></span>
-<span id="L2420"><span class="lineNum">    2420</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2421"><span class="lineNum">    2421</span> <span class="tlaGNC tlaBgGNC">        2142 :         }</span></span>
-<span id="L2422"><span class="lineNum">    2422</span>              : </span>
-<span id="L2423"><span class="lineNum">    2423</span> <span class="tlaGNC">        2149 :         if (!blocks_to_prune.empty()) {</span></span>
-<span id="L2424"><span class="lineNum">    2424</span> <span class="tlaGNC">        2142 :                 LOGINFO(4, &quot;pruned &quot; &lt;&lt; blocks_to_prune.size() &lt;&lt; &quot; old blocks at heights &lt; &quot; &lt;&lt; h);</span></span>
-<span id="L2425"><span class="lineNum">    2425</span>              : </span>
-<span id="L2426"><span class="lineNum">    2426</span>              :                 // If side-chain started pruning blocks it means the initial sync is complete</span>
-<span id="L2427"><span class="lineNum">    2427</span>              :                 // It's now safe to delete cached blocks</span>
-<span id="L2428"><span class="lineNum">    2428</span> <span class="tlaGNC">        2142 :                 if (p2pServer()) {</span></span>
-<span id="L2429"><span class="lineNum">    2429</span> <span class="tlaUNC tlaBgUNC">           0 :                         p2pServer()-&gt;clear_cached_blocks();</span></span>
-<span id="L2430"><span class="lineNum">    2430</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2431"><span class="lineNum">    2431</span>              : </span>
-<span id="L2432"><span class="lineNum">    2432</span>              :                 // Pre-calc workers are not needed anymore</span>
-<span id="L2433"><span class="lineNum">    2433</span> <span class="tlaGNC tlaBgGNC">        2142 :                 finish_precalc();</span></span>
-<span id="L2434"><span class="lineNum">    2434</span>              : </span>
-<span id="L2435"><span class="lineNum">    2435</span>              :                 // These blocks have already been unlinked from m_blocksById/m_blocksByHeight/m_blocksByMerkleRoot</span>
-<span id="L2436"><span class="lineNum">    2436</span>              :                 // above, so no new lookup can return them. Place them in a queue for deletion 1 minute later.</span>
-<span id="L2437"><span class="lineNum">    2437</span> <span class="tlaGNC">        2226 :                 for (PoolBlock* b : blocks_to_prune) {</span></span>
-<span id="L2438"><span class="lineNum">    2438</span> <span class="tlaGNC">        2226 :                         m_blocksToDelete.emplace_back(cur_time, b);</span></span>
-<span id="L2439"><span class="lineNum">    2439</span> <span class="tlaGNC">        2226 :                 }</span></span>
-<span id="L2440"><span class="lineNum">    2440</span>              : </span>
-<span id="L2441"><span class="lineNum">    2441</span>              : #ifdef DEV_TEST_SYNC</span>
-<span id="L2442"><span class="lineNum">    2442</span>              :                 if (m_firstPruneTime == 0) {</span>
-<span id="L2443"><span class="lineNum">    2443</span>              :                         m_firstPruneTime = seconds_since_epoch();</span>
-<span id="L2444"><span class="lineNum">    2444</span>              : </span>
-<span id="L2445"><span class="lineNum">    2445</span>              :                         // Test Monero node switching</span>
-<span id="L2446"><span class="lineNum">    2446</span>              :                         m_pool-&gt;reconnect_to_host();</span>
-<span id="L2447"><span class="lineNum">    2447</span>              :                 }</span>
-<span id="L2448"><span class="lineNum">    2448</span>              : </span>
-<span id="L2449"><span class="lineNum">    2449</span>              :                 if ((cur_time &gt;= m_firstPruneTime + 120) &amp;&amp; !m_pool-&gt;stopped()) {</span>
-<span id="L2450"><span class="lineNum">    2450</span>              :                         LOGINFO(0, log::LightGreen() &lt;&lt; &quot;[DEV] Synchronization finished successfully, stopping P2Pool now&quot;);</span>
-<span id="L2451"><span class="lineNum">    2451</span>              : #ifdef DEV_TRACK_MEMORY</span>
-<span id="L2452"><span class="lineNum">    2452</span>              :                         show_top_10_allocations();</span>
-<span id="L2453"><span class="lineNum">    2453</span>              : #endif</span>
-<span id="L2454"><span class="lineNum">    2454</span>              :                         StratumServer* server1 = m_pool-&gt;stratum_server();</span>
-<span id="L2455"><span class="lineNum">    2455</span>              :                         P2PServer* server2 = m_pool-&gt;p2p_server();</span>
-<span id="L2456"><span class="lineNum">    2456</span>              : </span>
-<span id="L2457"><span class="lineNum">    2457</span>              :                         if (server1 &amp;&amp; server2) {</span>
-<span id="L2458"><span class="lineNum">    2458</span>              :                                 server1-&gt;print_bans();</span>
-<span id="L2459"><span class="lineNum">    2459</span>              :                                 server2-&gt;print_bans();</span>
-<span id="L2460"><span class="lineNum">    2460</span>              : </span>
-<span id="L2461"><span class="lineNum">    2461</span>              :                                 server1-&gt;show_workers_async();</span>
-<span id="L2462"><span class="lineNum">    2462</span>              :                                 server2-&gt;show_peers_async();</span>
-<span id="L2463"><span class="lineNum">    2463</span>              :                         }</span>
-<span id="L2464"><span class="lineNum">    2464</span>              : </span>
-<span id="L2465"><span class="lineNum">    2465</span>              :                         m_pool-&gt;print_hosts();</span>
-<span id="L2466"><span class="lineNum">    2466</span>              :                         m_pool-&gt;stop();</span>
-<span id="L2467"><span class="lineNum">    2467</span>              : </span>
-<span id="L2468"><span class="lineNum">    2468</span>              : #ifdef DEV_TRACK_MEMORY</span>
-<span id="L2469"><span class="lineNum">    2469</span>              :                         // Give it 1 minute to shut down, otherwise save a minidump</span>
-<span id="L2470"><span class="lineNum">    2470</span>              :                         minidump_and_crash(60 * 1000);</span>
+<span id="L2382"><span class="lineNum">    2382</span> <span class="tlaGNC">        4291 :         for (auto it = m_blocksByHeight.begin(); (it != m_blocksByHeight.end()) &amp;&amp; (it-&gt;first &lt; h);) {</span></span>
+<span id="L2383"><span class="lineNum">    2383</span> <span class="tlaGNC">        2142 :                 const uint64_t height = it-&gt;first;</span></span>
+<span id="L2384"><span class="lineNum">    2384</span> <span class="tlaGNC">        2142 :                 std::vector&lt;PoolBlock*&gt;&amp; v = it-&gt;second;</span></span>
+<span id="L2385"><span class="lineNum">    2385</span>              : </span>
+<span id="L2386"><span class="lineNum">    2386</span> <span class="tlaGNC">        2142 :                 v.erase(std::remove_if(v.begin(), v.end(),</span></span>
+<span id="L2387"><span class="lineNum">    2387</span> <span class="tlaGNC">        2142 :                         [this, prune_distance, cur_time, prune_delay, &amp;blocks_to_prune, height](PoolBlock* block)</span></span>
+<span id="L2388"><span class="lineNum">    2388</span> <span class="tlaGNC">        2226 :                         {</span></span>
+<span id="L2389"><span class="lineNum">    2389</span> <span class="tlaGNC">        2226 :                                 if ((block-&gt;m_depth &gt; prune_distance) || (cur_time &gt;= block-&gt;m_localTimestamp + prune_delay)) {</span></span>
+<span id="L2390"><span class="lineNum">    2390</span> <span class="tlaGNC">        2226 :                                         blocks_to_prune.push_back(block);</span></span>
+<span id="L2391"><span class="lineNum">    2391</span>              : </span>
+<span id="L2392"><span class="lineNum">    2392</span> <span class="tlaGNC">        2226 :                                         auto it2 = m_blocksById.find(block-&gt;m_sidechainId);</span></span>
+<span id="L2393"><span class="lineNum">    2393</span> <span class="tlaGNC">        2226 :                                         if (it2 != m_blocksById.end()) {</span></span>
+<span id="L2394"><span class="lineNum">    2394</span> <span class="tlaGNC">        2226 :                                                 m_blocksById.erase(it2);</span></span>
+<span id="L2395"><span class="lineNum">    2395</span> <span class="tlaGNC">        2226 :                                         }</span></span>
+<span id="L2396"><span class="lineNum">    2396</span> <span class="tlaUNC tlaBgUNC">           0 :                                         else {</span></span>
+<span id="L2397"><span class="lineNum">    2397</span> <span class="tlaUNC">           0 :                                                 LOGERR(1, &quot;m_blocksByHeight and m_blocksById are inconsistent at height &quot; &lt;&lt; height &lt;&lt; &quot;. Fix the code!&quot;);</span></span>
+<span id="L2398"><span class="lineNum">    2398</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L2399"><span class="lineNum">    2399</span>              : </span>
+<span id="L2400"><span class="lineNum">    2400</span> <span class="tlaGNC tlaBgGNC">        2226 :                                         auto it3 = m_blocksByMerkleRoot.find(block-&gt;m_merkleRoot);</span></span>
+<span id="L2401"><span class="lineNum">    2401</span> <span class="tlaGNC">        2226 :                                         if (it3 != m_blocksByMerkleRoot.end()) {</span></span>
+<span id="L2402"><span class="lineNum">    2402</span> <span class="tlaGNC">        2226 :                                                 m_blocksByMerkleRoot.erase(it3);</span></span>
+<span id="L2403"><span class="lineNum">    2403</span> <span class="tlaGNC">        2226 :                                         }</span></span>
+<span id="L2404"><span class="lineNum">    2404</span> <span class="tlaUNC tlaBgUNC">           0 :                                         else {</span></span>
+<span id="L2405"><span class="lineNum">    2405</span> <span class="tlaUNC">           0 :                                                 LOGERR(1, &quot;m_blocksByHeight and m_blocksByMerkleRoot are inconsistent at height &quot; &lt;&lt; height &lt;&lt; &quot;. Fix the code!&quot;);</span></span>
+<span id="L2406"><span class="lineNum">    2406</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L2407"><span class="lineNum">    2407</span>              : </span>
+<span id="L2408"><span class="lineNum">    2408</span> <span class="tlaGNC tlaBgGNC">        2226 :                                         return true;</span></span>
+<span id="L2409"><span class="lineNum">    2409</span> <span class="tlaGNC">        2226 :                                 }</span></span>
+<span id="L2410"><span class="lineNum">    2410</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return false;</span></span>
+<span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC tlaBgGNC">        2226 :                         }), v.end());</span></span>
+<span id="L2412"><span class="lineNum">    2412</span>              : </span>
+<span id="L2413"><span class="lineNum">    2413</span> <span class="tlaGNC">        2142 :                 if (v.empty()) {</span></span>
+<span id="L2414"><span class="lineNum">    2414</span> <span class="tlaGNC">        2142 :                         it = m_blocksByHeight.erase(it);</span></span>
+<span id="L2415"><span class="lineNum">    2415</span> <span class="tlaGNC">        2142 :                 }</span></span>
+<span id="L2416"><span class="lineNum">    2416</span> <span class="tlaUNC tlaBgUNC">           0 :                 else {</span></span>
+<span id="L2417"><span class="lineNum">    2417</span> <span class="tlaUNC">           0 :                         ++it;</span></span>
+<span id="L2418"><span class="lineNum">    2418</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2419"><span class="lineNum">    2419</span> <span class="tlaGNC tlaBgGNC">        2142 :         }</span></span>
+<span id="L2420"><span class="lineNum">    2420</span>              : </span>
+<span id="L2421"><span class="lineNum">    2421</span> <span class="tlaGNC">        2149 :         if (!blocks_to_prune.empty()) {</span></span>
+<span id="L2422"><span class="lineNum">    2422</span> <span class="tlaGNC">        2142 :                 LOGINFO(4, &quot;pruned &quot; &lt;&lt; blocks_to_prune.size() &lt;&lt; &quot; old blocks at heights &lt; &quot; &lt;&lt; h);</span></span>
+<span id="L2423"><span class="lineNum">    2423</span>              : </span>
+<span id="L2424"><span class="lineNum">    2424</span>              :                 // If side-chain started pruning blocks it means the initial sync is complete</span>
+<span id="L2425"><span class="lineNum">    2425</span>              :                 // It's now safe to delete cached blocks</span>
+<span id="L2426"><span class="lineNum">    2426</span> <span class="tlaGNC">        2142 :                 if (p2pServer()) {</span></span>
+<span id="L2427"><span class="lineNum">    2427</span> <span class="tlaUNC tlaBgUNC">           0 :                         p2pServer()-&gt;clear_cached_blocks();</span></span>
+<span id="L2428"><span class="lineNum">    2428</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2429"><span class="lineNum">    2429</span>              : </span>
+<span id="L2430"><span class="lineNum">    2430</span>              :                 // Pre-calc workers are not needed anymore</span>
+<span id="L2431"><span class="lineNum">    2431</span> <span class="tlaGNC tlaBgGNC">        2142 :                 finish_precalc();</span></span>
+<span id="L2432"><span class="lineNum">    2432</span>              : </span>
+<span id="L2433"><span class="lineNum">    2433</span>              :                 // These blocks have already been unlinked from m_blocksById/m_blocksByHeight/m_blocksByMerkleRoot</span>
+<span id="L2434"><span class="lineNum">    2434</span>              :                 // above, so no new lookup can return them. Place them in a queue for deletion 1 minute later.</span>
+<span id="L2435"><span class="lineNum">    2435</span> <span class="tlaGNC">        2226 :                 for (PoolBlock* b : blocks_to_prune) {</span></span>
+<span id="L2436"><span class="lineNum">    2436</span> <span class="tlaGNC">        2226 :                         m_blocksToDelete.emplace_back(cur_time, b);</span></span>
+<span id="L2437"><span class="lineNum">    2437</span> <span class="tlaGNC">        2226 :                 }</span></span>
+<span id="L2438"><span class="lineNum">    2438</span>              : </span>
+<span id="L2439"><span class="lineNum">    2439</span>              : #ifdef DEV_TEST_SYNC</span>
+<span id="L2440"><span class="lineNum">    2440</span>              :                 if (m_firstPruneTime == 0) {</span>
+<span id="L2441"><span class="lineNum">    2441</span>              :                         m_firstPruneTime = seconds_since_epoch();</span>
+<span id="L2442"><span class="lineNum">    2442</span>              : </span>
+<span id="L2443"><span class="lineNum">    2443</span>              :                         // Test Monero node switching</span>
+<span id="L2444"><span class="lineNum">    2444</span>              :                         m_pool-&gt;reconnect_to_host();</span>
+<span id="L2445"><span class="lineNum">    2445</span>              :                 }</span>
+<span id="L2446"><span class="lineNum">    2446</span>              : </span>
+<span id="L2447"><span class="lineNum">    2447</span>              :                 if ((cur_time &gt;= m_firstPruneTime + 120) &amp;&amp; !m_pool-&gt;stopped()) {</span>
+<span id="L2448"><span class="lineNum">    2448</span>              :                         LOGINFO(0, log::LightGreen() &lt;&lt; &quot;[DEV] Synchronization finished successfully, stopping P2Pool now&quot;);</span>
+<span id="L2449"><span class="lineNum">    2449</span>              : #ifdef DEV_TRACK_MEMORY</span>
+<span id="L2450"><span class="lineNum">    2450</span>              :                         show_top_10_allocations();</span>
+<span id="L2451"><span class="lineNum">    2451</span>              : #endif</span>
+<span id="L2452"><span class="lineNum">    2452</span>              :                         StratumServer* server1 = m_pool-&gt;stratum_server();</span>
+<span id="L2453"><span class="lineNum">    2453</span>              :                         P2PServer* server2 = m_pool-&gt;p2p_server();</span>
+<span id="L2454"><span class="lineNum">    2454</span>              : </span>
+<span id="L2455"><span class="lineNum">    2455</span>              :                         if (server1 &amp;&amp; server2) {</span>
+<span id="L2456"><span class="lineNum">    2456</span>              :                                 server1-&gt;print_bans();</span>
+<span id="L2457"><span class="lineNum">    2457</span>              :                                 server2-&gt;print_bans();</span>
+<span id="L2458"><span class="lineNum">    2458</span>              : </span>
+<span id="L2459"><span class="lineNum">    2459</span>              :                                 server1-&gt;show_workers_async();</span>
+<span id="L2460"><span class="lineNum">    2460</span>              :                                 server2-&gt;show_peers_async();</span>
+<span id="L2461"><span class="lineNum">    2461</span>              :                         }</span>
+<span id="L2462"><span class="lineNum">    2462</span>              : </span>
+<span id="L2463"><span class="lineNum">    2463</span>              :                         m_pool-&gt;print_hosts();</span>
+<span id="L2464"><span class="lineNum">    2464</span>              :                         m_pool-&gt;stop();</span>
+<span id="L2465"><span class="lineNum">    2465</span>              : </span>
+<span id="L2466"><span class="lineNum">    2466</span>              : #ifdef DEV_TRACK_MEMORY</span>
+<span id="L2467"><span class="lineNum">    2467</span>              :                         // Give it 1 minute to shut down, otherwise save a minidump</span>
+<span id="L2468"><span class="lineNum">    2468</span>              :                         minidump_and_crash(60 * 1000);</span>
+<span id="L2469"><span class="lineNum">    2469</span>              : #endif</span>
+<span id="L2470"><span class="lineNum">    2470</span>              :                 }</span>
 <span id="L2471"><span class="lineNum">    2471</span>              : #endif</span>
-<span id="L2472"><span class="lineNum">    2472</span>              :                 }</span>
-<span id="L2473"><span class="lineNum">    2473</span>              : #endif</span>
-<span id="L2474"><span class="lineNum">    2474</span> <span class="tlaGNC">        2142 :         }</span></span>
-<span id="L2475"><span class="lineNum">    2475</span> <span class="tlaGNC">        2149 : }</span></span>
-<span id="L2476"><span class="lineNum">    2476</span>              : </span>
-<span id="L2477"><span class="lineNum">    2477</span>              : void SideChain::get_missing_blocks(unordered_set&lt;hash&gt;&amp; missing_blocks) const</span>
-<span id="L2478"><span class="lineNum">    2478</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
-<span id="L2479"><span class="lineNum">    2479</span> <span class="tlaUNC">           0 :         missing_blocks.clear();</span></span>
+<span id="L2472"><span class="lineNum">    2472</span> <span class="tlaGNC">        2142 :         }</span></span>
+<span id="L2473"><span class="lineNum">    2473</span> <span class="tlaGNC">        2149 : }</span></span>
+<span id="L2474"><span class="lineNum">    2474</span>              : </span>
+<span id="L2475"><span class="lineNum">    2475</span>              : void SideChain::get_missing_blocks(unordered_set&lt;hash&gt;&amp; missing_blocks) const</span>
+<span id="L2476"><span class="lineNum">    2476</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
+<span id="L2477"><span class="lineNum">    2477</span> <span class="tlaUNC">           0 :         missing_blocks.clear();</span></span>
+<span id="L2478"><span class="lineNum">    2478</span>              : </span>
+<span id="L2479"><span class="lineNum">    2479</span> <span class="tlaUNC">           0 :         ReadLock lock(m_sidechainLock);</span></span>
 <span id="L2480"><span class="lineNum">    2480</span>              : </span>
-<span id="L2481"><span class="lineNum">    2481</span> <span class="tlaUNC">           0 :         ReadLock lock(m_sidechainLock);</span></span>
-<span id="L2482"><span class="lineNum">    2482</span>              : </span>
-<span id="L2483"><span class="lineNum">    2483</span> <span class="tlaUNC">           0 :         for (auto&amp; b : m_blocksById) {</span></span>
-<span id="L2484"><span class="lineNum">    2484</span> <span class="tlaUNC">           0 :                 if (b.second-&gt;m_verified) {</span></span>
-<span id="L2485"><span class="lineNum">    2485</span> <span class="tlaUNC">           0 :                         continue;</span></span>
-<span id="L2486"><span class="lineNum">    2486</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2487"><span class="lineNum">    2487</span>              : </span>
-<span id="L2488"><span class="lineNum">    2488</span> <span class="tlaUNC">           0 :                 if (!b.second-&gt;m_parent.empty() &amp;&amp; (m_blocksById.find(b.second-&gt;m_parent) == m_blocksById.end())) {</span></span>
-<span id="L2489"><span class="lineNum">    2489</span> <span class="tlaUNC">           0 :                         missing_blocks.insert(b.second-&gt;m_parent);</span></span>
-<span id="L2490"><span class="lineNum">    2490</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2481"><span class="lineNum">    2481</span> <span class="tlaUNC">           0 :         for (auto&amp; b : m_blocksById) {</span></span>
+<span id="L2482"><span class="lineNum">    2482</span> <span class="tlaUNC">           0 :                 if (b.second-&gt;m_verified) {</span></span>
+<span id="L2483"><span class="lineNum">    2483</span> <span class="tlaUNC">           0 :                         continue;</span></span>
+<span id="L2484"><span class="lineNum">    2484</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2485"><span class="lineNum">    2485</span>              : </span>
+<span id="L2486"><span class="lineNum">    2486</span> <span class="tlaUNC">           0 :                 if (!b.second-&gt;m_parent.empty() &amp;&amp; (m_blocksById.find(b.second-&gt;m_parent) == m_blocksById.end())) {</span></span>
+<span id="L2487"><span class="lineNum">    2487</span> <span class="tlaUNC">           0 :                         missing_blocks.insert(b.second-&gt;m_parent);</span></span>
+<span id="L2488"><span class="lineNum">    2488</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2489"><span class="lineNum">    2489</span>              : </span>
+<span id="L2490"><span class="lineNum">    2490</span> <span class="tlaUNC">           0 :                 int num_missing_uncles = 0;</span></span>
 <span id="L2491"><span class="lineNum">    2491</span>              : </span>
-<span id="L2492"><span class="lineNum">    2492</span> <span class="tlaUNC">           0 :                 int num_missing_uncles = 0;</span></span>
-<span id="L2493"><span class="lineNum">    2493</span>              : </span>
-<span id="L2494"><span class="lineNum">    2494</span> <span class="tlaUNC">           0 :                 for (const hash&amp; h : b.second-&gt;m_uncles) {</span></span>
-<span id="L2495"><span class="lineNum">    2495</span> <span class="tlaUNC">           0 :                         if (!h.empty() &amp;&amp; (m_blocksById.find(h) == m_blocksById.end())) {</span></span>
-<span id="L2496"><span class="lineNum">    2496</span> <span class="tlaUNC">           0 :                                 missing_blocks.insert(h);</span></span>
-<span id="L2497"><span class="lineNum">    2497</span>              : </span>
-<span id="L2498"><span class="lineNum">    2498</span>              :                                 // Get no more than 2 first missing uncles at a time from each block</span>
-<span id="L2499"><span class="lineNum">    2499</span>              :                                 // Blocks with more than 2 uncles are very rare and they will be processed in several steps</span>
-<span id="L2500"><span class="lineNum">    2500</span> <span class="tlaUNC">           0 :                                 ++num_missing_uncles;</span></span>
-<span id="L2501"><span class="lineNum">    2501</span> <span class="tlaUNC">           0 :                                 if (num_missing_uncles &gt;= 2) {</span></span>
-<span id="L2502"><span class="lineNum">    2502</span> <span class="tlaUNC">           0 :                                         break;</span></span>
-<span id="L2503"><span class="lineNum">    2503</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L2504"><span class="lineNum">    2504</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2505"><span class="lineNum">    2505</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2506"><span class="lineNum">    2506</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2507"><span class="lineNum">    2507</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2508"><span class="lineNum">    2508</span>              : </span>
-<span id="L2509"><span class="lineNum">    2509</span>              : bool SideChain::load_config(const std::string&amp; filename)</span>
-<span id="L2510"><span class="lineNum">    2510</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L2511"><span class="lineNum">    2511</span> <span class="tlaUNC">           0 :         if (filename.empty()) {</span></span>
-<span id="L2512"><span class="lineNum">    2512</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;using default config&quot;);</span></span>
-<span id="L2513"><span class="lineNum">    2513</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L2514"><span class="lineNum">    2514</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2492"><span class="lineNum">    2492</span> <span class="tlaUNC">           0 :                 for (const hash&amp; h : b.second-&gt;m_uncles) {</span></span>
+<span id="L2493"><span class="lineNum">    2493</span> <span class="tlaUNC">           0 :                         if (!h.empty() &amp;&amp; (m_blocksById.find(h) == m_blocksById.end())) {</span></span>
+<span id="L2494"><span class="lineNum">    2494</span> <span class="tlaUNC">           0 :                                 missing_blocks.insert(h);</span></span>
+<span id="L2495"><span class="lineNum">    2495</span>              : </span>
+<span id="L2496"><span class="lineNum">    2496</span>              :                                 // Get no more than 2 first missing uncles at a time from each block</span>
+<span id="L2497"><span class="lineNum">    2497</span>              :                                 // Blocks with more than 2 uncles are very rare and they will be processed in several steps</span>
+<span id="L2498"><span class="lineNum">    2498</span> <span class="tlaUNC">           0 :                                 ++num_missing_uncles;</span></span>
+<span id="L2499"><span class="lineNum">    2499</span> <span class="tlaUNC">           0 :                                 if (num_missing_uncles &gt;= 2) {</span></span>
+<span id="L2500"><span class="lineNum">    2500</span> <span class="tlaUNC">           0 :                                         break;</span></span>
+<span id="L2501"><span class="lineNum">    2501</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L2502"><span class="lineNum">    2502</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2503"><span class="lineNum">    2503</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2504"><span class="lineNum">    2504</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2505"><span class="lineNum">    2505</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2506"><span class="lineNum">    2506</span>              : </span>
+<span id="L2507"><span class="lineNum">    2507</span>              : bool SideChain::load_config(const std::string&amp; filename)</span>
+<span id="L2508"><span class="lineNum">    2508</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L2509"><span class="lineNum">    2509</span> <span class="tlaUNC">           0 :         if (filename.empty()) {</span></span>
+<span id="L2510"><span class="lineNum">    2510</span> <span class="tlaUNC">           0 :                 LOGINFO(1, &quot;using default config&quot;);</span></span>
+<span id="L2511"><span class="lineNum">    2511</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L2512"><span class="lineNum">    2512</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2513"><span class="lineNum">    2513</span>              : </span>
+<span id="L2514"><span class="lineNum">    2514</span> <span class="tlaUNC">           0 :         LOGINFO(1, &quot;loading config from &quot; &lt;&lt; log::Gray() &lt;&lt; filename);</span></span>
 <span id="L2515"><span class="lineNum">    2515</span>              : </span>
-<span id="L2516"><span class="lineNum">    2516</span> <span class="tlaUNC">           0 :         LOGINFO(1, &quot;loading config from &quot; &lt;&lt; log::Gray() &lt;&lt; filename);</span></span>
-<span id="L2517"><span class="lineNum">    2517</span>              : </span>
-<span id="L2518"><span class="lineNum">    2518</span> <span class="tlaUNC">           0 :         std::ifstream f(filename);</span></span>
-<span id="L2519"><span class="lineNum">    2519</span> <span class="tlaUNC">           0 :         if (!f.is_open()) {</span></span>
-<span id="L2520"><span class="lineNum">    2520</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;can't open &quot; &lt;&lt; filename);</span></span>
-<span id="L2521"><span class="lineNum">    2521</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2522"><span class="lineNum">    2522</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2516"><span class="lineNum">    2516</span> <span class="tlaUNC">           0 :         std::ifstream f(filename);</span></span>
+<span id="L2517"><span class="lineNum">    2517</span> <span class="tlaUNC">           0 :         if (!f.is_open()) {</span></span>
+<span id="L2518"><span class="lineNum">    2518</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;can't open &quot; &lt;&lt; filename);</span></span>
+<span id="L2519"><span class="lineNum">    2519</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2520"><span class="lineNum">    2520</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2521"><span class="lineNum">    2521</span>              : </span>
+<span id="L2522"><span class="lineNum">    2522</span> <span class="tlaUNC">           0 :         using namespace rapidjson;</span></span>
 <span id="L2523"><span class="lineNum">    2523</span>              : </span>
-<span id="L2524"><span class="lineNum">    2524</span> <span class="tlaUNC">           0 :         using namespace rapidjson;</span></span>
-<span id="L2525"><span class="lineNum">    2525</span>              : </span>
-<span id="L2526"><span class="lineNum">    2526</span> <span class="tlaUNC">           0 :         Document doc;</span></span>
-<span id="L2527"><span class="lineNum">    2527</span> <span class="tlaUNC">           0 :         IStreamWrapper s(f);</span></span>
-<span id="L2528"><span class="lineNum">    2528</span> <span class="tlaUNC">           0 :         if (doc.ParseStream&lt;RAPIDJSON_PARSE_DEFAULT_FLAGS | kParseCommentsFlag&gt;(s).HasParseError()) {</span></span>
-<span id="L2529"><span class="lineNum">    2529</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;failed to parse JSON data in &quot; &lt;&lt; filename);</span></span>
-<span id="L2530"><span class="lineNum">    2530</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2531"><span class="lineNum">    2531</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2532"><span class="lineNum">    2532</span>              : </span>
-<span id="L2533"><span class="lineNum">    2533</span> <span class="tlaUNC">           0 :         if (!doc.IsObject()) {</span></span>
-<span id="L2534"><span class="lineNum">    2534</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;invalid JSON data in &quot; &lt;&lt; filename &lt;&lt; &quot;: top level is not an object&quot;);</span></span>
-<span id="L2535"><span class="lineNum">    2535</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2536"><span class="lineNum">    2536</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2537"><span class="lineNum">    2537</span>              : </span>
-<span id="L2538"><span class="lineNum">    2538</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;name&quot;, m_poolName);</span></span>
-<span id="L2539"><span class="lineNum">    2539</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;password&quot;, m_poolPassword);</span></span>
-<span id="L2540"><span class="lineNum">    2540</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;block_time&quot;, m_targetBlockTime);</span></span>
-<span id="L2541"><span class="lineNum">    2541</span>              : </span>
-<span id="L2542"><span class="lineNum">    2542</span> <span class="tlaUNC">           0 :         uint64_t min_diff;</span></span>
-<span id="L2543"><span class="lineNum">    2543</span> <span class="tlaUNC">           0 :         if (parseValue(doc, &quot;min_diff&quot;, min_diff) &amp;&amp; min_diff) {</span></span>
-<span id="L2544"><span class="lineNum">    2544</span> <span class="tlaUNC">           0 :                 m_minDifficulty = { min_diff, 0 };</span></span>
-<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2546"><span class="lineNum">    2546</span>              : </span>
-<span id="L2547"><span class="lineNum">    2547</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;pplns_window&quot;, m_chainWindowSize);</span></span>
-<span id="L2548"><span class="lineNum">    2548</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;uncle_penalty&quot;, m_unclePenalty);</span></span>
-<span id="L2549"><span class="lineNum">    2549</span>              : </span>
-<span id="L2550"><span class="lineNum">    2550</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L2551"><span class="lineNum">    2551</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L2552"><span class="lineNum">    2552</span>              : </span>
-<span id="L2553"><span class="lineNum">    2553</span>              : bool SideChain::check_config() const</span>
-<span id="L2554"><span class="lineNum">    2554</span> <span class="tlaGNC tlaBgGNC">           9 : {</span></span>
-<span id="L2555"><span class="lineNum">    2555</span> <span class="tlaGNC">           9 :         if (m_poolName.empty()) {</span></span>
-<span id="L2556"><span class="lineNum">    2556</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;name can't be empty&quot;);</span></span>
-<span id="L2557"><span class="lineNum">    2557</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2558"><span class="lineNum">    2558</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2559"><span class="lineNum">    2559</span>              : </span>
-<span id="L2560"><span class="lineNum">    2560</span> <span class="tlaGNC tlaBgGNC">           9 :         if (m_poolName.length() &gt; 128) {</span></span>
-<span id="L2561"><span class="lineNum">    2561</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;name is too long (must be 128 characters max)&quot;);</span></span>
-<span id="L2562"><span class="lineNum">    2562</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2563"><span class="lineNum">    2563</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2564"><span class="lineNum">    2564</span>              : </span>
-<span id="L2565"><span class="lineNum">    2565</span> <span class="tlaGNC tlaBgGNC">           9 :         if (m_poolPassword.length() &gt; 128) {</span></span>
-<span id="L2566"><span class="lineNum">    2566</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;password is too long (must be 128 characters max)&quot;);</span></span>
-<span id="L2567"><span class="lineNum">    2567</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2568"><span class="lineNum">    2568</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2569"><span class="lineNum">    2569</span>              : </span>
-<span id="L2570"><span class="lineNum">    2570</span> <span class="tlaGNC tlaBgGNC">           9 :         if ((m_targetBlockTime &lt; 1) || (m_targetBlockTime &gt; MONERO_BLOCK_TIME)) {</span></span>
-<span id="L2571"><span class="lineNum">    2571</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;block_time is invalid (must be between 1 and &quot; &lt;&lt; MONERO_BLOCK_TIME &lt;&lt; &quot;)&quot;);</span></span>
-<span id="L2572"><span class="lineNum">    2572</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2573"><span class="lineNum">    2573</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2574"><span class="lineNum">    2574</span>              : </span>
-<span id="L2575"><span class="lineNum">    2575</span> <span class="tlaGNC tlaBgGNC">           9 :         if (s_networkType == NetworkType::Mainnet) {</span></span>
-<span id="L2576"><span class="lineNum">    2576</span> <span class="tlaGNC">           9 :                 const difficulty_type min_diff{ MIN_DIFFICULTY, 0 };</span></span>
-<span id="L2577"><span class="lineNum">    2577</span> <span class="tlaGNC">           9 :                 const difficulty_type max_diff{ 1000000000, 0 };</span></span>
-<span id="L2578"><span class="lineNum">    2578</span>              : </span>
-<span id="L2579"><span class="lineNum">    2579</span> <span class="tlaGNC">           9 :                 if ((m_minDifficulty &lt; min_diff) || (max_diff &lt; m_minDifficulty)) {</span></span>
-<span id="L2580"><span class="lineNum">    2580</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;min_diff is invalid (must be between &quot; &lt;&lt; min_diff &lt;&lt; &quot; and &quot; &lt;&lt; max_diff &lt;&lt; ')');</span></span>
-<span id="L2581"><span class="lineNum">    2581</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L2582"><span class="lineNum">    2582</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2583"><span class="lineNum">    2583</span> <span class="tlaGNC tlaBgGNC">           9 :         }</span></span>
-<span id="L2584"><span class="lineNum">    2584</span>              : </span>
-<span id="L2585"><span class="lineNum">    2585</span> <span class="tlaGNC">           9 :         if ((m_chainWindowSize &lt; 60) || (m_chainWindowSize &gt; 2160)) {</span></span>
-<span id="L2586"><span class="lineNum">    2586</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;pplns_window is invalid (must be between 60 and 2160)&quot;);</span></span>
-<span id="L2587"><span class="lineNum">    2587</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2588"><span class="lineNum">    2588</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2589"><span class="lineNum">    2589</span>              : </span>
-<span id="L2590"><span class="lineNum">    2590</span> <span class="tlaGNC tlaBgGNC">           9 :         if ((m_unclePenalty &lt; 1) || (m_unclePenalty &gt; 99)) {</span></span>
-<span id="L2591"><span class="lineNum">    2591</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;uncle_penalty is invalid (must be between 1 and 99)&quot;);</span></span>
-<span id="L2592"><span class="lineNum">    2592</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L2593"><span class="lineNum">    2593</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2594"><span class="lineNum">    2594</span>              : </span>
-<span id="L2595"><span class="lineNum">    2595</span> <span class="tlaGNC tlaBgGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;pool name     = &quot; &lt;&lt; m_poolName);</span></span>
-<span id="L2596"><span class="lineNum">    2596</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;block time    = &quot; &lt;&lt; m_targetBlockTime &lt;&lt; &quot; seconds&quot;);</span></span>
-<span id="L2597"><span class="lineNum">    2597</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;min diff      = &quot; &lt;&lt; m_minDifficulty);</span></span>
-<span id="L2598"><span class="lineNum">    2598</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;PPLNS window  = &quot; &lt;&lt; m_chainWindowSize &lt;&lt; &quot; blocks&quot;);</span></span>
-<span id="L2599"><span class="lineNum">    2599</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;uncle penalty = &quot; &lt;&lt; m_unclePenalty &lt;&lt; '%');</span></span>
-<span id="L2600"><span class="lineNum">    2600</span>              : </span>
-<span id="L2601"><span class="lineNum">    2601</span> <span class="tlaGNC">           9 :         return true;</span></span>
-<span id="L2602"><span class="lineNum">    2602</span> <span class="tlaGNC">           9 : }</span></span>
-<span id="L2603"><span class="lineNum">    2603</span>              : </span>
-<span id="L2604"><span class="lineNum">    2604</span>              : void SideChain::launch_precalc(const PoolBlock* block)</span>
-<span id="L2605"><span class="lineNum">    2605</span> <span class="tlaGNC">       17929 : {</span></span>
-<span id="L2606"><span class="lineNum">    2606</span> <span class="tlaGNC">       17929 :         if (m_precalcFinished) {</span></span>
-<span id="L2607"><span class="lineNum">    2607</span> <span class="tlaGNC">        2214 :                 return;</span></span>
-<span id="L2608"><span class="lineNum">    2608</span> <span class="tlaGNC">        2214 :         }</span></span>
-<span id="L2609"><span class="lineNum">    2609</span>              : </span>
-<span id="L2610"><span class="lineNum">    2610</span> <span class="tlaGNC">       78575 :         for (int h = UNCLE_BLOCK_DEPTH; h &gt;= 0; --h) {</span></span>
-<span id="L2611"><span class="lineNum">    2611</span> <span class="tlaGNC">       62860 :                 auto it = m_blocksByHeight.find(block-&gt;m_sidechainHeight + m_chainWindowSize + h - 1);</span></span>
-<span id="L2612"><span class="lineNum">    2612</span> <span class="tlaGNC">       62860 :                 if (it == m_blocksByHeight.end()) {</span></span>
-<span id="L2613"><span class="lineNum">    2613</span> <span class="tlaUNC tlaBgUNC">           0 :                         continue;</span></span>
-<span id="L2614"><span class="lineNum">    2614</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2615"><span class="lineNum">    2615</span> <span class="tlaGNC tlaBgGNC">       64626 :                 for (PoolBlock* b : it-&gt;second) {</span></span>
-<span id="L2616"><span class="lineNum">    2616</span> <span class="tlaGNC">       64626 :                         if (b-&gt;m_precalculated) {</span></span>
-<span id="L2617"><span class="lineNum">    2617</span> <span class="tlaGNC">       43439 :                                 continue;</span></span>
-<span id="L2618"><span class="lineNum">    2618</span> <span class="tlaGNC">       43439 :                         }</span></span>
-<span id="L2619"><span class="lineNum">    2619</span> <span class="tlaGNC">       21187 :                         std::vector&lt;MinerShare&gt; shares;</span></span>
-<span id="L2620"><span class="lineNum">    2620</span> <span class="tlaGNC">       21187 :                         if (get_shares(b, shares, nullptr, true)) {</span></span>
-<span id="L2621"><span class="lineNum">    2621</span> <span class="tlaGNC">       13983 :                                 b-&gt;m_precalculated = true;</span></span>
-<span id="L2622"><span class="lineNum">    2622</span> <span class="tlaGNC">       13983 :                                 {</span></span>
-<span id="L2623"><span class="lineNum">    2623</span> <span class="tlaGNC">       13983 :                                         WriteLock lock(*PoolBlock::s_precalculatedSharesLock);</span></span>
-<span id="L2624"><span class="lineNum">    2624</span> <span class="tlaGNC">       13983 :                                         b-&gt;m_precalculatedShares = std::move(shares);</span></span>
-<span id="L2625"><span class="lineNum">    2625</span> <span class="tlaGNC">       13983 :                                 }</span></span>
-<span id="L2626"><span class="lineNum">    2626</span> <span class="tlaGNC">       13983 :                                 {</span></span>
-<span id="L2627"><span class="lineNum">    2627</span> <span class="tlaGNC">       13983 :                                         MutexLock lock2(m_precalcJobsMutex);</span></span>
-<span id="L2628"><span class="lineNum">    2628</span> <span class="tlaGNC">       13983 :                                         m_precalcJobs.push_back(b);</span></span>
-<span id="L2629"><span class="lineNum">    2629</span> <span class="tlaGNC">       13983 :                                         uv_cond_signal(&amp;m_precalcJobsCond);</span></span>
-<span id="L2630"><span class="lineNum">    2630</span> <span class="tlaGNC">       13983 :                                 }</span></span>
-<span id="L2631"><span class="lineNum">    2631</span> <span class="tlaGNC">       13983 :                         }</span></span>
-<span id="L2632"><span class="lineNum">    2632</span> <span class="tlaGNC">       21187 :                 }</span></span>
-<span id="L2633"><span class="lineNum">    2633</span> <span class="tlaGNC">       62860 :         }</span></span>
-<span id="L2634"><span class="lineNum">    2634</span> <span class="tlaGNC">       15715 : }</span></span>
-<span id="L2635"><span class="lineNum">    2635</span>              : </span>
-<span id="L2636"><span class="lineNum">    2636</span>              : void SideChain::precalc_worker()</span>
-<span id="L2637"><span class="lineNum">    2637</span> <span class="tlaGNC">          27 : {</span></span>
-<span id="L2638"><span class="lineNum">    2638</span> <span class="tlaGNC">          27 :         set_thread_name(&quot;Precalc&quot;);</span></span>
-<span id="L2639"><span class="lineNum">    2639</span>              : </span>
-<span id="L2640"><span class="lineNum">    2640</span> <span class="tlaGNC">          27 :         std::vector&lt;std::pair&lt;size_t, const Wallet*&gt;&gt; wallets;</span></span>
-<span id="L2641"><span class="lineNum">    2641</span> <span class="tlaGNC">          27 :         wallets.reserve(m_chainWindowSize);</span></span>
-<span id="L2642"><span class="lineNum">    2642</span>              : </span>
-<span id="L2643"><span class="lineNum">    2643</span> <span class="tlaGNC">       14010 :         do {</span></span>
-<span id="L2644"><span class="lineNum">    2644</span> <span class="tlaGNC">       14010 :                 const PoolBlock* job;</span></span>
-<span id="L2645"><span class="lineNum">    2645</span>              : </span>
-<span id="L2646"><span class="lineNum">    2646</span> <span class="tlaGNC">       14010 :                 {</span></span>
-<span id="L2647"><span class="lineNum">    2647</span> <span class="tlaGNC">       14010 :                         MutexLock lock(m_precalcJobsMutex);</span></span>
-<span id="L2648"><span class="lineNum">    2648</span>              : </span>
-<span id="L2649"><span class="lineNum">    2649</span> <span class="tlaGNC">       14010 :                         if (m_precalcFinished) {</span></span>
-<span id="L2650"><span class="lineNum">    2650</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return;</span></span>
-<span id="L2651"><span class="lineNum">    2651</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2652"><span class="lineNum">    2652</span>              : </span>
-<span id="L2653"><span class="lineNum">    2653</span> <span class="tlaGNC tlaBgGNC">       16388 :                         while (m_precalcJobs.empty()) {</span></span>
-<span id="L2654"><span class="lineNum">    2654</span> <span class="tlaGNC">        2405 :                                 uv_cond_wait(&amp;m_precalcJobsCond, &amp;m_precalcJobsMutex);</span></span>
-<span id="L2655"><span class="lineNum">    2655</span>              : </span>
-<span id="L2656"><span class="lineNum">    2656</span> <span class="tlaGNC">        2405 :                                 if (m_precalcFinished) {</span></span>
-<span id="L2657"><span class="lineNum">    2657</span> <span class="tlaGNC">          27 :                                         return;</span></span>
-<span id="L2658"><span class="lineNum">    2658</span> <span class="tlaGNC">          27 :                                 }</span></span>
-<span id="L2659"><span class="lineNum">    2659</span> <span class="tlaGNC">        2405 :                         }</span></span>
-<span id="L2660"><span class="lineNum">    2660</span>              : </span>
-<span id="L2661"><span class="lineNum">    2661</span> <span class="tlaGNC">       13983 :                         job = m_precalcJobs.back();</span></span>
-<span id="L2662"><span class="lineNum">    2662</span> <span class="tlaGNC">       13983 :                         m_precalcJobs.pop_back();</span></span>
-<span id="L2663"><span class="lineNum">    2663</span>              : </span>
-<span id="L2664"><span class="lineNum">    2664</span>              :                         // Filter out duplicate inputs for get_eph_public_key()</span>
-<span id="L2665"><span class="lineNum">    2665</span> <span class="tlaGNC">       13983 :                         uint8_t t[HASH_SIZE * 2 + sizeof(size_t)];</span></span>
-<span id="L2666"><span class="lineNum">    2666</span> <span class="tlaGNC">       13983 :                         memcpy(t, job-&gt;m_txkeySec.h, HASH_SIZE);</span></span>
+<span id="L2524"><span class="lineNum">    2524</span> <span class="tlaUNC">           0 :         Document doc;</span></span>
+<span id="L2525"><span class="lineNum">    2525</span> <span class="tlaUNC">           0 :         IStreamWrapper s(f);</span></span>
+<span id="L2526"><span class="lineNum">    2526</span> <span class="tlaUNC">           0 :         if (doc.ParseStream&lt;RAPIDJSON_PARSE_DEFAULT_FLAGS | kParseCommentsFlag&gt;(s).HasParseError()) {</span></span>
+<span id="L2527"><span class="lineNum">    2527</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;failed to parse JSON data in &quot; &lt;&lt; filename);</span></span>
+<span id="L2528"><span class="lineNum">    2528</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2529"><span class="lineNum">    2529</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2530"><span class="lineNum">    2530</span>              : </span>
+<span id="L2531"><span class="lineNum">    2531</span> <span class="tlaUNC">           0 :         if (!doc.IsObject()) {</span></span>
+<span id="L2532"><span class="lineNum">    2532</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;invalid JSON data in &quot; &lt;&lt; filename &lt;&lt; &quot;: top level is not an object&quot;);</span></span>
+<span id="L2533"><span class="lineNum">    2533</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2534"><span class="lineNum">    2534</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2535"><span class="lineNum">    2535</span>              : </span>
+<span id="L2536"><span class="lineNum">    2536</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;name&quot;, m_poolName);</span></span>
+<span id="L2537"><span class="lineNum">    2537</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;password&quot;, m_poolPassword);</span></span>
+<span id="L2538"><span class="lineNum">    2538</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;block_time&quot;, m_targetBlockTime);</span></span>
+<span id="L2539"><span class="lineNum">    2539</span>              : </span>
+<span id="L2540"><span class="lineNum">    2540</span> <span class="tlaUNC">           0 :         uint64_t min_diff;</span></span>
+<span id="L2541"><span class="lineNum">    2541</span> <span class="tlaUNC">           0 :         if (parseValue(doc, &quot;min_diff&quot;, min_diff) &amp;&amp; min_diff) {</span></span>
+<span id="L2542"><span class="lineNum">    2542</span> <span class="tlaUNC">           0 :                 m_minDifficulty = { min_diff, 0 };</span></span>
+<span id="L2543"><span class="lineNum">    2543</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2544"><span class="lineNum">    2544</span>              : </span>
+<span id="L2545"><span class="lineNum">    2545</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;pplns_window&quot;, m_chainWindowSize);</span></span>
+<span id="L2546"><span class="lineNum">    2546</span> <span class="tlaUNC">           0 :         parseValue(doc, &quot;uncle_penalty&quot;, m_unclePenalty);</span></span>
+<span id="L2547"><span class="lineNum">    2547</span>              : </span>
+<span id="L2548"><span class="lineNum">    2548</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L2549"><span class="lineNum">    2549</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L2550"><span class="lineNum">    2550</span>              : </span>
+<span id="L2551"><span class="lineNum">    2551</span>              : bool SideChain::check_config() const</span>
+<span id="L2552"><span class="lineNum">    2552</span> <span class="tlaGNC tlaBgGNC">           9 : {</span></span>
+<span id="L2553"><span class="lineNum">    2553</span> <span class="tlaGNC">           9 :         if (m_poolName.empty()) {</span></span>
+<span id="L2554"><span class="lineNum">    2554</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;name can't be empty&quot;);</span></span>
+<span id="L2555"><span class="lineNum">    2555</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2556"><span class="lineNum">    2556</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2557"><span class="lineNum">    2557</span>              : </span>
+<span id="L2558"><span class="lineNum">    2558</span> <span class="tlaGNC tlaBgGNC">           9 :         if (m_poolName.length() &gt; 128) {</span></span>
+<span id="L2559"><span class="lineNum">    2559</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;name is too long (must be 128 characters max)&quot;);</span></span>
+<span id="L2560"><span class="lineNum">    2560</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2561"><span class="lineNum">    2561</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2562"><span class="lineNum">    2562</span>              : </span>
+<span id="L2563"><span class="lineNum">    2563</span> <span class="tlaGNC tlaBgGNC">           9 :         if (m_poolPassword.length() &gt; 128) {</span></span>
+<span id="L2564"><span class="lineNum">    2564</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;password is too long (must be 128 characters max)&quot;);</span></span>
+<span id="L2565"><span class="lineNum">    2565</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2566"><span class="lineNum">    2566</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2567"><span class="lineNum">    2567</span>              : </span>
+<span id="L2568"><span class="lineNum">    2568</span> <span class="tlaGNC tlaBgGNC">           9 :         if ((m_targetBlockTime &lt; 1) || (m_targetBlockTime &gt; MONERO_BLOCK_TIME)) {</span></span>
+<span id="L2569"><span class="lineNum">    2569</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;block_time is invalid (must be between 1 and &quot; &lt;&lt; MONERO_BLOCK_TIME &lt;&lt; &quot;)&quot;);</span></span>
+<span id="L2570"><span class="lineNum">    2570</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2571"><span class="lineNum">    2571</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2572"><span class="lineNum">    2572</span>              : </span>
+<span id="L2573"><span class="lineNum">    2573</span> <span class="tlaGNC tlaBgGNC">           9 :         if (s_networkType == NetworkType::Mainnet) {</span></span>
+<span id="L2574"><span class="lineNum">    2574</span> <span class="tlaGNC">           9 :                 const difficulty_type min_diff{ MIN_DIFFICULTY, 0 };</span></span>
+<span id="L2575"><span class="lineNum">    2575</span> <span class="tlaGNC">           9 :                 const difficulty_type max_diff{ 1000000000, 0 };</span></span>
+<span id="L2576"><span class="lineNum">    2576</span>              : </span>
+<span id="L2577"><span class="lineNum">    2577</span> <span class="tlaGNC">           9 :                 if ((m_minDifficulty &lt; min_diff) || (max_diff &lt; m_minDifficulty)) {</span></span>
+<span id="L2578"><span class="lineNum">    2578</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;min_diff is invalid (must be between &quot; &lt;&lt; min_diff &lt;&lt; &quot; and &quot; &lt;&lt; max_diff &lt;&lt; ')');</span></span>
+<span id="L2579"><span class="lineNum">    2579</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L2580"><span class="lineNum">    2580</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2581"><span class="lineNum">    2581</span> <span class="tlaGNC tlaBgGNC">           9 :         }</span></span>
+<span id="L2582"><span class="lineNum">    2582</span>              : </span>
+<span id="L2583"><span class="lineNum">    2583</span> <span class="tlaGNC">           9 :         if ((m_chainWindowSize &lt; 60) || (m_chainWindowSize &gt; 2160)) {</span></span>
+<span id="L2584"><span class="lineNum">    2584</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;pplns_window is invalid (must be between 60 and 2160)&quot;);</span></span>
+<span id="L2585"><span class="lineNum">    2585</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2586"><span class="lineNum">    2586</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2587"><span class="lineNum">    2587</span>              : </span>
+<span id="L2588"><span class="lineNum">    2588</span> <span class="tlaGNC tlaBgGNC">           9 :         if ((m_unclePenalty &lt; 1) || (m_unclePenalty &gt; 99)) {</span></span>
+<span id="L2589"><span class="lineNum">    2589</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;uncle_penalty is invalid (must be between 1 and 99)&quot;);</span></span>
+<span id="L2590"><span class="lineNum">    2590</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L2591"><span class="lineNum">    2591</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2592"><span class="lineNum">    2592</span>              : </span>
+<span id="L2593"><span class="lineNum">    2593</span> <span class="tlaGNC tlaBgGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;pool name     = &quot; &lt;&lt; m_poolName);</span></span>
+<span id="L2594"><span class="lineNum">    2594</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;block time    = &quot; &lt;&lt; m_targetBlockTime &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L2595"><span class="lineNum">    2595</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;min diff      = &quot; &lt;&lt; m_minDifficulty);</span></span>
+<span id="L2596"><span class="lineNum">    2596</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;PPLNS window  = &quot; &lt;&lt; m_chainWindowSize &lt;&lt; &quot; blocks&quot;);</span></span>
+<span id="L2597"><span class="lineNum">    2597</span> <span class="tlaGNC">           9 :         LOGINFO(1, log::LightCyan() &lt;&lt; &quot;uncle penalty = &quot; &lt;&lt; m_unclePenalty &lt;&lt; '%');</span></span>
+<span id="L2598"><span class="lineNum">    2598</span>              : </span>
+<span id="L2599"><span class="lineNum">    2599</span> <span class="tlaGNC">           9 :         return true;</span></span>
+<span id="L2600"><span class="lineNum">    2600</span> <span class="tlaGNC">           9 : }</span></span>
+<span id="L2601"><span class="lineNum">    2601</span>              : </span>
+<span id="L2602"><span class="lineNum">    2602</span>              : void SideChain::launch_precalc(const PoolBlock* block)</span>
+<span id="L2603"><span class="lineNum">    2603</span> <span class="tlaGNC">       17929 : {</span></span>
+<span id="L2604"><span class="lineNum">    2604</span> <span class="tlaGNC">       17929 :         if (m_precalcFinished) {</span></span>
+<span id="L2605"><span class="lineNum">    2605</span> <span class="tlaGNC">        2214 :                 return;</span></span>
+<span id="L2606"><span class="lineNum">    2606</span> <span class="tlaGNC">        2214 :         }</span></span>
+<span id="L2607"><span class="lineNum">    2607</span>              : </span>
+<span id="L2608"><span class="lineNum">    2608</span> <span class="tlaGNC">       78575 :         for (int h = UNCLE_BLOCK_DEPTH; h &gt;= 0; --h) {</span></span>
+<span id="L2609"><span class="lineNum">    2609</span> <span class="tlaGNC">       62860 :                 auto it = m_blocksByHeight.find(block-&gt;m_sidechainHeight + m_chainWindowSize + h - 1);</span></span>
+<span id="L2610"><span class="lineNum">    2610</span> <span class="tlaGNC">       62860 :                 if (it == m_blocksByHeight.end()) {</span></span>
+<span id="L2611"><span class="lineNum">    2611</span> <span class="tlaUNC tlaBgUNC">           0 :                         continue;</span></span>
+<span id="L2612"><span class="lineNum">    2612</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L2613"><span class="lineNum">    2613</span> <span class="tlaGNC tlaBgGNC">       64626 :                 for (PoolBlock* b : it-&gt;second) {</span></span>
+<span id="L2614"><span class="lineNum">    2614</span> <span class="tlaGNC">       64626 :                         if (b-&gt;m_precalculated) {</span></span>
+<span id="L2615"><span class="lineNum">    2615</span> <span class="tlaGNC">       43439 :                                 continue;</span></span>
+<span id="L2616"><span class="lineNum">    2616</span> <span class="tlaGNC">       43439 :                         }</span></span>
+<span id="L2617"><span class="lineNum">    2617</span> <span class="tlaGNC">       21187 :                         std::vector&lt;MinerShare&gt; shares;</span></span>
+<span id="L2618"><span class="lineNum">    2618</span> <span class="tlaGNC">       21187 :                         if (get_shares(b, shares, nullptr, true)) {</span></span>
+<span id="L2619"><span class="lineNum">    2619</span> <span class="tlaGNC">       13983 :                                 b-&gt;m_precalculated = true;</span></span>
+<span id="L2620"><span class="lineNum">    2620</span> <span class="tlaGNC">       13983 :                                 {</span></span>
+<span id="L2621"><span class="lineNum">    2621</span> <span class="tlaGNC">       13983 :                                         WriteLock lock(*PoolBlock::s_precalculatedSharesLock);</span></span>
+<span id="L2622"><span class="lineNum">    2622</span> <span class="tlaGNC">       13983 :                                         b-&gt;m_precalculatedShares = std::move(shares);</span></span>
+<span id="L2623"><span class="lineNum">    2623</span> <span class="tlaGNC">       13983 :                                 }</span></span>
+<span id="L2624"><span class="lineNum">    2624</span> <span class="tlaGNC">       13983 :                                 {</span></span>
+<span id="L2625"><span class="lineNum">    2625</span> <span class="tlaGNC">       13983 :                                         MutexLock lock2(m_precalcJobsMutex);</span></span>
+<span id="L2626"><span class="lineNum">    2626</span> <span class="tlaGNC">       13983 :                                         m_precalcJobs.push_back(b);</span></span>
+<span id="L2627"><span class="lineNum">    2627</span> <span class="tlaGNC">       13983 :                                         uv_cond_signal(&amp;m_precalcJobsCond);</span></span>
+<span id="L2628"><span class="lineNum">    2628</span> <span class="tlaGNC">       13983 :                                 }</span></span>
+<span id="L2629"><span class="lineNum">    2629</span> <span class="tlaGNC">       13983 :                         }</span></span>
+<span id="L2630"><span class="lineNum">    2630</span> <span class="tlaGNC">       21187 :                 }</span></span>
+<span id="L2631"><span class="lineNum">    2631</span> <span class="tlaGNC">       62860 :         }</span></span>
+<span id="L2632"><span class="lineNum">    2632</span> <span class="tlaGNC">       15715 : }</span></span>
+<span id="L2633"><span class="lineNum">    2633</span>              : </span>
+<span id="L2634"><span class="lineNum">    2634</span>              : void SideChain::precalc_worker()</span>
+<span id="L2635"><span class="lineNum">    2635</span> <span class="tlaGNC">          27 : {</span></span>
+<span id="L2636"><span class="lineNum">    2636</span> <span class="tlaGNC">          27 :         set_thread_name(&quot;Precalc&quot;);</span></span>
+<span id="L2637"><span class="lineNum">    2637</span>              : </span>
+<span id="L2638"><span class="lineNum">    2638</span> <span class="tlaGNC">          27 :         std::vector&lt;std::pair&lt;size_t, const Wallet*&gt;&gt; wallets;</span></span>
+<span id="L2639"><span class="lineNum">    2639</span> <span class="tlaGNC">          27 :         wallets.reserve(m_chainWindowSize);</span></span>
+<span id="L2640"><span class="lineNum">    2640</span>              : </span>
+<span id="L2641"><span class="lineNum">    2641</span> <span class="tlaGNC">       14010 :         do {</span></span>
+<span id="L2642"><span class="lineNum">    2642</span> <span class="tlaGNC">       14010 :                 const PoolBlock* job;</span></span>
+<span id="L2643"><span class="lineNum">    2643</span>              : </span>
+<span id="L2644"><span class="lineNum">    2644</span> <span class="tlaGNC">       14010 :                 {</span></span>
+<span id="L2645"><span class="lineNum">    2645</span> <span class="tlaGNC">       14010 :                         MutexLock lock(m_precalcJobsMutex);</span></span>
+<span id="L2646"><span class="lineNum">    2646</span>              : </span>
+<span id="L2647"><span class="lineNum">    2647</span> <span class="tlaGNC">       14010 :                         if (m_precalcFinished) {</span></span>
+<span id="L2648"><span class="lineNum">    2648</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return;</span></span>
+<span id="L2649"><span class="lineNum">    2649</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2650"><span class="lineNum">    2650</span>              : </span>
+<span id="L2651"><span class="lineNum">    2651</span> <span class="tlaGNC tlaBgGNC">       16388 :                         while (m_precalcJobs.empty()) {</span></span>
+<span id="L2652"><span class="lineNum">    2652</span> <span class="tlaGNC">        2405 :                                 uv_cond_wait(&amp;m_precalcJobsCond, &amp;m_precalcJobsMutex);</span></span>
+<span id="L2653"><span class="lineNum">    2653</span>              : </span>
+<span id="L2654"><span class="lineNum">    2654</span> <span class="tlaGNC">        2405 :                                 if (m_precalcFinished) {</span></span>
+<span id="L2655"><span class="lineNum">    2655</span> <span class="tlaGNC">          27 :                                         return;</span></span>
+<span id="L2656"><span class="lineNum">    2656</span> <span class="tlaGNC">          27 :                                 }</span></span>
+<span id="L2657"><span class="lineNum">    2657</span> <span class="tlaGNC">        2405 :                         }</span></span>
+<span id="L2658"><span class="lineNum">    2658</span>              : </span>
+<span id="L2659"><span class="lineNum">    2659</span> <span class="tlaGNC">       13983 :                         job = m_precalcJobs.back();</span></span>
+<span id="L2660"><span class="lineNum">    2660</span> <span class="tlaGNC">       13983 :                         m_precalcJobs.pop_back();</span></span>
+<span id="L2661"><span class="lineNum">    2661</span>              : </span>
+<span id="L2662"><span class="lineNum">    2662</span>              :                         // Filter out duplicate inputs for get_eph_public_key()</span>
+<span id="L2663"><span class="lineNum">    2663</span> <span class="tlaGNC">       13983 :                         uint8_t t[HASH_SIZE * 2 + sizeof(size_t)];</span></span>
+<span id="L2664"><span class="lineNum">    2664</span> <span class="tlaGNC">       13983 :                         memcpy(t, job-&gt;m_txkeySec.h, HASH_SIZE);</span></span>
+<span id="L2665"><span class="lineNum">    2665</span>              : </span>
+<span id="L2666"><span class="lineNum">    2666</span> <span class="tlaGNC">       13983 :                         wallets.clear();</span></span>
 <span id="L2667"><span class="lineNum">    2667</span>              : </span>
-<span id="L2668"><span class="lineNum">    2668</span> <span class="tlaGNC">       13983 :                         wallets.clear();</span></span>
+<span id="L2668"><span class="lineNum">    2668</span> <span class="tlaGNC">       13983 :                         ReadLock lock2(*PoolBlock::s_precalculatedSharesLock);</span></span>
 <span id="L2669"><span class="lineNum">    2669</span>              : </span>
-<span id="L2670"><span class="lineNum">    2670</span> <span class="tlaGNC">       13983 :                         ReadLock lock2(*PoolBlock::s_precalculatedSharesLock);</span></span>
+<span id="L2670"><span class="lineNum">    2670</span> <span class="tlaGNC">       13983 :                         const size_t n = job-&gt;m_precalculatedShares.size();</span></span>
 <span id="L2671"><span class="lineNum">    2671</span>              : </span>
-<span id="L2672"><span class="lineNum">    2672</span> <span class="tlaGNC">       13983 :                         const size_t n = job-&gt;m_precalculatedShares.size();</span></span>
-<span id="L2673"><span class="lineNum">    2673</span>              : </span>
-<span id="L2674"><span class="lineNum">    2674</span> <span class="tlaGNC">     2339428 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2675"><span class="lineNum">    2675</span> <span class="tlaGNC">     2325445 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
-<span id="L2676"><span class="lineNum">    2676</span> <span class="tlaGNC">     2325445 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
-<span id="L2677"><span class="lineNum">    2677</span> <span class="tlaGNC">     2325445 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
-<span id="L2678"><span class="lineNum">    2678</span> <span class="tlaGNC">      373944 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
-<span id="L2679"><span class="lineNum">    2679</span> <span class="tlaGNC">      373944 :                                 }</span></span>
-<span id="L2680"><span class="lineNum">    2680</span> <span class="tlaGNC">     2325445 :                         }</span></span>
-<span id="L2681"><span class="lineNum">    2681</span> <span class="tlaGNC">       13983 :                 }</span></span>
-<span id="L2682"><span class="lineNum">    2682</span>              : </span>
-<span id="L2683"><span class="lineNum">    2683</span> <span class="tlaGNC">      373944 :                 for (const std::pair&lt;size_t, const Wallet*&gt;&amp; w : wallets) {</span></span>
-<span id="L2684"><span class="lineNum">    2684</span> <span class="tlaGNC">      373944 :                         hash eph_public_key;</span></span>
-<span id="L2685"><span class="lineNum">    2685</span> <span class="tlaGNC">      373944 :                         uint8_t view_tag;</span></span>
-<span id="L2686"><span class="lineNum">    2686</span> <span class="tlaGNC">      373944 :                         if (!w.second-&gt;get_eph_public_key(job-&gt;m_txkeySec, w.first, eph_public_key, view_tag)) {</span></span>
-<span id="L2687"><span class="lineNum">    2687</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(6, &quot;get_eph_public_key failed in precalc_worker&quot;);</span></span>
-<span id="L2688"><span class="lineNum">    2688</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L2689"><span class="lineNum">    2689</span> <span class="tlaGNC tlaBgGNC">      373944 :                 }</span></span>
-<span id="L2690"><span class="lineNum">    2690</span> <span class="tlaGNC">       13983 :         } while (true);</span></span>
-<span id="L2691"><span class="lineNum">    2691</span> <span class="tlaGNC">          27 : }</span></span>
-<span id="L2692"><span class="lineNum">    2692</span>              : </span>
-<span id="L2693"><span class="lineNum">    2693</span>              : void SideChain::finish_precalc()</span>
-<span id="L2694"><span class="lineNum">    2694</span> <span class="tlaGNC">        2151 : {</span></span>
-<span id="L2695"><span class="lineNum">    2695</span> <span class="tlaGNC">        2151 :         if (m_precalcFinished.exchange(true)) {</span></span>
-<span id="L2696"><span class="lineNum">    2696</span> <span class="tlaGNC">        2142 :                 return;</span></span>
-<span id="L2697"><span class="lineNum">    2697</span> <span class="tlaGNC">        2142 :         }</span></span>
-<span id="L2698"><span class="lineNum">    2698</span>              : </span>
-<span id="L2699"><span class="lineNum">    2699</span> <span class="tlaGNC">           9 :         try</span></span>
-<span id="L2700"><span class="lineNum">    2700</span> <span class="tlaGNC">           9 :         {</span></span>
-<span id="L2701"><span class="lineNum">    2701</span> <span class="tlaGNC">           9 :                 {</span></span>
-<span id="L2702"><span class="lineNum">    2702</span> <span class="tlaGNC">           9 :                         MutexLock lock(m_precalcJobsMutex);</span></span>
-<span id="L2703"><span class="lineNum">    2703</span> <span class="tlaGNC">           9 :                         m_precalcJobs.clear();</span></span>
-<span id="L2704"><span class="lineNum">    2704</span> <span class="tlaGNC">           9 :                         m_precalcJobs.shrink_to_fit();</span></span>
-<span id="L2705"><span class="lineNum">    2705</span> <span class="tlaGNC">           9 :                         uv_cond_broadcast(&amp;m_precalcJobsCond);</span></span>
-<span id="L2706"><span class="lineNum">    2706</span> <span class="tlaGNC">           9 :                 }</span></span>
-<span id="L2707"><span class="lineNum">    2707</span>              : </span>
-<span id="L2708"><span class="lineNum">    2708</span> <span class="tlaGNC">          27 :                 for (std::thread&amp; t : m_precalcWorkers) {</span></span>
-<span id="L2709"><span class="lineNum">    2709</span> <span class="tlaGNC">          27 :                         t.join();</span></span>
-<span id="L2710"><span class="lineNum">    2710</span> <span class="tlaGNC">          27 :                 }</span></span>
-<span id="L2711"><span class="lineNum">    2711</span> <span class="tlaGNC">           9 :                 m_precalcWorkers.clear();</span></span>
-<span id="L2712"><span class="lineNum">    2712</span> <span class="tlaGNC">           9 :                 m_precalcWorkers.shrink_to_fit();</span></span>
-<span id="L2713"><span class="lineNum">    2713</span>              : </span>
-<span id="L2714"><span class="lineNum">    2714</span> <span class="tlaGNC">           9 :                 delete m_uniquePrecalcInputs;</span></span>
-<span id="L2715"><span class="lineNum">    2715</span> <span class="tlaGNC">           9 :                 m_uniquePrecalcInputs = nullptr;</span></span>
-<span id="L2716"><span class="lineNum">    2716</span>              : </span>
-<span id="L2717"><span class="lineNum">    2717</span> <span class="tlaGNC">           9 :                 uv_mutex_destroy(&amp;m_precalcJobsMutex);</span></span>
-<span id="L2718"><span class="lineNum">    2718</span> <span class="tlaGNC">           9 :                 uv_cond_destroy(&amp;m_precalcJobsCond);</span></span>
-<span id="L2719"><span class="lineNum">    2719</span>              : </span>
-<span id="L2720"><span class="lineNum">    2720</span>              :                 // Also clear cache because it has data from all old blocks now</span>
-<span id="L2721"><span class="lineNum">    2721</span> <span class="tlaGNC">           9 :                 clear_crypto_cache();</span></span>
-<span id="L2722"><span class="lineNum">    2722</span>              : </span>
-<span id="L2723"><span class="lineNum">    2723</span> <span class="tlaGNC">           9 :                 LOGINFO(4, &quot;pre-calculation workers stopped&quot;);</span></span>
-<span id="L2724"><span class="lineNum">    2724</span> <span class="tlaGNC">           9 :         }</span></span>
-<span id="L2725"><span class="lineNum">    2725</span> <span class="tlaGNC">           9 :         catch (const std::exception&amp; e)</span></span>
-<span id="L2726"><span class="lineNum">    2726</span> <span class="tlaGNC">           9 :         {</span></span>
-<span id="L2727"><span class="lineNum">    2727</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;exception in finish_precalc(): &quot; &lt;&lt; e.what());</span></span>
-<span id="L2728"><span class="lineNum">    2728</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L2729"><span class="lineNum">    2729</span> <span class="tlaGNC tlaBgGNC">           9 : }</span></span>
-<span id="L2730"><span class="lineNum">    2730</span>              : </span>
-<span id="L2731"><span class="lineNum">    2731</span>              : } // namespace p2pool</span>
+<span id="L2672"><span class="lineNum">    2672</span> <span class="tlaGNC">     2339326 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2673"><span class="lineNum">    2673</span> <span class="tlaGNC">     2325343 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
+<span id="L2674"><span class="lineNum">    2674</span> <span class="tlaGNC">     2325343 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
+<span id="L2675"><span class="lineNum">    2675</span> <span class="tlaGNC">     2325343 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
+<span id="L2676"><span class="lineNum">    2676</span> <span class="tlaGNC">      373951 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
+<span id="L2677"><span class="lineNum">    2677</span> <span class="tlaGNC">      373951 :                                 }</span></span>
+<span id="L2678"><span class="lineNum">    2678</span> <span class="tlaGNC">     2325343 :                         }</span></span>
+<span id="L2679"><span class="lineNum">    2679</span> <span class="tlaGNC">       13983 :                 }</span></span>
+<span id="L2680"><span class="lineNum">    2680</span>              : </span>
+<span id="L2681"><span class="lineNum">    2681</span> <span class="tlaGNC">      373950 :                 for (const std::pair&lt;size_t, const Wallet*&gt;&amp; w : wallets) {</span></span>
+<span id="L2682"><span class="lineNum">    2682</span> <span class="tlaGNC">      373950 :                         hash eph_public_key;</span></span>
+<span id="L2683"><span class="lineNum">    2683</span> <span class="tlaGNC">      373950 :                         uint8_t view_tag;</span></span>
+<span id="L2684"><span class="lineNum">    2684</span> <span class="tlaGNC">      373950 :                         if (!w.second-&gt;get_eph_public_key(job-&gt;m_txkeySec, w.first, eph_public_key, view_tag)) {</span></span>
+<span id="L2685"><span class="lineNum">    2685</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGWARN(6, &quot;get_eph_public_key failed in precalc_worker&quot;);</span></span>
+<span id="L2686"><span class="lineNum">    2686</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L2687"><span class="lineNum">    2687</span> <span class="tlaGNC tlaBgGNC">      373950 :                 }</span></span>
+<span id="L2688"><span class="lineNum">    2688</span> <span class="tlaGNC">       13983 :         } while (true);</span></span>
+<span id="L2689"><span class="lineNum">    2689</span> <span class="tlaGNC">          27 : }</span></span>
+<span id="L2690"><span class="lineNum">    2690</span>              : </span>
+<span id="L2691"><span class="lineNum">    2691</span>              : void SideChain::finish_precalc()</span>
+<span id="L2692"><span class="lineNum">    2692</span> <span class="tlaGNC">        2151 : {</span></span>
+<span id="L2693"><span class="lineNum">    2693</span> <span class="tlaGNC">        2151 :         if (m_precalcFinished.exchange(true)) {</span></span>
+<span id="L2694"><span class="lineNum">    2694</span> <span class="tlaGNC">        2142 :                 return;</span></span>
+<span id="L2695"><span class="lineNum">    2695</span> <span class="tlaGNC">        2142 :         }</span></span>
+<span id="L2696"><span class="lineNum">    2696</span>              : </span>
+<span id="L2697"><span class="lineNum">    2697</span> <span class="tlaGNC">           9 :         try</span></span>
+<span id="L2698"><span class="lineNum">    2698</span> <span class="tlaGNC">           9 :         {</span></span>
+<span id="L2699"><span class="lineNum">    2699</span> <span class="tlaGNC">           9 :                 {</span></span>
+<span id="L2700"><span class="lineNum">    2700</span> <span class="tlaGNC">           9 :                         MutexLock lock(m_precalcJobsMutex);</span></span>
+<span id="L2701"><span class="lineNum">    2701</span> <span class="tlaGNC">           9 :                         m_precalcJobs.clear();</span></span>
+<span id="L2702"><span class="lineNum">    2702</span> <span class="tlaGNC">           9 :                         m_precalcJobs.shrink_to_fit();</span></span>
+<span id="L2703"><span class="lineNum">    2703</span> <span class="tlaGNC">           9 :                         uv_cond_broadcast(&amp;m_precalcJobsCond);</span></span>
+<span id="L2704"><span class="lineNum">    2704</span> <span class="tlaGNC">           9 :                 }</span></span>
+<span id="L2705"><span class="lineNum">    2705</span>              : </span>
+<span id="L2706"><span class="lineNum">    2706</span> <span class="tlaGNC">          27 :                 for (std::thread&amp; t : m_precalcWorkers) {</span></span>
+<span id="L2707"><span class="lineNum">    2707</span> <span class="tlaGNC">          27 :                         t.join();</span></span>
+<span id="L2708"><span class="lineNum">    2708</span> <span class="tlaGNC">          27 :                 }</span></span>
+<span id="L2709"><span class="lineNum">    2709</span> <span class="tlaGNC">           9 :                 m_precalcWorkers.clear();</span></span>
+<span id="L2710"><span class="lineNum">    2710</span> <span class="tlaGNC">           9 :                 m_precalcWorkers.shrink_to_fit();</span></span>
+<span id="L2711"><span class="lineNum">    2711</span>              : </span>
+<span id="L2712"><span class="lineNum">    2712</span> <span class="tlaGNC">           9 :                 delete m_uniquePrecalcInputs;</span></span>
+<span id="L2713"><span class="lineNum">    2713</span> <span class="tlaGNC">           9 :                 m_uniquePrecalcInputs = nullptr;</span></span>
+<span id="L2714"><span class="lineNum">    2714</span>              : </span>
+<span id="L2715"><span class="lineNum">    2715</span> <span class="tlaGNC">           9 :                 uv_mutex_destroy(&amp;m_precalcJobsMutex);</span></span>
+<span id="L2716"><span class="lineNum">    2716</span> <span class="tlaGNC">           9 :                 uv_cond_destroy(&amp;m_precalcJobsCond);</span></span>
+<span id="L2717"><span class="lineNum">    2717</span>              : </span>
+<span id="L2718"><span class="lineNum">    2718</span>              :                 // Also clear cache because it has data from all old blocks now</span>
+<span id="L2719"><span class="lineNum">    2719</span> <span class="tlaGNC">           9 :                 clear_crypto_cache();</span></span>
+<span id="L2720"><span class="lineNum">    2720</span>              : </span>
+<span id="L2721"><span class="lineNum">    2721</span> <span class="tlaGNC">           9 :                 LOGINFO(4, &quot;pre-calculation workers stopped&quot;);</span></span>
+<span id="L2722"><span class="lineNum">    2722</span> <span class="tlaGNC">           9 :         }</span></span>
+<span id="L2723"><span class="lineNum">    2723</span> <span class="tlaGNC">           9 :         catch (const std::exception&amp; e)</span></span>
+<span id="L2724"><span class="lineNum">    2724</span> <span class="tlaGNC">           9 :         {</span></span>
+<span id="L2725"><span class="lineNum">    2725</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;exception in finish_precalc(): &quot; &lt;&lt; e.what());</span></span>
+<span id="L2726"><span class="lineNum">    2726</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L2727"><span class="lineNum">    2727</span> <span class="tlaGNC tlaBgGNC">           9 : }</span></span>
+<span id="L2728"><span class="lineNum">    2728</span>              : </span>
+<span id="L2729"><span class="lineNum">    2729</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
