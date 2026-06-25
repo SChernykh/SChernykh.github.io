@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">191</td>
-            <td class="headerCovTableEntry">191</td>
+            <td class="headerCovTableEntry">227</td>
+            <td class="headerCovTableEntry">227</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-25 09:43:33</td>
+            <td class="headerValue">2026-06-25 12:55:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -90,11 +90,11 @@
 <span id="L28"><span class="lineNum">      28</span>              : namespace p2pool {</span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              : static hash H(const char* s)</span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">          16 : {</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">          16 :         hash result;</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">          16 :         from_hex(s, strlen(s), result);</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">          16 :         return result;</span></span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">          16 : };</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">          20 : {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">          20 :         hash result;</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">          20 :         from_hex(s, strlen(s), result);</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">          20 :         return result;</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">          20 : };</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
 <span id="L37"><span class="lineNum">      37</span>              : TEST(block_template, update)</span>
 <span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">           1 : {</span></span>
@@ -354,7 +354,56 @@
 <span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           1 : #endif</span></span>
 <span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L294"><span class="lineNum">     294</span>              : </span>
-<span id="L295"><span class="lineNum">     295</span>              : }</span>
+<span id="L295"><span class="lineNum">     295</span>              : TEST(block_template, genesis_block_max_timestamp)</span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           1 :         init_crypto_cache();</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           1 :         {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           1 :         SideChain sidechain(nullptr, NetworkType::Mainnet, &quot;unit_test&quot;);</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           1 :         ASSERT_EQ(sidechain.consensus_hash(), H(&quot;81d45b62c10afa4fdda7cebb02dd5ad82c43b577eb3fb0857824427c55fd8a8d&quot;));</span></span>
+<span id="L301"><span class="lineNum">     301</span>              : </span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           1 :         BlockTemplate tpl(&amp;sidechain, nullptr);</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :         tpl.rng().seed(0);</span></span>
+<span id="L304"><span class="lineNum">     304</span>              : </span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           1 :         MinerData data;</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           1 :         data.major_version = 16;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           1 :         data.height = 2762973;</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           1 :         data.prev_id = H(&quot;81a0260b29d5224e88d04b11faff321fbdc11c4570779386b2a1817a86dc622c&quot;);</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           1 :         data.seed_hash = H(&quot;33d0fb381466f04d6a1919ced3b698f54a28add3da5a6479b096c67df7a4974c&quot;);</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">           1 :         data.difficulty = { 300346053753ULL, 0 };</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           1 :         data.median_weight = 300000;</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           1 :         data.already_generated_coins = 18204981557254756780ULL;</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           1 :         data.median_timestamp = std::numeric_limits&lt;uint64_t&gt;::max() - 1;</span></span>
+<span id="L314"><span class="lineNum">     314</span>              : </span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 :         Mempool mempool;</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           1 :         Params params;</span></span>
+<span id="L317"><span class="lineNum">     317</span>              : </span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           1 :         params.m_miningWallet = Wallet(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
+<span id="L321"><span class="lineNum">     321</span>              : </span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tpl.submit_sidechain_block(1, 0, 0));</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">           1 :         ASSERT_EQ(sidechain.difficulty(), 100000);</span></span>
+<span id="L324"><span class="lineNum">     324</span>              : </span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           1 :         const PoolBlock* tip = sidechain.chainTip();</span></span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tip != nullptr);</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tip-&gt;m_verified);</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(tip-&gt;m_invalid);</span></span>
+<span id="L330"><span class="lineNum">     330</span>              : </span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_timestamp, std::numeric_limits&lt;uint64_t&gt;::max());</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_txinGenHeight, data.height);</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_sidechainHeight, 0);</span></span>
+<span id="L334"><span class="lineNum">     334</span>              : </span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tip-&gt;m_sidechainId, H(&quot;cd83d28671cfdad7e86b07debc45737e4bec40e4555023634a9921d7687e504e&quot;));</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">           1 : #ifdef WITH_INDEXED_HASHES</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">           1 :         indexed_hash::cleanup_storage();</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">           1 : #endif</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L343"><span class="lineNum">     343</span>              : </span>
+<span id="L344"><span class="lineNum">     344</span>              : }</span>
         </pre>
               </td>
             </tr>
