@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-25 12:55:24</td>
+            <td class="headerValue">2026-06-25 17:59:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.7&nbsp;%</td>
@@ -1656,7 +1656,7 @@
 <span id="L1594"><span class="lineNum">    1594</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L1595"><span class="lineNum">    1595</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1596"><span class="lineNum">    1596</span>              : </span>
-<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaUNC">           0 :                 const auto it = m_missingBlockRequests.emplace(client-&gt;m_peerId, *id.u64());</span></span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaUNC">           0 :                 const auto it = m_missingBlockRequests.emplace(client-&gt;m_peerId, hash64(id));</span></span>
 <span id="L1598"><span class="lineNum">    1598</span> <span class="tlaUNC">           0 :                 if (!it.second) {</span></span>
 <span id="L1599"><span class="lineNum">    1599</span>              :                         // We already asked this peer about this block</span>
 <span id="L1600"><span class="lineNum">    1600</span>              :                         // Don't try to ask another peer, leave it for another timer tick</span>
@@ -1683,7 +1683,7 @@
 <span id="L1621"><span class="lineNum">    1621</span> <span class="tlaUNC">           0 :                         });</span></span>
 <span id="L1622"><span class="lineNum">    1622</span>              : </span>
 <span id="L1623"><span class="lineNum">    1623</span> <span class="tlaUNC">           0 :                 if (result) {</span></span>
-<span id="L1624"><span class="lineNum">    1624</span> <span class="tlaUNC">           0 :                         client-&gt;m_blockPendingRequests.push_back(*id.u64());</span></span>
+<span id="L1624"><span class="lineNum">    1624</span> <span class="tlaUNC">           0 :                         client-&gt;m_blockPendingRequests.push_back(hash64(id));</span></span>
 <span id="L1625"><span class="lineNum">    1625</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1626"><span class="lineNum">    1626</span> <span class="tlaUNC">           0 :                 else {</span></span>
 <span id="L1627"><span class="lineNum">    1627</span> <span class="tlaUNC">           0 :                         m_missingBlockRequests.erase(it.first);</span></span>
@@ -3139,7 +3139,7 @@
 <span id="L3077"><span class="lineNum">    3077</span> <span class="tlaUNC">           0 :                         server-&gt;send_peer_list_request(this, cur_time);</span></span>
 <span id="L3078"><span class="lineNum">    3078</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L3079"><span class="lineNum">    3079</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L3080"><span class="lineNum">    3080</span> <span class="tlaUNC">           0 :         else if (*block-&gt;m_sidechainId.u64() != expected_id) {</span></span>
+<span id="L3080"><span class="lineNum">    3080</span> <span class="tlaUNC">           0 :         else if (hash64(block-&gt;m_sidechainId) != expected_id) {</span></span>
 <span id="L3081"><span class="lineNum">    3081</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; sent a wrong block: expected &quot; &lt;&lt; log::hex_buf(&amp;expected_id) &lt;&lt; &quot;, got &quot; &lt;&lt; block-&gt;m_sidechainId);</span></span>
 <span id="L3082"><span class="lineNum">    3082</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L3083"><span class="lineNum">    3083</span> <span class="tlaUNC">           0 :         }</span></span>
@@ -3527,7 +3527,7 @@
 <span id="L3465"><span class="lineNum">    3465</span> <span class="tlaUNC">           0 :                         return;</span></span>
 <span id="L3466"><span class="lineNum">    3466</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L3467"><span class="lineNum">    3467</span>              : </span>
-<span id="L3468"><span class="lineNum">    3468</span> <span class="tlaUNC">           0 :                 const uint64_t id64 = *id.u64();</span></span>
+<span id="L3468"><span class="lineNum">    3468</span> <span class="tlaUNC">           0 :                 const uint64_t id64 = hash64(id);</span></span>
 <span id="L3469"><span class="lineNum">    3469</span>              : </span>
 <span id="L3470"><span class="lineNum">    3470</span>              :                 // First check these two, then update them only after a successful send</span>
 <span id="L3471"><span class="lineNum">    3471</span> <span class="tlaUNC">           0 :                 if (server-&gt;m_blockNotifyRequests.find(id64) != server-&gt;m_blockNotifyRequests.end()) {</span></span>
@@ -4126,7 +4126,7 @@
 <span id="L4064"><span class="lineNum">    4064</span> <span class="tlaUNC">           0 :                         break;</span></span>
 <span id="L4065"><span class="lineNum">    4065</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L4066"><span class="lineNum">    4066</span>              : </span>
-<span id="L4067"><span class="lineNum">    4067</span> <span class="tlaUNC">           0 :                 auto it = server-&gt;m_missingBlockRequests.emplace(m_peerId, *id.u64());</span></span>
+<span id="L4067"><span class="lineNum">    4067</span> <span class="tlaUNC">           0 :                 auto it = server-&gt;m_missingBlockRequests.emplace(m_peerId, hash64(id));</span></span>
 <span id="L4068"><span class="lineNum">    4068</span> <span class="tlaUNC">           0 :                 if (!it.second) {</span></span>
 <span id="L4069"><span class="lineNum">    4069</span> <span class="tlaUNC">           0 :                         continue;</span></span>
 <span id="L4070"><span class="lineNum">    4070</span> <span class="tlaUNC">           0 :                 }</span></span>
@@ -4155,7 +4155,7 @@
 <span id="L4093"><span class="lineNum">    4093</span> <span class="tlaUNC">           0 :                         return;</span></span>
 <span id="L4094"><span class="lineNum">    4094</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L4095"><span class="lineNum">    4095</span>              : </span>
-<span id="L4096"><span class="lineNum">    4096</span> <span class="tlaUNC">           0 :                 m_blockPendingRequests.push_back(*id.u64());</span></span>
+<span id="L4096"><span class="lineNum">    4096</span> <span class="tlaUNC">           0 :                 m_blockPendingRequests.push_back(hash64(id));</span></span>
 <span id="L4097"><span class="lineNum">    4097</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L4098"><span class="lineNum">    4098</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L4099"><span class="lineNum">    4099</span>              : </span>
