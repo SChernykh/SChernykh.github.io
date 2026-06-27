@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-26 12:03:52</td>
+            <td class="headerValue">2026-06-27 02:33:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1212,7 +1212,7 @@
 <span id="L1150"><span class="lineNum">    1150</span>              : </span>
 <span id="L1151"><span class="lineNum">    1151</span> <span class="tlaUNC">           0 :         StratumClient* client = share-&gt;m_client;</span></span>
 <span id="L1152"><span class="lineNum">    1152</span>              : </span>
-<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaUNC">           0 :         if (client-&gt;m_resetCounter.load() == share-&gt;m_clientResetCounter) {</span></span>
+<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaUNC">           0 :         if (!client-&gt;is_gone(share-&gt;m_clientResetCounter)) {</span></span>
 <span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :                 const bool result = server-&gt;send(client,</span></span>
 <span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :                         [share](uint8_t* buf, size_t buf_size)</span></span>
 <span id="L1156"><span class="lineNum">    1156</span> <span class="tlaUNC">           0 :                         {</span></span>
