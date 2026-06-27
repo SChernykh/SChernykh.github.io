@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-27 02:33:04</td>
+            <td class="headerValue">2026-06-27 10:10:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -391,9 +391,9 @@
 <span id="L329"><span class="lineNum">     329</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L330"><span class="lineNum">     330</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L331"><span class="lineNum">     331</span>              : </span>
-<span id="L332"><span class="lineNum">     332</span>              : bool p2pool::calculate_hash(const void* data, size_t size, uint64_t height, const hash&amp; seed, hash&amp; result, bool force_light_mode)</span>
+<span id="L332"><span class="lineNum">     332</span>              : bool p2pool::calculate_hash(const void* data, size_t size, uint64_t height, const hash&amp; seed, hash&amp; result, bool force_light_mode, size_t lane)</span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :         return m_hasher-&gt;calculate(data, size, height, seed, result, force_light_mode);</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :         return m_hasher-&gt;calculate(data, size, height, seed, result, force_light_mode, lane);</span></span>
 <span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L336"><span class="lineNum">     336</span>              : </span>
 <span id="L337"><span class="lineNum">     337</span>              : uint64_t p2pool::get_seed_height(uint64_t height)</span>

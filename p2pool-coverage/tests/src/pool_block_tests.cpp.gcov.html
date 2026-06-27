@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-27 02:33:04</td>
+            <td class="headerValue">2026-06-27 10:10:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -179,7 +179,7 @@
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           1 :         hasher.set_seed(seed);</span></span>
 <span id="L118"><span class="lineNum">     118</span>              : </span>
 <span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           1 :         hash pow_hash;</span></span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b.get_pow_hash(&amp;hasher, 0, seed, pow_hash), true);</span></span>
+<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b.get_pow_hash(&amp;hasher, 0, seed, pow_hash, false, RandomX_Hasher_Base::VM_LANE_P2P), true);</span></span>
 <span id="L121"><span class="lineNum">     121</span>              : </span>
 <span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           1 :         std::stringstream s;</span></span>
 <span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           1 :         s &lt;&lt; pow_hash;</span></span>

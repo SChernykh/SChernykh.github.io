@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-27 02:33:04</td>
+            <td class="headerValue">2026-06-27 10:10:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">16.7&nbsp;%</td>
-            <td class="headerCovTableEntry">377</td>
-            <td class="headerCovTableEntry">63</td>
+            <td class="headerCovTableEntryLo">16.5&nbsp;%</td>
+            <td class="headerCovTableEntry">376</td>
+            <td class="headerCovTableEntry">62</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -109,13 +109,13 @@
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span>              :         extern const SipHashKey SIPHASH_KEY;</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">   131743104 :         FORCEINLINE size_t hash_bytes(const void* ptr, size_t len) noexcept {</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">   131743104 :                 size_t result;</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">   131743104 :                 uint8_t result_buf[sizeof(size_t)];</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">   131743104 :                 siphash(ptr, len, SIPHASH_KEY.data, result_buf, sizeof(result));</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">   131743104 :                 memcpy(&amp;result, result_buf, sizeof(result));</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">   131743104 :                 return result;</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">   131743104 :         }</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">   131736524 :         FORCEINLINE size_t hash_bytes(const void* ptr, size_t len) noexcept {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">   131736524 :                 size_t result;</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">   131736524 :                 uint8_t result_buf[sizeof(size_t)];</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">   131736524 :                 siphash(ptr, len, SIPHASH_KEY.data, result_buf, sizeof(result));</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">   131736524 :                 memcpy(&amp;result, result_buf, sizeof(result));</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">   131736524 :                 return result;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">   131736524 :         }</span></span>
 <span id="L57"><span class="lineNum">      57</span>              : } // namespace robin_hood</span>
 <span id="L58"><span class="lineNum">      58</span>              : </span>
 <span id="L59"><span class="lineNum">      59</span>              : #include &quot;robin_hood.h&quot;</span>
@@ -259,13 +259,13 @@
 <span id="L197"><span class="lineNum">     197</span>              : </span>
 <span id="L198"><span class="lineNum">     198</span>              : template&lt;typename T, typename U&gt;</span>
 <span id="L199"><span class="lineNum">     199</span>              : FORCEINLINE void writeVarint(T value, U&amp;&amp; callback)</span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">     4610868 : {</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">    13143156 :         while (value &gt;= 0x80) {</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">     8532288 :                 callback(static_cast&lt;uint8_t&gt;((value &amp; 0x7F) | 0x80));</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">     8532288 :                 value &gt;&gt;= 7;</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">     8532288 :         }</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">     4610868 :         callback(static_cast&lt;uint8_t&gt;(value));</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">     4610868 : }</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">     4608891 : {</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">    13139651 :         while (value &gt;= 0x80) {</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">     8530760 :                 callback(static_cast&lt;uint8_t&gt;((value &amp; 0x7F) | 0x80));</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">     8530760 :                 value &gt;&gt;= 7;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">     8530760 :         }</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">     4608891 :         callback(static_cast&lt;uint8_t&gt;(value));</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">     4608891 : }</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
 <span id="L208"><span class="lineNum">     208</span>              : template&lt;typename T&gt;</span>
 <span id="L209"><span class="lineNum">     209</span>              : FORCEINLINE void writeVarint(T value, std::vector&lt;uint8_t&gt;&amp; out)</span>
@@ -317,16 +317,16 @@
 <span id="L255"><span class="lineNum">     255</span>              : </span>
 <span id="L256"><span class="lineNum">     256</span>              : template&lt;typename T&gt;</span>
 <span id="L257"><span class="lineNum">     257</span>              : FORCEINLINE T read_unaligned(const T* p)</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">      828779 : {</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">      828779 :         static_assert(std::is_trivially_copyable&lt;T&gt;::value, &quot;T must be a trivially copyable type&quot;);</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">      828741 : {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">      828741 :         static_assert(std::is_trivially_copyable&lt;T&gt;::value, &quot;T must be a trivially copyable type&quot;);</span></span>
 <span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">      828779 :         T result;</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">      828779 :         memcpy(&amp;result, p, sizeof(T));</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">      828779 :         return result;</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      828779 : }</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">      828741 :         T result;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">      828741 :         memcpy(&amp;result, p, sizeof(T));</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">      828741 :         return result;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      828741 : }</span></span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">     2951582 : template&lt;typename T, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(&amp;)[N]) { return N; }</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        6799 : template&lt;typename T, typename U, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(U::*)[N]) { return N; }</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">     2951030 : template&lt;typename T, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(&amp;)[N]) { return N; }</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        6791 : template&lt;typename T, typename U, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(U::*)[N]) { return N; }</span></span>
 <span id="L268"><span class="lineNum">     268</span>              : </span>
 <span id="L269"><span class="lineNum">     269</span>              : [[noreturn]] void panic_stop(const char* message);</span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
@@ -401,10 +401,10 @@
 <span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">     3315636 : }</span></span>
 <span id="L340"><span class="lineNum">     340</span>              : </span>
 <span id="L341"><span class="lineNum">     341</span>              : FORCEINLINE uint64_t seconds_since_epoch()</span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">     1428630 : {</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">     1428630 :         using namespace std::chrono;</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">     1428630 :         return duration_cast&lt;seconds&gt;(steady_clock::now().time_since_epoch()).count();</span></span>
-<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">     1428630 : }</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">     1426520 : {</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">     1426520 :         using namespace std::chrono;</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">     1426520 :         return duration_cast&lt;seconds&gt;(steady_clock::now().time_since_epoch()).count();</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">     1426520 : }</span></span>
 <span id="L346"><span class="lineNum">     346</span>              : </span>
 <span id="L347"><span class="lineNum">     347</span>              : FORCEINLINE uint64_t microseconds_since_epoch()</span>
 <span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">        6720 : {</span></span>
@@ -557,9 +557,9 @@
 <span id="L495"><span class="lineNum">     495</span>              : struct hash&lt;std::array&lt;uint8_t, N&gt;&gt;</span>
 <span id="L496"><span class="lineNum">     496</span>              : {</span>
 <span id="L497"><span class="lineNum">     497</span>              :         FORCEINLINE size_t operator()(const std::array&lt;uint8_t, N&gt;&amp; value) const noexcept</span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">     9639838 :         {</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">     9639838 :                 return hash_bytes(value.data(), N);</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">     9639838 :         }</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">     9638085 :         {</span></span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">     9638085 :                 return hash_bytes(value.data(), N);</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">     9638085 :         }</span></span>
 <span id="L501"><span class="lineNum">     501</span>              : };</span>
 <span id="L502"><span class="lineNum">     502</span>              : </span>
 <span id="L503"><span class="lineNum">     503</span>              : template&lt;&gt;</span>
