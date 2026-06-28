@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-06-28 05:00:02</td>
+            <td class="headerValue">2026-06-28 06:34:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">60.0&nbsp;%</td>
@@ -152,9 +152,9 @@
 <span id="L90"><span class="lineNum">      90</span>              : template &lt;typename T&gt;</span>
 <span id="L91"><span class="lineNum">      91</span>              : class SpanStorage&lt;T, dynamic_extent&gt; : private SpanBase&lt;const T&gt; {</span>
 <span id="L92"><span class="lineNum">      92</span>              :  public:</span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">      160560 :   constexpr SpanStorage(T *data, size_t size) : data_(data), size_(size) {}</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      160559 :   constexpr T *data() const { return data_; }</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">     1123895 :   constexpr size_t size() const { return size_; }</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC tlaBgGNC">      160561 :   constexpr SpanStorage(T *data, size_t size) : data_(data), size_(size) {}</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">      160560 :   constexpr T *data() const { return data_; }</span></span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">     1123906 :   constexpr size_t size() const { return size_; }</span></span>
 <span id="L96"><span class="lineNum">      96</span>              : </span>
 <span id="L97"><span class="lineNum">      97</span>              :  private:</span>
 <span id="L98"><span class="lineNum">      98</span>              :   T *data_;</span>
@@ -225,7 +225,7 @@
 <span id="L163"><span class="lineNum">     163</span>              : </span>
 <span id="L164"><span class="lineNum">     164</span>              :   // NOTE: This constructor may abort() at runtime if len differs from the</span>
 <span id="L165"><span class="lineNum">     165</span>              :   // compile-time size, if any.</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      160560 :   constexpr Span(T *ptr, size_t len) : internal::SpanStorage&lt;T, N&gt;(ptr, len) {}</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">      160562 :   constexpr Span(T *ptr, size_t len) : internal::SpanStorage&lt;T, N&gt;(ptr, len) {}</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span>              :   template &lt;size_t NA,</span>
 <span id="L169"><span class="lineNum">     169</span>              :             typename = std::enable_if_t&lt;N == NA || N == dynamic_extent&gt;&gt;</span>
@@ -280,7 +280,7 @@
 <span id="L218"><span class="lineNum">     218</span>              : </span>
 <span id="L219"><span class="lineNum">     219</span>              :   using internal::SpanStorage&lt;T, N&gt;::data;</span>
 <span id="L220"><span class="lineNum">     220</span>              :   using internal::SpanStorage&lt;T, N&gt;::size;</span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      321118 :   constexpr bool empty() const { return size() == 0; }</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      321119 :   constexpr bool empty() const { return size() == 0; }</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
 <span id="L223"><span class="lineNum">     223</span>              :   constexpr iterator begin() const { return data(); }</span>
 <span id="L224"><span class="lineNum">     224</span>              :   constexpr const_iterator cbegin() const { return data(); }</span>
