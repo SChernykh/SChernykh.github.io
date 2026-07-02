@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-02 06:18:26</td>
+            <td class="headerValue">2026-07-02 18:54:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1030,12 +1030,12 @@
 <span id="L968"><span class="lineNum">     968</span>              : </span>
 <span id="L969"><span class="lineNum">     969</span> <span class="tlaUNC">           0 :                 if ((hashing_blob_size &lt; HASHING_BLOB_MIN_SIZE) || (hashing_blob_size &gt; HASHING_BLOB_MAX_SIZE)) {</span></span>
 <span id="L970"><span class="lineNum">     970</span> <span class="tlaUNC">           0 :                         LOGWARN(3, &quot;submit_aux_block: invalid hashing_blob_size (&quot; &lt;&lt; hashing_blob_size &lt;&lt; &quot; bytes)&quot;);</span></span>
-<span id="L971"><span class="lineNum">     971</span> <span class="tlaUNC">           0 :                         return;</span></span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaUNC">           0 :                         continue;</span></span>
 <span id="L972"><span class="lineNum">     972</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L973"><span class="lineNum">     973</span>              : </span>
 <span id="L974"><span class="lineNum">     974</span> <span class="tlaUNC">           0 :                 if (blob.empty()) {</span></span>
 <span id="L975"><span class="lineNum">     975</span> <span class="tlaUNC">           0 :                         LOGWARN(3, &quot;submit_aux_block: block template blob not found&quot;);</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 :                         return;</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaUNC">           0 :                         continue;</span></span>
 <span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L978"><span class="lineNum">     978</span>              : </span>
 <span id="L979"><span class="lineNum">     979</span> <span class="tlaUNC">           0 :                 uint8_t* p = blob.data();</span></span>
