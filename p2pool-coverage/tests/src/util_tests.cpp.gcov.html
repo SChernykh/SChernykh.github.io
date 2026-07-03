@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">232</td>
-            <td class="headerCovTableEntry">232</td>
+            <td class="headerCovTableEntry">253</td>
+            <td class="headerCovTableEntry">253</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-03 16:05:50</td>
+            <td class="headerValue">2026-07-03 19:25:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -373,7 +373,32 @@
 <span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(exception_thrown);</span></span>
 <span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L313"><span class="lineNum">     313</span>              : </span>
-<span id="L314"><span class="lineNum">     314</span>              : }</span>
+<span id="L314"><span class="lineNum">     314</span>              : TEST(util, get_bucket_index)</span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           1 :         static constexpr uint64_t sizes[] = {</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           1 :                 64,128,192,256,320,384,448,512,576,640,704,768,832,896,960,1024,</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           1 :                 1088,1152,1216,1280,1344,1408,1472,1536,1600,1664,1728,1792,1856,1920,1984,2048,</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           1 :                 2176,2304,2432,2560,2688,2816,2944,3072,3200,3328,3456,3584,3712,3840,3968,4096,</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           1 :                 4352,4608,4864,5120,5376,5632,5888,6144,6400,6656,6912,7168,7424,7680,7936,8192,</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           1 :                 8704,9216,9728,10240,10752,11264,11776,12288,12800,13312,13824,14336,14848,15360,15872,16384,</span></span>
+<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           1 :                 17408,18432,19456,20480,21504,22528,23552,24576,25600,26624,27648,28672,29696,30720,31744,32768,</span></span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">           1 :                 34816,36864,38912,40960,43008,45056,47104,49152,51200,53248,55296,57344,59392,61440,63488,65536,</span></span>
+<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">           1 :                 69632,73728,77824,81920,86016,90112,94208,98304,102400,106496,110592,114688,118784,122880,126976,131072,</span></span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L326"><span class="lineNum">     326</span>              : </span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           1 :         uint64_t size = 0;</span></span>
+<span id="L328"><span class="lineNum">     328</span>              : </span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">         129 :         for (size_t i = 0, n = array_size(sizes); i &lt; n; ++i) {</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">      131201 :                 while (size &lt;= sizes[i]) {</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">      131073 :                         uint64_t adjusted_size;</span></span>
+<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">      131073 :                         ASSERT_EQ(get_bucket_index(size, adjusted_size), i);</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">      131073 :                         ASSERT_EQ(adjusted_size, sizes[i]);</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">      131073 :                         ++size;</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">      131073 :                 }</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">         128 :         }</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L338"><span class="lineNum">     338</span>              : </span>
+<span id="L339"><span class="lineNum">     339</span>              : }</span>
         </pre>
               </td>
             </tr>
