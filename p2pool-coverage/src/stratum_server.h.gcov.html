@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-02 19:07:07</td>
+            <td class="headerValue">2026-07-03 16:05:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -181,118 +181,131 @@
 <span id="L119"><span class="lineNum">     119</span>              :         p2pool* m_pool;</span>
 <span id="L120"><span class="lineNum">     120</span>              :         bool m_autoDiff;</span>
 <span id="L121"><span class="lineNum">     121</span>              :         bool m_enableFullValidation;</span>
-<span id="L122"><span class="lineNum">     122</span>              :         struct BlobsData</span>
-<span id="L123"><span class="lineNum">     123</span>              :         {</span>
-<span id="L124"><span class="lineNum">     124</span>              :                 uint32_t m_extraNonceStart = 0;</span>
+<span id="L122"><span class="lineNum">     122</span>              : </span>
+<span id="L123"><span class="lineNum">     123</span>              :         struct BlobsData</span>
+<span id="L124"><span class="lineNum">     124</span>              :         {</span>
 <span id="L125"><span class="lineNum">     125</span>              :                 std::vector&lt;uint8_t&gt; m_blobs;</span>
-<span id="L126"><span class="lineNum">     126</span>              :                 size_t m_blobSize = 0;</span>
-<span id="L127"><span class="lineNum">     127</span>              :                 uint64_t m_target = 0;</span>
-<span id="L128"><span class="lineNum">     128</span>              :                 uint32_t m_numClientsExpected = 0;</span>
-<span id="L129"><span class="lineNum">     129</span>              :                 uint32_t m_templateId = 0;</span>
-<span id="L130"><span class="lineNum">     130</span>              :                 uint64_t m_height = 0;</span>
-<span id="L131"><span class="lineNum">     131</span>              :                 hash m_seedHash;</span>
-<span id="L132"><span class="lineNum">     132</span>              :         };</span>
-<span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span>              :         uv_mutex_t m_resetShareCountersLock;</span>
-<span id="L135"><span class="lineNum">     135</span>              :         uv_async_t m_resetShareCountersAsync;</span>
-<span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span> <span class="tlaUNC">           0 :         static void on_reset_share_counters(uv_async_t* handle) { reinterpret_cast&lt;StratumServer*&gt;(handle-&gt;data)-&gt;on_reset_share_counters(); }</span></span>
-<span id="L138"><span class="lineNum">     138</span>              :         void on_reset_share_counters();</span>
-<span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span>              :         uv_mutex_t m_blobsQueueLock;</span>
-<span id="L141"><span class="lineNum">     141</span>              :         uv_async_t m_blobsAsync;</span>
-<span id="L142"><span class="lineNum">     142</span>              :         std::vector&lt;BlobsData*&gt; m_blobsQueue;</span>
-<span id="L143"><span class="lineNum">     143</span>              : </span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :         static void on_blobs_ready(uv_async_t* handle) { reinterpret_cast&lt;StratumServer*&gt;(handle-&gt;data)-&gt;on_blobs_ready(); }</span></span>
-<span id="L145"><span class="lineNum">     145</span>              :         void on_blobs_ready();</span>
-<span id="L146"><span class="lineNum">     146</span>              : </span>
-<span id="L147"><span class="lineNum">     147</span>              :         uv_mutex_t m_showWorkersLock;</span>
-<span id="L148"><span class="lineNum">     148</span>              :         uv_async_t m_showWorkersAsync;</span>
-<span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :         static void on_show_workers(uv_async_t* handle) { reinterpret_cast&lt;StratumServer*&gt;(handle-&gt;data)-&gt;show_workers(); }</span></span>
-<span id="L151"><span class="lineNum">     151</span>              :         void show_workers();</span>
-<span id="L152"><span class="lineNum">     152</span>              : </span>
-<span id="L153"><span class="lineNum">     153</span>              :         std::atomic&lt;uint32_t&gt; m_extraNonce;</span>
-<span id="L154"><span class="lineNum">     154</span>              : </span>
-<span id="L155"><span class="lineNum">     155</span>              :         uv_mutex_t m_rngLock;</span>
-<span id="L156"><span class="lineNum">     156</span>              :         std::mt19937_64 m_rng;</span>
-<span id="L157"><span class="lineNum">     157</span>              : </span>
-<span id="L158"><span class="lineNum">     158</span>              :         struct SubmittedShare</span>
-<span id="L159"><span class="lineNum">     159</span>              :         {</span>
-<span id="L160"><span class="lineNum">     160</span>              :                 uv_work_t m_req = {};</span>
-<span id="L161"><span class="lineNum">     161</span>              :                 bool m_allocated = false;</span>
+<span id="L126"><span class="lineNum">     126</span>              :                 std::vector&lt;std::pair&lt;StratumClient*, uint32_t&gt;&gt; m_clients;</span>
+<span id="L127"><span class="lineNum">     127</span>              : </span>
+<span id="L128"><span class="lineNum">     128</span>              :                 uint32_t m_extraNonceStart = 0;</span>
+<span id="L129"><span class="lineNum">     129</span>              : </span>
+<span id="L130"><span class="lineNum">     130</span>              :                 size_t m_blobSize = 0;</span>
+<span id="L131"><span class="lineNum">     131</span>              :                 uint64_t m_target = 0;</span>
+<span id="L132"><span class="lineNum">     132</span>              :                 uint32_t m_numClientsExpected = 0;</span>
+<span id="L133"><span class="lineNum">     133</span>              :                 uint32_t m_templateId = 0;</span>
+<span id="L134"><span class="lineNum">     134</span>              :                 uint64_t m_height = 0;</span>
+<span id="L135"><span class="lineNum">     135</span>              : </span>
+<span id="L136"><span class="lineNum">     136</span>              :                 uint32_t m_numClientsProcessed = 0;</span>
+<span id="L137"><span class="lineNum">     137</span>              :                 uint32_t m_numSent = 0;</span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span>              : #ifndef P2POOL_LOG_DISABLE</span>
+<span id="L140"><span class="lineNum">     140</span>              :                 uint32_t m_numBatches = 0;</span>
+<span id="L141"><span class="lineNum">     141</span>              : #endif</span>
+<span id="L142"><span class="lineNum">     142</span>              : </span>
+<span id="L143"><span class="lineNum">     143</span>              :                 hash m_seedHash;</span>
+<span id="L144"><span class="lineNum">     144</span>              :         };</span>
+<span id="L145"><span class="lineNum">     145</span>              : </span>
+<span id="L146"><span class="lineNum">     146</span>              :         uv_mutex_t m_resetShareCountersLock;</span>
+<span id="L147"><span class="lineNum">     147</span>              :         uv_async_t m_resetShareCountersAsync;</span>
+<span id="L148"><span class="lineNum">     148</span>              : </span>
+<span id="L149"><span class="lineNum">     149</span> <span class="tlaUNC">           0 :         static void on_reset_share_counters(uv_async_t* handle) { reinterpret_cast&lt;StratumServer*&gt;(handle-&gt;data)-&gt;on_reset_share_counters(); }</span></span>
+<span id="L150"><span class="lineNum">     150</span>              :         void on_reset_share_counters();</span>
+<span id="L151"><span class="lineNum">     151</span>              : </span>
+<span id="L152"><span class="lineNum">     152</span>              :         uv_mutex_t m_blobsToSendLock;</span>
+<span id="L153"><span class="lineNum">     153</span>              :         uv_async_t m_blobsAsync;</span>
+<span id="L154"><span class="lineNum">     154</span>              :         std::unique_ptr&lt;BlobsData&gt; m_blobsToSend;</span>
+<span id="L155"><span class="lineNum">     155</span>              :         std::unique_ptr&lt;BlobsData&gt; m_blobsBeingSent;</span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span> <span class="tlaUNC">           0 :         static void on_blobs_ready(uv_async_t* handle) { reinterpret_cast&lt;StratumServer*&gt;(handle-&gt;data)-&gt;on_blobs_ready(); }</span></span>
+<span id="L158"><span class="lineNum">     158</span>              :         void on_blobs_ready();</span>
+<span id="L159"><span class="lineNum">     159</span>              : </span>
+<span id="L160"><span class="lineNum">     160</span>              :         uv_mutex_t m_showWorkersLock;</span>
+<span id="L161"><span class="lineNum">     161</span>              :         uv_async_t m_showWorkersAsync;</span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
-<span id="L163"><span class="lineNum">     163</span>              :                 StratumServer* m_server = nullptr;</span>
-<span id="L164"><span class="lineNum">     164</span>              :                 StratumClient* m_client = nullptr;</span>
-<span id="L165"><span class="lineNum">     165</span>              :                 bool m_clientIPv6 = false;</span>
-<span id="L166"><span class="lineNum">     166</span>              :                 raw_ip m_clientAddr;</span>
-<span id="L167"><span class="lineNum">     167</span>              :                 char m_clientAddrString[Client::ADDR_STRING_SIZE] = {};</span>
-<span id="L168"><span class="lineNum">     168</span>              :                 char m_clientCustomUser[StratumClient::CUSTOM_USER_SIZE] = {};</span>
-<span id="L169"><span class="lineNum">     169</span>              :                 uint32_t m_clientResetCounter = 0;</span>
-<span id="L170"><span class="lineNum">     170</span>              :                 uint32_t m_rpcId = 0;</span>
-<span id="L171"><span class="lineNum">     171</span>              :                 uint32_t m_id = 0;</span>
-<span id="L172"><span class="lineNum">     172</span>              :                 uint32_t m_templateId = 0;</span>
-<span id="L173"><span class="lineNum">     173</span>              :                 uint32_t m_nonce = 0;</span>
-<span id="L174"><span class="lineNum">     174</span>              :                 uint32_t m_extraNonce = 0;</span>
-<span id="L175"><span class="lineNum">     175</span>              :                 uint64_t m_target = 0;</span>
-<span id="L176"><span class="lineNum">     176</span>              :                 hash m_resultHash;</span>
-<span id="L177"><span class="lineNum">     177</span>              :                 difficulty_type m_sidechainDifficulty;</span>
-<span id="L178"><span class="lineNum">     178</span>              :                 uint64_t m_mainchainHeight = 0;</span>
-<span id="L179"><span class="lineNum">     179</span>              :                 uint64_t m_sidechainHeight = 0;</span>
-<span id="L180"><span class="lineNum">     180</span>              :                 double m_effort = 0.0;</span>
-<span id="L181"><span class="lineNum">     181</span>              :                 uint64_t m_timestamp = 0;</span>
-<span id="L182"><span class="lineNum">     182</span>              :                 uint64_t m_hashes = 0;</span>
-<span id="L183"><span class="lineNum">     183</span>              :                 bool m_highEnoughDifficulty = false;</span>
-<span id="L184"><span class="lineNum">     184</span>              :                 int32_t m_score = 0;</span>
-<span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span>              :                 enum class Result {</span>
-<span id="L187"><span class="lineNum">     187</span>              :                         NONE,</span>
-<span id="L188"><span class="lineNum">     188</span>              :                         STALE,</span>
-<span id="L189"><span class="lineNum">     189</span>              :                         COULDNT_CHECK_POW,</span>
-<span id="L190"><span class="lineNum">     190</span>              :                         LOW_DIFF,</span>
-<span id="L191"><span class="lineNum">     191</span>              :                         INVALID_POW,</span>
-<span id="L192"><span class="lineNum">     192</span>              :                         BANNED,</span>
-<span id="L193"><span class="lineNum">     193</span>              :                         SUBMIT_FAILED,</span>
-<span id="L194"><span class="lineNum">     194</span>              :                         OK</span>
-<span id="L195"><span class="lineNum">     195</span>              :                 } m_result = Result::NONE;</span>
-<span id="L196"><span class="lineNum">     196</span>              :         };</span>
-<span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span>              :         struct HashrateData</span>
-<span id="L199"><span class="lineNum">     199</span>              :         {</span>
-<span id="L200"><span class="lineNum">     200</span>              :                 uint64_t m_timestamp;</span>
-<span id="L201"><span class="lineNum">     201</span>              :                 uint64_t m_cumulativeHashes;</span>
-<span id="L202"><span class="lineNum">     202</span>              :         };</span>
-<span id="L203"><span class="lineNum">     203</span>              : </span>
-<span id="L204"><span class="lineNum">     204</span>              :         mutable uv_rwlock_t m_hashrateDataLock;</span>
-<span id="L205"><span class="lineNum">     205</span>              : </span>
-<span id="L206"><span class="lineNum">     206</span>              :         HashrateData m_hashrateData[131072];</span>
-<span id="L207"><span class="lineNum">     207</span>              :         uint64_t m_cumulativeHashes;</span>
-<span id="L208"><span class="lineNum">     208</span>              :         uint64_t m_cumulativeHashesAtLastShare;</span>
-<span id="L209"><span class="lineNum">     209</span>              :         uint64_t m_hashrateDataHead;</span>
-<span id="L210"><span class="lineNum">     210</span>              :         uint64_t m_hashrateDataTail_15m;</span>
-<span id="L211"><span class="lineNum">     211</span>              :         uint64_t m_hashrateDataTail_1h;</span>
-<span id="L212"><span class="lineNum">     212</span>              :         uint64_t m_hashrateDataTail_24h;</span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span>              :         double m_cumulativeFoundSharesDiff;</span>
-<span id="L215"><span class="lineNum">     215</span>              :         uint32_t m_totalFoundSidechainShares;</span>
-<span id="L216"><span class="lineNum">     216</span>              :         uint32_t m_totalFailedSidechainShares;</span>
-<span id="L217"><span class="lineNum">     217</span>              :         time_t m_lastSidechainShareFoundTime;</span>
-<span id="L218"><span class="lineNum">     218</span>              :         uint64_t m_totalStratumShares;</span>
-<span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span>              :         uint64_t m_banTime;</span>
-<span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span>              :         std::atomic&lt;uint64_t&gt; m_apiLastUpdateTime;</span>
-<span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span>              :         std::deque&lt;SubmittedShare*&gt; m_pendingShareChecks;</span>
-<span id="L225"><span class="lineNum">     225</span>              :         bool m_shareCheckInFlight;</span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaUNC">           0 :         static void on_show_workers(uv_async_t* handle) { reinterpret_cast&lt;StratumServer*&gt;(handle-&gt;data)-&gt;show_workers(); }</span></span>
+<span id="L164"><span class="lineNum">     164</span>              :         void show_workers();</span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span>              :         std::atomic&lt;uint32_t&gt; m_extraNonce;</span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              :         uv_mutex_t m_rngLock;</span>
+<span id="L169"><span class="lineNum">     169</span>              :         std::mt19937_64 m_rng;</span>
+<span id="L170"><span class="lineNum">     170</span>              : </span>
+<span id="L171"><span class="lineNum">     171</span>              :         struct SubmittedShare</span>
+<span id="L172"><span class="lineNum">     172</span>              :         {</span>
+<span id="L173"><span class="lineNum">     173</span>              :                 uv_work_t m_req = {};</span>
+<span id="L174"><span class="lineNum">     174</span>              :                 bool m_allocated = false;</span>
+<span id="L175"><span class="lineNum">     175</span>              : </span>
+<span id="L176"><span class="lineNum">     176</span>              :                 StratumServer* m_server = nullptr;</span>
+<span id="L177"><span class="lineNum">     177</span>              :                 StratumClient* m_client = nullptr;</span>
+<span id="L178"><span class="lineNum">     178</span>              :                 bool m_clientIPv6 = false;</span>
+<span id="L179"><span class="lineNum">     179</span>              :                 raw_ip m_clientAddr;</span>
+<span id="L180"><span class="lineNum">     180</span>              :                 char m_clientAddrString[Client::ADDR_STRING_SIZE] = {};</span>
+<span id="L181"><span class="lineNum">     181</span>              :                 char m_clientCustomUser[StratumClient::CUSTOM_USER_SIZE] = {};</span>
+<span id="L182"><span class="lineNum">     182</span>              :                 uint32_t m_clientResetCounter = 0;</span>
+<span id="L183"><span class="lineNum">     183</span>              :                 uint32_t m_rpcId = 0;</span>
+<span id="L184"><span class="lineNum">     184</span>              :                 uint32_t m_id = 0;</span>
+<span id="L185"><span class="lineNum">     185</span>              :                 uint32_t m_templateId = 0;</span>
+<span id="L186"><span class="lineNum">     186</span>              :                 uint32_t m_nonce = 0;</span>
+<span id="L187"><span class="lineNum">     187</span>              :                 uint32_t m_extraNonce = 0;</span>
+<span id="L188"><span class="lineNum">     188</span>              :                 uint64_t m_target = 0;</span>
+<span id="L189"><span class="lineNum">     189</span>              :                 hash m_resultHash;</span>
+<span id="L190"><span class="lineNum">     190</span>              :                 difficulty_type m_sidechainDifficulty;</span>
+<span id="L191"><span class="lineNum">     191</span>              :                 uint64_t m_mainchainHeight = 0;</span>
+<span id="L192"><span class="lineNum">     192</span>              :                 uint64_t m_sidechainHeight = 0;</span>
+<span id="L193"><span class="lineNum">     193</span>              :                 double m_effort = 0.0;</span>
+<span id="L194"><span class="lineNum">     194</span>              :                 uint64_t m_timestamp = 0;</span>
+<span id="L195"><span class="lineNum">     195</span>              :                 uint64_t m_hashes = 0;</span>
+<span id="L196"><span class="lineNum">     196</span>              :                 bool m_highEnoughDifficulty = false;</span>
+<span id="L197"><span class="lineNum">     197</span>              :                 int32_t m_score = 0;</span>
+<span id="L198"><span class="lineNum">     198</span>              : </span>
+<span id="L199"><span class="lineNum">     199</span>              :                 enum class Result {</span>
+<span id="L200"><span class="lineNum">     200</span>              :                         NONE,</span>
+<span id="L201"><span class="lineNum">     201</span>              :                         STALE,</span>
+<span id="L202"><span class="lineNum">     202</span>              :                         COULDNT_CHECK_POW,</span>
+<span id="L203"><span class="lineNum">     203</span>              :                         LOW_DIFF,</span>
+<span id="L204"><span class="lineNum">     204</span>              :                         INVALID_POW,</span>
+<span id="L205"><span class="lineNum">     205</span>              :                         BANNED,</span>
+<span id="L206"><span class="lineNum">     206</span>              :                         SUBMIT_FAILED,</span>
+<span id="L207"><span class="lineNum">     207</span>              :                         OK</span>
+<span id="L208"><span class="lineNum">     208</span>              :                 } m_result = Result::NONE;</span>
+<span id="L209"><span class="lineNum">     209</span>              :         };</span>
+<span id="L210"><span class="lineNum">     210</span>              : </span>
+<span id="L211"><span class="lineNum">     211</span>              :         struct HashrateData</span>
+<span id="L212"><span class="lineNum">     212</span>              :         {</span>
+<span id="L213"><span class="lineNum">     213</span>              :                 uint64_t m_timestamp;</span>
+<span id="L214"><span class="lineNum">     214</span>              :                 uint64_t m_cumulativeHashes;</span>
+<span id="L215"><span class="lineNum">     215</span>              :         };</span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span>              :         mutable uv_rwlock_t m_hashrateDataLock;</span>
+<span id="L218"><span class="lineNum">     218</span>              : </span>
+<span id="L219"><span class="lineNum">     219</span>              :         HashrateData m_hashrateData[131072];</span>
+<span id="L220"><span class="lineNum">     220</span>              :         uint64_t m_cumulativeHashes;</span>
+<span id="L221"><span class="lineNum">     221</span>              :         uint64_t m_cumulativeHashesAtLastShare;</span>
+<span id="L222"><span class="lineNum">     222</span>              :         uint64_t m_hashrateDataHead;</span>
+<span id="L223"><span class="lineNum">     223</span>              :         uint64_t m_hashrateDataTail_15m;</span>
+<span id="L224"><span class="lineNum">     224</span>              :         uint64_t m_hashrateDataTail_1h;</span>
+<span id="L225"><span class="lineNum">     225</span>              :         uint64_t m_hashrateDataTail_24h;</span>
 <span id="L226"><span class="lineNum">     226</span>              : </span>
-<span id="L227"><span class="lineNum">     227</span>              :         void update_hashrate_data(uint64_t hashes, uint64_t timestamp);</span>
-<span id="L228"><span class="lineNum">     228</span>              :         void api_update_local_stats(uint64_t timestamp);</span>
-<span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span>              :         void on_shutdown() override;</span>
-<span id="L231"><span class="lineNum">     231</span>              : };</span>
+<span id="L227"><span class="lineNum">     227</span>              :         double m_cumulativeFoundSharesDiff;</span>
+<span id="L228"><span class="lineNum">     228</span>              :         uint32_t m_totalFoundSidechainShares;</span>
+<span id="L229"><span class="lineNum">     229</span>              :         uint32_t m_totalFailedSidechainShares;</span>
+<span id="L230"><span class="lineNum">     230</span>              :         time_t m_lastSidechainShareFoundTime;</span>
+<span id="L231"><span class="lineNum">     231</span>              :         uint64_t m_totalStratumShares;</span>
 <span id="L232"><span class="lineNum">     232</span>              : </span>
-<span id="L233"><span class="lineNum">     233</span>              : } // namespace p2pool</span>
+<span id="L233"><span class="lineNum">     233</span>              :         uint64_t m_banTime;</span>
+<span id="L234"><span class="lineNum">     234</span>              : </span>
+<span id="L235"><span class="lineNum">     235</span>              :         std::atomic&lt;uint64_t&gt; m_apiLastUpdateTime;</span>
+<span id="L236"><span class="lineNum">     236</span>              : </span>
+<span id="L237"><span class="lineNum">     237</span>              :         std::deque&lt;SubmittedShare*&gt; m_pendingShareChecks;</span>
+<span id="L238"><span class="lineNum">     238</span>              :         bool m_shareCheckInFlight;</span>
+<span id="L239"><span class="lineNum">     239</span>              : </span>
+<span id="L240"><span class="lineNum">     240</span>              :         void update_hashrate_data(uint64_t hashes, uint64_t timestamp);</span>
+<span id="L241"><span class="lineNum">     241</span>              :         void api_update_local_stats(uint64_t timestamp);</span>
+<span id="L242"><span class="lineNum">     242</span>              : </span>
+<span id="L243"><span class="lineNum">     243</span>              :         void on_shutdown() override;</span>
+<span id="L244"><span class="lineNum">     244</span>              : };</span>
+<span id="L245"><span class="lineNum">     245</span>              : </span>
+<span id="L246"><span class="lineNum">     246</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
