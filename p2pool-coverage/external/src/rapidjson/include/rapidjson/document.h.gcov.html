@@ -31,17 +31,17 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">52.1&nbsp;%</td>
-            <td class="headerCovTableEntry">353</td>
+            <td class="headerCovTableEntryLo">51.1&nbsp;%</td>
+            <td class="headerCovTableEntry">360</td>
             <td class="headerCovTableEntry">184</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-04 06:22:38</td>
+            <td class="headerValue">2026-07-04 09:02:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">46.6&nbsp;%</td>
-            <td class="headerCovTableEntry">118</td>
+            <td class="headerCovTableEntryLo">38.2&nbsp;%</td>
+            <td class="headerCovTableEntry">144</td>
             <td class="headerCovTableEntry">55</td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -2745,18 +2745,18 @@
 <span id="L2683"><span class="lineNum">    2683</span>              :         \return The document itself for fluent API.</span>
 <span id="L2684"><span class="lineNum">    2684</span>              :     */</span>
 <span id="L2685"><span class="lineNum">    2685</span>              :     template &lt;unsigned parseFlags&gt;</span>
-<span id="L2686"><span class="lineNum">    2686</span>              :     GenericDocument&amp; ParseInsitu(Ch* str) {</span>
-<span id="L2687"><span class="lineNum">    2687</span>              :         GenericInsituStringStream&lt;Encoding&gt; s(str);</span>
-<span id="L2688"><span class="lineNum">    2688</span>              :         return ParseStream&lt;parseFlags | kParseInsituFlag&gt;(s);</span>
-<span id="L2689"><span class="lineNum">    2689</span>              :     }</span>
+<span id="L2686"><span class="lineNum">    2686</span> <span class="tlaUNC">           0 :     GenericDocument&amp; ParseInsitu(Ch* str) {</span></span>
+<span id="L2687"><span class="lineNum">    2687</span> <span class="tlaUNC">           0 :         GenericInsituStringStream&lt;Encoding&gt; s(str);</span></span>
+<span id="L2688"><span class="lineNum">    2688</span> <span class="tlaUNC">           0 :         return ParseStream&lt;parseFlags | kParseInsituFlag&gt;(s);</span></span>
+<span id="L2689"><span class="lineNum">    2689</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2690"><span class="lineNum">    2690</span>              : </span>
 <span id="L2691"><span class="lineNum">    2691</span>              :     //! Parse JSON text from a mutable string (with \ref kParseDefaultFlags)</span>
 <span id="L2692"><span class="lineNum">    2692</span>              :     /*! \param str Mutable zero-terminated string to be parsed.</span>
 <span id="L2693"><span class="lineNum">    2693</span>              :         \return The document itself for fluent API.</span>
 <span id="L2694"><span class="lineNum">    2694</span>              :     */</span>
-<span id="L2695"><span class="lineNum">    2695</span>              :     GenericDocument&amp; ParseInsitu(Ch* str) {</span>
-<span id="L2696"><span class="lineNum">    2696</span>              :         return ParseInsitu&lt;kParseDefaultFlags&gt;(str);</span>
-<span id="L2697"><span class="lineNum">    2697</span>              :     }</span>
+<span id="L2695"><span class="lineNum">    2695</span> <span class="tlaUNC">           0 :     GenericDocument&amp; ParseInsitu(Ch* str) {</span></span>
+<span id="L2696"><span class="lineNum">    2696</span> <span class="tlaUNC">           0 :         return ParseInsitu&lt;kParseDefaultFlags&gt;(str);</span></span>
+<span id="L2697"><span class="lineNum">    2697</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L2698"><span class="lineNum">    2698</span>              :     //!@}</span>
 <span id="L2699"><span class="lineNum">    2699</span>              : </span>
 <span id="L2700"><span class="lineNum">    2700</span>              :     //!@name Parse from read-only string</span>

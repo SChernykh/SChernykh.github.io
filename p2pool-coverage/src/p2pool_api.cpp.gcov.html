@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-04 06:22:38</td>
+            <td class="headerValue">2026-07-04 09:02:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -203,7 +203,7 @@
 <span id="L141"><span class="lineNum">     141</span> <span class="tlaUNC">           0 :         std::pair&lt;std::vector&lt;char&gt;, bool&gt;&amp; data = m_dumpData[path];</span></span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
 <span id="L143"><span class="lineNum">     143</span> <span class="tlaUNC">           0 :         if (data.first != buf) {</span></span>
-<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :                 data.first = buf;</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaUNC">           0 :                 data.first = std::move(buf);</span></span>
 <span id="L145"><span class="lineNum">     145</span> <span class="tlaUNC">           0 :                 data.second = true;</span></span>
 <span id="L146"><span class="lineNum">     146</span>              : </span>
 <span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :                 if (!uv_is_closing(reinterpret_cast&lt;uv_handle_t*&gt;(&amp;m_dumpToFileAsync))) {</span></span>

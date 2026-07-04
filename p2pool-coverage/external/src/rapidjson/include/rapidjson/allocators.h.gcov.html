@@ -31,17 +31,17 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">64.6&nbsp;%</td>
-            <td class="headerCovTableEntry">130</td>
+            <td class="headerCovTableEntryLo">54.2&nbsp;%</td>
+            <td class="headerCovTableEntry">155</td>
             <td class="headerCovTableEntry">84</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-04 06:22:38</td>
+            <td class="headerValue">2026-07-04 09:02:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryMed">81.2&nbsp;%</td>
-            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryLo">72.2&nbsp;%</td>
+            <td class="headerCovTableEntry">18</td>
             <td class="headerCovTableEntry">13</td>
           </tr>
                   <tr><td><img src="../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -261,19 +261,19 @@
 <span id="L199"><span class="lineNum">     199</span>              :         \param baseAllocator The allocator for allocating memory chunks.</span>
 <span id="L200"><span class="lineNum">     200</span>              :     */</span>
 <span id="L201"><span class="lineNum">     201</span>              :     MemoryPoolAllocator(void *buffer, size_t size, size_t chunkSize = kDefaultChunkCapacity, BaseAllocator* baseAllocator = 0) :</span>
-<span id="L202"><span class="lineNum">     202</span>              :         chunk_capacity_(chunkSize),</span>
-<span id="L203"><span class="lineNum">     203</span>              :         baseAllocator_(baseAllocator),</span>
-<span id="L204"><span class="lineNum">     204</span>              :         shared_(static_cast&lt;SharedData*&gt;(AlignBuffer(buffer, size)))</span>
-<span id="L205"><span class="lineNum">     205</span>              :     {</span>
-<span id="L206"><span class="lineNum">     206</span>              :         RAPIDJSON_ASSERT(size &gt;= SIZEOF_SHARED_DATA + SIZEOF_CHUNK_HEADER);</span>
-<span id="L207"><span class="lineNum">     207</span>              :         shared_-&gt;chunkHead = GetChunkHead(shared_);</span>
-<span id="L208"><span class="lineNum">     208</span>              :         shared_-&gt;chunkHead-&gt;capacity = size - SIZEOF_SHARED_DATA - SIZEOF_CHUNK_HEADER;</span>
-<span id="L209"><span class="lineNum">     209</span>              :         shared_-&gt;chunkHead-&gt;size = 0;</span>
-<span id="L210"><span class="lineNum">     210</span>              :         shared_-&gt;chunkHead-&gt;next = 0;</span>
-<span id="L211"><span class="lineNum">     211</span>              :         shared_-&gt;ownBaseAllocator = 0;</span>
-<span id="L212"><span class="lineNum">     212</span>              :         shared_-&gt;ownBuffer = false;</span>
-<span id="L213"><span class="lineNum">     213</span>              :         shared_-&gt;refcount = 1;</span>
-<span id="L214"><span class="lineNum">     214</span>              :     }</span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaUNC tlaBgUNC">           0 :         chunk_capacity_(chunkSize),</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaUNC">           0 :         baseAllocator_(baseAllocator),</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaUNC">           0 :         shared_(static_cast&lt;SharedData*&gt;(AlignBuffer(buffer, size)))</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaUNC">           0 :     {</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaUNC">           0 :         RAPIDJSON_ASSERT(size &gt;= SIZEOF_SHARED_DATA + SIZEOF_CHUNK_HEADER);</span></span>
+<span id="L207"><span class="lineNum">     207</span> <span class="tlaUNC">           0 :         shared_-&gt;chunkHead = GetChunkHead(shared_);</span></span>
+<span id="L208"><span class="lineNum">     208</span> <span class="tlaUNC">           0 :         shared_-&gt;chunkHead-&gt;capacity = size - SIZEOF_SHARED_DATA - SIZEOF_CHUNK_HEADER;</span></span>
+<span id="L209"><span class="lineNum">     209</span> <span class="tlaUNC">           0 :         shared_-&gt;chunkHead-&gt;size = 0;</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaUNC">           0 :         shared_-&gt;chunkHead-&gt;next = 0;</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaUNC">           0 :         shared_-&gt;ownBaseAllocator = 0;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaUNC">           0 :         shared_-&gt;ownBuffer = false;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaUNC">           0 :         shared_-&gt;refcount = 1;</span></span>
+<span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L215"><span class="lineNum">     215</span>              : </span>
 <span id="L216"><span class="lineNum">     216</span>              :     MemoryPoolAllocator(const MemoryPoolAllocator&amp; rhs) RAPIDJSON_NOEXCEPT :</span>
 <span id="L217"><span class="lineNum">     217</span>              :         chunk_capacity_(rhs.chunk_capacity_),</span>
@@ -318,7 +318,7 @@
 <span id="L256"><span class="lineNum">     256</span>              :     //! Destructor.</span>
 <span id="L257"><span class="lineNum">     257</span>              :     /*! This deallocates all memory chunks, excluding the user-supplied buffer.</span>
 <span id="L258"><span class="lineNum">     258</span>              :     */</span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">          14 :     ~MemoryPoolAllocator() RAPIDJSON_NOEXCEPT {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC tlaBgGNC">          14 :     ~MemoryPoolAllocator() RAPIDJSON_NOEXCEPT {</span></span>
 <span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">          14 :         if (!shared_) {</span></span>
 <span id="L261"><span class="lineNum">     261</span>              :             // do nothing if moved</span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC tlaBgUNC">           0 :             return;</span></span>
@@ -464,18 +464,18 @@
 <span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC tlaBgGNC">          14 :     }</span></span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
 <span id="L404"><span class="lineNum">     404</span>              :     static inline void* AlignBuffer(void* buf, size_t &amp;size)</span>
-<span id="L405"><span class="lineNum">     405</span>              :     {</span>
-<span id="L406"><span class="lineNum">     406</span>              :         RAPIDJSON_NOEXCEPT_ASSERT(buf != 0);</span>
-<span id="L407"><span class="lineNum">     407</span>              :         const uintptr_t mask = sizeof(void*) - 1;</span>
-<span id="L408"><span class="lineNum">     408</span>              :         const uintptr_t ubuf = reinterpret_cast&lt;uintptr_t&gt;(buf);</span>
-<span id="L409"><span class="lineNum">     409</span>              :         if (RAPIDJSON_UNLIKELY(ubuf &amp; mask)) {</span>
-<span id="L410"><span class="lineNum">     410</span>              :             const uintptr_t abuf = (ubuf + mask) &amp; ~mask;</span>
-<span id="L411"><span class="lineNum">     411</span>              :             RAPIDJSON_ASSERT(size &gt;= abuf - ubuf);</span>
-<span id="L412"><span class="lineNum">     412</span>              :             buf = reinterpret_cast&lt;void*&gt;(abuf);</span>
-<span id="L413"><span class="lineNum">     413</span>              :             size -= abuf - ubuf;</span>
-<span id="L414"><span class="lineNum">     414</span>              :         }</span>
-<span id="L415"><span class="lineNum">     415</span>              :         return buf;</span>
-<span id="L416"><span class="lineNum">     416</span>              :     }</span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC tlaBgUNC">           0 :     {</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 :         RAPIDJSON_NOEXCEPT_ASSERT(buf != 0);</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaUNC">           0 :         const uintptr_t mask = sizeof(void*) - 1;</span></span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaUNC">           0 :         const uintptr_t ubuf = reinterpret_cast&lt;uintptr_t&gt;(buf);</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaUNC">           0 :         if (RAPIDJSON_UNLIKELY(ubuf &amp; mask)) {</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaUNC">           0 :             const uintptr_t abuf = (ubuf + mask) &amp; ~mask;</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaUNC">           0 :             RAPIDJSON_ASSERT(size &gt;= abuf - ubuf);</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaUNC">           0 :             buf = reinterpret_cast&lt;void*&gt;(abuf);</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC">           0 :             size -= abuf - ubuf;</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :         return buf;</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaUNC">           0 :     }</span></span>
 <span id="L417"><span class="lineNum">     417</span>              : </span>
 <span id="L418"><span class="lineNum">     418</span>              :     size_t chunk_capacity_;     //!&lt; The minimum capacity of chunk when they are allocated.</span>
 <span id="L419"><span class="lineNum">     419</span>              :     BaseAllocator* baseAllocator_;  //!&lt; base allocator for allocating memory chunks.</span>
@@ -495,7 +495,7 @@
 <span id="L433"><span class="lineNum">     433</span>              : </span>
 <span id="L434"><span class="lineNum">     434</span>              : template&lt;typename T, typename A&gt;</span>
 <span id="L435"><span class="lineNum">     435</span>              : inline T* Realloc(A&amp; a, T* old_p, size_t old_n, size_t new_n)</span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">          14 : {</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC tlaBgGNC">          14 : {</span></span>
 <span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">          14 :     RAPIDJSON_NOEXCEPT_ASSERT(old_n &lt;= (std::numeric_limits&lt;size_t&gt;::max)() / sizeof(T) &amp;&amp; new_n &lt;= (std::numeric_limits&lt;size_t&gt;::max)() / sizeof(T));</span></span>
 <span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">          14 :     return static_cast&lt;T*&gt;(a.Realloc(old_p, old_n * sizeof(T), new_n * sizeof(T)));</span></span>
 <span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">          14 : }</span></span>
