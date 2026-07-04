@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-03 19:25:28</td>
+            <td class="headerValue">2026-07-04 02:34:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1127,7 +1127,7 @@
 <span id="L1065"><span class="lineNum">    1065</span> <span class="tlaUNC">           0 :                 buf = new WriteBuf();</span></span>
 <span id="L1066"><span class="lineNum">    1066</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1067"><span class="lineNum">    1067</span>              : </span>
-<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaUNC">           0 :         if (buf-&gt;m_dataCapacity != adjusted_size) {</span></span>
+<span id="L1068"><span class="lineNum">    1068</span> <span class="tlaUNC">           0 :         if (!buf-&gt;m_data || (buf-&gt;m_dataCapacity != adjusted_size)) {</span></span>
 <span id="L1069"><span class="lineNum">    1069</span> <span class="tlaUNC">           0 :                 buf-&gt;m_data = realloc_hook(buf-&gt;m_data, adjusted_size);</span></span>
 <span id="L1070"><span class="lineNum">    1070</span> <span class="tlaUNC">           0 :                 if (!buf-&gt;m_data) {</span></span>
 <span id="L1071"><span class="lineNum">    1071</span> <span class="tlaUNC">           0 :                         LOGERR(0, &quot;failed to allocate &quot; &lt;&lt; adjusted_size &lt;&lt; &quot; bytes to send data&quot;);</span></span>
