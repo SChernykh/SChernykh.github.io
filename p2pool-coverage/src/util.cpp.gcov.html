@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-08 10:43:51</td>
+            <td class="headerValue">2026-07-08 11:19:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">38.9&nbsp;%</td>
@@ -1044,8 +1044,8 @@
 <span id="L982"><span class="lineNum">     982</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L983"><span class="lineNum">     983</span>              : </span>
 <span id="L984"><span class="lineNum">     984</span> <span class="tlaUNC">           0 :         struct Work {</span></span>
-<span id="L985"><span class="lineNum">     985</span> <span class="tlaUNC">           0 :                 uv_work_t req;</span></span>
-<span id="L986"><span class="lineNum">     986</span> <span class="tlaUNC">           0 :                 std::shared_ptr&lt;std::atomic&lt;int32_t&gt;&gt; k;</span></span>
+<span id="L985"><span class="lineNum">     985</span> <span class="tlaUNC">           0 :                 uv_work_t req = {};</span></span>
+<span id="L986"><span class="lineNum">     986</span> <span class="tlaUNC">           0 :                 std::shared_ptr&lt;std::atomic&lt;int32_t&gt;&gt; k = 0;</span></span>
 <span id="L987"><span class="lineNum">     987</span>              : </span>
 <span id="L988"><span class="lineNum">     988</span> <span class="tlaUNC">           0 :                 FORCEINLINE void run()</span></span>
 <span id="L989"><span class="lineNum">     989</span> <span class="tlaUNC">           0 :                 {</span></span>
@@ -1060,7 +1060,7 @@
 <span id="L998"><span class="lineNum">     998</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L999"><span class="lineNum">     999</span> <span class="tlaUNC">           0 :         };</span></span>
 <span id="L1000"><span class="lineNum">    1000</span>              : </span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaUNC">           0 :         std::shared_ptr&lt;std::atomic&lt;int32_t&gt;&gt; k(new std::atomic&lt;int32_t&gt;(N));</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaUNC">           0 :         std::shared_ptr&lt;std::atomic&lt;int32_t&gt;&gt; k(new std::atomic&lt;int32_t&gt;(static_cast&lt;int32_t&gt;(N)));</span></span>
 <span id="L1002"><span class="lineNum">    1002</span>              : </span>
 <span id="L1003"><span class="lineNum">    1003</span> <span class="tlaUNC">           0 :         for (uint32_t i = 0; i &lt; N; ++i) {</span></span>
 <span id="L1004"><span class="lineNum">    1004</span> <span class="tlaUNC">           0 :                 Work* w = new Work{ {}, k };</span></span>

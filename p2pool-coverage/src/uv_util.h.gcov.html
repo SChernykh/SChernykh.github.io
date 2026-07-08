@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-08 10:43:51</td>
+            <td class="headerValue">2026-07-08 11:19:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">41.7&nbsp;%</td>
@@ -95,7 +95,7 @@
 <span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC tlaBgGNC">          75 :         FORCEINLINE  ReadWriteLock() { uv_rwlock_init(&amp;m_lock);    }</span></span>
 <span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">          11 :         FORCEINLINE ~ReadWriteLock() { uv_rwlock_destroy(&amp;m_lock); }</span></span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">    39612239 :         FORCEINLINE operator uv_rwlock_t&amp;() { return m_lock; }</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">    39618102 :         FORCEINLINE operator uv_rwlock_t&amp;() { return m_lock; }</span></span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
 <span id="L38"><span class="lineNum">      38</span>              : private:</span>
 <span id="L39"><span class="lineNum">      39</span>              :         uv_rwlock_t m_lock;</span>
@@ -114,8 +114,8 @@
 <span id="L52"><span class="lineNum">      52</span>              : </span>
 <span id="L53"><span class="lineNum">      53</span>              : template&lt;&gt; struct RWLock&lt;false&gt; : public nocopy_nomove</span>
 <span id="L54"><span class="lineNum">      54</span>              : {</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">    14831041 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_rdlock(&amp;handle); }</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">    14830778 :         FORCEINLINE ~RWLock() { uv_rwlock_rdunlock(m_handle); }</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">    14823141 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_rdlock(&amp;handle); }</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">    14823098 :         FORCEINLINE ~RWLock() { uv_rwlock_rdunlock(m_handle); }</span></span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
 <span id="L58"><span class="lineNum">      58</span>              : private:</span>
 <span id="L59"><span class="lineNum">      59</span>              :         uv_rwlock_t* m_handle;</span>
@@ -125,8 +125,8 @@
 <span id="L63"><span class="lineNum">      63</span>              : </span>
 <span id="L64"><span class="lineNum">      64</span>              : template&lt;&gt; struct RWLock&lt;true&gt; : public nocopy_nomove</span>
 <span id="L65"><span class="lineNum">      65</span>              : {</span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">    33665029 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_wrlock(&amp;handle); }</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">    33663859 :         FORCEINLINE ~RWLock() { uv_rwlock_wrunlock(m_handle); }</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">    33688741 :         explicit FORCEINLINE RWLock(uv_rwlock_t&amp; handle) : m_handle(&amp;handle) { uv_rwlock_wrlock(&amp;handle); }</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">    33687671 :         FORCEINLINE ~RWLock() { uv_rwlock_wrunlock(m_handle); }</span></span>
 <span id="L68"><span class="lineNum">      68</span>              : </span>
 <span id="L69"><span class="lineNum">      69</span>              : private:</span>
 <span id="L70"><span class="lineNum">      70</span>              :         uv_rwlock_t* m_handle;</span>
@@ -309,23 +309,23 @@
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       20220 :                 const int err = uv_queue_work(loop, &amp;w-&gt;req,</span></span>
 <span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       20220 :                         [](uv_work_t* req)</span></span>
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">       20220 :                         {</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       20202 :                                 Work* w = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">       20202 :                                 std::shared_ptr&lt;Callback&gt;&amp; cb = w-&gt;cb;</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       20219 :                                 Work* w = reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">       20219 :                                 std::shared_ptr&lt;Callback&gt;&amp; cb = w-&gt;cb;</span></span>
 <span id="L252"><span class="lineNum">     252</span>              : </span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       20202 :                                 if constexpr (accepts_parallel_run_params&lt;T&gt;::value) {</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       20219 :                                 if constexpr (accepts_parallel_run_params&lt;T&gt;::value) {</span></span>
 <span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC tlaBgUNC">           0 :                                         cb-&gt;m_func(cb-&gt;m_threadIndex.fetch_add(1, std::memory_order_relaxed), cb-&gt;m_threadCount);</span></span>
 <span id="L255"><span class="lineNum">     255</span>              :                                 }</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC tlaBgGNC">       20202 :                                 else {</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">       20202 :                                         cb-&gt;m_func();</span></span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">       20202 :                                 }</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC tlaBgGNC">       20219 :                                 else {</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">       20219 :                                         cb-&gt;m_func();</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">       20219 :                                 }</span></span>
 <span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">       20202 :                                 if (cb-&gt;m_wait) {</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">       20219 :                                 if (cb-&gt;m_wait) {</span></span>
 <span id="L261"><span class="lineNum">     261</span>              :                                         // Ensure the data written by the callback can be read after this point</span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">          30 :                                         cb-&gt;m_writeSync.fetch_add(1, std::memory_order_acq_rel);</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          30 :                                 }</span></span>
 <span id="L264"><span class="lineNum">     264</span>              : </span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">       20202 :                                 cb.reset();</span></span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       20202 :                         },</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">       20219 :                                 cb.reset();</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">       20219 :                         },</span></span>
 <span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">       20220 :                         [](uv_work_t* req, int)</span></span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">       20220 :                         {</span></span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaUNC tlaBgUNC">           0 :                                 delete reinterpret_cast&lt;Work*&gt;(req-&gt;data);</span></span>
@@ -351,9 +351,9 @@
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          10 :                         cb-&gt;m_func();</span></span>
 <span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">          10 :                 }</span></span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">         872 :                 while (cb-&gt;m_writeSync.load(std::memory_order_acquire) &lt; num_started_threads) {</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">         862 :                         std::this_thread::yield();</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">         862 :                 }</span></span>
+<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">         292 :                 while (cb-&gt;m_writeSync.load(std::memory_order_acquire) &lt; num_started_threads) {</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">         282 :                         std::this_thread::yield();</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">         282 :                 }</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">          10 :         }</span></span>
 <span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">        6740 : }</span></span>
 <span id="L297"><span class="lineNum">     297</span>              : </span>
