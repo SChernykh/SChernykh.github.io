@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-09 16:56:08</td>
+            <td class="headerValue">2026-07-09 17:14:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">52.2&nbsp;%</td>
@@ -238,8 +238,8 @@
 <span id="L176"><span class="lineNum">     176</span>              : #    define ROBIN_HOOD_LIKELY(condition) condition</span>
 <span id="L177"><span class="lineNum">     177</span>              : #    define ROBIN_HOOD_UNLIKELY(condition) condition</span>
 <span id="L178"><span class="lineNum">     178</span>              : #else</span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">    99615855 : #    define ROBIN_HOOD_LIKELY(condition) __builtin_expect(condition, 1)</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">    17825575 : #    define ROBIN_HOOD_UNLIKELY(condition) __builtin_expect(condition, 0)</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">    99617762 : #    define ROBIN_HOOD_LIKELY(condition) __builtin_expect(condition, 1)</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">    17816576 : #    define ROBIN_HOOD_UNLIKELY(condition) __builtin_expect(condition, 0)</span></span>
 <span id="L181"><span class="lineNum">     181</span>              : #endif</span>
 <span id="L182"><span class="lineNum">     182</span>              : </span>
 <span id="L183"><span class="lineNum">     183</span>              : // detect if native wchar_t type is availiable in MSVC</span>
@@ -392,9 +392,9 @@
 <span id="L330"><span class="lineNum">     330</span>              : // 'uint64_t*' {aka 'long unsigned int*'} increases required alignment of target type&quot;. Use with</span>
 <span id="L331"><span class="lineNum">     331</span>              : // care!</span>
 <span id="L332"><span class="lineNum">     332</span>              : template &lt;typename T&gt;</span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">   190008639 : inline T reinterpret_cast_no_cast_align_warning(void* ptr) noexcept {</span></span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">   190008639 :     return reinterpret_cast&lt;T&gt;(ptr);</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">   190008639 : }</span></span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">   190027501 : inline T reinterpret_cast_no_cast_align_warning(void* ptr) noexcept {</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">   190027501 :     return reinterpret_cast&lt;T&gt;(ptr);</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">   190027501 : }</span></span>
 <span id="L336"><span class="lineNum">     336</span>              : </span>
 <span id="L337"><span class="lineNum">     337</span>              : template &lt;typename T&gt;</span>
 <span id="L338"><span class="lineNum">     338</span>              : inline T reinterpret_cast_no_cast_align_warning(void const* ptr) noexcept {</span>
@@ -425,13 +425,13 @@
 <span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">      164025 : }</span></span>
 <span id="L364"><span class="lineNum">     364</span>              : </span>
 <span id="L365"><span class="lineNum">     365</span>              : template &lt;typename T&gt;</span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">    64629936 : inline T unaligned_load(void const* ptr) noexcept {</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">    64624843 : inline T unaligned_load(void const* ptr) noexcept {</span></span>
 <span id="L367"><span class="lineNum">     367</span>              :     // using memcpy so we don't get into unaligned load problems.</span>
 <span id="L368"><span class="lineNum">     368</span>              :     // compiler should optimize this very well anyways.</span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">    64629936 :     T t;</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">    64629936 :     std::memcpy(&amp;t, ptr, sizeof(T));</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">    64629936 :     return t;</span></span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">    64629936 : }</span></span>
+<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">    64624843 :     T t;</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">    64624843 :     std::memcpy(&amp;t, ptr, sizeof(T));</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">    64624843 :     return t;</span></span>
+<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">    64624843 : }</span></span>
 <span id="L373"><span class="lineNum">     373</span>              : </span>
 <span id="L374"><span class="lineNum">     374</span>              : // Allocates bulks of memory for objects of type T. This deallocates the memory in the destructor,</span>
 <span id="L375"><span class="lineNum">     375</span>              : // and keeps a linked list of the allocated memory around. Overhead per allocation is the size of a</span>
@@ -487,24 +487,24 @@
 <span id="L425"><span class="lineNum">     425</span>              :     // allocates, but does NOT initialize. Use in-place new constructor, e.g.</span>
 <span id="L426"><span class="lineNum">     426</span>              :     //   T* obj = pool.allocate();</span>
 <span id="L427"><span class="lineNum">     427</span>              :     //   ::new (static_cast&lt;void*&gt;(obj)) T();</span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">    32401940 :     T* allocate() {</span></span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">    32401940 :         T* tmp = mHead;</span></span>
-<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">    32401940 :         if (!tmp) {</span></span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">    32409560 :     T* allocate() {</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">    32409560 :         T* tmp = mHead;</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">    32409560 :         if (!tmp) {</span></span>
 <span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">      133922 :             tmp = performAllocation();</span></span>
 <span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">      133922 :         }</span></span>
 <span id="L433"><span class="lineNum">     433</span>              : </span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">    32401940 :         mHead = *reinterpret_cast_no_cast_align_warning&lt;T**&gt;(tmp);</span></span>
-<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">    32401940 :         return tmp;</span></span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">    32401940 :     }</span></span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">    32409560 :         mHead = *reinterpret_cast_no_cast_align_warning&lt;T**&gt;(tmp);</span></span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">    32409560 :         return tmp;</span></span>
+<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">    32409560 :     }</span></span>
 <span id="L437"><span class="lineNum">     437</span>              : </span>
 <span id="L438"><span class="lineNum">     438</span>              :     // does not actually deallocate but puts it in store.</span>
 <span id="L439"><span class="lineNum">     439</span>              :     // make sure you have already called the destructor! e.g. with</span>
 <span id="L440"><span class="lineNum">     440</span>              :     //  obj-&gt;~T();</span>
 <span id="L441"><span class="lineNum">     441</span>              :     //  pool.deallocate(obj);</span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">    25393658 :     void deallocate(T* obj) noexcept {</span></span>
-<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">    25393658 :         *reinterpret_cast_no_cast_align_warning&lt;T**&gt;(obj) = mHead;</span></span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">    25393658 :         mHead = obj;</span></span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">    25393658 :     }</span></span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">    25401447 :     void deallocate(T* obj) noexcept {</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">    25401447 :         *reinterpret_cast_no_cast_align_warning&lt;T**&gt;(obj) = mHead;</span></span>
+<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">    25401447 :         mHead = obj;</span></span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">    25401447 :     }</span></span>
 <span id="L446"><span class="lineNum">     446</span>              : </span>
 <span id="L447"><span class="lineNum">     447</span>              :     // Adds an already allocated block of memory to the allocator. This allocator is from now on</span>
 <span id="L448"><span class="lineNum">     448</span>              :     // responsible for freeing the data (with free()). If the provided data is not large enough to</span>
@@ -683,8 +683,8 @@
 <span id="L621"><span class="lineNum">     621</span>              :     template &lt;typename U1, typename U2&gt;</span>
 <span id="L622"><span class="lineNum">     622</span>              :     constexpr pair(U1&amp;&amp; a, U2&amp;&amp; b) noexcept(noexcept(T1(std::forward&lt;U1&gt;(</span>
 <span id="L623"><span class="lineNum">     623</span>              :         std::declval&lt;U1&amp;&amp;&gt;()))) &amp;&amp; noexcept(T2(std::forward&lt;U2&gt;(std::declval&lt;U2&amp;&amp;&gt;()))))</span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">     1313185 :         : first(std::forward&lt;U1&gt;(a))</span></span>
-<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">     1373084 :         , second(std::forward&lt;U2&gt;(b)) {}</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">     1322328 :         : first(std::forward&lt;U1&gt;(a))</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">     1382227 :         , second(std::forward&lt;U2&gt;(b)) {}</span></span>
 <span id="L626"><span class="lineNum">     626</span>              : </span>
 <span id="L627"><span class="lineNum">     627</span>              :     template &lt;typename... U1, typename... U2&gt;</span>
 <span id="L628"><span class="lineNum">     628</span>              :     // MSVC 2015 produces error &quot;C2476: ‘constexpr’ constructor does not initialize all members&quot;</span>
@@ -762,18 +762,18 @@
 <span id="L700"><span class="lineNum">     700</span>              :     return !(x &lt; y);</span>
 <span id="L701"><span class="lineNum">     701</span>              : }</span>
 <span id="L702"><span class="lineNum">     702</span>              : </span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">     2331711 : inline size_t hash_int(uint64_t x) noexcept {</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">     2330188 : inline size_t hash_int(uint64_t x) noexcept {</span></span>
 <span id="L704"><span class="lineNum">     704</span>              :     // tried lots of different hashes, let's stick with murmurhash3. It's simple, fast, well tested,</span>
 <span id="L705"><span class="lineNum">     705</span>              :     // and doesn't need any special 128bit operations.</span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">     2331711 :     x ^= x &gt;&gt; 33U;</span></span>
-<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">     2331711 :     x *= UINT64_C(0xff51afd7ed558ccd);</span></span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">     2331711 :     x ^= x &gt;&gt; 33U;</span></span>
+<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">     2330188 :     x ^= x &gt;&gt; 33U;</span></span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">     2330188 :     x *= UINT64_C(0xff51afd7ed558ccd);</span></span>
+<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">     2330188 :     x ^= x &gt;&gt; 33U;</span></span>
 <span id="L709"><span class="lineNum">     709</span>              : </span>
 <span id="L710"><span class="lineNum">     710</span>              :     // not doing the final step here, because this will be done by keyToIdx anyways</span>
 <span id="L711"><span class="lineNum">     711</span>              :     // x *= UINT64_C(0xc4ceb9fe1a85ec53);</span>
 <span id="L712"><span class="lineNum">     712</span>              :     // x ^= x &gt;&gt; 33U;</span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">     2331711 :     return static_cast&lt;size_t&gt;(x);</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">     2331711 : }</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">     2330188 :     return static_cast&lt;size_t&gt;(x);</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">     2330188 : }</span></span>
 <span id="L715"><span class="lineNum">     715</span>              : </span>
 <span id="L716"><span class="lineNum">     716</span>              : template&lt;typename T&gt; struct not_implemented { enum { value = 0 }; };</span>
 <span id="L717"><span class="lineNum">     717</span>              : </span>
@@ -836,9 +836,9 @@
 <span id="L774"><span class="lineNum">     774</span>              : #define ROBIN_HOOD_HASH_INT(T)                           \</span>
 <span id="L775"><span class="lineNum">     775</span>              :     template &lt;&gt;                                          \</span>
 <span id="L776"><span class="lineNum">     776</span>              :     struct hash&lt;T&gt; {                                     \</span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC tlaBgGNC">     2331711 :         size_t operator()(T const&amp; obj) const noexcept { \</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">     2331711 :             return hash_int(static_cast&lt;uint64_t&gt;(obj)); \</span></span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">     2331711 :         }                                                \</span></span>
+<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC tlaBgGNC">     2330188 :         size_t operator()(T const&amp; obj) const noexcept { \</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">     2330188 :             return hash_int(static_cast&lt;uint64_t&gt;(obj)); \</span></span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">     2330188 :         }                                                \</span></span>
 <span id="L780"><span class="lineNum">     780</span>              :     }</span>
 <span id="L781"><span class="lineNum">     781</span>              : </span>
 <span id="L782"><span class="lineNum">     782</span>              : #if defined(__GNUC__) &amp;&amp; !defined(__clang__)</span>
@@ -1059,22 +1059,22 @@
 <span id="L997"><span class="lineNum">     997</span>              :     public:</span>
 <span id="L998"><span class="lineNum">     998</span>              :         template &lt;typename... Args&gt;</span>
 <span id="L999"><span class="lineNum">     999</span>              :         explicit DataNode(M&amp; map, Args&amp;&amp;... args)</span>
-<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">    32401940 :             : mData(map.allocate()) {</span></span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">    32401940 :             ::new (static_cast&lt;void*&gt;(mData)) value_type(std::forward&lt;Args&gt;(args)...);</span></span>
-<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaGNC">    32401940 :         }</span></span>
+<span id="L1000"><span class="lineNum">    1000</span> <span class="tlaGNC">    32409560 :             : mData(map.allocate()) {</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">    32409560 :             ::new (static_cast&lt;void*&gt;(mData)) value_type(std::forward&lt;Args&gt;(args)...);</span></span>
+<span id="L1002"><span class="lineNum">    1002</span> <span class="tlaGNC">    32409560 :         }</span></span>
 <span id="L1003"><span class="lineNum">    1003</span>              : </span>
 <span id="L1004"><span class="lineNum">    1004</span>              :         DataNode(M&amp; ROBIN_HOOD_UNUSED(map) /*unused*/, DataNode&lt;M, false&gt;&amp;&amp; n) noexcept</span>
-<span id="L1005"><span class="lineNum">    1005</span> <span class="tlaGNC">     6479689 :             : mData(std::move(n.mData)) {}</span></span>
+<span id="L1005"><span class="lineNum">    1005</span> <span class="tlaGNC">     6479507 :             : mData(std::move(n.mData)) {}</span></span>
 <span id="L1006"><span class="lineNum">    1006</span>              : </span>
-<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">    25393658 :         void destroy(M&amp; map) noexcept {</span></span>
+<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">    25401447 :         void destroy(M&amp; map) noexcept {</span></span>
 <span id="L1008"><span class="lineNum">    1008</span>              :             // don't deallocate, just put it into list of datapool.</span>
-<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">    25393658 :             mData-&gt;~value_type();</span></span>
-<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">    25393658 :             map.deallocate(mData);</span></span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">    25393658 :         }</span></span>
+<span id="L1009"><span class="lineNum">    1009</span> <span class="tlaGNC">    25401447 :             mData-&gt;~value_type();</span></span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">    25401447 :             map.deallocate(mData);</span></span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">    25401447 :         }</span></span>
 <span id="L1012"><span class="lineNum">    1012</span>              : </span>
-<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">     7008282 :         void destroyDoNotDeallocate() noexcept {</span></span>
-<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">     7008282 :             mData-&gt;~value_type();</span></span>
-<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">     7008282 :         }</span></span>
+<span id="L1013"><span class="lineNum">    1013</span> <span class="tlaGNC">     7008113 :         void destroyDoNotDeallocate() noexcept {</span></span>
+<span id="L1014"><span class="lineNum">    1014</span> <span class="tlaGNC">     7008113 :             mData-&gt;~value_type();</span></span>
+<span id="L1015"><span class="lineNum">    1015</span> <span class="tlaGNC">     7008113 :         }</span></span>
 <span id="L1016"><span class="lineNum">    1016</span>              : </span>
 <span id="L1017"><span class="lineNum">    1017</span>              :         value_type const* operator-&gt;() const noexcept {</span>
 <span id="L1018"><span class="lineNum">    1018</span>              :             return mData;</span>
@@ -1088,32 +1088,32 @@
 <span id="L1026"><span class="lineNum">    1026</span> <span class="tlaGNC">    70616860 :             return *mData;</span></span>
 <span id="L1027"><span class="lineNum">    1027</span> <span class="tlaGNC">    70616860 :         }</span></span>
 <span id="L1028"><span class="lineNum">    1028</span>              : </span>
-<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">   136316029 :         value_type&amp; operator*() {</span></span>
-<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC">   136316029 :             return *mData;</span></span>
-<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">   136316029 :         }</span></span>
+<span id="L1029"><span class="lineNum">    1029</span> <span class="tlaGNC">   136315660 :         value_type&amp; operator*() {</span></span>
+<span id="L1030"><span class="lineNum">    1030</span> <span class="tlaGNC">   136315660 :             return *mData;</span></span>
+<span id="L1031"><span class="lineNum">    1031</span> <span class="tlaGNC">   136315660 :         }</span></span>
 <span id="L1032"><span class="lineNum">    1032</span>              : </span>
 <span id="L1033"><span class="lineNum">    1033</span>              :         template &lt;typename VT = value_type&gt;</span>
 <span id="L1034"><span class="lineNum">    1034</span>              :         ROBIN_HOOD(NODISCARD)</span>
-<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">   100777618 :         typename std::enable_if&lt;is_map, typename VT::first_type&amp;&gt;::type getFirst() noexcept {</span></span>
-<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaGNC">   100777618 :             return mData-&gt;first;</span></span>
-<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">   100777618 :         }</span></span>
+<span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">   100789461 :         typename std::enable_if&lt;is_map, typename VT::first_type&amp;&gt;::type getFirst() noexcept {</span></span>
+<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaGNC">   100789461 :             return mData-&gt;first;</span></span>
+<span id="L1037"><span class="lineNum">    1037</span> <span class="tlaGNC">   100789461 :         }</span></span>
 <span id="L1038"><span class="lineNum">    1038</span>              :         template &lt;typename VT = value_type&gt;</span>
 <span id="L1039"><span class="lineNum">    1039</span>              :         ROBIN_HOOD(NODISCARD)</span>
-<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">    25013067 :         typename std::enable_if&lt;is_set, VT&amp;&gt;::type getFirst() noexcept {</span></span>
-<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">    25013067 :             return *mData;</span></span>
-<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">    25013067 :         }</span></span>
+<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">    25011731 :         typename std::enable_if&lt;is_set, VT&amp;&gt;::type getFirst() noexcept {</span></span>
+<span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">    25011731 :             return *mData;</span></span>
+<span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">    25011731 :         }</span></span>
 <span id="L1043"><span class="lineNum">    1043</span>              : </span>
 <span id="L1044"><span class="lineNum">    1044</span>              :         template &lt;typename VT = value_type&gt;</span>
 <span id="L1045"><span class="lineNum">    1045</span>              :         ROBIN_HOOD(NODISCARD)</span>
 <span id="L1046"><span class="lineNum">    1046</span>              :         typename std::enable_if&lt;is_map, typename VT::first_type const&amp;&gt;::type</span>
-<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">     1373084 :             getFirst() const noexcept {</span></span>
-<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">     1373084 :             return mData-&gt;first;</span></span>
-<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC">     1373084 :         }</span></span>
+<span id="L1047"><span class="lineNum">    1047</span> <span class="tlaGNC">     1382227 :             getFirst() const noexcept {</span></span>
+<span id="L1048"><span class="lineNum">    1048</span> <span class="tlaGNC">     1382227 :             return mData-&gt;first;</span></span>
+<span id="L1049"><span class="lineNum">    1049</span> <span class="tlaGNC">     1382227 :         }</span></span>
 <span id="L1050"><span class="lineNum">    1050</span>              :         template &lt;typename VT = value_type&gt;</span>
 <span id="L1051"><span class="lineNum">    1051</span>              :         ROBIN_HOOD(NODISCARD)</span>
-<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">    31026798 :         typename std::enable_if&lt;is_set, VT const&amp;&gt;::type getFirst() const noexcept {</span></span>
-<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">    31026798 :             return *mData;</span></span>
-<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">    31026798 :         }</span></span>
+<span id="L1052"><span class="lineNum">    1052</span> <span class="tlaGNC">    31025275 :         typename std::enable_if&lt;is_set, VT const&amp;&gt;::type getFirst() const noexcept {</span></span>
+<span id="L1053"><span class="lineNum">    1053</span> <span class="tlaGNC">    31025275 :             return *mData;</span></span>
+<span id="L1054"><span class="lineNum">    1054</span> <span class="tlaGNC">    31025275 :         }</span></span>
 <span id="L1055"><span class="lineNum">    1055</span>              : </span>
 <span id="L1056"><span class="lineNum">    1056</span>              :         template &lt;typename MT = mapped_type&gt;</span>
 <span id="L1057"><span class="lineNum">    1057</span>              :         ROBIN_HOOD(NODISCARD)</span>
@@ -1139,9 +1139,9 @@
 <span id="L1077"><span class="lineNum">    1077</span>              :     using Node = DataNode&lt;Self, IsFlat&gt;;</span>
 <span id="L1078"><span class="lineNum">    1078</span>              : </span>
 <span id="L1079"><span class="lineNum">    1079</span>              :     // helpers for insertKeyPrepareEmptySpot: extract first entry (only const required)</span>
-<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC">    32399882 :     ROBIN_HOOD(NODISCARD) key_type const&amp; getFirstConst(Node const&amp; n) const noexcept {</span></span>
-<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">    32399882 :         return n.getFirst();</span></span>
-<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaGNC">    32399882 :     }</span></span>
+<span id="L1080"><span class="lineNum">    1080</span> <span class="tlaGNC">    32407502 :     ROBIN_HOOD(NODISCARD) key_type const&amp; getFirstConst(Node const&amp; n) const noexcept {</span></span>
+<span id="L1081"><span class="lineNum">    1081</span> <span class="tlaGNC">    32407502 :         return n.getFirst();</span></span>
+<span id="L1082"><span class="lineNum">    1082</span> <span class="tlaGNC">    32407502 :     }</span></span>
 <span id="L1083"><span class="lineNum">    1083</span>              : </span>
 <span id="L1084"><span class="lineNum">    1084</span>              :     // in case we have void mapped_type, we are not using a pair, thus we just route k through.</span>
 <span id="L1085"><span class="lineNum">    1085</span>              :     // No need to disable this because it's just not used if not applicable.</span>
@@ -1225,10 +1225,10 @@
 <span id="L1163"><span class="lineNum">    1163</span> <span class="tlaGNC">       29727 :             auto const numElementsWithBuffer = m.calcNumElementsWithBuffer(m.mMask + 1);</span></span>
 <span id="L1164"><span class="lineNum">    1164</span> <span class="tlaGNC">   257040597 :             for (size_t idx = 0; idx &lt; numElementsWithBuffer; ++idx) {</span></span>
 <span id="L1165"><span class="lineNum">    1165</span> <span class="tlaGNC">   257010870 :                 if (0 != m.mInfo[idx]) {</span></span>
-<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaGNC">     7008282 :                     Node&amp; n = m.mKeyVals[idx];</span></span>
-<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaGNC">     7008282 :                     n.destroyDoNotDeallocate();</span></span>
-<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaGNC">     7008282 :                     n.~Node();</span></span>
-<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaGNC">     7008282 :                 }</span></span>
+<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaGNC">     7008113 :                     Node&amp; n = m.mKeyVals[idx];</span></span>
+<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaGNC">     7008113 :                     n.destroyDoNotDeallocate();</span></span>
+<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaGNC">     7008113 :                     n.~Node();</span></span>
+<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaGNC">     7008113 :                 }</span></span>
 <span id="L1170"><span class="lineNum">    1170</span> <span class="tlaGNC">   257010870 :             }</span></span>
 <span id="L1171"><span class="lineNum">    1171</span> <span class="tlaGNC">       29727 :         }</span></span>
 <span id="L1172"><span class="lineNum">    1172</span>              :     };</span>
@@ -1267,8 +1267,8 @@
 <span id="L1205"><span class="lineNum">    1205</span>              :             , mInfo(other.mInfo) {}</span>
 <span id="L1206"><span class="lineNum">    1206</span>              : </span>
 <span id="L1207"><span class="lineNum">    1207</span>              :         Iter(NodePtr valPtr, uint8_t const* infoPtr) noexcept</span>
-<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaGNC">   250974796 :             : mKeyVals(valPtr)</span></span>
-<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaGNC">   250974796 :             , mInfo(infoPtr) {}</span></span>
+<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaGNC">   250981086 :             : mKeyVals(valPtr)</span></span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaGNC">   250981086 :             , mInfo(infoPtr) {}</span></span>
 <span id="L1210"><span class="lineNum">    1210</span>              : </span>
 <span id="L1211"><span class="lineNum">    1211</span>              :         Iter(NodePtr valPtr, uint8_t const* infoPtr,</span>
 <span id="L1212"><span class="lineNum">    1212</span>              :              fast_forward_tag ROBIN_HOOD_UNUSED(tag) /*unused*/) noexcept</span>
@@ -1303,9 +1303,9 @@
 <span id="L1241"><span class="lineNum">    1241</span> <span class="tlaGNC">     3429005 :             return **mKeyVals;</span></span>
 <span id="L1242"><span class="lineNum">    1242</span> <span class="tlaGNC">     3429005 :         }</span></span>
 <span id="L1243"><span class="lineNum">    1243</span>              : </span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaGNC">   203503876 :         pointer operator-&gt;() const {</span></span>
-<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaGNC">   203503876 :             return &amp;**mKeyVals;</span></span>
-<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaGNC">   203503876 :         }</span></span>
+<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaGNC">   203503517 :         pointer operator-&gt;() const {</span></span>
+<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaGNC">   203503517 :             return &amp;**mKeyVals;</span></span>
+<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaGNC">   203503517 :         }</span></span>
 <span id="L1247"><span class="lineNum">    1247</span>              : </span>
 <span id="L1248"><span class="lineNum">    1248</span>              :         template &lt;bool O&gt;</span>
 <span id="L1249"><span class="lineNum">    1249</span> <span class="tlaGNC">    71230880 :         bool operator==(Iter&lt;O&gt; const&amp; o) const noexcept {</span></span>
@@ -1313,9 +1313,9 @@
 <span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC">    71230880 :         }</span></span>
 <span id="L1252"><span class="lineNum">    1252</span>              : </span>
 <span id="L1253"><span class="lineNum">    1253</span>              :         template &lt;bool O&gt;</span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">    55775098 :         bool operator!=(Iter&lt;O&gt; const&amp; o) const noexcept {</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">    55775098 :             return mKeyVals != o.mKeyVals;</span></span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">    55775098 :         }</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaGNC">    55774441 :         bool operator!=(Iter&lt;O&gt; const&amp; o) const noexcept {</span></span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaGNC">    55774441 :             return mKeyVals != o.mKeyVals;</span></span>
+<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaGNC">    55774441 :         }</span></span>
 <span id="L1257"><span class="lineNum">    1257</span>              : </span>
 <span id="L1258"><span class="lineNum">    1258</span>              :     private:</span>
 <span id="L1259"><span class="lineNum">    1259</span>              :         // fast forward to the next non-free info byte</span>
@@ -1363,53 +1363,53 @@
 <span id="L1301"><span class="lineNum">    1301</span>              :     // Lower bits are used for indexing into the array (2^n size)</span>
 <span id="L1302"><span class="lineNum">    1302</span>              :     // The upper 1-5 bits need to be a reasonable good hash, to save comparisons.</span>
 <span id="L1303"><span class="lineNum">    1303</span>              :     template &lt;typename HashKey&gt;</span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaGNC">   131924127 :     void keyToIdx(HashKey&amp;&amp; key, size_t* idx, InfoType* info) const {</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaGNC">   131931341 :     void keyToIdx(HashKey&amp;&amp; key, size_t* idx, InfoType* info) const {</span></span>
 <span id="L1305"><span class="lineNum">    1305</span>              :         // In addition to whatever hash is used, add another mul &amp; shift so we get better hashing.</span>
 <span id="L1306"><span class="lineNum">    1306</span>              :         // This serves as a bad hash prevention, if the given data is</span>
 <span id="L1307"><span class="lineNum">    1307</span>              :         // badly mixed.</span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">   131924127 :         auto h = static_cast&lt;uint64_t&gt;(WHash::operator()(key));</span></span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaGNC">   131931341 :         auto h = static_cast&lt;uint64_t&gt;(WHash::operator()(key));</span></span>
 <span id="L1309"><span class="lineNum">    1309</span>              : </span>
-<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">   131924127 :         h *= mHashMultiplier;</span></span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaGNC">   131924127 :         h ^= h &gt;&gt; 33U;</span></span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">   131931341 :         h *= mHashMultiplier;</span></span>
+<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaGNC">   131931341 :         h ^= h &gt;&gt; 33U;</span></span>
 <span id="L1312"><span class="lineNum">    1312</span>              : </span>
 <span id="L1313"><span class="lineNum">    1313</span>              :         // the lower InitialInfoNumBits are reserved for info.</span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">   131924127 :         *info = mInfoInc + static_cast&lt;InfoType&gt;((h &amp; InfoMask) &gt;&gt; mInfoHashShift);</span></span>
-<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaGNC">   131924127 :         *idx = (static_cast&lt;size_t&gt;(h) &gt;&gt; InitialInfoNumBits) &amp; mMask;</span></span>
-<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaGNC">   131924127 :     }</span></span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">   131931341 :         *info = mInfoInc + static_cast&lt;InfoType&gt;((h &amp; InfoMask) &gt;&gt; mInfoHashShift);</span></span>
+<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaGNC">   131931341 :         *idx = (static_cast&lt;size_t&gt;(h) &gt;&gt; InitialInfoNumBits) &amp; mMask;</span></span>
+<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaGNC">   131931341 :     }</span></span>
 <span id="L1317"><span class="lineNum">    1317</span>              : </span>
 <span id="L1318"><span class="lineNum">    1318</span>              :     // forwards the index by one, wrapping around at the end</span>
-<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaGNC">    70832769 :     void next(InfoType* info, size_t* idx) const noexcept {</span></span>
-<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaGNC">    70832769 :         *idx = *idx + 1;</span></span>
-<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaGNC">    70832769 :         *info += mInfoInc;</span></span>
-<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaGNC">    70832769 :     }</span></span>
+<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaGNC">    70910324 :     void next(InfoType* info, size_t* idx) const noexcept {</span></span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaGNC">    70910324 :         *idx = *idx + 1;</span></span>
+<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaGNC">    70910324 :         *info += mInfoInc;</span></span>
+<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaGNC">    70910324 :     }</span></span>
 <span id="L1323"><span class="lineNum">    1323</span>              : </span>
-<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaGNC">    32434114 :     void nextWhileLess(InfoType* info, size_t* idx) const noexcept {</span></span>
+<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaGNC">    32441732 :     void nextWhileLess(InfoType* info, size_t* idx) const noexcept {</span></span>
 <span id="L1325"><span class="lineNum">    1325</span>              :         // unrolling this by hand did not bring any speedups.</span>
-<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaGNC">    34104748 :         while (*info &lt; mInfo[*idx]) {</span></span>
-<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaGNC">     1670634 :             next(info, idx);</span></span>
-<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaGNC">     1670634 :         }</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">    32434114 :     }</span></span>
+<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaGNC">    34120925 :         while (*info &lt; mInfo[*idx]) {</span></span>
+<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaGNC">     1679193 :             next(info, idx);</span></span>
+<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaGNC">     1679193 :         }</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">    32441732 :     }</span></span>
 <span id="L1330"><span class="lineNum">    1330</span>              : </span>
 <span id="L1331"><span class="lineNum">    1331</span>              :     // Shift everything up by one element. Tries to move stuff around.</span>
 <span id="L1332"><span class="lineNum">    1332</span>              :     void</span>
 <span id="L1333"><span class="lineNum">    1333</span>              :     shiftUp(size_t startIdx,</span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaGNC">      536972 :             size_t const insertion_idx) noexcept(std::is_nothrow_move_assignable&lt;Node&gt;::value) {</span></span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">      536972 :         auto idx = startIdx;</span></span>
-<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaGNC">      536972 :         ::new (static_cast&lt;void*&gt;(mKeyVals + idx)) Node(std::move(mKeyVals[idx - 1]));</span></span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">     2455943 :         while (--idx != insertion_idx) {</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">     1918971 :             mKeyVals[idx] = std::move(mKeyVals[idx - 1]);</span></span>
-<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaGNC">     1918971 :         }</span></span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaGNC">      537223 :             size_t const insertion_idx) noexcept(std::is_nothrow_move_assignable&lt;Node&gt;::value) {</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">      537223 :         auto idx = startIdx;</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaGNC">      537223 :         ::new (static_cast&lt;void*&gt;(mKeyVals + idx)) Node(std::move(mKeyVals[idx - 1]));</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">     2447284 :         while (--idx != insertion_idx) {</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">     1910061 :             mKeyVals[idx] = std::move(mKeyVals[idx - 1]);</span></span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaGNC">     1910061 :         }</span></span>
 <span id="L1340"><span class="lineNum">    1340</span>              : </span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">      536972 :         idx = startIdx;</span></span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">     2992915 :         while (idx != insertion_idx) {</span></span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">     2455943 :             ROBIN_HOOD_COUNT(shiftUp)</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC">     2455943 :             mInfo[idx] = static_cast&lt;uint8_t&gt;(mInfo[idx - 1] + mInfoInc);</span></span>
-<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaGNC">     2455943 :             if (ROBIN_HOOD_UNLIKELY(mInfo[idx] + mInfoInc &gt; 0xFF)) {</span></span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">         524 :                 mMaxNumElementsAllowed = 0;</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">         524 :             }</span></span>
-<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaGNC">     2455943 :             --idx;</span></span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaGNC">     2455943 :         }</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaGNC">      536972 :     }</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaGNC">      537223 :         idx = startIdx;</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">     2984507 :         while (idx != insertion_idx) {</span></span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">     2447284 :             ROBIN_HOOD_COUNT(shiftUp)</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC">     2447284 :             mInfo[idx] = static_cast&lt;uint8_t&gt;(mInfo[idx - 1] + mInfoInc);</span></span>
+<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaGNC">     2447284 :             if (ROBIN_HOOD_UNLIKELY(mInfo[idx] + mInfoInc &gt; 0xFF)) {</span></span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">         538 :                 mMaxNumElementsAllowed = 0;</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">         538 :             }</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaGNC">     2447284 :             --idx;</span></span>
+<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaGNC">     2447284 :         }</span></span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaGNC">      537223 :     }</span></span>
 <span id="L1351"><span class="lineNum">    1351</span>              : </span>
 <span id="L1352"><span class="lineNum">    1352</span> <span class="tlaGNC">        5065 :     void shiftDown(size_t idx) noexcept(std::is_nothrow_move_assignable&lt;Node&gt;::value) {</span></span>
 <span id="L1353"><span class="lineNum">    1353</span>              :         // until we find one that is either empty or has zero offset.</span>
@@ -1434,30 +1434,30 @@
 <span id="L1372"><span class="lineNum">    1372</span>              :     // copy of find(), except that it returns iterator instead of const_iterator.</span>
 <span id="L1373"><span class="lineNum">    1373</span>              :     template &lt;typename Other&gt;</span>
 <span id="L1374"><span class="lineNum">    1374</span>              :     ROBIN_HOOD(NODISCARD)</span>
-<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaGNC">    98351904 :     size_t findIdx(Other const&amp; key) const {</span></span>
-<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaGNC">    98351904 :         size_t idx{};</span></span>
-<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">    98351904 :         InfoType info{};</span></span>
-<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">    98351904 :         keyToIdx(key, &amp;idx, &amp;info);</span></span>
+<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaGNC">    98351497 :     size_t findIdx(Other const&amp; key) const {</span></span>
+<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaGNC">    98351497 :         size_t idx{};</span></span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaGNC">    98351497 :         InfoType info{};</span></span>
+<span id="L1378"><span class="lineNum">    1378</span> <span class="tlaGNC">    98351497 :         keyToIdx(key, &amp;idx, &amp;info);</span></span>
 <span id="L1379"><span class="lineNum">    1379</span>              : </span>
-<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaGNC">   116116846 :         do {</span></span>
+<span id="L1380"><span class="lineNum">    1380</span> <span class="tlaGNC">   116143674 :         do {</span></span>
 <span id="L1381"><span class="lineNum">    1381</span>              :             // unrolling this twice gives a bit of a speedup. More unrolling did not help.</span>
-<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaGNC">   116116846 :             if (info == mInfo[idx] &amp;&amp;</span></span>
-<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaGNC">    69682001 :                 ROBIN_HOOD_LIKELY(WKeyEqual::operator()(key, mKeyVals[idx].getFirst()))) {</span></span>
-<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaGNC">    68331391 :                 return idx;</span></span>
-<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">    68331391 :             }</span></span>
-<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaGNC">    47785455 :             next(&amp;info, &amp;idx);</span></span>
-<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">    47785455 :             if (info == mInfo[idx] &amp;&amp;</span></span>
-<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">    29479183 :                 ROBIN_HOOD_LIKELY(WKeyEqual::operator()(key, mKeyVals[idx].getFirst()))) {</span></span>
-<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaGNC">    28935392 :                 return idx;</span></span>
-<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">    28935392 :             }</span></span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaGNC">    18850063 :             next(&amp;info, &amp;idx);</span></span>
-<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaGNC">    18850063 :         } while (info &lt;= mInfo[idx]);</span></span>
+<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaGNC">   116143674 :             if (info == mInfo[idx] &amp;&amp;</span></span>
+<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaGNC">    69668441 :                 ROBIN_HOOD_LIKELY(WKeyEqual::operator()(key, mKeyVals[idx].getFirst()))) {</span></span>
+<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaGNC">    68313458 :                 return idx;</span></span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">    68313458 :             }</span></span>
+<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaGNC">    47830216 :             next(&amp;info, &amp;idx);</span></span>
+<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">    47830216 :             if (info == mInfo[idx] &amp;&amp;</span></span>
+<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">    29494656 :                 ROBIN_HOOD_LIKELY(WKeyEqual::operator()(key, mKeyVals[idx].getFirst()))) {</span></span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaGNC">    28947529 :                 return idx;</span></span>
+<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaGNC">    28947529 :             }</span></span>
+<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaGNC">    18882687 :             next(&amp;info, &amp;idx);</span></span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaGNC">    18882687 :         } while (info &lt;= mInfo[idx]);</span></span>
 <span id="L1393"><span class="lineNum">    1393</span>              : </span>
 <span id="L1394"><span class="lineNum">    1394</span>              :         // nothing found!</span>
-<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaGNC">     1085121 :         return mMask == 0 ? 0</span></span>
-<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaGNC">     1085121 :                           : static_cast&lt;size_t&gt;(std::distance(</span></span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaGNC">     1058292 :                                 mKeyVals, reinterpret_cast_no_cast_align_warning&lt;Node*&gt;(mInfo)));</span></span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaGNC">    98351904 :     }</span></span>
+<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaGNC">     1090510 :         return mMask == 0 ? 0</span></span>
+<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaGNC">     1090510 :                           : static_cast&lt;size_t&gt;(std::distance(</span></span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaGNC">     1063681 :                                 mKeyVals, reinterpret_cast_no_cast_align_warning&lt;Node*&gt;(mInfo)));</span></span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaGNC">    98351497 :     }</span></span>
 <span id="L1399"><span class="lineNum">    1399</span>              : </span>
 <span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC tlaBgUNC">           0 :     void cloneData(const Table&amp; o) {</span></span>
 <span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :         Cloner&lt;Table, IsFlat &amp;&amp; ROBIN_HOOD_IS_TRIVIALLY_COPYABLE(Node)&gt;()(o, *this);</span></span>
@@ -1477,10 +1477,10 @@
 <span id="L1415"><span class="lineNum">    1415</span> <span class="tlaGNC">     1138111 :         keyToIdx(keyval.getFirst(), &amp;idx, &amp;info);</span></span>
 <span id="L1416"><span class="lineNum">    1416</span>              : </span>
 <span id="L1417"><span class="lineNum">    1417</span>              :         // skip forward. Use &lt;= because we are certain that the element is not there.</span>
-<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaGNC">     1510390 :         while (info &lt;= mInfo[idx]) {</span></span>
-<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaGNC">      372279 :             idx = idx + 1;</span></span>
-<span id="L1420"><span class="lineNum">    1420</span> <span class="tlaGNC">      372279 :             info += mInfoInc;</span></span>
-<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaGNC">      372279 :         }</span></span>
+<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaGNC">     1510675 :         while (info &lt;= mInfo[idx]) {</span></span>
+<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaGNC">      372564 :             idx = idx + 1;</span></span>
+<span id="L1420"><span class="lineNum">    1420</span> <span class="tlaGNC">      372564 :             info += mInfoInc;</span></span>
+<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaGNC">      372564 :         }</span></span>
 <span id="L1422"><span class="lineNum">    1422</span>              : </span>
 <span id="L1423"><span class="lineNum">    1423</span>              :         // key not found, so we are now exactly where we want to insert it.</span>
 <span id="L1424"><span class="lineNum">    1424</span> <span class="tlaGNC">     1138111 :         auto const insertion_idx = idx;</span></span>
@@ -1490,17 +1490,17 @@
 <span id="L1428"><span class="lineNum">    1428</span> <span class="tlaGNC">          22 :         }</span></span>
 <span id="L1429"><span class="lineNum">    1429</span>              : </span>
 <span id="L1430"><span class="lineNum">    1430</span>              :         // find an empty spot</span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaGNC">     1140831 :         while (0 != mInfo[idx]) {</span></span>
-<span id="L1432"><span class="lineNum">    1432</span> <span class="tlaGNC">        2720 :             next(&amp;info, &amp;idx);</span></span>
-<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaGNC">        2720 :         }</span></span>
+<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaGNC">     1141061 :         while (0 != mInfo[idx]) {</span></span>
+<span id="L1432"><span class="lineNum">    1432</span> <span class="tlaGNC">        2950 :             next(&amp;info, &amp;idx);</span></span>
+<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaGNC">        2950 :         }</span></span>
 <span id="L1434"><span class="lineNum">    1434</span>              : </span>
 <span id="L1435"><span class="lineNum">    1435</span> <span class="tlaGNC">     1138111 :         auto&amp; l = mKeyVals[insertion_idx];</span></span>
 <span id="L1436"><span class="lineNum">    1436</span> <span class="tlaGNC">     1138111 :         if (idx == insertion_idx) {</span></span>
-<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaGNC">     1135428 :             ::new (static_cast&lt;void*&gt;(&amp;l)) Node(std::move(keyval));</span></span>
-<span id="L1438"><span class="lineNum">    1438</span> <span class="tlaGNC">     1135428 :         } else {</span></span>
-<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaGNC">        2683 :             shiftUp(idx, insertion_idx);</span></span>
-<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaGNC">        2683 :             l = std::move(keyval);</span></span>
-<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaGNC">        2683 :         }</span></span>
+<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaGNC">     1135190 :             ::new (static_cast&lt;void*&gt;(&amp;l)) Node(std::move(keyval));</span></span>
+<span id="L1438"><span class="lineNum">    1438</span> <span class="tlaGNC">     1135190 :         } else {</span></span>
+<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaGNC">        2921 :             shiftUp(idx, insertion_idx);</span></span>
+<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaGNC">        2921 :             l = std::move(keyval);</span></span>
+<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaGNC">        2921 :         }</span></span>
 <span id="L1442"><span class="lineNum">    1442</span>              : </span>
 <span id="L1443"><span class="lineNum">    1443</span>              :         // put at empty spot</span>
 <span id="L1444"><span class="lineNum">    1444</span> <span class="tlaGNC">     1138111 :         mInfo[insertion_idx] = insertion_info;</span></span>
@@ -1811,32 +1811,32 @@
 <span id="L1749"><span class="lineNum">    1749</span>              :     }</span>
 <span id="L1750"><span class="lineNum">    1750</span>              : </span>
 <span id="L1751"><span class="lineNum">    1751</span>              :     template &lt;typename... Args&gt;</span>
-<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC">    32399882 :     std::pair&lt;iterator, bool&gt; emplace(Args&amp;&amp;... args) {</span></span>
-<span id="L1753"><span class="lineNum">    1753</span> <span class="tlaGNC">    32399882 :         ROBIN_HOOD_TRACE(this)</span></span>
-<span id="L1754"><span class="lineNum">    1754</span> <span class="tlaGNC">    32399882 :         Node n{*this, std::forward&lt;Args&gt;(args)...};</span></span>
-<span id="L1755"><span class="lineNum">    1755</span> <span class="tlaGNC">    32399882 :         auto idxAndState = insertKeyPrepareEmptySpot(getFirstConst(n));</span></span>
-<span id="L1756"><span class="lineNum">    1756</span> <span class="tlaGNC">    32399882 :         switch (idxAndState.second) {</span></span>
-<span id="L1757"><span class="lineNum">    1757</span> <span class="tlaGNC">    25386748 :         case InsertionState::key_found:</span></span>
-<span id="L1758"><span class="lineNum">    1758</span> <span class="tlaGNC">    25386748 :             n.destroy(*this);</span></span>
-<span id="L1759"><span class="lineNum">    1759</span> <span class="tlaGNC">    25386748 :             break;</span></span>
+<span id="L1752"><span class="lineNum">    1752</span> <span class="tlaGNC">    32407502 :     std::pair&lt;iterator, bool&gt; emplace(Args&amp;&amp;... args) {</span></span>
+<span id="L1753"><span class="lineNum">    1753</span> <span class="tlaGNC">    32407502 :         ROBIN_HOOD_TRACE(this)</span></span>
+<span id="L1754"><span class="lineNum">    1754</span> <span class="tlaGNC">    32407502 :         Node n{*this, std::forward&lt;Args&gt;(args)...};</span></span>
+<span id="L1755"><span class="lineNum">    1755</span> <span class="tlaGNC">    32407502 :         auto idxAndState = insertKeyPrepareEmptySpot(getFirstConst(n));</span></span>
+<span id="L1756"><span class="lineNum">    1756</span> <span class="tlaGNC">    32407502 :         switch (idxAndState.second) {</span></span>
+<span id="L1757"><span class="lineNum">    1757</span> <span class="tlaGNC">    25394537 :         case InsertionState::key_found:</span></span>
+<span id="L1758"><span class="lineNum">    1758</span> <span class="tlaGNC">    25394537 :             n.destroy(*this);</span></span>
+<span id="L1759"><span class="lineNum">    1759</span> <span class="tlaGNC">    25394537 :             break;</span></span>
 <span id="L1760"><span class="lineNum">    1760</span>              : </span>
-<span id="L1761"><span class="lineNum">    1761</span> <span class="tlaGNC">     6479689 :         case InsertionState::new_node:</span></span>
-<span id="L1762"><span class="lineNum">    1762</span> <span class="tlaGNC">     6479689 :             ::new (static_cast&lt;void*&gt;(&amp;mKeyVals[idxAndState.first])) Node(*this, std::move(n));</span></span>
-<span id="L1763"><span class="lineNum">    1763</span> <span class="tlaGNC">     6479689 :             break;</span></span>
+<span id="L1761"><span class="lineNum">    1761</span> <span class="tlaGNC">     6479507 :         case InsertionState::new_node:</span></span>
+<span id="L1762"><span class="lineNum">    1762</span> <span class="tlaGNC">     6479507 :             ::new (static_cast&lt;void*&gt;(&amp;mKeyVals[idxAndState.first])) Node(*this, std::move(n));</span></span>
+<span id="L1763"><span class="lineNum">    1763</span> <span class="tlaGNC">     6479507 :             break;</span></span>
 <span id="L1764"><span class="lineNum">    1764</span>              : </span>
-<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">      533445 :         case InsertionState::overwrite_node:</span></span>
-<span id="L1766"><span class="lineNum">    1766</span> <span class="tlaGNC">      533445 :             mKeyVals[idxAndState.first] = std::move(n);</span></span>
-<span id="L1767"><span class="lineNum">    1767</span> <span class="tlaGNC">      533445 :             break;</span></span>
+<span id="L1765"><span class="lineNum">    1765</span> <span class="tlaGNC">      533458 :         case InsertionState::overwrite_node:</span></span>
+<span id="L1766"><span class="lineNum">    1766</span> <span class="tlaGNC">      533458 :             mKeyVals[idxAndState.first] = std::move(n);</span></span>
+<span id="L1767"><span class="lineNum">    1767</span> <span class="tlaGNC">      533458 :             break;</span></span>
 <span id="L1768"><span class="lineNum">    1768</span>              : </span>
 <span id="L1769"><span class="lineNum">    1769</span> <span class="tlaUNC tlaBgUNC">           0 :         case InsertionState::overflow_error:</span></span>
 <span id="L1770"><span class="lineNum">    1770</span> <span class="tlaUNC">           0 :             n.destroy(*this);</span></span>
 <span id="L1771"><span class="lineNum">    1771</span> <span class="tlaUNC">           0 :             throwOverflowError();</span></span>
 <span id="L1772"><span class="lineNum">    1772</span> <span class="tlaUNC">           0 :             break;</span></span>
-<span id="L1773"><span class="lineNum">    1773</span> <span class="tlaGNC tlaBgGNC">    32399882 :         }</span></span>
+<span id="L1773"><span class="lineNum">    1773</span> <span class="tlaGNC tlaBgGNC">    32407502 :         }</span></span>
 <span id="L1774"><span class="lineNum">    1774</span>              : </span>
-<span id="L1775"><span class="lineNum">    1775</span> <span class="tlaGNC">    32399882 :         return std::make_pair(iterator(mKeyVals + idxAndState.first, mInfo + idxAndState.first),</span></span>
-<span id="L1776"><span class="lineNum">    1776</span> <span class="tlaGNC">    32399882 :                               InsertionState::key_found != idxAndState.second);</span></span>
-<span id="L1777"><span class="lineNum">    1777</span> <span class="tlaGNC">    32399882 :     }</span></span>
+<span id="L1775"><span class="lineNum">    1775</span> <span class="tlaGNC">    32407502 :         return std::make_pair(iterator(mKeyVals + idxAndState.first, mInfo + idxAndState.first),</span></span>
+<span id="L1776"><span class="lineNum">    1776</span> <span class="tlaGNC">    32407502 :                               InsertionState::key_found != idxAndState.second);</span></span>
+<span id="L1777"><span class="lineNum">    1777</span> <span class="tlaGNC">    32407502 :     }</span></span>
 <span id="L1778"><span class="lineNum">    1778</span>              : </span>
 <span id="L1779"><span class="lineNum">    1779</span>              :     template &lt;typename... Args&gt;</span>
 <span id="L1780"><span class="lineNum">    1780</span>              :     iterator emplace_hint(const_iterator position, Args&amp;&amp;... args) {</span>
@@ -1898,9 +1898,9 @@
 <span id="L1836"><span class="lineNum">    1836</span>              :         return emplace(keyval).first;</span>
 <span id="L1837"><span class="lineNum">    1837</span>              :     }</span>
 <span id="L1838"><span class="lineNum">    1838</span>              : </span>
-<span id="L1839"><span class="lineNum">    1839</span> <span class="tlaGNC tlaBgGNC">     2400061 :     std::pair&lt;iterator, bool&gt; insert(value_type&amp;&amp; keyval) {</span></span>
-<span id="L1840"><span class="lineNum">    1840</span> <span class="tlaGNC">     2400061 :         return emplace(std::move(keyval));</span></span>
-<span id="L1841"><span class="lineNum">    1841</span> <span class="tlaGNC">     2400061 :     }</span></span>
+<span id="L1839"><span class="lineNum">    1839</span> <span class="tlaGNC tlaBgGNC">     2398538 :     std::pair&lt;iterator, bool&gt; insert(value_type&amp;&amp; keyval) {</span></span>
+<span id="L1840"><span class="lineNum">    1840</span> <span class="tlaGNC">     2398538 :         return emplace(std::move(keyval));</span></span>
+<span id="L1841"><span class="lineNum">    1841</span> <span class="tlaGNC">     2398538 :     }</span></span>
 <span id="L1842"><span class="lineNum">    1842</span>              : </span>
 <span id="L1843"><span class="lineNum">    1843</span>              :     iterator insert(const_iterator hint, value_type&amp;&amp; keyval) {</span>
 <span id="L1844"><span class="lineNum">    1844</span>              :         (void)hint;</span>
@@ -1986,11 +1986,11 @@
 <span id="L1924"><span class="lineNum">    1924</span>              :         return const_iterator{mKeyVals + idx, mInfo + idx};</span>
 <span id="L1925"><span class="lineNum">    1925</span>              :     }</span>
 <span id="L1926"><span class="lineNum">    1926</span>              : </span>
-<span id="L1927"><span class="lineNum">    1927</span> <span class="tlaGNC">    27787515 :     iterator find(const key_type&amp; key) {</span></span>
-<span id="L1928"><span class="lineNum">    1928</span> <span class="tlaGNC">    27787515 :         ROBIN_HOOD_TRACE(this)</span></span>
-<span id="L1929"><span class="lineNum">    1929</span> <span class="tlaGNC">    27787515 :         const size_t idx = findIdx(key);</span></span>
-<span id="L1930"><span class="lineNum">    1930</span> <span class="tlaGNC">    27787515 :         return iterator{mKeyVals + idx, mInfo + idx};</span></span>
-<span id="L1931"><span class="lineNum">    1931</span> <span class="tlaGNC">    27787515 :     }</span></span>
+<span id="L1927"><span class="lineNum">    1927</span> <span class="tlaGNC">    27787151 :     iterator find(const key_type&amp; key) {</span></span>
+<span id="L1928"><span class="lineNum">    1928</span> <span class="tlaGNC">    27787151 :         ROBIN_HOOD_TRACE(this)</span></span>
+<span id="L1929"><span class="lineNum">    1929</span> <span class="tlaGNC">    27787151 :         const size_t idx = findIdx(key);</span></span>
+<span id="L1930"><span class="lineNum">    1930</span> <span class="tlaGNC">    27787151 :         return iterator{mKeyVals + idx, mInfo + idx};</span></span>
+<span id="L1931"><span class="lineNum">    1931</span> <span class="tlaGNC">    27787151 :     }</span></span>
 <span id="L1932"><span class="lineNum">    1932</span>              : </span>
 <span id="L1933"><span class="lineNum">    1933</span>              :     template &lt;typename OtherKey&gt;</span>
 <span id="L1934"><span class="lineNum">    1934</span>              :     iterator find(const OtherKey&amp; key, is_transparent_tag /*unused*/) {</span>
@@ -2025,12 +2025,12 @@
 <span id="L1963"><span class="lineNum">    1963</span> <span class="tlaGNC">          15 :         return const_iterator(mKeyVals, mInfo, fast_forward_tag{});</span></span>
 <span id="L1964"><span class="lineNum">    1964</span> <span class="tlaGNC">        6736 :     }</span></span>
 <span id="L1965"><span class="lineNum">    1965</span>              : </span>
-<span id="L1966"><span class="lineNum">    1966</span> <span class="tlaGNC">    49618602 :     iterator end() {</span></span>
-<span id="L1967"><span class="lineNum">    1967</span> <span class="tlaGNC">    49618602 :         ROBIN_HOOD_TRACE(this)</span></span>
+<span id="L1966"><span class="lineNum">    1966</span> <span class="tlaGNC">    49617971 :     iterator end() {</span></span>
+<span id="L1967"><span class="lineNum">    1967</span> <span class="tlaGNC">    49617971 :         ROBIN_HOOD_TRACE(this)</span></span>
 <span id="L1968"><span class="lineNum">    1968</span>              :         // no need to supply valid info pointer: end() must not be dereferenced, and only node</span>
 <span id="L1969"><span class="lineNum">    1969</span>              :         // pointer is compared.</span>
-<span id="L1970"><span class="lineNum">    1970</span> <span class="tlaGNC">    49618602 :         return iterator{reinterpret_cast_no_cast_align_warning&lt;Node*&gt;(mInfo), nullptr};</span></span>
-<span id="L1971"><span class="lineNum">    1971</span> <span class="tlaGNC">    49618602 :     }</span></span>
+<span id="L1970"><span class="lineNum">    1970</span> <span class="tlaGNC">    49617971 :         return iterator{reinterpret_cast_no_cast_align_warning&lt;Node*&gt;(mInfo), nullptr};</span></span>
+<span id="L1971"><span class="lineNum">    1971</span> <span class="tlaGNC">    49617971 :     }</span></span>
 <span id="L1972"><span class="lineNum">    1972</span> <span class="tlaGNC">    70597933 :     const_iterator end() const { // NOLINT(modernize-use-nodiscard)</span></span>
 <span id="L1973"><span class="lineNum">    1973</span> <span class="tlaGNC">    70597933 :         ROBIN_HOOD_TRACE(this)</span></span>
 <span id="L1974"><span class="lineNum">    1974</span> <span class="tlaGNC">    70597933 :         return cend();</span></span>
@@ -2120,10 +2120,10 @@
 <span id="L2058"><span class="lineNum">    2058</span>              :         }</span>
 <span id="L2059"><span class="lineNum">    2059</span>              :     }</span>
 <span id="L2060"><span class="lineNum">    2060</span>              : </span>
-<span id="L2061"><span class="lineNum">    2061</span> <span class="tlaGNC">     1239443 :     size_type size() const noexcept { // NOLINT(modernize-use-nodiscard)</span></span>
-<span id="L2062"><span class="lineNum">    2062</span> <span class="tlaGNC">     1239443 :         ROBIN_HOOD_TRACE(this)</span></span>
-<span id="L2063"><span class="lineNum">    2063</span> <span class="tlaGNC">     1239443 :         return mNumElements;</span></span>
-<span id="L2064"><span class="lineNum">    2064</span> <span class="tlaGNC">     1239443 :     }</span></span>
+<span id="L2061"><span class="lineNum">    2061</span> <span class="tlaGNC">     1248586 :     size_type size() const noexcept { // NOLINT(modernize-use-nodiscard)</span></span>
+<span id="L2062"><span class="lineNum">    2062</span> <span class="tlaGNC">     1248586 :         ROBIN_HOOD_TRACE(this)</span></span>
+<span id="L2063"><span class="lineNum">    2063</span> <span class="tlaGNC">     1248586 :         return mNumElements;</span></span>
+<span id="L2064"><span class="lineNum">    2064</span> <span class="tlaGNC">     1248586 :     }</span></span>
 <span id="L2065"><span class="lineNum">    2065</span>              : </span>
 <span id="L2066"><span class="lineNum">    2066</span>              :     size_type max_size() const noexcept { // NOLINT(modernize-use-nodiscard)</span>
 <span id="L2067"><span class="lineNum">    2067</span>              :         ROBIN_HOOD_TRACE(this)</span>
@@ -2151,14 +2151,14 @@
 <span id="L2089"><span class="lineNum">    2089</span>              :         return mMask;</span>
 <span id="L2090"><span class="lineNum">    2090</span>              :     }</span>
 <span id="L2091"><span class="lineNum">    2091</span>              : </span>
-<span id="L2092"><span class="lineNum">    2092</span> <span class="tlaGNC">      454671 :     ROBIN_HOOD(NODISCARD) size_t calcMaxNumElementsAllowed(size_t maxElements) const noexcept {</span></span>
-<span id="L2093"><span class="lineNum">    2093</span> <span class="tlaGNC">      454671 :         if (ROBIN_HOOD_LIKELY(maxElements &lt;= (std::numeric_limits&lt;size_t&gt;::max)() / 100)) {</span></span>
-<span id="L2094"><span class="lineNum">    2094</span> <span class="tlaGNC">      454671 :             return maxElements * MaxLoadFactor100 / 100;</span></span>
-<span id="L2095"><span class="lineNum">    2095</span> <span class="tlaGNC">      454671 :         }</span></span>
+<span id="L2092"><span class="lineNum">    2092</span> <span class="tlaGNC">      454665 :     ROBIN_HOOD(NODISCARD) size_t calcMaxNumElementsAllowed(size_t maxElements) const noexcept {</span></span>
+<span id="L2093"><span class="lineNum">    2093</span> <span class="tlaGNC">      454665 :         if (ROBIN_HOOD_LIKELY(maxElements &lt;= (std::numeric_limits&lt;size_t&gt;::max)() / 100)) {</span></span>
+<span id="L2094"><span class="lineNum">    2094</span> <span class="tlaGNC">      454665 :             return maxElements * MaxLoadFactor100 / 100;</span></span>
+<span id="L2095"><span class="lineNum">    2095</span> <span class="tlaGNC">      454665 :         }</span></span>
 <span id="L2096"><span class="lineNum">    2096</span>              : </span>
 <span id="L2097"><span class="lineNum">    2097</span>              :         // we might be a bit inprecise, but since maxElements is quite large that doesn't matter</span>
 <span id="L2098"><span class="lineNum">    2098</span> <span class="tlaUNC tlaBgUNC">           0 :         return (maxElements / 100) * MaxLoadFactor100;</span></span>
-<span id="L2099"><span class="lineNum">    2099</span> <span class="tlaGNC tlaBgGNC">      454671 :     }</span></span>
+<span id="L2099"><span class="lineNum">    2099</span> <span class="tlaGNC tlaBgGNC">      454665 :     }</span></span>
 <span id="L2100"><span class="lineNum">    2100</span>              : </span>
 <span id="L2101"><span class="lineNum">    2101</span> <span class="tlaGNC">       30490 :     ROBIN_HOOD(NODISCARD) size_t calcNumBytesInfo(size_t numElements) const noexcept {</span></span>
 <span id="L2102"><span class="lineNum">    2102</span>              :         // we add a uint64_t, which houses the sentinel (first byte) and padding so we can load</span>
@@ -2167,10 +2167,10 @@
 <span id="L2105"><span class="lineNum">    2105</span> <span class="tlaGNC">       30490 :     }</span></span>
 <span id="L2106"><span class="lineNum">    2106</span>              : </span>
 <span id="L2107"><span class="lineNum">    2107</span>              :     ROBIN_HOOD(NODISCARD)</span>
-<span id="L2108"><span class="lineNum">    2108</span> <span class="tlaGNC">       90215 :     size_t calcNumElementsWithBuffer(size_t numElements) const noexcept {</span></span>
-<span id="L2109"><span class="lineNum">    2109</span> <span class="tlaGNC">       90215 :         auto maxNumElementsAllowed = calcMaxNumElementsAllowed(numElements);</span></span>
-<span id="L2110"><span class="lineNum">    2110</span> <span class="tlaGNC">       90215 :         return numElements + (std::min)(maxNumElementsAllowed, (static_cast&lt;size_t&gt;(0xFF)));</span></span>
-<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaGNC">       90215 :     }</span></span>
+<span id="L2108"><span class="lineNum">    2108</span> <span class="tlaGNC">       90213 :     size_t calcNumElementsWithBuffer(size_t numElements) const noexcept {</span></span>
+<span id="L2109"><span class="lineNum">    2109</span> <span class="tlaGNC">       90213 :         auto maxNumElementsAllowed = calcMaxNumElementsAllowed(numElements);</span></span>
+<span id="L2110"><span class="lineNum">    2110</span> <span class="tlaGNC">       90213 :         return numElements + (std::min)(maxNumElementsAllowed, (static_cast&lt;size_t&gt;(0xFF)));</span></span>
+<span id="L2111"><span class="lineNum">    2111</span> <span class="tlaGNC">       90213 :     }</span></span>
 <span id="L2112"><span class="lineNum">    2112</span>              : </span>
 <span id="L2113"><span class="lineNum">    2113</span>              :     // calculation only allowed for 2^n values</span>
 <span id="L2114"><span class="lineNum">    2114</span> <span class="tlaGNC">       30479 :     ROBIN_HOOD(NODISCARD) size_t calcNumBytesTotal(size_t numElements) const {</span></span>
@@ -2362,98 +2362,98 @@
 <span id="L2300"><span class="lineNum">    2300</span>              :     // This potentially shifts nodes out of the way, updates mInfo and number of inserted</span>
 <span id="L2301"><span class="lineNum">    2301</span>              :     // elements, so the only operation left to do is create/assign a new node at that spot.</span>
 <span id="L2302"><span class="lineNum">    2302</span>              :     template &lt;typename OtherKey&gt;</span>
-<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaGNC">    32433396 :     std::pair&lt;size_t, InsertionState&gt; insertKeyPrepareEmptySpot(OtherKey&amp;&amp; key) {</span></span>
-<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaGNC">    32434114 :         for (int i = 0; i &lt; 256; ++i) {</span></span>
-<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaGNC">    32434114 :             size_t idx{};</span></span>
-<span id="L2306"><span class="lineNum">    2306</span> <span class="tlaGNC">    32434114 :             InfoType info{};</span></span>
-<span id="L2307"><span class="lineNum">    2307</span> <span class="tlaGNC">    32434114 :             keyToIdx(key, &amp;idx, &amp;info);</span></span>
-<span id="L2308"><span class="lineNum">    2308</span> <span class="tlaGNC">    32434114 :             nextWhileLess(&amp;info, &amp;idx);</span></span>
+<span id="L2303"><span class="lineNum">    2303</span> <span class="tlaGNC">    32441016 :     std::pair&lt;size_t, InsertionState&gt; insertKeyPrepareEmptySpot(OtherKey&amp;&amp; key) {</span></span>
+<span id="L2304"><span class="lineNum">    2304</span> <span class="tlaGNC">    32441732 :         for (int i = 0; i &lt; 256; ++i) {</span></span>
+<span id="L2305"><span class="lineNum">    2305</span> <span class="tlaGNC">    32441732 :             size_t idx{};</span></span>
+<span id="L2306"><span class="lineNum">    2306</span> <span class="tlaGNC">    32441732 :             InfoType info{};</span></span>
+<span id="L2307"><span class="lineNum">    2307</span> <span class="tlaGNC">    32441732 :             keyToIdx(key, &amp;idx, &amp;info);</span></span>
+<span id="L2308"><span class="lineNum">    2308</span> <span class="tlaGNC">    32441732 :             nextWhileLess(&amp;info, &amp;idx);</span></span>
 <span id="L2309"><span class="lineNum">    2309</span>              : </span>
 <span id="L2310"><span class="lineNum">    2310</span>              :             // while we potentially have a match</span>
-<span id="L2311"><span class="lineNum">    2311</span> <span class="tlaGNC">    32507465 :             while (info == mInfo[idx]) {</span></span>
-<span id="L2312"><span class="lineNum">    2312</span> <span class="tlaGNC">    25491555 :                 if (WKeyEqual::operator()(key, mKeyVals[idx].getFirst())) {</span></span>
+<span id="L2311"><span class="lineNum">    2311</span> <span class="tlaGNC">    32515980 :             while (info == mInfo[idx]) {</span></span>
+<span id="L2312"><span class="lineNum">    2312</span> <span class="tlaGNC">    25500241 :                 if (WKeyEqual::operator()(key, mKeyVals[idx].getFirst())) {</span></span>
 <span id="L2313"><span class="lineNum">    2313</span>              :                     // key already exists, do NOT insert.</span>
 <span id="L2314"><span class="lineNum">    2314</span>              :                     // see http://en.cppreference.com/w/cpp/container/unordered_map/insert</span>
-<span id="L2315"><span class="lineNum">    2315</span> <span class="tlaGNC">    25418204 :                     return std::make_pair(idx, InsertionState::key_found);</span></span>
-<span id="L2316"><span class="lineNum">    2316</span> <span class="tlaGNC">    25418204 :                 }</span></span>
-<span id="L2317"><span class="lineNum">    2317</span> <span class="tlaGNC">       73351 :                 next(&amp;info, &amp;idx);</span></span>
-<span id="L2318"><span class="lineNum">    2318</span> <span class="tlaGNC">       73351 :             }</span></span>
+<span id="L2315"><span class="lineNum">    2315</span> <span class="tlaGNC">    25425993 :                     return std::make_pair(idx, InsertionState::key_found);</span></span>
+<span id="L2316"><span class="lineNum">    2316</span> <span class="tlaGNC">    25425993 :                 }</span></span>
+<span id="L2317"><span class="lineNum">    2317</span> <span class="tlaGNC">       74248 :                 next(&amp;info, &amp;idx);</span></span>
+<span id="L2318"><span class="lineNum">    2318</span> <span class="tlaGNC">       74248 :             }</span></span>
 <span id="L2319"><span class="lineNum">    2319</span>              : </span>
 <span id="L2320"><span class="lineNum">    2320</span>              :             // unlikely that this evaluates to true</span>
-<span id="L2321"><span class="lineNum">    2321</span> <span class="tlaGNC">     7015910 :             if (ROBIN_HOOD_UNLIKELY(mNumElements &gt;= mMaxNumElementsAllowed)) {</span></span>
-<span id="L2322"><span class="lineNum">    2322</span> <span class="tlaGNC">         718 :                 if (!increase_size()) {</span></span>
+<span id="L2321"><span class="lineNum">    2321</span> <span class="tlaGNC">     7015739 :             if (ROBIN_HOOD_UNLIKELY(mNumElements &gt;= mMaxNumElementsAllowed)) {</span></span>
+<span id="L2322"><span class="lineNum">    2322</span> <span class="tlaGNC">         716 :                 if (!increase_size()) {</span></span>
 <span id="L2323"><span class="lineNum">    2323</span> <span class="tlaUNC tlaBgUNC">           0 :                     return std::make_pair(size_t(0), InsertionState::overflow_error);</span></span>
 <span id="L2324"><span class="lineNum">    2324</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L2325"><span class="lineNum">    2325</span> <span class="tlaGNC tlaBgGNC">         718 :                 continue;</span></span>
-<span id="L2326"><span class="lineNum">    2326</span> <span class="tlaGNC">         718 :             }</span></span>
+<span id="L2325"><span class="lineNum">    2325</span> <span class="tlaGNC tlaBgGNC">         716 :                 continue;</span></span>
+<span id="L2326"><span class="lineNum">    2326</span> <span class="tlaGNC">         716 :             }</span></span>
 <span id="L2327"><span class="lineNum">    2327</span>              : </span>
 <span id="L2328"><span class="lineNum">    2328</span>              :             // key not found, so we are now exactly where we want to insert it.</span>
-<span id="L2329"><span class="lineNum">    2329</span> <span class="tlaGNC">     7015192 :             auto const insertion_idx = idx;</span></span>
-<span id="L2330"><span class="lineNum">    2330</span> <span class="tlaGNC">     7015192 :             auto const insertion_info = info;</span></span>
-<span id="L2331"><span class="lineNum">    2331</span> <span class="tlaGNC">     7015192 :             if (ROBIN_HOOD_UNLIKELY(insertion_info + mInfoInc &gt; 0xFF)) {</span></span>
-<span id="L2332"><span class="lineNum">    2332</span> <span class="tlaGNC">          20 :                 mMaxNumElementsAllowed = 0;</span></span>
-<span id="L2333"><span class="lineNum">    2333</span> <span class="tlaGNC">          20 :             }</span></span>
+<span id="L2329"><span class="lineNum">    2329</span> <span class="tlaGNC">     7015023 :             auto const insertion_idx = idx;</span></span>
+<span id="L2330"><span class="lineNum">    2330</span> <span class="tlaGNC">     7015023 :             auto const insertion_info = info;</span></span>
+<span id="L2331"><span class="lineNum">    2331</span> <span class="tlaGNC">     7015023 :             if (ROBIN_HOOD_UNLIKELY(insertion_info + mInfoInc &gt; 0xFF)) {</span></span>
+<span id="L2332"><span class="lineNum">    2332</span> <span class="tlaGNC">          17 :                 mMaxNumElementsAllowed = 0;</span></span>
+<span id="L2333"><span class="lineNum">    2333</span> <span class="tlaGNC">          17 :             }</span></span>
 <span id="L2334"><span class="lineNum">    2334</span>              : </span>
 <span id="L2335"><span class="lineNum">    2335</span>              :             // find an empty spot</span>
-<span id="L2336"><span class="lineNum">    2336</span> <span class="tlaGNC">     9468415 :             while (0 != mInfo[idx]) {</span></span>
-<span id="L2337"><span class="lineNum">    2337</span> <span class="tlaGNC">     2453223 :                 next(&amp;info, &amp;idx);</span></span>
-<span id="L2338"><span class="lineNum">    2338</span> <span class="tlaGNC">     2453223 :             }</span></span>
+<span id="L2336"><span class="lineNum">    2336</span> <span class="tlaGNC">     9459357 :             while (0 != mInfo[idx]) {</span></span>
+<span id="L2337"><span class="lineNum">    2337</span> <span class="tlaGNC">     2444334 :                 next(&amp;info, &amp;idx);</span></span>
+<span id="L2338"><span class="lineNum">    2338</span> <span class="tlaGNC">     2444334 :             }</span></span>
 <span id="L2339"><span class="lineNum">    2339</span>              : </span>
-<span id="L2340"><span class="lineNum">    2340</span> <span class="tlaGNC">     7015192 :             if (idx != insertion_idx) {</span></span>
-<span id="L2341"><span class="lineNum">    2341</span> <span class="tlaGNC">      534289 :                 shiftUp(idx, insertion_idx);</span></span>
-<span id="L2342"><span class="lineNum">    2342</span> <span class="tlaGNC">      534289 :             }</span></span>
+<span id="L2340"><span class="lineNum">    2340</span> <span class="tlaGNC">     7015023 :             if (idx != insertion_idx) {</span></span>
+<span id="L2341"><span class="lineNum">    2341</span> <span class="tlaGNC">      534302 :                 shiftUp(idx, insertion_idx);</span></span>
+<span id="L2342"><span class="lineNum">    2342</span> <span class="tlaGNC">      534302 :             }</span></span>
 <span id="L2343"><span class="lineNum">    2343</span>              :             // put at empty spot</span>
-<span id="L2344"><span class="lineNum">    2344</span> <span class="tlaGNC">     7015192 :             mInfo[insertion_idx] = static_cast&lt;uint8_t&gt;(insertion_info);</span></span>
-<span id="L2345"><span class="lineNum">    2345</span> <span class="tlaGNC">     7015192 :             ++mNumElements;</span></span>
-<span id="L2346"><span class="lineNum">    2346</span> <span class="tlaGNC">     7015192 :             return std::make_pair(insertion_idx, idx == insertion_idx</span></span>
-<span id="L2347"><span class="lineNum">    2347</span> <span class="tlaGNC">     7015192 :                                                      ? InsertionState::new_node</span></span>
-<span id="L2348"><span class="lineNum">    2348</span> <span class="tlaGNC">     7015192 :                                                      : InsertionState::overwrite_node);</span></span>
-<span id="L2349"><span class="lineNum">    2349</span> <span class="tlaGNC">     7015910 :         }</span></span>
+<span id="L2344"><span class="lineNum">    2344</span> <span class="tlaGNC">     7015023 :             mInfo[insertion_idx] = static_cast&lt;uint8_t&gt;(insertion_info);</span></span>
+<span id="L2345"><span class="lineNum">    2345</span> <span class="tlaGNC">     7015023 :             ++mNumElements;</span></span>
+<span id="L2346"><span class="lineNum">    2346</span> <span class="tlaGNC">     7015023 :             return std::make_pair(insertion_idx, idx == insertion_idx</span></span>
+<span id="L2347"><span class="lineNum">    2347</span> <span class="tlaGNC">     7015023 :                                                      ? InsertionState::new_node</span></span>
+<span id="L2348"><span class="lineNum">    2348</span> <span class="tlaGNC">     7015023 :                                                      : InsertionState::overwrite_node);</span></span>
+<span id="L2349"><span class="lineNum">    2349</span> <span class="tlaGNC">     7015739 :         }</span></span>
 <span id="L2350"><span class="lineNum">    2350</span>              : </span>
 <span id="L2351"><span class="lineNum">    2351</span>              :         // enough attempts failed, so finally give up.</span>
 <span id="L2352"><span class="lineNum">    2352</span> <span class="tlaUNC tlaBgUNC">           0 :         return std::make_pair(size_t(0), InsertionState::overflow_error);</span></span>
-<span id="L2353"><span class="lineNum">    2353</span> <span class="tlaGNC tlaBgGNC">    32433396 :     }</span></span>
+<span id="L2353"><span class="lineNum">    2353</span> <span class="tlaGNC tlaBgGNC">    32441016 :     }</span></span>
 <span id="L2354"><span class="lineNum">    2354</span>              : </span>
-<span id="L2355"><span class="lineNum">    2355</span> <span class="tlaGNC">         313 :     bool try_increase_info() {</span></span>
-<span id="L2356"><span class="lineNum">    2356</span> <span class="tlaGNC">         313 :         ROBIN_HOOD_LOG(&quot;mInfoInc=&quot; &lt;&lt; mInfoInc &lt;&lt; &quot;, numElements=&quot; &lt;&lt; mNumElements</span></span>
-<span id="L2357"><span class="lineNum">    2357</span> <span class="tlaGNC">         313 :                                    &lt;&lt; &quot;, maxNumElementsAllowed=&quot;</span></span>
-<span id="L2358"><span class="lineNum">    2358</span> <span class="tlaGNC">         313 :                                    &lt;&lt; calcMaxNumElementsAllowed(mMask + 1))</span></span>
-<span id="L2359"><span class="lineNum">    2359</span> <span class="tlaGNC">         313 :         if (mInfoInc &lt;= 2) {</span></span>
+<span id="L2355"><span class="lineNum">    2355</span> <span class="tlaGNC">         311 :     bool try_increase_info() {</span></span>
+<span id="L2356"><span class="lineNum">    2356</span> <span class="tlaGNC">         311 :         ROBIN_HOOD_LOG(&quot;mInfoInc=&quot; &lt;&lt; mInfoInc &lt;&lt; &quot;, numElements=&quot; &lt;&lt; mNumElements</span></span>
+<span id="L2357"><span class="lineNum">    2357</span> <span class="tlaGNC">         311 :                                    &lt;&lt; &quot;, maxNumElementsAllowed=&quot;</span></span>
+<span id="L2358"><span class="lineNum">    2358</span> <span class="tlaGNC">         311 :                                    &lt;&lt; calcMaxNumElementsAllowed(mMask + 1))</span></span>
+<span id="L2359"><span class="lineNum">    2359</span> <span class="tlaGNC">         311 :         if (mInfoInc &lt;= 2) {</span></span>
 <span id="L2360"><span class="lineNum">    2360</span>              :             // need to be &gt; 2 so that shift works (otherwise undefined behavior!)</span>
 <span id="L2361"><span class="lineNum">    2361</span> <span class="tlaUNC tlaBgUNC">           0 :             return false;</span></span>
 <span id="L2362"><span class="lineNum">    2362</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2363"><span class="lineNum">    2363</span>              :         // we got space left, try to make info smaller</span>
-<span id="L2364"><span class="lineNum">    2364</span> <span class="tlaGNC tlaBgGNC">         313 :         mInfoInc = static_cast&lt;uint8_t&gt;(mInfoInc &gt;&gt; 1U);</span></span>
+<span id="L2364"><span class="lineNum">    2364</span> <span class="tlaGNC tlaBgGNC">         311 :         mInfoInc = static_cast&lt;uint8_t&gt;(mInfoInc &gt;&gt; 1U);</span></span>
 <span id="L2365"><span class="lineNum">    2365</span>              : </span>
 <span id="L2366"><span class="lineNum">    2366</span>              :         // remove one bit of the hash, leaving more space for the distance info.</span>
 <span id="L2367"><span class="lineNum">    2367</span>              :         // This is extremely fast because we can operate on 8 bytes at once.</span>
-<span id="L2368"><span class="lineNum">    2368</span> <span class="tlaGNC">         313 :         ++mInfoHashShift;</span></span>
-<span id="L2369"><span class="lineNum">    2369</span> <span class="tlaGNC">         313 :         auto const numElementsWithBuffer = calcNumElementsWithBuffer(mMask + 1);</span></span>
+<span id="L2368"><span class="lineNum">    2368</span> <span class="tlaGNC">         311 :         ++mInfoHashShift;</span></span>
+<span id="L2369"><span class="lineNum">    2369</span> <span class="tlaGNC">         311 :         auto const numElementsWithBuffer = calcNumElementsWithBuffer(mMask + 1);</span></span>
 <span id="L2370"><span class="lineNum">    2370</span>              : </span>
-<span id="L2371"><span class="lineNum">    2371</span> <span class="tlaGNC">      709991 :         for (size_t i = 0; i &lt; numElementsWithBuffer; i += 8) {</span></span>
-<span id="L2372"><span class="lineNum">    2372</span> <span class="tlaGNC">      709678 :             auto val = unaligned_load&lt;uint64_t&gt;(mInfo + i);</span></span>
-<span id="L2373"><span class="lineNum">    2373</span> <span class="tlaGNC">      709678 :             val = (val &gt;&gt; 1U) &amp; UINT64_C(0x7f7f7f7f7f7f7f7f);</span></span>
-<span id="L2374"><span class="lineNum">    2374</span> <span class="tlaGNC">      709678 :             std::memcpy(mInfo + i, &amp;val, sizeof(val));</span></span>
-<span id="L2375"><span class="lineNum">    2375</span> <span class="tlaGNC">      709678 :         }</span></span>
+<span id="L2371"><span class="lineNum">    2371</span> <span class="tlaGNC">      704805 :         for (size_t i = 0; i &lt; numElementsWithBuffer; i += 8) {</span></span>
+<span id="L2372"><span class="lineNum">    2372</span> <span class="tlaGNC">      704494 :             auto val = unaligned_load&lt;uint64_t&gt;(mInfo + i);</span></span>
+<span id="L2373"><span class="lineNum">    2373</span> <span class="tlaGNC">      704494 :             val = (val &gt;&gt; 1U) &amp; UINT64_C(0x7f7f7f7f7f7f7f7f);</span></span>
+<span id="L2374"><span class="lineNum">    2374</span> <span class="tlaGNC">      704494 :             std::memcpy(mInfo + i, &amp;val, sizeof(val));</span></span>
+<span id="L2375"><span class="lineNum">    2375</span> <span class="tlaGNC">      704494 :         }</span></span>
 <span id="L2376"><span class="lineNum">    2376</span>              :         // update sentinel, which might have been cleared out!</span>
-<span id="L2377"><span class="lineNum">    2377</span> <span class="tlaGNC">         313 :         mInfo[numElementsWithBuffer] = 1;</span></span>
+<span id="L2377"><span class="lineNum">    2377</span> <span class="tlaGNC">         311 :         mInfo[numElementsWithBuffer] = 1;</span></span>
 <span id="L2378"><span class="lineNum">    2378</span>              : </span>
-<span id="L2379"><span class="lineNum">    2379</span> <span class="tlaGNC">         313 :         mMaxNumElementsAllowed = calcMaxNumElementsAllowed(mMask + 1);</span></span>
-<span id="L2380"><span class="lineNum">    2380</span> <span class="tlaGNC">         313 :         return true;</span></span>
-<span id="L2381"><span class="lineNum">    2381</span> <span class="tlaGNC">         313 :     }</span></span>
+<span id="L2379"><span class="lineNum">    2379</span> <span class="tlaGNC">         311 :         mMaxNumElementsAllowed = calcMaxNumElementsAllowed(mMask + 1);</span></span>
+<span id="L2380"><span class="lineNum">    2380</span> <span class="tlaGNC">         311 :         return true;</span></span>
+<span id="L2381"><span class="lineNum">    2381</span> <span class="tlaGNC">         311 :     }</span></span>
 <span id="L2382"><span class="lineNum">    2382</span>              : </span>
 <span id="L2383"><span class="lineNum">    2383</span>              :     // True if resize was possible, false otherwise</span>
-<span id="L2384"><span class="lineNum">    2384</span> <span class="tlaGNC">         718 :     bool increase_size() {</span></span>
+<span id="L2384"><span class="lineNum">    2384</span> <span class="tlaGNC">         716 :     bool increase_size() {</span></span>
 <span id="L2385"><span class="lineNum">    2385</span>              :         // nothing allocated yet? just allocate InitialNumElements</span>
-<span id="L2386"><span class="lineNum">    2386</span> <span class="tlaGNC">         718 :         if (0 == mMask) {</span></span>
+<span id="L2386"><span class="lineNum">    2386</span> <span class="tlaGNC">         716 :         if (0 == mMask) {</span></span>
 <span id="L2387"><span class="lineNum">    2387</span> <span class="tlaGNC">          53 :             initData(InitialNumElements);</span></span>
 <span id="L2388"><span class="lineNum">    2388</span> <span class="tlaGNC">          53 :             return true;</span></span>
 <span id="L2389"><span class="lineNum">    2389</span> <span class="tlaGNC">          53 :         }</span></span>
 <span id="L2390"><span class="lineNum">    2390</span>              : </span>
-<span id="L2391"><span class="lineNum">    2391</span> <span class="tlaGNC">         665 :         auto const maxNumElementsAllowed = calcMaxNumElementsAllowed(mMask + 1);</span></span>
-<span id="L2392"><span class="lineNum">    2392</span> <span class="tlaGNC">         665 :         if (mNumElements &lt; maxNumElementsAllowed &amp;&amp; try_increase_info()) {</span></span>
-<span id="L2393"><span class="lineNum">    2393</span> <span class="tlaGNC">         290 :             return true;</span></span>
-<span id="L2394"><span class="lineNum">    2394</span> <span class="tlaGNC">         290 :         }</span></span>
+<span id="L2391"><span class="lineNum">    2391</span> <span class="tlaGNC">         663 :         auto const maxNumElementsAllowed = calcMaxNumElementsAllowed(mMask + 1);</span></span>
+<span id="L2392"><span class="lineNum">    2392</span> <span class="tlaGNC">         663 :         if (mNumElements &lt; maxNumElementsAllowed &amp;&amp; try_increase_info()) {</span></span>
+<span id="L2393"><span class="lineNum">    2393</span> <span class="tlaGNC">         288 :             return true;</span></span>
+<span id="L2394"><span class="lineNum">    2394</span> <span class="tlaGNC">         288 :         }</span></span>
 <span id="L2395"><span class="lineNum">    2395</span>              : </span>
 <span id="L2396"><span class="lineNum">    2396</span> <span class="tlaGNC">         375 :         ROBIN_HOOD_LOG(&quot;mNumElements=&quot; &lt;&lt; mNumElements &lt;&lt; &quot;, maxNumElementsAllowed=&quot;</span></span>
 <span id="L2397"><span class="lineNum">    2397</span> <span class="tlaGNC">         375 :                                        &lt;&lt; maxNumElementsAllowed &lt;&lt; &quot;, load=&quot;</span></span>
@@ -2471,7 +2471,7 @@
 <span id="L2409"><span class="lineNum">    2409</span> <span class="tlaGNC">         375 :             rehashPowerOfTwo((mMask + 1) * 2, false);</span></span>
 <span id="L2410"><span class="lineNum">    2410</span> <span class="tlaGNC">         375 :         }</span></span>
 <span id="L2411"><span class="lineNum">    2411</span> <span class="tlaGNC">         375 :         return true;</span></span>
-<span id="L2412"><span class="lineNum">    2412</span> <span class="tlaGNC">         665 :     }</span></span>
+<span id="L2412"><span class="lineNum">    2412</span> <span class="tlaGNC">         663 :     }</span></span>
 <span id="L2413"><span class="lineNum">    2413</span>              : </span>
 <span id="L2414"><span class="lineNum">    2414</span> <span class="tlaUNC tlaBgUNC">           0 :     void nextHashMultiplier() {</span></span>
 <span id="L2415"><span class="lineNum">    2415</span>              :         // adding an *even* number, so that the multiplier will always stay odd. This is necessary</span>
