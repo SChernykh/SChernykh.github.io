@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">50.7&nbsp;%</td>
+            <td class="headerCovTableEntryLo">49.8&nbsp;%</td>
             <td class="headerCovTableEntry">641</td>
-            <td class="headerCovTableEntry">325</td>
+            <td class="headerCovTableEntry">319</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-08 11:19:46</td>
+            <td class="headerValue">2026-07-09 10:06:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">38.9&nbsp;%</td>
+            <td class="headerCovTableEntryLo">33.3&nbsp;%</td>
             <td class="headerCovTableEntry">54</td>
-            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntry">18</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -460,22 +460,22 @@
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC tlaBgGNC">        9888 : }</span></span>
 <span id="L399"><span class="lineNum">     399</span>              : </span>
 <span id="L400"><span class="lineNum">     400</span>              : void uv_cond_init_checked(uv_cond_t* cond)</span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          10 : {</span></span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          10 :         const int result = uv_cond_init(cond);</span></span>
-<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          10 :         if (result) {</span></span>
+<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          35 : {</span></span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          35 :         const int result = uv_cond_init(cond);</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          35 :         if (result) {</span></span>
 <span id="L404"><span class="lineNum">     404</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;failed to create conditional variable, error &quot; &lt;&lt; uv_err_name(result));</span></span>
 <span id="L405"><span class="lineNum">     405</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L406"><span class="lineNum">     406</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC tlaBgGNC">          10 : }</span></span>
+<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC tlaBgGNC">          35 : }</span></span>
 <span id="L408"><span class="lineNum">     408</span>              : </span>
 <span id="L409"><span class="lineNum">     409</span>              : void uv_mutex_init_checked(uv_mutex_t* mutex)</span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          29 : {</span></span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          29 :         const int result = uv_mutex_init(mutex);</span></span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          29 :         if (result) {</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          54 : {</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          54 :         const int result = uv_mutex_init(mutex);</span></span>
+<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">          54 :         if (result) {</span></span>
 <span id="L413"><span class="lineNum">     413</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;failed to create mutex, error &quot; &lt;&lt; uv_err_name(result));</span></span>
 <span id="L414"><span class="lineNum">     414</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L415"><span class="lineNum">     415</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC tlaBgGNC">          29 : }</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC tlaBgGNC">          54 : }</span></span>
 <span id="L417"><span class="lineNum">     417</span>              : </span>
 <span id="L418"><span class="lineNum">     418</span>              : void uv_rwlock_init_checked(uv_rwlock_t* lock)</span>
 <span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">          81 : {</span></span>
@@ -496,21 +496,21 @@
 <span id="L434"><span class="lineNum">     434</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L435"><span class="lineNum">     435</span>              : </span>
 <span id="L436"><span class="lineNum">     436</span>              : uv_loop_t* uv_default_loop_checked()</span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC tlaBgGNC">        6740 : {</span></span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">        6740 :         if (!is_main_thread()) {</span></span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;uv_default_loop() can only be used by the main thread. Fix the code!&quot;);</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L438"><span class="lineNum">     438</span> <span class="tlaUNC">           0 :         if (!is_main_thread()) {</span></span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;uv_default_loop() can only be used by the main thread. Fix the code!&quot;);</span></span>
 <span id="L440"><span class="lineNum">     440</span>              : #ifdef _WIN32</span>
 <span id="L441"><span class="lineNum">     441</span>              :                 if (IsDebuggerPresent()) {</span>
 <span id="L442"><span class="lineNum">     442</span>              :                         __debugbreak();</span>
 <span id="L443"><span class="lineNum">     443</span>              :                 }</span>
 <span id="L444"><span class="lineNum">     444</span>              : #endif</span>
 <span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC tlaBgGNC">        6740 :         return uv_default_loop();</span></span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">        6740 : }</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC">           0 :         return uv_default_loop();</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L448"><span class="lineNum">     448</span>              : </span>
 <span id="L449"><span class="lineNum">     449</span>              : struct BackgroundJobTracker::Impl</span>
 <span id="L450"><span class="lineNum">     450</span>              : {</span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC tlaBgUNC">           0 :         Impl() { uv_mutex_init_checked(&amp;m_lock); }</span></span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC">           0 :         Impl() { uv_mutex_init_checked(&amp;m_lock); }</span></span>
 <span id="L452"><span class="lineNum">     452</span> <span class="tlaUNC">           0 :         ~Impl() { uv_mutex_destroy(&amp;m_lock); }</span></span>
 <span id="L453"><span class="lineNum">     453</span>              : </span>
 <span id="L454"><span class="lineNum">     454</span>              :         void start(const char* name)</span>
@@ -614,16 +614,16 @@
 <span id="L552"><span class="lineNum">     552</span>              : </span>
 <span id="L553"><span class="lineNum">     553</span>              : static thread_local bool main_thread = false;</span>
 <span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC tlaBgGNC">           1 : void set_main_thread() { main_thread = true; }</span></span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">        6740 : bool is_main_thread() { return main_thread; }</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaUNC tlaBgUNC">           0 : bool is_main_thread() { return main_thread; }</span></span>
 <span id="L556"><span class="lineNum">     556</span>              : </span>
 <span id="L557"><span class="lineNum">     557</span>              : static thread_local bool uv_worker_pool_thread = false;</span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaUNC tlaBgUNC">           0 : void set_uv_worker_pool_thread() { uv_worker_pool_thread = true; }</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC tlaBgGNC">        6740 : bool is_uv_worker_pool_thread() { return uv_worker_pool_thread; }</span></span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaUNC">           0 : void set_uv_worker_pool_thread() { uv_worker_pool_thread = true; }</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaUNC">           0 : bool is_uv_worker_pool_thread() { return uv_worker_pool_thread; }</span></span>
 <span id="L560"><span class="lineNum">     560</span>              : </span>
 <span id="L561"><span class="lineNum">     561</span>              : bool disable_resolve_host = false;</span>
 <span id="L562"><span class="lineNum">     562</span>              : </span>
 <span id="L563"><span class="lineNum">     563</span>              : bool resolve_host(std::string&amp; host, bool&amp; is_v6)</span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L565"><span class="lineNum">     565</span> <span class="tlaUNC">           0 :         if (disable_resolve_host) {</span></span>
 <span id="L566"><span class="lineNum">     566</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;resolve_host was called with DNS disabled for host &quot; &lt;&lt; host);</span></span>
 <span id="L567"><span class="lineNum">     567</span> <span class="tlaUNC">           0 :                 return false;</span></span>
@@ -1005,7 +1005,7 @@
 <span id="L943"><span class="lineNum">     943</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L944"><span class="lineNum">     944</span>              : </span>
 <span id="L945"><span class="lineNum">     945</span>              : void set_thread_name(const char* name)</span>
-<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC tlaBgGNC">          30 : {</span></span>
+<span id="L946"><span class="lineNum">     946</span> <span class="tlaGNC tlaBgGNC">          55 : {</span></span>
 <span id="L947"><span class="lineNum">     947</span>              : #if (UV_VERSION_MAJOR &gt; 1) || ((UV_VERSION_MAJOR == 1) &amp;&amp; (UV_VERSION_MINOR &gt;= 50))</span>
 <span id="L948"><span class="lineNum">     948</span>              :         const int err = uv_thread_setname(name);</span>
 <span id="L949"><span class="lineNum">     949</span>              :         if (err) {</span>
@@ -1017,9 +1017,9 @@
 <span id="L955"><span class="lineNum">     955</span>              :                 LOGERR(1, &quot;pthread_setname_np failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; err);</span>
 <span id="L956"><span class="lineNum">     956</span>              :         }</span>
 <span id="L957"><span class="lineNum">     957</span>              : #else</span>
-<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">          30 :         (void)name;</span></span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          30 : #endif</span></span>
-<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">          30 : }</span></span>
+<span id="L958"><span class="lineNum">     958</span> <span class="tlaGNC">          55 :         (void)name;</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          55 : #endif</span></span>
+<span id="L960"><span class="lineNum">     960</span> <span class="tlaGNC">          55 : }</span></span>
 <span id="L961"><span class="lineNum">     961</span>              : </span>
 <span id="L962"><span class="lineNum">     962</span>              : void init_uv()</span>
 <span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>

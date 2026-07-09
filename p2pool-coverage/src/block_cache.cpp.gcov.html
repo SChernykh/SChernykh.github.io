@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-08 11:19:46</td>
+            <td class="headerValue">2026-07-09 10:06:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -276,7 +276,7 @@
 <span id="L214"><span class="lineNum">     214</span> <span class="tlaUNC">           0 :                         continue;</span></span>
 <span id="L215"><span class="lineNum">     215</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L216"><span class="lineNum">     216</span>              : </span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :                 if (block.deserialize(data + sizeof(uint32_t), n, side_chain, uv_default_loop_checked(), false, false) == 0) {</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaUNC">           0 :                 if (block.deserialize(data + sizeof(uint32_t), n, side_chain, false, false) == 0) {</span></span>
 <span id="L218"><span class="lineNum">     218</span> <span class="tlaUNC">           0 :                         server.add_cached_block(block);</span></span>
 <span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 :                         ++blocks_loaded;</span></span>
 <span id="L220"><span class="lineNum">     220</span> <span class="tlaUNC">           0 :                 }</span></span>

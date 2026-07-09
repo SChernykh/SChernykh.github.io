@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-08 11:19:46</td>
+            <td class="headerValue">2026-07-09 10:06:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -85,7 +85,7 @@
 <span id="L23"><span class="lineNum">      23</span>              : // Since data here can come from external and possibly malicious sources, check everything</span>
 <span id="L24"><span class="lineNum">      24</span>              : // Only the syntax (i.e. the serialized block binary format) and the keccak hash are checked here</span>
 <span id="L25"><span class="lineNum">      25</span>              : // Semantics must also be checked elsewhere before accepting the block (PoW, reward split between miners, difficulty calculation and so on)</span>
-<span id="L26"><span class="lineNum">      26</span>              : int PoolBlock::deserialize(const uint8_t* data, size_t size, const SideChain&amp; sidechain, uv_loop_t* loop, bool compact, bool allow_pruned)</span>
+<span id="L26"><span class="lineNum">      26</span>              : int PoolBlock::deserialize(const uint8_t* data, size_t size, const SideChain&amp; sidechain, bool compact, bool allow_pruned)</span>
 <span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC tlaBgGNC">       40269 : {</span></span>
 <span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">       40269 :         try {</span></span>
 <span id="L29"><span class="lineNum">      29</span>              :                 // Sanity check</span>
@@ -525,7 +525,7 @@
 <span id="L463"><span class="lineNum">     463</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
 <span id="L464"><span class="lineNum">     464</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L465"><span class="lineNum">     465</span>              : </span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if ((num_outputs == 0) &amp;&amp; !sidechain.get_outputs_blob(this, total_reward, outputs_blob, loop)) {</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if ((num_outputs == 0) &amp;&amp; !sidechain.get_outputs_blob(this, total_reward, outputs_blob)) {</span></span>
 <span id="L467"><span class="lineNum">     467</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
 <span id="L468"><span class="lineNum">     468</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L469"><span class="lineNum">     469</span>              : </span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-08 11:19:46</td>
+            <td class="headerValue">2026-07-09 10:06:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">75.0&nbsp;%</td>
@@ -125,7 +125,7 @@
 <span id="L63"><span class="lineNum">      63</span>              :         [[nodiscard]] difficulty_type get_cached_next_difficulty(const hash&amp; id) const;</span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span>              :         [[nodiscard]] const PoolBlock* get_block_blob(const hash&amp; id, std::vector&lt;uint8_t&gt;&amp; blob) const;</span>
-<span id="L66"><span class="lineNum">      66</span>              :         [[nodiscard]] bool get_outputs_blob(PoolBlock* block, uint64_t total_reward, std::vector&lt;uint8_t&gt;&amp; blob, uv_loop_t* loop) const;</span>
+<span id="L66"><span class="lineNum">      66</span>              :         [[nodiscard]] bool get_outputs_blob(PoolBlock* block, uint64_t total_reward, std::vector&lt;uint8_t&gt;&amp; blob) const;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span>              :         void print_status(bool obtain_sidechain_lock = true) const;</span>
 <span id="L69"><span class="lineNum">      69</span>              :         [[nodiscard]] double get_reward_share(const Wallet&amp; w) const;</span>
@@ -134,7 +134,7 @@
 <span id="L72"><span class="lineNum">      72</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L73"><span class="lineNum">      73</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">       46994 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       70445 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       70438 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        6494 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
 <span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40263 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
