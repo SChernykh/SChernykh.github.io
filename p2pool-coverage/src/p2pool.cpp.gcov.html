@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-09 19:20:11</td>
+            <td class="headerValue">2026-07-10 08:43:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -2258,7 +2258,7 @@
 <span id="L2196"><span class="lineNum">    2196</span> <span class="tlaUNC">           0 :         ReadLock lock(m_mainchainLock);</span></span>
 <span id="L2197"><span class="lineNum">    2197</span>              : </span>
 <span id="L2198"><span class="lineNum">    2198</span> <span class="tlaUNC">           0 :         auto it = m_mainchainByHeight.find(height);</span></span>
-<span id="L2199"><span class="lineNum">    2199</span> <span class="tlaUNC">           0 :         if (it == m_mainchainByHeight.end()) {</span></span>
+<span id="L2199"><span class="lineNum">    2199</span> <span class="tlaUNC">           0 :         if ((it == m_mainchainByHeight.end()) || it-&gt;second.difficulty.empty()) {</span></span>
 <span id="L2200"><span class="lineNum">    2200</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L2201"><span class="lineNum">    2201</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L2202"><span class="lineNum">    2202</span>              : </span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-09 19:20:11</td>
+            <td class="headerValue">2026-07-10 08:43:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -90,9 +90,9 @@
 <span id="L28"><span class="lineNum">      28</span>              : // Doesn't wait, returns immediately</span>
 <span id="L29"><span class="lineNum">      29</span>              : template&lt;typename T&gt;</span>
 <span id="L30"><span class="lineNum">      30</span>              : FORCEINLINE void queue_work(T&amp;&amp; callback, uint32_t N)</span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">      106149 : {</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">      106149 :         queue_work_base(std::make_shared&lt;Callback&lt;void&gt;::Derived&lt;T&gt;&gt;(std::forward&lt;T&gt;(callback)), N);</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">      106149 : }</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">      106011 : {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">      106011 :         queue_work_base(std::make_shared&lt;Callback&lt;void&gt;::Derived&lt;T&gt;&gt;(std::forward&lt;T&gt;(callback)), N);</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">      106011 : }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : } // namespace p2pool</span>
         </pre>
