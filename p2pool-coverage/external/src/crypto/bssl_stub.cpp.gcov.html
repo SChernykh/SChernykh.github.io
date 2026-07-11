@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-11 06:24:44</td>
+            <td class="headerValue">2026-07-11 19:30:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">33.3&nbsp;%</td>
@@ -85,12 +85,12 @@
 <span id="L23"><span class="lineNum">      23</span>              : #include &quot;crypto/fipsmodule/sha/sha512.cc.inc&quot;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : void OPENSSL_cleanse(void* ptr, size_t len)</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">      160559 : {</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">      160559 :         volatile uint8_t* p = static_cast&lt;volatile uint8_t*&gt;(ptr);</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">    18142199 :         while (len--) {</span></span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">    17981640 :                 *p++ = 0;</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">    17981640 :         }</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">      160559 : }</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">      160563 : {</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">      160563 :         volatile uint8_t* p = static_cast&lt;volatile uint8_t*&gt;(ptr);</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">    18142915 :         while (len--) {</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">    17982352 :                 *p++ = 0;</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">    17982352 :         }</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">      160563 : }</span></span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
 <span id="L33"><span class="lineNum">      33</span>              : int CRYPTO_memcmp(const void* a, const void* b, size_t len)</span>
 <span id="L34"><span class="lineNum">      34</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
