@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-11 19:30:24</td>
+            <td class="headerValue">2026-07-12 02:35:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -90,10 +90,10 @@
 <span id="L28"><span class="lineNum">      28</span>              : // Doesn't wait, returns immediately</span>
 <span id="L29"><span class="lineNum">      29</span>              : template&lt;typename T&gt;</span>
 <span id="L30"><span class="lineNum">      30</span>              : FORCEINLINE void queue_work(T&amp;&amp; callback, uint32_t N)</span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">      105796 : {</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">      105796 :         static_assert(!std::is_lvalue_reference_v&lt;T&gt;, &quot;queue_work() requires an rvalue callback; use std::move or pass a temporary lambda&quot;);</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">      105796 :         queue_work_base(std::make_shared&lt;Callback&lt;void&gt;::Derived&lt;std::decay_t&lt;T&gt;&gt;&gt;(std::forward&lt;T&gt;(callback)), N);</span></span>
-<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">      105796 : }</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC tlaBgGNC">      106018 : {</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">      106018 :         static_assert(!std::is_lvalue_reference_v&lt;T&gt;, &quot;queue_work() requires an rvalue callback; use std::move or pass a temporary lambda&quot;);</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">      106018 :         queue_work_base(std::make_shared&lt;Callback&lt;void&gt;::Derived&lt;std::decay_t&lt;T&gt;&gt;&gt;(std::forward&lt;T&gt;(callback)), N);</span></span>
+<span id="L34"><span class="lineNum">      34</span> <span class="tlaGNC">      106018 : }</span></span>
 <span id="L35"><span class="lineNum">      35</span>              : </span>
 <span id="L36"><span class="lineNum">      36</span>              : } // namespace p2pool</span>
         </pre>

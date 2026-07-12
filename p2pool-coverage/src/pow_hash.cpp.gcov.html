@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-07-11 19:30:24</td>
+            <td class="headerValue">2026-07-12 02:35:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">29.4&nbsp;%</td>
@@ -313,7 +313,7 @@
 <span id="L251"><span class="lineNum">     251</span>              :                                                 // Background doesn't work very well with xmrig mining on all cores</span>
 <span id="L252"><span class="lineNum">     252</span>              :                                                 //make_thread_background();</span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaUNC">           0 :                                                 set_thread_name(&quot;Dataset init&quot;);</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :                                                 randomx_init_dataset(m_dataset, m_cache[m_index], a, b - a);</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaUNC">           0 :                                                 randomx_init_dataset(m_dataset, m_cache[m_index], static_cast&lt;uint32_t&gt;(a), static_cast&lt;uint32_t&gt;(b - a));</span></span>
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaUNC">           0 :                                         });</span></span>
 <span id="L256"><span class="lineNum">     256</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
@@ -322,7 +322,7 @@
 <span id="L260"><span class="lineNum">     260</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L261"><span class="lineNum">     261</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :                         randomx_init_dataset(m_dataset, m_cache[m_index], 0, numItems);</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaUNC">           0 :                         randomx_init_dataset(m_dataset, m_cache[m_index], 0, static_cast&lt;uint32_t&gt;(numItems));</span></span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
 <span id="L266"><span class="lineNum">     266</span> <span class="tlaUNC">           0 :                 for (size_t i = 0; i &lt; VM_LANE_COUNT; ++i) {</span></span>
