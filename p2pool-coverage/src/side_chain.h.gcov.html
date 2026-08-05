@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-05 09:36:50</td>
+            <td class="headerValue">2026-08-05 12:26:39</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">75.0&nbsp;%</td>
@@ -134,7 +134,7 @@
 <span id="L72"><span class="lineNum">      72</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L73"><span class="lineNum">      73</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">       46994 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       70443 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       70446 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        6494 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
 <span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40263 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
@@ -177,7 +177,7 @@
 <span id="L115"><span class="lineNum">     115</span>              : </span>
 <span id="L116"><span class="lineNum">     116</span>              : private:</span>
 <span id="L117"><span class="lineNum">     117</span>              :         [[nodiscard]] bool get_shares(const PoolBlock* tip, std::vector&lt;MinerShare&gt;&amp; shares, uint64_t* bottom_height = nullptr, bool quiet = false) const;</span>
-<span id="L118"><span class="lineNum">     118</span>              :         [[nodiscard]] bool get_difficulty(const PoolBlock* tip, std::vector&lt;DifficultyData&gt;&amp; difficultyData, difficulty_type&amp; curDifficulty) const;</span>
+<span id="L118"><span class="lineNum">     118</span>              :         [[nodiscard]] int get_difficulty(const PoolBlock* tip, std::vector&lt;DifficultyData&gt;&amp; difficultyData, difficulty_type&amp; curDifficulty) const;</span>
 <span id="L119"><span class="lineNum">     119</span>              :         void verify_loop(PoolBlock* block);</span>
 <span id="L120"><span class="lineNum">     120</span>              :         void verify(PoolBlock* block);</span>
 <span id="L121"><span class="lineNum">     121</span>              :         void update_chain_tip(PoolBlock* block);</span>
