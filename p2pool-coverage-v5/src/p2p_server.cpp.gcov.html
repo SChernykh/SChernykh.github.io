@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-10 15:34:52</td>
+            <td class="headerValue">2026-08-11 10:52:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">1.7&nbsp;%</td>
@@ -1152,9 +1152,9 @@
 <span id="L1090"><span class="lineNum">    1090</span> <span class="tlaGNC">           6 :         data-&gt;pruned_blob.push_back(0);</span></span>
 <span id="L1091"><span class="lineNum">    1091</span>              : </span>
 <span id="L1092"><span class="lineNum">    1092</span> <span class="tlaGNC">           6 :         const uint64_t total_reward = std::accumulate(block.m_outputAmounts.begin(), block.m_outputAmounts.end(), 0ULL,</span></span>
-<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaGNC">           6 :                 [](uint64_t a, const PoolBlock::TxOutput&amp; b)</span></span>
+<span id="L1093"><span class="lineNum">    1093</span> <span class="tlaGNC">           6 :                 [](uint64_t a, uint64_t b)</span></span>
 <span id="L1094"><span class="lineNum">    1094</span> <span class="tlaGNC">        1486 :                 {</span></span>
-<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaGNC">        1486 :                         return a + b.m_reward;</span></span>
+<span id="L1095"><span class="lineNum">    1095</span> <span class="tlaGNC">        1486 :                         return a + b;</span></span>
 <span id="L1096"><span class="lineNum">    1096</span> <span class="tlaGNC">        1486 :                 });</span></span>
 <span id="L1097"><span class="lineNum">    1097</span>              : </span>
 <span id="L1098"><span class="lineNum">    1098</span> <span class="tlaGNC">           6 :         writeVarint(total_reward, data-&gt;pruned_blob);</span></span>
@@ -1164,30 +1164,30 @@
 <span id="L1102"><span class="lineNum">    1102</span> <span class="tlaGNC">           6 :         data-&gt;pruned_blob.insert(data-&gt;pruned_blob.end(), mainchain_data.begin() + outputs_offset + outputs_blob_size, mainchain_data.end());</span></span>
 <span id="L1103"><span class="lineNum">    1103</span>              : </span>
 <span id="L1104"><span class="lineNum">    1104</span> <span class="tlaGNC">           6 :         const size_t N = block.m_transactions.size();</span></span>
-<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaGNC">           6 :         if ((N &gt; 1) &amp;&amp; parent &amp;&amp; (parent-&gt;m_transactions.size() &gt; 1)) {</span></span>
-<span id="L1106"><span class="lineNum">    1106</span> <span class="tlaGNC">           6 :                 const uint32_t tx_list_size = static_cast&lt;uint32_t&gt;((N - 1) * HASH_SIZE);</span></span>
+<span id="L1105"><span class="lineNum">    1105</span> <span class="tlaGNC">           6 :         if ((N &gt; 0) &amp;&amp; parent &amp;&amp; (parent-&gt;m_transactions.size() &gt; 0)) {</span></span>
+<span id="L1106"><span class="lineNum">    1106</span> <span class="tlaGNC">           6 :                 const uint32_t tx_list_size = static_cast&lt;uint32_t&gt;(N * HASH_SIZE);</span></span>
 <span id="L1107"><span class="lineNum">    1107</span>              : </span>
 <span id="L1108"><span class="lineNum">    1108</span> <span class="tlaGNC">           6 :                 unordered_map&lt;hash, size_t&gt; parent_transactions;</span></span>
 <span id="L1109"><span class="lineNum">    1109</span> <span class="tlaGNC">           6 :                 parent_transactions.reserve(parent-&gt;m_transactions.size());</span></span>
 <span id="L1110"><span class="lineNum">    1110</span>              : </span>
-<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC">         230 :                 for (size_t i = 1; i &lt; parent-&gt;m_transactions.size(); ++i) {</span></span>
-<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaGNC">         224 :                         parent_transactions.emplace(parent-&gt;m_transactions[i], i);</span></span>
+<span id="L1111"><span class="lineNum">    1111</span> <span class="tlaGNC">         230 :                 for (size_t i = 0; i &lt; parent-&gt;m_transactions.size(); ++i) {</span></span>
+<span id="L1112"><span class="lineNum">    1112</span> <span class="tlaGNC">         224 :                         parent_transactions.emplace(parent-&gt;m_transactions[i], i + 1);</span></span>
 <span id="L1113"><span class="lineNum">    1113</span> <span class="tlaGNC">         224 :                 }</span></span>
 <span id="L1114"><span class="lineNum">    1114</span>              : </span>
 <span id="L1115"><span class="lineNum">    1115</span>              :                 // Reserve 1 additional byte per transaction to be ready for the worst case (all transactions are different in the parent block)</span>
-<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.reserve(data-&gt;pruned_blob.capacity() + (N - 1));</span></span>
-<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaGNC">           6 :                 data-&gt;compact_unpruned_blob.reserve(data-&gt;blob.capacity() + (N - 1));</span></span>
+<span id="L1116"><span class="lineNum">    1116</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.reserve(data-&gt;pruned_blob.capacity() + N);</span></span>
+<span id="L1117"><span class="lineNum">    1117</span> <span class="tlaGNC">           6 :                 data-&gt;compact_unpruned_blob.reserve(data-&gt;blob.capacity() + N);</span></span>
 <span id="L1118"><span class="lineNum">    1118</span>              : </span>
 <span id="L1119"><span class="lineNum">    1119</span>              :                 // Copy pruned_blob and mainchain_data without the transaction list</span>
 <span id="L1120"><span class="lineNum">    1120</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.assign(data-&gt;pruned_blob.begin(), data-&gt;pruned_blob.end() - tx_list_size);</span></span>
 <span id="L1121"><span class="lineNum">    1121</span> <span class="tlaGNC">           6 :                 data-&gt;compact_unpruned_blob.assign(mainchain_data.begin(), mainchain_data.end() - tx_list_size);</span></span>
 <span id="L1122"><span class="lineNum">    1122</span>              : </span>
 <span id="L1123"><span class="lineNum">    1123</span> <span class="tlaGNC">           6 :                 std::vector&lt;uint8_t&gt; compact_transactions;</span></span>
-<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC">           6 :                 compact_transactions.reserve(tx_list_size + (N - 1));</span></span>
+<span id="L1124"><span class="lineNum">    1124</span> <span class="tlaGNC">           6 :                 compact_transactions.reserve(tx_list_size + N);</span></span>
 <span id="L1125"><span class="lineNum">    1125</span>              : </span>
 <span id="L1126"><span class="lineNum">    1126</span>              :                 // Process transaction hashes one by one</span>
 <span id="L1127"><span class="lineNum">    1127</span> <span class="tlaGNC">           6 :                 size_t num_found = 0;</span></span>
-<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaGNC">         304 :                 for (size_t i = 1; i &lt; N; ++i) {</span></span>
+<span id="L1128"><span class="lineNum">    1128</span> <span class="tlaGNC">         304 :                 for (size_t i = 0; i &lt; N; ++i) {</span></span>
 <span id="L1129"><span class="lineNum">    1129</span> <span class="tlaGNC">         298 :                         const hash&amp; tx = block.m_transactions[i];</span></span>
 <span id="L1130"><span class="lineNum">    1130</span> <span class="tlaGNC">         298 :                         auto it = parent_transactions.find(tx);</span></span>
 <span id="L1131"><span class="lineNum">    1131</span> <span class="tlaGNC">         298 :                         if (it != parent_transactions.end()) {</span></span>
@@ -1199,7 +1199,7 @@
 <span id="L1137"><span class="lineNum">    1137</span> <span class="tlaGNC">          80 :                                 compact_transactions.insert(compact_transactions.end(), tx.h, tx.h + HASH_SIZE);</span></span>
 <span id="L1138"><span class="lineNum">    1138</span> <span class="tlaGNC">          80 :                         }</span></span>
 <span id="L1139"><span class="lineNum">    1139</span> <span class="tlaGNC">         298 :                 }</span></span>
-<span id="L1140"><span class="lineNum">    1140</span> <span class="tlaGNC">           6 :                 LOGINFO(6, &quot;compact blob: &quot; &lt;&lt; num_found &lt;&lt; '/' &lt;&lt; (N - 1) &lt;&lt; &quot; transactions were found in the parent block&quot;);</span></span>
+<span id="L1140"><span class="lineNum">    1140</span> <span class="tlaGNC">           6 :                 LOGINFO(6, &quot;compact blob: &quot; &lt;&lt; num_found &lt;&lt; '/' &lt;&lt; N &lt;&lt; &quot; transactions were found in the parent block&quot;);</span></span>
 <span id="L1141"><span class="lineNum">    1141</span>              : </span>
 <span id="L1142"><span class="lineNum">    1142</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.insert(data-&gt;compact_blob.end(), compact_transactions.begin(), compact_transactions.end());</span></span>
 <span id="L1143"><span class="lineNum">    1143</span> <span class="tlaGNC">           6 :                 data-&gt;compact_blob.insert(data-&gt;compact_blob.end(), sidechain_data.begin(), sidechain_data.end());</span></span>

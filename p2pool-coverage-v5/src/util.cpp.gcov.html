@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-10 15:34:52</td>
+            <td class="headerValue">2026-08-11 10:52:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">38.2&nbsp;%</td>
@@ -1031,7 +1031,7 @@
 <span id="L969"><span class="lineNum">     969</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L970"><span class="lineNum">     970</span>              : </span>
 <span id="L971"><span class="lineNum">     971</span>              : void set_thread_name(const char* name)</span>
-<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC tlaBgGNC">          39 : {</span></span>
+<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC tlaBgGNC">          40 : {</span></span>
 <span id="L973"><span class="lineNum">     973</span>              : #if (UV_VERSION_MAJOR &gt; 1) || ((UV_VERSION_MAJOR == 1) &amp;&amp; (UV_VERSION_MINOR &gt;= 50))</span>
 <span id="L974"><span class="lineNum">     974</span>              :         const int err = uv_thread_setname(name);</span>
 <span id="L975"><span class="lineNum">     975</span>              :         if (err) {</span>
@@ -1043,9 +1043,9 @@
 <span id="L981"><span class="lineNum">     981</span>              :                 LOGERR(1, &quot;pthread_setname_np failed for &quot; &lt;&lt; name &lt;&lt; &quot;, error &quot; &lt;&lt; err);</span>
 <span id="L982"><span class="lineNum">     982</span>              :         }</span>
 <span id="L983"><span class="lineNum">     983</span>              : #else</span>
-<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">          39 :         (void)name;</span></span>
-<span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">          39 : #endif</span></span>
-<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">          39 : }</span></span>
+<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">          40 :         (void)name;</span></span>
+<span id="L985"><span class="lineNum">     985</span> <span class="tlaGNC">          40 : #endif</span></span>
+<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">          40 : }</span></span>
 <span id="L987"><span class="lineNum">     987</span>              : </span>
 <span id="L988"><span class="lineNum">     988</span>              : void init_uv()</span>
 <span id="L989"><span class="lineNum">     989</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>

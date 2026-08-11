@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-10 15:34:52</td>
+            <td class="headerValue">2026-08-11 10:52:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">13.9&nbsp;%</td>
@@ -139,28 +139,28 @@
 <span id="L77"><span class="lineNum">      77</span>              : </span>
 <span id="L78"><span class="lineNum">      78</span>              :         template&lt;typename T, unsigned int base = 10&gt;</span>
 <span id="L79"><span class="lineNum">      79</span>              :         NOINLINE void writeInt(T data)</span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        5188 :         {</span></span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        5188 :                 static_assert(1 &lt; base &amp;&amp; base &lt;= 64, &quot;Invalid base&quot;);</span></span>
+<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">        5189 :         {</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        5189 :                 static_assert(1 &lt; base &amp;&amp; base &lt;= 64, &quot;Invalid base&quot;);</span></span>
 <span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        5188 :                 const bool negative = is_negative(data);</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">        5188 :                 std::make_unsigned_t&lt;T&gt; udata = abs(data);</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">        5189 :                 const bool negative = is_negative(data);</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">        5189 :                 std::make_unsigned_t&lt;T&gt; udata = abs(data);</span></span>
 <span id="L85"><span class="lineNum">      85</span>              : </span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        5188 :                 char buf[80];</span></span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        5188 :                 size_t k = sizeof(buf);</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        5188 :                 int w = std::min&lt;int&gt;(m_numberWidth, static_cast&lt;int&gt;(sizeof(buf)));</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">        5189 :                 char buf[80];</span></span>
+<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        5189 :                 size_t k = sizeof(buf);</span></span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        5189 :                 int w = std::min&lt;int&gt;(m_numberWidth, static_cast&lt;int&gt;(sizeof(buf)));</span></span>
 <span id="L89"><span class="lineNum">      89</span>              : </span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       14793 :                 do {</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       14793 :                         buf[--k] = &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;[udata % base];</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       14793 :                         udata /= base;</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       14793 :                         --w;</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       14793 :                 } while (udata || (w &gt; 0));</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       14795 :                 do {</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       14795 :                         buf[--k] = &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;[udata % base];</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       14795 :                         udata /= base;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       14795 :                         --w;</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       14795 :                 } while (udata || (w &gt; 0));</span></span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
-<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        5188 :                 if (negative) {</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        5189 :                 if (negative) {</span></span>
 <span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">        1025 :                         buf[--k] = '-';</span></span>
 <span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">        1025 :                 }</span></span>
 <span id="L99"><span class="lineNum">      99</span>              : </span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">        5188 :                 writeBuf(buf + k, sizeof(buf) - k);</span></span>
-<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        5188 :         }</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">        5189 :                 writeBuf(buf + k, sizeof(buf) - k);</span></span>
+<span id="L101"><span class="lineNum">     101</span> <span class="tlaGNC">        5189 :         }</span></span>
 <span id="L102"><span class="lineNum">     102</span>              : </span>
 <span id="L103"><span class="lineNum">     103</span>              :         FORCEINLINE void writeBuf(const char* buf, size_t n0)</span>
 <span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">       11578 :         {</span></span>

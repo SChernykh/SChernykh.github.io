@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">26</td>
-            <td class="headerCovTableEntry">26</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">24</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-10 15:34:52</td>
+            <td class="headerValue">2026-08-11 10:52:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">36.8&nbsp;%</td>
-            <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntryLo">29.4&nbsp;%</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -85,14 +85,14 @@
 <span id="L23"><span class="lineNum">      23</span>              : #include &lt;map&gt;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : #if defined(_DEBUG) || defined(DEV_DEBUG)</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       35203 : #define POOL_BLOCK_DEBUG 1</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       36155 : #define POOL_BLOCK_DEBUG 1</span></span>
 <span id="L27"><span class="lineNum">      27</span>              : #else</span>
 <span id="L28"><span class="lineNum">      28</span>              : #define POOL_BLOCK_DEBUG 0</span>
 <span id="L29"><span class="lineNum">      29</span>              : #endif</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              : namespace p2pool {</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       35203 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       36155 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : class RandomX_Hasher_Base;</span>
 <span id="L36"><span class="lineNum">      36</span>              : class SideChain;</span>
@@ -171,139 +171,154 @@
 <span id="L109"><span class="lineNum">     109</span>              :         // Miner transaction</span>
 <span id="L110"><span class="lineNum">     110</span>              :         uint64_t m_txinGenHeight;</span>
 <span id="L111"><span class="lineNum">     111</span>              : </span>
-<span id="L112"><span class="lineNum">     112</span>              :         struct TxOutput</span>
-<span id="L113"><span class="lineNum">     113</span>              :         {</span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">     6681895 :                 FORCEINLINE TxOutput() : m_reward(0), m_viewTag(0) {}</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">        9602 :                 FORCEINLINE TxOutput(uint64_t r, uint8_t view_tag) : m_reward(r), m_viewTag(view_tag) {}</span></span>
-<span id="L116"><span class="lineNum">     116</span>              : </span>
-<span id="L117"><span class="lineNum">     117</span>              :                 uint64_t m_reward : 56;</span>
-<span id="L118"><span class="lineNum">     118</span>              :                 uint64_t m_viewTag : 8;</span>
+<span id="L112"><span class="lineNum">     112</span>              :         std::vector&lt;indexed_hash&gt; m_ephPublicKeys;</span>
+<span id="L113"><span class="lineNum">     113</span>              :         std::vector&lt;uint64_t&gt; m_outputAmounts;</span>
+<span id="L114"><span class="lineNum">     114</span>              :         std::vector&lt;uint8_t&gt; m_viewTags;</span>
+<span id="L115"><span class="lineNum">     115</span>              : </span>
+<span id="L116"><span class="lineNum">     116</span>              :         struct carrot_view_tag</span>
+<span id="L117"><span class="lineNum">     117</span>              :         {</span>
+<span id="L118"><span class="lineNum">     118</span>              :                 uint8_t bytes[CARROT_VIEW_TAG_BYTES];</span>
 <span id="L119"><span class="lineNum">     119</span>              :         };</span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
-<span id="L121"><span class="lineNum">     121</span>              :         static_assert(sizeof(TxOutput) == sizeof(uint64_t), &quot;TxOutput bit packing didn't work with this compiler, fix the code!&quot;);</span>
-<span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span>              :         std::vector&lt;indexed_hash&gt; m_ephPublicKeys;</span>
-<span id="L124"><span class="lineNum">     124</span>              :         std::vector&lt;TxOutput&gt; m_outputAmounts;</span>
+<span id="L121"><span class="lineNum">     121</span>              :         static_assert(sizeof(carrot_view_tag) == CARROT_VIEW_TAG_BYTES);</span>
+<span id="L122"><span class="lineNum">     122</span>              :         static_assert(alignof(carrot_view_tag) == 1);</span>
+<span id="L123"><span class="lineNum">     123</span>              : </span>
+<span id="L124"><span class="lineNum">     124</span>              :         std::vector&lt;carrot_view_tag&gt; m_carrotViewTags;</span>
 <span id="L125"><span class="lineNum">     125</span>              : </span>
-<span id="L126"><span class="lineNum">     126</span>              :         hash m_txkeyPub;</span>
-<span id="L127"><span class="lineNum">     127</span>              :         uint64_t m_extraNonceSize;</span>
-<span id="L128"><span class="lineNum">     128</span>              :         uint32_t m_extraNonce;</span>
-<span id="L129"><span class="lineNum">     129</span>              : </span>
-<span id="L130"><span class="lineNum">     130</span>              :         uint32_t m_merkleTreeDataSize;</span>
-<span id="L131"><span class="lineNum">     131</span>              :         uint64_t m_merkleTreeData;</span>
-<span id="L132"><span class="lineNum">     132</span>              :         root_hash m_merkleRoot;</span>
+<span id="L126"><span class="lineNum">     126</span>              :         struct alignas(CARROT_JANUS_ANCHOR_BYTES) carrot_janus_anchor</span>
+<span id="L127"><span class="lineNum">     127</span>              :         {</span>
+<span id="L128"><span class="lineNum">     128</span>              :                 uint8_t bytes[CARROT_JANUS_ANCHOR_BYTES];</span>
+<span id="L129"><span class="lineNum">     129</span>              :         };</span>
+<span id="L130"><span class="lineNum">     130</span>              : </span>
+<span id="L131"><span class="lineNum">     131</span>              :         static_assert(sizeof(carrot_janus_anchor) == CARROT_JANUS_ANCHOR_BYTES);</span>
+<span id="L132"><span class="lineNum">     132</span>              :         static_assert(alignof(carrot_janus_anchor) == CARROT_JANUS_ANCHOR_BYTES);</span>
 <span id="L133"><span class="lineNum">     133</span>              : </span>
-<span id="L134"><span class="lineNum">     134</span>              :         // All block transaction hashes including the miner transaction hash at index 0</span>
-<span id="L135"><span class="lineNum">     135</span>              :         std::vector&lt;indexed_hash&gt; m_transactions;</span>
-<span id="L136"><span class="lineNum">     136</span>              : </span>
-<span id="L137"><span class="lineNum">     137</span>              :         // Miner's wallet</span>
-<span id="L138"><span class="lineNum">     138</span>              :         Wallet m_minerWallet{ nullptr };</span>
+<span id="L134"><span class="lineNum">     134</span>              :         std::vector&lt;carrot_janus_anchor&gt; m_carrotJanusAnchors;</span>
+<span id="L135"><span class="lineNum">     135</span>              : </span>
+<span id="L136"><span class="lineNum">     136</span>              :         hash m_txkeyPub;</span>
+<span id="L137"><span class="lineNum">     137</span>              :         uint64_t m_extraNonceSize;</span>
+<span id="L138"><span class="lineNum">     138</span>              :         uint32_t m_extraNonce;</span>
 <span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span>              :         // Transaction secret key</span>
-<span id="L141"><span class="lineNum">     141</span>              :         // Required to check that pub keys in the miner transaction pay out to correct miner wallet addresses</span>
-<span id="L142"><span class="lineNum">     142</span>              :         hash m_txkeySecSeed;</span>
-<span id="L143"><span class="lineNum">     143</span>              :         hash m_txkeySec;</span>
-<span id="L144"><span class="lineNum">     144</span>              : </span>
-<span id="L145"><span class="lineNum">     145</span>              :         // Side-chain parent and uncle blocks</span>
-<span id="L146"><span class="lineNum">     146</span>              :         hash m_parent;</span>
-<span id="L147"><span class="lineNum">     147</span>              :         std::vector&lt;hash&gt; m_uncles;</span>
-<span id="L148"><span class="lineNum">     148</span>              : </span>
-<span id="L149"><span class="lineNum">     149</span>              :         // Blockchain data</span>
-<span id="L150"><span class="lineNum">     150</span>              :         uint64_t m_sidechainHeight;</span>
-<span id="L151"><span class="lineNum">     151</span>              :         difficulty_type m_difficulty;</span>
-<span id="L152"><span class="lineNum">     152</span>              :         difficulty_type m_cumulativeDifficulty;</span>
-<span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span>              :         // Merkle proof for merge mining</span>
-<span id="L155"><span class="lineNum">     155</span>              :         std::vector&lt;hash&gt; m_merkleProof;</span>
-<span id="L156"><span class="lineNum">     156</span>              : </span>
-<span id="L157"><span class="lineNum">     157</span>              :         // Merge mining extra data</span>
-<span id="L158"><span class="lineNum">     158</span>              :         //</span>
-<span id="L159"><span class="lineNum">     159</span>              :         // Format: vector of (chain ID, chain data) pairs</span>
-<span id="L160"><span class="lineNum">     160</span>              :         //</span>
-<span id="L161"><span class="lineNum">     161</span>              :         // Chain data always has merge mining hash and difficulty (two varints for low and high 64 bits) in the beginning, the rest is arbitrary and depends on the merge mined chain's requirements</span>
-<span id="L162"><span class="lineNum">     162</span>              :         //</span>
-<span id="L163"><span class="lineNum">     163</span>              :         // Some chain IDs are used for other purposes:</span>
-<span id="L164"><span class="lineNum">     164</span>              :         //</span>
-<span id="L165"><span class="lineNum">     165</span>              :         // - keccak(&quot;subaddress_viewpub&quot;) stores the public viewkey part of the subaddress, if it's used for mining (&quot;merge mining hash&quot; = viewkey, &quot;difficulty&quot; = 0,0)</span>
-<span id="L166"><span class="lineNum">     166</span>              :         //</span>
-<span id="L167"><span class="lineNum">     167</span>              :         std::map&lt;hash, std::vector&lt;uint8_t&gt;&gt; m_mergeMiningExtra;</span>
-<span id="L168"><span class="lineNum">     168</span>              : </span>
-<span id="L169"><span class="lineNum">     169</span>              :         // Arbitrary extra data</span>
-<span id="L170"><span class="lineNum">     170</span>              :         uint32_t m_sidechainExtraBuf[4];</span>
-<span id="L171"><span class="lineNum">     171</span>              : </span>
-<span id="L172"><span class="lineNum">     172</span>              :         // HASH (see diagram in the comment above)</span>
-<span id="L173"><span class="lineNum">     173</span>              :         hash m_sidechainId;</span>
-<span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span>              :         // Just temporary stuff, not a part of the block</span>
-<span id="L176"><span class="lineNum">     176</span>              :         uint64_t m_depth;</span>
-<span id="L177"><span class="lineNum">     177</span>              : </span>
-<span id="L178"><span class="lineNum">     178</span>              :         bool m_verified;</span>
-<span id="L179"><span class="lineNum">     179</span>              :         bool m_invalid;</span>
-<span id="L180"><span class="lineNum">     180</span>              : </span>
-<span id="L181"><span class="lineNum">     181</span>              :         mutable bool m_broadcasted;</span>
-<span id="L182"><span class="lineNum">     182</span>              :         mutable bool m_wantBroadcast;</span>
-<span id="L183"><span class="lineNum">     183</span>              : </span>
-<span id="L184"><span class="lineNum">     184</span>              :         bool m_precalculated;</span>
-<span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span>              :         static ReadWriteLock* s_precalculatedSharesLock;</span>
-<span id="L187"><span class="lineNum">     187</span>              :         std::vector&lt;MinerShare&gt; m_precalculatedShares;</span>
-<span id="L188"><span class="lineNum">     188</span>              : </span>
-<span id="L189"><span class="lineNum">     189</span>              :         uint64_t m_localTimestamp;</span>
-<span id="L190"><span class="lineNum">     190</span>              :         uint64_t m_receivedTimestamp;</span>
-<span id="L191"><span class="lineNum">     191</span>              : </span>
-<span id="L192"><span class="lineNum">     192</span>              :         std::vector&lt;AuxChainData&gt; m_auxChains;</span>
-<span id="L193"><span class="lineNum">     193</span>              :         uint32_t m_auxNonce;</span>
-<span id="L194"><span class="lineNum">     194</span>              : </span>
-<span id="L195"><span class="lineNum">     195</span>              :         std::vector&lt;uint8_t&gt; m_hashingBlob;</span>
-<span id="L196"><span class="lineNum">     196</span>              :         hash m_powHash;</span>
-<span id="L197"><span class="lineNum">     197</span>              :         hash m_seed;</span>
+<span id="L140"><span class="lineNum">     140</span>              :         uint32_t m_merkleTreeDataSize;</span>
+<span id="L141"><span class="lineNum">     141</span>              :         uint64_t m_merkleTreeData;</span>
+<span id="L142"><span class="lineNum">     142</span>              :         root_hash m_merkleRoot;</span>
+<span id="L143"><span class="lineNum">     143</span>              : </span>
+<span id="L144"><span class="lineNum">     144</span>              :         // All block transaction hashes</span>
+<span id="L145"><span class="lineNum">     145</span>              :         std::vector&lt;indexed_hash&gt; m_transactions;</span>
+<span id="L146"><span class="lineNum">     146</span>              : </span>
+<span id="L147"><span class="lineNum">     147</span>              :         uint8_t m_fcmp_pp_n_tree_layers;</span>
+<span id="L148"><span class="lineNum">     148</span>              :         hash m_fcmp_pp_tree_root;</span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span>              :         // Miner's wallet</span>
+<span id="L151"><span class="lineNum">     151</span>              :         Wallet m_minerWallet{ nullptr };</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              :         // Transaction secret key</span>
+<span id="L154"><span class="lineNum">     154</span>              :         // Required to check that pub keys in the miner transaction pay out to correct miner wallet addresses</span>
+<span id="L155"><span class="lineNum">     155</span>              :         hash m_txkeySecSeed;</span>
+<span id="L156"><span class="lineNum">     156</span>              :         hash m_txkeySec;</span>
+<span id="L157"><span class="lineNum">     157</span>              : </span>
+<span id="L158"><span class="lineNum">     158</span>              :         // Side-chain parent and uncle blocks</span>
+<span id="L159"><span class="lineNum">     159</span>              :         hash m_parent;</span>
+<span id="L160"><span class="lineNum">     160</span>              :         std::vector&lt;hash&gt; m_uncles;</span>
+<span id="L161"><span class="lineNum">     161</span>              : </span>
+<span id="L162"><span class="lineNum">     162</span>              :         // Blockchain data</span>
+<span id="L163"><span class="lineNum">     163</span>              :         uint64_t m_sidechainHeight;</span>
+<span id="L164"><span class="lineNum">     164</span>              :         difficulty_type m_difficulty;</span>
+<span id="L165"><span class="lineNum">     165</span>              :         difficulty_type m_cumulativeDifficulty;</span>
+<span id="L166"><span class="lineNum">     166</span>              : </span>
+<span id="L167"><span class="lineNum">     167</span>              :         // Merkle proof for merge mining</span>
+<span id="L168"><span class="lineNum">     168</span>              :         std::vector&lt;hash&gt; m_merkleProof;</span>
+<span id="L169"><span class="lineNum">     169</span>              : </span>
+<span id="L170"><span class="lineNum">     170</span>              :         // Merge mining extra data</span>
+<span id="L171"><span class="lineNum">     171</span>              :         //</span>
+<span id="L172"><span class="lineNum">     172</span>              :         // Format: vector of (chain ID, chain data) pairs</span>
+<span id="L173"><span class="lineNum">     173</span>              :         //</span>
+<span id="L174"><span class="lineNum">     174</span>              :         // Chain data always has merge mining hash and difficulty (two varints for low and high 64 bits) in the beginning, the rest is arbitrary and depends on the merge mined chain's requirements</span>
+<span id="L175"><span class="lineNum">     175</span>              :         //</span>
+<span id="L176"><span class="lineNum">     176</span>              :         // Some chain IDs are used for other purposes:</span>
+<span id="L177"><span class="lineNum">     177</span>              :         //</span>
+<span id="L178"><span class="lineNum">     178</span>              :         // - keccak(&quot;subaddress_viewpub&quot;) stores the public viewkey part of the subaddress, if it's used for mining (&quot;merge mining hash&quot; = viewkey, &quot;difficulty&quot; = 0,0)</span>
+<span id="L179"><span class="lineNum">     179</span>              :         //</span>
+<span id="L180"><span class="lineNum">     180</span>              :         std::map&lt;hash, std::vector&lt;uint8_t&gt;&gt; m_mergeMiningExtra;</span>
+<span id="L181"><span class="lineNum">     181</span>              : </span>
+<span id="L182"><span class="lineNum">     182</span>              :         // Arbitrary extra data</span>
+<span id="L183"><span class="lineNum">     183</span>              :         uint32_t m_sidechainExtraBuf[4];</span>
+<span id="L184"><span class="lineNum">     184</span>              : </span>
+<span id="L185"><span class="lineNum">     185</span>              :         // HASH (see diagram in the comment above)</span>
+<span id="L186"><span class="lineNum">     186</span>              :         hash m_sidechainId;</span>
+<span id="L187"><span class="lineNum">     187</span>              : </span>
+<span id="L188"><span class="lineNum">     188</span>              :         // Just temporary stuff, not a part of the block</span>
+<span id="L189"><span class="lineNum">     189</span>              :         uint64_t m_depth;</span>
+<span id="L190"><span class="lineNum">     190</span>              : </span>
+<span id="L191"><span class="lineNum">     191</span>              :         bool m_verified;</span>
+<span id="L192"><span class="lineNum">     192</span>              :         bool m_invalid;</span>
+<span id="L193"><span class="lineNum">     193</span>              : </span>
+<span id="L194"><span class="lineNum">     194</span>              :         mutable bool m_broadcasted;</span>
+<span id="L195"><span class="lineNum">     195</span>              :         mutable bool m_wantBroadcast;</span>
+<span id="L196"><span class="lineNum">     196</span>              : </span>
+<span id="L197"><span class="lineNum">     197</span>              :         bool m_precalculated;</span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span>              :         // Used to speed up SideChain::get_difficulty</span>
-<span id="L200"><span class="lineNum">     200</span>              :         mutable difficulty_type m_cachedNextDifficulty;</span>
+<span id="L199"><span class="lineNum">     199</span>              :         static ReadWriteLock* s_precalculatedSharesLock;</span>
+<span id="L200"><span class="lineNum">     200</span>              :         std::vector&lt;MinerShare&gt; m_precalculatedShares;</span>
 <span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span>              :         std::vector&lt;uint8_t&gt; serialize_mainchain_data(size_t* header_size = nullptr, size_t* miner_tx_size = nullptr, int* outputs_offset = nullptr, int* outputs_blob_size = nullptr, const uint32_t* nonce = nullptr, const uint32_t* extra_nonce = nullptr) const;</span>
-<span id="L203"><span class="lineNum">     203</span>              :         std::vector&lt;uint8_t&gt; serialize_sidechain_data() const;</span>
+<span id="L202"><span class="lineNum">     202</span>              :         uint64_t m_localTimestamp;</span>
+<span id="L203"><span class="lineNum">     203</span>              :         uint64_t m_receivedTimestamp;</span>
 <span id="L204"><span class="lineNum">     204</span>              : </span>
-<span id="L205"><span class="lineNum">     205</span>              :         [[nodiscard]] int deserialize(const uint8_t* data, size_t size, const SideChain&amp; sidechain, bool compact, bool allow_pruned);</span>
-<span id="L206"><span class="lineNum">     206</span>              :         void reset_offchain_data();</span>
+<span id="L205"><span class="lineNum">     205</span>              :         std::vector&lt;AuxChainData&gt; m_auxChains;</span>
+<span id="L206"><span class="lineNum">     206</span>              :         uint32_t m_auxNonce;</span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
-<span id="L208"><span class="lineNum">     208</span>              :         bool get_pow_hash(RandomX_Hasher_Base* hasher, uint64_t height, const hash&amp; seed_hash, hash&amp; pow_hash, bool force_light_mode, size_t lane);</span>
-<span id="L209"><span class="lineNum">     209</span>              : </span>
-<span id="L210"><span class="lineNum">     210</span>              :         uint64_t get_payout(const Wallet&amp; w) const;</span>
+<span id="L208"><span class="lineNum">     208</span>              :         std::vector&lt;uint8_t&gt; m_hashingBlob;</span>
+<span id="L209"><span class="lineNum">     209</span>              :         hash m_powHash;</span>
+<span id="L210"><span class="lineNum">     210</span>              :         hash m_seed;</span>
 <span id="L211"><span class="lineNum">     211</span>              : </span>
-<span id="L212"><span class="lineNum">     212</span>              :         typedef std::array&lt;uint8_t, HASH_SIZE + NONCE_SIZE + EXTRA_NONCE_SIZE&gt; full_id;</span>
-<span id="L213"><span class="lineNum">     213</span>              : </span>
-<span id="L214"><span class="lineNum">     214</span>              :         FORCEINLINE full_id get_full_id() const</span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">        6721 :         {</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">        6721 :                 full_id key;</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">        6721 :                 uint8_t* p = key.data();</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">        6721 :                 memcpy(p, m_sidechainId.h, HASH_SIZE);</span></span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">        6721 :                 memcpy(p + HASH_SIZE, &amp;m_nonce, NONCE_SIZE);</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">        6721 :                 memcpy(p + HASH_SIZE + NONCE_SIZE, &amp;m_extraNonce, EXTRA_NONCE_SIZE);</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">        6721 :                 return key;</span></span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">        6721 :         }</span></span>
-<span id="L223"><span class="lineNum">     223</span>              : </span>
-<span id="L224"><span class="lineNum">     224</span>              :         hash calculate_tx_key_seed() const;</span>
-<span id="L225"><span class="lineNum">     225</span>              : </span>
-<span id="L226"><span class="lineNum">     226</span>              :         static FORCEINLINE uint64_t encode_merkle_tree_data(uint32_t n_aux_chains, uint32_t nonce)</span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       23120 :         {</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">       23120 :                 uint32_t n_bits = 1U;</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">      121578 :                 while (((1U &lt;&lt; n_bits) &lt; n_aux_chains) &amp;&amp; (n_bits &lt; 8)) {</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">       98458 :                         ++n_bits;</span></span>
-<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">       98458 :                 }</span></span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">       23120 :                 return (n_bits - 1U) | ((n_aux_chains - 1U) &lt;&lt; 3U) | (static_cast&lt;uint64_t&gt;(nonce) &lt;&lt; (3U + n_bits));</span></span>
-<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">       23120 :         }</span></span>
-<span id="L234"><span class="lineNum">     234</span>              : </span>
-<span id="L235"><span class="lineNum">     235</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">       56653 :         {</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">       56653 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">       56653 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
-<span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">       56653 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">       56653 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       56653 :         }</span></span>
-<span id="L242"><span class="lineNum">     242</span>              : };</span>
-<span id="L243"><span class="lineNum">     243</span>              : </span>
-<span id="L244"><span class="lineNum">     244</span>              : } // namespace p2pool</span>
+<span id="L212"><span class="lineNum">     212</span>              :         // Used to speed up SideChain::get_difficulty</span>
+<span id="L213"><span class="lineNum">     213</span>              :         mutable difficulty_type m_cachedNextDifficulty;</span>
+<span id="L214"><span class="lineNum">     214</span>              : </span>
+<span id="L215"><span class="lineNum">     215</span>              :         hash m_coinbase_tx_hash;</span>
+<span id="L216"><span class="lineNum">     216</span>              : </span>
+<span id="L217"><span class="lineNum">     217</span>              :         std::vector&lt;uint8_t&gt; serialize_mainchain_data(size_t* header_size = nullptr, size_t* miner_tx_size = nullptr, int* outputs_offset = nullptr, int* outputs_blob_size = nullptr, const uint32_t* nonce = nullptr, const uint32_t* extra_nonce = nullptr) const;</span>
+<span id="L218"><span class="lineNum">     218</span>              :         std::vector&lt;uint8_t&gt; serialize_sidechain_data() const;</span>
+<span id="L219"><span class="lineNum">     219</span>              : </span>
+<span id="L220"><span class="lineNum">     220</span>              :         [[nodiscard]] int deserialize(const uint8_t* data, size_t size, const SideChain&amp; sidechain, bool compact, bool allow_pruned);</span>
+<span id="L221"><span class="lineNum">     221</span>              :         void reset_offchain_data();</span>
+<span id="L222"><span class="lineNum">     222</span>              : </span>
+<span id="L223"><span class="lineNum">     223</span>              :         bool get_pow_hash(RandomX_Hasher_Base* hasher, uint64_t height, const hash&amp; seed_hash, hash&amp; pow_hash, bool force_light_mode, size_t lane);</span>
+<span id="L224"><span class="lineNum">     224</span>              : </span>
+<span id="L225"><span class="lineNum">     225</span>              :         uint64_t get_payout(const Wallet&amp; w) const;</span>
+<span id="L226"><span class="lineNum">     226</span>              : </span>
+<span id="L227"><span class="lineNum">     227</span>              :         typedef std::array&lt;uint8_t, HASH_SIZE + NONCE_SIZE + EXTRA_NONCE_SIZE&gt; full_id;</span>
+<span id="L228"><span class="lineNum">     228</span>              : </span>
+<span id="L229"><span class="lineNum">     229</span>              :         FORCEINLINE full_id get_full_id() const</span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">        6721 :         {</span></span>
+<span id="L231"><span class="lineNum">     231</span> <span class="tlaGNC">        6721 :                 full_id key;</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">        6721 :                 uint8_t* p = key.data();</span></span>
+<span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">        6721 :                 memcpy(p, m_sidechainId.h, HASH_SIZE);</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">        6721 :                 memcpy(p + HASH_SIZE, &amp;m_nonce, NONCE_SIZE);</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">        6721 :                 memcpy(p + HASH_SIZE + NONCE_SIZE, &amp;m_extraNonce, EXTRA_NONCE_SIZE);</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">        6721 :                 return key;</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">        6721 :         }</span></span>
+<span id="L238"><span class="lineNum">     238</span>              : </span>
+<span id="L239"><span class="lineNum">     239</span>              :         hash calculate_tx_key_seed() const;</span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              :         static FORCEINLINE uint64_t encode_merkle_tree_data(uint32_t n_aux_chains, uint32_t nonce)</span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">       23120 :         {</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       23120 :                 uint32_t n_bits = 1U;</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">      121578 :                 while (((1U &lt;&lt; n_bits) &lt; n_aux_chains) &amp;&amp; (n_bits &lt; 8)) {</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       98458 :                         ++n_bits;</span></span>
+<span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">       98458 :                 }</span></span>
+<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       23120 :                 return (n_bits - 1U) | ((n_aux_chains - 1U) &lt;&lt; 3U) | (static_cast&lt;uint64_t&gt;(nonce) &lt;&lt; (3U + n_bits));</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       23120 :         }</span></span>
+<span id="L249"><span class="lineNum">     249</span>              : </span>
+<span id="L250"><span class="lineNum">     250</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">       56653 :         {</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       56653 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       56653 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">       56653 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       56653 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">       56653 :         }</span></span>
+<span id="L257"><span class="lineNum">     257</span>              : };</span>
+<span id="L258"><span class="lineNum">     258</span>              : </span>
+<span id="L259"><span class="lineNum">     259</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
