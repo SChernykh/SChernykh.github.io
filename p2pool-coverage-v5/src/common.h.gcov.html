@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-11 10:52:33</td>
+            <td class="headerValue">2026-08-11 12:03:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">88.7&nbsp;%</td>
@@ -200,7 +200,7 @@
 <span id="L138"><span class="lineNum">     138</span>              : constexpr uint8_t TX_VERSION = 2;</span>
 <span id="L139"><span class="lineNum">     139</span>              : constexpr uint8_t TXIN_GEN = 0xFF;</span>
 <span id="L140"><span class="lineNum">     140</span>              : constexpr uint8_t TXOUT_TO_TAGGED_KEY = 3;</span>
-<span id="L141"><span class="lineNum">     141</span>              : constexpr uint8_t TXOUT_TO_CARROT_V1 = 0;</span>
+<span id="L141"><span class="lineNum">     141</span>              : constexpr uint8_t TXOUT_TO_CARROT_V1 = 1;</span>
 <span id="L142"><span class="lineNum">     142</span>              : constexpr uint8_t TX_EXTRA_TAG_PUBKEY = 1;</span>
 <span id="L143"><span class="lineNum">     143</span>              : constexpr uint8_t TX_EXTRA_NONCE = 2;</span>
 <span id="L144"><span class="lineNum">     144</span>              : constexpr uint8_t TX_EXTRA_MERGE_MINING_TAG = 3;</span>
@@ -241,7 +241,7 @@
 <span id="L179"><span class="lineNum">     179</span>              : {</span>
 <span id="L180"><span class="lineNum">     180</span>              :         uint8_t h[HASH_SIZE];</span>
 <span id="L181"><span class="lineNum">     181</span>              : </span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">    21592553 :         FORCEINLINE constexpr hash() noexcept : h{} {}</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">    21583315 :         FORCEINLINE constexpr hash() noexcept : h{} {}</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">           1 :         constexpr hash(std::initializer_list&lt;uint8_t&gt; l) noexcept : h{} {</span></span>
 <span id="L185"><span class="lineNum">     185</span> <span class="tlaGNC">           1 :                 auto it = l.begin();</span></span>
@@ -285,25 +285,25 @@
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        5067 :         }</span></span>
 <span id="L224"><span class="lineNum">     224</span>              : </span>
 <span id="L225"><span class="lineNum">     225</span>              :         FORCEINLINE bool operator==(const hash&amp; other) const</span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">   228010966 :         {</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">   228010966 :                 const uint64_t* a = u64();</span></span>
-<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">   228010966 :                 const uint64_t* b = other.u64();</span></span>
-<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">   228010966 :                 return (a[0] == b[0]) &amp;&amp; (a[1] == b[1]) &amp;&amp; (a[2] == b[2]) &amp;&amp; (a[3] == b[3]);</span></span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">   228010966 :         }</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">   228015009 :         {</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">   228015009 :                 const uint64_t* a = u64();</span></span>
+<span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">   228015009 :                 const uint64_t* b = other.u64();</span></span>
+<span id="L229"><span class="lineNum">     229</span> <span class="tlaGNC">   228015009 :                 return (a[0] == b[0]) &amp;&amp; (a[1] == b[1]) &amp;&amp; (a[2] == b[2]) &amp;&amp; (a[3] == b[3]);</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">   228015009 :         }</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : </span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">     3916861 :         FORCEINLINE bool operator!=(const hash&amp; other) const { return !operator==(other); }</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">     3916702 :         FORCEINLINE bool operator!=(const hash&amp; other) const { return !operator==(other); }</span></span>
 <span id="L233"><span class="lineNum">     233</span>              : </span>
-<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">    15843210 :         FORCEINLINE bool empty() const {</span></span>
-<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">    15843210 :                 const uint64_t* a = u64();</span></span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">    15843210 :                 return (a[0] == 0) &amp;&amp; (a[1] == 0) &amp;&amp; (a[2] == 0) &amp;&amp; (a[3] == 0);</span></span>
-<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">    15843210 :         }</span></span>
+<span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">    15842646 :         FORCEINLINE bool empty() const {</span></span>
+<span id="L235"><span class="lineNum">     235</span> <span class="tlaGNC">    15842646 :                 const uint64_t* a = u64();</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">    15842646 :                 return (a[0] == 0) &amp;&amp; (a[1] == 0) &amp;&amp; (a[2] == 0) &amp;&amp; (a[3] == 0);</span></span>
+<span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">    15842646 :         }</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : </span>
 <span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">       40307 :         FORCEINLINE void clear() {</span></span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">       40307 :                 memset(h, 0, HASH_SIZE);</span></span>
 <span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       40307 :         }</span></span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       73306 :         FORCEINLINE uint64_t* u64() { return reinterpret_cast&lt;uint64_t*&gt;(h); }</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">   577172466 :         FORCEINLINE const uint64_t* u64() const { return reinterpret_cast&lt;const uint64_t*&gt;(h); }</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       73307 :         FORCEINLINE uint64_t* u64() { return reinterpret_cast&lt;uint64_t*&gt;(h); }</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">   577174674 :         FORCEINLINE const uint64_t* u64() const { return reinterpret_cast&lt;const uint64_t*&gt;(h); }</span></span>
 <span id="L245"><span class="lineNum">     245</span>              : </span>
 <span id="L246"><span class="lineNum">     246</span>              :         template&lt;int index&gt;</span>
 <span id="L247"><span class="lineNum">     247</span>              :         FORCEINLINE constexpr uint64_t u64() const</span>
@@ -328,7 +328,7 @@
 <span id="L266"><span class="lineNum">     266</span>              : struct root_hash : public hash</span>
 <span id="L267"><span class="lineNum">     267</span>              : {</span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC tlaBgGNC">       80806 :         FORCEINLINE root_hash() : hash() {}</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">       70657 :         explicit FORCEINLINE root_hash(const hash&amp; h) : hash(h) {}</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">       70652 :         explicit FORCEINLINE root_hash(const hash&amp; h) : hash(h) {}</span></span>
 <span id="L270"><span class="lineNum">     270</span>              : };</span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
 <span id="L272"><span class="lineNum">     272</span>              : static_assert(sizeof(hash) == HASH_SIZE, &quot;struct hash has invalid size, check your compiler options&quot;);</span>
@@ -508,7 +508,7 @@
 <span id="L446"><span class="lineNum">     446</span>              :         ~indexed_hash();</span>
 <span id="L447"><span class="lineNum">     447</span>              : </span>
 <span id="L448"><span class="lineNum">     448</span>              :         indexed_hash(const indexed_hash&amp; h) noexcept;</span>
-<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">      698182 :         FORCEINLINE indexed_hash(indexed_hash&amp;&amp; h) noexcept : m_index(h.m_index) { h.m_index = std::numeric_limits&lt;uint32_t&gt;::max(); }</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">      700788 :         FORCEINLINE indexed_hash(indexed_hash&amp;&amp; h) noexcept : m_index(h.m_index) { h.m_index = std::numeric_limits&lt;uint32_t&gt;::max(); }</span></span>
 <span id="L450"><span class="lineNum">     450</span>              : </span>
 <span id="L451"><span class="lineNum">     451</span>              :         indexed_hash&amp; operator=(const indexed_hash&amp; h) noexcept;</span>
 <span id="L452"><span class="lineNum">     452</span>              :         indexed_hash&amp; operator=(indexed_hash&amp;&amp; h) noexcept;</span>
@@ -541,15 +541,15 @@
 <span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">           3 :         }</span></span>
 <span id="L480"><span class="lineNum">     480</span>              : </span>
 <span id="L481"><span class="lineNum">     481</span>              :         FORCEINLINE operator hash() const</span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">     7283636 :         {</span></span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">     7283636 :                 const uint32_t i = m_index;</span></span>
+<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">     7280674 :         {</span></span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">     7280674 :                 const uint32_t i = m_index;</span></span>
 <span id="L484"><span class="lineNum">     484</span>              : </span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">     7283636 :                 if (i == std::numeric_limits&lt;uint32_t&gt;::max()) {</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">     7280674 :                 if (i == std::numeric_limits&lt;uint32_t&gt;::max()) {</span></span>
 <span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">          14 :                         return {};</span></span>
 <span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">          14 :                 }</span></span>
 <span id="L488"><span class="lineNum">     488</span>              : </span>
-<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">     7283622 :                 return get(i);</span></span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">     7283636 :         }</span></span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">     7280660 :                 return get(i);</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">     7280674 :         }</span></span>
 <span id="L491"><span class="lineNum">     491</span>              : </span>
 <span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">        9742 :         FORCEINLINE uint32_t get_bucket() const { return m_index &gt;&gt; BUCKET_SHIFT; }</span></span>
 <span id="L493"><span class="lineNum">     493</span>              : </span>
@@ -560,7 +560,7 @@
 <span id="L498"><span class="lineNum">     498</span>              : private:</span>
 <span id="L499"><span class="lineNum">     499</span>              :         uint32_t m_index;</span>
 <span id="L500"><span class="lineNum">     500</span>              : </span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">     8326691 :         static FORCEINLINE uint32_t get_bucket(const hash&amp; h) { return h.u64()[3] &gt;&gt; (64 - BUCKET_BITS); }</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">     8329294 :         static FORCEINLINE uint32_t get_bucket(const hash&amp; h) { return h.u64()[3] &gt;&gt; (64 - BUCKET_BITS); }</span></span>
 <span id="L502"><span class="lineNum">     502</span>              : </span>
 <span id="L503"><span class="lineNum">     503</span>              :         static hash get(uint32_t index);</span>
 <span id="L504"><span class="lineNum">     504</span>              :         static bool is_same(uint32_t index, uint32_t bucket, const hash&amp; h);</span>

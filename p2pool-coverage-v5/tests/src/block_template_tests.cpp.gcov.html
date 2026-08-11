@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-11 10:52:33</td>
+            <td class="headerValue">2026-08-11 12:03:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -182,9 +182,9 @@
 <span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_sidechainId, H(&quot;5fcd597c6061bae558c25e85435766b20e411265032dc401652a53524165f56a&quot;));</span></span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_transactions.size(), 202);</span></span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
-<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         202 :         for (size_t i = 1; i &lt; b-&gt;m_transactions.size(); ++i) {</span></span>
-<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         201 :                 ASSERT_GE(static_cast&lt;hash&gt;(b-&gt;m_transactions[i]).u64()[0], 256);</span></span>
-<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         201 :         }</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">         203 :         for (size_t i = 0; i &lt; b-&gt;m_transactions.size(); ++i) {</span></span>
+<span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         202 :                 ASSERT_GE(static_cast&lt;hash&gt;(b-&gt;m_transactions[i]).u64()[0], 256);</span></span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         202 :         }</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : </span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">           1 :         tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>
