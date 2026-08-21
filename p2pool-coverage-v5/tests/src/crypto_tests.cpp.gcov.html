@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-19 12:17:25</td>
+            <td class="headerValue">2026-08-21 11:02:10</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -314,7 +314,7 @@
 <span id="L252"><span class="lineNum">     252</span>              : </span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">           1 :         s &lt;&lt; gen_janus_anchor(txkey_sec, 0, w);</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span>              :         ASSERT_EQ(memcmp(buf, &quot;69408f4a8e57cc31408f90ff5fc958a6&quot;, CARROT_JANUS_ANCHOR_BYTES * 2), 0);</span>
+<span id="L255"><span class="lineNum">     255</span>              :         ASSERT_EQ(std::string_view(buf, CARROT_JANUS_ANCHOR_BYTES * 2), &quot;b45ba3471efd4d621b70009b48e2dc73&quot;);</span>
 <span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
 <span id="L258"><span class="lineNum">     258</span>              : }</span>
