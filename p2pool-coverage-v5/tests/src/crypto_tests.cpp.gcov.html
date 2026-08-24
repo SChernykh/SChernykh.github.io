@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">172</td>
-            <td class="headerCovTableEntry">172</td>
+            <td class="headerCovTableEntry">206</td>
+            <td class="headerCovTableEntry">206</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-23 11:35:17</td>
+            <td class="headerValue">2026-08-24 10:52:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">4</td>
+            <td class="headerCovTableEntry">4</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -304,20 +304,63 @@
 <span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">           1 : #endif</span></span>
 <span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L244"><span class="lineNum">     244</span>              : </span>
-<span id="L245"><span class="lineNum">     245</span>              : TEST(crypto, gen_janus_anchor)</span>
+<span id="L245"><span class="lineNum">     245</span>              : TEST(crypto, t_base_table)</span>
 <span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           1 : {</span></span>
-<span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           1 :         constexpr hash txkey_sec = keccak(&quot;gen_janus_anchor test&quot;);</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">           1 :         Wallet w(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
-<span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">           1 :         char buf[CARROT_JANUS_ANCHOR_BYTES * 2 + 1] = {};</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           1 :         log::Stream s(buf);</span></span>
+<span id="L247"><span class="lineNum">     247</span>              :         // unbiased_hash_to_ec(keccak(&quot;Monero Generator T&quot;))</span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">           1 :         constexpr uint8_t T_bytes[32] = {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">           1 :                 97, 183, 54, 206, 147, 182, 42, 61, 55, 120, 171, 32, 77, 168, 93, 59,</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">           1 :                 76, 220, 7, 37, 15, 93, 167, 227, 223, 38, 41, 146, 129, 52, 213, 38</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">           1 :         };</span></span>
 <span id="L252"><span class="lineNum">     252</span>              : </span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">           1 :         s &lt;&lt; gen_janus_anchor(txkey_sec, 0, w);</span></span>
-<span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span>              :         ASSERT_EQ(std::string_view(buf, CARROT_JANUS_ANCHOR_BYTES * 2), &quot;b45ba3471efd4d621b70009b48e2dc73&quot;);</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L257"><span class="lineNum">     257</span>              : </span>
-<span id="L258"><span class="lineNum">     258</span>              : }</span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">           1 :         ge_p3 T;</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">           1 :         ASSERT_EQ(ge_frombytes_vartime(&amp;T, T_bytes), 0);</span></span>
+<span id="L255"><span class="lineNum">     255</span>              : </span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">          33 :         for (size_t i = 0; i &lt; 32; ++i) {</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">         288 :                 for (size_t j = 0; j &lt; 8; ++j) {</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">         256 :                         uint8_t scalar[32] = {};</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">         256 :                         scalar[i] = static_cast&lt;uint8_t&gt;(j + 1);</span></span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">         256 :                         ge_p2 expected;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         256 :                         ge_scalarmult(&amp;expected, scalar, &amp;T);</span></span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">         256 :                         const ge_precomp&amp; entry = ge_T_base[i][j];</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">         256 :                         ge_p3 actual;</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">         256 :                         fe_add(actual.Y, entry.yplusx, entry.yminusx);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">         256 :                         fe_mul(actual.Y, actual.Y, fe_inv2);</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         256 :                         fe_sub(actual.X, entry.yplusx, entry.yminusx);</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">         256 :                         fe_mul(actual.X, actual.X, fe_inv2);</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">         256 :                         fe_1(actual.Z);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">         256 :                         fe_mul(actual.T, actual.X, actual.Y);</span></span>
+<span id="L272"><span class="lineNum">     272</span>              : </span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">         256 :                         uint8_t expected_bytes[32];</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">         256 :                         uint8_t actual_bytes[32];</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">         256 :                         ge_tobytes(expected_bytes, &amp;expected);</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">         256 :                         ge_p3_tobytes(actual_bytes, &amp;actual);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">         512 :                         ASSERT_EQ(memcmp(actual_bytes, expected_bytes, sizeof(actual_bytes)), 0) &lt;&lt; &quot;i = &quot; &lt;&lt; i &lt;&lt; &quot;, j = &quot; &lt;&lt; j;</span></span>
+<span id="L278"><span class="lineNum">     278</span>              : </span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">         256 :                         fe expected_xy2d;</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">         256 :                         fe_mul(expected_xy2d, actual.T, fe_d2);</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">         256 :                         fe_tobytes(expected_bytes, expected_xy2d);</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">         256 :                         fe_tobytes(actual_bytes, entry.xy2d);</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">         512 :                         ASSERT_EQ(memcmp(actual_bytes, expected_bytes, sizeof(actual_bytes)), 0) &lt;&lt; &quot;i = &quot; &lt;&lt; i &lt;&lt; &quot;, j = &quot; &lt;&lt; j;</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">         256 :                 }</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">          32 :         }</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L287"><span class="lineNum">     287</span>              : </span>
+<span id="L288"><span class="lineNum">     288</span>              : TEST(crypto, gen_janus_anchor)</span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">           1 :         constexpr hash txkey_sec = keccak(&quot;gen_janus_anchor test&quot;);</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">           1 :         Wallet w(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 :         char buf[CARROT_JANUS_ANCHOR_BYTES * 2 + 1] = {};</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           1 :         log::Stream s(buf);</span></span>
+<span id="L295"><span class="lineNum">     295</span>              : </span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 :         s &lt;&lt; gen_janus_anchor(txkey_sec, 0, w);</span></span>
+<span id="L297"><span class="lineNum">     297</span>              : </span>
+<span id="L298"><span class="lineNum">     298</span>              :         ASSERT_EQ(std::string_view(buf, CARROT_JANUS_ANCHOR_BYTES * 2), &quot;b45ba3471efd4d621b70009b48e2dc73&quot;);</span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L300"><span class="lineNum">     300</span>              : </span>
+<span id="L301"><span class="lineNum">     301</span>              : }</span>
         </pre>
               </td>
             </tr>
