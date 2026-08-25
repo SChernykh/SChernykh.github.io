@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">62</td>
-            <td class="headerCovTableEntry">62</td>
+            <td class="headerCovTableEntry">80</td>
+            <td class="headerCovTableEntry">80</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-24 10:52:25</td>
+            <td class="headerValue">2026-08-25 10:16:55</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">5</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -79,111 +79,144 @@
 <span id="L17"><span class="lineNum">      17</span>              : </span>
 <span id="L18"><span class="lineNum">      18</span>              : #include &quot;common.h&quot;</span>
 <span id="L19"><span class="lineNum">      19</span>              : #include &quot;carrot.h&quot;</span>
-<span id="L20"><span class="lineNum">      20</span>              : #include &quot;keccak.h&quot;</span>
-<span id="L21"><span class="lineNum">      21</span>              : #include &quot;blake2/blake2.h&quot;</span>
-<span id="L22"><span class="lineNum">      22</span>              : </span>
-<span id="L23"><span class="lineNum">      23</span>              : #include &quot;gtest/gtest.h&quot;</span>
-<span id="L24"><span class="lineNum">      24</span>              : </span>
-<span id="L25"><span class="lineNum">      25</span>              : namespace p2pool {</span>
-<span id="L26"><span class="lineNum">      26</span>              : </span>
-<span id="L27"><span class="lineNum">      27</span>              : static constexpr auto t = carrot::transcript(&quot;test&quot;, static_cast&lt;uint32_t&gt;(0x12345678));</span>
-<span id="L28"><span class="lineNum">      28</span>              : </span>
-<span id="L29"><span class="lineNum">      29</span>              : static_assert(</span>
-<span id="L30"><span class="lineNum">      30</span>              :         (t.size() == 9) &amp;&amp;</span>
-<span id="L31"><span class="lineNum">      31</span>              :         (t[0] == 4) &amp;&amp;</span>
-<span id="L32"><span class="lineNum">      32</span>              :         (t[1] == 't') &amp;&amp; (t[2] == 'e') &amp;&amp; (t[3] == 's') &amp;&amp; (t[4] == 't') &amp;&amp;</span>
-<span id="L33"><span class="lineNum">      33</span>              :         (t[5] == 0x78) &amp;&amp; (t[6] == 0x56) &amp;&amp; (t[7] == 0x34) &amp;&amp; (t[8] == 0x12),</span>
-<span id="L34"><span class="lineNum">      34</span>              :         &quot;constexpr carrot::transcript code check failed&quot;</span>
-<span id="L35"><span class="lineNum">      35</span>              : );</span>
-<span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span>              : TEST(carrot, transcript)</span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">           1 :         uint8_t t1 = 0x12;</span></span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           1 :         uint16_t t2 = 0x1234;</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           1 :         uint32_t t3 = 0x12345678;</span></span>
-<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC">           1 :         uint64_t t4 = 0x123456789abcdef0;</span></span>
-<span id="L43"><span class="lineNum">      43</span>              : </span>
-<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :         auto t = carrot::transcript(&quot;test&quot;, t1, t2, t3, t4, keccak_0x00);</span></span>
-<span id="L45"><span class="lineNum">      45</span>              : </span>
-<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           1 :         std::array&lt;uint8_t, 52&gt; check = {</span></span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           1 :                 4, 't', 'e', 's', 't',</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 :                 0x12,</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           1 :                 0x34, 0x12,</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :                 0x78, 0x56, 0x34, 0x12,</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 :                 0xf0, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12,</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :                 0xbc, 0x36, 0x78, 0x9e, 0x7a, 0x1e, 0x28, 0x14, 0x36, 0x46, 0x42, 0x29, 0x82, 0x8f, 0x81, 0x7d, 0x66, 0x12, 0xf7, 0xb4, 0x77, 0xd6, 0x65, 0x91, 0xff, 0x96, 0xa9, 0xe0, 0x64, 0xbc, 0xc9, 0x8a</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :         };</span></span>
-<span id="L54"><span class="lineNum">      54</span>              : </span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :         ASSERT_EQ(t, check);</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L57"><span class="lineNum">      57</span>              : </span>
-<span id="L58"><span class="lineNum">      58</span>              : TEST(carrot, hash_to_bytes)</span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           1 : {</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 :         uint8_t buf[128];</span></span>
-<span id="L61"><span class="lineNum">      61</span>              : </span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(carrot::hash_to_bytes(nullptr, 0, buf, 16, nullptr));</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(carrot::hash_to_bytes(&quot;test&quot;, 4, nullptr, 0, nullptr));</span></span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(carrot::hash_to_bytes(&quot;test&quot;, 4, buf, sizeof(buf), nullptr));</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(carrot::hash_to_bytes(&quot;test&quot;, 4, buf, 0, nullptr));</span></span>
+<span id="L20"><span class="lineNum">      20</span>              : #include &quot;wallet.h&quot;</span>
+<span id="L21"><span class="lineNum">      21</span>              : #include &quot;keccak.h&quot;</span>
+<span id="L22"><span class="lineNum">      22</span>              : #include &quot;blake2/blake2.h&quot;</span>
+<span id="L23"><span class="lineNum">      23</span>              : </span>
+<span id="L24"><span class="lineNum">      24</span>              : #include &quot;gtest/gtest.h&quot;</span>
+<span id="L25"><span class="lineNum">      25</span>              : </span>
+<span id="L26"><span class="lineNum">      26</span>              : namespace p2pool {</span>
+<span id="L27"><span class="lineNum">      27</span>              : </span>
+<span id="L28"><span class="lineNum">      28</span>              : namespace carrot {</span>
+<span id="L29"><span class="lineNum">      29</span>              : </span>
+<span id="L30"><span class="lineNum">      30</span>              : static constexpr auto t = transcript(&quot;test&quot;, static_cast&lt;uint32_t&gt;(0x12345678), padding&lt;1, 0xff&gt;());</span>
+<span id="L31"><span class="lineNum">      31</span>              : </span>
+<span id="L32"><span class="lineNum">      32</span>              : static_assert(</span>
+<span id="L33"><span class="lineNum">      33</span>              :         (t.size() == 10) &amp;&amp;</span>
+<span id="L34"><span class="lineNum">      34</span>              :         (t[0] == 4) &amp;&amp;</span>
+<span id="L35"><span class="lineNum">      35</span>              :         (t[1] == 't') &amp;&amp; (t[2] == 'e') &amp;&amp; (t[3] == 's') &amp;&amp; (t[4] == 't') &amp;&amp;</span>
+<span id="L36"><span class="lineNum">      36</span>              :         (t[5] == 0x78) &amp;&amp; (t[6] == 0x56) &amp;&amp; (t[7] == 0x34) &amp;&amp; (t[8] == 0x12) &amp;&amp;</span>
+<span id="L37"><span class="lineNum">      37</span>              :         (t[9] == 0xff),</span>
+<span id="L38"><span class="lineNum">      38</span>              :         &quot;constexpr transcript code check failed&quot;</span>
+<span id="L39"><span class="lineNum">      39</span>              : );</span>
+<span id="L40"><span class="lineNum">      40</span>              : </span>
+<span id="L41"><span class="lineNum">      41</span>              : TEST(carrot, transcript)</span>
+<span id="L42"><span class="lineNum">      42</span> <span class="tlaGNC tlaBgGNC">           1 : {</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :         uint8_t t1 = 0x12;</span></span>
+<span id="L44"><span class="lineNum">      44</span> <span class="tlaGNC">           1 :         uint16_t t2 = 0x1234;</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :         uint32_t t3 = 0x12345678;</span></span>
+<span id="L46"><span class="lineNum">      46</span> <span class="tlaGNC">           1 :         uint64_t t4 = 0x123456789abcdef0;</span></span>
+<span id="L47"><span class="lineNum">      47</span>              : </span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           1 :         auto t = transcript(&quot;test&quot;, t1, t2, t3, t4, padding&lt;3, 0&gt;(), keccak_0x00);</span></span>
+<span id="L49"><span class="lineNum">      49</span>              : </span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           1 :         std::array&lt;uint8_t, 55&gt; check = {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 :                 4, 't', 'e', 's', 't',</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :                 0x12,</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :                 0x34, 0x12,</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">           1 :                 0x78, 0x56, 0x34, 0x12,</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :                 0xf0, 0xde, 0xbc, 0x9a, 0x78, 0x56, 0x34, 0x12,</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">           1 :                 0, 0, 0,</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :                 0xbc, 0x36, 0x78, 0x9e, 0x7a, 0x1e, 0x28, 0x14, 0x36, 0x46, 0x42, 0x29, 0x82, 0x8f, 0x81, 0x7d, 0x66, 0x12, 0xf7, 0xb4, 0x77, 0xd6, 0x65, 0x91, 0xff, 0x96, 0xa9, 0xe0, 0x64, 0xbc, 0xc9, 0x8a</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L59"><span class="lineNum">      59</span>              : </span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           1 :         ASSERT_EQ(t, check);</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L62"><span class="lineNum">      62</span>              : </span>
+<span id="L63"><span class="lineNum">      63</span>              : TEST(carrot, hash_to_bytes)</span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           1 :         uint8_t buf[128];</span></span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           1 :         constexpr hash key = keccak(&quot;hash_to_bytes key&quot;);</span></span>
-<span id="L68"><span class="lineNum">      68</span>              : </span>
-<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 :         hash h3;</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h3.h, 3, nullptr));</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h3, hash(&quot;e6f9210000000000000000000000000000000000000000000000000000000000&quot;));</span></span>
-<span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h3.h, 3, key.h));</span></span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h3, hash(&quot;11ce720000000000000000000000000000000000000000000000000000000000&quot;));</span></span>
-<span id="L75"><span class="lineNum">      75</span>              : </span>
-<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           1 :         hash h8;</span></span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h8.h, 8, nullptr));</span></span>
-<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h8, hash(&quot;aaa0ffa7c54356af000000000000000000000000000000000000000000000000&quot;));</span></span>
-<span id="L79"><span class="lineNum">      79</span>              : </span>
-<span id="L80"><span class="lineNum">      80</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h8.h, 8, key.h));</span></span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h8, hash(&quot;35dc4643f1e7cb42000000000000000000000000000000000000000000000000&quot;));</span></span>
-<span id="L82"><span class="lineNum">      82</span>              : </span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">           1 :         hash h16;</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h16.h, 16, nullptr));</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h16, hash(&quot;626e43b9d900ba19bbd00676bcb80d0e00000000000000000000000000000000&quot;));</span></span>
-<span id="L86"><span class="lineNum">      86</span>              : </span>
-<span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h16.h, 16, key.h));</span></span>
-<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h16, hash(&quot;4e4caa4254997b3d5cc2658eebec2dbc00000000000000000000000000000000&quot;));</span></span>
-<span id="L89"><span class="lineNum">      89</span>              : </span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">           1 :         hash h32;</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h32.h, 32, nullptr));</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h32, hash(&quot;f2cf7bfcc95d4ed1dc57f490d928869d9cdf265c3c19129c9d82cb9b9c4bae62&quot;));</span></span>
-<span id="L93"><span class="lineNum">      93</span>              : </span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, h32.h, 32, key.h));</span></span>
-<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h32, hash(&quot;26fee298add01626671e6973ea4b91e05a7f2349bec9fa17ca49985578f570a0&quot;));</span></span>
-<span id="L96"><span class="lineNum">      96</span>              : </span>
-<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">           1 :         hash h64[2];</span></span>
-<span id="L98"><span class="lineNum">      98</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, &amp;h64, 64, nullptr));</span></span>
-<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[0], hash(&quot;0b80a879a216e72f6e125152218e7bbc06c1feea657873324f98f2f504326782&quot;));</span></span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[1], hash(&quot;137ad1fb1fa8df9267066a03e8b609f220f09ce63654aa4f4182fb2671bb26ff&quot;));</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(hash_to_bytes(nullptr, 0, buf, 16, nullptr));</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(hash_to_bytes(&quot;test&quot;, 4, nullptr, 0, nullptr));</span></span>
+<span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(hash_to_bytes(&quot;test&quot;, 4, buf, sizeof(buf), nullptr));</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(hash_to_bytes(&quot;test&quot;, 4, buf, 0, nullptr));</span></span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :         constexpr hash key = keccak(&quot;hash_to_bytes key&quot;);</span></span>
+<span id="L73"><span class="lineNum">      73</span>              : </span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :         hash h3;</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h3.h, 3, nullptr));</span></span>
+<span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h3, hash(&quot;e6f9210000000000000000000000000000000000000000000000000000000000&quot;));</span></span>
+<span id="L77"><span class="lineNum">      77</span>              : </span>
+<span id="L78"><span class="lineNum">      78</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h3.h, 3, key.h));</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h3, hash(&quot;11ce720000000000000000000000000000000000000000000000000000000000&quot;));</span></span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">           1 :         hash h8;</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h8.h, 8, nullptr));</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h8, hash(&quot;aaa0ffa7c54356af000000000000000000000000000000000000000000000000&quot;));</span></span>
+<span id="L84"><span class="lineNum">      84</span>              : </span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h8.h, 8, key.h));</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h8, hash(&quot;35dc4643f1e7cb42000000000000000000000000000000000000000000000000&quot;));</span></span>
+<span id="L87"><span class="lineNum">      87</span>              : </span>
+<span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">           1 :         hash h16;</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h16.h, 16, nullptr));</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h16, hash(&quot;626e43b9d900ba19bbd00676bcb80d0e00000000000000000000000000000000&quot;));</span></span>
+<span id="L91"><span class="lineNum">      91</span>              : </span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h16.h, 16, key.h));</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h16, hash(&quot;4e4caa4254997b3d5cc2658eebec2dbc00000000000000000000000000000000&quot;));</span></span>
+<span id="L94"><span class="lineNum">      94</span>              : </span>
+<span id="L95"><span class="lineNum">      95</span> <span class="tlaGNC">           1 :         hash h32;</span></span>
+<span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h32.h, 32, nullptr));</span></span>
+<span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h32, hash(&quot;f2cf7bfcc95d4ed1dc57f490d928869d9cdf265c3c19129c9d82cb9b9c4bae62&quot;));</span></span>
+<span id="L98"><span class="lineNum">      98</span>              : </span>
+<span id="L99"><span class="lineNum">      99</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, h32.h, 32, key.h));</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h32, hash(&quot;26fee298add01626671e6973ea4b91e05a7f2349bec9fa17ca49985578f570a0&quot;));</span></span>
 <span id="L101"><span class="lineNum">     101</span>              : </span>
-<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_bytes(&quot;test&quot;, 4, &amp;h64, 64, key.h));</span></span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[0], hash(&quot;e483fc85cc424217dc8402a63b0976f4c29a2f01ba02636c78825edb4c819e7f&quot;));</span></span>
-<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[1], hash(&quot;65650211ee373680fbcb1a2b747ca439a36e26826f35eccc64187841f1760c64&quot;));</span></span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L102"><span class="lineNum">     102</span> <span class="tlaGNC">           1 :         hash h64[2];</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, &amp;h64, 64, nullptr));</span></span>
+<span id="L104"><span class="lineNum">     104</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[0], hash(&quot;0b80a879a216e72f6e125152218e7bbc06c1feea657873324f98f2f504326782&quot;));</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[1], hash(&quot;137ad1fb1fa8df9267066a03e8b609f220f09ce63654aa4f4182fb2671bb26ff&quot;));</span></span>
 <span id="L106"><span class="lineNum">     106</span>              : </span>
-<span id="L107"><span class="lineNum">     107</span>              : TEST(carrot, hash_to_scalar)</span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           1 : {</span></span>
-<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           1 :         uint8_t buf[128];</span></span>
-<span id="L110"><span class="lineNum">     110</span>              : </span>
-<span id="L111"><span class="lineNum">     111</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(carrot::hash_to_scalar(nullptr, 0, buf, nullptr));</span></span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(carrot::hash_to_scalar(&quot;test&quot;, 4, nullptr, nullptr));</span></span>
-<span id="L113"><span class="lineNum">     113</span>              : </span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           1 :         constexpr hash key = keccak(&quot;hash_to_scalar key&quot;);</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_bytes(&quot;test&quot;, 4, &amp;h64, 64, key.h));</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[0], hash(&quot;e483fc85cc424217dc8402a63b0976f4c29a2f01ba02636c78825edb4c819e7f&quot;));</span></span>
+<span id="L109"><span class="lineNum">     109</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h64[1], hash(&quot;65650211ee373680fbcb1a2b747ca439a36e26826f35eccc64187841f1760c64&quot;));</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L111"><span class="lineNum">     111</span>              : </span>
+<span id="L112"><span class="lineNum">     112</span>              : TEST(carrot, hash_to_scalar)</span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">           1 :         uint8_t buf[128];</span></span>
 <span id="L115"><span class="lineNum">     115</span>              : </span>
-<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           1 :         hash h;</span></span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_scalar(&quot;test&quot;, 4, h.h, nullptr));</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h, hash(&quot;06fa2ad0139e43e746e5c1f96b117497083f0d076fc76ccbf1a8a7b24b1df30f&quot;));</span></span>
-<span id="L119"><span class="lineNum">     119</span>              : </span>
-<span id="L120"><span class="lineNum">     120</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(carrot::hash_to_scalar(&quot;test&quot;, 4, h.h, key.h));</span></span>
-<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h, hash(&quot;d0d300be17f60b471e558875aceecb9155cf9a25738060b995e5559ec5bb9104&quot;));</span></span>
-<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L123"><span class="lineNum">     123</span>              : </span>
-<span id="L124"><span class="lineNum">     124</span>              : }</span>
+<span id="L116"><span class="lineNum">     116</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(hash_to_scalar(nullptr, 0, buf, nullptr));</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(hash_to_scalar(&quot;test&quot;, 4, nullptr, nullptr));</span></span>
+<span id="L118"><span class="lineNum">     118</span>              : </span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">           1 :         constexpr hash key = keccak(&quot;hash_to_scalar key&quot;);</span></span>
+<span id="L120"><span class="lineNum">     120</span>              : </span>
+<span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">           1 :         hash h;</span></span>
+<span id="L122"><span class="lineNum">     122</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_scalar(&quot;test&quot;, 4, h.h, nullptr));</span></span>
+<span id="L123"><span class="lineNum">     123</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h, hash(&quot;06fa2ad0139e43e746e5c1f96b117497083f0d076fc76ccbf1a8a7b24b1df30f&quot;));</span></span>
+<span id="L124"><span class="lineNum">     124</span>              : </span>
+<span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(hash_to_scalar(&quot;test&quot;, 4, h.h, key.h));</span></span>
+<span id="L126"><span class="lineNum">     126</span> <span class="tlaGNC">           1 :         ASSERT_EQ(h, hash(&quot;d0d300be17f60b471e558875aceecb9155cf9a25738060b995e5559ec5bb9104&quot;));</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L128"><span class="lineNum">     128</span>              : </span>
+<span id="L129"><span class="lineNum">     129</span>              : TEST(carrot, gen_janus_anchor)</span>
+<span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L131"><span class="lineNum">     131</span> <span class="tlaGNC">           1 :         constexpr hash txkey_sec = keccak(&quot;gen_janus_anchor test&quot;);</span></span>
+<span id="L132"><span class="lineNum">     132</span> <span class="tlaGNC">           1 :         Wallet w(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
+<span id="L133"><span class="lineNum">     133</span>              : </span>
+<span id="L134"><span class="lineNum">     134</span> <span class="tlaGNC">           1 :         char buf[CARROT_JANUS_ANCHOR_BYTES * 2 + 1] = {};</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC">           1 :         log::Stream s(buf);</span></span>
+<span id="L136"><span class="lineNum">     136</span>              : </span>
+<span id="L137"><span class="lineNum">     137</span> <span class="tlaGNC">           1 :         s &lt;&lt; gen_janus_anchor(txkey_sec, 0, w);</span></span>
+<span id="L138"><span class="lineNum">     138</span>              : </span>
+<span id="L139"><span class="lineNum">     139</span> <span class="tlaGNC">           1 :         ASSERT_EQ(std::string_view(buf, CARROT_JANUS_ANCHOR_BYTES * 2), &quot;b45ba3471efd4d621b70009b48e2dc73&quot;);</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L141"><span class="lineNum">     141</span>              : </span>
+<span id="L142"><span class="lineNum">     142</span>              : TEST(carrot, gen_eph_privkey)</span>
+<span id="L143"><span class="lineNum">     143</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L144"><span class="lineNum">     144</span> <span class="tlaGNC">           1 :         const janus_anchor anchor_norm = {</span></span>
+<span id="L145"><span class="lineNum">     145</span> <span class="tlaGNC">           1 :                 { 0xca, 0xee, 0x13, 0x81, 0x77, 0x54, 0x87, 0xa0, 0x98, 0x25, 0x57, 0xf0, 0xd2, 0x68, 0x0b, 0x55 }</span></span>
+<span id="L146"><span class="lineNum">     146</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L147"><span class="lineNum">     147</span>              : </span>
+<span id="L148"><span class="lineNum">     148</span> <span class="tlaGNC">           1 :         Wallet w(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaGNC">           1 :         hash eph_priv_key;</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(gen_eph_privkey(anchor_norm, 3812345, w, eph_priv_key));</span></span>
+<span id="L152"><span class="lineNum">     152</span> <span class="tlaGNC">           1 :         ASSERT_EQ(eph_priv_key, hash(&quot;46a29e25fb6caafe8d5f40e279ff4830fdcca68232237461b0884520e2dea507&quot;));</span></span>
+<span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L154"><span class="lineNum">     154</span>              : </span>
+<span id="L155"><span class="lineNum">     155</span>              : } // namespace carrot</span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
