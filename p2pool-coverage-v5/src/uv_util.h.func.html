@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-25 10:16:55</td>
+            <td class="headerValue">2026-08-26 10:49:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryMed">83.3&nbsp;%</td>
-            <td class="headerCovTableEntry">30</td>
-            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntryMed">84.8&nbsp;%</td>
+            <td class="headerCovTableEntry">33</td>
+            <td class="headerCovTableEntry">28</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -65,70 +65,70 @@
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L264">bool p2pool::sync_point&lt;unsigned int&gt;(std::atomic&lt;unsigned int&gt;&amp;, unsigned int)</a></td>
               
-              <td class="coverFnHi">606667</td>
+              <td class="coverFnHi">609673</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L43">p2pool::MutexLock::MutexLock(pthread_mutex_t&amp;)</a></td>
               
-              <td class="coverFnHi">41237</td>
+              <td class="coverFnHi">41241</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L44">p2pool::MutexLock::~MutexLock()</a></td>
               
-              <td class="coverFnHi">41237</td>
+              <td class="coverFnHi">41241</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L54">p2pool::RWLock&lt;false&gt;::RWLock(pthread_rwlock_t&amp;)</a></td>
               
-              <td class="coverFnHi">16165922</td>
+              <td class="coverFnHi">16159440</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L55">p2pool::RWLock&lt;false&gt;::~RWLock()</a></td>
               
-              <td class="coverFnHi">16166637</td>
+              <td class="coverFnHi">16159228</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L65">p2pool::RWLock&lt;true&gt;::RWLock(pthread_rwlock_t&amp;)</a></td>
               
-              <td class="coverFnHi">33711035</td>
+              <td class="coverFnHi">33699470</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L66">p2pool::RWLock&lt;true&gt;::~RWLock()</a></td>
               
-              <td class="coverFnHi">33710636</td>
+              <td class="coverFnHi">33699056</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L32">p2pool::ReadWriteLock::ReadWriteLock()</a></td>
               
-              <td class="coverFnHi">81</td>
+              <td class="coverFnHi">82</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L35">p2pool::ReadWriteLock::operator pthread_rwlock_t&amp;()</a></td>
               
-              <td class="coverFnHi">39711584</td>
+              <td class="coverFnHi">39707585</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L33">p2pool::ReadWriteLock::~ReadWriteLock()</a></td>
               
-              <td class="coverFnHi">17</td>
+              <td class="coverFnHi">18</td>
               
               
             </tr>
@@ -170,7 +170,7 @@
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L210">thread_pool_tests.cpp:p2pool::parallel_run&lt;p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&gt;(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&amp;&amp;, bool)::Work::Work(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&amp;&amp;, unsigned int)</a></td>
               
-              <td class="coverFnHi">105885</td>
+              <td class="coverFnHi">105841</td>
               
               
             </tr>
@@ -182,37 +182,44 @@
               
             </tr>
             <tr>
+              <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L210">carrot.cpp:p2pool::parallel_run<p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0>(p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0&&, bool)::Work::Work(p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0&&, unsigned int)</a></td>
+              
+              <td class="coverFnAliasHi">40</td>
+              
+              
+            </tr>
+            <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L210">p2pool::parallel_run<p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}>(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}&&, bool)::Work::Work(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}&&, unsigned int)</a></td>
               
-              <td class="coverFnAliasHi">1791</td>
+              <td class="coverFnAliasHi">1778</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L210">p2pool::parallel_run<p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}>(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}&&, bool)::Work::Work(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}&&, unsigned int)</a></td>
               
-              <td class="coverFnAliasHi">2257</td>
+              <td class="coverFnAliasHi">2249</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L210">p2pool::parallel_run<p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}>(p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}&&, bool)::Work::Work(p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}&&, unsigned int)</a></td>
               
-              <td class="coverFnAliasHi">2257</td>
+              <td class="coverFnAliasHi">2244</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L210">thread_pool_tests.cpp:p2pool::parallel_run<p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}>(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&&, bool)::Work::Work(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&&, unsigned int)</a></td>
               
-              <td class="coverFnAliasHi">99570</td>
+              <td class="coverFnAliasHi">99520</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L230">thread_pool_tests.cpp:p2pool::parallel_run&lt;p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&gt;(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&amp;&amp;, bool)::{lambda()#1}::operator()() const</a></td>
               
-              <td class="coverFnHi">317866</td>
+              <td class="coverFnHi">318067</td>
               
               
             </tr>
@@ -224,37 +231,44 @@
               
             </tr>
             <tr>
+              <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L230">carrot.cpp:p2pool::parallel_run<p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0>(p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0&&, bool)::{lambda()#1}::operator()() const</a></td>
+              
+              <td class="coverFnAliasHi">119</td>
+              
+              
+            </tr>
+            <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L230">p2pool::parallel_run<p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}>(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}&&, bool)::{lambda()#1}::operator()() const</a></td>
               
-              <td class="coverFnAliasHi">5372</td>
+              <td class="coverFnAliasHi">5328</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L230">p2pool::parallel_run<p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}>(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}&&, bool)::{lambda()#1}::operator()() const</a></td>
               
-              <td class="coverFnAliasHi">6771</td>
+              <td class="coverFnAliasHi">6747</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L230">p2pool::parallel_run<p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}>(p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}&&, bool)::{lambda()#1}::operator()() const</a></td>
               
-              <td class="coverFnAliasHi">6770</td>
+              <td class="coverFnAliasHi">6731</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L230">thread_pool_tests.cpp:p2pool::parallel_run<p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}>(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&&, bool)::{lambda()#1}::operator()() const</a></td>
               
-              <td class="coverFnAliasHi">298923</td>
+              <td class="coverFnAliasHi">299112</td>
               
               
             </tr>
             <tr>
               <td class="coverFn"><a href="uv_util.h.gcov.html#L190">thread_pool_tests.cpp:void p2pool::parallel_run&lt;p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&gt;(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&amp;&amp;, bool)</a></td>
               
-              <td class="coverFnHi">106123</td>
+              <td class="coverFnHi">106010</td>
               
               
             </tr>
@@ -266,30 +280,37 @@
               
             </tr>
             <tr>
+              <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L190">carrot.cpp:void p2pool::parallel_run<p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0>(p2pool::carrot::batch_eph_pubkeys(std::vector<p2pool::hash, std::allocator<p2pool::hash> > const&, std::vector<p2pool::hash, std::allocator<p2pool::hash> >&)::$_0&&, bool)</a></td>
+              
+              <td class="coverFnAliasHi">40</td>
+              
+              
+            </tr>
+            <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L190">thread_pool_tests.cpp:void p2pool::parallel_run<p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}>(p2pool::thread_pool_parallel_run_Test::TestBody()::$_1::operator()() const::{lambda(unsigned int, unsigned int)#1}&&, bool)</a></td>
               
-              <td class="coverFnAliasHi">99808</td>
+              <td class="coverFnAliasHi">99689</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L190">void p2pool::parallel_run<p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}>(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#1}&&, bool)</a></td>
               
-              <td class="coverFnAliasHi">1791</td>
+              <td class="coverFnAliasHi">1778</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L190">void p2pool::parallel_run<p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}>(p2pool::Cache::batch_derivations(std::vector<std::pair<p2pool::hash, unsigned long>, std::allocator<std::pair<p2pool::hash, unsigned long> > > const&, p2pool::hash const&, std::vector<std::pair<p2pool::hash, int>, std::allocator<std::pair<p2pool::hash, int> > >&)::{lambda(unsigned int, unsigned int)#2}&&, bool)</a></td>
               
-              <td class="coverFnAliasHi">2257</td>
+              <td class="coverFnAliasHi">2249</td>
               
               
             </tr>
             <tr>
               <td class="coverFnAlias"><a href="uv_util.h.gcov.html#L190">void p2pool::parallel_run<p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}>(p2pool::Cache::batch_public_keys(std::vector<p2pool::batch_public_key_input, std::allocator<p2pool::batch_public_key_input> > const&, std::vector<std::pair<p2pool::hash, bool>, std::allocator<std::pair<p2pool::hash, bool> > >&)::{lambda(unsigned int, unsigned int)#1}&&, bool)</a></td>
               
-              <td class="coverFnAliasHi">2257</td>
+              <td class="coverFnAliasHi">2244</td>
               
               
             </tr>

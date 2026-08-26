@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-25 10:16:55</td>
+            <td class="headerValue">2026-08-26 10:49:26</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">86.1&nbsp;%</td>
@@ -208,9 +208,12 @@
 <span id="L146"><span class="lineNum">     146</span>              :         // retry_counter is transaction-wide and must have a single canonical value, just like txkey_sec</span>
 <span id="L147"><span class="lineNum">     147</span>              :         carrot::janus_anchor gen_janus_anchor(const hash&amp; txkey_sec, uint8_t retry_counter, const Wallet&amp; w);</span>
 <span id="L148"><span class="lineNum">     148</span>              :         bool gen_eph_privkey(const janus_anchor&amp; anchor_norm, uint64_t height, const Wallet&amp; w, hash&amp; eph_priv_key);</span>
-<span id="L149"><span class="lineNum">     149</span>              : } // namespace carrot</span>
-<span id="L150"><span class="lineNum">     150</span>              : </span>
-<span id="L151"><span class="lineNum">     151</span>              : } // namespace p2pool</span>
+<span id="L149"><span class="lineNum">     149</span>              : </span>
+<span id="L150"><span class="lineNum">     150</span>              :         bool gen_eph_pubkey(const hash&amp; eph_priv_key, hash&amp; eph_pub_key);</span>
+<span id="L151"><span class="lineNum">     151</span>              :         bool batch_eph_pubkeys(const std::vector&lt;hash&gt;&amp; eph_priv_keys, std::vector&lt;hash&gt;&amp; eph_pub_keys);</span>
+<span id="L152"><span class="lineNum">     152</span>              : } // namespace carrot</span>
+<span id="L153"><span class="lineNum">     153</span>              : </span>
+<span id="L154"><span class="lineNum">     154</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
