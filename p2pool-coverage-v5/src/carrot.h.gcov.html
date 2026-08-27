@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-26 10:49:26</td>
+            <td class="headerValue">2026-08-27 15:29:01</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">86.1&nbsp;%</td>
@@ -210,10 +210,13 @@
 <span id="L148"><span class="lineNum">     148</span>              :         bool gen_eph_privkey(const janus_anchor&amp; anchor_norm, uint64_t height, const Wallet&amp; w, hash&amp; eph_priv_key);</span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
 <span id="L150"><span class="lineNum">     150</span>              :         bool gen_eph_pubkey(const hash&amp; eph_priv_key, hash&amp; eph_pub_key);</span>
-<span id="L151"><span class="lineNum">     151</span>              :         bool batch_eph_pubkeys(const std::vector&lt;hash&gt;&amp; eph_priv_keys, std::vector&lt;hash&gt;&amp; eph_pub_keys);</span>
-<span id="L152"><span class="lineNum">     152</span>              : } // namespace carrot</span>
-<span id="L153"><span class="lineNum">     153</span>              : </span>
-<span id="L154"><span class="lineNum">     154</span>              : } // namespace p2pool</span>
+<span id="L151"><span class="lineNum">     151</span>              :         bool gen_sender_receiver_secret(const hash&amp; eph_priv_key, const hash&amp; view_public_key, hash&amp; secret);</span>
+<span id="L152"><span class="lineNum">     152</span>              : </span>
+<span id="L153"><span class="lineNum">     153</span>              :         bool batch_eph_pubkeys(const std::vector&lt;hash&gt;&amp; eph_priv_keys, std::vector&lt;std::pair&lt;hash, bool&gt;&gt;&amp; eph_pub_keys);</span>
+<span id="L154"><span class="lineNum">     154</span>              :         bool batch_sender_receiver_secrets(const std::vector&lt;hash&gt;&amp; eph_priv_keys, const std::vector&lt;hash&gt;&amp; view_public_keys, std::vector&lt;std::pair&lt;hash, bool&gt;&gt;&amp; secrets);</span>
+<span id="L155"><span class="lineNum">     155</span>              : } // namespace carrot</span>
+<span id="L156"><span class="lineNum">     156</span>              : </span>
+<span id="L157"><span class="lineNum">     157</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
