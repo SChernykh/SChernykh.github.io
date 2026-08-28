@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-28 09:09:59</td>
+            <td class="headerValue">2026-08-28 11:51:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -249,8 +249,8 @@
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaUNC">           0 :                         data.push_back(TXOUT_TO_CARROT_V1);</span></span>
 <span id="L188"><span class="lineNum">     188</span> <span class="tlaUNC">           0 :                         const hash h = m_ephPublicKeys[i];</span></span>
 <span id="L189"><span class="lineNum">     189</span> <span class="tlaUNC">           0 :                         data.insert(data.end(), h.h, h.h + HASH_SIZE);</span></span>
-<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :                         data.insert(data.end(), m_carrotViewTags[i].bytes, m_carrotViewTags[i].bytes + CARROT_VIEW_TAG_BYTES);</span></span>
-<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :                         data.insert(data.end(), m_carrotJanusAnchors[i].bytes, m_carrotJanusAnchors[i].bytes + CARROT_JANUS_ANCHOR_BYTES);</span></span>
+<span id="L190"><span class="lineNum">     190</span> <span class="tlaUNC">           0 :                         data.insert(data.end(), m_carrotViewTags[i].data, m_carrotViewTags[i].data + CARROT_VIEW_TAG_BYTES);</span></span>
+<span id="L191"><span class="lineNum">     191</span> <span class="tlaUNC">           0 :                         data.insert(data.end(), m_carrotJanusAnchors[i].data, m_carrotJanusAnchors[i].data + CARROT_JANUS_ANCHOR_BYTES);</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC tlaBgGNC">       30176 :         else {</span></span>

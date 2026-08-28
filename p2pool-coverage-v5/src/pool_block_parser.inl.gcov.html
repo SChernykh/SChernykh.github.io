@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-28 09:09:59</td>
+            <td class="headerValue">2026-08-28 11:51:12</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -209,8 +209,8 @@
 <span id="L147"><span class="lineNum">     147</span> <span class="tlaUNC">           0 :                                         READ_BUF(ephPublicKey.h, HASH_SIZE);</span></span>
 <span id="L148"><span class="lineNum">     148</span> <span class="tlaUNC">           0 :                                         m_ephPublicKeys[i] = ephPublicKey;</span></span>
 <span id="L149"><span class="lineNum">     149</span>              : </span>
-<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :                                         READ_BUF(m_carrotViewTags[i].bytes, CARROT_VIEW_TAG_BYTES);</span></span>
-<span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :                                         READ_BUF(m_carrotJanusAnchors[i].bytes, CARROT_JANUS_ANCHOR_BYTES);</span></span>
+<span id="L150"><span class="lineNum">     150</span> <span class="tlaUNC">           0 :                                         READ_BUF(m_carrotViewTags[i].data, CARROT_VIEW_TAG_BYTES);</span></span>
+<span id="L151"><span class="lineNum">     151</span> <span class="tlaUNC">           0 :                                         READ_BUF(m_carrotJanusAnchors[i].data, CARROT_JANUS_ANCHOR_BYTES);</span></span>
 <span id="L152"><span class="lineNum">     152</span> <span class="tlaUNC">           0 :                                 }</span></span>
 <span id="L153"><span class="lineNum">     153</span> <span class="tlaGNC tlaBgGNC">     6681895 :                                 else {</span></span>
 <span id="L154"><span class="lineNum">     154</span> <span class="tlaGNC">     6681895 :                                         EXPECT_BYTE(TXOUT_TO_TAGGED_KEY);</span></span>
