@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-28 11:51:12</td>
+            <td class="headerValue">2026-08-28 17:55:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -245,7 +245,7 @@
 <span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          11 :                 onetime_address</span></span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          11 :         );</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          11 :         view_tag result;</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">          11 :         view_tag result{};</span></span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">          11 :         hash_to_bytes(t.data(), t.size(), result.data, CARROT_VIEW_TAG_BYTES, sender_receiver_secret.h);</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : </span>
 <span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">          11 :         return result;</span></span>
@@ -258,10 +258,10 @@
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          13 :                 onetime_address</span></span>
 <span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          13 :         );</span></span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          13 :         janus_anchor mask;</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">          13 :         janus_anchor mask{};</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">          13 :         hash_to_bytes(t.data(), t.size(), mask.data, CARROT_JANUS_ANCHOR_BYTES, contextualized_sender_receiver_secret.h);</span></span>
 <span id="L201"><span class="lineNum">     201</span>              : </span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          13 :         janus_anchor result;</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">          13 :         janus_anchor result{};</span></span>
 <span id="L203"><span class="lineNum">     203</span>              : </span>
 <span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">         221 :         for (size_t i = 0; i &lt; CARROT_JANUS_ANCHOR_BYTES; ++i) {</span></span>
 <span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">         208 :                 result.data[i] = anchor.data[i] ^ mask.data[i];</span></span>
