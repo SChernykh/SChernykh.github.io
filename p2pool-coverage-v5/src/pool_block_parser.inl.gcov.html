@@ -31,13 +31,13 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryMed">77.2&nbsp;%</td>
-            <td class="headerCovTableEntry">435</td>
-            <td class="headerCovTableEntry">336</td>
+            <td class="headerCovTableEntryMed">76.9&nbsp;%</td>
+            <td class="headerCovTableEntry">438</td>
+            <td class="headerCovTableEntry">337</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-28 17:55:58</td>
+            <td class="headerValue">2026-08-29 07:35:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -559,130 +559,133 @@
 <span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">       14658 :                                 hash chain_id;</span></span>
 <span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">       14658 :                                 READ_BUF(chain_id.h, HASH_SIZE);</span></span>
 <span id="L499"><span class="lineNum">     499</span>              : </span>
-<span id="L500"><span class="lineNum">     500</span>              :                                 // IDs must be ordered to avoid duplicates</span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">       14658 :                                 if (i &amp;&amp; !(prev_chain_id &lt; chain_id)) return __LINE__;</span></span>
-<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">       14658 :                                 prev_chain_id = chain_id;</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">       14658 :                                 if ((m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (chain_id == keccak_subaddress_viewpub)) {</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC tlaBgUNC">           0 :                                         return __LINE__;</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaUNC">           0 :                                 }</span></span>
 <span id="L503"><span class="lineNum">     503</span>              : </span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">       14658 :                                 uint64_t n;</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">       14658 :                                 READ_VARINT(n);</span></span>
-<span id="L506"><span class="lineNum">     506</span>              : </span>
-<span id="L507"><span class="lineNum">     507</span>              :                                 // Sanity check</span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">       14658 :                                 if (static_cast&lt;uint64_t&gt;(data_end - data) &lt; n) return __LINE__;</span></span>
-<span id="L509"><span class="lineNum">     509</span>              : </span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">       14658 :                                 std::vector&lt;uint8_t&gt; t;</span></span>
-<span id="L511"><span class="lineNum">     511</span>              : </span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">       14658 :                                 if (n &gt; 0) {</span></span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">       14658 :                                         t.resize(n);</span></span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">       14658 :                                         READ_BUF(t.data(), n);</span></span>
-<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">       14658 :                                 }</span></span>
+<span id="L504"><span class="lineNum">     504</span>              :                                 // IDs must be ordered to avoid duplicates</span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC tlaBgGNC">       14658 :                                 if (i &amp;&amp; !(prev_chain_id &lt; chain_id)) return __LINE__;</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">       14658 :                                 prev_chain_id = chain_id;</span></span>
+<span id="L507"><span class="lineNum">     507</span>              : </span>
+<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">       14658 :                                 uint64_t n;</span></span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">       14658 :                                 READ_VARINT(n);</span></span>
+<span id="L510"><span class="lineNum">     510</span>              : </span>
+<span id="L511"><span class="lineNum">     511</span>              :                                 // Sanity checks</span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">       14658 :                                 if (static_cast&lt;uint64_t&gt;(data_end - data) &lt; n) return __LINE__;</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">       14658 :                                 if ((m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (static_cast&lt;uint64_t&gt;(data - mm_extra_begin) + n &gt; MM_EXTRA_MAX_SIZE)) {</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaUNC tlaBgUNC">           0 :                                         return __LINE__;</span></span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaUNC">           0 :                                 }</span></span>
 <span id="L516"><span class="lineNum">     516</span>              : </span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">       14658 :                                 m_mergeMiningExtra.emplace(chain_id, std::move(t));</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">       14658 :                         }</span></span>
-<span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">       14658 :                         if ((m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (data - mm_extra_begin &gt; MM_EXTRA_MAX_SIZE)) {</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return __LINE__;</span></span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC tlaBgGNC">       14658 :                 }</span></span>
-<span id="L524"><span class="lineNum">     524</span>              : </span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       40263 :                 READ_BUF(m_sidechainExtraBuf, sizeof(m_sidechainExtraBuf));</span></span>
-<span id="L526"><span class="lineNum">     526</span>              : </span>
-<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">       40263 : #undef READ_BYTE</span></span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">       40263 : #undef EXPECT_BYTE</span></span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">       40263 : #undef READ_VARINT</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">       40263 : #undef READ_BUF</span></span>
-<span id="L531"><span class="lineNum">     531</span>              : </span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       40263 :                 if (data != data_end) {</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L535"><span class="lineNum">     535</span>              : </span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if ((num_outputs == 0) &amp;&amp; !sidechain.get_outputs_blob(this, total_reward, outputs_blob)) {</span></span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L539"><span class="lineNum">     539</span>              : </span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if (static_cast&lt;int&gt;(outputs_blob.size()) != outputs_blob_size) {</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L543"><span class="lineNum">     543</span>              : </span>
-<span id="L544"><span class="lineNum">     544</span>              :                 // TODO: make sure get_outputs_blob reconstructs all new Carrot fields for pruned blocks</span>
-<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if ((m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (m_carrotTxPubKeys.size() != m_outputAmounts.size())) {</span></span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L548"><span class="lineNum">     548</span>              : </span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC tlaBgGNC">       40263 :                 const uint8_t* transactions_blob = reinterpret_cast&lt;uint8_t*&gt;(transactions.data());</span></span>
-<span id="L550"><span class="lineNum">     550</span>              : </span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">       40263 : #if POOL_BLOCK_DEBUG</span></span>
-<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">       40263 :                 memcpy(m_mainChainDataDebug.data() + outputs_offset, outputs_blob.data(), outputs_blob_size);</span></span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">       40263 :                 memcpy(m_mainChainDataDebug.data() + transactions_offset + outputs_blob_size_diff, transactions_blob, transactions_blob_size);</span></span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">       40263 : #endif</span></span>
-<span id="L555"><span class="lineNum">     555</span>              : </span>
-<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">       40263 :                 hash check;</span></span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">       40263 :                 const std::vector&lt;uint8_t&gt;&amp; consensus_id = sidechain.consensus_id();</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC tlaBgGNC">       14658 :                                 std::vector&lt;uint8_t&gt; t;</span></span>
+<span id="L518"><span class="lineNum">     518</span>              : </span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">       14658 :                                 if (n &gt; 0) {</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">       14658 :                                         t.resize(n);</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">       14658 :                                         READ_BUF(t.data(), n);</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">       14658 :                                 }</span></span>
+<span id="L523"><span class="lineNum">     523</span>              : </span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">       14658 :                                 m_mergeMiningExtra.emplace(chain_id, std::move(t));</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       14658 :                         }</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">       14658 :                 }</span></span>
+<span id="L527"><span class="lineNum">     527</span>              : </span>
+<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">       40263 :                 READ_BUF(m_sidechainExtraBuf, sizeof(m_sidechainExtraBuf));</span></span>
+<span id="L529"><span class="lineNum">     529</span>              : </span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">       40263 : #undef READ_BYTE</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">       40263 : #undef EXPECT_BYTE</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">       40263 : #undef READ_VARINT</span></span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">       40263 : #undef READ_BUF</span></span>
+<span id="L534"><span class="lineNum">     534</span>              : </span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">       40263 :                 if (data != data_end) {</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L538"><span class="lineNum">     538</span>              : </span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if ((num_outputs == 0) &amp;&amp; !sidechain.get_outputs_blob(this, total_reward, outputs_blob)) {</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L542"><span class="lineNum">     542</span>              : </span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if (static_cast&lt;int&gt;(outputs_blob.size()) != outputs_blob_size) {</span></span>
+<span id="L544"><span class="lineNum">     544</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L546"><span class="lineNum">     546</span>              : </span>
+<span id="L547"><span class="lineNum">     547</span>              :                 // TODO: make sure get_outputs_blob reconstructs all new Carrot fields for pruned blocks</span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC tlaBgGNC">       40263 :                 if ((m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (m_carrotTxPubKeys.size() != m_outputAmounts.size())) {</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L551"><span class="lineNum">     551</span>              : </span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC tlaBgGNC">       40263 :                 const uint8_t* transactions_blob = reinterpret_cast&lt;uint8_t*&gt;(transactions.data());</span></span>
+<span id="L553"><span class="lineNum">     553</span>              : </span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">       40263 : #if POOL_BLOCK_DEBUG</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">       40263 :                 memcpy(m_mainChainDataDebug.data() + outputs_offset, outputs_blob.data(), outputs_blob_size);</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">       40263 :                 memcpy(m_mainChainDataDebug.data() + transactions_offset + outputs_blob_size_diff, transactions_blob, transactions_blob_size);</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">       40263 : #endif</span></span>
 <span id="L558"><span class="lineNum">     558</span>              : </span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">       40263 :                 keccak_custom(</span></span>
-<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">       40263 :                         [nonce_offset, extra_nonce_offset, mm_root_hash_offset, data_begin, data_size, &amp;consensus_id, &amp;outputs_blob, outputs_blob_size_diff, outputs_offset, outputs_blob_size, transactions_blob, transactions_blob_size_diff, transactions_offset, transactions_blob_size](int offset) -&gt; uint8_t</span></span>
-<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">   305757351 :                         {</span></span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">   305757351 :                                 uint32_t k = static_cast&lt;uint32_t&gt;(offset - nonce_offset);</span></span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">   305757351 :                                 if (k &lt; NONCE_SIZE) {</span></span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">      161052 :                                         return 0;</span></span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">      161052 :                                 }</span></span>
-<span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">   305596299 :                                 k = static_cast&lt;uint32_t&gt;(offset - extra_nonce_offset);</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">   305596299 :                                 if (k &lt; EXTRA_NONCE_SIZE) {</span></span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">      161052 :                                         return 0;</span></span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">      161052 :                                 }</span></span>
-<span id="L571"><span class="lineNum">     571</span>              : </span>
-<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">   305435247 :                                 k = static_cast&lt;uint32_t&gt;(offset - mm_root_hash_offset);</span></span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">   305435247 :                                 if (k &lt; HASH_SIZE) {</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">     1288416 :                                         return 0;</span></span>
-<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">     1288416 :                                 }</span></span>
-<span id="L576"><span class="lineNum">     576</span>              : </span>
-<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">   304146831 :                                 if (offset &lt; data_size) {</span></span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">   302858415 :                                         if (offset &lt; outputs_offset) {</span></span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">     2016876 :                                                 return data_begin[offset];</span></span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">     2016876 :                                         }</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">   300841539 :                                         else if (offset &lt; outputs_offset + outputs_blob_size) {</span></span>
-<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">   260292172 :                                                 return outputs_blob[offset - outputs_offset];</span></span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">   260292172 :                                         }</span></span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">    40549367 :                                         else if (offset &lt; transactions_offset + outputs_blob_size_diff) {</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">     1652249 :                                                 return data_begin[offset - outputs_blob_size_diff];</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">     1652249 :                                         }</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">    38897118 :                                         else if (offset &lt; transactions_offset + outputs_blob_size_diff + transactions_blob_size) {</span></span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">    30780640 :                                                 return transactions_blob[offset - (transactions_offset + outputs_blob_size_diff)];</span></span>
-<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">    30780640 :                                         }</span></span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">     8116478 :                                         return data_begin[offset - outputs_blob_size_diff - transactions_blob_size_diff];</span></span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">   302858415 :                                 }</span></span>
-<span id="L592"><span class="lineNum">     592</span>              : </span>
-<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">     1288416 :                                 return consensus_id[offset - data_size];</span></span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">   304146831 :                         },</span></span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">       40263 :                         static_cast&lt;int&gt;(size + outputs_blob_size_diff + transactions_blob_size_diff + consensus_id.size()), check.h, HASH_SIZE);</span></span>
-<span id="L596"><span class="lineNum">     596</span>              : </span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">       40263 :                 if (m_sidechainId.empty()) {</span></span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">       40251 :                         m_sidechainId = check;</span></span>
-<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">       40251 :                 }</span></span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">          12 :                 else if (m_sidechainId != check) {</span></span>
-<span id="L601"><span class="lineNum">     601</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L603"><span class="lineNum">     603</span>              : </span>
-<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC tlaBgGNC">       40263 : #if POOL_BLOCK_DEBUG</span></span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">       40263 :                 m_sideChainDataDebug.assign(sidechain_data_begin, data_end);</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">       40263 : #endif</span></span>
-<span id="L607"><span class="lineNum">     607</span>              : </span>
-<span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">       40263 :                 const uint32_t mm_aux_slot = get_aux_slot(sidechain.consensus_hash(), mm_nonce, mm_n_aux_chains);</span></span>
-<span id="L609"><span class="lineNum">     609</span>              : </span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">       40263 :                 if (!verify_merkle_proof(check, m_merkleProof, mm_aux_slot, mm_n_aux_chains, m_merkleRoot)) {</span></span>
-<span id="L611"><span class="lineNum">     611</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC tlaBgGNC">       40263 :         }</span></span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">       40269 :         catch (std::exception&amp; e) {</span></span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(0, &quot;Exception in PoolBlock::deserialize(): &quot; &lt;&lt; e.what());</span></span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaUNC">           0 :                 return __LINE__;</span></span>
-<span id="L617"><span class="lineNum">     617</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L618"><span class="lineNum">     618</span>              : </span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC tlaBgGNC">       40263 :         reset_offchain_data();</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">       40263 :         return 0;</span></span>
-<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">       40269 : }</span></span>
-<span id="L622"><span class="lineNum">     622</span>              : </span>
-<span id="L623"><span class="lineNum">     623</span>              : } // namespace p2pool</span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">       40263 :                 hash check;</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">       40263 :                 const std::vector&lt;uint8_t&gt;&amp; consensus_id = sidechain.consensus_id();</span></span>
+<span id="L561"><span class="lineNum">     561</span>              : </span>
+<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">       40263 :                 keccak_custom(</span></span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">       40263 :                         [nonce_offset, extra_nonce_offset, mm_root_hash_offset, data_begin, data_size, &amp;consensus_id, &amp;outputs_blob, outputs_blob_size_diff, outputs_offset, outputs_blob_size, transactions_blob, transactions_blob_size_diff, transactions_offset, transactions_blob_size](int offset) -&gt; uint8_t</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">   305757351 :                         {</span></span>
+<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">   305757351 :                                 uint32_t k = static_cast&lt;uint32_t&gt;(offset - nonce_offset);</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">   305757351 :                                 if (k &lt; NONCE_SIZE) {</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">      161052 :                                         return 0;</span></span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">      161052 :                                 }</span></span>
+<span id="L569"><span class="lineNum">     569</span>              : </span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">   305596299 :                                 k = static_cast&lt;uint32_t&gt;(offset - extra_nonce_offset);</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">   305596299 :                                 if (k &lt; EXTRA_NONCE_SIZE) {</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">      161052 :                                         return 0;</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">      161052 :                                 }</span></span>
+<span id="L574"><span class="lineNum">     574</span>              : </span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">   305435247 :                                 k = static_cast&lt;uint32_t&gt;(offset - mm_root_hash_offset);</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">   305435247 :                                 if (k &lt; HASH_SIZE) {</span></span>
+<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">     1288416 :                                         return 0;</span></span>
+<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">     1288416 :                                 }</span></span>
+<span id="L579"><span class="lineNum">     579</span>              : </span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">   304146831 :                                 if (offset &lt; data_size) {</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">   302858415 :                                         if (offset &lt; outputs_offset) {</span></span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">     2016876 :                                                 return data_begin[offset];</span></span>
+<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">     2016876 :                                         }</span></span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">   300841539 :                                         else if (offset &lt; outputs_offset + outputs_blob_size) {</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">   260292172 :                                                 return outputs_blob[offset - outputs_offset];</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">   260292172 :                                         }</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">    40549367 :                                         else if (offset &lt; transactions_offset + outputs_blob_size_diff) {</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">     1652249 :                                                 return data_begin[offset - outputs_blob_size_diff];</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">     1652249 :                                         }</span></span>
+<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">    38897118 :                                         else if (offset &lt; transactions_offset + outputs_blob_size_diff + transactions_blob_size) {</span></span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">    30780640 :                                                 return transactions_blob[offset - (transactions_offset + outputs_blob_size_diff)];</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">    30780640 :                                         }</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">     8116478 :                                         return data_begin[offset - outputs_blob_size_diff - transactions_blob_size_diff];</span></span>
+<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">   302858415 :                                 }</span></span>
+<span id="L595"><span class="lineNum">     595</span>              : </span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">     1288416 :                                 return consensus_id[offset - data_size];</span></span>
+<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">   304146831 :                         },</span></span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">       40263 :                         static_cast&lt;int&gt;(size + outputs_blob_size_diff + transactions_blob_size_diff + consensus_id.size()), check.h, HASH_SIZE);</span></span>
+<span id="L599"><span class="lineNum">     599</span>              : </span>
+<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">       40263 :                 if (m_sidechainId.empty()) {</span></span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">       40251 :                         m_sidechainId = check;</span></span>
+<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">       40251 :                 }</span></span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">          12 :                 else if (m_sidechainId != check) {</span></span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L606"><span class="lineNum">     606</span>              : </span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC tlaBgGNC">       40263 : #if POOL_BLOCK_DEBUG</span></span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">       40263 :                 m_sideChainDataDebug.assign(sidechain_data_begin, data_end);</span></span>
+<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">       40263 : #endif</span></span>
+<span id="L610"><span class="lineNum">     610</span>              : </span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">       40263 :                 const uint32_t mm_aux_slot = get_aux_slot(sidechain.consensus_hash(), mm_nonce, mm_n_aux_chains);</span></span>
+<span id="L612"><span class="lineNum">     612</span>              : </span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">       40263 :                 if (!verify_merkle_proof(check, m_merkleProof, mm_aux_slot, mm_n_aux_chains, m_merkleRoot)) {</span></span>
+<span id="L614"><span class="lineNum">     614</span> <span class="tlaUNC tlaBgUNC">           0 :                         return __LINE__;</span></span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC tlaBgGNC">       40263 :         }</span></span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC">       40269 :         catch (std::exception&amp; e) {</span></span>
+<span id="L618"><span class="lineNum">     618</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(0, &quot;Exception in PoolBlock::deserialize(): &quot; &lt;&lt; e.what());</span></span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaUNC">           0 :                 return __LINE__;</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L621"><span class="lineNum">     621</span>              : </span>
+<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC tlaBgGNC">       40263 :         reset_offchain_data();</span></span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">       40263 :         return 0;</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">       40269 : }</span></span>
+<span id="L625"><span class="lineNum">     625</span>              : </span>
+<span id="L626"><span class="lineNum">     626</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
