@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-30 10:34:23</td>
+            <td class="headerValue">2026-08-30 15:45:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -133,7 +133,7 @@
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :         hash seed_hash;</span></span>
 <span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :         size_t nonce_offset;</span></span>
 <span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 :         uint32_t template_id;</span></span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :         tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id), 76);</span></span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           1 :         ASSERT_EQ(height, 2762973);</span></span>
 <span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">           1 :         ASSERT_EQ(diff, 300346053753ULL);</span></span>
@@ -186,7 +186,7 @@
 <span id="L124"><span class="lineNum">     124</span> <span class="tlaGNC">         202 :                 ASSERT_GE(static_cast&lt;hash&gt;(b-&gt;m_transactions[i]).u64()[0], 256);</span></span>
 <span id="L125"><span class="lineNum">     125</span> <span class="tlaGNC">         202 :         }</span></span>
 <span id="L126"><span class="lineNum">     126</span>              : </span>
-<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">           1 :         tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
+<span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id), 77);</span></span>
 <span id="L128"><span class="lineNum">     128</span>              : </span>
 <span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">           1 :         ASSERT_EQ(height, 2762973);</span></span>
 <span id="L130"><span class="lineNum">     130</span> <span class="tlaGNC">           1 :         ASSERT_EQ(diff, 300346053753ULL);</span></span>
@@ -223,7 +223,7 @@
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_sidechainId, H(&quot;318543c2020c1154ec4b8127c1849777ef7d9cfe255ebbf8806f2e0231c82adb&quot;));</span></span>
 <span id="L162"><span class="lineNum">     162</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_transactions.size(), 10);</span></span>
 <span id="L163"><span class="lineNum">     163</span>              : </span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">           1 :         tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id), 76);</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : </span>
 <span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">           1 :         ASSERT_EQ(height, 2762973);</span></span>
 <span id="L167"><span class="lineNum">     167</span> <span class="tlaGNC">           1 :         ASSERT_EQ(diff, 300346053753ULL);</span></span>
@@ -260,7 +260,7 @@
 <span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_sidechainId, H(&quot;76e680114a10a0499a78f9160f12f27bdc86453f8a5f2b25726b7dc91bd4809b&quot;));</span></span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">           1 :         ASSERT_EQ(b-&gt;m_transactions.size(), 173);</span></span>
 <span id="L200"><span class="lineNum">     200</span>              : </span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">           1 :         tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">           1 :         ASSERT_EQ(tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id), 77);</span></span>
 <span id="L202"><span class="lineNum">     202</span>              : </span>
 <span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">           1 :         ASSERT_EQ(height, 2762973);</span></span>
 <span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">           1 :         ASSERT_EQ(diff, 300346053753ULL);</span></span>
