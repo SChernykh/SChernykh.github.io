@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-30 09:01:33</td>
+            <td class="headerValue">2026-08-30 10:34:23</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -858,19 +858,19 @@
 <span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L797"><span class="lineNum">     797</span>              : </span>
 <span id="L798"><span class="lineNum">     798</span>              : static bool equal_values(const std::vector&lt;std::pair&lt;hash, bool&gt;&gt;&amp; values, const std::vector&lt;hash&gt;&amp; reference)</span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">         117 : {</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">         117 :         if (values.size() != reference.size()) {</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">         116 : {</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">         116 :         if (values.size() != reference.size()) {</span></span>
 <span id="L801"><span class="lineNum">     801</span> <span class="tlaUNC tlaBgUNC">           0 :                 return false;</span></span>
 <span id="L802"><span class="lineNum">     802</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L803"><span class="lineNum">     803</span>              : </span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC tlaBgGNC">        8223 :         for (size_t i = 0, n = values.size(); i &lt; n; ++i) {</span></span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">        8106 :                 if (!values[i].second || (values[i].first != reference[i])) {</span></span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC tlaBgGNC">        8362 :         for (size_t i = 0, n = values.size(); i &lt; n; ++i) {</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">        8246 :                 if (!values[i].second || (values[i].first != reference[i])) {</span></span>
 <span id="L806"><span class="lineNum">     806</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
 <span id="L807"><span class="lineNum">     807</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaGNC tlaBgGNC">        8106 :         }</span></span>
+<span id="L808"><span class="lineNum">     808</span> <span class="tlaGNC tlaBgGNC">        8246 :         }</span></span>
 <span id="L809"><span class="lineNum">     809</span>              : </span>
-<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">         117 :         return true;</span></span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">         117 : }</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">         116 :         return true;</span></span>
+<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">         116 : }</span></span>
 <span id="L812"><span class="lineNum">     812</span>              : </span>
 <span id="L813"><span class="lineNum">     813</span>              : TEST(carrot, batch_eph_pubkeys)</span>
 <span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">           1 : {</span></span>
@@ -1513,9 +1513,9 @@
 <span id="L1451"><span class="lineNum">    1451</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L1452"><span class="lineNum">    1452</span>              : </span>
 <span id="L1453"><span class="lineNum">    1453</span>              : static bool equal_anchor(const janus_anchor&amp; a, const janus_anchor&amp; b)</span>
-<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaGNC">        1798 : {</span></span>
-<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaGNC">        1798 :         return memcmp(a.data, b.data, CARROT_JANUS_ANCHOR_BYTES) == 0;</span></span>
-<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaGNC">        1798 : }</span></span>
+<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaGNC">        1946 : {</span></span>
+<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaGNC">        1946 :         return memcmp(a.data, b.data, CARROT_JANUS_ANCHOR_BYTES) == 0;</span></span>
+<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaGNC">        1946 : }</span></span>
 <span id="L1457"><span class="lineNum">    1457</span>              : </span>
 <span id="L1458"><span class="lineNum">    1458</span>              : // 33 wallets is enough to cross every parallel_run thread-count boundary</span>
 <span id="L1459"><span class="lineNum">    1459</span>              : static std::vector&lt;Wallet&gt; make_test_wallets(size_t n)</span>
@@ -1602,20 +1602,20 @@
 <span id="L1540"><span class="lineNum">    1540</span>              : </span>
 <span id="L1541"><span class="lineNum">    1541</span>              :         // Sizes on both sides of the point where the function stops running inline and dispatches</span>
 <span id="L1542"><span class="lineNum">    1542</span>              :         // parallel_run. The two paths must agree exactly - the split is an optimization, not a behavior.</span>
-<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC">          12 :         for (const size_t n : { 40U, 44U, 46U, 47U, 48U, 49U, 50U, 52U, 56U, 64U, 72U, 96U }) {</span></span>
-<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaGNC">          12 :                 const std::vector&lt;const Wallet*&gt; range(pointers.begin(), pointers.begin() + n);</span></span>
+<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaGNC">          10 :         for (const size_t n : { 40U, 64U, 78U, 79U, 80U, 81U, 82U, 84U, 96U, 128U }) {</span></span>
+<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaGNC">          10 :                 const std::vector&lt;const Wallet*&gt; range(pointers.begin(), pointers.begin() + n);</span></span>
 <span id="L1545"><span class="lineNum">    1545</span>              : </span>
-<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaGNC">          12 :                 anchors.resize(1);</span></span>
-<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaGNC">          12 :                 eph_priv_keys.resize(1);</span></span>
+<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaGNC">          10 :                 anchors.resize(1);</span></span>
+<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaGNC">          10 :                 eph_priv_keys.resize(1);</span></span>
 <span id="L1548"><span class="lineNum">    1548</span>              : </span>
-<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaGNC">          24 :                 ASSERT_TRUE(batch_eph_privkeys(txkey_sec, 0, height, range, anchors, eph_priv_keys)) &lt;&lt; &quot;batch size &quot; &lt;&lt; n;</span></span>
-<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaGNC">          12 :                 ASSERT_EQ(anchors.size(), n);</span></span>
+<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaGNC">          20 :                 ASSERT_TRUE(batch_eph_privkeys(txkey_sec, 0, height, range, anchors, eph_priv_keys)) &lt;&lt; &quot;batch size &quot; &lt;&lt; n;</span></span>
+<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaGNC">          10 :                 ASSERT_EQ(anchors.size(), n);</span></span>
 <span id="L1551"><span class="lineNum">    1551</span>              : </span>
-<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaGNC">         676 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L1553"><span class="lineNum">    1553</span> <span class="tlaGNC">        1328 :                         EXPECT_TRUE(equal_anchor(anchors[i], reference_anchors[i])) &lt;&lt; &quot;batch size &quot; &lt;&lt; n &lt;&lt; &quot;, element &quot; &lt;&lt; i;</span></span>
-<span id="L1554"><span class="lineNum">    1554</span> <span class="tlaGNC">        1328 :                         EXPECT_EQ(eph_priv_keys[i], reference_keys[i]) &lt;&lt; &quot;batch size &quot; &lt;&lt; n &lt;&lt; &quot;, element &quot; &lt;&lt; i;</span></span>
-<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaGNC">         664 :                 }</span></span>
-<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaGNC">          12 :         }</span></span>
+<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaGNC">         822 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L1553"><span class="lineNum">    1553</span> <span class="tlaGNC">        1624 :                         EXPECT_TRUE(equal_anchor(anchors[i], reference_anchors[i])) &lt;&lt; &quot;batch size &quot; &lt;&lt; n &lt;&lt; &quot;, element &quot; &lt;&lt; i;</span></span>
+<span id="L1554"><span class="lineNum">    1554</span> <span class="tlaGNC">        1624 :                         EXPECT_EQ(eph_priv_keys[i], reference_keys[i]) &lt;&lt; &quot;batch size &quot; &lt;&lt; n &lt;&lt; &quot;, element &quot; &lt;&lt; i;</span></span>
+<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaGNC">         812 :                 }</span></span>
+<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaGNC">          10 :         }</span></span>
 <span id="L1557"><span class="lineNum">    1557</span>              : </span>
 <span id="L1558"><span class="lineNum">    1558</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(batch_eph_privkeys(txkey_sec, 0, height, pointers, anchors, eph_priv_keys));</span></span>
 <span id="L1559"><span class="lineNum">    1559</span> <span class="tlaGNC">           1 :         ASSERT_EQ(anchors.size(), BOUNDARY_INPUTS);</span></span>
@@ -1732,17 +1732,17 @@
 <span id="L1670"><span class="lineNum">    1670</span> <span class="tlaGNC">           1 :         ASSERT_EQ(range_begin, BOUNDARY_INPUTS);</span></span>
 <span id="L1671"><span class="lineNum">    1671</span>              : </span>
 <span id="L1672"><span class="lineNum">    1672</span>              :         // Sizes on both sides of the inline/parallel_run switch, same reasoning as in batch_eph_privkeys</span>
-<span id="L1673"><span class="lineNum">    1673</span> <span class="tlaGNC">          11 :         for (const size_t n : { 48U, 52U, 54U, 55U, 56U, 57U, 58U, 60U, 64U, 72U, 96U }) {</span></span>
-<span id="L1674"><span class="lineNum">    1674</span> <span class="tlaGNC">          11 :                 const std::vector&lt;std::pair&lt;hash, bool&gt;&gt; s_range(sender_receiver_secrets.begin(), sender_receiver_secrets.begin() + n);</span></span>
-<span id="L1675"><span class="lineNum">    1675</span> <span class="tlaGNC">          11 :                 const std::vector&lt;std::pair&lt;hash, bool&gt;&gt; e_range(eph_pub_keys.begin(), eph_pub_keys.begin() + n);</span></span>
-<span id="L1676"><span class="lineNum">    1676</span> <span class="tlaGNC">          11 :                 const std::vector&lt;hash&gt; range_reference(reference.begin(), reference.begin() + n);</span></span>
+<span id="L1673"><span class="lineNum">    1673</span> <span class="tlaGNC">          10 :         for (const size_t n : { 40U, 64U, 78U, 79U, 80U, 81U, 82U, 84U, 96U, 128U }) {</span></span>
+<span id="L1674"><span class="lineNum">    1674</span> <span class="tlaGNC">          10 :                 const std::vector&lt;std::pair&lt;hash, bool&gt;&gt; s_range(sender_receiver_secrets.begin(), sender_receiver_secrets.begin() + n);</span></span>
+<span id="L1675"><span class="lineNum">    1675</span> <span class="tlaGNC">          10 :                 const std::vector&lt;std::pair&lt;hash, bool&gt;&gt; e_range(eph_pub_keys.begin(), eph_pub_keys.begin() + n);</span></span>
+<span id="L1676"><span class="lineNum">    1676</span> <span class="tlaGNC">          10 :                 const std::vector&lt;hash&gt; range_reference(reference.begin(), reference.begin() + n);</span></span>
 <span id="L1677"><span class="lineNum">    1677</span>              : </span>
-<span id="L1678"><span class="lineNum">    1678</span> <span class="tlaGNC">          11 :                 out.resize(1);</span></span>
+<span id="L1678"><span class="lineNum">    1678</span> <span class="tlaGNC">          10 :                 out.resize(1);</span></span>
 <span id="L1679"><span class="lineNum">    1679</span>              : </span>
-<span id="L1680"><span class="lineNum">    1680</span> <span class="tlaGNC">          22 :                 ASSERT_TRUE(batch_contextualized_sender_receiver_secrets(s_range, e_range, height, out)) &lt;&lt; &quot;batch size &quot; &lt;&lt; n;</span></span>
-<span id="L1681"><span class="lineNum">    1681</span> <span class="tlaGNC">          11 :                 ASSERT_EQ(out.size(), n);</span></span>
-<span id="L1682"><span class="lineNum">    1682</span> <span class="tlaGNC">          22 :                 EXPECT_TRUE(equal_values(out, range_reference)) &lt;&lt; &quot;batch size &quot; &lt;&lt; n;</span></span>
-<span id="L1683"><span class="lineNum">    1683</span> <span class="tlaGNC">          11 :         }</span></span>
+<span id="L1680"><span class="lineNum">    1680</span> <span class="tlaGNC">          20 :                 ASSERT_TRUE(batch_contextualized_sender_receiver_secrets(s_range, e_range, height, out)) &lt;&lt; &quot;batch size &quot; &lt;&lt; n;</span></span>
+<span id="L1681"><span class="lineNum">    1681</span> <span class="tlaGNC">          10 :                 ASSERT_EQ(out.size(), n);</span></span>
+<span id="L1682"><span class="lineNum">    1682</span> <span class="tlaGNC">          20 :                 EXPECT_TRUE(equal_values(out, range_reference)) &lt;&lt; &quot;batch size &quot; &lt;&lt; n;</span></span>
+<span id="L1683"><span class="lineNum">    1683</span> <span class="tlaGNC">          10 :         }</span></span>
 <span id="L1684"><span class="lineNum">    1684</span>              : </span>
 <span id="L1685"><span class="lineNum">    1685</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(batch_contextualized_sender_receiver_secrets(sender_receiver_secrets, eph_pub_keys, height, out));</span></span>
 <span id="L1686"><span class="lineNum">    1686</span> <span class="tlaGNC">           1 :         EXPECT_TRUE(equal_values(out, reference));</span></span>
