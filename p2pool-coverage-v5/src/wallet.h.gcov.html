@@ -32,17 +32,17 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">15</td>
-            <td class="headerCovTableEntry">15</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-08-29 07:35:18</td>
+            <td class="headerValue">2026-08-30 09:01:33</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -96,7 +96,7 @@
 <span id="L34"><span class="lineNum">      34</span>              :         Wallet(const Wallet&amp; w);</span>
 <span id="L35"><span class="lineNum">      35</span>              :         Wallet&amp; operator=(const Wallet&amp; w);</span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">        6792 :         [[nodiscard]] FORCEINLINE bool valid() const { return m_type != NetworkType::Invalid; }</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC tlaBgGNC">        6805 :         [[nodiscard]] FORCEINLINE bool valid() const { return m_type != NetworkType::Invalid; }</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
 <span id="L39"><span class="lineNum">      39</span>              :         [[nodiscard]] bool decode(const char* address);</span>
 <span id="L40"><span class="lineNum">      40</span>              :         [[nodiscard]] bool assign(const hash&amp; spend_pub_key, const hash&amp; view_pub_key, NetworkType type, bool subaddress);</span>
@@ -117,27 +117,30 @@
 <span id="L55"><span class="lineNum">      55</span>              : </span>
 <span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">          60 :         [[nodiscard]] FORCEINLINE uint64_t prefix() const { return m_prefix; }</span></span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">    28693765 :         [[nodiscard]] FORCEINLINE const hash* keys() const { return m_keys; }</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">      419771 :         [[nodiscard]] FORCEINLINE const hash&amp; spend_public_key() const { return m_keys[0]; }</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">     2368956 :         [[nodiscard]] FORCEINLINE const hash&amp; view_public_key() const { return m_keys[1]; }</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">      437594 :         [[nodiscard]] FORCEINLINE const hash&amp; spend_public_key() const { return m_keys[0]; }</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">     2662263 :         [[nodiscard]] FORCEINLINE const hash&amp; view_public_key() const { return m_keys[1]; }</span></span>
 <span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">          60 :         [[nodiscard]] FORCEINLINE uint32_t checksum() const { return m_checksum; }</span></span>
 <span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">          72 :         [[nodiscard]] FORCEINLINE NetworkType get_type() const { return m_type; }</span></span>
 <span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">          72 :         [[nodiscard]] FORCEINLINE bool is_subaddress() const { return m_subaddress; }</span></span>
-<span id="L63"><span class="lineNum">      63</span>              :         [[nodiscard]] bool torsion_check() const;</span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           7 :         [[nodiscard]] FORCEINLINE bool is_torsioned() const { return m_torsioned; }</span></span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
-<span id="L65"><span class="lineNum">      65</span>              : private:</span>
-<span id="L66"><span class="lineNum">      66</span>              :         uint64_t m_prefix;</span>
-<span id="L67"><span class="lineNum">      67</span>              : </span>
-<span id="L68"><span class="lineNum">      68</span>              :         hash m_keys[2];</span>
+<span id="L65"><span class="lineNum">      65</span>              :         [[nodiscard]] bool torsion_check() const;</span>
+<span id="L66"><span class="lineNum">      66</span>              : </span>
+<span id="L67"><span class="lineNum">      67</span>              : private:</span>
+<span id="L68"><span class="lineNum">      68</span>              :         uint64_t m_prefix;</span>
 <span id="L69"><span class="lineNum">      69</span>              : </span>
-<span id="L70"><span class="lineNum">      70</span>              :         // Make sure it's safe to memcpy/pass to plain C dode</span>
-<span id="L71"><span class="lineNum">      71</span>              :         static_assert(std::is_standard_layout_v&lt;decltype(m_keys)&gt; &amp;&amp; (sizeof(m_keys) == HASH_SIZE * 2));</span>
-<span id="L72"><span class="lineNum">      72</span>              : </span>
-<span id="L73"><span class="lineNum">      73</span>              :         uint32_t m_checksum;</span>
-<span id="L74"><span class="lineNum">      74</span>              :         NetworkType m_type;</span>
-<span id="L75"><span class="lineNum">      75</span>              :         bool m_subaddress;</span>
-<span id="L76"><span class="lineNum">      76</span>              : };</span>
-<span id="L77"><span class="lineNum">      77</span>              : </span>
-<span id="L78"><span class="lineNum">      78</span>              : } // namespace p2pool</span>
+<span id="L70"><span class="lineNum">      70</span>              :         hash m_keys[2];</span>
+<span id="L71"><span class="lineNum">      71</span>              : </span>
+<span id="L72"><span class="lineNum">      72</span>              :         // Make sure it's safe to memcpy/pass to plain C dode</span>
+<span id="L73"><span class="lineNum">      73</span>              :         static_assert(std::is_standard_layout_v&lt;decltype(m_keys)&gt; &amp;&amp; (sizeof(m_keys) == HASH_SIZE * 2));</span>
+<span id="L74"><span class="lineNum">      74</span>              : </span>
+<span id="L75"><span class="lineNum">      75</span>              :         uint32_t m_checksum;</span>
+<span id="L76"><span class="lineNum">      76</span>              :         NetworkType m_type;</span>
+<span id="L77"><span class="lineNum">      77</span>              :         bool m_subaddress;</span>
+<span id="L78"><span class="lineNum">      78</span>              :         bool m_torsioned;</span>
+<span id="L79"><span class="lineNum">      79</span>              : };</span>
+<span id="L80"><span class="lineNum">      80</span>              : </span>
+<span id="L81"><span class="lineNum">      81</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
