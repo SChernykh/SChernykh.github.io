@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-06 19:19:46</td>
+            <td class="headerValue">2026-09-06 20:05:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -377,19 +377,19 @@
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">       23445 :         const uint8_t n = static_cast&lt;uint8_t&gt;(m_merkleProof.size());</span></span>
 <span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">       23445 :         data.push_back(n);</span></span>
 <span id="L317"><span class="lineNum">     317</span>              : </span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       25380 :         for (uint8_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">        1935 :                 const hash&amp; h = m_merkleProof[i];</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">        1935 :                 data.insert(data.end(), h.h, h.h + HASH_SIZE);</span></span>
-<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">        1935 :         }</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">       25381 :         for (uint8_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">        1936 :                 const hash&amp; h = m_merkleProof[i];</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">        1936 :                 data.insert(data.end(), h.h, h.h + HASH_SIZE);</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">        1936 :         }</span></span>
 <span id="L322"><span class="lineNum">     322</span>              : </span>
 <span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">       23445 :         writeVarint(m_mergeMiningExtra.size(), data);</span></span>
 <span id="L324"><span class="lineNum">     324</span>              : </span>
 <span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">       23445 :         for (const auto&amp; mm_extra_data : m_mergeMiningExtra) {</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">        1935 :                 data.insert(data.end(), mm_extra_data.first.h, mm_extra_data.first.h + HASH_SIZE);</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">        1936 :                 data.insert(data.end(), mm_extra_data.first.h, mm_extra_data.first.h + HASH_SIZE);</span></span>
 <span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">        1935 :                 writeVarint(mm_extra_data.second.size(), data);</span></span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">        1935 :                 data.insert(data.end(), mm_extra_data.second.begin(), mm_extra_data.second.end());</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        1935 :         }</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">        1936 :                 writeVarint(mm_extra_data.second.size(), data);</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">        1936 :                 data.insert(data.end(), mm_extra_data.second.begin(), mm_extra_data.second.end());</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">        1936 :         }</span></span>
 <span id="L331"><span class="lineNum">     331</span>              : </span>
 <span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">       23445 :         const uint8_t* p = reinterpret_cast&lt;const uint8_t*&gt;(m_sidechainExtraBuf);</span></span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">       23445 :         data.insert(data.end(), p, p + sizeof(m_sidechainExtraBuf));</span></span>
