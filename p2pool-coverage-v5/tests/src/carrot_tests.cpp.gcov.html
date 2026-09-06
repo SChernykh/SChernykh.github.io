@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-04 10:45:03</td>
+            <td class="headerValue">2026-09-06 09:35:53</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -118,7 +118,7 @@
 <span id="L56"><span class="lineNum">      56</span>              : static constexpr const hash&amp; invalid_public_key = all_ones;</span>
 <span id="L57"><span class="lineNum">      57</span>              : </span>
 <span id="L58"><span class="lineNum">      58</span>              : static constexpr janus_anchor all_ones_anchor = {</span>
-<span id="L59"><span class="lineNum">      59</span>              :         { 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff }</span>
+<span id="L59"><span class="lineNum">      59</span>              :         0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff</span>
 <span id="L60"><span class="lineNum">      60</span>              : };</span>
 <span id="L61"><span class="lineNum">      61</span>              : </span>
 <span id="L62"><span class="lineNum">      62</span>              : static constexpr hash hash_to_bytes_key = keccak(&quot;hash_to_bytes key&quot;);</span>
@@ -132,7 +132,7 @@
 <span id="L70"><span class="lineNum">      70</span>              : static constexpr hash eph_pub_key(&quot;924e14b4c6664450530266de4aafa87a019484a22e193728d6cad09824690224&quot;);</span>
 <span id="L71"><span class="lineNum">      71</span>              : </span>
 <span id="L72"><span class="lineNum">      72</span>              : static constexpr janus_anchor convergence_anchor = {</span>
-<span id="L73"><span class="lineNum">      73</span>              :         { 0xca, 0xee, 0x13, 0x81, 0x77, 0x54, 0x87, 0xa0, 0x98, 0x25, 0x57, 0xf0, 0xd2, 0x68, 0x0b, 0x55 }</span>
+<span id="L73"><span class="lineNum">      73</span>              :         0xca, 0xee, 0x13, 0x81, 0x77, 0x54, 0x87, 0xa0, 0x98, 0x25, 0x57, 0xf0, 0xd2, 0x68, 0x0b, 0x55</span>
 <span id="L74"><span class="lineNum">      74</span>              : };</span>
 <span id="L75"><span class="lineNum">      75</span>              : </span>
 <span id="L76"><span class="lineNum">      76</span>              : static constexpr hash convergence_eph_priv_key(&quot;6aea0ed0c34ad3483415377658841a75e0da8b462e637d8bf783b9bcd320b303&quot;);</span>
@@ -837,7 +837,7 @@
 <span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">           5 :                 init_crypto_cache();</span></span>
 <span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">           5 :                 thread_pool_init();</span></span>
 <span id="L777"><span class="lineNum">     777</span>              : </span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">           5 :                 std::vector&lt;coinbase_output&gt; out;</span></span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">           5 :                 std::vector&lt;coinbase_tx_output&gt; out;</span></span>
 <span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">           5 :                 const bool ok = batch_coinbase_outputs(v.height, { in }, out);</span></span>
 <span id="L780"><span class="lineNum">     780</span>              : </span>
 <span id="L781"><span class="lineNum">     781</span> <span class="tlaGNC">           5 :                 thread_pool_destroy();</span></span>
@@ -1267,9 +1267,9 @@
 <span id="L1205"><span class="lineNum">    1205</span> <span class="tlaGNC">           1 :         }</span></span>
 <span id="L1206"><span class="lineNum">    1206</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L1207"><span class="lineNum">    1207</span>              : </span>
-<span id="L1208"><span class="lineNum">    1208</span>              : static coinbase_output reference_coinbase_output(uint64_t height, const coinbase_output_input&amp; in)</span>
+<span id="L1208"><span class="lineNum">    1208</span>              : static coinbase_tx_output reference_coinbase_output(uint64_t height, const coinbase_output_input&amp; in)</span>
 <span id="L1209"><span class="lineNum">    1209</span> <span class="tlaGNC">         573 : {</span></span>
-<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaGNC">         573 :         coinbase_output result{};</span></span>
+<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaGNC">         573 :         coinbase_tx_output result{};</span></span>
 <span id="L1211"><span class="lineNum">    1211</span>              : </span>
 <span id="L1212"><span class="lineNum">    1212</span> <span class="tlaGNC">         573 :         const hash sender_extension_g = gen_sender_extension_g(in.contextualized_sender_receiver_secret, in.amount, in.spend_public_key);</span></span>
 <span id="L1213"><span class="lineNum">    1213</span> <span class="tlaGNC">         573 :         const hash sender_extension_t = gen_sender_extension_t(in.contextualized_sender_receiver_secret, in.amount, in.spend_public_key);</span></span>
@@ -1287,7 +1287,7 @@
 <span id="L1225"><span class="lineNum">    1225</span> <span class="tlaGNC">         573 :         return result;</span></span>
 <span id="L1226"><span class="lineNum">    1226</span> <span class="tlaGNC">         573 : }</span></span>
 <span id="L1227"><span class="lineNum">    1227</span>              : </span>
-<span id="L1228"><span class="lineNum">    1228</span>              : static bool equal_outputs(const coinbase_output&amp; a, const coinbase_output&amp; b)</span>
+<span id="L1228"><span class="lineNum">    1228</span>              : static bool equal_outputs(const coinbase_tx_output&amp; a, const coinbase_tx_output&amp; b)</span>
 <span id="L1229"><span class="lineNum">    1229</span> <span class="tlaGNC">        1694 : {</span></span>
 <span id="L1230"><span class="lineNum">    1230</span> <span class="tlaGNC">        1694 :         return (a.valid == b.valid) &amp;&amp;</span></span>
 <span id="L1231"><span class="lineNum">    1231</span> <span class="tlaGNC">        1694 :                 (a.onetime_address == b.onetime_address) &amp;&amp;</span></span>
@@ -1308,7 +1308,7 @@
 <span id="L1246"><span class="lineNum">    1246</span> <span class="tlaGNC">           1 :         constexpr uint64_t height = 3812345;</span></span>
 <span id="L1247"><span class="lineNum">    1247</span> <span class="tlaGNC">           1 :         constexpr uint64_t amount = 600000000000ULL;</span></span>
 <span id="L1248"><span class="lineNum">    1248</span>              : </span>
-<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaGNC">           1 :         std::vector&lt;coinbase_output&gt; out(1);</span></span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaGNC">           1 :         std::vector&lt;coinbase_tx_output&gt; out(1);</span></span>
 <span id="L1250"><span class="lineNum">    1250</span>              : </span>
 <span id="L1251"><span class="lineNum">    1251</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(batch_coinbase_outputs(height, {}, out));</span></span>
 <span id="L1252"><span class="lineNum">    1252</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(out.empty());</span></span>
@@ -1409,7 +1409,7 @@
 <span id="L1347"><span class="lineNum">    1347</span>              : </span>
 <span id="L1348"><span class="lineNum">    1348</span>              :         // The height only reaches the view tag: K_o and the encrypted anchor don't depend on it</span>
 <span id="L1349"><span class="lineNum">    1349</span> <span class="tlaGNC">           1 :         {</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaGNC">           1 :                 std::vector&lt;coinbase_output&gt; out2;</span></span>
+<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaGNC">           1 :                 std::vector&lt;coinbase_tx_output&gt; out2;</span></span>
 <span id="L1351"><span class="lineNum">    1351</span>              : </span>
 <span id="L1352"><span class="lineNum">    1352</span> <span class="tlaGNC">           1 :                 ASSERT_TRUE(batch_coinbase_outputs(height, { known }, out));</span></span>
 <span id="L1353"><span class="lineNum">    1353</span> <span class="tlaGNC">           1 :                 ASSERT_TRUE(batch_coinbase_outputs(height + 1, { known }, out2));</span></span>
@@ -1444,7 +1444,7 @@
 <span id="L1382"><span class="lineNum">    1382</span> <span class="tlaGNC">         560 :                 inputs.emplace_back(t);</span></span>
 <span id="L1383"><span class="lineNum">    1383</span> <span class="tlaGNC">         560 :         }</span></span>
 <span id="L1384"><span class="lineNum">    1384</span>              : </span>
-<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">           1 :         std::vector&lt;coinbase_output&gt; reference(inputs.size());</span></span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaGNC">           1 :         std::vector&lt;coinbase_tx_output&gt; reference(inputs.size());</span></span>
 <span id="L1386"><span class="lineNum">    1386</span>              : </span>
 <span id="L1387"><span class="lineNum">    1387</span> <span class="tlaGNC">         562 :         for (size_t i = 0; i &lt; reference.size(); ++i) {</span></span>
 <span id="L1388"><span class="lineNum">    1388</span> <span class="tlaGNC">         561 :                 reference[i] = reference_coinbase_output(height, inputs[i]);</span></span>
@@ -1483,7 +1483,7 @@
 <span id="L1421"><span class="lineNum">    1421</span> <span class="tlaGNC">           1 :                 std::vector&lt;hash&gt; onetime_addresses;</span></span>
 <span id="L1422"><span class="lineNum">    1422</span> <span class="tlaGNC">           1 :                 onetime_addresses.reserve(out.size());</span></span>
 <span id="L1423"><span class="lineNum">    1423</span>              : </span>
-<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaGNC">         561 :                 for (const coinbase_output&amp; t : out) {</span></span>
+<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaGNC">         561 :                 for (const coinbase_tx_output&amp; t : out) {</span></span>
 <span id="L1425"><span class="lineNum">    1425</span> <span class="tlaGNC">         561 :                         onetime_addresses.emplace_back(t.onetime_address);</span></span>
 <span id="L1426"><span class="lineNum">    1426</span> <span class="tlaGNC">         561 :                 }</span></span>
 <span id="L1427"><span class="lineNum">    1427</span>              : </span>
