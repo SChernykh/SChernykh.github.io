@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-08 11:38:54</td>
+            <td class="headerValue">2026-09-08 12:25:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">58.9&nbsp;%</td>
@@ -1388,25 +1388,25 @@
 <span id="L1326"><span class="lineNum">    1326</span>              : </span>
 <span id="L1327"><span class="lineNum">    1327</span>              :         // Every 5 minutes, delete wallets that haven't been seen for more than 72 hours and onion/I2P identifiers that haven't been seen for more than 12 hours</span>
 <span id="L1328"><span class="lineNum">    1328</span> <span class="tlaGNC">       33518 :         if (m_seenWalletsLastPruneTime + 5ul * 60ul &lt;= cur_time) {</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">          27 :                 auto prune = [cur_time](auto&amp; data, uint64_t timeout) {</span></span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">          36 :                         for (auto it = data.begin(); it != data.end();) {</span></span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaGNC">           9 :                                 if (it-&gt;second + timeout &lt; cur_time) {</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">          12 :                 auto prune = [cur_time](auto&amp; data, uint64_t timeout) {</span></span>
+<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">         773 :                         for (auto it = data.begin(); it != data.end();) {</span></span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaGNC">         761 :                                 if (it-&gt;second + timeout &lt; cur_time) {</span></span>
 <span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC tlaBgUNC">           0 :                                         it = data.erase(it);</span></span>
 <span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaGNC tlaBgGNC">           9 :                                 else {</span></span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">           9 :                                         ++it;</span></span>
-<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaGNC">           9 :                                 }</span></span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">           9 :                         }</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">          27 :                 };</span></span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaGNC tlaBgGNC">         761 :                                 else {</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">         761 :                                         ++it;</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaGNC">         761 :                                 }</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">         761 :                         }</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">          12 :                 };</span></span>
 <span id="L1339"><span class="lineNum">    1339</span>              : </span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">           9 :                 constexpr uint64_t hour = 3600;</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">           4 :                 constexpr uint64_t hour = 3600;</span></span>
 <span id="L1341"><span class="lineNum">    1341</span>              : </span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">           9 :                 prune(m_seenWallets, 72 * hour);</span></span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">           9 :                 prune(m_seenOnionPubkeys, 12 * hour);</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC">           9 :                 prune(m_seenI2PDestHashes, 12 * hour);</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">           4 :                 prune(m_seenWallets, 72 * hour);</span></span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">           4 :                 prune(m_seenOnionPubkeys, 12 * hour);</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC">           4 :                 prune(m_seenI2PDestHashes, 12 * hour);</span></span>
 <span id="L1345"><span class="lineNum">    1345</span>              : </span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">           9 :                 m_seenWalletsLastPruneTime = cur_time;</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">           9 :         }</span></span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">           4 :                 m_seenWalletsLastPruneTime = cur_time;</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">           4 :         }</span></span>
 <span id="L1348"><span class="lineNum">    1348</span> <span class="tlaGNC">       33518 : }</span></span>
 <span id="L1349"><span class="lineNum">    1349</span>              : </span>
 <span id="L1350"><span class="lineNum">    1350</span>              : uint64_t SideChain::last_updated() const</span>
@@ -2945,13 +2945,13 @@
 <span id="L2883"><span class="lineNum">    2883</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return;</span></span>
 <span id="L2884"><span class="lineNum">    2884</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L2885"><span class="lineNum">    2885</span>              : </span>
-<span id="L2886"><span class="lineNum">    2886</span> <span class="tlaGNC tlaBgGNC">       16190 :                         while (m_precalcJobs.empty()) {</span></span>
-<span id="L2887"><span class="lineNum">    2887</span> <span class="tlaGNC">        2207 :                                 uv_cond_wait(&amp;m_precalcJobsCond, &amp;m_precalcJobsMutex);</span></span>
+<span id="L2886"><span class="lineNum">    2886</span> <span class="tlaGNC tlaBgGNC">       16194 :                         while (m_precalcJobs.empty()) {</span></span>
+<span id="L2887"><span class="lineNum">    2887</span> <span class="tlaGNC">        2211 :                                 uv_cond_wait(&amp;m_precalcJobsCond, &amp;m_precalcJobsMutex);</span></span>
 <span id="L2888"><span class="lineNum">    2888</span>              : </span>
-<span id="L2889"><span class="lineNum">    2889</span> <span class="tlaGNC">        2207 :                                 if (m_precalcFinished) {</span></span>
+<span id="L2889"><span class="lineNum">    2889</span> <span class="tlaGNC">        2211 :                                 if (m_precalcFinished) {</span></span>
 <span id="L2890"><span class="lineNum">    2890</span> <span class="tlaGNC">          11 :                                         return;</span></span>
 <span id="L2891"><span class="lineNum">    2891</span> <span class="tlaGNC">          11 :                                 }</span></span>
-<span id="L2892"><span class="lineNum">    2892</span> <span class="tlaGNC">        2207 :                         }</span></span>
+<span id="L2892"><span class="lineNum">    2892</span> <span class="tlaGNC">        2211 :                         }</span></span>
 <span id="L2893"><span class="lineNum">    2893</span>              : </span>
 <span id="L2894"><span class="lineNum">    2894</span> <span class="tlaGNC">       13983 :                         job = m_precalcJobs.back();</span></span>
 <span id="L2895"><span class="lineNum">    2895</span> <span class="tlaGNC">       13983 :                         m_precalcJobs.pop_back();</span></span>
@@ -2966,13 +2966,13 @@
 <span id="L2904"><span class="lineNum">    2904</span>              : </span>
 <span id="L2905"><span class="lineNum">    2905</span> <span class="tlaGNC">       13983 :                         const size_t n = job-&gt;m_precalculatedShares.size();</span></span>
 <span id="L2906"><span class="lineNum">    2906</span>              : </span>
-<span id="L2907"><span class="lineNum">    2907</span> <span class="tlaGNC">     2204056 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2908"><span class="lineNum">    2908</span> <span class="tlaGNC">     2190073 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
-<span id="L2909"><span class="lineNum">    2909</span> <span class="tlaGNC">     2190073 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
-<span id="L2910"><span class="lineNum">    2910</span> <span class="tlaGNC">     2190073 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
-<span id="L2911"><span class="lineNum">    2911</span> <span class="tlaGNC">      361969 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
-<span id="L2912"><span class="lineNum">    2912</span> <span class="tlaGNC">      361969 :                                 }</span></span>
-<span id="L2913"><span class="lineNum">    2913</span> <span class="tlaGNC">     2190073 :                         }</span></span>
+<span id="L2907"><span class="lineNum">    2907</span> <span class="tlaGNC">     2251213 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2908"><span class="lineNum">    2908</span> <span class="tlaGNC">     2237230 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
+<span id="L2909"><span class="lineNum">    2909</span> <span class="tlaGNC">     2237230 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
+<span id="L2910"><span class="lineNum">    2910</span> <span class="tlaGNC">     2237230 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
+<span id="L2911"><span class="lineNum">    2911</span> <span class="tlaGNC">      363906 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
+<span id="L2912"><span class="lineNum">    2912</span> <span class="tlaGNC">      363906 :                                 }</span></span>
+<span id="L2913"><span class="lineNum">    2913</span> <span class="tlaGNC">     2237230 :                         }</span></span>
 <span id="L2914"><span class="lineNum">    2914</span> <span class="tlaGNC">       13983 :                 }</span></span>
 <span id="L2915"><span class="lineNum">    2915</span>              : </span>
 <span id="L2916"><span class="lineNum">    2916</span> <span class="tlaUNC tlaBgUNC">           0 :                 const size_t n = wallets.size();</span></span>
@@ -2980,9 +2980,9 @@
 <span id="L2918"><span class="lineNum">    2918</span> <span class="tlaGNC tlaBgGNC">       13983 :                 in.clear();</span></span>
 <span id="L2919"><span class="lineNum">    2919</span> <span class="tlaGNC">       13983 :                 in.reserve(n);</span></span>
 <span id="L2920"><span class="lineNum">    2920</span>              : </span>
-<span id="L2921"><span class="lineNum">    2921</span> <span class="tlaGNC">      375952 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2922"><span class="lineNum">    2922</span> <span class="tlaGNC">      361969 :                         in.emplace_back(wallets[i].second-&gt;view_public_key(), wallets[i].first);</span></span>
-<span id="L2923"><span class="lineNum">    2923</span> <span class="tlaGNC">      361969 :                 }</span></span>
+<span id="L2921"><span class="lineNum">    2921</span> <span class="tlaGNC">      377889 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2922"><span class="lineNum">    2922</span> <span class="tlaGNC">      363906 :                         in.emplace_back(wallets[i].second-&gt;view_public_key(), wallets[i].first);</span></span>
+<span id="L2923"><span class="lineNum">    2923</span> <span class="tlaGNC">      363906 :                 }</span></span>
 <span id="L2924"><span class="lineNum">    2924</span>              : </span>
 <span id="L2925"><span class="lineNum">    2925</span> <span class="tlaGNC">       13983 :                 if (!batch_derivations(in, job-&gt;m_txkeySec, out)) {</span></span>
 <span id="L2926"><span class="lineNum">    2926</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGWARN(6, &quot;batch_derivations failed in precalc_worker&quot;);</span></span>
@@ -2992,9 +2992,9 @@
 <span id="L2930"><span class="lineNum">    2930</span> <span class="tlaGNC tlaBgGNC">       13983 :                 in2.clear();</span></span>
 <span id="L2931"><span class="lineNum">    2931</span> <span class="tlaGNC">       13983 :                 in2.reserve(n);</span></span>
 <span id="L2932"><span class="lineNum">    2932</span>              : </span>
-<span id="L2933"><span class="lineNum">    2933</span> <span class="tlaGNC">      375952 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2934"><span class="lineNum">    2934</span> <span class="tlaGNC">      361969 :                         in2.emplace_back(out[i].first, wallets[i].first, wallets[i].second-&gt;spend_public_key());</span></span>
-<span id="L2935"><span class="lineNum">    2935</span> <span class="tlaGNC">      361969 :                 }</span></span>
+<span id="L2933"><span class="lineNum">    2933</span> <span class="tlaGNC">      377889 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2934"><span class="lineNum">    2934</span> <span class="tlaGNC">      363906 :                         in2.emplace_back(out[i].first, wallets[i].first, wallets[i].second-&gt;spend_public_key());</span></span>
+<span id="L2935"><span class="lineNum">    2935</span> <span class="tlaGNC">      363906 :                 }</span></span>
 <span id="L2936"><span class="lineNum">    2936</span>              : </span>
 <span id="L2937"><span class="lineNum">    2937</span> <span class="tlaGNC">       13983 :                 if (!batch_public_keys(in2, out2)) {</span></span>
 <span id="L2938"><span class="lineNum">    2938</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGWARN(6, &quot;batch_public_keys failed in precalc_worker&quot;);</span></span>
