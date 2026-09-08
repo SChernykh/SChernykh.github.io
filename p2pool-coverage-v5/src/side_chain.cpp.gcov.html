@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-08 12:25:02</td>
+            <td class="headerValue">2026-09-08 17:55:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">58.9&nbsp;%</td>
@@ -307,14 +307,14 @@
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">          11 : }</span></span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
 <span id="L247"><span class="lineNum">     247</span>              : bool SideChain::fill_sidechain_data(PoolBlock&amp; block, std::vector&lt;MinerShare&gt;&amp; shares) const</span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        6736 : {</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        6736 :         block.m_uncles.clear();</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        6737 : {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        6737 :         block.m_uncles.clear();</span></span>
 <span id="L250"><span class="lineNum">     250</span>              : </span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        6736 :         ReadLock lock(m_sidechainLock);</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">        6737 :         ReadLock lock(m_sidechainLock);</span></span>
 <span id="L252"><span class="lineNum">     252</span>              : </span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        6736 :         const PoolBlock* tip = m_chainTip;</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">        6737 :         const PoolBlock* tip = m_chainTip;</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        6736 :         if (!tip) {</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">        6737 :         if (!tip) {</span></span>
 <span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">           6 :                 block.m_parent = {};</span></span>
 <span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">           6 :                 block.m_sidechainHeight = 0;</span></span>
 <span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">           6 :                 block.m_difficulty = m_minDifficulty;</span></span>
@@ -326,40 +326,40 @@
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">           6 :                 return get_shares(&amp;block, shares);</span></span>
 <span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">           6 :         }</span></span>
 <span id="L266"><span class="lineNum">     266</span>              : </span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        6730 :         block.m_txkeySecSeed = (block.m_prevId == tip-&gt;m_prevId) ? tip-&gt;m_txkeySecSeed : tip-&gt;calculate_tx_key_seed();</span></span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6730 :         get_tx_keys(block.m_txkeyPub, block.m_txkeySec, block.m_txkeySecSeed, block.m_prevId);</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        6731 :         block.m_txkeySecSeed = (block.m_prevId == tip-&gt;m_prevId) ? tip-&gt;m_txkeySecSeed : tip-&gt;calculate_tx_key_seed();</span></span>
+<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6731 :         get_tx_keys(block.m_txkeyPub, block.m_txkeySec, block.m_txkeySecSeed, block.m_prevId);</span></span>
 <span id="L269"><span class="lineNum">     269</span>              : </span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        6730 :         block.m_parent = tip-&gt;m_sidechainId;</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        6730 :         block.m_sidechainHeight = tip-&gt;m_sidechainHeight + 1;</span></span>
+<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        6731 :         block.m_parent = tip-&gt;m_sidechainId;</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        6731 :         block.m_sidechainHeight = tip-&gt;m_sidechainHeight + 1;</span></span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
 <span id="L273"><span class="lineNum">     273</span>              :         // Collect uncles from 3 previous block heights</span>
 <span id="L274"><span class="lineNum">     274</span>              : </span>
 <span id="L275"><span class="lineNum">     275</span>              :         // First get a list of already mined blocks at these heights</span>
-<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        6730 :         std::vector&lt;hash&gt; mined_blocks;</span></span>
-<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        6730 :         mined_blocks.reserve(UNCLE_BLOCK_DEPTH * 2 + 1);</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        6731 :         std::vector&lt;hash&gt; mined_blocks;</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        6731 :         mined_blocks.reserve(UNCLE_BLOCK_DEPTH * 2 + 1);</span></span>
 <span id="L278"><span class="lineNum">     278</span>              : </span>
-<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        6730 :         const PoolBlock* tmp = tip;</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">       26916 :         for (uint64_t i = 0, n = std::min&lt;uint64_t&gt;(UNCLE_BLOCK_DEPTH, tip-&gt;m_sidechainHeight + 1); tmp &amp;&amp; (i &lt; n); ++i) {</span></span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       20186 :                 mined_blocks.push_back(tmp-&gt;m_sidechainId);</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       20186 :                 mined_blocks.insert(mined_blocks.end(), tmp-&gt;m_uncles.begin(), tmp-&gt;m_uncles.end());</span></span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">       20186 :                 tmp = get_parent(tmp);</span></span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       20186 :         }</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        6731 :         const PoolBlock* tmp = tip;</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">       26920 :         for (uint64_t i = 0, n = std::min&lt;uint64_t&gt;(UNCLE_BLOCK_DEPTH, tip-&gt;m_sidechainHeight + 1); tmp &amp;&amp; (i &lt; n); ++i) {</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       20189 :                 mined_blocks.push_back(tmp-&gt;m_sidechainId);</span></span>
+<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       20189 :                 mined_blocks.insert(mined_blocks.end(), tmp-&gt;m_uncles.begin(), tmp-&gt;m_uncles.end());</span></span>
+<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">       20189 :                 tmp = get_parent(tmp);</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       20189 :         }</span></span>
 <span id="L285"><span class="lineNum">     285</span>              : </span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">       26916 :         for (uint64_t i = 0, n = std::min&lt;uint64_t&gt;(UNCLE_BLOCK_DEPTH, tip-&gt;m_sidechainHeight + 1); i &lt; n; ++i) {</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       20186 :                 auto it = m_blocksByHeight.find(tip-&gt;m_sidechainHeight - i);</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">       20186 :                 if (it == m_blocksByHeight.end()) {</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">       26920 :         for (uint64_t i = 0, n = std::min&lt;uint64_t&gt;(UNCLE_BLOCK_DEPTH, tip-&gt;m_sidechainHeight + 1); i &lt; n; ++i) {</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       20189 :                 auto it = m_blocksByHeight.find(tip-&gt;m_sidechainHeight - i);</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">       20189 :                 if (it == m_blocksByHeight.end()) {</span></span>
 <span id="L289"><span class="lineNum">     289</span> <span class="tlaUNC tlaBgUNC">           0 :                         continue;</span></span>
 <span id="L290"><span class="lineNum">     290</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC tlaBgGNC">       20922 :                 for (const PoolBlock* uncle : it-&gt;second) {</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC tlaBgGNC">       20925 :                 for (const PoolBlock* uncle : it-&gt;second) {</span></span>
 <span id="L292"><span class="lineNum">     292</span>              :                         // Only add verified and valid blocks</span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       20922 :                         if (!uncle || !uncle-&gt;m_verified || uncle-&gt;m_invalid) {</span></span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       20925 :                         if (!uncle || !uncle-&gt;m_verified || uncle-&gt;m_invalid) {</span></span>
 <span id="L294"><span class="lineNum">     294</span> <span class="tlaUNC tlaBgUNC">           0 :                                 continue;</span></span>
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
 <span id="L297"><span class="lineNum">     297</span>              :                         // Only add it if it hasn't been mined already</span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC tlaBgGNC">       20922 :                         if (std::find(mined_blocks.begin(), mined_blocks.end(), uncle-&gt;m_sidechainId) != mined_blocks.end()) {</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       20679 :                                 continue;</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">       20679 :                         }</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC tlaBgGNC">       20925 :                         if (std::find(mined_blocks.begin(), mined_blocks.end(), uncle-&gt;m_sidechainId) != mined_blocks.end()) {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       20682 :                                 continue;</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">       20682 :                         }</span></span>
 <span id="L301"><span class="lineNum">     301</span>              : </span>
 <span id="L302"><span class="lineNum">     302</span>              :                         // Only add it if it's on the same chain</span>
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">         243 :                         bool same_chain = false;</span></span>
@@ -396,10 +396,10 @@
 <span id="L334"><span class="lineNum">     334</span> <span class="tlaUNC">           0 :                                         &quot;) is not on the same chain, depth &quot; &lt;&lt; block.m_sidechainHeight - uncle-&gt;m_sidechainHeight);</span></span>
 <span id="L335"><span class="lineNum">     335</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC tlaBgGNC">         243 :                 }</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">       20186 :         }</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">       20189 :         }</span></span>
 <span id="L338"><span class="lineNum">     338</span>              : </span>
 <span id="L339"><span class="lineNum">     339</span>              :         // Sort uncles and remove duplicates</span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">        6730 :         if (block.m_uncles.size() &gt; 1) {</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">        6731 :         if (block.m_uncles.size() &gt; 1) {</span></span>
 <span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">          26 :                 std::sort(block.m_uncles.begin(), block.m_uncles.end());</span></span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">          26 :                 block.m_uncles.erase(std::unique(block.m_uncles.begin(), block.m_uncles.end()), block.m_uncles.end());</span></span>
 <span id="L343"><span class="lineNum">     343</span>              : </span>
@@ -408,10 +408,10 @@
 <span id="L346"><span class="lineNum">     346</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC tlaBgGNC">          26 :         }</span></span>
 <span id="L348"><span class="lineNum">     348</span>              : </span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">        6730 :         block.m_difficulty = difficulty();</span></span>
-<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">        6730 :         block.m_cumulativeDifficulty = tip-&gt;m_cumulativeDifficulty + block.m_difficulty;</span></span>
+<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">        6731 :         block.m_difficulty = difficulty();</span></span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">        6731 :         block.m_cumulativeDifficulty = tip-&gt;m_cumulativeDifficulty + block.m_difficulty;</span></span>
 <span id="L351"><span class="lineNum">     351</span>              : </span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        6730 :         for (const hash&amp; uncle_id : block.m_uncles) {</span></span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">        6731 :         for (const hash&amp; uncle_id : block.m_uncles) {</span></span>
 <span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">         243 :                 auto it = m_blocksById.find(uncle_id);</span></span>
 <span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">         243 :                 if (it == m_blocksById.end()) {</span></span>
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;block template has an unknown uncle block &quot; &lt;&lt; uncle_id &lt;&lt; &quot;. Fix the code!&quot;);</span></span>
@@ -420,8 +420,8 @@
 <span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC tlaBgGNC">         243 :                 block.m_cumulativeDifficulty += it-&gt;second-&gt;m_difficulty;</span></span>
 <span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">         243 :         }</span></span>
 <span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        6730 :         return get_shares(&amp;block, shares);</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        6730 : }</span></span>
+<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">        6731 :         return get_shares(&amp;block, shares);</span></span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">        6731 : }</span></span>
 <span id="L363"><span class="lineNum">     363</span>              : </span>
 <span id="L364"><span class="lineNum">     364</span>              : P2PServer* SideChain::p2pServer() const</span>
 <span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       42420 : {</span></span>
@@ -429,25 +429,25 @@
 <span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">       42420 : }</span></span>
 <span id="L368"><span class="lineNum">     368</span>              : </span>
 <span id="L369"><span class="lineNum">     369</span>              : bool SideChain::get_shares(const PoolBlock* tip, std::vector&lt;MinerShare&gt;&amp; shares, uint64_t* bottom_height, bool quiet) const</span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">       29660 : {</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">       29660 :         if (tip-&gt;m_txkeySecSeed.empty()) {</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">       29662 : {</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">       29662 :         if (tip-&gt;m_txkeySecSeed.empty()) {</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;tx key seed is not set, fix the code!&quot;);</span></span>
 <span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L374"><span class="lineNum">     374</span>              : </span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC tlaBgGNC">       29660 :         const int L = quiet ? 6 : 3;</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC tlaBgGNC">       29662 :         const int L = quiet ? 6 : 3;</span></span>
 <span id="L376"><span class="lineNum">     376</span>              : </span>
 <span id="L377"><span class="lineNum">     377</span>              :         // Collect shares from each block in the PPLNS window, starting from the &quot;tip&quot;</span>
 <span id="L378"><span class="lineNum">     378</span>              : </span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">       29660 :         uint64_t block_depth = 0;</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">       29660 :         const PoolBlock* cur = tip;</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">       29662 :         uint64_t block_depth = 0;</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">       29662 :         const PoolBlock* cur = tip;</span></span>
 <span id="L381"><span class="lineNum">     381</span>              : </span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">       29660 :         difficulty_type mainchain_diff</span></span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">       29660 : #ifdef P2POOL_UNIT_TESTS</span></span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">       29660 :                 = m_testMainChainDiff</span></span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">       29660 : #endif</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">       29660 :         ;</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">       29662 :         difficulty_type mainchain_diff</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">       29662 : #ifdef P2POOL_UNIT_TESTS</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">       29662 :                 = m_testMainChainDiff</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">       29662 : #endif</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">       29662 :         ;</span></span>
 <span id="L387"><span class="lineNum">     387</span>              : </span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">       29660 :         if (m_pool &amp;&amp; !tip-&gt;m_parent.empty()) {</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">       29662 :         if (m_pool &amp;&amp; !tip-&gt;m_parent.empty()) {</span></span>
 <span id="L389"><span class="lineNum">     389</span> <span class="tlaUNC tlaBgUNC">           0 :                 const uint64_t h = p2pool::get_seed_height(tip-&gt;m_txinGenHeight);</span></span>
 <span id="L390"><span class="lineNum">     390</span> <span class="tlaUNC">           0 :                 if (!m_pool-&gt;get_difficulty_at_height(h, mainchain_diff)) {</span></span>
 <span id="L391"><span class="lineNum">     391</span> <span class="tlaUNC">           0 :                         LOGWARN(L, &quot;get_shares: couldn't get mainchain difficulty for height = &quot; &lt;&lt; h);</span></span>
@@ -464,21 +464,21 @@
 <span id="L402"><span class="lineNum">     402</span>              : </span>
 <span id="L403"><span class="lineNum">     403</span>              :         // Dynamic PPLNS window starting from v2</span>
 <span id="L404"><span class="lineNum">     404</span>              :         // Limit PPLNS weight to 2x of the Monero difficulty (max 2 blocks per PPLNS window on average)</span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC tlaBgGNC">       29660 :         const difficulty_type max_pplns_weight = mainchain_diff * 2;</span></span>
-<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">       29660 :         difficulty_type pplns_weight;</span></span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC tlaBgGNC">       29662 :         const difficulty_type max_pplns_weight = mainchain_diff * 2;</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">       29662 :         difficulty_type pplns_weight;</span></span>
 <span id="L407"><span class="lineNum">     407</span>              : </span>
 <span id="L408"><span class="lineNum">     408</span>              :         // Don't allow more than 2700 (2160 + 2160 / 4) outputs in the coinbase transaction starting from v5</span>
 <span id="L409"><span class="lineNum">     409</span>              :         // FCMP++ has a limit of 10000, but 512 KiB message size will limit it to ~5800</span>
 <span id="L410"><span class="lineNum">     410</span>              :         // 2700 outputs will take ~46% of post-FCMP++ message size</span>
-<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">       29660 :         const uint64_t max_shares = m_chainWindowSize + (m_chainWindowSize / 4);</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">       29662 :         const uint64_t max_shares = m_chainWindowSize + (m_chainWindowSize / 4);</span></span>
 <span id="L412"><span class="lineNum">     412</span>              : </span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">       29660 :         unordered_set&lt;MinerShare&gt; shares_set;</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">       29660 :         shares_set.reserve(m_chainWindowSize * 2);</span></span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">       29662 :         unordered_set&lt;MinerShare&gt; shares_set;</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">       29662 :         shares_set.reserve(m_chainWindowSize * 2);</span></span>
 <span id="L415"><span class="lineNum">     415</span>              : </span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">    27995634 :         do {</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">    27995634 :                 difficulty_type cur_weight = cur-&gt;m_difficulty;</span></span>
+<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">    27995644 :         do {</span></span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">    27995644 :                 difficulty_type cur_weight = cur-&gt;m_difficulty;</span></span>
 <span id="L418"><span class="lineNum">     418</span>              : </span>
-<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">    27995634 :                 for (const hash&amp; uncle_id : cur-&gt;m_uncles) {</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">    27995644 :                 for (const hash&amp; uncle_id : cur-&gt;m_uncles) {</span></span>
 <span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">      713164 :                         auto it = m_blocksById.find(uncle_id);</span></span>
 <span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">      713164 :                         if (it == m_blocksById.end()) {</span></span>
 <span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">        7100 :                                 LOGWARN(L, &quot;get_shares: can't find uncle block at height = &quot; &lt;&lt; cur-&gt;m_sidechainHeight &lt;&lt; &quot;, id = &quot; &lt;&lt; uncle_id);</span></span>
@@ -523,69 +523,69 @@
 <span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">      705358 :                 }</span></span>
 <span id="L462"><span class="lineNum">     462</span>              : </span>
 <span id="L463"><span class="lineNum">     463</span>              :                 // Always add non-uncle shares even if PPLNS weight goes above the limit</span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">    27988534 :                 auto result = shares_set.emplace(cur_weight, &amp;cur-&gt;m_minerWallet);</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">    27988534 :                 if (!result.second) {</span></span>
-<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">    22440600 :                         result.first-&gt;m_weight += cur_weight;</span></span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">    22440600 :                 }</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">    27988534 :                 pplns_weight += cur_weight;</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">    27988544 :                 auto result = shares_set.emplace(cur_weight, &amp;cur-&gt;m_minerWallet);</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">    27988544 :                 if (!result.second) {</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">    22440602 :                         result.first-&gt;m_weight += cur_weight;</span></span>
+<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">    22440602 :                 }</span></span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">    27988544 :                 pplns_weight += cur_weight;</span></span>
 <span id="L469"><span class="lineNum">     469</span>              : </span>
 <span id="L470"><span class="lineNum">     470</span>              :                 // One non-uncle share can go above the limit, but it will also guarantee that &quot;shares&quot; is never empty</span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">    27988534 :                 if (pplns_weight &gt; max_pplns_weight) {</span></span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">    27988544 :                 if (pplns_weight &gt; max_pplns_weight) {</span></span>
 <span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC">       13523 :                         break;</span></span>
 <span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">       13523 :                 }</span></span>
 <span id="L474"><span class="lineNum">     474</span>              : </span>
 <span id="L475"><span class="lineNum">     475</span>              :                 // Stop if we hit the limit on outputs</span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">    27975011 :                 if ((tip-&gt;m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (shares_set.size() &gt;= max_shares)) {</span></span>
+<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">    27975021 :                 if ((tip-&gt;m_majorVersion &gt;= HARDFORK_VERSION_FCMP_PP) &amp;&amp; (shares_set.size() &gt;= max_shares)) {</span></span>
 <span id="L477"><span class="lineNum">     477</span> <span class="tlaUNC tlaBgUNC">           0 :                         break;</span></span>
 <span id="L478"><span class="lineNum">     478</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L479"><span class="lineNum">     479</span>              : </span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC tlaBgGNC">    27975011 :                 ++block_depth;</span></span>
-<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">    27975011 :                 if (block_depth &gt;= m_chainWindowSize) {</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC tlaBgGNC">    27975021 :                 ++block_depth;</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">    27975021 :                 if (block_depth &gt;= m_chainWindowSize) {</span></span>
 <span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">        8884 :                         break;</span></span>
 <span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">        8884 :                 }</span></span>
 <span id="L484"><span class="lineNum">     484</span>              : </span>
 <span id="L485"><span class="lineNum">     485</span>              :                 // Reached the genesis block so we're done</span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">    27966127 :                 if (cur-&gt;m_sidechainHeight == 0) {</span></span>
-<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">          49 :                         break;</span></span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">          49 :                 }</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">    27966137 :                 if (cur-&gt;m_sidechainHeight == 0) {</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">          51 :                         break;</span></span>
+<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">          51 :                 }</span></span>
 <span id="L489"><span class="lineNum">     489</span>              : </span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">    27966078 :                 auto it = m_blocksById.find(cur-&gt;m_parent);</span></span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">    27966078 :                 if (it == m_blocksById.end()) {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">    27966086 :                 auto it = m_blocksById.find(cur-&gt;m_parent);</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">    27966086 :                 if (it == m_blocksById.end()) {</span></span>
 <span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">         104 :                         LOGWARN(L, &quot;get_shares: can't find parent block at height = &quot; &lt;&lt; cur-&gt;m_sidechainHeight - 1 &lt;&lt; &quot;, id = &quot; &lt;&lt; cur-&gt;m_parent);</span></span>
 <span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">         104 :                         LOGWARN(L, &quot;get_shares: can't calculate shares for block at height = &quot; &lt;&lt; tip-&gt;m_sidechainHeight &lt;&lt; &quot;, id = &quot; &lt;&lt; tip-&gt;m_sidechainId &lt;&lt; &quot;, mainchain height = &quot; &lt;&lt; tip-&gt;m_txinGenHeight);</span></span>
 <span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">         104 :                         return false;</span></span>
 <span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">         104 :                 }</span></span>
 <span id="L496"><span class="lineNum">     496</span>              : </span>
-<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">    27965974 :                 cur = it-&gt;second;</span></span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">    27965974 :         } while (true);</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">    27965982 :                 cur = it-&gt;second;</span></span>
+<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">    27965982 :         } while (true);</span></span>
 <span id="L499"><span class="lineNum">     499</span>              : </span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">       22456 :         if (bottom_height) {</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">       22458 :         if (bottom_height) {</span></span>
 <span id="L501"><span class="lineNum">     501</span> <span class="tlaUNC tlaBgUNC">           0 :                 *bottom_height = cur-&gt;m_sidechainHeight;</span></span>
 <span id="L502"><span class="lineNum">     502</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L503"><span class="lineNum">     503</span>              : </span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC tlaBgGNC">       22456 :         shares.assign(shares_set.begin(), shares_set.end());</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">    34358267 :         std::sort(shares.begin(), shares.end(), [](const auto&amp; a, const auto&amp; b) { return *a.m_wallet &lt; *b.m_wallet; });</span></span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC tlaBgGNC">       22458 :         shares.assign(shares_set.begin(), shares_set.end());</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">    34358275 :         std::sort(shares.begin(), shares.end(), [](const auto&amp; a, const auto&amp; b) { return *a.m_wallet &lt; *b.m_wallet; });</span></span>
 <span id="L506"><span class="lineNum">     506</span>              : </span>
-<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">       22456 :         const uint64_t n = shares.size();</span></span>
+<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">       22458 :         const uint64_t n = shares.size();</span></span>
 <span id="L508"><span class="lineNum">     508</span>              : </span>
 <span id="L509"><span class="lineNum">     509</span>              :         // Shuffle shares</span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">       22456 :         if (n &gt; 1) {</span></span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">       13469 :                 hash h;</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">       13469 :                 keccak(tip-&gt;m_txkeySecSeed.h, HASH_SIZE, h.h);</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">       22458 :         if (n &gt; 1) {</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">       13471 :                 hash h;</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">       13471 :                 keccak(tip-&gt;m_txkeySecSeed.h, HASH_SIZE, h.h);</span></span>
 <span id="L513"><span class="lineNum">     513</span>              : </span>
-<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">       13469 :                 uint64_t seed = *h.u64();</span></span>
-<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">       13469 :                 if (seed == 0) seed = 1;</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">       13471 :                 uint64_t seed = *h.u64();</span></span>
+<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">       13471 :                 if (seed == 0) seed = 1;</span></span>
 <span id="L516"><span class="lineNum">     516</span>              : </span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">     3329183 :                 for (uint64_t i = 0, k; i &lt; n - 1; ++i) {</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">     3315714 :                         seed = xorshift64star(seed);</span></span>
-<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">     3315714 :                         umul128(seed, n - i, &amp;k);</span></span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">     3315714 :                         std::swap(shares[i], shares[i + k]);</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">     3315714 :                 }</span></span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">       13469 :         }</span></span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">     3329191 :                 for (uint64_t i = 0, k; i &lt; n - 1; ++i) {</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">     3315720 :                         seed = xorshift64star(seed);</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">     3315720 :                         umul128(seed, n - i, &amp;k);</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">     3315720 :                         std::swap(shares[i], shares[i + k]);</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">     3315720 :                 }</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">       13471 :         }</span></span>
 <span id="L523"><span class="lineNum">     523</span>              : </span>
-<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">       22456 :         LOGINFO(6, &quot;get_shares: parent = &quot; &lt;&lt; tip-&gt;m_parent &lt;&lt; &quot;, &quot; &lt;&lt; n &lt;&lt; &quot; unique wallets in PPLNS window, PPLNS weight = &quot; &lt;&lt; pplns_weight);</span></span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       22456 :         return true;</span></span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">       29660 : }</span></span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">       22458 :         LOGINFO(6, &quot;get_shares: parent = &quot; &lt;&lt; tip-&gt;m_parent &lt;&lt; &quot;, &quot; &lt;&lt; n &lt;&lt; &quot; unique wallets in PPLNS window, PPLNS weight = &quot; &lt;&lt; pplns_weight);</span></span>
+<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">       22458 :         return true;</span></span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">       29662 : }</span></span>
 <span id="L527"><span class="lineNum">     527</span>              : </span>
 <span id="L528"><span class="lineNum">     528</span>              : bool SideChain::incoming_block_seen(const PoolBlock&amp; block)</span>
 <span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">        6720 : {</span></span>
@@ -892,16 +892,16 @@
 <span id="L830"><span class="lineNum">     830</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L831"><span class="lineNum">     831</span>              : </span>
 <span id="L832"><span class="lineNum">     832</span>              : difficulty_type SideChain::get_cached_next_difficulty(const hash&amp; id) const</span>
-<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC tlaBgGNC">       42795 : {</span></span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">       42795 :         ReadLock lock(m_sidechainLock);</span></span>
+<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC tlaBgGNC">       42798 : {</span></span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">       42798 :         ReadLock lock(m_sidechainLock);</span></span>
 <span id="L835"><span class="lineNum">     835</span>              : </span>
-<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">       42795 :         auto it = m_blocksById.find(id);</span></span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">       42795 :         if (it != m_blocksById.end()) {</span></span>
-<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC">       15365 :                 return it-&gt;second-&gt;m_cachedNextDifficulty;</span></span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">       15365 :         }</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">       42798 :         auto it = m_blocksById.find(id);</span></span>
+<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">       42798 :         if (it != m_blocksById.end()) {</span></span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC">       15368 :                 return it-&gt;second-&gt;m_cachedNextDifficulty;</span></span>
+<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">       15368 :         }</span></span>
 <span id="L840"><span class="lineNum">     840</span>              : </span>
 <span id="L841"><span class="lineNum">     841</span> <span class="tlaGNC">       27430 :         return {};</span></span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">       42795 : }</span></span>
+<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">       42798 : }</span></span>
 <span id="L843"><span class="lineNum">     843</span>              : </span>
 <span id="L844"><span class="lineNum">     844</span>              : const PoolBlock* SideChain::get_block_blob(const hash&amp; id, std::vector&lt;uint8_t&gt;&amp; blob) const</span>
 <span id="L845"><span class="lineNum">     845</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
@@ -937,19 +937,19 @@
 <span id="L875"><span class="lineNum">     875</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L876"><span class="lineNum">     876</span>              : </span>
 <span id="L877"><span class="lineNum">     877</span>              : bool SideChain::get_outputs_blob(PoolBlock* block, uint64_t total_reward, std::vector&lt;uint8_t&gt;&amp; blob, std::vector&lt;uint8_t&gt;&amp; pubkeys_blob) const</span>
-<span id="L878"><span class="lineNum">     878</span> <span class="tlaGNC tlaBgGNC">          96 : {</span></span>
-<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC">          96 :         blob.clear();</span></span>
-<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">          96 :         pubkeys_blob.clear();</span></span>
+<span id="L878"><span class="lineNum">     878</span> <span class="tlaGNC tlaBgGNC">          97 : {</span></span>
+<span id="L879"><span class="lineNum">     879</span> <span class="tlaGNC">          97 :         blob.clear();</span></span>
+<span id="L880"><span class="lineNum">     880</span> <span class="tlaGNC">          97 :         pubkeys_blob.clear();</span></span>
 <span id="L881"><span class="lineNum">     881</span>              : </span>
-<span id="L882"><span class="lineNum">     882</span> <span class="tlaGNC">          96 :         hash txkeySec;</span></span>
+<span id="L882"><span class="lineNum">     882</span> <span class="tlaGNC">          97 :         hash txkeySec;</span></span>
 <span id="L883"><span class="lineNum">     883</span>              : </span>
-<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC">          96 :         std::vector&lt;const Wallet*&gt; tmpWallets;</span></span>
-<span id="L885"><span class="lineNum">     885</span> <span class="tlaGNC">          96 :         std::vector&lt;uint64_t&gt; tmpRewards;</span></span>
-<span id="L886"><span class="lineNum">     886</span> <span class="tlaGNC">          96 :         {</span></span>
-<span id="L887"><span class="lineNum">     887</span> <span class="tlaGNC">          96 :                 ReadLock lock(m_sidechainLock);</span></span>
+<span id="L884"><span class="lineNum">     884</span> <span class="tlaGNC">          97 :         std::vector&lt;const Wallet*&gt; tmpWallets;</span></span>
+<span id="L885"><span class="lineNum">     885</span> <span class="tlaGNC">          97 :         std::vector&lt;uint64_t&gt; tmpRewards;</span></span>
+<span id="L886"><span class="lineNum">     886</span> <span class="tlaGNC">          97 :         {</span></span>
+<span id="L887"><span class="lineNum">     887</span> <span class="tlaGNC">          97 :                 ReadLock lock(m_sidechainLock);</span></span>
 <span id="L888"><span class="lineNum">     888</span>              : </span>
-<span id="L889"><span class="lineNum">     889</span> <span class="tlaGNC">          96 :                 auto it = block-&gt;m_sidechainId.empty() ? m_blocksById.end() : m_blocksById.find(block-&gt;m_sidechainId);</span></span>
-<span id="L890"><span class="lineNum">     890</span> <span class="tlaGNC">          96 :                 if (it != m_blocksById.end()) {</span></span>
+<span id="L889"><span class="lineNum">     889</span> <span class="tlaGNC">          97 :                 auto it = block-&gt;m_sidechainId.empty() ? m_blocksById.end() : m_blocksById.find(block-&gt;m_sidechainId);</span></span>
+<span id="L890"><span class="lineNum">     890</span> <span class="tlaGNC">          97 :                 if (it != m_blocksById.end()) {</span></span>
 <span id="L891"><span class="lineNum">     891</span> <span class="tlaGNC">          50 :                         const PoolBlock* b = it-&gt;second;</span></span>
 <span id="L892"><span class="lineNum">     892</span>              : </span>
 <span id="L893"><span class="lineNum">     893</span> <span class="tlaGNC">          50 :                         uint64_t total_reward_check = 0;</span></span>
@@ -1016,61 +1016,61 @@
 <span id="L954"><span class="lineNum">     954</span> <span class="tlaGNC">          50 :                         return total_reward_check == total_reward;</span></span>
 <span id="L955"><span class="lineNum">     955</span> <span class="tlaGNC">          50 :                 }</span></span>
 <span id="L956"><span class="lineNum">     956</span>              : </span>
-<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">          46 :                 txkeySec = block-&gt;m_txkeySec;</span></span>
+<span id="L957"><span class="lineNum">     957</span> <span class="tlaGNC">          47 :                 txkeySec = block-&gt;m_txkeySec;</span></span>
 <span id="L958"><span class="lineNum">     958</span>              : </span>
-<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          46 :                 std::vector&lt;MinerShare&gt; tmpShares;</span></span>
+<span id="L959"><span class="lineNum">     959</span> <span class="tlaGNC">          47 :                 std::vector&lt;MinerShare&gt; tmpShares;</span></span>
 <span id="L960"><span class="lineNum">     960</span>              : </span>
-<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">          46 :                 if (!get_shares(block, tmpShares) || !split_reward(block-&gt;m_majorVersion, total_reward, tmpShares, tmpWallets, tmpRewards)) {</span></span>
+<span id="L961"><span class="lineNum">     961</span> <span class="tlaGNC">          47 :                 if (!get_shares(block, tmpShares) || !split_reward(block-&gt;m_majorVersion, total_reward, tmpShares, tmpWallets, tmpRewards)) {</span></span>
 <span id="L962"><span class="lineNum">     962</span> <span class="tlaUNC tlaBgUNC">           0 :                         return false;</span></span>
 <span id="L963"><span class="lineNum">     963</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L964"><span class="lineNum">     964</span> <span class="tlaGNC tlaBgGNC">          46 :         }</span></span>
+<span id="L964"><span class="lineNum">     964</span> <span class="tlaGNC tlaBgGNC">          47 :         }</span></span>
 <span id="L965"><span class="lineNum">     965</span>              : </span>
-<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">          46 :         const size_t n = tmpWallets.size();</span></span>
+<span id="L966"><span class="lineNum">     966</span> <span class="tlaGNC">          47 :         const size_t n = tmpWallets.size();</span></span>
 <span id="L967"><span class="lineNum">     967</span>              : </span>
-<span id="L968"><span class="lineNum">     968</span> <span class="tlaGNC">          46 :         LOGINFO(6, &quot;get_outputs_blob batch start&quot;);</span></span>
+<span id="L968"><span class="lineNum">     968</span> <span class="tlaGNC">          47 :         LOGINFO(6, &quot;get_outputs_blob batch start&quot;);</span></span>
 <span id="L969"><span class="lineNum">     969</span>              : </span>
-<span id="L970"><span class="lineNum">     970</span> <span class="tlaGNC">          46 :         block-&gt;m_ephPublicKeys.clear();</span></span>
-<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC">          46 :         block-&gt;m_outputAmounts.clear();</span></span>
-<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC">          46 :         block-&gt;m_viewTags.clear();</span></span>
-<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">          46 :         block-&gt;m_carrotOutputs.clear();</span></span>
+<span id="L970"><span class="lineNum">     970</span> <span class="tlaGNC">          47 :         block-&gt;m_ephPublicKeys.clear();</span></span>
+<span id="L971"><span class="lineNum">     971</span> <span class="tlaGNC">          47 :         block-&gt;m_outputAmounts.clear();</span></span>
+<span id="L972"><span class="lineNum">     972</span> <span class="tlaGNC">          47 :         block-&gt;m_viewTags.clear();</span></span>
+<span id="L973"><span class="lineNum">     973</span> <span class="tlaGNC">          47 :         block-&gt;m_carrotOutputs.clear();</span></span>
 <span id="L974"><span class="lineNum">     974</span>              : </span>
-<span id="L975"><span class="lineNum">     975</span> <span class="tlaGNC">          46 :         if (block-&gt;m_majorVersion &gt;= HARDFORK_VERSION_CARROT) {</span></span>
-<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">          46 :                 if (!carrot::build_coinbase_outputs(block-&gt;m_txkeySec, block-&gt;m_txinGenHeight, tmpWallets, tmpRewards, block-&gt;m_carrotOutputs)) {</span></span>
+<span id="L975"><span class="lineNum">     975</span> <span class="tlaGNC">          47 :         if (block-&gt;m_majorVersion &gt;= HARDFORK_VERSION_CARROT) {</span></span>
+<span id="L976"><span class="lineNum">     976</span> <span class="tlaGNC">          47 :                 if (!carrot::build_coinbase_outputs(block-&gt;m_txkeySec, block-&gt;m_txinGenHeight, tmpWallets, tmpRewards, block-&gt;m_carrotOutputs)) {</span></span>
 <span id="L977"><span class="lineNum">     977</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGWARN(6, &quot;get_outputs_blob: can't generate Carrot coinbase outputs&quot;);</span></span>
 <span id="L978"><span class="lineNum">     978</span> <span class="tlaUNC">           0 :                         return false;</span></span>
 <span id="L979"><span class="lineNum">     979</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L980"><span class="lineNum">     980</span>              : </span>
-<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC tlaBgGNC">          46 :                 LOGINFO(6, &quot;get_outputs_blob batch end&quot;);</span></span>
+<span id="L981"><span class="lineNum">     981</span> <span class="tlaGNC tlaBgGNC">          47 :                 LOGINFO(6, &quot;get_outputs_blob batch end&quot;);</span></span>
 <span id="L982"><span class="lineNum">     982</span>              : </span>
-<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">          46 :                 blob.reserve(n * (block-&gt;output_blob_size_estimate() + HASH_SIZE) + 64);</span></span>
-<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">          46 :                 pubkeys_blob.reserve(n * HASH_SIZE + 3);</span></span>
+<span id="L983"><span class="lineNum">     983</span> <span class="tlaGNC">          47 :                 blob.reserve(n * (block-&gt;output_blob_size_estimate() + HASH_SIZE) + 64);</span></span>
+<span id="L984"><span class="lineNum">     984</span> <span class="tlaGNC">          47 :                 pubkeys_blob.reserve(n * HASH_SIZE + 3);</span></span>
 <span id="L985"><span class="lineNum">     985</span>              : </span>
-<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">          46 :                 writeVarint(n, blob);</span></span>
+<span id="L986"><span class="lineNum">     986</span> <span class="tlaGNC">          47 :                 writeVarint(n, blob);</span></span>
 <span id="L987"><span class="lineNum">     987</span>              : </span>
-<span id="L988"><span class="lineNum">     988</span> <span class="tlaGNC">          46 :                 if (n &gt; 1) {</span></span>
-<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">          36 :                         pubkeys_blob.push_back(TX_EXTRA_TAG_ADDITIONAL_PUBKEYS);</span></span>
-<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">          36 :                         writeVarint(n, pubkeys_blob);</span></span>
-<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">          36 :                 }</span></span>
+<span id="L988"><span class="lineNum">     988</span> <span class="tlaGNC">          47 :                 if (n &gt; 1) {</span></span>
+<span id="L989"><span class="lineNum">     989</span> <span class="tlaGNC">          37 :                         pubkeys_blob.push_back(TX_EXTRA_TAG_ADDITIONAL_PUBKEYS);</span></span>
+<span id="L990"><span class="lineNum">     990</span> <span class="tlaGNC">          37 :                         writeVarint(n, pubkeys_blob);</span></span>
+<span id="L991"><span class="lineNum">     991</span> <span class="tlaGNC">          37 :                 }</span></span>
 <span id="L992"><span class="lineNum">     992</span> <span class="tlaGNC">          10 :                 else {</span></span>
 <span id="L993"><span class="lineNum">     993</span> <span class="tlaGNC">          10 :                         pubkeys_blob.push_back(TX_EXTRA_TAG_PUBKEY);</span></span>
 <span id="L994"><span class="lineNum">     994</span> <span class="tlaGNC">          10 :                 }</span></span>
 <span id="L995"><span class="lineNum">     995</span>              : </span>
-<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">         164 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">         118 :                         const carrot::coinbase_tx_output&amp; o = block-&gt;m_carrotOutputs[i];</span></span>
+<span id="L996"><span class="lineNum">     996</span> <span class="tlaGNC">         169 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L997"><span class="lineNum">     997</span> <span class="tlaGNC">         122 :                         const carrot::coinbase_tx_output&amp; o = block-&gt;m_carrotOutputs[i];</span></span>
 <span id="L998"><span class="lineNum">     998</span>              : </span>
-<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">         118 :                         writeVarint(o.amount, blob);</span></span>
+<span id="L999"><span class="lineNum">     999</span> <span class="tlaGNC">         122 :                         writeVarint(o.amount, blob);</span></span>
 <span id="L1000"><span class="lineNum">    1000</span>              : </span>
-<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">         118 :                         blob.emplace_back(TXOUT_TO_CARROT_V1);</span></span>
+<span id="L1001"><span class="lineNum">    1001</span> <span class="tlaGNC">         122 :                         blob.emplace_back(TXOUT_TO_CARROT_V1);</span></span>
 <span id="L1002"><span class="lineNum">    1002</span>              : </span>
-<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">         118 :                         blob.insert(blob.end(), o.onetime_address.h, o.onetime_address.h + HASH_SIZE);</span></span>
-<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">         118 :                         blob.insert(blob.end(), o.vt.data, o.vt.data + CARROT_VIEW_TAG_BYTES);</span></span>
-<span id="L1005"><span class="lineNum">    1005</span> <span class="tlaGNC">         118 :                         blob.insert(blob.end(), o.anchor_enc.data, o.anchor_enc.data + CARROT_JANUS_ANCHOR_BYTES);</span></span>
+<span id="L1003"><span class="lineNum">    1003</span> <span class="tlaGNC">         122 :                         blob.insert(blob.end(), o.onetime_address.h, o.onetime_address.h + HASH_SIZE);</span></span>
+<span id="L1004"><span class="lineNum">    1004</span> <span class="tlaGNC">         122 :                         blob.insert(blob.end(), o.vt.data, o.vt.data + CARROT_VIEW_TAG_BYTES);</span></span>
+<span id="L1005"><span class="lineNum">    1005</span> <span class="tlaGNC">         122 :                         blob.insert(blob.end(), o.anchor_enc.data, o.anchor_enc.data + CARROT_JANUS_ANCHOR_BYTES);</span></span>
 <span id="L1006"><span class="lineNum">    1006</span>              : </span>
-<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">         118 :                         pubkeys_blob.insert(pubkeys_blob.end(), o.eph_pub_key.h, o.eph_pub_key.h + HASH_SIZE);</span></span>
-<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">         118 :                 }</span></span>
+<span id="L1007"><span class="lineNum">    1007</span> <span class="tlaGNC">         122 :                         pubkeys_blob.insert(pubkeys_blob.end(), o.eph_pub_key.h, o.eph_pub_key.h + HASH_SIZE);</span></span>
+<span id="L1008"><span class="lineNum">    1008</span> <span class="tlaGNC">         122 :                 }</span></span>
 <span id="L1009"><span class="lineNum">    1009</span>              : </span>
-<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">          46 :                 return true;</span></span>
-<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">          46 :         }</span></span>
+<span id="L1010"><span class="lineNum">    1010</span> <span class="tlaGNC">          47 :                 return true;</span></span>
+<span id="L1011"><span class="lineNum">    1011</span> <span class="tlaGNC">          47 :         }</span></span>
 <span id="L1012"><span class="lineNum">    1012</span>              : </span>
 <span id="L1013"><span class="lineNum">    1013</span> <span class="tlaUNC tlaBgUNC">           0 :         std::vector&lt;std::pair&lt;hash, size_t&gt;&gt; in;</span></span>
 <span id="L1014"><span class="lineNum">    1014</span> <span class="tlaUNC">           0 :         std::vector&lt;std::pair&lt;hash, int32_t&gt;&gt; out;</span></span>
@@ -1342,38 +1342,38 @@
 <span id="L1280"><span class="lineNum">    1280</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1281"><span class="lineNum">    1281</span>              : </span>
 <span id="L1282"><span class="lineNum">    1282</span>              : uint64_t SideChain::network_major_version(uint64_t height)</span>
-<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaGNC tlaBgGNC">       60644 : {</span></span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaGNC tlaBgGNC">       60647 : {</span></span>
 <span id="L1284"><span class="lineNum">    1284</span>              :         // TODO: update hardforks.cpp from Monero once the mainnet and stagenet heights for v17 (FCMP++, Carrot,</span>
 <span id="L1285"><span class="lineNum">    1285</span>              :         // RandomX v2) and v18 are announced. Only testnet has them so far, so this returns 16 for every mainnet</span>
 <span id="L1286"><span class="lineNum">    1286</span>              :         // and stagenet height and PoolBlock::deserialize rejects v17+ blocks there.</span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaGNC">       60644 :         const hardfork_t* hard_forks;</span></span>
-<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaGNC">       60644 :         size_t num_hard_forks;</span></span>
+<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaGNC">       60647 :         const hardfork_t* hard_forks;</span></span>
+<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaGNC">       60647 :         size_t num_hard_forks;</span></span>
 <span id="L1289"><span class="lineNum">    1289</span>              : </span>
-<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">       60644 :         switch (s_networkType)</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       60644 :         {</span></span>
+<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">       60647 :         switch (s_networkType)</span></span>
+<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       60647 :         {</span></span>
 <span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">       40269 :         case NetworkType::Mainnet:</span></span>
 <span id="L1293"><span class="lineNum">    1293</span> <span class="tlaGNC">       40269 :         default:</span></span>
 <span id="L1294"><span class="lineNum">    1294</span> <span class="tlaGNC">       40269 :                 hard_forks = mainnet_hard_forks;</span></span>
 <span id="L1295"><span class="lineNum">    1295</span> <span class="tlaGNC">       40269 :                 num_hard_forks = num_mainnet_hard_forks;</span></span>
 <span id="L1296"><span class="lineNum">    1296</span> <span class="tlaGNC">       40269 :                 break;</span></span>
 <span id="L1297"><span class="lineNum">    1297</span>              : </span>
-<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaGNC">       20375 :         case NetworkType::Testnet:</span></span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaGNC">       20375 :                 hard_forks = testnet_hard_forks;</span></span>
-<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaGNC">       20375 :                 num_hard_forks = num_testnet_hard_forks;</span></span>
-<span id="L1301"><span class="lineNum">    1301</span> <span class="tlaGNC">       20375 :                 break;</span></span>
+<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaGNC">       20378 :         case NetworkType::Testnet:</span></span>
+<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaGNC">       20378 :                 hard_forks = testnet_hard_forks;</span></span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaGNC">       20378 :                 num_hard_forks = num_testnet_hard_forks;</span></span>
+<span id="L1301"><span class="lineNum">    1301</span> <span class="tlaGNC">       20378 :                 break;</span></span>
 <span id="L1302"><span class="lineNum">    1302</span>              : </span>
 <span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC tlaBgUNC">           0 :         case NetworkType::Stagenet:</span></span>
 <span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :                 hard_forks = stagenet_hard_forks;</span></span>
 <span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :                 num_hard_forks = num_stagenet_hard_forks;</span></span>
 <span id="L1306"><span class="lineNum">    1306</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC tlaBgGNC">       60644 :         }</span></span>
+<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaGNC tlaBgGNC">       60647 :         }</span></span>
 <span id="L1308"><span class="lineNum">    1308</span>              : </span>
-<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaGNC">       60644 :         uint64_t result = 1;</span></span>
-<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">      990679 :         for (size_t i = 1; (i &lt; num_hard_forks) &amp;&amp; (height &gt;= hard_forks[i].height); ++i) {</span></span>
-<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaGNC">      930035 :                 result = hard_forks[i].version;</span></span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC">      930035 :         }</span></span>
-<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaGNC">       60644 :         return result;</span></span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">       60644 : }</span></span>
+<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaGNC">       60647 :         uint64_t result = 1;</span></span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaGNC">      990730 :         for (size_t i = 1; (i &lt; num_hard_forks) &amp;&amp; (height &gt;= hard_forks[i].height); ++i) {</span></span>
+<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaGNC">      930083 :                 result = hard_forks[i].version;</span></span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaGNC">      930083 :         }</span></span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaGNC">       60647 :         return result;</span></span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaGNC">       60647 : }</span></span>
 <span id="L1315"><span class="lineNum">    1315</span>              : </span>
 <span id="L1316"><span class="lineNum">    1316</span>              : difficulty_type SideChain::total_hashes() const</span>
 <span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC tlaBgUNC">           0 : {</span></span>
@@ -1388,25 +1388,25 @@
 <span id="L1326"><span class="lineNum">    1326</span>              : </span>
 <span id="L1327"><span class="lineNum">    1327</span>              :         // Every 5 minutes, delete wallets that haven't been seen for more than 72 hours and onion/I2P identifiers that haven't been seen for more than 12 hours</span>
 <span id="L1328"><span class="lineNum">    1328</span> <span class="tlaGNC">       33518 :         if (m_seenWalletsLastPruneTime + 5ul * 60ul &lt;= cur_time) {</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">          12 :                 auto prune = [cur_time](auto&amp; data, uint64_t timeout) {</span></span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">         773 :                         for (auto it = data.begin(); it != data.end();) {</span></span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaGNC">         761 :                                 if (it-&gt;second + timeout &lt; cur_time) {</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaGNC">          27 :                 auto prune = [cur_time](auto&amp; data, uint64_t timeout) {</span></span>
+<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaGNC">          36 :                         for (auto it = data.begin(); it != data.end();) {</span></span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaGNC">           9 :                                 if (it-&gt;second + timeout &lt; cur_time) {</span></span>
 <span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC tlaBgUNC">           0 :                                         it = data.erase(it);</span></span>
 <span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaGNC tlaBgGNC">         761 :                                 else {</span></span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">         761 :                                         ++it;</span></span>
-<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaGNC">         761 :                                 }</span></span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">         761 :                         }</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">          12 :                 };</span></span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaGNC tlaBgGNC">           9 :                                 else {</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaGNC">           9 :                                         ++it;</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaGNC">           9 :                                 }</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaGNC">           9 :                         }</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaGNC">          27 :                 };</span></span>
 <span id="L1339"><span class="lineNum">    1339</span>              : </span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">           4 :                 constexpr uint64_t hour = 3600;</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaGNC">           9 :                 constexpr uint64_t hour = 3600;</span></span>
 <span id="L1341"><span class="lineNum">    1341</span>              : </span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">           4 :                 prune(m_seenWallets, 72 * hour);</span></span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">           4 :                 prune(m_seenOnionPubkeys, 12 * hour);</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC">           4 :                 prune(m_seenI2PDestHashes, 12 * hour);</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaGNC">           9 :                 prune(m_seenWallets, 72 * hour);</span></span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaGNC">           9 :                 prune(m_seenOnionPubkeys, 12 * hour);</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaGNC">           9 :                 prune(m_seenI2PDestHashes, 12 * hour);</span></span>
 <span id="L1345"><span class="lineNum">    1345</span>              : </span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">           4 :                 m_seenWalletsLastPruneTime = cur_time;</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">           4 :         }</span></span>
+<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaGNC">           9 :                 m_seenWalletsLastPruneTime = cur_time;</span></span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaGNC">           9 :         }</span></span>
 <span id="L1348"><span class="lineNum">    1348</span> <span class="tlaGNC">       33518 : }</span></span>
 <span id="L1349"><span class="lineNum">    1349</span>              : </span>
 <span id="L1350"><span class="lineNum">    1350</span>              : uint64_t SideChain::last_updated() const</span>
@@ -1454,33 +1454,33 @@
 <span id="L1392"><span class="lineNum">    1392</span>              :         const std::vector&lt;MinerShare&gt;&amp; shares,</span>
 <span id="L1393"><span class="lineNum">    1393</span>              :         std::vector&lt;const Wallet*&gt;&amp; wallets,</span>
 <span id="L1394"><span class="lineNum">    1394</span>              :         std::vector&lt;uint64_t&gt;&amp; rewards)</span>
-<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaGNC tlaBgGNC">       26845 : {</span></span>
-<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaGNC">       26845 :         wallets.clear();</span></span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaGNC">       26845 :         rewards.clear();</span></span>
+<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaGNC tlaBgGNC">       26848 : {</span></span>
+<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaGNC">       26848 :         wallets.clear();</span></span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaGNC">       26848 :         rewards.clear();</span></span>
 <span id="L1398"><span class="lineNum">    1398</span>              : </span>
-<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaGNC">       26845 :         const size_t num_shares = shares.size();</span></span>
+<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaGNC">       26848 :         const size_t num_shares = shares.size();</span></span>
 <span id="L1400"><span class="lineNum">    1400</span>              : </span>
-<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaGNC">     3322165 :         const difficulty_type total_weight = std::accumulate(shares.begin(), shares.end(), difficulty_type(), [](const difficulty_type&amp; a, const MinerShare&amp; b) { return a + b.m_weight; });</span></span>
+<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaGNC">     3322177 :         const difficulty_type total_weight = std::accumulate(shares.begin(), shares.end(), difficulty_type(), [](const difficulty_type&amp; a, const MinerShare&amp; b) { return a + b.m_weight; });</span></span>
 <span id="L1402"><span class="lineNum">    1402</span>              : </span>
-<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaGNC">       26845 :         if (total_weight.empty()) {</span></span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaGNC">       26848 :         if (total_weight.empty()) {</span></span>
 <span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;total_weight is 0. Check the code!&quot;);</span></span>
 <span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1407"><span class="lineNum">    1407</span>              : </span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaGNC tlaBgGNC">       26845 :         wallets.reserve(num_shares);</span></span>
-<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaGNC">       26845 :         rewards.reserve(num_shares);</span></span>
+<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaGNC tlaBgGNC">       26848 :         wallets.reserve(num_shares);</span></span>
+<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaGNC">       26848 :         rewards.reserve(num_shares);</span></span>
 <span id="L1410"><span class="lineNum">    1410</span>              : </span>
 <span id="L1411"><span class="lineNum">    1411</span>              :         // Each miner gets a proportional fraction of the block reward</span>
-<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaGNC">       26845 :         difficulty_type w;</span></span>
-<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaGNC">       26845 :         uint64_t reward_given = 0;</span></span>
-<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaGNC">     3349010 :         for (uint64_t i = 0; i &lt; num_shares; ++i) {</span></span>
-<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaGNC">     3322165 :                 w += shares[i].m_weight;</span></span>
+<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaGNC">       26848 :         difficulty_type w;</span></span>
+<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaGNC">       26848 :         uint64_t reward_given = 0;</span></span>
+<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaGNC">     3349025 :         for (uint64_t i = 0; i &lt; num_shares; ++i) {</span></span>
+<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaGNC">     3322177 :                 w += shares[i].m_weight;</span></span>
 <span id="L1416"><span class="lineNum">    1416</span>              : </span>
-<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaGNC">     3322165 :                 const difficulty_type next_value = w * reward / total_weight;</span></span>
-<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaGNC">     3322165 :                 const uint64_t r = next_value.lo - reward_given;</span></span>
-<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaGNC">     3322165 :                 reward_given = next_value.lo;</span></span>
+<span id="L1417"><span class="lineNum">    1417</span> <span class="tlaGNC">     3322177 :                 const difficulty_type next_value = w * reward / total_weight;</span></span>
+<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaGNC">     3322177 :                 const uint64_t r = next_value.lo - reward_given;</span></span>
+<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaGNC">     3322177 :                 reward_given = next_value.lo;</span></span>
 <span id="L1420"><span class="lineNum">    1420</span>              : </span>
-<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaGNC">     3322165 :                 if ((major_version &lt; HARDFORK_VERSION_CARROT) &amp;&amp; (r &gt; MAX_OUTPUT_VALUE)) {</span></span>
+<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaGNC">     3322177 :                 if ((major_version &lt; HARDFORK_VERSION_CARROT) &amp;&amp; (r &gt; MAX_OUTPUT_VALUE)) {</span></span>
 <span id="L1422"><span class="lineNum">    1422</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGERR(1, &quot;Reward of &quot; &lt;&lt; log::XMRAmount(reward) &lt;&lt; &quot; is too big for the current split.&quot;);</span></span>
 <span id="L1423"><span class="lineNum">    1423</span>              : </span>
 <span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :                         wallets.clear();</span></span>
@@ -1488,12 +1488,12 @@
 <span id="L1426"><span class="lineNum">    1426</span> <span class="tlaUNC">           0 :                         return false;</span></span>
 <span id="L1427"><span class="lineNum">    1427</span> <span class="tlaUNC">           0 :                 }</span></span>
 <span id="L1428"><span class="lineNum">    1428</span>              : </span>
-<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaGNC tlaBgGNC">     3322165 :                 wallets.emplace_back(shares[i].m_wallet);</span></span>
-<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaGNC">     3322165 :                 rewards.emplace_back(r);</span></span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaGNC">     3322165 :         }</span></span>
+<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaGNC tlaBgGNC">     3322177 :                 wallets.emplace_back(shares[i].m_wallet);</span></span>
+<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaGNC">     3322177 :                 rewards.emplace_back(r);</span></span>
+<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaGNC">     3322177 :         }</span></span>
 <span id="L1432"><span class="lineNum">    1432</span>              : </span>
 <span id="L1433"><span class="lineNum">    1433</span>              :         // Double check that we gave out the exact amount</span>
-<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaGNC">       26845 :         if (std::accumulate(rewards.begin(), rewards.end(), 0ULL) != reward) {</span></span>
+<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaGNC">       26848 :         if (std::accumulate(rewards.begin(), rewards.end(), 0ULL) != reward) {</span></span>
 <span id="L1435"><span class="lineNum">    1435</span> <span class="tlaUNC tlaBgUNC">           0 :                 LOGERR(1, &quot;miners got incorrect reward. This should never happen because math says so. Check the code!&quot;);</span></span>
 <span id="L1436"><span class="lineNum">    1436</span>              : </span>
 <span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 :                 wallets.clear();</span></span>
@@ -1501,8 +1501,8 @@
 <span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :                 return false;</span></span>
 <span id="L1440"><span class="lineNum">    1440</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1441"><span class="lineNum">    1441</span>              : </span>
-<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaGNC tlaBgGNC">       26845 :         return true;</span></span>
-<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaGNC">       26845 : }</span></span>
+<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaGNC tlaBgGNC">       26848 :         return true;</span></span>
+<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaGNC">       26848 : }</span></span>
 <span id="L1444"><span class="lineNum">    1444</span>              : </span>
 <span id="L1445"><span class="lineNum">    1445</span>              : int SideChain::get_difficulty(const PoolBlock* const tip, std::vector&lt;DifficultyData&gt;&amp; difficultyData, difficulty_type&amp; curDifficulty) const</span>
 <span id="L1446"><span class="lineNum">    1446</span> <span class="tlaGNC">       19819 : {</span></span>
@@ -2293,10 +2293,10 @@
 <span id="L2231"><span class="lineNum">    2231</span> <span class="tlaGNC tlaBgGNC">        6731 : }</span></span>
 <span id="L2232"><span class="lineNum">    2232</span>              : </span>
 <span id="L2233"><span class="lineNum">    2233</span>              : PoolBlock* SideChain::get_parent(const PoolBlock* block) const</span>
-<span id="L2234"><span class="lineNum">    2234</span> <span class="tlaGNC">       61426 : {</span></span>
-<span id="L2235"><span class="lineNum">    2235</span> <span class="tlaGNC">       61426 :         auto it = m_blocksById.find(block-&gt;m_parent);</span></span>
-<span id="L2236"><span class="lineNum">    2236</span> <span class="tlaGNC">       61426 :         return (it != m_blocksById.end()) ? it-&gt;second : nullptr;</span></span>
-<span id="L2237"><span class="lineNum">    2237</span> <span class="tlaGNC">       61426 : }</span></span>
+<span id="L2234"><span class="lineNum">    2234</span> <span class="tlaGNC">       61429 : {</span></span>
+<span id="L2235"><span class="lineNum">    2235</span> <span class="tlaGNC">       61429 :         auto it = m_blocksById.find(block-&gt;m_parent);</span></span>
+<span id="L2236"><span class="lineNum">    2236</span> <span class="tlaGNC">       61429 :         return (it != m_blocksById.end()) ? it-&gt;second : nullptr;</span></span>
+<span id="L2237"><span class="lineNum">    2237</span> <span class="tlaGNC">       61429 : }</span></span>
 <span id="L2238"><span class="lineNum">    2238</span>              : </span>
 <span id="L2239"><span class="lineNum">    2239</span>              : bool SideChain::is_longer_chain(const PoolBlock* const block, const PoolBlock* const candidate, bool&amp; is_alternative) const</span>
 <span id="L2240"><span class="lineNum">    2240</span> <span class="tlaGNC">       33529 : {</span></span>
@@ -2945,13 +2945,13 @@
 <span id="L2883"><span class="lineNum">    2883</span> <span class="tlaUNC tlaBgUNC">           0 :                                 return;</span></span>
 <span id="L2884"><span class="lineNum">    2884</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L2885"><span class="lineNum">    2885</span>              : </span>
-<span id="L2886"><span class="lineNum">    2886</span> <span class="tlaGNC tlaBgGNC">       16194 :                         while (m_precalcJobs.empty()) {</span></span>
-<span id="L2887"><span class="lineNum">    2887</span> <span class="tlaGNC">        2211 :                                 uv_cond_wait(&amp;m_precalcJobsCond, &amp;m_precalcJobsMutex);</span></span>
+<span id="L2886"><span class="lineNum">    2886</span> <span class="tlaGNC tlaBgGNC">       16192 :                         while (m_precalcJobs.empty()) {</span></span>
+<span id="L2887"><span class="lineNum">    2887</span> <span class="tlaGNC">        2209 :                                 uv_cond_wait(&amp;m_precalcJobsCond, &amp;m_precalcJobsMutex);</span></span>
 <span id="L2888"><span class="lineNum">    2888</span>              : </span>
-<span id="L2889"><span class="lineNum">    2889</span> <span class="tlaGNC">        2211 :                                 if (m_precalcFinished) {</span></span>
+<span id="L2889"><span class="lineNum">    2889</span> <span class="tlaGNC">        2209 :                                 if (m_precalcFinished) {</span></span>
 <span id="L2890"><span class="lineNum">    2890</span> <span class="tlaGNC">          11 :                                         return;</span></span>
 <span id="L2891"><span class="lineNum">    2891</span> <span class="tlaGNC">          11 :                                 }</span></span>
-<span id="L2892"><span class="lineNum">    2892</span> <span class="tlaGNC">        2211 :                         }</span></span>
+<span id="L2892"><span class="lineNum">    2892</span> <span class="tlaGNC">        2209 :                         }</span></span>
 <span id="L2893"><span class="lineNum">    2893</span>              : </span>
 <span id="L2894"><span class="lineNum">    2894</span> <span class="tlaGNC">       13983 :                         job = m_precalcJobs.back();</span></span>
 <span id="L2895"><span class="lineNum">    2895</span> <span class="tlaGNC">       13983 :                         m_precalcJobs.pop_back();</span></span>
@@ -2966,13 +2966,13 @@
 <span id="L2904"><span class="lineNum">    2904</span>              : </span>
 <span id="L2905"><span class="lineNum">    2905</span> <span class="tlaGNC">       13983 :                         const size_t n = job-&gt;m_precalculatedShares.size();</span></span>
 <span id="L2906"><span class="lineNum">    2906</span>              : </span>
-<span id="L2907"><span class="lineNum">    2907</span> <span class="tlaGNC">     2251213 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2908"><span class="lineNum">    2908</span> <span class="tlaGNC">     2237230 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
-<span id="L2909"><span class="lineNum">    2909</span> <span class="tlaGNC">     2237230 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
-<span id="L2910"><span class="lineNum">    2910</span> <span class="tlaGNC">     2237230 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
-<span id="L2911"><span class="lineNum">    2911</span> <span class="tlaGNC">      363906 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
-<span id="L2912"><span class="lineNum">    2912</span> <span class="tlaGNC">      363906 :                                 }</span></span>
-<span id="L2913"><span class="lineNum">    2913</span> <span class="tlaGNC">     2237230 :                         }</span></span>
+<span id="L2907"><span class="lineNum">    2907</span> <span class="tlaGNC">     2279581 :                         for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2908"><span class="lineNum">    2908</span> <span class="tlaGNC">     2265598 :                                 memcpy(t + HASH_SIZE, job-&gt;m_precalculatedShares[i].m_wallet-&gt;view_public_key().h, HASH_SIZE);</span></span>
+<span id="L2909"><span class="lineNum">    2909</span> <span class="tlaGNC">     2265598 :                                 memcpy(t + HASH_SIZE * 2, &amp;i, sizeof(i));</span></span>
+<span id="L2910"><span class="lineNum">    2910</span> <span class="tlaGNC">     2265598 :                                 if (m_uniquePrecalcInputs-&gt;insert(robin_hood::hash_bytes(t, array_size(t))).second) {</span></span>
+<span id="L2911"><span class="lineNum">    2911</span> <span class="tlaGNC">      364744 :                                         wallets.emplace_back(i, job-&gt;m_precalculatedShares[i].m_wallet);</span></span>
+<span id="L2912"><span class="lineNum">    2912</span> <span class="tlaGNC">      364744 :                                 }</span></span>
+<span id="L2913"><span class="lineNum">    2913</span> <span class="tlaGNC">     2265598 :                         }</span></span>
 <span id="L2914"><span class="lineNum">    2914</span> <span class="tlaGNC">       13983 :                 }</span></span>
 <span id="L2915"><span class="lineNum">    2915</span>              : </span>
 <span id="L2916"><span class="lineNum">    2916</span> <span class="tlaUNC tlaBgUNC">           0 :                 const size_t n = wallets.size();</span></span>
@@ -2980,9 +2980,9 @@
 <span id="L2918"><span class="lineNum">    2918</span> <span class="tlaGNC tlaBgGNC">       13983 :                 in.clear();</span></span>
 <span id="L2919"><span class="lineNum">    2919</span> <span class="tlaGNC">       13983 :                 in.reserve(n);</span></span>
 <span id="L2920"><span class="lineNum">    2920</span>              : </span>
-<span id="L2921"><span class="lineNum">    2921</span> <span class="tlaGNC">      377889 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2922"><span class="lineNum">    2922</span> <span class="tlaGNC">      363906 :                         in.emplace_back(wallets[i].second-&gt;view_public_key(), wallets[i].first);</span></span>
-<span id="L2923"><span class="lineNum">    2923</span> <span class="tlaGNC">      363906 :                 }</span></span>
+<span id="L2921"><span class="lineNum">    2921</span> <span class="tlaGNC">      378727 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2922"><span class="lineNum">    2922</span> <span class="tlaGNC">      364744 :                         in.emplace_back(wallets[i].second-&gt;view_public_key(), wallets[i].first);</span></span>
+<span id="L2923"><span class="lineNum">    2923</span> <span class="tlaGNC">      364744 :                 }</span></span>
 <span id="L2924"><span class="lineNum">    2924</span>              : </span>
 <span id="L2925"><span class="lineNum">    2925</span> <span class="tlaGNC">       13983 :                 if (!batch_derivations(in, job-&gt;m_txkeySec, out)) {</span></span>
 <span id="L2926"><span class="lineNum">    2926</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGWARN(6, &quot;batch_derivations failed in precalc_worker&quot;);</span></span>
@@ -2992,9 +2992,9 @@
 <span id="L2930"><span class="lineNum">    2930</span> <span class="tlaGNC tlaBgGNC">       13983 :                 in2.clear();</span></span>
 <span id="L2931"><span class="lineNum">    2931</span> <span class="tlaGNC">       13983 :                 in2.reserve(n);</span></span>
 <span id="L2932"><span class="lineNum">    2932</span>              : </span>
-<span id="L2933"><span class="lineNum">    2933</span> <span class="tlaGNC">      377889 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
-<span id="L2934"><span class="lineNum">    2934</span> <span class="tlaGNC">      363906 :                         in2.emplace_back(out[i].first, wallets[i].first, wallets[i].second-&gt;spend_public_key());</span></span>
-<span id="L2935"><span class="lineNum">    2935</span> <span class="tlaGNC">      363906 :                 }</span></span>
+<span id="L2933"><span class="lineNum">    2933</span> <span class="tlaGNC">      378727 :                 for (size_t i = 0; i &lt; n; ++i) {</span></span>
+<span id="L2934"><span class="lineNum">    2934</span> <span class="tlaGNC">      364744 :                         in2.emplace_back(out[i].first, wallets[i].first, wallets[i].second-&gt;spend_public_key());</span></span>
+<span id="L2935"><span class="lineNum">    2935</span> <span class="tlaGNC">      364744 :                 }</span></span>
 <span id="L2936"><span class="lineNum">    2936</span>              : </span>
 <span id="L2937"><span class="lineNum">    2937</span> <span class="tlaGNC">       13983 :                 if (!batch_public_keys(in2, out2)) {</span></span>
 <span id="L2938"><span class="lineNum">    2938</span> <span class="tlaUNC tlaBgUNC">           0 :                         LOGWARN(6, &quot;batch_public_keys failed in precalc_worker&quot;);</span></span>
