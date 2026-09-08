@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-07 18:11:21</td>
+            <td class="headerValue">2026-09-08 11:38:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryMed">75.0&nbsp;%</td>
@@ -94,7 +94,7 @@
 <span id="L32"><span class="lineNum">      32</span>              : </span>
 <span id="L33"><span class="lineNum">      33</span>              : struct MinerShare</span>
 <span id="L34"><span class="lineNum">      34</span>              : {</span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">    28693765 :         FORCEINLINE MinerShare(const difficulty_type&amp; w, const Wallet* x) : m_weight(w), m_wallet(x) {}</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC tlaBgGNC">    28693892 :         FORCEINLINE MinerShare(const difficulty_type&amp; w, const Wallet* x) : m_weight(w), m_wallet(x) {}</span></span>
 <span id="L36"><span class="lineNum">      36</span>              : </span>
 <span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">    23045075 :         FORCEINLINE bool operator==(const MinerShare&amp; s) const { return *m_wallet == *s.m_wallet; }</span></span>
 <span id="L38"><span class="lineNum">      38</span>              : </span>
@@ -125,7 +125,7 @@
 <span id="L63"><span class="lineNum">      63</span>              :         [[nodiscard]] difficulty_type get_cached_next_difficulty(const hash&amp; id) const;</span>
 <span id="L64"><span class="lineNum">      64</span>              : </span>
 <span id="L65"><span class="lineNum">      65</span>              :         [[nodiscard]] const PoolBlock* get_block_blob(const hash&amp; id, std::vector&lt;uint8_t&gt;&amp; blob) const;</span>
-<span id="L66"><span class="lineNum">      66</span>              :         [[nodiscard]] bool get_outputs_blob(PoolBlock* block, uint64_t total_reward, std::vector&lt;uint8_t&gt;&amp; blob) const;</span>
+<span id="L66"><span class="lineNum">      66</span>              :         [[nodiscard]] bool get_outputs_blob(PoolBlock* block, uint64_t total_reward, std::vector&lt;uint8_t&gt;&amp; blob, std::vector&lt;uint8_t&gt;&amp; pubkeys_blob) const;</span>
 <span id="L67"><span class="lineNum">      67</span>              : </span>
 <span id="L68"><span class="lineNum">      68</span>              :         void print_status(bool obtain_sidechain_lock = true) const;</span>
 <span id="L69"><span class="lineNum">      69</span>              :         [[nodiscard]] double get_reward_share(const Wallet&amp; w) const;</span>
@@ -133,12 +133,12 @@
 <span id="L71"><span class="lineNum">      71</span>              :         // Consensus ID can be used to spawn independent P2Pools with their own sidechains</span>
 <span id="L72"><span class="lineNum">      72</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L73"><span class="lineNum">      73</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
-<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">       46994 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       70446 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">       47082 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
+<span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">       70375 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">        6494 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
-<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       40263 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
+<span id="L77"><span class="lineNum">      77</span> <span class="tlaGNC">       43075 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L78"><span class="lineNum">      78</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
-<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        6736 :         [[nodiscard]] FORCEINLINE difficulty_type difficulty() const { ReadLock lock(m_curDifficultyLock); return m_curDifficulty; }</span></span>
+<span id="L79"><span class="lineNum">      79</span> <span class="tlaGNC">        6739 :         [[nodiscard]] FORCEINLINE difficulty_type difficulty() const { ReadLock lock(m_curDifficultyLock); return m_curDifficulty; }</span></span>
 <span id="L80"><span class="lineNum">      80</span>              :         [[nodiscard]] difficulty_type total_hashes() const;</span>
 <span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC">        6481 :         [[nodiscard]] uint64_t block_time() const { return m_targetBlockTime; }</span></span>
 <span id="L82"><span class="lineNum">      82</span> <span class="tlaUNC tlaBgUNC">           0 :         [[nodiscard]] FORCEINLINE uint64_t miner_count() const { ReadLock lock(m_seenDataLock); return m_seenWallets.size(); }</span></span>
@@ -274,9 +274,9 @@
 <span id="L212"><span class="lineNum">     212</span>              :         struct hash&lt;p2pool::MinerShare&gt;</span>
 <span id="L213"><span class="lineNum">     213</span>              :         {</span>
 <span id="L214"><span class="lineNum">     214</span>              :                 FORCEINLINE size_t operator()(const p2pool::MinerShare&amp; value) const noexcept</span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC tlaBgGNC">    28693765 :                 {</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">    28693765 :                         return hash_bytes(value.m_wallet-&gt;keys(), p2pool::HASH_SIZE * 2);</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">    28693765 :                 }</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC tlaBgGNC">    28693892 :                 {</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">    28693892 :                         return hash_bytes(value.m_wallet-&gt;keys(), p2pool::HASH_SIZE * 2);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">    28693892 :                 }</span></span>
 <span id="L218"><span class="lineNum">     218</span>              :         };</span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
 <span id="L220"><span class="lineNum">     220</span>              : } // namespace robin_hood</span>

@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-07 18:11:21</td>
+            <td class="headerValue">2026-09-08 11:38:54</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">36.8&nbsp;%</td>
@@ -85,14 +85,14 @@
 <span id="L23"><span class="lineNum">      23</span>              : #include &lt;map&gt;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : #if defined(_DEBUG) || defined(DEV_DEBUG)</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       36153 : #define POOL_BLOCK_DEBUG 1</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       35903 : #define POOL_BLOCK_DEBUG 1</span></span>
 <span id="L27"><span class="lineNum">      27</span>              : #else</span>
 <span id="L28"><span class="lineNum">      28</span>              : #define POOL_BLOCK_DEBUG 0</span>
 <span id="L29"><span class="lineNum">      29</span>              : #endif</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              : namespace p2pool {</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       36153 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       35903 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : class RandomX_Hasher_Base;</span>
 <span id="L36"><span class="lineNum">      36</span>              : class SideChain;</span>
@@ -148,7 +148,7 @@
 <span id="L86"><span class="lineNum">      86</span>              : </span>
 <span id="L87"><span class="lineNum">      87</span>              : struct DifficultyData</span>
 <span id="L88"><span class="lineNum">      88</span>              : {</span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">    41775684 :         FORCEINLINE DifficultyData(uint64_t t, const difficulty_type&amp; d) : m_timestamp(t), m_cumulativeDifficulty(d) {}</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">    41775694 :         FORCEINLINE DifficultyData(uint64_t t, const difficulty_type&amp; d) : m_timestamp(t), m_cumulativeDifficulty(d) {}</span></span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span>              :         uint64_t m_timestamp;</span>
 <span id="L92"><span class="lineNum">      92</span>              :         difficulty_type m_cumulativeDifficulty;</span>
@@ -299,22 +299,22 @@
 <span id="L237"><span class="lineNum">     237</span> <span class="tlaGNC">       23120 :         }</span></span>
 <span id="L238"><span class="lineNum">     238</span>              : </span>
 <span id="L239"><span class="lineNum">     239</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
-<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">       56653 :         {</span></span>
-<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       56653 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">       56653 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
-<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       56653 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">       56653 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       56653 :         }</span></span>
+<span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">       76675 :         {</span></span>
+<span id="L241"><span class="lineNum">     241</span> <span class="tlaGNC">       76675 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">       76675 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
+<span id="L243"><span class="lineNum">     243</span> <span class="tlaGNC">       76675 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">       76675 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       76675 :         }</span></span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
 <span id="L247"><span class="lineNum">     247</span>              :         [[nodiscard]] static constexpr size_t output_blob_size_estimate(uint8_t major_version)</span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       50386 :         {</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">       50386 :                 constexpr size_t OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + 1;</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       50386 :                 constexpr size_t CARROT_OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + CARROT_VIEW_TAG_BYTES + CARROT_JANUS_ANCHOR_BYTES;</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">       50598 :         {</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">       50598 :                 constexpr size_t OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + 1;</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">       50598 :                 constexpr size_t CARROT_OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + CARROT_VIEW_TAG_BYTES + CARROT_JANUS_ANCHOR_BYTES;</span></span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       50386 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? CARROT_OUTPUT_BLOB_SIZE : OUTPUT_BLOB_SIZE;</span></span>
-<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       50386 :         }</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">       50598 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? CARROT_OUTPUT_BLOB_SIZE : OUTPUT_BLOB_SIZE;</span></span>
+<span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       50598 :         }</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
-<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       36918 :         [[nodiscard]] constexpr size_t output_blob_size_estimate() const { return output_blob_size_estimate(m_majorVersion); }</span></span>
+<span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">       37130 :         [[nodiscard]] constexpr size_t output_blob_size_estimate() const { return output_blob_size_estimate(m_majorVersion); }</span></span>
 <span id="L256"><span class="lineNum">     256</span>              : };</span>
 <span id="L257"><span class="lineNum">     257</span>              : </span>
 <span id="L258"><span class="lineNum">     258</span>              : } // namespace p2pool</span>
