@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-08 17:55:50</td>
+            <td class="headerValue">2026-09-08 18:53:47</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">7</td>
+            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">8</td>
           </tr>
                   <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -234,14 +234,14 @@
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">           1 :         thread_pool_init();</span></span>
 <span id="L173"><span class="lineNum">     173</span> <span class="tlaGNC">           1 :         init_crypto_cache();</span></span>
 <span id="L174"><span class="lineNum">     174</span>              : </span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           1 :         ON_SCOPE_LEAVE([]() {</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">           1 :         auto on_scope_leave = ScopeGuard{[]() {</span></span>
 <span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">           1 :                 thread_pool_destroy();</span></span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">           1 :                 destroy_crypto_cache();</span></span>
 <span id="L178"><span class="lineNum">     178</span>              : </span>
 <span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">           1 : #ifdef WITH_INDEXED_HASHES</span></span>
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">           1 :                 indexed_hash::cleanup_storage();</span></span>
 <span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">           1 : #endif</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">           1 :         });</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">           1 :         }};</span></span>
 <span id="L183"><span class="lineNum">     183</span>              : </span>
 <span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">           1 :         SideChain sidechain(nullptr, NetworkType::Testnet, &quot;default&quot;);</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
