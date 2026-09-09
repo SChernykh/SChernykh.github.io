@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-09 13:00:32</td>
+            <td class="headerValue">2026-09-09 20:15:36</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -389,7 +389,7 @@
 <span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           3 :                         ASSERT_TRUE(ancestors.good());</span></span>
 <span id="L328"><span class="lineNum">     328</span>              : </span>
 <span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">           3 :                         ASSERT_GT(size, 0U);</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           3 :                         ASSERT_LE(size, MAX_BLOCK_SIZE);</span></span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           3 :                         ASSERT_LE(size, MAX_BLOCK_SIZE_NEW);</span></span>
 <span id="L331"><span class="lineNum">     331</span>              : </span>
 <span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           3 :                         buf.resize(size);</span></span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           3 :                         ancestors.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
@@ -399,7 +399,7 @@
 <span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">           1 :                         std::ifstream f(&quot;block_carrot.dat&quot;, std::ios::binary | std::ios::ate);</span></span>
 <span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">           1 :                         ASSERT_TRUE(f.is_open());</span></span>
 <span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">           1 :                         ASSERT_GT(f.tellg(), 0);</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">           1 :                         ASSERT_LE(static_cast&lt;uint64_t&gt;(f.tellg()), MAX_BLOCK_SIZE);</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">           1 :                         ASSERT_LE(static_cast&lt;uint64_t&gt;(f.tellg()), MAX_BLOCK_SIZE_NEW);</span></span>
 <span id="L341"><span class="lineNum">     341</span>              : </span>
 <span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           1 :                         buf.resize(static_cast&lt;size_t&gt;(f.tellg()));</span></span>
 <span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">           1 :                         f.seekg(0);</span></span>
@@ -605,8 +605,8 @@
 <span id="L543"><span class="lineNum">     543</span>              : </span>
 <span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">           8 :                         bad_varint(reward_offset, reward + 1);</span></span>
 <span id="L545"><span class="lineNum">     545</span>              : </span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 53ULL, uint64_t(layout.outputs_blob_size - 1), uint64_t(layout.outputs_blob_size + 1), MAX_BLOCK_SIZE + 1, UINT64_MAX}) bad_varint(output_size_ptr - begin, n);</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 32ULL, pubkeys_size - 1, pubkeys_size + 1, MAX_BLOCK_SIZE + 1, UINT64_MAX}) bad_varint(pubkeys_size_ptr - begin, n);</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 53ULL, uint64_t(layout.outputs_blob_size - 1), uint64_t(layout.outputs_blob_size + 1), MAX_BLOCK_SIZE_NEW + 1, UINT64_MAX}) bad_varint(output_size_ptr - begin, n);</span></span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 32ULL, pubkeys_size - 1, pubkeys_size + 1, MAX_BLOCK_SIZE_NEW + 1, UINT64_MAX}) bad_varint(pubkeys_size_ptr - begin, n);</span></span>
 <span id="L548"><span class="lineNum">     548</span>              : </span>
 <span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size - 1);</span></span>
 <span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size + 1);</span></span>

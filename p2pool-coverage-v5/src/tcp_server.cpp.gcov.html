@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">1195</td>
+            <td class="headerCovTableEntry">1193</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-09 13:00:32</td>
+            <td class="headerValue">2026-09-09 20:15:36</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1206,461 +1206,459 @@
 <span id="L1144"><span class="lineNum">    1144</span>              : #endif</span>
 <span id="L1145"><span class="lineNum">    1145</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L1146"><span class="lineNum">    1146</span> <span class="tlaUNC">           0 :         m_readBuf[0] = '\0';</span></span>
-<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaUNC">           0 :         m_readBuf[m_readBufSize - 1] = '\0';</span></span>
-<span id="L1148"><span class="lineNum">    1148</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1149"><span class="lineNum">    1149</span>              : </span>
-<span id="L1150"><span class="lineNum">    1150</span>              : void TCPServer::Client::reset()</span>
-<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1152"><span class="lineNum">    1152</span> <span class="tlaUNC">           0 :         m_resetCounter.fetch_add(1);</span></span>
-<span id="L1153"><span class="lineNum">    1153</span>              : </span>
-<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :         m_owner = nullptr;</span></span>
-<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :         m_prev = nullptr;</span></span>
-<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaUNC">           0 :         m_next = nullptr;</span></span>
-<span id="L1157"><span class="lineNum">    1157</span> <span class="tlaUNC">           0 :         memset(&amp;m_socket, 0, sizeof(m_socket));</span></span>
-<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaUNC">           0 :         m_addressType = AddressType::IPv4;</span></span>
-<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaUNC">           0 :         m_isIncoming = false;</span></span>
-<span id="L1160"><span class="lineNum">    1160</span> <span class="tlaUNC">           0 :         m_readBufInUse = false;</span></span>
-<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :         m_isClosing = false;</span></span>
-<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 :         m_numRead = 0;</span></span>
-<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 :         m_addr = raw_ip::localhost_ipv4;</span></span>
-<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaUNC">           0 :         m_port = -1;</span></span>
-<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC">           0 :         m_addrString[0] = '\0';</span></span>
-<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC">           0 :         m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
-<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :         m_proxyProtocolState = ProxyProtocolState::None;</span></span>
-<span id="L1168"><span class="lineNum">    1168</span> <span class="tlaUNC">           0 :         m_readBuf[0] = '\0';</span></span>
-<span id="L1169"><span class="lineNum">    1169</span> <span class="tlaUNC">           0 :         m_readBuf[m_readBufSize - 1] = '\0';</span></span>
-<span id="L1170"><span class="lineNum">    1170</span>              : </span>
-<span id="L1171"><span class="lineNum">    1171</span>              : #ifdef WITH_TLS</span>
-<span id="L1172"><span class="lineNum">    1172</span>              :         m_tls.reset();</span>
-<span id="L1173"><span class="lineNum">    1173</span>              :         m_tlsChecked = false;</span>
-<span id="L1174"><span class="lineNum">    1174</span>              : #endif</span>
-<span id="L1175"><span class="lineNum">    1175</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1176"><span class="lineNum">    1176</span>              : </span>
-<span id="L1177"><span class="lineNum">    1177</span>              : void TCPServer::Client::on_alloc(uv_handle_t* handle, size_t /*suggested_size*/, uv_buf_t* buf)</span>
-<span id="L1178"><span class="lineNum">    1178</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1179"><span class="lineNum">    1179</span> <span class="tlaUNC">           0 :         Client* pThis = static_cast&lt;Client*&gt;(handle-&gt;data);</span></span>
-<span id="L1180"><span class="lineNum">    1180</span>              : </span>
-<span id="L1181"><span class="lineNum">    1181</span> <span class="tlaUNC">           0 :         if (pThis-&gt;m_readBufInUse) {</span></span>
-<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(pThis-&gt;m_addrString) &lt;&lt; &quot; read buffer is already in use&quot;);</span></span>
-<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :                 buf-&gt;len = 0;</span></span>
-<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :                 buf-&gt;base = nullptr;</span></span>
-<span id="L1185"><span class="lineNum">    1185</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1186"><span class="lineNum">    1186</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1187"><span class="lineNum">    1187</span>              : </span>
-<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaUNC">           0 :         if (pThis-&gt;m_numRead &gt;= pThis-&gt;m_readBufSize) {</span></span>
-<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(pThis-&gt;m_addrString) &lt;&lt; &quot; read buffer is full&quot;);</span></span>
-<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaUNC">           0 :                 buf-&gt;len = 0;</span></span>
-<span id="L1191"><span class="lineNum">    1191</span> <span class="tlaUNC">           0 :                 buf-&gt;base = nullptr;</span></span>
-<span id="L1192"><span class="lineNum">    1192</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1193"><span class="lineNum">    1193</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1194"><span class="lineNum">    1194</span>              : </span>
-<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaUNC">           0 :         buf-&gt;len = pThis-&gt;m_readBufSize - pThis-&gt;m_numRead;</span></span>
-<span id="L1196"><span class="lineNum">    1196</span> <span class="tlaUNC">           0 :         buf-&gt;base = pThis-&gt;m_readBuf + pThis-&gt;m_numRead;</span></span>
-<span id="L1197"><span class="lineNum">    1197</span> <span class="tlaUNC">           0 :         pThis-&gt;m_readBufInUse = true;</span></span>
-<span id="L1198"><span class="lineNum">    1198</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1199"><span class="lineNum">    1199</span>              : </span>
-<span id="L1200"><span class="lineNum">    1200</span>              : void TCPServer::Client::on_read(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf)</span>
-<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1202"><span class="lineNum">    1202</span> <span class="tlaUNC">           0 :         Client* client = static_cast&lt;Client*&gt;(stream-&gt;data);</span></span>
-<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaUNC">           0 :         client-&gt;m_readBufInUse = false;</span></span>
-<span id="L1204"><span class="lineNum">    1204</span>              : </span>
-<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaUNC">           0 :         if (client-&gt;m_isClosing) {</span></span>
-<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; is being disconnected but data received from it, nread = &quot; &lt;&lt; nread &lt;&lt; &quot;. Ignoring it.&quot;);</span></span>
-<span id="L1207"><span class="lineNum">    1207</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1209"><span class="lineNum">    1209</span>              : </span>
-<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC">           0 :         if (nread &gt; 0) {</span></span>
-<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :                 if (client-&gt;m_owner &amp;&amp; !client-&gt;m_owner-&gt;m_finished.load()) {</span></span>
-<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :                         if (client-&gt;m_proxyProtocolState == ProxyProtocolState::ExpectingHeader) {</span></span>
-<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :                                 if (!client-&gt;on_proxy_protocol(buf-&gt;base, static_cast&lt;uint32_t&gt;(nread))) {</span></span>
-<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :                                         client-&gt;close();</span></span>
-<span id="L1215"><span class="lineNum">    1215</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 :                         else if (client-&gt;m_socks5ProxyState == Socks5ProxyState::Default) {</span></span>
-<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :                                 if (!client-&gt;on_read(buf-&gt;base, static_cast&lt;uint32_t&gt;(nread))) {</span></span>
-<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :                                         client-&gt;close();</span></span>
-<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :                         else if (!client-&gt;on_proxy_handshake(buf-&gt;base, static_cast&lt;uint32_t&gt;(nread))) {</span></span>
-<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :                                 client-&gt;close();</span></span>
-<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :         else if (nread &lt; 0) {</span></span>
-<span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 :                 if (nread != UV_EOF) {</span></span>
-<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :                         const int err = static_cast&lt;int&gt;(nread);</span></span>
-<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :                         LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; failed to read response, err = &quot; &lt;&lt; uv_err_name(err));</span></span>
-<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :                         client-&gt;on_read_failed(err);</span></span>
-<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :                         client-&gt;on_disconnected();</span></span>
-<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaUNC">           0 :                 client-&gt;close();</span></span>
-<span id="L1237"><span class="lineNum">    1237</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1238"><span class="lineNum">    1238</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1239"><span class="lineNum">    1239</span>              : </span>
-<span id="L1240"><span class="lineNum">    1240</span>              : bool TCPServer::Client::on_proxy_handshake(const char* data, uint32_t size)</span>
-<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :         if ((data != m_readBuf + m_numRead) || (data + size &gt; m_readBuf + m_readBufSize)) {</span></span>
-<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid data pointer or size in on_read()&quot;);</span></span>
-<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1245"><span class="lineNum">    1245</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :         m_numRead += size;</span></span>
+<span id="L1147"><span class="lineNum">    1147</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1148"><span class="lineNum">    1148</span>              : </span>
+<span id="L1149"><span class="lineNum">    1149</span>              : void TCPServer::Client::reset()</span>
+<span id="L1150"><span class="lineNum">    1150</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1151"><span class="lineNum">    1151</span> <span class="tlaUNC">           0 :         m_resetCounter.fetch_add(1);</span></span>
+<span id="L1152"><span class="lineNum">    1152</span>              : </span>
+<span id="L1153"><span class="lineNum">    1153</span> <span class="tlaUNC">           0 :         m_owner = nullptr;</span></span>
+<span id="L1154"><span class="lineNum">    1154</span> <span class="tlaUNC">           0 :         m_prev = nullptr;</span></span>
+<span id="L1155"><span class="lineNum">    1155</span> <span class="tlaUNC">           0 :         m_next = nullptr;</span></span>
+<span id="L1156"><span class="lineNum">    1156</span> <span class="tlaUNC">           0 :         memset(&amp;m_socket, 0, sizeof(m_socket));</span></span>
+<span id="L1157"><span class="lineNum">    1157</span> <span class="tlaUNC">           0 :         m_addressType = AddressType::IPv4;</span></span>
+<span id="L1158"><span class="lineNum">    1158</span> <span class="tlaUNC">           0 :         m_isIncoming = false;</span></span>
+<span id="L1159"><span class="lineNum">    1159</span> <span class="tlaUNC">           0 :         m_readBufInUse = false;</span></span>
+<span id="L1160"><span class="lineNum">    1160</span> <span class="tlaUNC">           0 :         m_isClosing = false;</span></span>
+<span id="L1161"><span class="lineNum">    1161</span> <span class="tlaUNC">           0 :         m_numRead = 0;</span></span>
+<span id="L1162"><span class="lineNum">    1162</span> <span class="tlaUNC">           0 :         m_addr = raw_ip::localhost_ipv4;</span></span>
+<span id="L1163"><span class="lineNum">    1163</span> <span class="tlaUNC">           0 :         m_port = -1;</span></span>
+<span id="L1164"><span class="lineNum">    1164</span> <span class="tlaUNC">           0 :         m_addrString[0] = '\0';</span></span>
+<span id="L1165"><span class="lineNum">    1165</span> <span class="tlaUNC">           0 :         m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
+<span id="L1166"><span class="lineNum">    1166</span> <span class="tlaUNC">           0 :         m_proxyProtocolState = ProxyProtocolState::None;</span></span>
+<span id="L1167"><span class="lineNum">    1167</span> <span class="tlaUNC">           0 :         m_readBuf[0] = '\0';</span></span>
+<span id="L1168"><span class="lineNum">    1168</span>              : </span>
+<span id="L1169"><span class="lineNum">    1169</span>              : #ifdef WITH_TLS</span>
+<span id="L1170"><span class="lineNum">    1170</span>              :         m_tls.reset();</span>
+<span id="L1171"><span class="lineNum">    1171</span>              :         m_tlsChecked = false;</span>
+<span id="L1172"><span class="lineNum">    1172</span>              : #endif</span>
+<span id="L1173"><span class="lineNum">    1173</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1174"><span class="lineNum">    1174</span>              : </span>
+<span id="L1175"><span class="lineNum">    1175</span>              : void TCPServer::Client::on_alloc(uv_handle_t* handle, size_t /*suggested_size*/, uv_buf_t* buf)</span>
+<span id="L1176"><span class="lineNum">    1176</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1177"><span class="lineNum">    1177</span> <span class="tlaUNC">           0 :         Client* pThis = static_cast&lt;Client*&gt;(handle-&gt;data);</span></span>
+<span id="L1178"><span class="lineNum">    1178</span>              : </span>
+<span id="L1179"><span class="lineNum">    1179</span> <span class="tlaUNC">           0 :         if (pThis-&gt;m_readBufInUse) {</span></span>
+<span id="L1180"><span class="lineNum">    1180</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(pThis-&gt;m_addrString) &lt;&lt; &quot; read buffer is already in use&quot;);</span></span>
+<span id="L1181"><span class="lineNum">    1181</span> <span class="tlaUNC">           0 :                 buf-&gt;len = 0;</span></span>
+<span id="L1182"><span class="lineNum">    1182</span> <span class="tlaUNC">           0 :                 buf-&gt;base = nullptr;</span></span>
+<span id="L1183"><span class="lineNum">    1183</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1184"><span class="lineNum">    1184</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1185"><span class="lineNum">    1185</span>              : </span>
+<span id="L1186"><span class="lineNum">    1186</span> <span class="tlaUNC">           0 :         if (pThis-&gt;m_numRead &gt;= pThis-&gt;m_readBufSize) {</span></span>
+<span id="L1187"><span class="lineNum">    1187</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(pThis-&gt;m_addrString) &lt;&lt; &quot; read buffer is full&quot;);</span></span>
+<span id="L1188"><span class="lineNum">    1188</span> <span class="tlaUNC">           0 :                 buf-&gt;len = 0;</span></span>
+<span id="L1189"><span class="lineNum">    1189</span> <span class="tlaUNC">           0 :                 buf-&gt;base = nullptr;</span></span>
+<span id="L1190"><span class="lineNum">    1190</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1191"><span class="lineNum">    1191</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1192"><span class="lineNum">    1192</span>              : </span>
+<span id="L1193"><span class="lineNum">    1193</span> <span class="tlaUNC">           0 :         buf-&gt;len = pThis-&gt;m_readBufSize - pThis-&gt;m_numRead;</span></span>
+<span id="L1194"><span class="lineNum">    1194</span> <span class="tlaUNC">           0 :         buf-&gt;base = pThis-&gt;m_readBuf + pThis-&gt;m_numRead;</span></span>
+<span id="L1195"><span class="lineNum">    1195</span> <span class="tlaUNC">           0 :         pThis-&gt;m_readBufInUse = true;</span></span>
+<span id="L1196"><span class="lineNum">    1196</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1197"><span class="lineNum">    1197</span>              : </span>
+<span id="L1198"><span class="lineNum">    1198</span>              : void TCPServer::Client::on_read(uv_stream_t* stream, ssize_t nread, const uv_buf_t* buf)</span>
+<span id="L1199"><span class="lineNum">    1199</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1200"><span class="lineNum">    1200</span> <span class="tlaUNC">           0 :         Client* client = static_cast&lt;Client*&gt;(stream-&gt;data);</span></span>
+<span id="L1201"><span class="lineNum">    1201</span> <span class="tlaUNC">           0 :         client-&gt;m_readBufInUse = false;</span></span>
+<span id="L1202"><span class="lineNum">    1202</span>              : </span>
+<span id="L1203"><span class="lineNum">    1203</span> <span class="tlaUNC">           0 :         if (client-&gt;m_isClosing) {</span></span>
+<span id="L1204"><span class="lineNum">    1204</span> <span class="tlaUNC">           0 :                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; is being disconnected but data received from it, nread = &quot; &lt;&lt; nread &lt;&lt; &quot;. Ignoring it.&quot;);</span></span>
+<span id="L1205"><span class="lineNum">    1205</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1206"><span class="lineNum">    1206</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1207"><span class="lineNum">    1207</span>              : </span>
+<span id="L1208"><span class="lineNum">    1208</span> <span class="tlaUNC">           0 :         if (nread &gt; 0) {</span></span>
+<span id="L1209"><span class="lineNum">    1209</span> <span class="tlaUNC">           0 :                 if (client-&gt;m_owner &amp;&amp; !client-&gt;m_owner-&gt;m_finished.load()) {</span></span>
+<span id="L1210"><span class="lineNum">    1210</span> <span class="tlaUNC">           0 :                         if (client-&gt;m_proxyProtocolState == ProxyProtocolState::ExpectingHeader) {</span></span>
+<span id="L1211"><span class="lineNum">    1211</span> <span class="tlaUNC">           0 :                                 if (!client-&gt;on_proxy_protocol(buf-&gt;base, static_cast&lt;uint32_t&gt;(nread))) {</span></span>
+<span id="L1212"><span class="lineNum">    1212</span> <span class="tlaUNC">           0 :                                         client-&gt;close();</span></span>
+<span id="L1213"><span class="lineNum">    1213</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1214"><span class="lineNum">    1214</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1215"><span class="lineNum">    1215</span> <span class="tlaUNC">           0 :                         else if (client-&gt;m_socks5ProxyState == Socks5ProxyState::Default) {</span></span>
+<span id="L1216"><span class="lineNum">    1216</span> <span class="tlaUNC">           0 :                                 if (!client-&gt;on_read(buf-&gt;base, static_cast&lt;uint32_t&gt;(nread))) {</span></span>
+<span id="L1217"><span class="lineNum">    1217</span> <span class="tlaUNC">           0 :                                         client-&gt;close();</span></span>
+<span id="L1218"><span class="lineNum">    1218</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1219"><span class="lineNum">    1219</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1220"><span class="lineNum">    1220</span> <span class="tlaUNC">           0 :                         else if (!client-&gt;on_proxy_handshake(buf-&gt;base, static_cast&lt;uint32_t&gt;(nread))) {</span></span>
+<span id="L1221"><span class="lineNum">    1221</span> <span class="tlaUNC">           0 :                                 client-&gt;close();</span></span>
+<span id="L1222"><span class="lineNum">    1222</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1223"><span class="lineNum">    1223</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 :         else if (nread &lt; 0) {</span></span>
+<span id="L1226"><span class="lineNum">    1226</span> <span class="tlaUNC">           0 :                 if (nread != UV_EOF) {</span></span>
+<span id="L1227"><span class="lineNum">    1227</span> <span class="tlaUNC">           0 :                         const int err = static_cast&lt;int&gt;(nread);</span></span>
+<span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 :                         LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; failed to read response, err = &quot; &lt;&lt; uv_err_name(err));</span></span>
+<span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :                         client-&gt;on_read_failed(err);</span></span>
+<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L1232"><span class="lineNum">    1232</span> <span class="tlaUNC">           0 :                         client-&gt;on_disconnected();</span></span>
+<span id="L1233"><span class="lineNum">    1233</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1234"><span class="lineNum">    1234</span> <span class="tlaUNC">           0 :                 client-&gt;close();</span></span>
+<span id="L1235"><span class="lineNum">    1235</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1236"><span class="lineNum">    1236</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1237"><span class="lineNum">    1237</span>              : </span>
+<span id="L1238"><span class="lineNum">    1238</span>              : bool TCPServer::Client::on_proxy_handshake(const char* data, uint32_t size)</span>
+<span id="L1239"><span class="lineNum">    1239</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1240"><span class="lineNum">    1240</span> <span class="tlaUNC">           0 :         if ((data != m_readBuf + m_numRead) || (data + size &gt; m_readBuf + m_readBufSize)) {</span></span>
+<span id="L1241"><span class="lineNum">    1241</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid data pointer or size in on_read()&quot;);</span></span>
+<span id="L1242"><span class="lineNum">    1242</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1243"><span class="lineNum">    1243</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1244"><span class="lineNum">    1244</span> <span class="tlaUNC">           0 :         m_numRead += size;</span></span>
+<span id="L1245"><span class="lineNum">    1245</span>              : </span>
+<span id="L1246"><span class="lineNum">    1246</span> <span class="tlaUNC">           0 :         uint32_t n = 0;</span></span>
 <span id="L1247"><span class="lineNum">    1247</span>              : </span>
-<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :         uint32_t n = 0;</span></span>
-<span id="L1249"><span class="lineNum">    1249</span>              : </span>
-<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :         switch (m_socks5ProxyState) {</span></span>
-<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaUNC">           0 :         case Socks5ProxyState::MethodSelectionSent:</span></span>
-<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt;= 2) {</span></span>
-<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :                         if ((m_readBuf[0] != 5) || (m_readBuf[1] != 0)) {</span></span>
-<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;SOCKS5 proxy returned an invalid METHOD selection message&quot;);</span></span>
-<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :                         n = 2;</span></span>
-<span id="L1258"><span class="lineNum">    1258</span>              : </span>
-<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :                         const bool result = m_owner-&gt;send(this,</span></span>
-<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaUNC">           0 :                                 [this](uint8_t* buf, size_t buf_size) -&gt; size_t</span></span>
-<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaUNC">           0 :                                 {</span></span>
-<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaUNC">           0 :                                         if (buf_size &lt; ADDR_STRING_SIZE + 7) {</span></span>
-<span id="L1263"><span class="lineNum">    1263</span> <span class="tlaUNC">           0 :                                                 return 0;</span></span>
-<span id="L1264"><span class="lineNum">    1264</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L1265"><span class="lineNum">    1265</span>              : </span>
-<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :                                         buf[0] = 5; // Protocol version (SOCKS5)</span></span>
-<span id="L1267"><span class="lineNum">    1267</span> <span class="tlaUNC">           0 :                                         buf[1] = 1; // CONNECT</span></span>
-<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaUNC">           0 :                                         buf[2] = 0; // RESERVED</span></span>
-<span id="L1269"><span class="lineNum">    1269</span>              : </span>
-<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaUNC">           0 :                                         if (m_addressType == AddressType::DomainName) {</span></span>
-<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :                                                 buf[3] = 3; // ATYP</span></span>
-<span id="L1272"><span class="lineNum">    1272</span>              : </span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaUNC">           0 :                                                 const char* s = strchr(m_addrString, ':');</span></span>
-<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :                                                 const size_t domain_len = s ? (s - m_addrString) : strlen(m_addrString);</span></span>
-<span id="L1275"><span class="lineNum">    1275</span>              : </span>
-<span id="L1276"><span class="lineNum">    1276</span> <span class="tlaUNC">           0 :                                                 buf[4] = static_cast&lt;uint8_t&gt;(domain_len);</span></span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :                                                 memcpy(buf + 5, m_addrString, domain_len);</span></span>
-<span id="L1278"><span class="lineNum">    1278</span>              : </span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaUNC">           0 :                                                 buf[domain_len + 5] = static_cast&lt;uint8_t&gt;(m_port &gt;&gt; 8);</span></span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaUNC">           0 :                                                 buf[domain_len + 6] = static_cast&lt;uint8_t&gt;(m_port &amp; 0xFF);</span></span>
-<span id="L1281"><span class="lineNum">    1281</span>              : </span>
-<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaUNC">           0 :                                                 return domain_len + 7;</span></span>
-<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L1284"><span class="lineNum">    1284</span>              : </span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :                                         if (m_addressType == AddressType::IPv6) {</span></span>
-<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaUNC">           0 :                                                 buf[3] = 4; // ATYP</span></span>
-<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :                                                 memcpy(buf + 4, m_addr.data, 16);</span></span>
-<span id="L1288"><span class="lineNum">    1288</span> <span class="tlaUNC">           0 :                                                 buf[20] = static_cast&lt;uint8_t&gt;(m_port &gt;&gt; 8);</span></span>
-<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaUNC">           0 :                                                 buf[21] = static_cast&lt;uint8_t&gt;(m_port &amp; 0xFF);</span></span>
-<span id="L1290"><span class="lineNum">    1290</span>              : </span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaUNC">           0 :                                                 return 22;</span></span>
-<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L1293"><span class="lineNum">    1293</span>              : </span>
-<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaUNC">           0 :                                         buf[3] = 1; // ATYP</span></span>
-<span id="L1295"><span class="lineNum">    1295</span> <span class="tlaUNC">           0 :                                         memcpy(buf + 4, m_addr.data + sizeof(raw_ip::ipv4_prefix), 4);</span></span>
-<span id="L1296"><span class="lineNum">    1296</span> <span class="tlaUNC">           0 :                                         buf[8] = static_cast&lt;uint8_t&gt;(m_port &gt;&gt; 8);</span></span>
-<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :                                         buf[9] = static_cast&lt;uint8_t&gt;(m_port &amp; 0xFF);</span></span>
-<span id="L1298"><span class="lineNum">    1298</span>              : </span>
-<span id="L1299"><span class="lineNum">    1299</span> <span class="tlaUNC">           0 :                                         return 10;</span></span>
-<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :                                 });</span></span>
-<span id="L1301"><span class="lineNum">    1301</span>              : </span>
-<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :                         if (result) {</span></span>
-<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :                                 m_socks5ProxyState = Socks5ProxyState::ConnectRequestSent;</span></span>
-<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :                         else {</span></span>
-<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;Failed to send SOCKS5 proxy connect request&quot;);</span></span>
-<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1309"><span class="lineNum">    1309</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1311"><span class="lineNum">    1311</span>              : </span>
-<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :         case Socks5ProxyState::ConnectRequestSent:</span></span>
-<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt;= 4) {</span></span>
-<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :                         const uint8_t* p = reinterpret_cast&lt;uint8_t*&gt;(m_readBuf);</span></span>
-<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :                         if ((p[0] != 5) || (p[1] != 0) || p[2] != 0) {</span></span>
-<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;SOCKS5 proxy returned an invalid reply to CONNECT&quot;);</span></span>
-<span id="L1317"><span class="lineNum">    1317</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1319"><span class="lineNum">    1319</span>              : </span>
-<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :                         switch (p[3]) {</span></span>
-<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 :                         case 1:</span></span>
-<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :                                 if (m_numRead &gt;= 10) {</span></span>
-<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :                                         m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
-<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :                                         n = 10;</span></span>
-<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :                                 break;</span></span>
-<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaUNC">           0 :                         case 3:</span></span>
-<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :                                 if (m_numRead &gt;= 5) {</span></span>
-<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :                                         const uint32_t len = p[4];</span></span>
-<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC">           0 :                                         if (m_numRead &gt;= 7 + len) {</span></span>
-<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :                                                 m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
-<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 :                                                 n = 7 + len;</span></span>
-<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :                                         }</span></span>
-<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :                                 break;</span></span>
-<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :                         case 4:</span></span>
-<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :                                 if (m_numRead &gt;= 22) {</span></span>
-<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :                                         m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
-<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :                                         n = 22;</span></span>
-<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :                                 break;</span></span>
-<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC">           0 :                         default:</span></span>
-<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;SOCKS5 proxy returned an invalid reply to CONNECT (invalid address type &quot; &lt;&lt; p[3] &lt;&lt; ')');</span></span>
-<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1346"><span class="lineNum">    1346</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :                 break;</span></span>
-<span id="L1348"><span class="lineNum">    1348</span>              : </span>
-<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :         default:</span></span>
-<span id="L1350"><span class="lineNum">    1350</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1351"><span class="lineNum">    1351</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1352"><span class="lineNum">    1352</span>              : </span>
-<span id="L1353"><span class="lineNum">    1353</span>              :         // Move the possible unfinished message to the beginning of m_readBuf to free up more space for reading</span>
-<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :         if (n &gt; 0) {</span></span>
-<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :                 m_numRead -= n;</span></span>
-<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt; 0) {</span></span>
-<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 :                         memmove(m_readBuf, m_readBuf + n, m_numRead);</span></span>
-<span id="L1358"><span class="lineNum">    1358</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1360"><span class="lineNum">    1360</span>              : </span>
-<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 :         if (m_socks5ProxyState == Socks5ProxyState::Default) {</span></span>
-<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC">           0 :                 if (!on_connect()) {</span></span>
-<span id="L1363"><span class="lineNum">    1363</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1365"><span class="lineNum">    1365</span>              : </span>
-<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt; 0) {</span></span>
-<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :                         const uint32_t nread = m_numRead;</span></span>
-<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :                         m_numRead = 0;</span></span>
-<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaUNC">           0 :                         if (!on_read(m_readBuf, nread)) {</span></span>
-<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1372"><span class="lineNum">    1372</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1374"><span class="lineNum">    1374</span>              : </span>
-<span id="L1375"><span class="lineNum">    1375</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L1376"><span class="lineNum">    1376</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1377"><span class="lineNum">    1377</span>              : </span>
-<span id="L1378"><span class="lineNum">    1378</span>              : bool TCPServer::Client::on_proxy_protocol(const char* data, uint32_t size)</span>
-<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1380"><span class="lineNum">    1380</span>              :         // PROXY protocol v2 signature</span>
-<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :         static constexpr uint8_t ppv2_signature[12] = { 0x0D, 0x0A, 0x0D, 0x0A, 0x00, 0x0D, 0x0A, 0x51, 0x55, 0x49, 0x54, 0x0A };</span></span>
-<span id="L1382"><span class="lineNum">    1382</span>              : </span>
-<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaUNC">           0 :         if ((data != m_readBuf + m_numRead) || (data + size &gt; m_readBuf + m_readBufSize)) {</span></span>
-<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid data pointer or size in on_proxy_protocol()&quot;);</span></span>
-<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1386"><span class="lineNum">    1386</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1387"><span class="lineNum">    1387</span> <span class="tlaUNC">           0 :         m_numRead += size;</span></span>
-<span id="L1388"><span class="lineNum">    1388</span>              : </span>
-<span id="L1389"><span class="lineNum">    1389</span>              :         // Need at least 16 bytes for the fixed header</span>
-<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaUNC">           0 :         if (m_numRead &lt; 16) {</span></span>
-<span id="L1391"><span class="lineNum">    1391</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1248"><span class="lineNum">    1248</span> <span class="tlaUNC">           0 :         switch (m_socks5ProxyState) {</span></span>
+<span id="L1249"><span class="lineNum">    1249</span> <span class="tlaUNC">           0 :         case Socks5ProxyState::MethodSelectionSent:</span></span>
+<span id="L1250"><span class="lineNum">    1250</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt;= 2) {</span></span>
+<span id="L1251"><span class="lineNum">    1251</span> <span class="tlaUNC">           0 :                         if ((m_readBuf[0] != 5) || (m_readBuf[1] != 0)) {</span></span>
+<span id="L1252"><span class="lineNum">    1252</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;SOCKS5 proxy returned an invalid METHOD selection message&quot;);</span></span>
+<span id="L1253"><span class="lineNum">    1253</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1254"><span class="lineNum">    1254</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1255"><span class="lineNum">    1255</span> <span class="tlaUNC">           0 :                         n = 2;</span></span>
+<span id="L1256"><span class="lineNum">    1256</span>              : </span>
+<span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :                         const bool result = m_owner-&gt;send(this,</span></span>
+<span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :                                 [this](uint8_t* buf, size_t buf_size) -&gt; size_t</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :                                 {</span></span>
+<span id="L1260"><span class="lineNum">    1260</span> <span class="tlaUNC">           0 :                                         if (buf_size &lt; ADDR_STRING_SIZE + 7) {</span></span>
+<span id="L1261"><span class="lineNum">    1261</span> <span class="tlaUNC">           0 :                                                 return 0;</span></span>
+<span id="L1262"><span class="lineNum">    1262</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L1263"><span class="lineNum">    1263</span>              : </span>
+<span id="L1264"><span class="lineNum">    1264</span> <span class="tlaUNC">           0 :                                         buf[0] = 5; // Protocol version (SOCKS5)</span></span>
+<span id="L1265"><span class="lineNum">    1265</span> <span class="tlaUNC">           0 :                                         buf[1] = 1; // CONNECT</span></span>
+<span id="L1266"><span class="lineNum">    1266</span> <span class="tlaUNC">           0 :                                         buf[2] = 0; // RESERVED</span></span>
+<span id="L1267"><span class="lineNum">    1267</span>              : </span>
+<span id="L1268"><span class="lineNum">    1268</span> <span class="tlaUNC">           0 :                                         if (m_addressType == AddressType::DomainName) {</span></span>
+<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaUNC">           0 :                                                 buf[3] = 3; // ATYP</span></span>
+<span id="L1270"><span class="lineNum">    1270</span>              : </span>
+<span id="L1271"><span class="lineNum">    1271</span> <span class="tlaUNC">           0 :                                                 const char* s = strchr(m_addrString, ':');</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaUNC">           0 :                                                 const size_t domain_len = s ? (s - m_addrString) : strlen(m_addrString);</span></span>
+<span id="L1273"><span class="lineNum">    1273</span>              : </span>
+<span id="L1274"><span class="lineNum">    1274</span> <span class="tlaUNC">           0 :                                                 buf[4] = static_cast&lt;uint8_t&gt;(domain_len);</span></span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaUNC">           0 :                                                 memcpy(buf + 5, m_addrString, domain_len);</span></span>
+<span id="L1276"><span class="lineNum">    1276</span>              : </span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaUNC">           0 :                                                 buf[domain_len + 5] = static_cast&lt;uint8_t&gt;(m_port &gt;&gt; 8);</span></span>
+<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaUNC">           0 :                                                 buf[domain_len + 6] = static_cast&lt;uint8_t&gt;(m_port &amp; 0xFF);</span></span>
+<span id="L1279"><span class="lineNum">    1279</span>              : </span>
+<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaUNC">           0 :                                                 return domain_len + 7;</span></span>
+<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L1282"><span class="lineNum">    1282</span>              : </span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaUNC">           0 :                                         if (m_addressType == AddressType::IPv6) {</span></span>
+<span id="L1284"><span class="lineNum">    1284</span> <span class="tlaUNC">           0 :                                                 buf[3] = 4; // ATYP</span></span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaUNC">           0 :                                                 memcpy(buf + 4, m_addr.data, 16);</span></span>
+<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaUNC">           0 :                                                 buf[20] = static_cast&lt;uint8_t&gt;(m_port &gt;&gt; 8);</span></span>
+<span id="L1287"><span class="lineNum">    1287</span> <span class="tlaUNC">           0 :                                                 buf[21] = static_cast&lt;uint8_t&gt;(m_port &amp; 0xFF);</span></span>
+<span id="L1288"><span class="lineNum">    1288</span>              : </span>
+<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaUNC">           0 :                                                 return 22;</span></span>
+<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L1291"><span class="lineNum">    1291</span>              : </span>
+<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaUNC">           0 :                                         buf[3] = 1; // ATYP</span></span>
+<span id="L1293"><span class="lineNum">    1293</span> <span class="tlaUNC">           0 :                                         memcpy(buf + 4, m_addr.data + sizeof(raw_ip::ipv4_prefix), 4);</span></span>
+<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaUNC">           0 :                                         buf[8] = static_cast&lt;uint8_t&gt;(m_port &gt;&gt; 8);</span></span>
+<span id="L1295"><span class="lineNum">    1295</span> <span class="tlaUNC">           0 :                                         buf[9] = static_cast&lt;uint8_t&gt;(m_port &amp; 0xFF);</span></span>
+<span id="L1296"><span class="lineNum">    1296</span>              : </span>
+<span id="L1297"><span class="lineNum">    1297</span> <span class="tlaUNC">           0 :                                         return 10;</span></span>
+<span id="L1298"><span class="lineNum">    1298</span> <span class="tlaUNC">           0 :                                 });</span></span>
+<span id="L1299"><span class="lineNum">    1299</span>              : </span>
+<span id="L1300"><span class="lineNum">    1300</span> <span class="tlaUNC">           0 :                         if (result) {</span></span>
+<span id="L1301"><span class="lineNum">    1301</span> <span class="tlaUNC">           0 :                                 m_socks5ProxyState = Socks5ProxyState::ConnectRequestSent;</span></span>
+<span id="L1302"><span class="lineNum">    1302</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1303"><span class="lineNum">    1303</span> <span class="tlaUNC">           0 :                         else {</span></span>
+<span id="L1304"><span class="lineNum">    1304</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;Failed to send SOCKS5 proxy connect request&quot;);</span></span>
+<span id="L1305"><span class="lineNum">    1305</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1306"><span class="lineNum">    1306</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1307"><span class="lineNum">    1307</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1308"><span class="lineNum">    1308</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1309"><span class="lineNum">    1309</span>              : </span>
+<span id="L1310"><span class="lineNum">    1310</span> <span class="tlaUNC">           0 :         case Socks5ProxyState::ConnectRequestSent:</span></span>
+<span id="L1311"><span class="lineNum">    1311</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt;= 4) {</span></span>
+<span id="L1312"><span class="lineNum">    1312</span> <span class="tlaUNC">           0 :                         const uint8_t* p = reinterpret_cast&lt;uint8_t*&gt;(m_readBuf);</span></span>
+<span id="L1313"><span class="lineNum">    1313</span> <span class="tlaUNC">           0 :                         if ((p[0] != 5) || (p[1] != 0) || p[2] != 0) {</span></span>
+<span id="L1314"><span class="lineNum">    1314</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;SOCKS5 proxy returned an invalid reply to CONNECT&quot;);</span></span>
+<span id="L1315"><span class="lineNum">    1315</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1316"><span class="lineNum">    1316</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1317"><span class="lineNum">    1317</span>              : </span>
+<span id="L1318"><span class="lineNum">    1318</span> <span class="tlaUNC">           0 :                         switch (p[3]) {</span></span>
+<span id="L1319"><span class="lineNum">    1319</span> <span class="tlaUNC">           0 :                         case 1:</span></span>
+<span id="L1320"><span class="lineNum">    1320</span> <span class="tlaUNC">           0 :                                 if (m_numRead &gt;= 10) {</span></span>
+<span id="L1321"><span class="lineNum">    1321</span> <span class="tlaUNC">           0 :                                         m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
+<span id="L1322"><span class="lineNum">    1322</span> <span class="tlaUNC">           0 :                                         n = 10;</span></span>
+<span id="L1323"><span class="lineNum">    1323</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1324"><span class="lineNum">    1324</span> <span class="tlaUNC">           0 :                                 break;</span></span>
+<span id="L1325"><span class="lineNum">    1325</span> <span class="tlaUNC">           0 :                         case 3:</span></span>
+<span id="L1326"><span class="lineNum">    1326</span> <span class="tlaUNC">           0 :                                 if (m_numRead &gt;= 5) {</span></span>
+<span id="L1327"><span class="lineNum">    1327</span> <span class="tlaUNC">           0 :                                         const uint32_t len = p[4];</span></span>
+<span id="L1328"><span class="lineNum">    1328</span> <span class="tlaUNC">           0 :                                         if (m_numRead &gt;= 7 + len) {</span></span>
+<span id="L1329"><span class="lineNum">    1329</span> <span class="tlaUNC">           0 :                                                 m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
+<span id="L1330"><span class="lineNum">    1330</span> <span class="tlaUNC">           0 :                                                 n = 7 + len;</span></span>
+<span id="L1331"><span class="lineNum">    1331</span> <span class="tlaUNC">           0 :                                         }</span></span>
+<span id="L1332"><span class="lineNum">    1332</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1333"><span class="lineNum">    1333</span> <span class="tlaUNC">           0 :                                 break;</span></span>
+<span id="L1334"><span class="lineNum">    1334</span> <span class="tlaUNC">           0 :                         case 4:</span></span>
+<span id="L1335"><span class="lineNum">    1335</span> <span class="tlaUNC">           0 :                                 if (m_numRead &gt;= 22) {</span></span>
+<span id="L1336"><span class="lineNum">    1336</span> <span class="tlaUNC">           0 :                                         m_socks5ProxyState = Socks5ProxyState::Default;</span></span>
+<span id="L1337"><span class="lineNum">    1337</span> <span class="tlaUNC">           0 :                                         n = 22;</span></span>
+<span id="L1338"><span class="lineNum">    1338</span> <span class="tlaUNC">           0 :                                 }</span></span>
+<span id="L1339"><span class="lineNum">    1339</span> <span class="tlaUNC">           0 :                                 break;</span></span>
+<span id="L1340"><span class="lineNum">    1340</span> <span class="tlaUNC">           0 :                         default:</span></span>
+<span id="L1341"><span class="lineNum">    1341</span> <span class="tlaUNC">           0 :                                 LOGWARN(5, &quot;SOCKS5 proxy returned an invalid reply to CONNECT (invalid address type &quot; &lt;&lt; p[3] &lt;&lt; ')');</span></span>
+<span id="L1342"><span class="lineNum">    1342</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1343"><span class="lineNum">    1343</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1344"><span class="lineNum">    1344</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1345"><span class="lineNum">    1345</span> <span class="tlaUNC">           0 :                 break;</span></span>
+<span id="L1346"><span class="lineNum">    1346</span>              : </span>
+<span id="L1347"><span class="lineNum">    1347</span> <span class="tlaUNC">           0 :         default:</span></span>
+<span id="L1348"><span class="lineNum">    1348</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1349"><span class="lineNum">    1349</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1350"><span class="lineNum">    1350</span>              : </span>
+<span id="L1351"><span class="lineNum">    1351</span>              :         // Move the possible unfinished message to the beginning of m_readBuf to free up more space for reading</span>
+<span id="L1352"><span class="lineNum">    1352</span> <span class="tlaUNC">           0 :         if (n &gt; 0) {</span></span>
+<span id="L1353"><span class="lineNum">    1353</span> <span class="tlaUNC">           0 :                 m_numRead -= n;</span></span>
+<span id="L1354"><span class="lineNum">    1354</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt; 0) {</span></span>
+<span id="L1355"><span class="lineNum">    1355</span> <span class="tlaUNC">           0 :                         memmove(m_readBuf, m_readBuf + n, m_numRead);</span></span>
+<span id="L1356"><span class="lineNum">    1356</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1357"><span class="lineNum">    1357</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1358"><span class="lineNum">    1358</span>              : </span>
+<span id="L1359"><span class="lineNum">    1359</span> <span class="tlaUNC">           0 :         if (m_socks5ProxyState == Socks5ProxyState::Default) {</span></span>
+<span id="L1360"><span class="lineNum">    1360</span> <span class="tlaUNC">           0 :                 if (!on_connect()) {</span></span>
+<span id="L1361"><span class="lineNum">    1361</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L1362"><span class="lineNum">    1362</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1363"><span class="lineNum">    1363</span>              : </span>
+<span id="L1364"><span class="lineNum">    1364</span> <span class="tlaUNC">           0 :                 if (m_numRead &gt; 0) {</span></span>
+<span id="L1365"><span class="lineNum">    1365</span> <span class="tlaUNC">           0 :                         const uint32_t nread = m_numRead;</span></span>
+<span id="L1366"><span class="lineNum">    1366</span> <span class="tlaUNC">           0 :                         m_numRead = 0;</span></span>
+<span id="L1367"><span class="lineNum">    1367</span> <span class="tlaUNC">           0 :                         if (!on_read(m_readBuf, nread)) {</span></span>
+<span id="L1368"><span class="lineNum">    1368</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1369"><span class="lineNum">    1369</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1370"><span class="lineNum">    1370</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1371"><span class="lineNum">    1371</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1372"><span class="lineNum">    1372</span>              : </span>
+<span id="L1373"><span class="lineNum">    1373</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L1374"><span class="lineNum">    1374</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1375"><span class="lineNum">    1375</span>              : </span>
+<span id="L1376"><span class="lineNum">    1376</span>              : bool TCPServer::Client::on_proxy_protocol(const char* data, uint32_t size)</span>
+<span id="L1377"><span class="lineNum">    1377</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1378"><span class="lineNum">    1378</span>              :         // PROXY protocol v2 signature</span>
+<span id="L1379"><span class="lineNum">    1379</span> <span class="tlaUNC">           0 :         static constexpr uint8_t ppv2_signature[12] = { 0x0D, 0x0A, 0x0D, 0x0A, 0x00, 0x0D, 0x0A, 0x51, 0x55, 0x49, 0x54, 0x0A };</span></span>
+<span id="L1380"><span class="lineNum">    1380</span>              : </span>
+<span id="L1381"><span class="lineNum">    1381</span> <span class="tlaUNC">           0 :         if ((data != m_readBuf + m_numRead) || (data + size &gt; m_readBuf + m_readBufSize)) {</span></span>
+<span id="L1382"><span class="lineNum">    1382</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid data pointer or size in on_proxy_protocol()&quot;);</span></span>
+<span id="L1383"><span class="lineNum">    1383</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1384"><span class="lineNum">    1384</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1385"><span class="lineNum">    1385</span> <span class="tlaUNC">           0 :         m_numRead += size;</span></span>
+<span id="L1386"><span class="lineNum">    1386</span>              : </span>
+<span id="L1387"><span class="lineNum">    1387</span>              :         // Need at least 16 bytes for the fixed header</span>
+<span id="L1388"><span class="lineNum">    1388</span> <span class="tlaUNC">           0 :         if (m_numRead &lt; 16) {</span></span>
+<span id="L1389"><span class="lineNum">    1389</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L1390"><span class="lineNum">    1390</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1391"><span class="lineNum">    1391</span>              : </span>
+<span id="L1392"><span class="lineNum">    1392</span> <span class="tlaUNC">           0 :         const uint8_t* p = reinterpret_cast&lt;const uint8_t*&gt;(m_readBuf);</span></span>
 <span id="L1393"><span class="lineNum">    1393</span>              : </span>
-<span id="L1394"><span class="lineNum">    1394</span> <span class="tlaUNC">           0 :         const uint8_t* p = reinterpret_cast&lt;const uint8_t*&gt;(m_readBuf);</span></span>
-<span id="L1395"><span class="lineNum">    1395</span>              : </span>
-<span id="L1396"><span class="lineNum">    1396</span>              :         // Validate 12-byte signature</span>
-<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :         if (memcmp(p, ppv2_signature, 12) != 0) {</span></span>
-<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid PROXY protocol v2 signature&quot;);</span></span>
-<span id="L1399"><span class="lineNum">    1399</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1400"><span class="lineNum">    1400</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1401"><span class="lineNum">    1401</span>              : </span>
-<span id="L1402"><span class="lineNum">    1402</span>              :         // Byte 12: version (high nibble) and command (low nibble)</span>
-<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :         const uint8_t ver_cmd = p[12];</span></span>
-<span id="L1404"><span class="lineNum">    1404</span> <span class="tlaUNC">           0 :         const uint8_t version = (ver_cmd &gt;&gt; 4) &amp; 0x0F;</span></span>
-<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :         const uint8_t command = ver_cmd &amp; 0x0F;</span></span>
-<span id="L1406"><span class="lineNum">    1406</span>              : </span>
-<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :         if (version != 2) {</span></span>
-<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; unsupported PROXY protocol version &quot; &lt;&lt; version);</span></span>
-<span id="L1409"><span class="lineNum">    1409</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1411"><span class="lineNum">    1411</span>              : </span>
-<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :         if (command &gt; 1) {</span></span>
-<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid PROXY protocol command &quot; &lt;&lt; command);</span></span>
-<span id="L1414"><span class="lineNum">    1414</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1415"><span class="lineNum">    1415</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1416"><span class="lineNum">    1416</span>              : </span>
-<span id="L1417"><span class="lineNum">    1417</span>              :         // Byte 13: address family (high nibble) and protocol (low nibble)</span>
-<span id="L1418"><span class="lineNum">    1418</span> <span class="tlaUNC">           0 :         const uint8_t family_proto = p[13];</span></span>
-<span id="L1419"><span class="lineNum">    1419</span>              : </span>
-<span id="L1420"><span class="lineNum">    1420</span>              :         // Bytes 14-15: address data length (big-endian), includes address block + optional TLV extensions</span>
-<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 :         const uint16_t addr_len = (static_cast&lt;uint16_t&gt;(p[14]) &lt;&lt; 8) | static_cast&lt;uint16_t&gt;(p[15]);</span></span>
+<span id="L1394"><span class="lineNum">    1394</span>              :         // Validate 12-byte signature</span>
+<span id="L1395"><span class="lineNum">    1395</span> <span class="tlaUNC">           0 :         if (memcmp(p, ppv2_signature, 12) != 0) {</span></span>
+<span id="L1396"><span class="lineNum">    1396</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid PROXY protocol v2 signature&quot;);</span></span>
+<span id="L1397"><span class="lineNum">    1397</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1398"><span class="lineNum">    1398</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1399"><span class="lineNum">    1399</span>              : </span>
+<span id="L1400"><span class="lineNum">    1400</span>              :         // Byte 12: version (high nibble) and command (low nibble)</span>
+<span id="L1401"><span class="lineNum">    1401</span> <span class="tlaUNC">           0 :         const uint8_t ver_cmd = p[12];</span></span>
+<span id="L1402"><span class="lineNum">    1402</span> <span class="tlaUNC">           0 :         const uint8_t version = (ver_cmd &gt;&gt; 4) &amp; 0x0F;</span></span>
+<span id="L1403"><span class="lineNum">    1403</span> <span class="tlaUNC">           0 :         const uint8_t command = ver_cmd &amp; 0x0F;</span></span>
+<span id="L1404"><span class="lineNum">    1404</span>              : </span>
+<span id="L1405"><span class="lineNum">    1405</span> <span class="tlaUNC">           0 :         if (version != 2) {</span></span>
+<span id="L1406"><span class="lineNum">    1406</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; unsupported PROXY protocol version &quot; &lt;&lt; version);</span></span>
+<span id="L1407"><span class="lineNum">    1407</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1408"><span class="lineNum">    1408</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1409"><span class="lineNum">    1409</span>              : </span>
+<span id="L1410"><span class="lineNum">    1410</span> <span class="tlaUNC">           0 :         if (command &gt; 1) {</span></span>
+<span id="L1411"><span class="lineNum">    1411</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; invalid PROXY protocol command &quot; &lt;&lt; command);</span></span>
+<span id="L1412"><span class="lineNum">    1412</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1413"><span class="lineNum">    1413</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1414"><span class="lineNum">    1414</span>              : </span>
+<span id="L1415"><span class="lineNum">    1415</span>              :         // Byte 13: address family (high nibble) and protocol (low nibble)</span>
+<span id="L1416"><span class="lineNum">    1416</span> <span class="tlaUNC">           0 :         const uint8_t family_proto = p[13];</span></span>
+<span id="L1417"><span class="lineNum">    1417</span>              : </span>
+<span id="L1418"><span class="lineNum">    1418</span>              :         // Bytes 14-15: address data length (big-endian), includes address block + optional TLV extensions</span>
+<span id="L1419"><span class="lineNum">    1419</span> <span class="tlaUNC">           0 :         const uint16_t addr_len = (static_cast&lt;uint16_t&gt;(p[14]) &lt;&lt; 8) | static_cast&lt;uint16_t&gt;(p[15]);</span></span>
+<span id="L1420"><span class="lineNum">    1420</span>              : </span>
+<span id="L1421"><span class="lineNum">    1421</span> <span class="tlaUNC">           0 :         const uint32_t total_header_len = 16 + static_cast&lt;uint32_t&gt;(addr_len);</span></span>
 <span id="L1422"><span class="lineNum">    1422</span>              : </span>
-<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :         const uint32_t total_header_len = 16 + static_cast&lt;uint32_t&gt;(addr_len);</span></span>
-<span id="L1424"><span class="lineNum">    1424</span>              : </span>
-<span id="L1425"><span class="lineNum">    1425</span> <span class="tlaUNC">           0 :         if (total_header_len &gt; m_readBufSize) {</span></span>
-<span id="L1426"><span class="lineNum">    1426</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 header too large (&quot; &lt;&lt; total_header_len &lt;&lt; &quot; bytes)&quot;);</span></span>
-<span id="L1427"><span class="lineNum">    1427</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1428"><span class="lineNum">    1428</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1429"><span class="lineNum">    1429</span>              : </span>
-<span id="L1430"><span class="lineNum">    1430</span>              :         // Wait for complete header</span>
-<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaUNC">           0 :         if (m_numRead &lt; total_header_len) {</span></span>
-<span id="L1432"><span class="lineNum">    1432</span> <span class="tlaUNC">           0 :                 return true;</span></span>
-<span id="L1433"><span class="lineNum">    1433</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1434"><span class="lineNum">    1434</span>              : </span>
-<span id="L1435"><span class="lineNum">    1435</span>              :         // PROXY command: extract real client address</span>
-<span id="L1436"><span class="lineNum">    1436</span> <span class="tlaUNC">           0 :         if (command == 1) {</span></span>
-<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 :                 const uint8_t family = (family_proto &gt;&gt; 4) &amp; 0x0F;</span></span>
-<span id="L1438"><span class="lineNum">    1438</span>              : </span>
-<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :                 if (family == 1) {</span></span>
-<span id="L1440"><span class="lineNum">    1440</span>              :                         // AF_INET: src(4) + dst(4) + sport(2) + dport(2) = 12 bytes minimum, may be larger with TLV extensions</span>
-<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaUNC">           0 :                         if (addr_len &lt; 12) {</span></span>
-<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 IPv4 address data too short (&quot; &lt;&lt; addr_len &lt;&lt; &quot; bytes)&quot;);</span></span>
-<span id="L1443"><span class="lineNum">    1443</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1445"><span class="lineNum">    1445</span>              : </span>
-<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaUNC">           0 :                         memcpy(m_addr.data, raw_ip::ipv4_prefix, sizeof(raw_ip::ipv4_prefix));</span></span>
-<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaUNC">           0 :                         memcpy(m_addr.data + sizeof(raw_ip::ipv4_prefix), p + 16, 4);</span></span>
-<span id="L1448"><span class="lineNum">    1448</span> <span class="tlaUNC">           0 :                         m_port = (static_cast&lt;int&gt;(p[24]) &lt;&lt; 8) | static_cast&lt;int&gt;(p[25]);</span></span>
-<span id="L1449"><span class="lineNum">    1449</span> <span class="tlaUNC">           0 :                         m_addressType = AddressType::IPv4;</span></span>
-<span id="L1450"><span class="lineNum">    1450</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1451"><span class="lineNum">    1451</span> <span class="tlaUNC">           0 :                 else if (family == 2) {</span></span>
-<span id="L1452"><span class="lineNum">    1452</span>              :                         // AF_INET6: src(16) + dst(16) + sport(2) + dport(2) = 36 bytes minimum, may be larger with TLV extensions</span>
-<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaUNC">           0 :                         if (addr_len &lt; 36) {</span></span>
-<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 IPv6 address data too short (&quot; &lt;&lt; addr_len &lt;&lt; &quot; bytes)&quot;);</span></span>
-<span id="L1455"><span class="lineNum">    1455</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
-<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L1457"><span class="lineNum">    1457</span>              : </span>
-<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaUNC">           0 :                         memcpy(m_addr.data, p + 16, 16);</span></span>
-<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaUNC">           0 :                         m_port = (static_cast&lt;int&gt;(p[48]) &lt;&lt; 8) | static_cast&lt;int&gt;(p[49]);</span></span>
-<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaUNC">           0 :                         m_addressType = AddressType::IPv6;</span></span>
-<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaUNC">           0 :                         LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 unsupported address family &quot; &lt;&lt; family);</span></span>
-<span id="L1464"><span class="lineNum">    1464</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L1465"><span class="lineNum">    1465</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1466"><span class="lineNum">    1466</span>              : </span>
-<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaUNC">           0 :                 init_addr_string();</span></span>
-<span id="L1468"><span class="lineNum">    1468</span> <span class="tlaUNC">           0 :                 LOGINFO(5, &quot;PROXY protocol v2: real address is &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
-<span id="L1469"><span class="lineNum">    1469</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1470"><span class="lineNum">    1470</span>              :         // LOCAL command (health checks): keep original address</span>
-<span id="L1471"><span class="lineNum">    1471</span>              : </span>
-<span id="L1472"><span class="lineNum">    1472</span>              :         // Move remaining data to beginning of buffer</span>
-<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :         m_numRead -= total_header_len;</span></span>
-<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaUNC">           0 :         if (m_numRead &gt; 0) {</span></span>
-<span id="L1475"><span class="lineNum">    1475</span> <span class="tlaUNC">           0 :                 memmove(m_readBuf, m_readBuf + total_header_len, m_numRead);</span></span>
-<span id="L1476"><span class="lineNum">    1476</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1423"><span class="lineNum">    1423</span> <span class="tlaUNC">           0 :         if (total_header_len &gt; m_readBufSize) {</span></span>
+<span id="L1424"><span class="lineNum">    1424</span> <span class="tlaUNC">           0 :                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 header too large (&quot; &lt;&lt; total_header_len &lt;&lt; &quot; bytes)&quot;);</span></span>
+<span id="L1425"><span class="lineNum">    1425</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1426"><span class="lineNum">    1426</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1427"><span class="lineNum">    1427</span>              : </span>
+<span id="L1428"><span class="lineNum">    1428</span>              :         // Wait for complete header</span>
+<span id="L1429"><span class="lineNum">    1429</span> <span class="tlaUNC">           0 :         if (m_numRead &lt; total_header_len) {</span></span>
+<span id="L1430"><span class="lineNum">    1430</span> <span class="tlaUNC">           0 :                 return true;</span></span>
+<span id="L1431"><span class="lineNum">    1431</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1432"><span class="lineNum">    1432</span>              : </span>
+<span id="L1433"><span class="lineNum">    1433</span>              :         // PROXY command: extract real client address</span>
+<span id="L1434"><span class="lineNum">    1434</span> <span class="tlaUNC">           0 :         if (command == 1) {</span></span>
+<span id="L1435"><span class="lineNum">    1435</span> <span class="tlaUNC">           0 :                 const uint8_t family = (family_proto &gt;&gt; 4) &amp; 0x0F;</span></span>
+<span id="L1436"><span class="lineNum">    1436</span>              : </span>
+<span id="L1437"><span class="lineNum">    1437</span> <span class="tlaUNC">           0 :                 if (family == 1) {</span></span>
+<span id="L1438"><span class="lineNum">    1438</span>              :                         // AF_INET: src(4) + dst(4) + sport(2) + dport(2) = 12 bytes minimum, may be larger with TLV extensions</span>
+<span id="L1439"><span class="lineNum">    1439</span> <span class="tlaUNC">           0 :                         if (addr_len &lt; 12) {</span></span>
+<span id="L1440"><span class="lineNum">    1440</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 IPv4 address data too short (&quot; &lt;&lt; addr_len &lt;&lt; &quot; bytes)&quot;);</span></span>
+<span id="L1441"><span class="lineNum">    1441</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1442"><span class="lineNum">    1442</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1443"><span class="lineNum">    1443</span>              : </span>
+<span id="L1444"><span class="lineNum">    1444</span> <span class="tlaUNC">           0 :                         memcpy(m_addr.data, raw_ip::ipv4_prefix, sizeof(raw_ip::ipv4_prefix));</span></span>
+<span id="L1445"><span class="lineNum">    1445</span> <span class="tlaUNC">           0 :                         memcpy(m_addr.data + sizeof(raw_ip::ipv4_prefix), p + 16, 4);</span></span>
+<span id="L1446"><span class="lineNum">    1446</span> <span class="tlaUNC">           0 :                         m_port = (static_cast&lt;int&gt;(p[24]) &lt;&lt; 8) | static_cast&lt;int&gt;(p[25]);</span></span>
+<span id="L1447"><span class="lineNum">    1447</span> <span class="tlaUNC">           0 :                         m_addressType = AddressType::IPv4;</span></span>
+<span id="L1448"><span class="lineNum">    1448</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1449"><span class="lineNum">    1449</span> <span class="tlaUNC">           0 :                 else if (family == 2) {</span></span>
+<span id="L1450"><span class="lineNum">    1450</span>              :                         // AF_INET6: src(16) + dst(16) + sport(2) + dport(2) = 36 bytes minimum, may be larger with TLV extensions</span>
+<span id="L1451"><span class="lineNum">    1451</span> <span class="tlaUNC">           0 :                         if (addr_len &lt; 36) {</span></span>
+<span id="L1452"><span class="lineNum">    1452</span> <span class="tlaUNC">           0 :                                 LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 IPv6 address data too short (&quot; &lt;&lt; addr_len &lt;&lt; &quot; bytes)&quot;);</span></span>
+<span id="L1453"><span class="lineNum">    1453</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
+<span id="L1454"><span class="lineNum">    1454</span> <span class="tlaUNC">           0 :                         }</span></span>
+<span id="L1455"><span class="lineNum">    1455</span>              : </span>
+<span id="L1456"><span class="lineNum">    1456</span> <span class="tlaUNC">           0 :                         memcpy(m_addr.data, p + 16, 16);</span></span>
+<span id="L1457"><span class="lineNum">    1457</span> <span class="tlaUNC">           0 :                         m_port = (static_cast&lt;int&gt;(p[48]) &lt;&lt; 8) | static_cast&lt;int&gt;(p[49]);</span></span>
+<span id="L1458"><span class="lineNum">    1458</span> <span class="tlaUNC">           0 :                         m_addressType = AddressType::IPv6;</span></span>
+<span id="L1459"><span class="lineNum">    1459</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1460"><span class="lineNum">    1460</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L1461"><span class="lineNum">    1461</span> <span class="tlaUNC">           0 :                         LOGWARN(4, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; PROXY protocol v2 unsupported address family &quot; &lt;&lt; family);</span></span>
+<span id="L1462"><span class="lineNum">    1462</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L1463"><span class="lineNum">    1463</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1464"><span class="lineNum">    1464</span>              : </span>
+<span id="L1465"><span class="lineNum">    1465</span> <span class="tlaUNC">           0 :                 init_addr_string();</span></span>
+<span id="L1466"><span class="lineNum">    1466</span> <span class="tlaUNC">           0 :                 LOGINFO(5, &quot;PROXY protocol v2: real address is &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString));</span></span>
+<span id="L1467"><span class="lineNum">    1467</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1468"><span class="lineNum">    1468</span>              :         // LOCAL command (health checks): keep original address</span>
+<span id="L1469"><span class="lineNum">    1469</span>              : </span>
+<span id="L1470"><span class="lineNum">    1470</span>              :         // Move remaining data to beginning of buffer</span>
+<span id="L1471"><span class="lineNum">    1471</span> <span class="tlaUNC">           0 :         m_numRead -= total_header_len;</span></span>
+<span id="L1472"><span class="lineNum">    1472</span> <span class="tlaUNC">           0 :         if (m_numRead &gt; 0) {</span></span>
+<span id="L1473"><span class="lineNum">    1473</span> <span class="tlaUNC">           0 :                 memmove(m_readBuf, m_readBuf + total_header_len, m_numRead);</span></span>
+<span id="L1474"><span class="lineNum">    1474</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1475"><span class="lineNum">    1475</span>              : </span>
+<span id="L1476"><span class="lineNum">    1476</span> <span class="tlaUNC">           0 :         m_proxyProtocolState = ProxyProtocolState::HeaderReceived;</span></span>
 <span id="L1477"><span class="lineNum">    1477</span>              : </span>
-<span id="L1478"><span class="lineNum">    1478</span> <span class="tlaUNC">           0 :         m_proxyProtocolState = ProxyProtocolState::HeaderReceived;</span></span>
-<span id="L1479"><span class="lineNum">    1479</span>              : </span>
-<span id="L1480"><span class="lineNum">    1480</span>              :         // Deferred ban check with real IP</span>
-<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaUNC">           0 :         if (m_owner-&gt;is_banned(isV6(), m_addr)) {</span></span>
-<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaUNC">           0 :                 LOGINFO(5, &quot;peer &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; is banned, disconnecting&quot;);</span></span>
-<span id="L1483"><span class="lineNum">    1483</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1485"><span class="lineNum">    1485</span>              : </span>
-<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaUNC">           0 :         if (m_owner-&gt;m_finished.load()) {</span></span>
-<span id="L1487"><span class="lineNum">    1487</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1488"><span class="lineNum">    1488</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1489"><span class="lineNum">    1489</span>              : </span>
-<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaUNC">           0 :         if (!on_connect()) {</span></span>
-<span id="L1491"><span class="lineNum">    1491</span> <span class="tlaUNC">           0 :                 return false;</span></span>
-<span id="L1492"><span class="lineNum">    1492</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1493"><span class="lineNum">    1493</span>              : </span>
-<span id="L1494"><span class="lineNum">    1494</span>              :         // Pass remaining data to the protocol handler</span>
-<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaUNC">           0 :         if (m_numRead &gt; 0) {</span></span>
-<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaUNC">           0 :                 const uint32_t nread = m_numRead;</span></span>
-<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaUNC">           0 :                 m_numRead = 0;</span></span>
-<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC">           0 :                 if (!on_read(m_readBuf, nread)) {</span></span>
-<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaUNC">           0 :                         return false;</span></span>
-<span id="L1500"><span class="lineNum">    1500</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1501"><span class="lineNum">    1501</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1502"><span class="lineNum">    1502</span>              : </span>
-<span id="L1503"><span class="lineNum">    1503</span> <span class="tlaUNC">           0 :         return true;</span></span>
-<span id="L1504"><span class="lineNum">    1504</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1505"><span class="lineNum">    1505</span>              : </span>
-<span id="L1506"><span class="lineNum">    1506</span>              : void TCPServer::Client::on_write(uv_write_t* req, int status)</span>
-<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC">           0 :         WriteBuf* buf = static_cast&lt;WriteBuf*&gt;(req-&gt;data);</span></span>
-<span id="L1509"><span class="lineNum">    1509</span> <span class="tlaUNC">           0 :         Client* client = buf-&gt;m_client;</span></span>
-<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaUNC">           0 :         TCPServer* server = client-&gt;m_owner;</span></span>
-<span id="L1511"><span class="lineNum">    1511</span>              : </span>
-<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaUNC">           0 :         if (server) {</span></span>
-<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC">           0 :                 server-&gt;return_write_buffer(buf);</span></span>
-<span id="L1514"><span class="lineNum">    1514</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaUNC">           0 :         else {</span></span>
-<span id="L1516"><span class="lineNum">    1516</span>              :                 // no server to return buf to, so just delete it</span>
-<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaUNC">           0 :                 if (buf-&gt;m_data) {</span></span>
-<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaUNC">           0 :                         free_hook(buf-&gt;m_data);</span></span>
-<span id="L1519"><span class="lineNum">    1519</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1520"><span class="lineNum">    1520</span> <span class="tlaUNC">           0 :                 delete buf;</span></span>
-<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1522"><span class="lineNum">    1522</span>              : </span>
-<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :         if (status != 0) {</span></span>
-<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; failed to write data to client connection, error &quot; &lt;&lt; uv_err_name(status));</span></span>
-<span id="L1525"><span class="lineNum">    1525</span> <span class="tlaUNC">           0 :                 client-&gt;close();</span></span>
-<span id="L1526"><span class="lineNum">    1526</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1527"><span class="lineNum">    1527</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1528"><span class="lineNum">    1528</span>              : </span>
-<span id="L1529"><span class="lineNum">    1529</span>              : void TCPServer::Client::close()</span>
-<span id="L1530"><span class="lineNum">    1530</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaUNC">           0 :         if (m_isClosing || !m_owner) {</span></span>
-<span id="L1532"><span class="lineNum">    1532</span>              :                 // Already closed</span>
-<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1534"><span class="lineNum">    1534</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :         m_isClosing = true;</span></span>
+<span id="L1478"><span class="lineNum">    1478</span>              :         // Deferred ban check with real IP</span>
+<span id="L1479"><span class="lineNum">    1479</span> <span class="tlaUNC">           0 :         if (m_owner-&gt;is_banned(isV6(), m_addr)) {</span></span>
+<span id="L1480"><span class="lineNum">    1480</span> <span class="tlaUNC">           0 :                 LOGINFO(5, &quot;peer &quot; &lt;&lt; log::Gray() &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; log::NoColor() &lt;&lt; &quot; is banned, disconnecting&quot;);</span></span>
+<span id="L1481"><span class="lineNum">    1481</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1482"><span class="lineNum">    1482</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1483"><span class="lineNum">    1483</span>              : </span>
+<span id="L1484"><span class="lineNum">    1484</span> <span class="tlaUNC">           0 :         if (m_owner-&gt;m_finished.load()) {</span></span>
+<span id="L1485"><span class="lineNum">    1485</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1486"><span class="lineNum">    1486</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1487"><span class="lineNum">    1487</span>              : </span>
+<span id="L1488"><span class="lineNum">    1488</span> <span class="tlaUNC">           0 :         if (!on_connect()) {</span></span>
+<span id="L1489"><span class="lineNum">    1489</span> <span class="tlaUNC">           0 :                 return false;</span></span>
+<span id="L1490"><span class="lineNum">    1490</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1491"><span class="lineNum">    1491</span>              : </span>
+<span id="L1492"><span class="lineNum">    1492</span>              :         // Pass remaining data to the protocol handler</span>
+<span id="L1493"><span class="lineNum">    1493</span> <span class="tlaUNC">           0 :         if (m_numRead &gt; 0) {</span></span>
+<span id="L1494"><span class="lineNum">    1494</span> <span class="tlaUNC">           0 :                 const uint32_t nread = m_numRead;</span></span>
+<span id="L1495"><span class="lineNum">    1495</span> <span class="tlaUNC">           0 :                 m_numRead = 0;</span></span>
+<span id="L1496"><span class="lineNum">    1496</span> <span class="tlaUNC">           0 :                 if (!on_read(m_readBuf, nread)) {</span></span>
+<span id="L1497"><span class="lineNum">    1497</span> <span class="tlaUNC">           0 :                         return false;</span></span>
+<span id="L1498"><span class="lineNum">    1498</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1499"><span class="lineNum">    1499</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1500"><span class="lineNum">    1500</span>              : </span>
+<span id="L1501"><span class="lineNum">    1501</span> <span class="tlaUNC">           0 :         return true;</span></span>
+<span id="L1502"><span class="lineNum">    1502</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1503"><span class="lineNum">    1503</span>              : </span>
+<span id="L1504"><span class="lineNum">    1504</span>              : void TCPServer::Client::on_write(uv_write_t* req, int status)</span>
+<span id="L1505"><span class="lineNum">    1505</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1506"><span class="lineNum">    1506</span> <span class="tlaUNC">           0 :         WriteBuf* buf = static_cast&lt;WriteBuf*&gt;(req-&gt;data);</span></span>
+<span id="L1507"><span class="lineNum">    1507</span> <span class="tlaUNC">           0 :         Client* client = buf-&gt;m_client;</span></span>
+<span id="L1508"><span class="lineNum">    1508</span> <span class="tlaUNC">           0 :         TCPServer* server = client-&gt;m_owner;</span></span>
+<span id="L1509"><span class="lineNum">    1509</span>              : </span>
+<span id="L1510"><span class="lineNum">    1510</span> <span class="tlaUNC">           0 :         if (server) {</span></span>
+<span id="L1511"><span class="lineNum">    1511</span> <span class="tlaUNC">           0 :                 server-&gt;return_write_buffer(buf);</span></span>
+<span id="L1512"><span class="lineNum">    1512</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1513"><span class="lineNum">    1513</span> <span class="tlaUNC">           0 :         else {</span></span>
+<span id="L1514"><span class="lineNum">    1514</span>              :                 // no server to return buf to, so just delete it</span>
+<span id="L1515"><span class="lineNum">    1515</span> <span class="tlaUNC">           0 :                 if (buf-&gt;m_data) {</span></span>
+<span id="L1516"><span class="lineNum">    1516</span> <span class="tlaUNC">           0 :                         free_hook(buf-&gt;m_data);</span></span>
+<span id="L1517"><span class="lineNum">    1517</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1518"><span class="lineNum">    1518</span> <span class="tlaUNC">           0 :                 delete buf;</span></span>
+<span id="L1519"><span class="lineNum">    1519</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1520"><span class="lineNum">    1520</span>              : </span>
+<span id="L1521"><span class="lineNum">    1521</span> <span class="tlaUNC">           0 :         if (status != 0) {</span></span>
+<span id="L1522"><span class="lineNum">    1522</span> <span class="tlaUNC">           0 :                 LOGWARN(5, &quot;client &quot; &lt;&lt; static_cast&lt;const char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; failed to write data to client connection, error &quot; &lt;&lt; uv_err_name(status));</span></span>
+<span id="L1523"><span class="lineNum">    1523</span> <span class="tlaUNC">           0 :                 client-&gt;close();</span></span>
+<span id="L1524"><span class="lineNum">    1524</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1525"><span class="lineNum">    1525</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1526"><span class="lineNum">    1526</span>              : </span>
+<span id="L1527"><span class="lineNum">    1527</span>              : void TCPServer::Client::close()</span>
+<span id="L1528"><span class="lineNum">    1528</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1529"><span class="lineNum">    1529</span> <span class="tlaUNC">           0 :         if (m_isClosing || !m_owner) {</span></span>
+<span id="L1530"><span class="lineNum">    1530</span>              :                 // Already closed</span>
+<span id="L1531"><span class="lineNum">    1531</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1532"><span class="lineNum">    1532</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1533"><span class="lineNum">    1533</span> <span class="tlaUNC">           0 :         m_isClosing = true;</span></span>
+<span id="L1534"><span class="lineNum">    1534</span>              : </span>
+<span id="L1535"><span class="lineNum">    1535</span> <span class="tlaUNC">           0 :         m_owner-&gt;check_event_loop_thread(__func__);</span></span>
 <span id="L1536"><span class="lineNum">    1536</span>              : </span>
-<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaUNC">           0 :         m_owner-&gt;check_event_loop_thread(__func__);</span></span>
+<span id="L1537"><span class="lineNum">    1537</span> <span class="tlaUNC">           0 :         uv_read_stop(reinterpret_cast&lt;uv_stream_t*&gt;(&amp;m_socket));</span></span>
 <span id="L1538"><span class="lineNum">    1538</span>              : </span>
-<span id="L1539"><span class="lineNum">    1539</span> <span class="tlaUNC">           0 :         uv_read_stop(reinterpret_cast&lt;uv_stream_t*&gt;(&amp;m_socket));</span></span>
-<span id="L1540"><span class="lineNum">    1540</span>              : </span>
-<span id="L1541"><span class="lineNum">    1541</span> <span class="tlaUNC">           0 :         uv_tcp_t* s = &amp;m_socket;</span></span>
-<span id="L1542"><span class="lineNum">    1542</span> <span class="tlaUNC">           0 :         uv_handle_t* h = reinterpret_cast&lt;uv_handle_t*&gt;(s);</span></span>
-<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaUNC">           0 :         if (!uv_is_closing(h)) {</span></span>
-<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaUNC">           0 :                 uv_close(h, on_connection_close);</span></span>
-<span id="L1545"><span class="lineNum">    1545</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1546"><span class="lineNum">    1546</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1547"><span class="lineNum">    1547</span>              : </span>
-<span id="L1548"><span class="lineNum">    1548</span>              : void TCPServer::Client::ban(uint64_t seconds)</span>
-<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaUNC">           0 :         if (m_addr.is_localhost()) {</span></span>
-<span id="L1551"><span class="lineNum">    1551</span> <span class="tlaUNC">           0 :                 return;</span></span>
-<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1553"><span class="lineNum">    1553</span>              : </span>
-<span id="L1554"><span class="lineNum">    1554</span> <span class="tlaUNC">           0 :         if (m_owner) {</span></span>
-<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; banned for &quot; &lt;&lt; seconds &lt;&lt; &quot; seconds&quot;);</span></span>
-<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaUNC">           0 :                 m_owner-&gt;ban(isV6(), m_addr, seconds);</span></span>
-<span id="L1557"><span class="lineNum">    1557</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1558"><span class="lineNum">    1558</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1559"><span class="lineNum">    1559</span>              : </span>
-<span id="L1560"><span class="lineNum">    1560</span>              : void TCPServer::Client::init_addr_string()</span>
-<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1562"><span class="lineNum">    1562</span> <span class="tlaUNC">           0 :         const char* addr_str;</span></span>
-<span id="L1563"><span class="lineNum">    1563</span> <span class="tlaUNC">           0 :         char addr_str_buf[64];</span></span>
-<span id="L1564"><span class="lineNum">    1564</span>              : </span>
-<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaUNC">           0 :         if (isV6()) {</span></span>
-<span id="L1566"><span class="lineNum">    1566</span> <span class="tlaUNC">           0 :                 addr_str = inet_ntop(AF_INET6, m_addr.data, addr_str_buf, sizeof(addr_str_buf));</span></span>
-<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaUNC">           0 :         else {</span></span>
-<span id="L1569"><span class="lineNum">    1569</span> <span class="tlaUNC">           0 :                 addr_str = inet_ntop(AF_INET, m_addr.data + sizeof(raw_ip::ipv4_prefix), addr_str_buf, sizeof(addr_str_buf));</span></span>
-<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1571"><span class="lineNum">    1571</span>              : </span>
-<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaUNC">           0 :         if (addr_str) {</span></span>
-<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaUNC">           0 :                 size_t n = strlen(addr_str);</span></span>
-<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaUNC">           0 :                 if (n &gt; sizeof(m_addrString) - 16) {</span></span>
-<span id="L1575"><span class="lineNum">    1575</span> <span class="tlaUNC">           0 :                         n = sizeof(m_addrString) - 16;</span></span>
-<span id="L1576"><span class="lineNum">    1576</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1577"><span class="lineNum">    1577</span>              : </span>
-<span id="L1578"><span class="lineNum">    1578</span> <span class="tlaUNC">           0 :                 log::Stream s(m_addrString);</span></span>
-<span id="L1579"><span class="lineNum">    1579</span> <span class="tlaUNC">           0 :                 if (isV6()) {</span></span>
-<span id="L1580"><span class="lineNum">    1580</span> <span class="tlaUNC">           0 :                         s &lt;&lt; '[' &lt;&lt; log::const_buf(addr_str, n) &lt;&lt; &quot;]:&quot; &lt;&lt; m_port &lt;&lt; '\0';</span></span>
-<span id="L1581"><span class="lineNum">    1581</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1582"><span class="lineNum">    1582</span> <span class="tlaUNC">           0 :                 else {</span></span>
-<span id="L1583"><span class="lineNum">    1583</span> <span class="tlaUNC">           0 :                         s &lt;&lt; log::const_buf(addr_str, n) &lt;&lt; ':' &lt;&lt; m_port &lt;&lt; '\0';</span></span>
-<span id="L1584"><span class="lineNum">    1584</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L1585"><span class="lineNum">    1585</span> <span class="tlaUNC">           0 :         }</span></span>
-<span id="L1586"><span class="lineNum">    1586</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1587"><span class="lineNum">    1587</span>              : </span>
-<span id="L1588"><span class="lineNum">    1588</span>              : void TCPServer::Client::asan_poison_this() const</span>
-<span id="L1589"><span class="lineNum">    1589</span> <span class="tlaUNC">           0 : {</span></span>
-<span id="L1590"><span class="lineNum">    1590</span>              : #ifdef P2POOL_ASAN</span>
-<span id="L1591"><span class="lineNum">    1591</span>              :         const uint8_t* begin = reinterpret_cast&lt;const uint8_t*&gt;(this);</span>
-<span id="L1592"><span class="lineNum">    1592</span>              :         const uint8_t* counter_begin = reinterpret_cast&lt;const uint8_t*&gt;(&amp;m_resetCounter);</span>
-<span id="L1593"><span class="lineNum">    1593</span>              :         const uint8_t* counter_end = counter_begin + sizeof(m_resetCounter);</span>
-<span id="L1594"><span class="lineNum">    1594</span>              :         const uint8_t* end = begin + get_size();</span>
-<span id="L1595"><span class="lineNum">    1595</span>              : </span>
-<span id="L1596"><span class="lineNum">    1596</span>              :         ASAN_POISON_MEMORY_REGION(begin, counter_begin - begin);</span>
-<span id="L1597"><span class="lineNum">    1597</span>              :         ASAN_POISON_MEMORY_REGION(counter_end, end - counter_end);</span>
-<span id="L1598"><span class="lineNum">    1598</span>              : #endif</span>
-<span id="L1599"><span class="lineNum">    1599</span> <span class="tlaUNC">           0 : }</span></span>
-<span id="L1600"><span class="lineNum">    1600</span>              : </span>
-<span id="L1601"><span class="lineNum">    1601</span>              : } // namespace p2pool</span>
+<span id="L1539"><span class="lineNum">    1539</span> <span class="tlaUNC">           0 :         uv_tcp_t* s = &amp;m_socket;</span></span>
+<span id="L1540"><span class="lineNum">    1540</span> <span class="tlaUNC">           0 :         uv_handle_t* h = reinterpret_cast&lt;uv_handle_t*&gt;(s);</span></span>
+<span id="L1541"><span class="lineNum">    1541</span> <span class="tlaUNC">           0 :         if (!uv_is_closing(h)) {</span></span>
+<span id="L1542"><span class="lineNum">    1542</span> <span class="tlaUNC">           0 :                 uv_close(h, on_connection_close);</span></span>
+<span id="L1543"><span class="lineNum">    1543</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1544"><span class="lineNum">    1544</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1545"><span class="lineNum">    1545</span>              : </span>
+<span id="L1546"><span class="lineNum">    1546</span>              : void TCPServer::Client::ban(uint64_t seconds)</span>
+<span id="L1547"><span class="lineNum">    1547</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1548"><span class="lineNum">    1548</span> <span class="tlaUNC">           0 :         if (m_addr.is_localhost()) {</span></span>
+<span id="L1549"><span class="lineNum">    1549</span> <span class="tlaUNC">           0 :                 return;</span></span>
+<span id="L1550"><span class="lineNum">    1550</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1551"><span class="lineNum">    1551</span>              : </span>
+<span id="L1552"><span class="lineNum">    1552</span> <span class="tlaUNC">           0 :         if (m_owner) {</span></span>
+<span id="L1553"><span class="lineNum">    1553</span> <span class="tlaUNC">           0 :                 LOGWARN(3, &quot;peer &quot; &lt;&lt; static_cast&lt;char*&gt;(m_addrString) &lt;&lt; &quot; banned for &quot; &lt;&lt; seconds &lt;&lt; &quot; seconds&quot;);</span></span>
+<span id="L1554"><span class="lineNum">    1554</span> <span class="tlaUNC">           0 :                 m_owner-&gt;ban(isV6(), m_addr, seconds);</span></span>
+<span id="L1555"><span class="lineNum">    1555</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1556"><span class="lineNum">    1556</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1557"><span class="lineNum">    1557</span>              : </span>
+<span id="L1558"><span class="lineNum">    1558</span>              : void TCPServer::Client::init_addr_string()</span>
+<span id="L1559"><span class="lineNum">    1559</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1560"><span class="lineNum">    1560</span> <span class="tlaUNC">           0 :         const char* addr_str;</span></span>
+<span id="L1561"><span class="lineNum">    1561</span> <span class="tlaUNC">           0 :         char addr_str_buf[64];</span></span>
+<span id="L1562"><span class="lineNum">    1562</span>              : </span>
+<span id="L1563"><span class="lineNum">    1563</span> <span class="tlaUNC">           0 :         if (isV6()) {</span></span>
+<span id="L1564"><span class="lineNum">    1564</span> <span class="tlaUNC">           0 :                 addr_str = inet_ntop(AF_INET6, m_addr.data, addr_str_buf, sizeof(addr_str_buf));</span></span>
+<span id="L1565"><span class="lineNum">    1565</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1566"><span class="lineNum">    1566</span> <span class="tlaUNC">           0 :         else {</span></span>
+<span id="L1567"><span class="lineNum">    1567</span> <span class="tlaUNC">           0 :                 addr_str = inet_ntop(AF_INET, m_addr.data + sizeof(raw_ip::ipv4_prefix), addr_str_buf, sizeof(addr_str_buf));</span></span>
+<span id="L1568"><span class="lineNum">    1568</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1569"><span class="lineNum">    1569</span>              : </span>
+<span id="L1570"><span class="lineNum">    1570</span> <span class="tlaUNC">           0 :         if (addr_str) {</span></span>
+<span id="L1571"><span class="lineNum">    1571</span> <span class="tlaUNC">           0 :                 size_t n = strlen(addr_str);</span></span>
+<span id="L1572"><span class="lineNum">    1572</span> <span class="tlaUNC">           0 :                 if (n &gt; sizeof(m_addrString) - 16) {</span></span>
+<span id="L1573"><span class="lineNum">    1573</span> <span class="tlaUNC">           0 :                         n = sizeof(m_addrString) - 16;</span></span>
+<span id="L1574"><span class="lineNum">    1574</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1575"><span class="lineNum">    1575</span>              : </span>
+<span id="L1576"><span class="lineNum">    1576</span> <span class="tlaUNC">           0 :                 log::Stream s(m_addrString);</span></span>
+<span id="L1577"><span class="lineNum">    1577</span> <span class="tlaUNC">           0 :                 if (isV6()) {</span></span>
+<span id="L1578"><span class="lineNum">    1578</span> <span class="tlaUNC">           0 :                         s &lt;&lt; '[' &lt;&lt; log::const_buf(addr_str, n) &lt;&lt; &quot;]:&quot; &lt;&lt; m_port &lt;&lt; '\0';</span></span>
+<span id="L1579"><span class="lineNum">    1579</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1580"><span class="lineNum">    1580</span> <span class="tlaUNC">           0 :                 else {</span></span>
+<span id="L1581"><span class="lineNum">    1581</span> <span class="tlaUNC">           0 :                         s &lt;&lt; log::const_buf(addr_str, n) &lt;&lt; ':' &lt;&lt; m_port &lt;&lt; '\0';</span></span>
+<span id="L1582"><span class="lineNum">    1582</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L1583"><span class="lineNum">    1583</span> <span class="tlaUNC">           0 :         }</span></span>
+<span id="L1584"><span class="lineNum">    1584</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1585"><span class="lineNum">    1585</span>              : </span>
+<span id="L1586"><span class="lineNum">    1586</span>              : void TCPServer::Client::asan_poison_this() const</span>
+<span id="L1587"><span class="lineNum">    1587</span> <span class="tlaUNC">           0 : {</span></span>
+<span id="L1588"><span class="lineNum">    1588</span>              : #ifdef P2POOL_ASAN</span>
+<span id="L1589"><span class="lineNum">    1589</span>              :         const uint8_t* begin = reinterpret_cast&lt;const uint8_t*&gt;(this);</span>
+<span id="L1590"><span class="lineNum">    1590</span>              :         const uint8_t* counter_begin = reinterpret_cast&lt;const uint8_t*&gt;(&amp;m_resetCounter);</span>
+<span id="L1591"><span class="lineNum">    1591</span>              :         const uint8_t* counter_end = counter_begin + sizeof(m_resetCounter);</span>
+<span id="L1592"><span class="lineNum">    1592</span>              :         const uint8_t* end = begin + get_size();</span>
+<span id="L1593"><span class="lineNum">    1593</span>              : </span>
+<span id="L1594"><span class="lineNum">    1594</span>              :         ASAN_POISON_MEMORY_REGION(begin, counter_begin - begin);</span>
+<span id="L1595"><span class="lineNum">    1595</span>              :         ASAN_POISON_MEMORY_REGION(counter_end, end - counter_end);</span>
+<span id="L1596"><span class="lineNum">    1596</span>              : #endif</span>
+<span id="L1597"><span class="lineNum">    1597</span> <span class="tlaUNC">           0 : }</span></span>
+<span id="L1598"><span class="lineNum">    1598</span>              : </span>
+<span id="L1599"><span class="lineNum">    1599</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
