@@ -32,12 +32,12 @@
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntryHi">95.6&nbsp;%</td>
-            <td class="headerCovTableEntry">386</td>
-            <td class="headerCovTableEntry">369</td>
+            <td class="headerCovTableEntry">387</td>
+            <td class="headerCovTableEntry">370</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-09 08:27:59</td>
+            <td class="headerValue">2026-09-09 11:00:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -589,50 +589,52 @@
 <span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">           5 : }</span></span>
 <span id="L528"><span class="lineNum">     528</span>              : </span>
 <span id="L529"><span class="lineNum">     529</span>              : hash PoolBlock::calculate_genesis_tx_key_seed(const hash&amp; consensus_hash) const</span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">          39 : {</span></span>
-<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">          39 :         if (m_majorVersion &gt;= HARDFORK_VERSION_CARROT) {</span></span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">          22 :                 using namespace carrot;</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">          94 : {</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">          94 :         if (m_majorVersion &gt;= HARDFORK_VERSION_CARROT) {</span></span>
+<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">          67 :                 using namespace carrot;</span></span>
 <span id="L533"><span class="lineNum">     533</span>              : </span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">          22 :                 auto t = transcript(</span></span>
-<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">          22 :                         &quot;P2Pool tx key seed&quot;,</span></span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">          22 :                         m_txinGenHeight,</span></span>
-<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">          22 :                         consensus_hash</span></span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">          22 :                 );</span></span>
-<span id="L539"><span class="lineNum">     539</span>              : </span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">          22 :                 hash result{};</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">          22 :                 hash_to_bytes(t.data(), t.size(), result.h, HASH_SIZE);</span></span>
-<span id="L542"><span class="lineNum">     542</span>              : </span>
-<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">          22 :                 return result;</span></span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">          22 :         }</span></span>
-<span id="L545"><span class="lineNum">     545</span>              : </span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">          17 :         return consensus_hash;</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">          39 : }</span></span>
-<span id="L548"><span class="lineNum">     548</span>              : </span>
-<span id="L549"><span class="lineNum">     549</span>              : hash PoolBlock::calculate_tx_key_seed() const</span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">        3245 : {</span></span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">        3245 :         const char domain[] = &quot;tx_key_seed&quot;;</span></span>
-<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">        3245 :         const uint32_t zero = 0;</span></span>
-<span id="L553"><span class="lineNum">     553</span>              : </span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">        3245 :         const std::vector&lt;uint8_t&gt; mainchain_data = serialize_mainchain_data(nullptr, &amp;zero, &amp;zero);</span></span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">        3245 :         const std::vector&lt;uint8_t&gt; sidechain_data = serialize_sidechain_data();</span></span>
-<span id="L556"><span class="lineNum">     556</span>              : </span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">        3245 :         hash result;</span></span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">    31368752 :         keccak_custom([&amp;domain, &amp;mainchain_data, &amp;sidechain_data](int offset) -&gt; uint8_t {</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">    31368752 :                 size_t k = offset;</span></span>
-<span id="L560"><span class="lineNum">     560</span>              : </span>
-<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">    31368752 :                 if (k &lt; sizeof(domain)) return domain[k];</span></span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">    31329812 :                 k -= sizeof(domain);</span></span>
-<span id="L563"><span class="lineNum">     563</span>              : </span>
-<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">    31329812 :                 if (k &lt; mainchain_data.size()) return mainchain_data[k];</span></span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">      733234 :                 k -= mainchain_data.size();</span></span>
-<span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">      733234 :                 return sidechain_data[k];</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">    31329812 :         }, static_cast&lt;int&gt;(sizeof(domain) + mainchain_data.size() + sidechain_data.size()), result.h, HASH_SIZE);</span></span>
-<span id="L569"><span class="lineNum">     569</span>              : </span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">        3245 :         return result;</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">        3245 : }</span></span>
-<span id="L572"><span class="lineNum">     572</span>              : </span>
-<span id="L573"><span class="lineNum">     573</span>              : } // namespace p2pool</span>
+<span id="L534"><span class="lineNum">     534</span>              :                 // tx key seed changes when the previous Monero block id changes, so make genesis tx key seed follow this rule too.</span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">          67 :                 auto t = transcript(</span></span>
+<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">          67 :                         &quot;P2Pool tx key seed&quot;,</span></span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">          67 :                         consensus_hash,</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">          67 :                         m_txinGenHeight,</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">          67 :                         m_prevId</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">          67 :                 );</span></span>
+<span id="L541"><span class="lineNum">     541</span>              : </span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">          67 :                 hash result{};</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">          67 :                 hash_to_bytes(t.data(), t.size(), result.h, HASH_SIZE);</span></span>
+<span id="L544"><span class="lineNum">     544</span>              : </span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">          67 :                 return result;</span></span>
+<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">          67 :         }</span></span>
+<span id="L547"><span class="lineNum">     547</span>              : </span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">          27 :         return consensus_hash;</span></span>
+<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">          94 : }</span></span>
+<span id="L550"><span class="lineNum">     550</span>              : </span>
+<span id="L551"><span class="lineNum">     551</span>              : hash PoolBlock::calculate_tx_key_seed() const</span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">        3245 : {</span></span>
+<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">        3245 :         const char domain[] = &quot;tx_key_seed&quot;;</span></span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">        3245 :         const uint32_t zero = 0;</span></span>
+<span id="L555"><span class="lineNum">     555</span>              : </span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">        3245 :         const std::vector&lt;uint8_t&gt; mainchain_data = serialize_mainchain_data(nullptr, &amp;zero, &amp;zero);</span></span>
+<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">        3245 :         const std::vector&lt;uint8_t&gt; sidechain_data = serialize_sidechain_data();</span></span>
+<span id="L558"><span class="lineNum">     558</span>              : </span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">        3245 :         hash result;</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">    31368752 :         keccak_custom([&amp;domain, &amp;mainchain_data, &amp;sidechain_data](int offset) -&gt; uint8_t {</span></span>
+<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">    31368752 :                 size_t k = offset;</span></span>
+<span id="L562"><span class="lineNum">     562</span>              : </span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">    31368752 :                 if (k &lt; sizeof(domain)) return domain[k];</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">    31329812 :                 k -= sizeof(domain);</span></span>
+<span id="L565"><span class="lineNum">     565</span>              : </span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">    31329812 :                 if (k &lt; mainchain_data.size()) return mainchain_data[k];</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">      733234 :                 k -= mainchain_data.size();</span></span>
+<span id="L568"><span class="lineNum">     568</span>              : </span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">      733234 :                 return sidechain_data[k];</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">    31329812 :         }, static_cast&lt;int&gt;(sizeof(domain) + mainchain_data.size() + sidechain_data.size()), result.h, HASH_SIZE);</span></span>
+<span id="L571"><span class="lineNum">     571</span>              : </span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">        3245 :         return result;</span></span>
+<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">        3245 : }</span></span>
+<span id="L574"><span class="lineNum">     574</span>              : </span>
+<span id="L575"><span class="lineNum">     575</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

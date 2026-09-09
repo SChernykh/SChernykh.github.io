@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-09 08:27:59</td>
+            <td class="headerValue">2026-09-09 11:00:09</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -410,7 +410,7 @@
 <span id="L348"><span class="lineNum">     348</span>              : </span>
 <span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           8 :                                 const hash expected_seed = genesis</span></span>
 <span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">           8 :                                         ? (change_prev_id ? genesis-&gt;calculate_tx_key_seed() : genesis-&gt;m_txkeySecSeed)</span></span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">           8 :                                         : ((version &lt; HARDFORK_VERSION_CARROT) ? sidechain.consensus_hash() : H(&quot;552595497b5127e52686d9a534252a7d6bea5cfa1d101734ba6849541fb828d5&quot;));</span></span>
+<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">           8 :                                         : ((version &lt; HARDFORK_VERSION_CARROT) ? sidechain.consensus_hash() : H(&quot;0206fa01e57831c64ec64607664e9b53753035c508a7d76358951440ef8d5c5d&quot;));</span></span>
 <span id="L352"><span class="lineNum">     352</span>              : </span>
 <span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">           8 :                                 ASSERT_EQ(b-&gt;m_txkeySecSeed, expected_seed);</span></span>
 <span id="L354"><span class="lineNum">     354</span>              : </span>
