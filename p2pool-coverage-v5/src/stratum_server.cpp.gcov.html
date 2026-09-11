@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-11 08:20:55</td>
+            <td class="headerValue">2026-09-11 12:24:02</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -507,7 +507,7 @@
 <span id="L445"><span class="lineNum">     445</span> <span class="tlaUNC">           0 :                                         LOGWARN(4, &quot;client &quot; &lt;&lt; static_cast&lt;char*&gt;(client-&gt;m_addrString) &lt;&lt; &quot; invalid params ('commitment' is not a hex value)&quot;);</span></span>
 <span id="L446"><span class="lineNum">     446</span> <span class="tlaUNC">           0 :                                         return false;</span></span>
 <span id="L447"><span class="lineNum">     447</span> <span class="tlaUNC">           0 :                                 }</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC">           0 :                                 commitment.h[i / 2] = (commitment.h[i / 2] &lt;&lt; 4) + d;</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaUNC">           0 :                                 commitment.h[i / 2] = static_cast&lt;uint8_t&gt;((commitment.h[i / 2] &lt;&lt; 4) + d);</span></span>
 <span id="L449"><span class="lineNum">     449</span> <span class="tlaUNC">           0 :                         }</span></span>
 <span id="L450"><span class="lineNum">     450</span>              : </span>
 <span id="L451"><span class="lineNum">     451</span> <span class="tlaUNC">           0 :                         if (commitment.empty()) {</span></span>
