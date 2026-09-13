@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-12 12:22:13</td>
+            <td class="headerValue">2026-09-13 11:33:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1318,7 +1318,7 @@
 <span id="L1256"><span class="lineNum">    1256</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1257"><span class="lineNum">    1257</span> <span class="tlaUNC">           0 :         m_blockTemplate-&gt;update(data, *m_mempool, m_params);</span></span>
 <span id="L1258"><span class="lineNum">    1258</span> <span class="tlaUNC">           0 :         stratum_on_block();</span></span>
-<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :         api_update_pool_stats();</span></span>
+<span id="L1259"><span class="lineNum">    1259</span> <span class="tlaUNC">           0 :         api_update_pool_stats(m_blockTemplate-&gt;get_bottom_height());</span></span>
 <span id="L1260"><span class="lineNum">    1260</span>              : </span>
 <span id="L1261"><span class="lineNum">    1261</span>              : #if defined(WITH_RANDOMX) &amp;&amp; !defined(P2POOL_UNIT_TESTS)</span>
 <span id="L1262"><span class="lineNum">    1262</span>              :         if (m_isAlternativeBlock.exchange(false)) {</span>
@@ -2027,15 +2027,15 @@
 <span id="L1965"><span class="lineNum">    1965</span> <span class="tlaUNC">           0 :         api_update_stats_mod();</span></span>
 <span id="L1966"><span class="lineNum">    1966</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1967"><span class="lineNum">    1967</span>              : </span>
-<span id="L1968"><span class="lineNum">    1968</span>              : void p2pool::api_update_pool_stats()</span>
+<span id="L1968"><span class="lineNum">    1968</span>              : void p2pool::api_update_pool_stats(uint64_t bottom_height)</span>
 <span id="L1969"><span class="lineNum">    1969</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L1970"><span class="lineNum">    1970</span> <span class="tlaUNC">           0 :         if (!m_api || m_stopped) {</span></span>
 <span id="L1971"><span class="lineNum">    1971</span> <span class="tlaUNC">           0 :                 return;</span></span>
 <span id="L1972"><span class="lineNum">    1972</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1973"><span class="lineNum">    1973</span>              : </span>
 <span id="L1974"><span class="lineNum">    1974</span> <span class="tlaUNC">           0 :         const PoolBlock* tip = m_sideChain-&gt;chainTip();</span></span>
-<span id="L1975"><span class="lineNum">    1975</span> <span class="tlaUNC">           0 :         const uint64_t bottom_height = m_sideChain-&gt;get_bottom_height(tip);</span></span>
-<span id="L1976"><span class="lineNum">    1976</span> <span class="tlaUNC">           0 :         const uint64_t pplns_window_size = (tip &amp;&amp; bottom_height) ? (tip-&gt;m_sidechainHeight - bottom_height + 1U) : m_sideChain-&gt;chain_window_size();</span></span>
+<span id="L1975"><span class="lineNum">    1975</span> <span class="tlaUNC">           0 :         const bool is_carrot = tip &amp;&amp; (tip-&gt;m_majorVersion &gt;= HARDFORK_VERSION_CARROT);</span></span>
+<span id="L1976"><span class="lineNum">    1976</span> <span class="tlaUNC">           0 :         const uint64_t pplns_window_size = (tip &amp;&amp; bottom_height) ? (tip-&gt;m_sidechainHeight - bottom_height + (is_carrot ? 1U : 2U)) : m_sideChain-&gt;chain_window_size();</span></span>
 <span id="L1977"><span class="lineNum">    1977</span>              : </span>
 <span id="L1978"><span class="lineNum">    1978</span> <span class="tlaUNC">           0 :         uint64_t t;</span></span>
 <span id="L1979"><span class="lineNum">    1979</span> <span class="tlaUNC">           0 :         const difficulty_type diff = m_sideChain-&gt;difficulty();</span></span>

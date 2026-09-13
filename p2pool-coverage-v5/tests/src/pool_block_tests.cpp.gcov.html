@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-12 12:22:13</td>
+            <td class="headerValue">2026-09-13 11:33:24</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -351,588 +351,589 @@
 <span id="L289"><span class="lineNum">     289</span>              : </span>
 <span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">           1 :         std::vector&lt;Wallet&gt; mining_wallets;</span></span>
 <span id="L291"><span class="lineNum">     291</span>              : </span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">           1 :         constexpr uint64_t payouts[4][4] = {</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 :                 { 600123456789ULL, 0, 0, 0 },</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           1 :                 { 300061728394ULL, 300061728395ULL, 0, 0 },</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">           1 :                 { 200041152263ULL, 200041152263ULL, 200041152263ULL, 0 },</span></span>
-<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 :                 { 150030864197ULL, 150030864197ULL, 150030864197ULL, 150030864198ULL },</span></span>
-<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           1 :         };</span></span>
-<span id="L298"><span class="lineNum">     298</span>              : </span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           1 :         std::ifstream ancestors(&quot;block_carrot_ancestors.dat&quot;, std::ios::binary);</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(ancestors.is_open());</span></span>
-<span id="L301"><span class="lineNum">     301</span>              : </span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           1 :         const struct {</span></span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :                 size_t main_size;</span></span>
-<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           1 :                 size_t pruned_size;</span></span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           1 :                 size_t compact_size;</span></span>
-<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           1 :                 size_t compact_unpruned_size;</span></span>
-<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           1 :                 hash sidechain_id;</span></span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           1 :                 hash coinbase_hash;</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           1 :                 const char* hashing_blob;</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">           1 :         } expected[] = {</span></span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           1 :                 { 4396, 5085, 0, 0, H(&quot;93efc370237e5fb59c843de5f392fa81179751564175e5bd13e42a677edef309&quot;), H(&quot;1010e11212434d2dd5dfb6c583fde95eccdba044abdde54b836a9afd0ef04fd1&quot;), &quot;111280cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a8978563412763dab04b71117f54717cc5ae4770044882c2808900f080fccff667ec2c124398301&quot; },</span></span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           1 :                 { 4487, 5085, 1058, 1200, H(&quot;f684f17f495537f5c51267d470d9e439256c03ae4bf730f9e9bb4e0bd36d31fe&quot;), H(&quot;281c62920c6cb7a86433b0a3bbaf976abcffdc01428da688df97f99bdae4b017&quot;), &quot;11128acae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a89795634122525a023fc3bfc9e6fa1df29e807659516c603284915bd4f9f1eb7ea6d7db1a58301&quot; },</span></span>
-<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           1 :                 { 4578, 5087, 1060, 1291, H(&quot;24e0f76cc6f3fb5d8b0b65325840ff028f7b469ff359593fa5674c48866228d7&quot;), H(&quot;92af2b5a6aa9a565ba2c690f2d1e24493ccf14ee77743b4711447efe6f2ee4bd&quot;), &quot;111294cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897a563412ea4383bc6240f6f768ca0624d45eeb74707eec0f6c627c131ee5aefc13cbf1b28301&quot; },</span></span>
-<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">           1 :                 { 4668, 5088, 1093, 1413, H(&quot;02e59e68d6f93de80c7ad1ef87ea2176ec72e9d87e85e9ce1d6a13d45b46e4e0&quot;), H(&quot;30a52c02ec8a5f28cb1befd3eb5f0e17fef76f547e99fe55d17c17807f0c195c&quot;), &quot;11129ecae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897b5634124546233526abde1bc0bf486f96f9d2af0abbc7cc7a6fb26225bee4668c09621b8301&quot; },</span></span>
-<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 :         };</span></span>
-<span id="L316"><span class="lineNum">     316</span>              : </span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           1 :         PoolBlock decoded;</span></span>
-<span id="L318"><span class="lineNum">     318</span>              : </span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           5 :         for (size_t i = 0; i &lt; 4; ++i) {</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           4 :                 SCOPED_TRACE(i);</span></span>
-<span id="L321"><span class="lineNum">     321</span>              : </span>
-<span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">           4 :                 std::vector&lt;uint8_t&gt; buf;</span></span>
-<span id="L323"><span class="lineNum">     323</span>              : </span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaGNC">           4 :                 if (i &lt; 3) {</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           3 :                         uint32_t size;</span></span>
-<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">           3 :                         ancestors.read(reinterpret_cast&lt;char*&gt;(&amp;size), sizeof(size));</span></span>
-<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           3 :                         ASSERT_TRUE(ancestors.good());</span></span>
-<span id="L328"><span class="lineNum">     328</span>              : </span>
-<span id="L329"><span class="lineNum">     329</span> <span class="tlaGNC">           3 :                         ASSERT_GT(size, 0U);</span></span>
-<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           3 :                         ASSERT_LE(size, MAX_BLOCK_SIZE_NEW);</span></span>
-<span id="L331"><span class="lineNum">     331</span>              : </span>
-<span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">           3 :                         buf.resize(size);</span></span>
-<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           3 :                         ancestors.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
-<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">           3 :                         ASSERT_TRUE(ancestors.good());</span></span>
-<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">           3 :                 }</span></span>
-<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">           1 :                 else {</span></span>
-<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">           1 :                         std::ifstream f(&quot;block_carrot.dat&quot;, std::ios::binary | std::ios::ate);</span></span>
-<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">           1 :                         ASSERT_TRUE(f.is_open());</span></span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">           1 :                         ASSERT_GT(f.tellg(), 0);</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">           1 :                         ASSERT_LE(static_cast&lt;uint64_t&gt;(f.tellg()), MAX_BLOCK_SIZE_NEW);</span></span>
-<span id="L341"><span class="lineNum">     341</span>              : </span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">           1 :                         buf.resize(static_cast&lt;size_t&gt;(f.tellg()));</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">           1 :                         f.seekg(0);</span></span>
-<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">           1 :                         f.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
-<span id="L345"><span class="lineNum">     345</span>              : </span>
-<span id="L346"><span class="lineNum">     346</span> <span class="tlaGNC">           1 :                         ASSERT_TRUE(f.good());</span></span>
-<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">           1 :                 }</span></span>
-<span id="L348"><span class="lineNum">     348</span>              : </span>
-<span id="L349"><span class="lineNum">     349</span> <span class="tlaGNC">           4 :                 PoolBlock b;</span></span>
-<span id="L350"><span class="lineNum">     350</span>              : </span>
-<span id="L351"><span class="lineNum">     351</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.deserialize(buf.data(), buf.size(), sidechain, false, false), 0);</span></span>
-<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">           4 :                 mining_wallets.push_back(b.m_minerWallet);</span></span>
-<span id="L353"><span class="lineNum">     353</span>              : </span>
-<span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">           4 :                 PoolBlock::MainchainLayout layout;</span></span>
-<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           4 :                 const auto main = b.serialize_mainchain_data(&amp;layout);</span></span>
-<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">           4 :                 const auto side = b.serialize_sidechain_data();</span></span>
-<span id="L357"><span class="lineNum">     357</span>              : </span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(main.size(), expected[i].main_size);</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainId, expected[i].sidechain_id);</span></span>
-<span id="L360"><span class="lineNum">     360</span>              : </span>
-<span id="L361"><span class="lineNum">     361</span> <span class="tlaGNC">           4 :                 CarrotBlockTestHasher hasher;</span></span>
-<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">           4 :                 hash pow_hash;</span></span>
-<span id="L363"><span class="lineNum">     363</span>              : </span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.get_pow_hash(&amp;hasher, b.m_txinGenHeight, {}, pow_hash, false, RandomX_Hasher_Base::VM_LANE_P2P));</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_coinbase_tx_hash, expected[i].coinbase_hash);</span></span>
-<span id="L366"><span class="lineNum">     366</span>              : </span>
-<span id="L367"><span class="lineNum">     367</span> <span class="tlaGNC">           4 :                 std::vector&lt;uint8_t&gt; expected_hashing_blob;</span></span>
-<span id="L368"><span class="lineNum">     368</span>              : </span>
-<span id="L369"><span class="lineNum">     369</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(from_hex(expected[i].hashing_blob, strlen(expected[i].hashing_blob), expected_hashing_blob));</span></span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(hasher.blob, expected_hashing_blob);</span></span>
-<span id="L371"><span class="lineNum">     371</span>              : </span>
-<span id="L372"><span class="lineNum">     372</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_majorVersion, HARDFORK_VERSION_CARROT);</span></span>
-<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_minorVersion, 18U);</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txinGenHeight, 3012000U);</span></span>
-<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txkeySecSeed, H(&quot;44898813cdaa6a4c41ed362a36e7bd128e763af57770a72b007f1c097462fe14&quot;));</span></span>
-<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainHeight, i);</span></span>
-<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_timestamp, 1780000000U + i * 10);</span></span>
-<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_nonce, 0x12345678U + i);</span></span>
-<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_extraNonce, 0x9abcdef0U + i);</span></span>
-<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_extraNonceSize, 14U);</span></span>
-<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_carrotOutputs.size(), i + 1);</span></span>
-<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.m_ephPublicKeys.empty());</span></span>
-<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.m_outputAmounts.empty());</span></span>
-<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.m_viewTags.empty());</span></span>
-<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_transactions.size(), 130U);</span></span>
-<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_fcmp_pp_n_tree_layers, 7U);</span></span>
-<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_fcmp_pp_tree_root, H(&quot;61b736ce93b62a3d3778ab204da85d3b4cdc07250f5da7e3df2629928134d526&quot;));</span></span>
-<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_mergeMiningExtra.size(), 4U);</span></span>
-<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">           4 :                 ASSERT_FALSE(b.m_merkleProof.empty());</span></span>
-<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainExtraBuf[3], 0x99aabbccU + i);</span></span>
-<span id="L391"><span class="lineNum">     391</span>              : </span>
-<span id="L392"><span class="lineNum">     392</span> <span class="tlaGNC">           4 :                 uint32_t chains, mm_nonce;</span></span>
-<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">           4 :                 b.decode_merkle_tree_data(chains, mm_nonce);</span></span>
-<span id="L394"><span class="lineNum">     394</span>              : </span>
-<span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(chains, 5U);</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(mm_nonce, 4663U);</span></span>
-<span id="L397"><span class="lineNum">     397</span>              : </span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           4 :                 const hash aux_ids[] = { keccak(&quot;Carrot fixture chain A&quot;), keccak(&quot;Carrot fixture chain B&quot;), keccak(&quot;Carrot fixture chain C&quot;), keccak(&quot;Carrot fixture chain D&quot;) };</span></span>
-<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           4 :                 const size_t extra_sizes[] = { 0, 1, 128, 257 };</span></span>
-<span id="L400"><span class="lineNum">     400</span>              : </span>
-<span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">          20 :                 for (size_t j = 0; j &lt; 4; ++j) {</span></span>
-<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          16 :                         const auto it = b.m_mergeMiningExtra.find(aux_ids[j]);</span></span>
-<span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span> <span class="tlaGNC">          16 :                         ASSERT_NE(it, b.m_mergeMiningExtra.end());</span></span>
-<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          16 :                         ASSERT_EQ(it-&gt;second.size(), extra_sizes[j]);</span></span>
-<span id="L406"><span class="lineNum">     406</span>              : </span>
-<span id="L407"><span class="lineNum">     407</span> <span class="tlaGNC">        1560 :                         for (size_t k = 0; k &lt; extra_sizes[j]; ++k) {</span></span>
-<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">        1544 :                                 ASSERT_EQ(it-&gt;second[k], static_cast&lt;uint8_t&gt;(k + j + 1 + i));</span></span>
-<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">        1544 :                         }</span></span>
-<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">          16 :                 }</span></span>
-<span id="L411"><span class="lineNum">     411</span>              : </span>
-<span id="L412"><span class="lineNum">     412</span> <span class="tlaGNC">           4 :                 uint64_t reward = 0;</span></span>
-<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">          10 :                 for (const auto&amp; output : b.m_carrotOutputs) reward += output.amount;</span></span>
-<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(reward, BASE_BLOCK_REWARD + 123456789U);</span></span>
-<span id="L415"><span class="lineNum">     415</span>              : </span>
-<span id="L416"><span class="lineNum">     416</span> <span class="tlaGNC">           4 :                 const PoolBlock* parent = sidechain.find_block(b.m_parent);</span></span>
-<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(parent != nullptr, i &gt; 0);</span></span>
-<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(sidechain.find_block(b.m_sidechainId), nullptr);</span></span>
-<span id="L419"><span class="lineNum">     419</span>              : </span>
-<span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           4 :                 const P2PServer::Broadcast broadcast(b, parent);</span></span>
-<span id="L421"><span class="lineNum">     421</span>              : </span>
-<span id="L422"><span class="lineNum">     422</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.blob, buf);</span></span>
-<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.pruned_blob.size(), expected[i].pruned_size);</span></span>
-<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.compact_blob.size(), expected[i].compact_size);</span></span>
-<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.compact_unpruned_blob.size(), expected[i].compact_unpruned_size);</span></span>
-<span id="L426"><span class="lineNum">     426</span>              : </span>
-<span id="L427"><span class="lineNum">     427</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.id, b.m_sidechainId);</span></span>
-<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.parent_hash, b.m_parent);</span></span>
-<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.uncle_hashes, b.m_uncles);</span></span>
-<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.received_timestamp, b.m_receivedTimestamp);</span></span>
-<span id="L431"><span class="lineNum">     431</span>              : </span>
-<span id="L432"><span class="lineNum">     432</span> <span class="tlaGNC">           4 :                 PoolBlock inline_parent;</span></span>
-<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           4 :                 inline_parent.m_transactions.emplace_back(hash{});</span></span>
-<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           4 :                 for (hash tx : b.m_transactions) ASSERT_FALSE(tx.empty());</span></span>
-<span id="L435"><span class="lineNum">     435</span>              : </span>
-<span id="L436"><span class="lineNum">     436</span> <span class="tlaGNC">           4 :                 const P2PServer::Broadcast inline_broadcast(b, &amp;inline_parent);</span></span>
-<span id="L437"><span class="lineNum">     437</span>              : </span>
-<span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(inline_broadcast.compact_blob.size(), broadcast.pruned_blob.size() + b.m_transactions.size());</span></span>
-<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(inline_broadcast.compact_unpruned_blob.size(), broadcast.blob.size() + b.m_transactions.size());</span></span>
-<span id="L440"><span class="lineNum">     440</span>              : </span>
-<span id="L441"><span class="lineNum">     441</span> <span class="tlaGNC">           4 :                 const PoolBlock empty_parent;</span></span>
-<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">           4 :                 const P2PServer::Broadcast no_parent_transactions(b, &amp;empty_parent);</span></span>
-<span id="L443"><span class="lineNum">     443</span>              : </span>
-<span id="L444"><span class="lineNum">     444</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(no_parent_transactions.compact_blob.empty());</span></span>
-<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(no_parent_transactions.compact_unpruned_blob.empty());</span></span>
-<span id="L446"><span class="lineNum">     446</span>              : </span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(no_parent_transactions.pruned_blob, broadcast.pruned_blob);</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(no_parent_transactions.blob, broadcast.blob);</span></span>
-<span id="L449"><span class="lineNum">     449</span>              : </span>
-<span id="L450"><span class="lineNum">     450</span> <span class="tlaGNC">           8 :                 for (bool cached : {false, true}) {</span></span>
-<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">           8 :                         SCOPED_TRACE(cached);</span></span>
-<span id="L452"><span class="lineNum">     452</span>              : </span>
-<span id="L453"><span class="lineNum">     453</span> <span class="tlaGNC">           8 :                         if (cached) {</span></span>
-<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">           4 :                                 ASSERT_TRUE(sidechain.add_block(b));</span></span>
-<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">           4 :                                 const PoolBlock* stored = sidechain.find_block(b.m_sidechainId);</span></span>
-<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           4 :                                 ASSERT_NE(stored, nullptr);</span></span>
-<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">           4 :                                 ASSERT_TRUE(stored-&gt;m_verified);</span></span>
-<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">           4 :                                 ASSERT_FALSE(stored-&gt;m_invalid);</span></span>
-<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">           4 :                                 ASSERT_EQ(sidechain.chainTip(), stored);</span></span>
-<span id="L460"><span class="lineNum">     460</span>              : </span>
-<span id="L461"><span class="lineNum">     461</span> <span class="tlaGNC">          14 :                                 for (size_t j = 0; j &lt; mining_wallets.size(); ++j) {</span></span>
-<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">          20 :                                         EXPECT_DOUBLE_EQ(sidechain.get_reward_share(mining_wallets[j]), static_cast&lt;double&gt;(payouts[i][j]) / static_cast&lt;double&gt;(reward)) &lt;&lt; &quot;miner &quot; &lt;&lt; j;</span></span>
-<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">          10 :                                 }</span></span>
-<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">           4 :                                 EXPECT_DOUBLE_EQ(sidechain.get_reward_share(no_payout), 0.0);</span></span>
-<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           4 :                         }</span></span>
-<span id="L466"><span class="lineNum">     466</span>              : </span>
-<span id="L467"><span class="lineNum">     467</span> <span class="tlaGNC">          16 :                         for (bool compact : {false, true}) {</span></span>
-<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          16 :                                 if (compact &amp;&amp; !parent) continue;</span></span>
-<span id="L469"><span class="lineNum">     469</span>              : </span>
-<span id="L470"><span class="lineNum">     470</span> <span class="tlaGNC">          28 :                                 for (bool pruned : {false, true}) {</span></span>
-<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">          56 :                                         for (bool all_inline : {false, true}) {</span></span>
-<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC">          56 :                                                 if (all_inline &amp;&amp; !compact) continue;</span></span>
-<span id="L473"><span class="lineNum">     473</span>              : </span>
-<span id="L474"><span class="lineNum">     474</span> <span class="tlaGNC">          56 :                                                 SCOPED_TRACE(testing::Message() &lt;&lt; &quot;compact=&quot; &lt;&lt; compact &lt;&lt; &quot; pruned=&quot; &lt;&lt; pruned &lt;&lt; &quot; inline=&quot; &lt;&lt; all_inline);</span></span>
-<span id="L475"><span class="lineNum">     475</span>              : </span>
-<span id="L476"><span class="lineNum">     476</span> <span class="tlaGNC">          40 :                                                 const auto&amp; data = all_inline ? inline_broadcast : broadcast;</span></span>
-<span id="L477"><span class="lineNum">     477</span>              : </span>
-<span id="L478"><span class="lineNum">     478</span> <span class="tlaGNC">          40 :                                                 const auto&amp; wire = compact</span></span>
-<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          40 :                                                         ? (pruned ? data.compact_blob : data.compact_unpruned_blob)</span></span>
-<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">          40 :                                                         : (pruned ? data.pruned_blob : data.blob);</span></span>
-<span id="L481"><span class="lineNum">     481</span>              : </span>
-<span id="L482"><span class="lineNum">     482</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.deserialize(wire.data(), wire.size(), sidechain, compact, pruned), 0);</span></span>
-<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.m_sidechainId, b.m_sidechainId);</span></span>
-<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.serialize_mainchain_data(), main);</span></span>
-<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.serialize_sidechain_data(), side);</span></span>
-<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.m_carrotOutputs.size(), b.m_carrotOutputs.size());</span></span>
-<span id="L487"><span class="lineNum">     487</span>              : </span>
-<span id="L488"><span class="lineNum">     488</span> <span class="tlaGNC">         152 :                                                 for (size_t j = 0; j &lt; b.m_carrotOutputs.size(); ++j) {</span></span>
-<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         112 :                                                         const auto&amp; x = decoded.m_carrotOutputs[j];</span></span>
-<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">         112 :                                                         const auto&amp; y = b.m_carrotOutputs[j];</span></span>
-<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">         112 :                                                         ASSERT_EQ(x.amount, y.amount);</span></span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">         112 :                                                         ASSERT_EQ(x.onetime_address, y.onetime_address);</span></span>
-<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">         112 :                                                         ASSERT_EQ(x.eph_pub_key, y.eph_pub_key);</span></span>
-<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">         112 :                                                         ASSERT_EQ(x.vt, y.vt);</span></span>
-<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">         112 :                                                         ASSERT_EQ(x.anchor_enc, y.anchor_enc);</span></span>
-<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">         112 :                                                 }</span></span>
-<span id="L497"><span class="lineNum">     497</span>              : </span>
-<span id="L498"><span class="lineNum">     498</span> <span class="tlaGNC">          40 :                                                 ASSERT_TRUE(decoded.m_ephPublicKeys.empty());</span></span>
-<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">          40 :                                                 ASSERT_TRUE(decoded.m_outputAmounts.empty());</span></span>
-<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          40 :                                                 ASSERT_TRUE(decoded.m_viewTags.empty());</span></span>
-<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">          40 :                                                 ASSERT_FALSE(decoded.m_verified);</span></span>
-<span id="L502"><span class="lineNum">     502</span>              : </span>
-<span id="L503"><span class="lineNum">     503</span> <span class="tlaGNC">         152 :                                                 for (size_t j = 0; j &lt; mining_wallets.size(); ++j) {</span></span>
-<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">         224 :                                                         EXPECT_EQ(decoded.get_payout(mining_wallets[j]), payouts[i][j]) &lt;&lt; &quot;miner &quot; &lt;&lt; j;</span></span>
-<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">         112 :                                                 }</span></span>
-<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">          40 :                                                 EXPECT_EQ(decoded.get_payout(no_payout), 0U);</span></span>
-<span id="L507"><span class="lineNum">     507</span>              : </span>
-<span id="L508"><span class="lineNum">     508</span> <span class="tlaGNC">          40 :                                                 if (pruned) {</span></span>
-<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          20 :                                                         ASSERT_NE(decoded.deserialize(wire.data(), wire.size(), sidechain, compact, false), 0);</span></span>
-<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">          20 :                                                 }</span></span>
-<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">          40 :                                         }</span></span>
-<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">          28 :                                 }</span></span>
-<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">          14 :                         }</span></span>
-<span id="L514"><span class="lineNum">     514</span>              : </span>
-<span id="L515"><span class="lineNum">     515</span> <span class="tlaGNC">           8 :                         const auto&amp; pruned = broadcast.pruned_blob;</span></span>
-<span id="L516"><span class="lineNum">     516</span>              : </span>
-<span id="L517"><span class="lineNum">     517</span> <span class="tlaGNC">           8 :                         const uint8_t* const begin = pruned.data();</span></span>
-<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">           8 :                         const uint8_t* const end = begin + pruned.size();</span></span>
-<span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC">           8 :                         uint64_t value;</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">           8 :                         const size_t reward_offset = layout.outputs_offset + 1;</span></span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">           8 :                         const uint8_t* output_size_ptr = readVarint(begin + reward_offset, end, value);</span></span>
-<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           8 :                         ASSERT_NE(output_size_ptr, nullptr);</span></span>
-<span id="L524"><span class="lineNum">     524</span>              : </span>
-<span id="L525"><span class="lineNum">     525</span> <span class="tlaGNC">           8 :                         const uint8_t* id = readVarint(output_size_ptr, end, value);</span></span>
-<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">           8 :                         ASSERT_NE(id, nullptr);</span></span>
-<span id="L527"><span class="lineNum">     527</span>              : </span>
-<span id="L528"><span class="lineNum">     528</span> <span class="tlaGNC">           8 :                         const uint8_t* extra_size_ptr = id + HASH_SIZE;</span></span>
-<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">           8 :                         const uint8_t* pubkeys_size_ptr = readVarint(extra_size_ptr, end, value);</span></span>
-<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">           8 :                         ASSERT_NE(pubkeys_size_ptr, nullptr);</span></span>
-<span id="L531"><span class="lineNum">     531</span>              : </span>
-<span id="L532"><span class="lineNum">     532</span> <span class="tlaGNC">           8 :                         const uint64_t extra_size = value;</span></span>
-<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">           8 :                         const uint8_t* nonce_tag = readVarint(pubkeys_size_ptr, end, value);</span></span>
-<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">           8 :                         ASSERT_NE(nonce_tag, nullptr);</span></span>
-<span id="L535"><span class="lineNum">     535</span>              : </span>
-<span id="L536"><span class="lineNum">     536</span> <span class="tlaGNC">           8 :                         const uint64_t pubkeys_size = value;</span></span>
-<span id="L537"><span class="lineNum">     537</span>              : </span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">         128 :                         auto bad_varint = [&amp;](size_t offset, uint64_t replacement) {</span></span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         128 :                                 auto bad = pruned;</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">         128 :                                 replace_carrot_varint(bad, offset, replacement);</span></span>
-<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">         256 :                                 EXPECT_NE(decoded.deserialize(bad.data(), bad.size(), sidechain, false, true), 0) &lt;&lt; &quot;offset=&quot; &lt;&lt; offset &lt;&lt; &quot; value=&quot; &lt;&lt; replacement;</span></span>
-<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">         128 :                         };</span></span>
-<span id="L543"><span class="lineNum">     543</span>              : </span>
-<span id="L544"><span class="lineNum">     544</span> <span class="tlaGNC">           8 :                         bad_varint(reward_offset, reward + 1);</span></span>
-<span id="L545"><span class="lineNum">     545</span>              : </span>
-<span id="L546"><span class="lineNum">     546</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 53ULL, uint64_t(layout.outputs_blob_size - 1), uint64_t(layout.outputs_blob_size + 1), MAX_BLOCK_SIZE_NEW + 1, UINT64_MAX}) bad_varint(output_size_ptr - begin, n);</span></span>
-<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 32ULL, pubkeys_size - 1, pubkeys_size + 1, MAX_BLOCK_SIZE_NEW + 1, UINT64_MAX}) bad_varint(pubkeys_size_ptr - begin, n);</span></span>
-<span id="L548"><span class="lineNum">     548</span>              : </span>
-<span id="L549"><span class="lineNum">     549</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size - 1);</span></span>
-<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size + 1);</span></span>
-<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size - (pubkeys_size - (nonce_tag - pubkeys_size_ptr)));</span></span>
-<span id="L552"><span class="lineNum">     552</span>              : </span>
-<span id="L553"><span class="lineNum">     553</span> <span class="tlaGNC">           8 :                         auto changed_nonces = pruned;</span></span>
-<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">           8 :                         changed_nonces[layout.header_size - NONCE_SIZE] ^= 0x80;</span></span>
-<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">           8 :                         changed_nonces[(nonce_tag - begin) + 2] ^= 0x40;</span></span>
-<span id="L556"><span class="lineNum">     556</span>              : </span>
-<span id="L557"><span class="lineNum">     557</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.deserialize(changed_nonces.data(), changed_nonces.size(), sidechain, false, true), 0);</span></span>
-<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.m_sidechainId, b.m_sidechainId);</span></span>
-<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.m_nonce, b.m_nonce ^ 0x80);</span></span>
-<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.m_extraNonce, b.m_extraNonce ^ 0x40);</span></span>
-<span id="L561"><span class="lineNum">     561</span>              : </span>
-<span id="L562"><span class="lineNum">     562</span> <span class="tlaGNC">           8 :                         const uint32_t nonce = b.m_nonce ^ 0x80;</span></span>
-<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">           8 :                         const uint32_t extra_nonce = b.m_extraNonce ^ 0x40;</span></span>
-<span id="L564"><span class="lineNum">     564</span>              : </span>
-<span id="L565"><span class="lineNum">     565</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.serialize_mainchain_data(), b.serialize_mainchain_data(nullptr, &amp;nonce, &amp;extra_nonce));</span></span>
-<span id="L566"><span class="lineNum">     566</span>              : </span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">          32 :                         for (size_t offset : {size_t(id - begin), pruned.size() - 1, pruned.size() - side.size() - HASH_SIZE, pruned.size() - side.size() - HASH_SIZE - 2}) {</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">          32 :                                 auto bad = pruned;</span></span>
-<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">          32 :                                 bad[offset] ^= 1;</span></span>
-<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">          64 :                                 EXPECT_NE(decoded.deserialize(bad.data(), bad.size(), sidechain, false, true), 0) &lt;&lt; offset;</span></span>
-<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">          32 :                         }</span></span>
-<span id="L572"><span class="lineNum">     572</span>              : </span>
-<span id="L573"><span class="lineNum">     573</span> <span class="tlaGNC">           8 :                         auto bad_count = buf;</span></span>
-<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">           8 :                         replace_carrot_varint(bad_count, layout.outputs_offset, UINT64_MAX);</span></span>
-<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">           8 :                         EXPECT_NE(decoded.deserialize(bad_count.data(), bad_count.size(), sidechain, false, false), 0);</span></span>
-<span id="L576"><span class="lineNum">     576</span>              : </span>
-<span id="L577"><span class="lineNum">     577</span> <span class="tlaGNC">           8 :                         if (i &gt; 0) {</span></span>
-<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">           6 :                                 auto bad_reward = buf;</span></span>
-<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">           6 :                                 replace_carrot_varint(bad_reward, layout.outputs_offset + 1, UINT64_MAX);</span></span>
-<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">           6 :                                 EXPECT_NE(decoded.deserialize(bad_reward.data(), bad_reward.size(), sidechain, false, false), 0);</span></span>
-<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">           6 :                         }</span></span>
-<span id="L582"><span class="lineNum">     582</span>              : </span>
-<span id="L583"><span class="lineNum">     583</span> <span class="tlaGNC">           8 :                         if (!cached) {</span></span>
-<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">       61035 :                                 for (size_t n = 0; n &lt; pruned.size(); ++n) EXPECT_NE(decoded.deserialize(pruned.data(), n, sidechain, false, true), 0) &lt;&lt; n;</span></span>
-<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">           4 :                         }</span></span>
-<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           8 :                 }</span></span>
-<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">           4 :         }</span></span>
-<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">           1 :         ASSERT_EQ(ancestors.peek(), std::char_traits&lt;char&gt;::eof());</span></span>
-<span id="L589"><span class="lineNum">     589</span>              : </span>
-<span id="L590"><span class="lineNum">     590</span> <span class="tlaGNC">           1 :         const PoolBlock* parent = sidechain.chainTip();</span></span>
-<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">           1 :         ASSERT_NE(parent, nullptr);</span></span>
-<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(parent-&gt;m_transactions.empty());</span></span>
-<span id="L593"><span class="lineNum">     593</span>              : </span>
-<span id="L594"><span class="lineNum">     594</span> <span class="tlaGNC">           1 :         {</span></span>
-<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">           1 :                 PoolBlock scan_block(*parent);</span></span>
-<span id="L596"><span class="lineNum">     596</span>              : </span>
-<span id="L597"><span class="lineNum">     597</span> <span class="tlaGNC">           1 :                 PoolBlock* original_tip = sidechain.blocksById().at(parent-&gt;m_sidechainId);</span></span>
-<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">           1 :                 sidechain.set_chain_tip(&amp;scan_block);</span></span>
-<span id="L599"><span class="lineNum">     599</span>              : </span>
-<span id="L600"><span class="lineNum">     600</span> <span class="tlaGNC">           1 :                 auto restore_tip = ScopeGuard{[&amp;]() { sidechain.set_chain_tip(original_tip); }};</span></span>
-<span id="L601"><span class="lineNum">     601</span>              : </span>
-<span id="L602"><span class="lineNum">     602</span> <span class="tlaGNC">           8 :                 auto check_no_reward = [&amp;]() {</span></span>
-<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">          40 :                         for (size_t i = 0; i &lt; mining_wallets.size(); ++i) {</span></span>
-<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">          64 :                                 EXPECT_EQ(scan_block.get_payout(mining_wallets[i]), 0U) &lt;&lt; &quot;miner &quot; &lt;&lt; i;</span></span>
-<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">          64 :                                 EXPECT_DOUBLE_EQ(sidechain.get_reward_share(mining_wallets[i]), 0.0) &lt;&lt; &quot;miner &quot; &lt;&lt; i;</span></span>
-<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">          32 :                         }</span></span>
-<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">           8 :                 };</span></span>
-<span id="L608"><span class="lineNum">     608</span>              : </span>
-<span id="L609"><span class="lineNum">     609</span> <span class="tlaGNC">           4 :                 for (size_t i = 0; i &lt; CARROT_VIEW_TAG_BYTES; ++i) {</span></span>
-<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">           3 :                         SCOPED_TRACE(testing::Message() &lt;&lt; &quot;view-tag byte &quot; &lt;&lt; i);</span></span>
-<span id="L611"><span class="lineNum">     611</span>              : </span>
-<span id="L612"><span class="lineNum">     612</span> <span class="tlaGNC">          12 :                         for (auto&amp; o : scan_block.m_carrotOutputs) o.vt.data[i] ^= 1;</span></span>
-<span id="L613"><span class="lineNum">     613</span>              : </span>
-<span id="L614"><span class="lineNum">     614</span> <span class="tlaGNC">           3 :                         check_no_reward();</span></span>
-<span id="L615"><span class="lineNum">     615</span> <span class="tlaGNC">           3 :                         scan_block.m_carrotOutputs = parent-&gt;m_carrotOutputs;</span></span>
-<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">           3 :                 }</span></span>
-<span id="L617"><span class="lineNum">     617</span>              : </span>
-<span id="L618"><span class="lineNum">     618</span> <span class="tlaGNC">           4 :                 for (auto&amp; o : scan_block.m_carrotOutputs) ++o.amount;</span></span>
-<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
-<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">           1 :                 scan_block.m_carrotOutputs = parent-&gt;m_carrotOutputs;</span></span>
-<span id="L621"><span class="lineNum">     621</span>              : </span>
-<span id="L622"><span class="lineNum">     622</span> <span class="tlaGNC">           4 :                 for (auto&amp; o : scan_block.m_carrotOutputs) o.eph_pub_key.h[0] ^= 1;</span></span>
-<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
-<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">           1 :                 scan_block.m_carrotOutputs = parent-&gt;m_carrotOutputs;</span></span>
-<span id="L625"><span class="lineNum">     625</span>              : </span>
-<span id="L626"><span class="lineNum">     626</span> <span class="tlaGNC">           1 :                 ++scan_block.m_txinGenHeight;</span></span>
-<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
-<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">           1 :                 scan_block.m_txinGenHeight = parent-&gt;m_txinGenHeight;</span></span>
-<span id="L629"><span class="lineNum">     629</span>              : </span>
-<span id="L630"><span class="lineNum">     630</span> <span class="tlaGNC">           1 :                 scan_block.m_txkeySec.h[0] ^= 1;</span></span>
-<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
-<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">           1 :                 scan_block.m_txkeySec = parent-&gt;m_txkeySec;</span></span>
-<span id="L633"><span class="lineNum">     633</span>              : </span>
-<span id="L634"><span class="lineNum">     634</span> <span class="tlaGNC">           1 :                 scan_block.m_carrotOutputs.clear();</span></span>
-<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
-<span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L637"><span class="lineNum">     637</span>              : </span>
-<span id="L638"><span class="lineNum">     638</span> <span class="tlaGNC">           1 :         MinerData data{};</span></span>
-<span id="L639"><span class="lineNum">     639</span>              : </span>
-<span id="L640"><span class="lineNum">     640</span> <span class="tlaGNC">           1 :         data.major_version = parent-&gt;m_majorVersion;</span></span>
-<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">           1 :         data.height = parent-&gt;m_txinGenHeight;</span></span>
-<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">           1 :         data.prev_id = parent-&gt;m_prevId;</span></span>
-<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">           1 :         data.difficulty = sidechain.m_testMainChainDiff;</span></span>
-<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">           1 :         data.median_weight = 300000;</span></span>
-<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">           1 :         data.already_generated_coins = 18204981557254756780ULL;</span></span>
-<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">           1 :         data.median_timestamp = parent-&gt;m_timestamp;</span></span>
-<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">           1 :         data.fcmp_pp_n_tree_layers = parent-&gt;m_fcmp_pp_n_tree_layers;</span></span>
-<span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC">           1 :         data.fcmp_pp_tree_root = parent-&gt;m_fcmp_pp_tree_root;</span></span>
-<span id="L649"><span class="lineNum">     649</span>              : </span>
-<span id="L650"><span class="lineNum">     650</span> <span class="tlaGNC">           1 :         Mempool mempool;</span></span>
-<span id="L651"><span class="lineNum">     651</span>              : </span>
-<span id="L652"><span class="lineNum">     652</span> <span class="tlaGNC">           1 :         Params params;</span></span>
-<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">           1 :         params.m_miningWallet = parent-&gt;m_minerWallet;</span></span>
-<span id="L654"><span class="lineNum">     654</span>              : </span>
-<span id="L655"><span class="lineNum">     655</span> <span class="tlaGNC">           1 :         BlockTemplate tpl(&amp;sidechain, nullptr);</span></span>
-<span id="L656"><span class="lineNum">     656</span>              : </span>
-<span id="L657"><span class="lineNum">     657</span> <span class="tlaGNC">           1 :         tpl.rng().seed(123);</span></span>
-<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
-<span id="L659"><span class="lineNum">     659</span>              : </span>
-<span id="L660"><span class="lineNum">     660</span> <span class="tlaGNC">           1 :         const PoolBlock* b = tpl.pool_block_template();</span></span>
-<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(b-&gt;m_transactions.empty());</span></span>
-<span id="L662"><span class="lineNum">     662</span>              : </span>
-<span id="L663"><span class="lineNum">     663</span> <span class="tlaGNC">           1 :         const P2PServer::Broadcast broadcast(*b, parent);</span></span>
-<span id="L664"><span class="lineNum">     664</span>              : </span>
-<span id="L665"><span class="lineNum">     665</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(broadcast.compact_blob.empty());</span></span>
-<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(broadcast.compact_unpruned_blob.empty());</span></span>
-<span id="L667"><span class="lineNum">     667</span>              : </span>
-<span id="L668"><span class="lineNum">     668</span> <span class="tlaGNC">           2 :         for (bool pruned : {false, true}) {</span></span>
-<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">           2 :                 const auto&amp; wire = pruned ? broadcast.pruned_blob : broadcast.blob;</span></span>
-<span id="L670"><span class="lineNum">     670</span>              : </span>
-<span id="L671"><span class="lineNum">     671</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.deserialize(wire.data(), wire.size(), sidechain, false, pruned), 0);</span></span>
-<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.m_sidechainId, b-&gt;m_sidechainId);</span></span>
-<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.serialize_mainchain_data(), b-&gt;serialize_mainchain_data());</span></span>
-<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.serialize_sidechain_data(), b-&gt;serialize_sidechain_data());</span></span>
-<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">           2 :         }</span></span>
-<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L677"><span class="lineNum">     677</span>              : </span>
-<span id="L678"><span class="lineNum">     678</span>              : TEST(pool_block, verify)</span>
-<span id="L679"><span class="lineNum">     679</span> <span class="tlaGNC">           1 : {</span></span>
-<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">           1 :         thread_pool_init();</span></span>
-<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">           1 :         init_crypto_cache();</span></span>
-<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">           1 :         {</span></span>
-<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">           1 :         struct STest</span></span>
-<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">           1 :         {</span></span>
-<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">           1 :                 const char* m_poolName;</span></span>
-<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">           1 :                 const char* m_fileName;</span></span>
-<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">           1 :                 uint64_t m_txinGenHeight;</span></span>
-<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">           1 :                 uint64_t m_sidechainHeight;</span></span>
-<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">           1 :                 uint32_t m_expectedSharesNextBlock;</span></span>
-<span id="L690"><span class="lineNum">     690</span> <span class="tlaGNC">           1 :                 bool m_shuffle;</span></span>
-<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">           1 :                 hash m_templateBlobsHash;</span></span>
-<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">           1 :         } tests[6] = {</span></span>
-<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">           1 :                 { &quot;default&quot;, &quot;sidechain_dump.dat&quot;, 3456189, 11704382, 53, false, H(&quot;fd6bd6b38ed20a770c7eca6de3715e36453765908ef52a1d4df822d5eb66de5d&quot;) },</span></span>
-<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">           1 :                 { &quot;default&quot;, &quot;sidechain_dump.dat&quot;, 3456189, 11704382, 53, true, H(&quot;fd6bd6b38ed20a770c7eca6de3715e36453765908ef52a1d4df822d5eb66de5d&quot;) },</span></span>
-<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">           1 :                 { &quot;mini&quot;, &quot;sidechain_dump_mini.dat&quot;, 3456189, 11207082, 578, false, H(&quot;a0746d4a39a1a72aa48ddacc0c38d44504c77022bff92d937dbf45478cb8e4cb&quot;) },</span></span>
-<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">           1 :                 { &quot;mini&quot;, &quot;sidechain_dump_mini.dat&quot;, 3456189, 11207082, 578, true, H(&quot;a0746d4a39a1a72aa48ddacc0c38d44504c77022bff92d937dbf45478cb8e4cb&quot;) },</span></span>
-<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">           1 :                 { &quot;nano&quot;, &quot;sidechain_dump_nano.dat&quot;, 3456189, 188542, 115, false, H(&quot;2b5a6abd276e99a1a8165c42e4ef3b4a7bcb4e79e483fc891e77288f8498a417&quot;) },</span></span>
-<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">           1 :                 { &quot;nano&quot;, &quot;sidechain_dump_nano.dat&quot;, 3456189, 188542, 115, true, H(&quot;2b5a6abd276e99a1a8165c42e4ef3b4a7bcb4e79e483fc891e77288f8498a417&quot;) },</span></span>
-<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">           1 :         };</span></span>
-<span id="L700"><span class="lineNum">     700</span>              : </span>
-<span id="L701"><span class="lineNum">     701</span> <span class="tlaGNC">           1 :         for (const STest&amp; t : tests)</span></span>
-<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">           6 :         {</span></span>
-<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">           6 :                 SideChain sidechain(nullptr, NetworkType::Mainnet, t.m_poolName);</span></span>
-<span id="L704"><span class="lineNum">     704</span>              : </span>
-<span id="L705"><span class="lineNum">     705</span>              :                 // Difficulty of block 3454976</span>
-<span id="L706"><span class="lineNum">     706</span> <span class="tlaGNC">           6 :                 sidechain.m_testMainChainDiff = difficulty_type(625461936742ULL, 0ULL);</span></span>
-<span id="L707"><span class="lineNum">     707</span>              : </span>
-<span id="L708"><span class="lineNum">     708</span> <span class="tlaGNC">           6 :                 std::ifstream f(t.m_fileName, std::ios::binary | std::ios::ate);</span></span>
-<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(f.good() &amp;&amp; f.is_open(), true);</span></span>
-<span id="L710"><span class="lineNum">     710</span>              : </span>
-<span id="L711"><span class="lineNum">     711</span> <span class="tlaGNC">           6 :                 std::vector&lt;uint8_t&gt; buf(f.tellg());</span></span>
-<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">           6 :                 f.seekg(0);</span></span>
-<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">           6 :                 f.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
-<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(f.good(), true);</span></span>
-<span id="L715"><span class="lineNum">     715</span>              : </span>
-<span id="L716"><span class="lineNum">     716</span> <span class="tlaGNC">           6 :                 std::vector&lt;PoolBlock*&gt; blocks;</span></span>
-<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">       26800 :                 for (const uint8_t *p = buf.data(), *e = buf.data() + buf.size(); p &lt; e;) {</span></span>
-<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(p + sizeof(uint32_t) &lt;= e);</span></span>
-<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">       26794 :                         const uint32_t n = *reinterpret_cast&lt;const uint32_t*&gt;(p);</span></span>
-<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">       26794 :                         p += sizeof(uint32_t);</span></span>
-<span id="L721"><span class="lineNum">     721</span>              : </span>
-<span id="L722"><span class="lineNum">     722</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(p + n &lt;= e);</span></span>
-<span id="L723"><span class="lineNum">     723</span>              : </span>
-<span id="L724"><span class="lineNum">     724</span> <span class="tlaGNC">       26794 :                         PoolBlock* b = new PoolBlock();</span></span>
-<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">       26794 :                         ASSERT_EQ(b-&gt;deserialize(p, n, sidechain, false, false), 0);</span></span>
-<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">       26794 :                         p += n;</span></span>
-<span id="L727"><span class="lineNum">     727</span>              : </span>
-<span id="L728"><span class="lineNum">     728</span> <span class="tlaGNC">       26794 :                         blocks.push_back(b);</span></span>
-<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">       26794 :                 }</span></span>
-<span id="L730"><span class="lineNum">     730</span>              : </span>
-<span id="L731"><span class="lineNum">     731</span> <span class="tlaGNC">           6 :                 if (t.m_shuffle) {</span></span>
-<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">           3 :                         std::mt19937_64 rng;</span></span>
-<span id="L733"><span class="lineNum">     733</span>              : </span>
-<span id="L734"><span class="lineNum">     734</span> <span class="tlaGNC">       13397 :                         for (uint64_t i = 0, k, n = blocks.size(); i &lt; n - 1; ++i) {</span></span>
-<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">       13394 :                                 umul128(rng(), n - i, &amp;k);</span></span>
-<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">       13394 :                                 std::swap(blocks[i], blocks[i + k]);</span></span>
-<span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">       13394 :                         }</span></span>
-<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">           3 :                 }</span></span>
-<span id="L739"><span class="lineNum">     739</span>              : </span>
-<span id="L740"><span class="lineNum">     740</span> <span class="tlaGNC">       26800 :                 for (uint64_t i = 0, n = blocks.size(); i &lt; n; ++i) {</span></span>
-<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(sidechain.add_block(*blocks[i]));</span></span>
-<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(sidechain.find_block(blocks[i]-&gt;m_sidechainId) != nullptr);</span></span>
-<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC">       26794 :                         delete blocks[i];</span></span>
-<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">       26794 :                 }</span></span>
-<span id="L745"><span class="lineNum">     745</span>              : </span>
-<span id="L746"><span class="lineNum">     746</span> <span class="tlaGNC">       26800 :                 for (auto it = sidechain.blocksById().begin(); it != sidechain.blocksById().end(); ++it) {</span></span>
-<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">       26794 :                         const PoolBlock* b = it-&gt;second;</span></span>
-<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(b-&gt;m_verified);</span></span>
-<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">       26794 :                         ASSERT_FALSE(b-&gt;m_invalid);</span></span>
-<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">       26794 :                 }</span></span>
-<span id="L751"><span class="lineNum">     751</span>              : </span>
-<span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">           6 :                 const PoolBlock* tip = sidechain.chainTip();</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(tip != nullptr);</span></span>
-<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(tip-&gt;m_verified);</span></span>
-<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">           6 :                 ASSERT_FALSE(tip-&gt;m_invalid);</span></span>
-<span id="L756"><span class="lineNum">     756</span>              : </span>
-<span id="L757"><span class="lineNum">     757</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(tip-&gt;m_txinGenHeight, t.m_txinGenHeight);</span></span>
-<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(tip-&gt;m_sidechainHeight, t.m_sidechainHeight);</span></span>
-<span id="L759"><span class="lineNum">     759</span>              : </span>
-<span id="L760"><span class="lineNum">     760</span> <span class="tlaGNC">           6 :                 {</span></span>
-<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">           6 :                         BlockTemplate tpl(&amp;sidechain, nullptr);</span></span>
-<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC">           6 :                         auto&amp; r = tpl.rng();</span></span>
-<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">           6 :                         r.seed(0);</span></span>
-<span id="L764"><span class="lineNum">     764</span>              : </span>
-<span id="L765"><span class="lineNum">     765</span> <span class="tlaGNC">           6 :                         MinerData data;</span></span>
-<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">           6 :                         data.major_version = 16;</span></span>
-<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">           6 :                         data.height = t.m_txinGenHeight;</span></span>
-<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">           6 :                         data.prev_id = H(&quot;f7723462d2f4d9f605601df8de8bd483802d2275f77cbf3a6f61d8f3fc4c47bc&quot;);</span></span>
-<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">           6 :                         data.seed_hash = H(&quot;11186f5a8473d8dc7a0d3a0bf25834a07b1dffe8741d53cd543a8708c2e8b2a9&quot;);</span></span>
-<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">           6 :                         data.difficulty = { 656711234691ULL, 0 };</span></span>
-<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">           6 :                         data.median_weight = 300000;</span></span>
-<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">           6 :                         data.already_generated_coins = std::numeric_limits&lt;uint64_t&gt;::max();</span></span>
-<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">           6 :                         data.median_timestamp = (1ULL &lt;&lt; 35) - 2;</span></span>
-<span id="L774"><span class="lineNum">     774</span>              : </span>
-<span id="L775"><span class="lineNum">     775</span> <span class="tlaGNC">           6 :                         Mempool mempool;</span></span>
-<span id="L776"><span class="lineNum">     776</span>              : </span>
-<span id="L777"><span class="lineNum">     777</span> <span class="tlaGNC">       49158 :                         for (uint64_t i = 0; i &lt; 8192; ++i) {</span></span>
-<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">       49152 :                                 hash h;</span></span>
-<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">       49152 :                                 h.u64()[0] = i;</span></span>
-<span id="L780"><span class="lineNum">     780</span>              : </span>
-<span id="L781"><span class="lineNum">     781</span> <span class="tlaGNC">       49152 :                                 TxMempoolData tx;</span></span>
-<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC">       49152 :                                 tx.id = static_cast&lt;indexed_hash&gt;(h);</span></span>
-<span id="L783"><span class="lineNum">     783</span> <span class="tlaGNC">       49152 :                                 tx.fee = (r() % 1'000'000'000) + 30'000'000;</span></span>
-<span id="L784"><span class="lineNum">     784</span> <span class="tlaGNC">       49152 :                                 tx.weight = (r() % 20'000) + 1'500;</span></span>
-<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">       49152 :                                 mempool.add(tx);</span></span>
-<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">       49152 :                         }</span></span>
-<span id="L787"><span class="lineNum">     787</span>              : </span>
-<span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">           6 :                         Params params;</span></span>
-<span id="L789"><span class="lineNum">     789</span>              : </span>
-<span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">           6 :                         params.m_miningWallet = Wallet(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
-<span id="L791"><span class="lineNum">     791</span>              : </span>
-<span id="L792"><span class="lineNum">     792</span> <span class="tlaGNC">           6 :                         tpl.update(data, mempool, params);</span></span>
-<span id="L793"><span class="lineNum">     793</span>              : </span>
-<span id="L794"><span class="lineNum">     794</span> <span class="tlaGNC">           6 :                         std::vector&lt;uint8_t&gt; blobs;</span></span>
-<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">           6 :                         uint64_t height;</span></span>
-<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">           6 :                         difficulty_type diff, aux_diff, sidechain_diff;</span></span>
-<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">           6 :                         hash seed_hash;</span></span>
-<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">           6 :                         size_t nonce_offset;</span></span>
-<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">           6 :                         uint32_t template_id;</span></span>
-<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">           6 :                         const uint32_t blob_size = tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
-<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(blob_size, 77);</span></span>
-<span id="L802"><span class="lineNum">     802</span>              : </span>
-<span id="L803"><span class="lineNum">     803</span> <span class="tlaGNC">           6 :                         hash blobs_hash;</span></span>
-<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">           6 :                         keccak(blobs.data(), static_cast&lt;int&gt;(blobs.size()), blobs_hash.h);</span></span>
-<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(blobs_hash, t.m_templateBlobsHash);</span></span>
-<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L807"><span class="lineNum">     807</span>              : </span>
-<span id="L808"><span class="lineNum">     808</span> <span class="tlaGNC">           6 :                 PoolBlock block;</span></span>
-<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(block.m_minerWallet.decode(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;));</span></span>
-<span id="L810"><span class="lineNum">     810</span>              : </span>
-<span id="L811"><span class="lineNum">     811</span> <span class="tlaGNC">           6 :                 std::vector&lt;MinerShare&gt; shares;</span></span>
-<span id="L812"><span class="lineNum">     812</span>              : </span>
-<span id="L813"><span class="lineNum">     813</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(sidechain.fill_sidechain_data(block, shares));</span></span>
-<span id="L814"><span class="lineNum">     814</span>              : </span>
-<span id="L815"><span class="lineNum">     815</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(block.m_sidechainHeight, t.m_sidechainHeight + 1);</span></span>
-<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(shares.size(), t.m_expectedSharesNextBlock);</span></span>
-<span id="L817"><span class="lineNum">     817</span>              : </span>
-<span id="L818"><span class="lineNum">     818</span> <span class="tlaGNC">           6 :                 const PoolBlock* parent = sidechain.find_block(tip-&gt;m_parent);</span></span>
-<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(parent != nullptr);</span></span>
-<span id="L820"><span class="lineNum">     820</span>              : </span>
-<span id="L821"><span class="lineNum">     821</span>              :                 // Check pruned and compact broadcast blobs</span>
-<span id="L822"><span class="lineNum">     822</span>              : </span>
-<span id="L823"><span class="lineNum">     823</span> <span class="tlaGNC">           6 :                 auto tip_full_blob = tip-&gt;serialize_mainchain_data();</span></span>
-<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">           6 :                 auto v2 = tip-&gt;serialize_sidechain_data();</span></span>
-<span id="L825"><span class="lineNum">     825</span> <span class="tlaGNC">           6 :                 tip_full_blob.insert(tip_full_blob.end(), v2.begin(), v2.end());</span></span>
-<span id="L826"><span class="lineNum">     826</span>              : </span>
-<span id="L827"><span class="lineNum">     827</span> <span class="tlaGNC">           6 :                 P2PServer::Broadcast broadcast(*tip, parent);</span></span>
-<span id="L828"><span class="lineNum">     828</span>              : </span>
-<span id="L829"><span class="lineNum">     829</span> <span class="tlaGNC">           6 :                 {</span></span>
-<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">           6 :                         PoolBlock block2;</span></span>
-<span id="L831"><span class="lineNum">     831</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, false, true), 0);</span></span>
-<span id="L832"><span class="lineNum">     832</span>              : </span>
-<span id="L833"><span class="lineNum">     833</span> <span class="tlaGNC">           6 :                         auto v1 = block2.serialize_mainchain_data();</span></span>
-<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">           6 :                         v2 = block2.serialize_sidechain_data();</span></span>
-<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
-<span id="L836"><span class="lineNum">     836</span>              : </span>
-<span id="L837"><span class="lineNum">     837</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
-<span id="L838"><span class="lineNum">     838</span>              : </span>
-<span id="L839"><span class="lineNum">     839</span> <span class="tlaGNC">           6 :                         ASSERT_NE(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, false, false), 0);</span></span>
-<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L841"><span class="lineNum">     841</span>              : </span>
-<span id="L842"><span class="lineNum">     842</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_blob.empty()) {</span></span>
-<span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC">           6 :                         PoolBlock block3;</span></span>
-<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block3.deserialize(broadcast.compact_blob.data(), broadcast.compact_blob.size(), sidechain, true, true), 0);</span></span>
-<span id="L845"><span class="lineNum">     845</span>              : </span>
-<span id="L846"><span class="lineNum">     846</span> <span class="tlaGNC">           6 :                         auto v1 = block3.serialize_mainchain_data();</span></span>
-<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">           6 :                         v2 = block3.serialize_sidechain_data();</span></span>
-<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
-<span id="L849"><span class="lineNum">     849</span>              : </span>
-<span id="L850"><span class="lineNum">     850</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
-<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L852"><span class="lineNum">     852</span>              : </span>
-<span id="L853"><span class="lineNum">     853</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_unpruned_blob.empty()) {</span></span>
-<span id="L854"><span class="lineNum">     854</span> <span class="tlaGNC">           6 :                         PoolBlock block4;</span></span>
-<span id="L855"><span class="lineNum">     855</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block4.deserialize(broadcast.compact_unpruned_blob.data(), broadcast.compact_unpruned_blob.size(), sidechain, true, false), 0);</span></span>
-<span id="L856"><span class="lineNum">     856</span>              : </span>
-<span id="L857"><span class="lineNum">     857</span> <span class="tlaGNC">           6 :                         auto v1 = block4.serialize_mainchain_data();</span></span>
-<span id="L858"><span class="lineNum">     858</span> <span class="tlaGNC">           6 :                         v2 = block4.serialize_sidechain_data();</span></span>
-<span id="L859"><span class="lineNum">     859</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
-<span id="L860"><span class="lineNum">     860</span>              : </span>
-<span id="L861"><span class="lineNum">     861</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
-<span id="L862"><span class="lineNum">     862</span> <span class="tlaGNC">           6 :                 }</span></span>
-<span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC">           6 :         }</span></span>
-<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">           1 :         }</span></span>
-<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">           1 :         thread_pool_destroy();</span></span>
-<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
-<span id="L867"><span class="lineNum">     867</span>              : </span>
-<span id="L868"><span class="lineNum">     868</span> <span class="tlaGNC">           1 : #ifdef WITH_INDEXED_HASHES</span></span>
-<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">           1 :         indexed_hash::cleanup_storage();</span></span>
-<span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">           1 : #endif</span></span>
-<span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">           1 : }</span></span>
-<span id="L872"><span class="lineNum">     872</span>              : </span>
-<span id="L873"><span class="lineNum">     873</span>              : }</span>
+<span id="L292"><span class="lineNum">     292</span>              :         // Starting with Carrot, a block pays out the PPLNS window of its parent, so block N pays N miners (block 0 pays 1)</span>
+<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">           1 :         constexpr uint64_t payouts[4][4] = {</span></span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">           1 :                 { 600123456789ULL, 0, 0, 0 },</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">           1 :                 { 600123456789ULL, 0, 0, 0 },</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">           1 :                 { 300061728395ULL, 300061728394ULL, 0, 0 },</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">           1 :                 { 200041152263ULL, 200041152263ULL, 200041152263ULL, 0 },</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L299"><span class="lineNum">     299</span>              : </span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           1 :         std::ifstream ancestors(&quot;block_carrot_ancestors.dat&quot;, std::ios::binary);</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(ancestors.is_open());</span></span>
+<span id="L302"><span class="lineNum">     302</span>              : </span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :         const struct {</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">           1 :                 size_t main_size;</span></span>
+<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           1 :                 size_t pruned_size;</span></span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">           1 :                 size_t compact_size;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">           1 :                 size_t compact_unpruned_size;</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">           1 :                 hash sidechain_id;</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">           1 :                 hash coinbase_hash;</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">           1 :                 const char* hashing_blob;</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">           1 :         } expected[] = {</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">           1 :                 { 4396, 5085, 0, 0, H(&quot;93efc370237e5fb59c843de5f392fa81179751564175e5bd13e42a677edef309&quot;), H(&quot;1010e11212434d2dd5dfb6c583fde95eccdba044abdde54b836a9afd0ef04fd1&quot;), &quot;111280cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a8978563412763dab04b71117f54717cc5ae4770044882c2808900f080fccff667ec2c124398301&quot; },</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">           1 :                 { 4396, 5085, 1058, 1109, H(&quot;1de7dca04f0434d8b5f1631a59bf787edce8ecc91cd54f87f7ae74776584706a&quot;), H(&quot;75218b6e3a85727928640026449dc801dc04951660ab39cae529104dd35a17d0&quot;), &quot;11128acae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a8979563412ba8f6882eab600ecafb89aab850d2960bb42ed1ab09c673b59056eea6e65a3f98301&quot; },</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">           1 :                 { 4487, 5085, 1058, 1200, H(&quot;30dd0e7f6cae3eeb9456c8db94adf3bf11d7fdead9a1e70ba0bcdaea78eb309b&quot;), H(&quot;fe4b5eb9233726a58eb2856fce4ce031bd3380bb3ab59a85446c037c50da8c89&quot;), &quot;111294cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897a563412d47c8fba2ae478c3dc171a0273cba21075ff4ac6762ab809a419b5edfbf8c91d8301&quot; },</span></span>
+<span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 :                 { 4578, 5087, 1092, 1323, H(&quot;8a31d6960eb807cf4327566574b4cf37cdfce05ca040252015b7169b684a5dd4&quot;), H(&quot;e3b79e7c444be514db0b9dfe6342303bdabddee4549bf71139dc2d8168572dbe&quot;), &quot;11129ecae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897b563412b631c40badd6484a70d5fc9a65f8694fa3ab299e07754f8a966c7048c59390e48301&quot; },</span></span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L317"><span class="lineNum">     317</span>              : </span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           1 :         PoolBlock decoded;</span></span>
+<span id="L319"><span class="lineNum">     319</span>              : </span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           5 :         for (size_t i = 0; i &lt; 4; ++i) {</span></span>
+<span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           4 :                 SCOPED_TRACE(i);</span></span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">           4 :                 std::vector&lt;uint8_t&gt; buf;</span></span>
+<span id="L324"><span class="lineNum">     324</span>              : </span>
+<span id="L325"><span class="lineNum">     325</span> <span class="tlaGNC">           4 :                 if (i &lt; 3) {</span></span>
+<span id="L326"><span class="lineNum">     326</span> <span class="tlaGNC">           3 :                         uint32_t size;</span></span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">           3 :                         ancestors.read(reinterpret_cast&lt;char*&gt;(&amp;size), sizeof(size));</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">           3 :                         ASSERT_TRUE(ancestors.good());</span></span>
+<span id="L329"><span class="lineNum">     329</span>              : </span>
+<span id="L330"><span class="lineNum">     330</span> <span class="tlaGNC">           3 :                         ASSERT_GT(size, 0U);</span></span>
+<span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">           3 :                         ASSERT_LE(size, MAX_BLOCK_SIZE_NEW);</span></span>
+<span id="L332"><span class="lineNum">     332</span>              : </span>
+<span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">           3 :                         buf.resize(size);</span></span>
+<span id="L334"><span class="lineNum">     334</span> <span class="tlaGNC">           3 :                         ancestors.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
+<span id="L335"><span class="lineNum">     335</span> <span class="tlaGNC">           3 :                         ASSERT_TRUE(ancestors.good());</span></span>
+<span id="L336"><span class="lineNum">     336</span> <span class="tlaGNC">           3 :                 }</span></span>
+<span id="L337"><span class="lineNum">     337</span> <span class="tlaGNC">           1 :                 else {</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">           1 :                         std::ifstream f(&quot;block_carrot.dat&quot;, std::ios::binary | std::ios::ate);</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">           1 :                         ASSERT_TRUE(f.is_open());</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">           1 :                         ASSERT_GT(f.tellg(), 0);</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">           1 :                         ASSERT_LE(static_cast&lt;uint64_t&gt;(f.tellg()), MAX_BLOCK_SIZE_NEW);</span></span>
+<span id="L342"><span class="lineNum">     342</span>              : </span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">           1 :                         buf.resize(static_cast&lt;size_t&gt;(f.tellg()));</span></span>
+<span id="L344"><span class="lineNum">     344</span> <span class="tlaGNC">           1 :                         f.seekg(0);</span></span>
+<span id="L345"><span class="lineNum">     345</span> <span class="tlaGNC">           1 :                         f.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
+<span id="L346"><span class="lineNum">     346</span>              : </span>
+<span id="L347"><span class="lineNum">     347</span> <span class="tlaGNC">           1 :                         ASSERT_TRUE(f.good());</span></span>
+<span id="L348"><span class="lineNum">     348</span> <span class="tlaGNC">           1 :                 }</span></span>
+<span id="L349"><span class="lineNum">     349</span>              : </span>
+<span id="L350"><span class="lineNum">     350</span> <span class="tlaGNC">           4 :                 PoolBlock b;</span></span>
+<span id="L351"><span class="lineNum">     351</span>              : </span>
+<span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.deserialize(buf.data(), buf.size(), sidechain, false, false), 0);</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">           4 :                 mining_wallets.push_back(b.m_minerWallet);</span></span>
+<span id="L354"><span class="lineNum">     354</span>              : </span>
+<span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">           4 :                 PoolBlock::MainchainLayout layout;</span></span>
+<span id="L356"><span class="lineNum">     356</span> <span class="tlaGNC">           4 :                 const auto main = b.serialize_mainchain_data(&amp;layout);</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">           4 :                 const auto side = b.serialize_sidechain_data();</span></span>
+<span id="L358"><span class="lineNum">     358</span>              : </span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(main.size(), expected[i].main_size);</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainId, expected[i].sidechain_id);</span></span>
+<span id="L361"><span class="lineNum">     361</span>              : </span>
+<span id="L362"><span class="lineNum">     362</span> <span class="tlaGNC">           4 :                 CarrotBlockTestHasher hasher;</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">           4 :                 hash pow_hash;</span></span>
+<span id="L364"><span class="lineNum">     364</span>              : </span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.get_pow_hash(&amp;hasher, b.m_txinGenHeight, {}, pow_hash, false, RandomX_Hasher_Base::VM_LANE_P2P));</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_coinbase_tx_hash, expected[i].coinbase_hash);</span></span>
+<span id="L367"><span class="lineNum">     367</span>              : </span>
+<span id="L368"><span class="lineNum">     368</span> <span class="tlaGNC">           4 :                 std::vector&lt;uint8_t&gt; expected_hashing_blob;</span></span>
+<span id="L369"><span class="lineNum">     369</span>              : </span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(from_hex(expected[i].hashing_blob, strlen(expected[i].hashing_blob), expected_hashing_blob));</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(hasher.blob, expected_hashing_blob);</span></span>
+<span id="L372"><span class="lineNum">     372</span>              : </span>
+<span id="L373"><span class="lineNum">     373</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_majorVersion, HARDFORK_VERSION_CARROT);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_minorVersion, 18U);</span></span>
+<span id="L375"><span class="lineNum">     375</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txinGenHeight, 3012000U);</span></span>
+<span id="L376"><span class="lineNum">     376</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txkeySecSeed, H(&quot;44898813cdaa6a4c41ed362a36e7bd128e763af57770a72b007f1c097462fe14&quot;));</span></span>
+<span id="L377"><span class="lineNum">     377</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainHeight, i);</span></span>
+<span id="L378"><span class="lineNum">     378</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_timestamp, 1780000000U + i * 10);</span></span>
+<span id="L379"><span class="lineNum">     379</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_nonce, 0x12345678U + i);</span></span>
+<span id="L380"><span class="lineNum">     380</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_extraNonce, 0x9abcdef0U + i);</span></span>
+<span id="L381"><span class="lineNum">     381</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_extraNonceSize, 14U);</span></span>
+<span id="L382"><span class="lineNum">     382</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_carrotOutputs.size(), std::max&lt;size_t&gt;(i, 1));</span></span>
+<span id="L383"><span class="lineNum">     383</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.m_ephPublicKeys.empty());</span></span>
+<span id="L384"><span class="lineNum">     384</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.m_outputAmounts.empty());</span></span>
+<span id="L385"><span class="lineNum">     385</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(b.m_viewTags.empty());</span></span>
+<span id="L386"><span class="lineNum">     386</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_transactions.size(), 130U);</span></span>
+<span id="L387"><span class="lineNum">     387</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_fcmp_pp_n_tree_layers, 7U);</span></span>
+<span id="L388"><span class="lineNum">     388</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_fcmp_pp_tree_root, H(&quot;61b736ce93b62a3d3778ab204da85d3b4cdc07250f5da7e3df2629928134d526&quot;));</span></span>
+<span id="L389"><span class="lineNum">     389</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_mergeMiningExtra.size(), 4U);</span></span>
+<span id="L390"><span class="lineNum">     390</span> <span class="tlaGNC">           4 :                 ASSERT_FALSE(b.m_merkleProof.empty());</span></span>
+<span id="L391"><span class="lineNum">     391</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainExtraBuf[3], 0x99aabbccU + i);</span></span>
+<span id="L392"><span class="lineNum">     392</span>              : </span>
+<span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">           4 :                 uint32_t chains, mm_nonce;</span></span>
+<span id="L394"><span class="lineNum">     394</span> <span class="tlaGNC">           4 :                 b.decode_merkle_tree_data(chains, mm_nonce);</span></span>
+<span id="L395"><span class="lineNum">     395</span>              : </span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(chains, 5U);</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(mm_nonce, 4663U);</span></span>
+<span id="L398"><span class="lineNum">     398</span>              : </span>
+<span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           4 :                 const hash aux_ids[] = { keccak(&quot;Carrot fixture chain A&quot;), keccak(&quot;Carrot fixture chain B&quot;), keccak(&quot;Carrot fixture chain C&quot;), keccak(&quot;Carrot fixture chain D&quot;) };</span></span>
+<span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           4 :                 const size_t extra_sizes[] = { 0, 1, 128, 257 };</span></span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span> <span class="tlaGNC">          20 :                 for (size_t j = 0; j &lt; 4; ++j) {</span></span>
+<span id="L403"><span class="lineNum">     403</span> <span class="tlaGNC">          16 :                         const auto it = b.m_mergeMiningExtra.find(aux_ids[j]);</span></span>
+<span id="L404"><span class="lineNum">     404</span>              : </span>
+<span id="L405"><span class="lineNum">     405</span> <span class="tlaGNC">          16 :                         ASSERT_NE(it, b.m_mergeMiningExtra.end());</span></span>
+<span id="L406"><span class="lineNum">     406</span> <span class="tlaGNC">          16 :                         ASSERT_EQ(it-&gt;second.size(), extra_sizes[j]);</span></span>
+<span id="L407"><span class="lineNum">     407</span>              : </span>
+<span id="L408"><span class="lineNum">     408</span> <span class="tlaGNC">        1560 :                         for (size_t k = 0; k &lt; extra_sizes[j]; ++k) {</span></span>
+<span id="L409"><span class="lineNum">     409</span> <span class="tlaGNC">        1544 :                                 ASSERT_EQ(it-&gt;second[k], static_cast&lt;uint8_t&gt;(k + j + 1 + i));</span></span>
+<span id="L410"><span class="lineNum">     410</span> <span class="tlaGNC">        1544 :                         }</span></span>
+<span id="L411"><span class="lineNum">     411</span> <span class="tlaGNC">          16 :                 }</span></span>
+<span id="L412"><span class="lineNum">     412</span>              : </span>
+<span id="L413"><span class="lineNum">     413</span> <span class="tlaGNC">           4 :                 uint64_t reward = 0;</span></span>
+<span id="L414"><span class="lineNum">     414</span> <span class="tlaGNC">           7 :                 for (const auto&amp; output : b.m_carrotOutputs) reward += output.amount;</span></span>
+<span id="L415"><span class="lineNum">     415</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(reward, BASE_BLOCK_REWARD + 123456789U);</span></span>
+<span id="L416"><span class="lineNum">     416</span>              : </span>
+<span id="L417"><span class="lineNum">     417</span> <span class="tlaGNC">           4 :                 const PoolBlock* parent = sidechain.find_block(b.m_parent);</span></span>
+<span id="L418"><span class="lineNum">     418</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(parent != nullptr, i &gt; 0);</span></span>
+<span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(sidechain.find_block(b.m_sidechainId), nullptr);</span></span>
+<span id="L420"><span class="lineNum">     420</span>              : </span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           4 :                 const P2PServer::Broadcast broadcast(b, parent);</span></span>
+<span id="L422"><span class="lineNum">     422</span>              : </span>
+<span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.blob, buf);</span></span>
+<span id="L424"><span class="lineNum">     424</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.pruned_blob.size(), expected[i].pruned_size);</span></span>
+<span id="L425"><span class="lineNum">     425</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.compact_blob.size(), expected[i].compact_size);</span></span>
+<span id="L426"><span class="lineNum">     426</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.compact_unpruned_blob.size(), expected[i].compact_unpruned_size);</span></span>
+<span id="L427"><span class="lineNum">     427</span>              : </span>
+<span id="L428"><span class="lineNum">     428</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.id, b.m_sidechainId);</span></span>
+<span id="L429"><span class="lineNum">     429</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.parent_hash, b.m_parent);</span></span>
+<span id="L430"><span class="lineNum">     430</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.uncle_hashes, b.m_uncles);</span></span>
+<span id="L431"><span class="lineNum">     431</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(broadcast.received_timestamp, b.m_receivedTimestamp);</span></span>
+<span id="L432"><span class="lineNum">     432</span>              : </span>
+<span id="L433"><span class="lineNum">     433</span> <span class="tlaGNC">           4 :                 PoolBlock inline_parent;</span></span>
+<span id="L434"><span class="lineNum">     434</span> <span class="tlaGNC">           4 :                 inline_parent.m_transactions.emplace_back(hash{});</span></span>
+<span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           4 :                 for (hash tx : b.m_transactions) ASSERT_FALSE(tx.empty());</span></span>
+<span id="L436"><span class="lineNum">     436</span>              : </span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">           4 :                 const P2PServer::Broadcast inline_broadcast(b, &amp;inline_parent);</span></span>
+<span id="L438"><span class="lineNum">     438</span>              : </span>
+<span id="L439"><span class="lineNum">     439</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(inline_broadcast.compact_blob.size(), broadcast.pruned_blob.size() + b.m_transactions.size());</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(inline_broadcast.compact_unpruned_blob.size(), broadcast.blob.size() + b.m_transactions.size());</span></span>
+<span id="L441"><span class="lineNum">     441</span>              : </span>
+<span id="L442"><span class="lineNum">     442</span> <span class="tlaGNC">           4 :                 const PoolBlock empty_parent;</span></span>
+<span id="L443"><span class="lineNum">     443</span> <span class="tlaGNC">           4 :                 const P2PServer::Broadcast no_parent_transactions(b, &amp;empty_parent);</span></span>
+<span id="L444"><span class="lineNum">     444</span>              : </span>
+<span id="L445"><span class="lineNum">     445</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(no_parent_transactions.compact_blob.empty());</span></span>
+<span id="L446"><span class="lineNum">     446</span> <span class="tlaGNC">           4 :                 ASSERT_TRUE(no_parent_transactions.compact_unpruned_blob.empty());</span></span>
+<span id="L447"><span class="lineNum">     447</span>              : </span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(no_parent_transactions.pruned_blob, broadcast.pruned_blob);</span></span>
+<span id="L449"><span class="lineNum">     449</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(no_parent_transactions.blob, broadcast.blob);</span></span>
+<span id="L450"><span class="lineNum">     450</span>              : </span>
+<span id="L451"><span class="lineNum">     451</span> <span class="tlaGNC">           8 :                 for (bool cached : {false, true}) {</span></span>
+<span id="L452"><span class="lineNum">     452</span> <span class="tlaGNC">           8 :                         SCOPED_TRACE(cached);</span></span>
+<span id="L453"><span class="lineNum">     453</span>              : </span>
+<span id="L454"><span class="lineNum">     454</span> <span class="tlaGNC">           8 :                         if (cached) {</span></span>
+<span id="L455"><span class="lineNum">     455</span> <span class="tlaGNC">           4 :                                 ASSERT_TRUE(sidechain.add_block(b));</span></span>
+<span id="L456"><span class="lineNum">     456</span> <span class="tlaGNC">           4 :                                 const PoolBlock* stored = sidechain.find_block(b.m_sidechainId);</span></span>
+<span id="L457"><span class="lineNum">     457</span> <span class="tlaGNC">           4 :                                 ASSERT_NE(stored, nullptr);</span></span>
+<span id="L458"><span class="lineNum">     458</span> <span class="tlaGNC">           4 :                                 ASSERT_TRUE(stored-&gt;m_verified);</span></span>
+<span id="L459"><span class="lineNum">     459</span> <span class="tlaGNC">           4 :                                 ASSERT_FALSE(stored-&gt;m_invalid);</span></span>
+<span id="L460"><span class="lineNum">     460</span> <span class="tlaGNC">           4 :                                 ASSERT_EQ(sidechain.chainTip(), stored);</span></span>
+<span id="L461"><span class="lineNum">     461</span>              : </span>
+<span id="L462"><span class="lineNum">     462</span> <span class="tlaGNC">          14 :                                 for (size_t j = 0; j &lt; mining_wallets.size(); ++j) {</span></span>
+<span id="L463"><span class="lineNum">     463</span> <span class="tlaGNC">          20 :                                         EXPECT_DOUBLE_EQ(sidechain.get_reward_share(mining_wallets[j]), static_cast&lt;double&gt;(payouts[i][j]) / static_cast&lt;double&gt;(reward)) &lt;&lt; &quot;miner &quot; &lt;&lt; j;</span></span>
+<span id="L464"><span class="lineNum">     464</span> <span class="tlaGNC">          10 :                                 }</span></span>
+<span id="L465"><span class="lineNum">     465</span> <span class="tlaGNC">           4 :                                 EXPECT_DOUBLE_EQ(sidechain.get_reward_share(no_payout), 0.0);</span></span>
+<span id="L466"><span class="lineNum">     466</span> <span class="tlaGNC">           4 :                         }</span></span>
+<span id="L467"><span class="lineNum">     467</span>              : </span>
+<span id="L468"><span class="lineNum">     468</span> <span class="tlaGNC">          16 :                         for (bool compact : {false, true}) {</span></span>
+<span id="L469"><span class="lineNum">     469</span> <span class="tlaGNC">          16 :                                 if (compact &amp;&amp; !parent) continue;</span></span>
+<span id="L470"><span class="lineNum">     470</span>              : </span>
+<span id="L471"><span class="lineNum">     471</span> <span class="tlaGNC">          28 :                                 for (bool pruned : {false, true}) {</span></span>
+<span id="L472"><span class="lineNum">     472</span> <span class="tlaGNC">          56 :                                         for (bool all_inline : {false, true}) {</span></span>
+<span id="L473"><span class="lineNum">     473</span> <span class="tlaGNC">          56 :                                                 if (all_inline &amp;&amp; !compact) continue;</span></span>
+<span id="L474"><span class="lineNum">     474</span>              : </span>
+<span id="L475"><span class="lineNum">     475</span> <span class="tlaGNC">          56 :                                                 SCOPED_TRACE(testing::Message() &lt;&lt; &quot;compact=&quot; &lt;&lt; compact &lt;&lt; &quot; pruned=&quot; &lt;&lt; pruned &lt;&lt; &quot; inline=&quot; &lt;&lt; all_inline);</span></span>
+<span id="L476"><span class="lineNum">     476</span>              : </span>
+<span id="L477"><span class="lineNum">     477</span> <span class="tlaGNC">          40 :                                                 const auto&amp; data = all_inline ? inline_broadcast : broadcast;</span></span>
+<span id="L478"><span class="lineNum">     478</span>              : </span>
+<span id="L479"><span class="lineNum">     479</span> <span class="tlaGNC">          40 :                                                 const auto&amp; wire = compact</span></span>
+<span id="L480"><span class="lineNum">     480</span> <span class="tlaGNC">          40 :                                                         ? (pruned ? data.compact_blob : data.compact_unpruned_blob)</span></span>
+<span id="L481"><span class="lineNum">     481</span> <span class="tlaGNC">          40 :                                                         : (pruned ? data.pruned_blob : data.blob);</span></span>
+<span id="L482"><span class="lineNum">     482</span>              : </span>
+<span id="L483"><span class="lineNum">     483</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.deserialize(wire.data(), wire.size(), sidechain, compact, pruned), 0);</span></span>
+<span id="L484"><span class="lineNum">     484</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.m_sidechainId, b.m_sidechainId);</span></span>
+<span id="L485"><span class="lineNum">     485</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.serialize_mainchain_data(), main);</span></span>
+<span id="L486"><span class="lineNum">     486</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.serialize_sidechain_data(), side);</span></span>
+<span id="L487"><span class="lineNum">     487</span> <span class="tlaGNC">          40 :                                                 ASSERT_EQ(decoded.m_carrotOutputs.size(), b.m_carrotOutputs.size());</span></span>
+<span id="L488"><span class="lineNum">     488</span>              : </span>
+<span id="L489"><span class="lineNum">     489</span> <span class="tlaGNC">         116 :                                                 for (size_t j = 0; j &lt; b.m_carrotOutputs.size(); ++j) {</span></span>
+<span id="L490"><span class="lineNum">     490</span> <span class="tlaGNC">          76 :                                                         const auto&amp; x = decoded.m_carrotOutputs[j];</span></span>
+<span id="L491"><span class="lineNum">     491</span> <span class="tlaGNC">          76 :                                                         const auto&amp; y = b.m_carrotOutputs[j];</span></span>
+<span id="L492"><span class="lineNum">     492</span> <span class="tlaGNC">          76 :                                                         ASSERT_EQ(x.amount, y.amount);</span></span>
+<span id="L493"><span class="lineNum">     493</span> <span class="tlaGNC">          76 :                                                         ASSERT_EQ(x.onetime_address, y.onetime_address);</span></span>
+<span id="L494"><span class="lineNum">     494</span> <span class="tlaGNC">          76 :                                                         ASSERT_EQ(x.eph_pub_key, y.eph_pub_key);</span></span>
+<span id="L495"><span class="lineNum">     495</span> <span class="tlaGNC">          76 :                                                         ASSERT_EQ(x.vt, y.vt);</span></span>
+<span id="L496"><span class="lineNum">     496</span> <span class="tlaGNC">          76 :                                                         ASSERT_EQ(x.anchor_enc, y.anchor_enc);</span></span>
+<span id="L497"><span class="lineNum">     497</span> <span class="tlaGNC">          76 :                                                 }</span></span>
+<span id="L498"><span class="lineNum">     498</span>              : </span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaGNC">          40 :                                                 ASSERT_TRUE(decoded.m_ephPublicKeys.empty());</span></span>
+<span id="L500"><span class="lineNum">     500</span> <span class="tlaGNC">          40 :                                                 ASSERT_TRUE(decoded.m_outputAmounts.empty());</span></span>
+<span id="L501"><span class="lineNum">     501</span> <span class="tlaGNC">          40 :                                                 ASSERT_TRUE(decoded.m_viewTags.empty());</span></span>
+<span id="L502"><span class="lineNum">     502</span> <span class="tlaGNC">          40 :                                                 ASSERT_FALSE(decoded.m_verified);</span></span>
+<span id="L503"><span class="lineNum">     503</span>              : </span>
+<span id="L504"><span class="lineNum">     504</span> <span class="tlaGNC">         152 :                                                 for (size_t j = 0; j &lt; mining_wallets.size(); ++j) {</span></span>
+<span id="L505"><span class="lineNum">     505</span> <span class="tlaGNC">         224 :                                                         EXPECT_EQ(decoded.get_payout(mining_wallets[j]), payouts[i][j]) &lt;&lt; &quot;miner &quot; &lt;&lt; j;</span></span>
+<span id="L506"><span class="lineNum">     506</span> <span class="tlaGNC">         112 :                                                 }</span></span>
+<span id="L507"><span class="lineNum">     507</span> <span class="tlaGNC">          40 :                                                 EXPECT_EQ(decoded.get_payout(no_payout), 0U);</span></span>
+<span id="L508"><span class="lineNum">     508</span>              : </span>
+<span id="L509"><span class="lineNum">     509</span> <span class="tlaGNC">          40 :                                                 if (pruned) {</span></span>
+<span id="L510"><span class="lineNum">     510</span> <span class="tlaGNC">          20 :                                                         ASSERT_NE(decoded.deserialize(wire.data(), wire.size(), sidechain, compact, false), 0);</span></span>
+<span id="L511"><span class="lineNum">     511</span> <span class="tlaGNC">          20 :                                                 }</span></span>
+<span id="L512"><span class="lineNum">     512</span> <span class="tlaGNC">          40 :                                         }</span></span>
+<span id="L513"><span class="lineNum">     513</span> <span class="tlaGNC">          28 :                                 }</span></span>
+<span id="L514"><span class="lineNum">     514</span> <span class="tlaGNC">          14 :                         }</span></span>
+<span id="L515"><span class="lineNum">     515</span>              : </span>
+<span id="L516"><span class="lineNum">     516</span> <span class="tlaGNC">           8 :                         const auto&amp; pruned = broadcast.pruned_blob;</span></span>
+<span id="L517"><span class="lineNum">     517</span>              : </span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaGNC">           8 :                         const uint8_t* const begin = pruned.data();</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaGNC">           8 :                         const uint8_t* const end = begin + pruned.size();</span></span>
+<span id="L520"><span class="lineNum">     520</span>              : </span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">           8 :                         uint64_t value;</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">           8 :                         const size_t reward_offset = layout.outputs_offset + 1;</span></span>
+<span id="L523"><span class="lineNum">     523</span> <span class="tlaGNC">           8 :                         const uint8_t* output_size_ptr = readVarint(begin + reward_offset, end, value);</span></span>
+<span id="L524"><span class="lineNum">     524</span> <span class="tlaGNC">           8 :                         ASSERT_NE(output_size_ptr, nullptr);</span></span>
+<span id="L525"><span class="lineNum">     525</span>              : </span>
+<span id="L526"><span class="lineNum">     526</span> <span class="tlaGNC">           8 :                         const uint8_t* id = readVarint(output_size_ptr, end, value);</span></span>
+<span id="L527"><span class="lineNum">     527</span> <span class="tlaGNC">           8 :                         ASSERT_NE(id, nullptr);</span></span>
+<span id="L528"><span class="lineNum">     528</span>              : </span>
+<span id="L529"><span class="lineNum">     529</span> <span class="tlaGNC">           8 :                         const uint8_t* extra_size_ptr = id + HASH_SIZE;</span></span>
+<span id="L530"><span class="lineNum">     530</span> <span class="tlaGNC">           8 :                         const uint8_t* pubkeys_size_ptr = readVarint(extra_size_ptr, end, value);</span></span>
+<span id="L531"><span class="lineNum">     531</span> <span class="tlaGNC">           8 :                         ASSERT_NE(pubkeys_size_ptr, nullptr);</span></span>
+<span id="L532"><span class="lineNum">     532</span>              : </span>
+<span id="L533"><span class="lineNum">     533</span> <span class="tlaGNC">           8 :                         const uint64_t extra_size = value;</span></span>
+<span id="L534"><span class="lineNum">     534</span> <span class="tlaGNC">           8 :                         const uint8_t* nonce_tag = readVarint(pubkeys_size_ptr, end, value);</span></span>
+<span id="L535"><span class="lineNum">     535</span> <span class="tlaGNC">           8 :                         ASSERT_NE(nonce_tag, nullptr);</span></span>
+<span id="L536"><span class="lineNum">     536</span>              : </span>
+<span id="L537"><span class="lineNum">     537</span> <span class="tlaGNC">           8 :                         const uint64_t pubkeys_size = value;</span></span>
+<span id="L538"><span class="lineNum">     538</span>              : </span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">         128 :                         auto bad_varint = [&amp;](size_t offset, uint64_t replacement) {</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">         128 :                                 auto bad = pruned;</span></span>
+<span id="L541"><span class="lineNum">     541</span> <span class="tlaGNC">         128 :                                 replace_carrot_varint(bad, offset, replacement);</span></span>
+<span id="L542"><span class="lineNum">     542</span> <span class="tlaGNC">         256 :                                 EXPECT_NE(decoded.deserialize(bad.data(), bad.size(), sidechain, false, true), 0) &lt;&lt; &quot;offset=&quot; &lt;&lt; offset &lt;&lt; &quot; value=&quot; &lt;&lt; replacement;</span></span>
+<span id="L543"><span class="lineNum">     543</span> <span class="tlaGNC">         128 :                         };</span></span>
+<span id="L544"><span class="lineNum">     544</span>              : </span>
+<span id="L545"><span class="lineNum">     545</span> <span class="tlaGNC">           8 :                         bad_varint(reward_offset, reward + 1);</span></span>
+<span id="L546"><span class="lineNum">     546</span>              : </span>
+<span id="L547"><span class="lineNum">     547</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 53ULL, uint64_t(layout.outputs_blob_size - 1), uint64_t(layout.outputs_blob_size + 1), MAX_BLOCK_SIZE_NEW + 1, UINT64_MAX}) bad_varint(output_size_ptr - begin, n);</span></span>
+<span id="L548"><span class="lineNum">     548</span> <span class="tlaGNC">          48 :                         for (uint64_t n : std::initializer_list&lt;uint64_t&gt;{0ULL, 32ULL, pubkeys_size - 1, pubkeys_size + 1, MAX_BLOCK_SIZE_NEW + 1, UINT64_MAX}) bad_varint(pubkeys_size_ptr - begin, n);</span></span>
+<span id="L549"><span class="lineNum">     549</span>              : </span>
+<span id="L550"><span class="lineNum">     550</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size - 1);</span></span>
+<span id="L551"><span class="lineNum">     551</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size + 1);</span></span>
+<span id="L552"><span class="lineNum">     552</span> <span class="tlaGNC">           8 :                         bad_varint(extra_size_ptr - begin, extra_size - (pubkeys_size - (nonce_tag - pubkeys_size_ptr)));</span></span>
+<span id="L553"><span class="lineNum">     553</span>              : </span>
+<span id="L554"><span class="lineNum">     554</span> <span class="tlaGNC">           8 :                         auto changed_nonces = pruned;</span></span>
+<span id="L555"><span class="lineNum">     555</span> <span class="tlaGNC">           8 :                         changed_nonces[layout.header_size - NONCE_SIZE] ^= 0x80;</span></span>
+<span id="L556"><span class="lineNum">     556</span> <span class="tlaGNC">           8 :                         changed_nonces[(nonce_tag - begin) + 2] ^= 0x40;</span></span>
+<span id="L557"><span class="lineNum">     557</span>              : </span>
+<span id="L558"><span class="lineNum">     558</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.deserialize(changed_nonces.data(), changed_nonces.size(), sidechain, false, true), 0);</span></span>
+<span id="L559"><span class="lineNum">     559</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.m_sidechainId, b.m_sidechainId);</span></span>
+<span id="L560"><span class="lineNum">     560</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.m_nonce, b.m_nonce ^ 0x80);</span></span>
+<span id="L561"><span class="lineNum">     561</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.m_extraNonce, b.m_extraNonce ^ 0x40);</span></span>
+<span id="L562"><span class="lineNum">     562</span>              : </span>
+<span id="L563"><span class="lineNum">     563</span> <span class="tlaGNC">           8 :                         const uint32_t nonce = b.m_nonce ^ 0x80;</span></span>
+<span id="L564"><span class="lineNum">     564</span> <span class="tlaGNC">           8 :                         const uint32_t extra_nonce = b.m_extraNonce ^ 0x40;</span></span>
+<span id="L565"><span class="lineNum">     565</span>              : </span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC">           8 :                         ASSERT_EQ(decoded.serialize_mainchain_data(), b.serialize_mainchain_data(nullptr, &amp;nonce, &amp;extra_nonce));</span></span>
+<span id="L567"><span class="lineNum">     567</span>              : </span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">          32 :                         for (size_t offset : {size_t(id - begin), pruned.size() - 1, pruned.size() - side.size() - HASH_SIZE, pruned.size() - side.size() - HASH_SIZE - 2}) {</span></span>
+<span id="L569"><span class="lineNum">     569</span> <span class="tlaGNC">          32 :                                 auto bad = pruned;</span></span>
+<span id="L570"><span class="lineNum">     570</span> <span class="tlaGNC">          32 :                                 bad[offset] ^= 1;</span></span>
+<span id="L571"><span class="lineNum">     571</span> <span class="tlaGNC">          64 :                                 EXPECT_NE(decoded.deserialize(bad.data(), bad.size(), sidechain, false, true), 0) &lt;&lt; offset;</span></span>
+<span id="L572"><span class="lineNum">     572</span> <span class="tlaGNC">          32 :                         }</span></span>
+<span id="L573"><span class="lineNum">     573</span>              : </span>
+<span id="L574"><span class="lineNum">     574</span> <span class="tlaGNC">           8 :                         auto bad_count = buf;</span></span>
+<span id="L575"><span class="lineNum">     575</span> <span class="tlaGNC">           8 :                         replace_carrot_varint(bad_count, layout.outputs_offset, UINT64_MAX);</span></span>
+<span id="L576"><span class="lineNum">     576</span> <span class="tlaGNC">           8 :                         EXPECT_NE(decoded.deserialize(bad_count.data(), bad_count.size(), sidechain, false, false), 0);</span></span>
+<span id="L577"><span class="lineNum">     577</span>              : </span>
+<span id="L578"><span class="lineNum">     578</span> <span class="tlaGNC">           8 :                         if (i &gt; 0) {</span></span>
+<span id="L579"><span class="lineNum">     579</span> <span class="tlaGNC">           6 :                                 auto bad_reward = buf;</span></span>
+<span id="L580"><span class="lineNum">     580</span> <span class="tlaGNC">           6 :                                 replace_carrot_varint(bad_reward, layout.outputs_offset + 1, UINT64_MAX);</span></span>
+<span id="L581"><span class="lineNum">     581</span> <span class="tlaGNC">           6 :                                 EXPECT_NE(decoded.deserialize(bad_reward.data(), bad_reward.size(), sidechain, false, false), 0);</span></span>
+<span id="L582"><span class="lineNum">     582</span> <span class="tlaGNC">           6 :                         }</span></span>
+<span id="L583"><span class="lineNum">     583</span>              : </span>
+<span id="L584"><span class="lineNum">     584</span> <span class="tlaGNC">           8 :                         if (!cached) {</span></span>
+<span id="L585"><span class="lineNum">     585</span> <span class="tlaGNC">       61026 :                                 for (size_t n = 0; n &lt; pruned.size(); ++n) EXPECT_NE(decoded.deserialize(pruned.data(), n, sidechain, false, true), 0) &lt;&lt; n;</span></span>
+<span id="L586"><span class="lineNum">     586</span> <span class="tlaGNC">           4 :                         }</span></span>
+<span id="L587"><span class="lineNum">     587</span> <span class="tlaGNC">           8 :                 }</span></span>
+<span id="L588"><span class="lineNum">     588</span> <span class="tlaGNC">           4 :         }</span></span>
+<span id="L589"><span class="lineNum">     589</span> <span class="tlaGNC">           1 :         ASSERT_EQ(ancestors.peek(), std::char_traits&lt;char&gt;::eof());</span></span>
+<span id="L590"><span class="lineNum">     590</span>              : </span>
+<span id="L591"><span class="lineNum">     591</span> <span class="tlaGNC">           1 :         const PoolBlock* parent = sidechain.chainTip();</span></span>
+<span id="L592"><span class="lineNum">     592</span> <span class="tlaGNC">           1 :         ASSERT_NE(parent, nullptr);</span></span>
+<span id="L593"><span class="lineNum">     593</span> <span class="tlaGNC">           1 :         ASSERT_FALSE(parent-&gt;m_transactions.empty());</span></span>
+<span id="L594"><span class="lineNum">     594</span>              : </span>
+<span id="L595"><span class="lineNum">     595</span> <span class="tlaGNC">           1 :         {</span></span>
+<span id="L596"><span class="lineNum">     596</span> <span class="tlaGNC">           1 :                 PoolBlock scan_block(*parent);</span></span>
+<span id="L597"><span class="lineNum">     597</span>              : </span>
+<span id="L598"><span class="lineNum">     598</span> <span class="tlaGNC">           1 :                 PoolBlock* original_tip = sidechain.blocksById().at(parent-&gt;m_sidechainId);</span></span>
+<span id="L599"><span class="lineNum">     599</span> <span class="tlaGNC">           1 :                 sidechain.set_chain_tip(&amp;scan_block);</span></span>
+<span id="L600"><span class="lineNum">     600</span>              : </span>
+<span id="L601"><span class="lineNum">     601</span> <span class="tlaGNC">           1 :                 auto restore_tip = ScopeGuard{[&amp;]() { sidechain.set_chain_tip(original_tip); }};</span></span>
+<span id="L602"><span class="lineNum">     602</span>              : </span>
+<span id="L603"><span class="lineNum">     603</span> <span class="tlaGNC">           8 :                 auto check_no_reward = [&amp;]() {</span></span>
+<span id="L604"><span class="lineNum">     604</span> <span class="tlaGNC">          40 :                         for (size_t i = 0; i &lt; mining_wallets.size(); ++i) {</span></span>
+<span id="L605"><span class="lineNum">     605</span> <span class="tlaGNC">          64 :                                 EXPECT_EQ(scan_block.get_payout(mining_wallets[i]), 0U) &lt;&lt; &quot;miner &quot; &lt;&lt; i;</span></span>
+<span id="L606"><span class="lineNum">     606</span> <span class="tlaGNC">          64 :                                 EXPECT_DOUBLE_EQ(sidechain.get_reward_share(mining_wallets[i]), 0.0) &lt;&lt; &quot;miner &quot; &lt;&lt; i;</span></span>
+<span id="L607"><span class="lineNum">     607</span> <span class="tlaGNC">          32 :                         }</span></span>
+<span id="L608"><span class="lineNum">     608</span> <span class="tlaGNC">           8 :                 };</span></span>
+<span id="L609"><span class="lineNum">     609</span>              : </span>
+<span id="L610"><span class="lineNum">     610</span> <span class="tlaGNC">           4 :                 for (size_t i = 0; i &lt; CARROT_VIEW_TAG_BYTES; ++i) {</span></span>
+<span id="L611"><span class="lineNum">     611</span> <span class="tlaGNC">           3 :                         SCOPED_TRACE(testing::Message() &lt;&lt; &quot;view-tag byte &quot; &lt;&lt; i);</span></span>
+<span id="L612"><span class="lineNum">     612</span>              : </span>
+<span id="L613"><span class="lineNum">     613</span> <span class="tlaGNC">           9 :                         for (auto&amp; o : scan_block.m_carrotOutputs) o.vt.data[i] ^= 1;</span></span>
+<span id="L614"><span class="lineNum">     614</span>              : </span>
+<span id="L615"><span class="lineNum">     615</span> <span class="tlaGNC">           3 :                         check_no_reward();</span></span>
+<span id="L616"><span class="lineNum">     616</span> <span class="tlaGNC">           3 :                         scan_block.m_carrotOutputs = parent-&gt;m_carrotOutputs;</span></span>
+<span id="L617"><span class="lineNum">     617</span> <span class="tlaGNC">           3 :                 }</span></span>
+<span id="L618"><span class="lineNum">     618</span>              : </span>
+<span id="L619"><span class="lineNum">     619</span> <span class="tlaGNC">           3 :                 for (auto&amp; o : scan_block.m_carrotOutputs) ++o.amount;</span></span>
+<span id="L620"><span class="lineNum">     620</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
+<span id="L621"><span class="lineNum">     621</span> <span class="tlaGNC">           1 :                 scan_block.m_carrotOutputs = parent-&gt;m_carrotOutputs;</span></span>
+<span id="L622"><span class="lineNum">     622</span>              : </span>
+<span id="L623"><span class="lineNum">     623</span> <span class="tlaGNC">           3 :                 for (auto&amp; o : scan_block.m_carrotOutputs) o.eph_pub_key.h[0] ^= 1;</span></span>
+<span id="L624"><span class="lineNum">     624</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
+<span id="L625"><span class="lineNum">     625</span> <span class="tlaGNC">           1 :                 scan_block.m_carrotOutputs = parent-&gt;m_carrotOutputs;</span></span>
+<span id="L626"><span class="lineNum">     626</span>              : </span>
+<span id="L627"><span class="lineNum">     627</span> <span class="tlaGNC">           1 :                 ++scan_block.m_txinGenHeight;</span></span>
+<span id="L628"><span class="lineNum">     628</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
+<span id="L629"><span class="lineNum">     629</span> <span class="tlaGNC">           1 :                 scan_block.m_txinGenHeight = parent-&gt;m_txinGenHeight;</span></span>
+<span id="L630"><span class="lineNum">     630</span>              : </span>
+<span id="L631"><span class="lineNum">     631</span> <span class="tlaGNC">           1 :                 scan_block.m_txkeySec.h[0] ^= 1;</span></span>
+<span id="L632"><span class="lineNum">     632</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
+<span id="L633"><span class="lineNum">     633</span> <span class="tlaGNC">           1 :                 scan_block.m_txkeySec = parent-&gt;m_txkeySec;</span></span>
+<span id="L634"><span class="lineNum">     634</span>              : </span>
+<span id="L635"><span class="lineNum">     635</span> <span class="tlaGNC">           1 :                 scan_block.m_carrotOutputs.clear();</span></span>
+<span id="L636"><span class="lineNum">     636</span> <span class="tlaGNC">           1 :                 check_no_reward();</span></span>
+<span id="L637"><span class="lineNum">     637</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L638"><span class="lineNum">     638</span>              : </span>
+<span id="L639"><span class="lineNum">     639</span> <span class="tlaGNC">           1 :         MinerData data{};</span></span>
+<span id="L640"><span class="lineNum">     640</span>              : </span>
+<span id="L641"><span class="lineNum">     641</span> <span class="tlaGNC">           1 :         data.major_version = parent-&gt;m_majorVersion;</span></span>
+<span id="L642"><span class="lineNum">     642</span> <span class="tlaGNC">           1 :         data.height = parent-&gt;m_txinGenHeight;</span></span>
+<span id="L643"><span class="lineNum">     643</span> <span class="tlaGNC">           1 :         data.prev_id = parent-&gt;m_prevId;</span></span>
+<span id="L644"><span class="lineNum">     644</span> <span class="tlaGNC">           1 :         data.difficulty = sidechain.m_testMainChainDiff;</span></span>
+<span id="L645"><span class="lineNum">     645</span> <span class="tlaGNC">           1 :         data.median_weight = 300000;</span></span>
+<span id="L646"><span class="lineNum">     646</span> <span class="tlaGNC">           1 :         data.already_generated_coins = 18204981557254756780ULL;</span></span>
+<span id="L647"><span class="lineNum">     647</span> <span class="tlaGNC">           1 :         data.median_timestamp = parent-&gt;m_timestamp;</span></span>
+<span id="L648"><span class="lineNum">     648</span> <span class="tlaGNC">           1 :         data.fcmp_pp_n_tree_layers = parent-&gt;m_fcmp_pp_n_tree_layers;</span></span>
+<span id="L649"><span class="lineNum">     649</span> <span class="tlaGNC">           1 :         data.fcmp_pp_tree_root = parent-&gt;m_fcmp_pp_tree_root;</span></span>
+<span id="L650"><span class="lineNum">     650</span>              : </span>
+<span id="L651"><span class="lineNum">     651</span> <span class="tlaGNC">           1 :         Mempool mempool;</span></span>
+<span id="L652"><span class="lineNum">     652</span>              : </span>
+<span id="L653"><span class="lineNum">     653</span> <span class="tlaGNC">           1 :         Params params;</span></span>
+<span id="L654"><span class="lineNum">     654</span> <span class="tlaGNC">           1 :         params.m_miningWallet = parent-&gt;m_minerWallet;</span></span>
+<span id="L655"><span class="lineNum">     655</span>              : </span>
+<span id="L656"><span class="lineNum">     656</span> <span class="tlaGNC">           1 :         BlockTemplate tpl(&amp;sidechain, nullptr);</span></span>
+<span id="L657"><span class="lineNum">     657</span>              : </span>
+<span id="L658"><span class="lineNum">     658</span> <span class="tlaGNC">           1 :         tpl.rng().seed(123);</span></span>
+<span id="L659"><span class="lineNum">     659</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
+<span id="L660"><span class="lineNum">     660</span>              : </span>
+<span id="L661"><span class="lineNum">     661</span> <span class="tlaGNC">           1 :         const PoolBlock* b = tpl.pool_block_template();</span></span>
+<span id="L662"><span class="lineNum">     662</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(b-&gt;m_transactions.empty());</span></span>
+<span id="L663"><span class="lineNum">     663</span>              : </span>
+<span id="L664"><span class="lineNum">     664</span> <span class="tlaGNC">           1 :         const P2PServer::Broadcast broadcast(*b, parent);</span></span>
+<span id="L665"><span class="lineNum">     665</span>              : </span>
+<span id="L666"><span class="lineNum">     666</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(broadcast.compact_blob.empty());</span></span>
+<span id="L667"><span class="lineNum">     667</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(broadcast.compact_unpruned_blob.empty());</span></span>
+<span id="L668"><span class="lineNum">     668</span>              : </span>
+<span id="L669"><span class="lineNum">     669</span> <span class="tlaGNC">           2 :         for (bool pruned : {false, true}) {</span></span>
+<span id="L670"><span class="lineNum">     670</span> <span class="tlaGNC">           2 :                 const auto&amp; wire = pruned ? broadcast.pruned_blob : broadcast.blob;</span></span>
+<span id="L671"><span class="lineNum">     671</span>              : </span>
+<span id="L672"><span class="lineNum">     672</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.deserialize(wire.data(), wire.size(), sidechain, false, pruned), 0);</span></span>
+<span id="L673"><span class="lineNum">     673</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.m_sidechainId, b-&gt;m_sidechainId);</span></span>
+<span id="L674"><span class="lineNum">     674</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.serialize_mainchain_data(), b-&gt;serialize_mainchain_data());</span></span>
+<span id="L675"><span class="lineNum">     675</span> <span class="tlaGNC">           2 :                 ASSERT_EQ(decoded.serialize_sidechain_data(), b-&gt;serialize_sidechain_data());</span></span>
+<span id="L676"><span class="lineNum">     676</span> <span class="tlaGNC">           2 :         }</span></span>
+<span id="L677"><span class="lineNum">     677</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L678"><span class="lineNum">     678</span>              : </span>
+<span id="L679"><span class="lineNum">     679</span>              : TEST(pool_block, verify)</span>
+<span id="L680"><span class="lineNum">     680</span> <span class="tlaGNC">           1 : {</span></span>
+<span id="L681"><span class="lineNum">     681</span> <span class="tlaGNC">           1 :         thread_pool_init();</span></span>
+<span id="L682"><span class="lineNum">     682</span> <span class="tlaGNC">           1 :         init_crypto_cache();</span></span>
+<span id="L683"><span class="lineNum">     683</span> <span class="tlaGNC">           1 :         {</span></span>
+<span id="L684"><span class="lineNum">     684</span> <span class="tlaGNC">           1 :         struct STest</span></span>
+<span id="L685"><span class="lineNum">     685</span> <span class="tlaGNC">           1 :         {</span></span>
+<span id="L686"><span class="lineNum">     686</span> <span class="tlaGNC">           1 :                 const char* m_poolName;</span></span>
+<span id="L687"><span class="lineNum">     687</span> <span class="tlaGNC">           1 :                 const char* m_fileName;</span></span>
+<span id="L688"><span class="lineNum">     688</span> <span class="tlaGNC">           1 :                 uint64_t m_txinGenHeight;</span></span>
+<span id="L689"><span class="lineNum">     689</span> <span class="tlaGNC">           1 :                 uint64_t m_sidechainHeight;</span></span>
+<span id="L690"><span class="lineNum">     690</span> <span class="tlaGNC">           1 :                 uint32_t m_expectedSharesNextBlock;</span></span>
+<span id="L691"><span class="lineNum">     691</span> <span class="tlaGNC">           1 :                 bool m_shuffle;</span></span>
+<span id="L692"><span class="lineNum">     692</span> <span class="tlaGNC">           1 :                 hash m_templateBlobsHash;</span></span>
+<span id="L693"><span class="lineNum">     693</span> <span class="tlaGNC">           1 :         } tests[6] = {</span></span>
+<span id="L694"><span class="lineNum">     694</span> <span class="tlaGNC">           1 :                 { &quot;default&quot;, &quot;sidechain_dump.dat&quot;, 3456189, 11704382, 53, false, H(&quot;fd6bd6b38ed20a770c7eca6de3715e36453765908ef52a1d4df822d5eb66de5d&quot;) },</span></span>
+<span id="L695"><span class="lineNum">     695</span> <span class="tlaGNC">           1 :                 { &quot;default&quot;, &quot;sidechain_dump.dat&quot;, 3456189, 11704382, 53, true, H(&quot;fd6bd6b38ed20a770c7eca6de3715e36453765908ef52a1d4df822d5eb66de5d&quot;) },</span></span>
+<span id="L696"><span class="lineNum">     696</span> <span class="tlaGNC">           1 :                 { &quot;mini&quot;, &quot;sidechain_dump_mini.dat&quot;, 3456189, 11207082, 578, false, H(&quot;a0746d4a39a1a72aa48ddacc0c38d44504c77022bff92d937dbf45478cb8e4cb&quot;) },</span></span>
+<span id="L697"><span class="lineNum">     697</span> <span class="tlaGNC">           1 :                 { &quot;mini&quot;, &quot;sidechain_dump_mini.dat&quot;, 3456189, 11207082, 578, true, H(&quot;a0746d4a39a1a72aa48ddacc0c38d44504c77022bff92d937dbf45478cb8e4cb&quot;) },</span></span>
+<span id="L698"><span class="lineNum">     698</span> <span class="tlaGNC">           1 :                 { &quot;nano&quot;, &quot;sidechain_dump_nano.dat&quot;, 3456189, 188542, 115, false, H(&quot;2b5a6abd276e99a1a8165c42e4ef3b4a7bcb4e79e483fc891e77288f8498a417&quot;) },</span></span>
+<span id="L699"><span class="lineNum">     699</span> <span class="tlaGNC">           1 :                 { &quot;nano&quot;, &quot;sidechain_dump_nano.dat&quot;, 3456189, 188542, 115, true, H(&quot;2b5a6abd276e99a1a8165c42e4ef3b4a7bcb4e79e483fc891e77288f8498a417&quot;) },</span></span>
+<span id="L700"><span class="lineNum">     700</span> <span class="tlaGNC">           1 :         };</span></span>
+<span id="L701"><span class="lineNum">     701</span>              : </span>
+<span id="L702"><span class="lineNum">     702</span> <span class="tlaGNC">           1 :         for (const STest&amp; t : tests)</span></span>
+<span id="L703"><span class="lineNum">     703</span> <span class="tlaGNC">           6 :         {</span></span>
+<span id="L704"><span class="lineNum">     704</span> <span class="tlaGNC">           6 :                 SideChain sidechain(nullptr, NetworkType::Mainnet, t.m_poolName);</span></span>
+<span id="L705"><span class="lineNum">     705</span>              : </span>
+<span id="L706"><span class="lineNum">     706</span>              :                 // Difficulty of block 3454976</span>
+<span id="L707"><span class="lineNum">     707</span> <span class="tlaGNC">           6 :                 sidechain.m_testMainChainDiff = difficulty_type(625461936742ULL, 0ULL);</span></span>
+<span id="L708"><span class="lineNum">     708</span>              : </span>
+<span id="L709"><span class="lineNum">     709</span> <span class="tlaGNC">           6 :                 std::ifstream f(t.m_fileName, std::ios::binary | std::ios::ate);</span></span>
+<span id="L710"><span class="lineNum">     710</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(f.good() &amp;&amp; f.is_open(), true);</span></span>
+<span id="L711"><span class="lineNum">     711</span>              : </span>
+<span id="L712"><span class="lineNum">     712</span> <span class="tlaGNC">           6 :                 std::vector&lt;uint8_t&gt; buf(f.tellg());</span></span>
+<span id="L713"><span class="lineNum">     713</span> <span class="tlaGNC">           6 :                 f.seekg(0);</span></span>
+<span id="L714"><span class="lineNum">     714</span> <span class="tlaGNC">           6 :                 f.read(reinterpret_cast&lt;char*&gt;(buf.data()), buf.size());</span></span>
+<span id="L715"><span class="lineNum">     715</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(f.good(), true);</span></span>
+<span id="L716"><span class="lineNum">     716</span>              : </span>
+<span id="L717"><span class="lineNum">     717</span> <span class="tlaGNC">           6 :                 std::vector&lt;PoolBlock*&gt; blocks;</span></span>
+<span id="L718"><span class="lineNum">     718</span> <span class="tlaGNC">       26800 :                 for (const uint8_t *p = buf.data(), *e = buf.data() + buf.size(); p &lt; e;) {</span></span>
+<span id="L719"><span class="lineNum">     719</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(p + sizeof(uint32_t) &lt;= e);</span></span>
+<span id="L720"><span class="lineNum">     720</span> <span class="tlaGNC">       26794 :                         const uint32_t n = *reinterpret_cast&lt;const uint32_t*&gt;(p);</span></span>
+<span id="L721"><span class="lineNum">     721</span> <span class="tlaGNC">       26794 :                         p += sizeof(uint32_t);</span></span>
+<span id="L722"><span class="lineNum">     722</span>              : </span>
+<span id="L723"><span class="lineNum">     723</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(p + n &lt;= e);</span></span>
+<span id="L724"><span class="lineNum">     724</span>              : </span>
+<span id="L725"><span class="lineNum">     725</span> <span class="tlaGNC">       26794 :                         PoolBlock* b = new PoolBlock();</span></span>
+<span id="L726"><span class="lineNum">     726</span> <span class="tlaGNC">       26794 :                         ASSERT_EQ(b-&gt;deserialize(p, n, sidechain, false, false), 0);</span></span>
+<span id="L727"><span class="lineNum">     727</span> <span class="tlaGNC">       26794 :                         p += n;</span></span>
+<span id="L728"><span class="lineNum">     728</span>              : </span>
+<span id="L729"><span class="lineNum">     729</span> <span class="tlaGNC">       26794 :                         blocks.push_back(b);</span></span>
+<span id="L730"><span class="lineNum">     730</span> <span class="tlaGNC">       26794 :                 }</span></span>
+<span id="L731"><span class="lineNum">     731</span>              : </span>
+<span id="L732"><span class="lineNum">     732</span> <span class="tlaGNC">           6 :                 if (t.m_shuffle) {</span></span>
+<span id="L733"><span class="lineNum">     733</span> <span class="tlaGNC">           3 :                         std::mt19937_64 rng;</span></span>
+<span id="L734"><span class="lineNum">     734</span>              : </span>
+<span id="L735"><span class="lineNum">     735</span> <span class="tlaGNC">       13397 :                         for (uint64_t i = 0, k, n = blocks.size(); i &lt; n - 1; ++i) {</span></span>
+<span id="L736"><span class="lineNum">     736</span> <span class="tlaGNC">       13394 :                                 umul128(rng(), n - i, &amp;k);</span></span>
+<span id="L737"><span class="lineNum">     737</span> <span class="tlaGNC">       13394 :                                 std::swap(blocks[i], blocks[i + k]);</span></span>
+<span id="L738"><span class="lineNum">     738</span> <span class="tlaGNC">       13394 :                         }</span></span>
+<span id="L739"><span class="lineNum">     739</span> <span class="tlaGNC">           3 :                 }</span></span>
+<span id="L740"><span class="lineNum">     740</span>              : </span>
+<span id="L741"><span class="lineNum">     741</span> <span class="tlaGNC">       26800 :                 for (uint64_t i = 0, n = blocks.size(); i &lt; n; ++i) {</span></span>
+<span id="L742"><span class="lineNum">     742</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(sidechain.add_block(*blocks[i]));</span></span>
+<span id="L743"><span class="lineNum">     743</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(sidechain.find_block(blocks[i]-&gt;m_sidechainId) != nullptr);</span></span>
+<span id="L744"><span class="lineNum">     744</span> <span class="tlaGNC">       26794 :                         delete blocks[i];</span></span>
+<span id="L745"><span class="lineNum">     745</span> <span class="tlaGNC">       26794 :                 }</span></span>
+<span id="L746"><span class="lineNum">     746</span>              : </span>
+<span id="L747"><span class="lineNum">     747</span> <span class="tlaGNC">       26800 :                 for (auto it = sidechain.blocksById().begin(); it != sidechain.blocksById().end(); ++it) {</span></span>
+<span id="L748"><span class="lineNum">     748</span> <span class="tlaGNC">       26794 :                         const PoolBlock* b = it-&gt;second;</span></span>
+<span id="L749"><span class="lineNum">     749</span> <span class="tlaGNC">       26794 :                         ASSERT_TRUE(b-&gt;m_verified);</span></span>
+<span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">       26794 :                         ASSERT_FALSE(b-&gt;m_invalid);</span></span>
+<span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">       26794 :                 }</span></span>
+<span id="L752"><span class="lineNum">     752</span>              : </span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">           6 :                 const PoolBlock* tip = sidechain.chainTip();</span></span>
+<span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(tip != nullptr);</span></span>
+<span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(tip-&gt;m_verified);</span></span>
+<span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">           6 :                 ASSERT_FALSE(tip-&gt;m_invalid);</span></span>
+<span id="L757"><span class="lineNum">     757</span>              : </span>
+<span id="L758"><span class="lineNum">     758</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(tip-&gt;m_txinGenHeight, t.m_txinGenHeight);</span></span>
+<span id="L759"><span class="lineNum">     759</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(tip-&gt;m_sidechainHeight, t.m_sidechainHeight);</span></span>
+<span id="L760"><span class="lineNum">     760</span>              : </span>
+<span id="L761"><span class="lineNum">     761</span> <span class="tlaGNC">           6 :                 {</span></span>
+<span id="L762"><span class="lineNum">     762</span> <span class="tlaGNC">           6 :                         BlockTemplate tpl(&amp;sidechain, nullptr);</span></span>
+<span id="L763"><span class="lineNum">     763</span> <span class="tlaGNC">           6 :                         auto&amp; r = tpl.rng();</span></span>
+<span id="L764"><span class="lineNum">     764</span> <span class="tlaGNC">           6 :                         r.seed(0);</span></span>
+<span id="L765"><span class="lineNum">     765</span>              : </span>
+<span id="L766"><span class="lineNum">     766</span> <span class="tlaGNC">           6 :                         MinerData data;</span></span>
+<span id="L767"><span class="lineNum">     767</span> <span class="tlaGNC">           6 :                         data.major_version = 16;</span></span>
+<span id="L768"><span class="lineNum">     768</span> <span class="tlaGNC">           6 :                         data.height = t.m_txinGenHeight;</span></span>
+<span id="L769"><span class="lineNum">     769</span> <span class="tlaGNC">           6 :                         data.prev_id = H(&quot;f7723462d2f4d9f605601df8de8bd483802d2275f77cbf3a6f61d8f3fc4c47bc&quot;);</span></span>
+<span id="L770"><span class="lineNum">     770</span> <span class="tlaGNC">           6 :                         data.seed_hash = H(&quot;11186f5a8473d8dc7a0d3a0bf25834a07b1dffe8741d53cd543a8708c2e8b2a9&quot;);</span></span>
+<span id="L771"><span class="lineNum">     771</span> <span class="tlaGNC">           6 :                         data.difficulty = { 656711234691ULL, 0 };</span></span>
+<span id="L772"><span class="lineNum">     772</span> <span class="tlaGNC">           6 :                         data.median_weight = 300000;</span></span>
+<span id="L773"><span class="lineNum">     773</span> <span class="tlaGNC">           6 :                         data.already_generated_coins = std::numeric_limits&lt;uint64_t&gt;::max();</span></span>
+<span id="L774"><span class="lineNum">     774</span> <span class="tlaGNC">           6 :                         data.median_timestamp = (1ULL &lt;&lt; 35) - 2;</span></span>
+<span id="L775"><span class="lineNum">     775</span>              : </span>
+<span id="L776"><span class="lineNum">     776</span> <span class="tlaGNC">           6 :                         Mempool mempool;</span></span>
+<span id="L777"><span class="lineNum">     777</span>              : </span>
+<span id="L778"><span class="lineNum">     778</span> <span class="tlaGNC">       49158 :                         for (uint64_t i = 0; i &lt; 8192; ++i) {</span></span>
+<span id="L779"><span class="lineNum">     779</span> <span class="tlaGNC">       49152 :                                 hash h;</span></span>
+<span id="L780"><span class="lineNum">     780</span> <span class="tlaGNC">       49152 :                                 h.u64()[0] = i;</span></span>
+<span id="L781"><span class="lineNum">     781</span>              : </span>
+<span id="L782"><span class="lineNum">     782</span> <span class="tlaGNC">       49152 :                                 TxMempoolData tx;</span></span>
+<span id="L783"><span class="lineNum">     783</span> <span class="tlaGNC">       49152 :                                 tx.id = static_cast&lt;indexed_hash&gt;(h);</span></span>
+<span id="L784"><span class="lineNum">     784</span> <span class="tlaGNC">       49152 :                                 tx.fee = (r() % 1'000'000'000) + 30'000'000;</span></span>
+<span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">       49152 :                                 tx.weight = (r() % 20'000) + 1'500;</span></span>
+<span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">       49152 :                                 mempool.add(tx);</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">       49152 :                         }</span></span>
+<span id="L788"><span class="lineNum">     788</span>              : </span>
+<span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">           6 :                         Params params;</span></span>
+<span id="L790"><span class="lineNum">     790</span>              : </span>
+<span id="L791"><span class="lineNum">     791</span> <span class="tlaGNC">           6 :                         params.m_miningWallet = Wallet(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;);</span></span>
+<span id="L792"><span class="lineNum">     792</span>              : </span>
+<span id="L793"><span class="lineNum">     793</span> <span class="tlaGNC">           6 :                         tpl.update(data, mempool, params);</span></span>
+<span id="L794"><span class="lineNum">     794</span>              : </span>
+<span id="L795"><span class="lineNum">     795</span> <span class="tlaGNC">           6 :                         std::vector&lt;uint8_t&gt; blobs;</span></span>
+<span id="L796"><span class="lineNum">     796</span> <span class="tlaGNC">           6 :                         uint64_t height;</span></span>
+<span id="L797"><span class="lineNum">     797</span> <span class="tlaGNC">           6 :                         difficulty_type diff, aux_diff, sidechain_diff;</span></span>
+<span id="L798"><span class="lineNum">     798</span> <span class="tlaGNC">           6 :                         hash seed_hash;</span></span>
+<span id="L799"><span class="lineNum">     799</span> <span class="tlaGNC">           6 :                         size_t nonce_offset;</span></span>
+<span id="L800"><span class="lineNum">     800</span> <span class="tlaGNC">           6 :                         uint32_t template_id;</span></span>
+<span id="L801"><span class="lineNum">     801</span> <span class="tlaGNC">           6 :                         const uint32_t blob_size = tpl.get_hashing_blobs(0, 1000, blobs, height, diff, aux_diff, sidechain_diff, seed_hash, nonce_offset, template_id);</span></span>
+<span id="L802"><span class="lineNum">     802</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(blob_size, 77);</span></span>
+<span id="L803"><span class="lineNum">     803</span>              : </span>
+<span id="L804"><span class="lineNum">     804</span> <span class="tlaGNC">           6 :                         hash blobs_hash;</span></span>
+<span id="L805"><span class="lineNum">     805</span> <span class="tlaGNC">           6 :                         keccak(blobs.data(), static_cast&lt;int&gt;(blobs.size()), blobs_hash.h);</span></span>
+<span id="L806"><span class="lineNum">     806</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(blobs_hash, t.m_templateBlobsHash);</span></span>
+<span id="L807"><span class="lineNum">     807</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L808"><span class="lineNum">     808</span>              : </span>
+<span id="L809"><span class="lineNum">     809</span> <span class="tlaGNC">           6 :                 PoolBlock block;</span></span>
+<span id="L810"><span class="lineNum">     810</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(block.m_minerWallet.decode(&quot;44MnN1f3Eto8DZYUWuE5XZNUtE3vcRzt2j6PzqWpPau34e6Cf4fAxt6X2MBmrm6F9YMEiMNjN6W4Shn4pLcfNAja621jwyg&quot;));</span></span>
+<span id="L811"><span class="lineNum">     811</span>              : </span>
+<span id="L812"><span class="lineNum">     812</span> <span class="tlaGNC">           6 :                 std::vector&lt;MinerShare&gt; shares;</span></span>
+<span id="L813"><span class="lineNum">     813</span>              : </span>
+<span id="L814"><span class="lineNum">     814</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(sidechain.fill_sidechain_data(block, shares));</span></span>
+<span id="L815"><span class="lineNum">     815</span>              : </span>
+<span id="L816"><span class="lineNum">     816</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(block.m_sidechainHeight, t.m_sidechainHeight + 1);</span></span>
+<span id="L817"><span class="lineNum">     817</span> <span class="tlaGNC">           6 :                 ASSERT_EQ(shares.size(), t.m_expectedSharesNextBlock);</span></span>
+<span id="L818"><span class="lineNum">     818</span>              : </span>
+<span id="L819"><span class="lineNum">     819</span> <span class="tlaGNC">           6 :                 const PoolBlock* parent = sidechain.find_block(tip-&gt;m_parent);</span></span>
+<span id="L820"><span class="lineNum">     820</span> <span class="tlaGNC">           6 :                 ASSERT_TRUE(parent != nullptr);</span></span>
+<span id="L821"><span class="lineNum">     821</span>              : </span>
+<span id="L822"><span class="lineNum">     822</span>              :                 // Check pruned and compact broadcast blobs</span>
+<span id="L823"><span class="lineNum">     823</span>              : </span>
+<span id="L824"><span class="lineNum">     824</span> <span class="tlaGNC">           6 :                 auto tip_full_blob = tip-&gt;serialize_mainchain_data();</span></span>
+<span id="L825"><span class="lineNum">     825</span> <span class="tlaGNC">           6 :                 auto v2 = tip-&gt;serialize_sidechain_data();</span></span>
+<span id="L826"><span class="lineNum">     826</span> <span class="tlaGNC">           6 :                 tip_full_blob.insert(tip_full_blob.end(), v2.begin(), v2.end());</span></span>
+<span id="L827"><span class="lineNum">     827</span>              : </span>
+<span id="L828"><span class="lineNum">     828</span> <span class="tlaGNC">           6 :                 P2PServer::Broadcast broadcast(*tip, parent);</span></span>
+<span id="L829"><span class="lineNum">     829</span>              : </span>
+<span id="L830"><span class="lineNum">     830</span> <span class="tlaGNC">           6 :                 {</span></span>
+<span id="L831"><span class="lineNum">     831</span> <span class="tlaGNC">           6 :                         PoolBlock block2;</span></span>
+<span id="L832"><span class="lineNum">     832</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, false, true), 0);</span></span>
+<span id="L833"><span class="lineNum">     833</span>              : </span>
+<span id="L834"><span class="lineNum">     834</span> <span class="tlaGNC">           6 :                         auto v1 = block2.serialize_mainchain_data();</span></span>
+<span id="L835"><span class="lineNum">     835</span> <span class="tlaGNC">           6 :                         v2 = block2.serialize_sidechain_data();</span></span>
+<span id="L836"><span class="lineNum">     836</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
+<span id="L837"><span class="lineNum">     837</span>              : </span>
+<span id="L838"><span class="lineNum">     838</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
+<span id="L839"><span class="lineNum">     839</span>              : </span>
+<span id="L840"><span class="lineNum">     840</span> <span class="tlaGNC">           6 :                         ASSERT_NE(block2.deserialize(broadcast.pruned_blob.data(), broadcast.pruned_blob.size(), sidechain, false, false), 0);</span></span>
+<span id="L841"><span class="lineNum">     841</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L842"><span class="lineNum">     842</span>              : </span>
+<span id="L843"><span class="lineNum">     843</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_blob.empty()) {</span></span>
+<span id="L844"><span class="lineNum">     844</span> <span class="tlaGNC">           6 :                         PoolBlock block3;</span></span>
+<span id="L845"><span class="lineNum">     845</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block3.deserialize(broadcast.compact_blob.data(), broadcast.compact_blob.size(), sidechain, true, true), 0);</span></span>
+<span id="L846"><span class="lineNum">     846</span>              : </span>
+<span id="L847"><span class="lineNum">     847</span> <span class="tlaGNC">           6 :                         auto v1 = block3.serialize_mainchain_data();</span></span>
+<span id="L848"><span class="lineNum">     848</span> <span class="tlaGNC">           6 :                         v2 = block3.serialize_sidechain_data();</span></span>
+<span id="L849"><span class="lineNum">     849</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
+<span id="L850"><span class="lineNum">     850</span>              : </span>
+<span id="L851"><span class="lineNum">     851</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
+<span id="L852"><span class="lineNum">     852</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L853"><span class="lineNum">     853</span>              : </span>
+<span id="L854"><span class="lineNum">     854</span> <span class="tlaGNC">           6 :                 if (!broadcast.compact_unpruned_blob.empty()) {</span></span>
+<span id="L855"><span class="lineNum">     855</span> <span class="tlaGNC">           6 :                         PoolBlock block4;</span></span>
+<span id="L856"><span class="lineNum">     856</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(block4.deserialize(broadcast.compact_unpruned_blob.data(), broadcast.compact_unpruned_blob.size(), sidechain, true, false), 0);</span></span>
+<span id="L857"><span class="lineNum">     857</span>              : </span>
+<span id="L858"><span class="lineNum">     858</span> <span class="tlaGNC">           6 :                         auto v1 = block4.serialize_mainchain_data();</span></span>
+<span id="L859"><span class="lineNum">     859</span> <span class="tlaGNC">           6 :                         v2 = block4.serialize_sidechain_data();</span></span>
+<span id="L860"><span class="lineNum">     860</span> <span class="tlaGNC">           6 :                         v1.insert(v1.end(), v2.begin(), v2.end());</span></span>
+<span id="L861"><span class="lineNum">     861</span>              : </span>
+<span id="L862"><span class="lineNum">     862</span> <span class="tlaGNC">           6 :                         ASSERT_EQ(v1, tip_full_blob);</span></span>
+<span id="L863"><span class="lineNum">     863</span> <span class="tlaGNC">           6 :                 }</span></span>
+<span id="L864"><span class="lineNum">     864</span> <span class="tlaGNC">           6 :         }</span></span>
+<span id="L865"><span class="lineNum">     865</span> <span class="tlaGNC">           1 :         }</span></span>
+<span id="L866"><span class="lineNum">     866</span> <span class="tlaGNC">           1 :         thread_pool_destroy();</span></span>
+<span id="L867"><span class="lineNum">     867</span> <span class="tlaGNC">           1 :         destroy_crypto_cache();</span></span>
+<span id="L868"><span class="lineNum">     868</span>              : </span>
+<span id="L869"><span class="lineNum">     869</span> <span class="tlaGNC">           1 : #ifdef WITH_INDEXED_HASHES</span></span>
+<span id="L870"><span class="lineNum">     870</span> <span class="tlaGNC">           1 :         indexed_hash::cleanup_storage();</span></span>
+<span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">           1 : #endif</span></span>
+<span id="L872"><span class="lineNum">     872</span> <span class="tlaGNC">           1 : }</span></span>
+<span id="L873"><span class="lineNum">     873</span>              : </span>
+<span id="L874"><span class="lineNum">     874</span>              : }</span>
         </pre>
               </td>
             </tr>
