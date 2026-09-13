@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-13 15:26:30</td>
+            <td class="headerValue">2026-09-13 18:11:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">39.3&nbsp;%</td>
@@ -280,7 +280,7 @@
 <span id="L218"><span class="lineNum">     218</span>              : #endif</span>
 <span id="L219"><span class="lineNum">     219</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L220"><span class="lineNum">     220</span>              : </span>
-<span id="L221"><span class="lineNum">     221</span>              : NOINLINE difficulty_type&amp; difficulty_type::operator/=(difficulty_type b)</span>
+<span id="L221"><span class="lineNum">     221</span>              : NOINLINE u128&amp; u128::operator/=(u128 b)</span>
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC tlaBgGNC">    46720133 : {</span></span>
 <span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">    46720133 :         if (*this &lt; b) {</span></span>
 <span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">      287417 :                 lo = 0;</span></span>
@@ -311,7 +311,7 @@
 <span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">     9973165 :                 t = shiftright128(udiv128(hi - divisor, lo, divisor, &amp;r), 1, shift);</span></span>
 <span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">     9973165 :         }</span></span>
 <span id="L251"><span class="lineNum">     251</span>              : </span>
-<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">    39454058 :         difficulty_type product;</span></span>
+<span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC">    39454058 :         u128 product;</span></span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">    39454058 :         product.lo = umul128(b.lo, t, &amp;product.hi);</span></span>
 <span id="L254"><span class="lineNum">     254</span>              : </span>
 <span id="L255"><span class="lineNum">     255</span> <span class="tlaGNC">    39454058 :         uint64_t t1, t2;</span></span>
@@ -379,7 +379,7 @@
 <span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">    10002005 :         return true;</span></span>
 <span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">    20004009 : }</span></span>
 <span id="L319"><span class="lineNum">     319</span>              : </span>
-<span id="L320"><span class="lineNum">     320</span>              : std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const difficulty_type&amp; d)</span>
+<span id="L320"><span class="lineNum">     320</span>              : std::ostream&amp; operator&lt;&lt;(std::ostream&amp; s, const u128&amp; d)</span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">          11 : {</span></span>
 <span id="L322"><span class="lineNum">     322</span> <span class="tlaGNC">          11 :         char buf[log::Stream::BUF_SIZE + 1];</span></span>
 <span id="L323"><span class="lineNum">     323</span>              :         // cppcheck-suppress uninitvar</span>
@@ -389,7 +389,7 @@
 <span id="L327"><span class="lineNum">     327</span> <span class="tlaGNC">          11 :         return s;</span></span>
 <span id="L328"><span class="lineNum">     328</span> <span class="tlaGNC">          11 : }</span></span>
 <span id="L329"><span class="lineNum">     329</span>              : </span>
-<span id="L330"><span class="lineNum">     330</span>              : std::istream&amp; operator&gt;&gt;(std::istream&amp; s, difficulty_type&amp; diff)</span>
+<span id="L330"><span class="lineNum">     330</span>              : std::istream&amp; operator&gt;&gt;(std::istream&amp; s, u128&amp; diff)</span>
 <span id="L331"><span class="lineNum">     331</span> <span class="tlaGNC">          12 : {</span></span>
 <span id="L332"><span class="lineNum">     332</span> <span class="tlaGNC">          12 :         diff.lo = 0;</span></span>
 <span id="L333"><span class="lineNum">     333</span> <span class="tlaGNC">          12 :         diff.hi = 0;</span></span>

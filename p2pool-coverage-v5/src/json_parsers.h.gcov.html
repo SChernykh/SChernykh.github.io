@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">69.8&nbsp;%</td>
-            <td class="headerCovTableEntry">63</td>
-            <td class="headerCovTableEntry">44</td>
+            <td class="headerCovTableEntryLo">70.3&nbsp;%</td>
+            <td class="headerCovTableEntry">64</td>
+            <td class="headerCovTableEntry">45</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-13 15:26:30</td>
+            <td class="headerValue">2026-09-13 18:11:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">18.8&nbsp;%</td>
-            <td class="headerCovTableEntry">32</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">20.6&nbsp;%</td>
+            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntry">7</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -183,9 +183,9 @@
 <span id="L121"><span class="lineNum">     121</span>              : #endif</span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
 <span id="L123"><span class="lineNum">     123</span>              : template&lt;typename T&gt;</span>
-<span id="L124"><span class="lineNum">     124</span>              : struct parse_wrapper&lt;T, difficulty_type&gt;</span>
+<span id="L124"><span class="lineNum">     124</span>              : struct parse_wrapper&lt;T, u128&gt;</span>
 <span id="L125"><span class="lineNum">     125</span>              : {</span>
-<span id="L126"><span class="lineNum">     126</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, difficulty_type &amp;out_value)</span>
+<span id="L126"><span class="lineNum">     126</span>              :         static NOINLINE bool parse(T&amp; v, const char* name, u128 &amp;out_value)</span>
 <span id="L127"><span class="lineNum">     127</span> <span class="tlaGNC tlaBgGNC">          10 :         {</span></span>
 <span id="L128"><span class="lineNum">     128</span> <span class="tlaGNC">          10 :                 const char* s = nullptr;</span></span>
 <span id="L129"><span class="lineNum">     129</span> <span class="tlaGNC">          10 :                 if (!parseValue(v, name, s) || !s) {</span></span>
@@ -219,9 +219,15 @@
 <span id="L157"><span class="lineNum">     157</span> <span class="tlaGNC">           9 :         }</span></span>
 <span id="L158"><span class="lineNum">     158</span>              : };</span>
 <span id="L159"><span class="lineNum">     159</span>              : </span>
-<span id="L160"><span class="lineNum">     160</span> <span class="tlaUNC tlaBgUNC">           0 : #define PARSE(doc, var, name) parseValue(doc, #name, var.name)</span></span>
-<span id="L161"><span class="lineNum">     161</span>              : </span>
-<span id="L162"><span class="lineNum">     162</span>              : } // namespace p2pool</span>
+<span id="L160"><span class="lineNum">     160</span>              : template&lt;typename T&gt;</span>
+<span id="L161"><span class="lineNum">     161</span>              : struct parse_wrapper&lt;T, difficulty_type&gt;</span>
+<span id="L162"><span class="lineNum">     162</span>              : {</span>
+<span id="L163"><span class="lineNum">     163</span> <span class="tlaGNC">          10 :         static FORCEINLINE bool parse(T&amp; v, const char* name, difficulty_type &amp;out_value) { return parse_wrapper&lt;T, u128&gt;::parse(v, name, out_value); }</span></span>
+<span id="L164"><span class="lineNum">     164</span>              : };</span>
+<span id="L165"><span class="lineNum">     165</span>              : </span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaUNC tlaBgUNC">           0 : #define PARSE(doc, var, name) parseValue(doc, #name, var.name)</span></span>
+<span id="L167"><span class="lineNum">     167</span>              : </span>
+<span id="L168"><span class="lineNum">     168</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>
