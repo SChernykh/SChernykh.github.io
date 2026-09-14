@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-14 09:51:31</td>
+            <td class="headerValue">2026-09-14 10:18:19</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">15.9&nbsp;%</td>
@@ -412,7 +412,7 @@
 <span id="L350"><span class="lineNum">     350</span>              : {</span>
 <span id="L351"><span class="lineNum">     351</span>              :         static FORCEINLINE void put(const fp64&amp; data, Stream* wrapper)</span>
 <span id="L352"><span class="lineNum">     352</span> <span class="tlaGNC">          23 :         {</span></span>
-<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">          23 :                 char buf[fp64::SCIENTIFIC_BUF_SIZE];</span></span>
+<span id="L353"><span class="lineNum">     353</span> <span class="tlaGNC">          23 :                 char buf[fp64::SCIENTIFIC_BUF_SIZE] = {};</span></span>
 <span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">          23 :                 wrapper-&gt;writeBuf(buf, data.to_scientific(buf));</span></span>
 <span id="L355"><span class="lineNum">     355</span> <span class="tlaGNC">          23 :         }</span></span>
 <span id="L356"><span class="lineNum">     356</span>              : };</span>
