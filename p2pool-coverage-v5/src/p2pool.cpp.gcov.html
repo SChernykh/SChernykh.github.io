@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-14 10:53:23</td>
+            <td class="headerValue">2026-09-15 12:01:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1286,10 +1286,10 @@
 <span id="L1224"><span class="lineNum">    1224</span> <span class="tlaUNC">           0 :                 });</span></span>
 <span id="L1225"><span class="lineNum">    1225</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1226"><span class="lineNum">    1226</span>              : </span>
-<span id="L1227"><span class="lineNum">    1227</span>              : bool p2pool::submit_sidechain_block(uint32_t template_id, uint32_t nonce, uint32_t extra_nonce)</span>
+<span id="L1227"><span class="lineNum">    1227</span>              : bool p2pool::submit_sidechain_block(uint32_t template_id, uint32_t nonce, uint32_t extra_nonce, const hash&amp; pow_hash)</span>
 <span id="L1228"><span class="lineNum">    1228</span> <span class="tlaUNC">           0 : {</span></span>
 <span id="L1229"><span class="lineNum">    1229</span> <span class="tlaUNC">           0 :         LOGINFO(3, &quot;submit_sidechain_block: template id = &quot; &lt;&lt; template_id &lt;&lt; &quot;, nonce = &quot; &lt;&lt; nonce &lt;&lt; &quot;, extra_nonce = &quot; &lt;&lt; extra_nonce);</span></span>
-<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :         return m_blockTemplate-&gt;submit_sidechain_block(template_id, nonce, extra_nonce);</span></span>
+<span id="L1230"><span class="lineNum">    1230</span> <span class="tlaUNC">           0 :         return m_blockTemplate-&gt;submit_sidechain_block(template_id, nonce, extra_nonce, pow_hash);</span></span>
 <span id="L1231"><span class="lineNum">    1231</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L1232"><span class="lineNum">    1232</span>              : </span>
 <span id="L1233"><span class="lineNum">    1233</span>              : void p2pool::update_block_template_async(bool is_alternative_block)</span>
@@ -2044,7 +2044,7 @@
 <span id="L1982"><span class="lineNum">    1982</span> <span class="tlaUNC">           0 :         const uint64_t miners = std::max&lt;uint64_t&gt;(m_sideChain-&gt;miner_count(), m_p2pServer ? m_p2pServer-&gt;peer_list_size() : 0U);</span></span>
 <span id="L1983"><span class="lineNum">    1983</span> <span class="tlaUNC">           0 :         const difficulty_type total_hashes = m_sideChain-&gt;total_hashes();</span></span>
 <span id="L1984"><span class="lineNum">    1984</span>              : </span>
-<span id="L1985"><span class="lineNum">    1985</span> <span class="tlaUNC">           0 :         const auto&amp; s = m_blockTemplate-&gt;get_shares();</span></span>
+<span id="L1985"><span class="lineNum">    1985</span> <span class="tlaUNC">           0 :         const auto&amp; s = m_blockTemplate-&gt;get_payout_window().m_shares;</span></span>
 <span id="L1986"><span class="lineNum">    1986</span> <span class="tlaUNC">           0 :         const difficulty_type pplns_weight = std::accumulate(s.begin(), s.end(), difficulty_type(), [](const auto&amp; a, const auto&amp; b) { return a + b.m_weight; });</span></span>
 <span id="L1987"><span class="lineNum">    1987</span>              : </span>
 <span id="L1988"><span class="lineNum">    1988</span> <span class="tlaUNC">           0 :         time_t last_block_found_time = 0;</span></span>

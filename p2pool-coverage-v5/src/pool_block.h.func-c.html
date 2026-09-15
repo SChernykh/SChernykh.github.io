@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
-            <td class="headerCovTableEntry">34</td>
-            <td class="headerCovTableEntry">34</td>
+            <td class="headerCovTableEntryHi">90.5&nbsp;%</td>
+            <td class="headerCovTableEntry">42</td>
+            <td class="headerCovTableEntry">38</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-14 10:53:23</td>
+            <td class="headerValue">2026-09-15 12:01:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">42.9&nbsp;%</td>
-            <td class="headerCovTableEntry">21</td>
-            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">44.8&nbsp;%</td>
+            <td class="headerCovTableEntry">29</td>
+            <td class="headerCovTableEntry">13</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -63,14 +63,35 @@
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L232">p2pool::PoolBlock::get_full_id() const</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L40">p2pool::MinerShare::operator==(p2pool::MinerShare const&amp;) const</a></td>
+              
+              <td class="coverFnLo">0</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L307">robin_hood::hash&lt;p2pool::MinerShare, void&gt;::operator()(p2pool::MinerShare const&amp;) const</a></td>
+              
+              <td class="coverFnLo">0</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L252">p2pool::PoolBlock::get_full_id() const</a></td>
               
               <td class="coverFnHi">6721</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L245">p2pool::PoolBlock::encode_merkle_tree_data(unsigned int, unsigned int)</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L53">p2pool::PPLNSWindow::empty() const</a></td>
+              
+              <td class="coverFnHi">20074</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L265">p2pool::PoolBlock::encode_merkle_tree_data(unsigned int, unsigned int)</a></td>
               
               <td class="coverFnHi">23129</td>
               
@@ -79,7 +100,7 @@
             <tr>
               <td class="coverFn"><a href="pool_block.h.gcov.html#L31">main.cpp:p2pool::pool_block_debug()</a></td>
               
-              <td class="coverFnHi">35939</td>
+              <td class="coverFnHi">36174</td>
               
               
             </tr>
@@ -154,6 +175,20 @@
               
             </tr>
             <tr>
+              <td class="coverFnAlias"><a href="pool_block.h.gcov.html#L31">quantize_rewards.cpp:p2pool::pool_block_debug()</a></td>
+              
+              <td class="coverFnAliasLo">0</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFnAlias"><a href="pool_block.h.gcov.html#L31">quantize_rewards_tests.cpp:p2pool::pool_block_debug()</a></td>
+              
+              <td class="coverFnAliasLo">0</td>
+              
+              
+            </tr>
+            <tr>
               <td class="coverFnAlias"><a href="pool_block.h.gcov.html#L31">side_chain.cpp:p2pool::pool_block_debug()</a></td>
               
               <td class="coverFnAliasLo">0</td>
@@ -170,47 +205,68 @@
             <tr>
               <td class="coverFnAlias"><a href="pool_block.h.gcov.html#L31">block_template.cpp:p2pool::pool_block_debug()</a></td>
               
-              <td class="coverFnAliasHi">35939</td>
+              <td class="coverFnAliasHi">36174</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L269">p2pool::PoolBlock::output_blob_size_estimate() const</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L289">p2pool::PoolBlock::output_blob_size_estimate() const</a></td>
               
               <td class="coverFnHi">37140</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L262">p2pool::PoolBlock::output_blob_size_estimate(unsigned char)</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L51">p2pool::PPLNSWindow::clear()</a></td>
+              
+              <td class="coverFnHi">47248</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L54">p2pool::PPLNSWindow::size() const</a></td>
+              
+              <td class="coverFnHi">47696</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L282">p2pool::PoolBlock::output_blob_size_estimate(unsigned char)</a></td>
               
               <td class="coverFnHi">50626</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L254">p2pool::PoolBlock::decode_merkle_tree_data(unsigned int&amp;, unsigned int&amp;) const</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L274">p2pool::PoolBlock::decode_merkle_tree_data(unsigned int&amp;, unsigned int&amp;) const</a></td>
               
               <td class="coverFnHi">76694</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L276">p2pool::PoolBlock::max_block_size() const</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L296">p2pool::PoolBlock::max_block_size() const</a></td>
               
               <td class="coverFnHi">211458</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L272">p2pool::PoolBlock::max_block_size(unsigned char)</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L292">p2pool::PoolBlock::max_block_size(unsigned char)</a></td>
               
               <td class="coverFnHi">211458</td>
               
               
             </tr>
             <tr>
-              <td class="coverFn"><a href="pool_block.h.gcov.html#L88">p2pool::DifficultyData::DifficultyData(unsigned long, p2pool::difficulty_type const&amp;)</a></td>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L38">p2pool::MinerShare::MinerShare(p2pool::difficulty_type const&amp;, p2pool::Wallet const*)</a></td>
+              
+              <td class="coverFnHi">5703177</td>
+              
+              
+            </tr>
+            <tr>
+              <td class="coverFn"><a href="pool_block.h.gcov.html#L108">p2pool::DifficultyData::DifficultyData(unsigned long, p2pool::difficulty_type const&amp;)</a></td>
               
               <td class="coverFnHi">41775706</td>
               

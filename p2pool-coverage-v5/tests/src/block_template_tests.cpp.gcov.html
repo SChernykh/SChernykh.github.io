@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-14 10:53:23</td>
+            <td class="headerValue">2026-09-15 12:01:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -324,14 +324,14 @@
 <span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">         213 :                         if ((rng() % 11) == 0) {</span></span>
 <span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">          26 :                                 tpl3.update(data, mempool, params);</span></span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">          26 :                                 ++i3;</span></span>
-<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          26 :                                 ASSERT_TRUE(tpl3.submit_sidechain_block(i3, 0, 0));</span></span>
+<span id="L265"><span class="lineNum">     265</span> <span class="tlaGNC">          26 :                                 ASSERT_TRUE(tpl3.submit_sidechain_block(i3, 0, 0, hash()));</span></span>
 <span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">          26 :                         }</span></span>
 <span id="L267"><span class="lineNum">     267</span>              : </span>
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">         213 :                         ++i2;</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">         213 :                         ASSERT_TRUE(tpl2.submit_sidechain_block(i2, 0, 0));</span></span>
+<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">         213 :                         ASSERT_TRUE(tpl2.submit_sidechain_block(i2, 0, 0, hash()));</span></span>
 <span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">         213 :                 }</span></span>
 <span id="L271"><span class="lineNum">     271</span>              : </span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        6480 :                 ASSERT_TRUE(tpl.submit_sidechain_block(i + 1, 0, 0));</span></span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        6480 :                 ASSERT_TRUE(tpl.submit_sidechain_block(i + 1, 0, 0, hash()));</span></span>
 <span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        6480 :                 data.median_timestamp += sidechain.block_time();</span></span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        6480 :         }</span></span>
 <span id="L275"><span class="lineNum">     275</span>              : </span>
@@ -496,7 +496,7 @@
 <span id="L434"><span class="lineNum">     434</span>              : </span>
 <span id="L435"><span class="lineNum">     435</span> <span class="tlaGNC">           1 :         tpl.update(data, mempool, params);</span></span>
 <span id="L436"><span class="lineNum">     436</span>              : </span>
-<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tpl.submit_sidechain_block(1, 0, 0));</span></span>
+<span id="L437"><span class="lineNum">     437</span> <span class="tlaGNC">           1 :         ASSERT_TRUE(tpl.submit_sidechain_block(1, 0, 0, hash()));</span></span>
 <span id="L438"><span class="lineNum">     438</span> <span class="tlaGNC">           1 :         ASSERT_EQ(sidechain.difficulty(), 100000);</span></span>
 <span id="L439"><span class="lineNum">     439</span>              : </span>
 <span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC">           1 :         const PoolBlock* tip = sidechain.chainTip();</span></span>
