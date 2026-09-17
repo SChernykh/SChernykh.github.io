@@ -31,18 +31,18 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryHi">90.3&nbsp;%</td>
+            <td class="headerCovTableEntryHi">92.2&nbsp;%</td>
             <td class="headerCovTableEntry">206</td>
-            <td class="headerCovTableEntry">186</td>
+            <td class="headerCovTableEntry">190</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-17 11:26:35</td>
+            <td class="headerValue">2026-09-17 18:20:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntryLo">26.6&nbsp;%</td>
-            <td class="headerCovTableEntry">519</td>
-            <td class="headerCovTableEntry">138</td>
+            <td class="headerCovTableEntryLo">28.1&nbsp;%</td>
+            <td class="headerCovTableEntry">530</td>
+            <td class="headerCovTableEntry">149</td>
           </tr>
                   <tr><td><img src="../glass.png" width=3 height=3 alt=""></td></tr>
                 </table>
@@ -84,9 +84,9 @@
 <span id="L22"><span class="lineNum">      22</span>              : #pragma warning(disable : 4623 5026 5027 5262)</span>
 <span id="L23"><span class="lineNum">      23</span>              : #endif</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC tlaBgGNC">      165546 : #define ROBIN_HOOD_MALLOC(size) p2pool::malloc_hook(size)</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC tlaBgGNC">      165750 : #define ROBIN_HOOD_MALLOC(size) p2pool::malloc_hook(size)</span></span>
 <span id="L26"><span class="lineNum">      26</span>              : #define ROBIN_HOOD_CALLOC(count, size) p2pool::calloc_hook((count), (size))</span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">      165546 : #define ROBIN_HOOD_FREE(ptr) p2pool::free_hook(ptr)</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">      165750 : #define ROBIN_HOOD_FREE(ptr) p2pool::free_hook(ptr)</span></span>
 <span id="L28"><span class="lineNum">      28</span>              : </span>
 <span id="L29"><span class="lineNum">      29</span>              : extern &quot;C&quot; {</span>
 <span id="L30"><span class="lineNum">      30</span>              : #include &quot;siphash/siphash.h&quot;</span>
@@ -109,13 +109,13 @@
 <span id="L47"><span class="lineNum">      47</span>              : </span>
 <span id="L48"><span class="lineNum">      48</span>              :         extern const SipHashKey SIPHASH_KEY;</span>
 <span id="L49"><span class="lineNum">      49</span>              : </span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">    45779703 :         FORCEINLINE size_t hash_bytes(const void* ptr, size_t len) noexcept {</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">    45779703 :                 size_t result;</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">    45779703 :                 uint8_t result_buf[sizeof(size_t)];</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">    45779703 :                 siphash(ptr, len, SIPHASH_KEY.data, result_buf, sizeof(result));</span></span>
-<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">    45779703 :                 memcpy(&amp;result, result_buf, sizeof(result));</span></span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">    45779703 :                 return result;</span></span>
-<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">    45779703 :         }</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">    45697051 :         FORCEINLINE size_t hash_bytes(const void* ptr, size_t len) noexcept {</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">    45697051 :                 size_t result;</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">    45697051 :                 uint8_t result_buf[sizeof(size_t)];</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">    45697051 :                 siphash(ptr, len, SIPHASH_KEY.data, result_buf, sizeof(result));</span></span>
+<span id="L54"><span class="lineNum">      54</span> <span class="tlaGNC">    45697051 :                 memcpy(&amp;result, result_buf, sizeof(result));</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">    45697051 :                 return result;</span></span>
+<span id="L56"><span class="lineNum">      56</span> <span class="tlaGNC">    45697051 :         }</span></span>
 <span id="L57"><span class="lineNum">      57</span>              : } // namespace robin_hood</span>
 <span id="L58"><span class="lineNum">      58</span>              : </span>
 <span id="L59"><span class="lineNum">      59</span>              : #include &quot;robin_hood.h&quot;</span>
@@ -159,22 +159,22 @@
 <span id="L97"><span class="lineNum">      97</span>              : template&lt;typename T&gt;</span>
 <span id="L98"><span class="lineNum">      98</span>              : struct ScopeGuard : public nocopy_nomove</span>
 <span id="L99"><span class="lineNum">      99</span>              : {</span>
-<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">          16 :         explicit FORCEINLINE ScopeGuard(T&amp;&amp; handler) : m_handler(std::move(handler)) {}</span></span>
+<span id="L100"><span class="lineNum">     100</span> <span class="tlaGNC">          18 :         explicit FORCEINLINE ScopeGuard(T&amp;&amp; handler) : m_handler(std::move(handler)) {}</span></span>
 <span id="L101"><span class="lineNum">     101</span>              : </span>
 <span id="L102"><span class="lineNum">     102</span>              :         FORCEINLINE ~ScopeGuard()</span>
-<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          16 :         {</span></span>
+<span id="L103"><span class="lineNum">     103</span> <span class="tlaGNC">          18 :         {</span></span>
 <span id="L104"><span class="lineNum">     104</span>              :                 // Because the handler can throw an exception, and we don't want exceptions in a destructor</span>
-<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">          16 :                 try {</span></span>
-<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">          16 :                         m_handler();</span></span>
-<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          16 :                 }</span></span>
-<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          16 :                 catch(...) {</span></span>
+<span id="L105"><span class="lineNum">     105</span> <span class="tlaGNC">          18 :                 try {</span></span>
+<span id="L106"><span class="lineNum">     106</span> <span class="tlaGNC">          18 :                         m_handler();</span></span>
+<span id="L107"><span class="lineNum">     107</span> <span class="tlaGNC">          18 :                 }</span></span>
+<span id="L108"><span class="lineNum">     108</span> <span class="tlaGNC">          18 :                 catch(...) {</span></span>
 <span id="L109"><span class="lineNum">     109</span> <span class="tlaUNC tlaBgUNC">           0 :                 }</span></span>
-<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC tlaBgGNC">          16 :         }</span></span>
+<span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC tlaBgGNC">          18 :         }</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : </span>
 <span id="L112"><span class="lineNum">     112</span>              :         T m_handler;</span>
 <span id="L113"><span class="lineNum">     113</span>              : };</span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          11 : #define ON_SCOPE_LEAVE(...) auto CONCAT(scope_guard_, __LINE__) = ScopeGuard{ __VA_ARGS__ };</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">          13 : #define ON_SCOPE_LEAVE(...) auto CONCAT(scope_guard_, __LINE__) = ScopeGuard{ __VA_ARGS__ };</span></span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
 <span id="L117"><span class="lineNum">     117</span>              : struct MinerCallbackHandler</span>
 <span id="L118"><span class="lineNum">     118</span>              : {</span>
@@ -234,99 +234,99 @@
 <span id="L172"><span class="lineNum">     172</span> <span class="tlaGNC">         237 : }</span></span>
 <span id="L173"><span class="lineNum">     173</span>              : </span>
 <span id="L174"><span class="lineNum">     174</span>              : template&lt;typename T&gt; FORCEINLINE constexpr bool is_negative(T x)</span>
-<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        5318 : {</span></span>
-<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        5318 :         if constexpr (std::is_signed_v&lt;T&gt;) {</span></span>
+<span id="L175"><span class="lineNum">     175</span> <span class="tlaGNC">        5330 : {</span></span>
+<span id="L176"><span class="lineNum">     176</span> <span class="tlaGNC">        5330 :         if constexpr (std::is_signed_v&lt;T&gt;) {</span></span>
 <span id="L177"><span class="lineNum">     177</span> <span class="tlaGNC">        3077 :                 return (x &lt; 0);</span></span>
 <span id="L178"><span class="lineNum">     178</span>              :         }</span>
-<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">        2241 :         else {</span></span>
-<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        2241 :                 (void) x;</span></span>
-<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">        2241 :                 return false;</span></span>
-<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        2241 :         }</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        5318 : }</span></span>
+<span id="L179"><span class="lineNum">     179</span> <span class="tlaGNC">        2253 :         else {</span></span>
+<span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">        2253 :                 (void) x;</span></span>
+<span id="L181"><span class="lineNum">     181</span> <span class="tlaGNC">        2253 :                 return false;</span></span>
+<span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">        2253 :         }</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        5330 : }</span></span>
 <span id="L184"><span class="lineNum">     184</span>              : </span>
 <span id="L185"><span class="lineNum">     185</span>              : template&lt;typename T&gt; FORCEINLINE constexpr std::make_unsigned_t&lt;T&gt; abs(T x)</span>
-<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        5318 : {</span></span>
-<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        5318 :         static_assert(std::is_integral_v&lt;T&gt; &amp;&amp; !std::is_same_v&lt;T, bool&gt;);</span></span>
+<span id="L186"><span class="lineNum">     186</span> <span class="tlaGNC">        5330 : {</span></span>
+<span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">        5330 :         static_assert(std::is_integral_v&lt;T&gt; &amp;&amp; !std::is_same_v&lt;T, bool&gt;);</span></span>
 <span id="L188"><span class="lineNum">     188</span>              : </span>
-<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        5318 :         if constexpr (std::is_signed_v&lt;T&gt;) {</span></span>
+<span id="L189"><span class="lineNum">     189</span> <span class="tlaGNC">        5330 :         if constexpr (std::is_signed_v&lt;T&gt;) {</span></span>
 <span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">        3077 :                 const std::make_unsigned_t&lt;T&gt; ux = static_cast&lt;std::make_unsigned_t&lt;T&gt;&gt;(x);</span></span>
 <span id="L191"><span class="lineNum">     191</span> <span class="tlaGNC">        3077 :                 MSVC_PRAGMA(warning(suppress:4146))</span></span>
 <span id="L192"><span class="lineNum">     192</span> <span class="tlaGNC">        3077 :                 return (x &lt; 0) ? -ux : ux;</span></span>
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">        3077 :         } else {</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        2241 :                 return x;</span></span>
-<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        2241 :         }</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        5318 : }</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">        2253 :                 return x;</span></span>
+<span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">        2253 :         }</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        5330 : }</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
 <span id="L198"><span class="lineNum">     198</span>              : template&lt;typename T, typename U&gt;</span>
 <span id="L199"><span class="lineNum">     199</span>              : FORCEINLINE void writeVarint(T value, U&amp;&amp; callback)</span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">     5144721 : {</span></span>
-<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">    14035411 :         while (value &gt;= 0x80) {</span></span>
-<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">     8890690 :                 callback(static_cast&lt;uint8_t&gt;((value &amp; 0x7F) | 0x80));</span></span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">     8890690 :                 value &gt;&gt;= 7;</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">     8890690 :         }</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">     5144721 :         callback(static_cast&lt;uint8_t&gt;(value));</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">     5144721 : }</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">     5135097 : {</span></span>
+<span id="L201"><span class="lineNum">     201</span> <span class="tlaGNC">    14013873 :         while (value &gt;= 0x80) {</span></span>
+<span id="L202"><span class="lineNum">     202</span> <span class="tlaGNC">     8878776 :                 callback(static_cast&lt;uint8_t&gt;((value &amp; 0x7F) | 0x80));</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">     8878776 :                 value &gt;&gt;= 7;</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">     8878776 :         }</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">     5135097 :         callback(static_cast&lt;uint8_t&gt;(value));</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">     5135097 : }</span></span>
 <span id="L207"><span class="lineNum">     207</span>              : </span>
 <span id="L208"><span class="lineNum">     208</span>              : template&lt;typename T&gt;</span>
 <span id="L209"><span class="lineNum">     209</span>              : FORCEINLINE void writeVarint(T value, std::vector&lt;uint8_t&gt;&amp; out)</span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">     3321011 : {</span></span>
-<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">    10943925 :         writeVarint(value, [&amp;out](uint8_t b) { out.emplace_back(b); });</span></span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">     3321011 : }</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">     3321065 : {</span></span>
+<span id="L211"><span class="lineNum">     211</span> <span class="tlaGNC">    10944043 :         writeVarint(value, [&amp;out](uint8_t b) { out.emplace_back(b); });</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">     3321065 : }</span></span>
 <span id="L213"><span class="lineNum">     213</span>              : </span>
 <span id="L214"><span class="lineNum">     214</span> <span class="tlaGNC">           1 : template&lt;typename T&gt; static FORCEINLINE bool out_of_range(uint64_t value) { return value &gt; std::numeric_limits&lt;T&gt;::max(); }</span></span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">     9709172 : template&lt;&gt; FORCEINLINE bool out_of_range&lt;uint64_t&gt;(uint64_t) { return false; }</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">     9709189 : template&lt;&gt; FORCEINLINE bool out_of_range&lt;uint64_t&gt;(uint64_t) { return false; }</span></span>
 <span id="L216"><span class="lineNum">     216</span>              : </span>
 <span id="L217"><span class="lineNum">     217</span>              : template&lt;typename T&gt;</span>
 <span id="L218"><span class="lineNum">     218</span>              : const uint8_t* readVarint(const uint8_t* data, const uint8_t* data_end, T&amp; b)</span>
-<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">     9709360 : {</span></span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">     9709360 :         static_assert(std::is_unsigned_v&lt;T&gt;, &quot;readVarint works only with unsigned types&quot;);</span></span>
+<span id="L219"><span class="lineNum">     219</span> <span class="tlaGNC">     9709377 : {</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">     9709377 :         static_assert(std::is_unsigned_v&lt;T&gt;, &quot;readVarint works only with unsigned types&quot;);</span></span>
 <span id="L221"><span class="lineNum">     221</span>              : </span>
-<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">     9709360 :         uint64_t result = 0;</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">     9709360 :         int k = 0;</span></span>
+<span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">     9709377 :         uint64_t result = 0;</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">     9709377 :         int k = 0;</span></span>
 <span id="L224"><span class="lineNum">     224</span>              : </span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">    41388781 :         while (data &lt; data_end) {</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">    41388598 :                 if (k &gt;= static_cast&lt;int&gt;(sizeof(T)) * 8) {</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">    41388817 :         while (data &lt; data_end) {</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">    41388634 :                 if (k &gt;= static_cast&lt;int&gt;(sizeof(T)) * 8) {</span></span>
 <span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">           1 :                         return nullptr;</span></span>
 <span id="L228"><span class="lineNum">     228</span> <span class="tlaGNC">           1 :                 }</span></span>
 <span id="L229"><span class="lineNum">     229</span>              : </span>
-<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">    41388597 :                 const uint64_t cur_byte = *(data++);</span></span>
+<span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">    41388633 :                 const uint64_t cur_byte = *(data++);</span></span>
 <span id="L231"><span class="lineNum">     231</span>              : </span>
-<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">    41388597 :                 if (k &amp;&amp; (cur_byte == 0)) {</span></span>
+<span id="L232"><span class="lineNum">     232</span> <span class="tlaGNC">    41388633 :                 if (k &amp;&amp; (cur_byte == 0)) {</span></span>
 <span id="L233"><span class="lineNum">     233</span> <span class="tlaGNC">           1 :                         return nullptr;</span></span>
 <span id="L234"><span class="lineNum">     234</span> <span class="tlaGNC">           1 :                 }</span></span>
 <span id="L235"><span class="lineNum">     235</span>              : </span>
-<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">    41388596 :                 result |= (cur_byte &amp; 0x7F) &lt;&lt; k;</span></span>
+<span id="L236"><span class="lineNum">     236</span> <span class="tlaGNC">    41388632 :                 result |= (cur_byte &amp; 0x7F) &lt;&lt; k;</span></span>
 <span id="L237"><span class="lineNum">     237</span>              : </span>
-<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">    41388596 :                 if ((k &gt; 0) &amp;&amp; (shiftleft128(cur_byte &amp; 0x7F, 0, k) != 0)) {</span></span>
+<span id="L238"><span class="lineNum">     238</span> <span class="tlaGNC">    41388632 :                 if ((k &gt; 0) &amp;&amp; (shiftleft128(cur_byte &amp; 0x7F, 0, k) != 0)) {</span></span>
 <span id="L239"><span class="lineNum">     239</span> <span class="tlaGNC">           2 :                         return nullptr;</span></span>
 <span id="L240"><span class="lineNum">     240</span> <span class="tlaGNC">           2 :                 }</span></span>
 <span id="L241"><span class="lineNum">     241</span>              : </span>
-<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">    41388594 :                 k += 7;</span></span>
+<span id="L242"><span class="lineNum">     242</span> <span class="tlaGNC">    41388630 :                 k += 7;</span></span>
 <span id="L243"><span class="lineNum">     243</span>              : </span>
-<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">    41388594 :                 if ((cur_byte &amp; 0x80) == 0) {</span></span>
-<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">     9709173 :                         if (out_of_range&lt;T&gt;(result)) {</span></span>
+<span id="L244"><span class="lineNum">     244</span> <span class="tlaGNC">    41388630 :                 if ((cur_byte &amp; 0x80) == 0) {</span></span>
+<span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">     9709190 :                         if (out_of_range&lt;T&gt;(result)) {</span></span>
 <span id="L246"><span class="lineNum">     246</span> <span class="tlaGNC">           1 :                                 return nullptr;</span></span>
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">           1 :                         }</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">     9709172 :                         b = static_cast&lt;T&gt;(result);</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">     9709172 :                         return data;</span></span>
-<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">     9709173 :                 }</span></span>
-<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">    41388594 :         }</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">     9709189 :                         b = static_cast&lt;T&gt;(result);</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">     9709189 :                         return data;</span></span>
+<span id="L250"><span class="lineNum">     250</span> <span class="tlaGNC">     9709190 :                 }</span></span>
+<span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">    41388630 :         }</span></span>
 <span id="L252"><span class="lineNum">     252</span>              : </span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         183 :         return nullptr;</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">     9709360 : }</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">     9709377 : }</span></span>
 <span id="L255"><span class="lineNum">     255</span>              : </span>
 <span id="L256"><span class="lineNum">     256</span>              : template&lt;typename T&gt;</span>
 <span id="L257"><span class="lineNum">     257</span>              : FORCEINLINE T read_unaligned(const T* p)</span>
-<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">      873045 : {</span></span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">      873045 :         static_assert(std::is_trivially_copyable&lt;T&gt;::value, &quot;T must be a trivially copyable type&quot;);</span></span>
+<span id="L258"><span class="lineNum">     258</span> <span class="tlaGNC">      875030 : {</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">      875030 :         static_assert(std::is_trivially_copyable&lt;T&gt;::value, &quot;T must be a trivially copyable type&quot;);</span></span>
 <span id="L260"><span class="lineNum">     260</span>              : </span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">      873045 :         T result;</span></span>
-<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">      873045 :         memcpy(&amp;result, p, sizeof(T));</span></span>
-<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">      873045 :         return result;</span></span>
-<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      873045 : }</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">      875030 :         T result;</span></span>
+<span id="L262"><span class="lineNum">     262</span> <span class="tlaGNC">      875030 :         memcpy(&amp;result, p, sizeof(T));</span></span>
+<span id="L263"><span class="lineNum">     263</span> <span class="tlaGNC">      875030 :         return result;</span></span>
+<span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      875030 : }</span></span>
 <span id="L265"><span class="lineNum">     265</span>              : </span>
-<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">      647811 : template&lt;typename T, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(&amp;)[N]) { return N; }</span></span>
-<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        6896 : template&lt;typename T, typename U, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(U::*)[N]) { return N; }</span></span>
+<span id="L266"><span class="lineNum">     266</span> <span class="tlaGNC">      644566 : template&lt;typename T, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(&amp;)[N]) { return N; }</span></span>
+<span id="L267"><span class="lineNum">     267</span> <span class="tlaGNC">        6902 : template&lt;typename T, typename U, size_t N&gt; FORCEINLINE constexpr size_t array_size(T(U::*)[N]) { return N; }</span></span>
 <span id="L268"><span class="lineNum">     268</span>              : </span>
 <span id="L269"><span class="lineNum">     269</span>              : [[noreturn]] void panic_stop(const char* message);</span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
@@ -343,8 +343,8 @@
 <span id="L281"><span class="lineNum">     281</span>              :         BackgroundJobTracker();</span>
 <span id="L282"><span class="lineNum">     282</span>              :         ~BackgroundJobTracker();</span>
 <span id="L283"><span class="lineNum">     283</span>              : </span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaUNC">           0 :         template&lt;size_t N&gt; FORCEINLINE void start(const char (&amp;name)[N]) { start_internal(name); }</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaUNC">           0 :         template&lt;size_t N&gt; FORCEINLINE void stop (const char (&amp;name)[N]) { stop_internal (name); }</span></span>
+<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC tlaBgGNC">           1 :         template&lt;size_t N&gt; FORCEINLINE void start(const char (&amp;name)[N]) { start_internal(name); }</span></span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">           1 :         template&lt;size_t N&gt; FORCEINLINE void stop (const char (&amp;name)[N]) { stop_internal (name); }</span></span>
 <span id="L286"><span class="lineNum">     286</span>              : </span>
 <span id="L287"><span class="lineNum">     287</span>              :         std::vector&lt;std::pair&lt;const char*, int32_t&gt;&gt; get_jobs();</span>
 <span id="L288"><span class="lineNum">     288</span>              :         void print_status();</span>
@@ -359,8 +359,8 @@
 <span id="L297"><span class="lineNum">     297</span>              : </span>
 <span id="L298"><span class="lineNum">     298</span>              : extern BackgroundJobTracker* bkg_jobs_tracker;</span>
 <span id="L299"><span class="lineNum">     299</span>              : </span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaUNC">           0 : #define BACKGROUND_JOB_START(x) do { bkg_jobs_tracker-&gt;start(#x); } while (0)</span></span>
-<span id="L301"><span class="lineNum">     301</span> <span class="tlaUNC">           0 : #define BACKGROUND_JOB_STOP(x)  do { bkg_jobs_tracker-&gt;stop(#x);  } while (0)</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           1 : #define BACKGROUND_JOB_START(x) do { bkg_jobs_tracker-&gt;start(#x); } while (0)</span></span>
+<span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           1 : #define BACKGROUND_JOB_STOP(x)  do { bkg_jobs_tracker-&gt;stop(#x);  } while (0)</span></span>
 <span id="L302"><span class="lineNum">     302</span>              : </span>
 <span id="L303"><span class="lineNum">     303</span>              : void set_main_thread();</span>
 <span id="L304"><span class="lineNum">     304</span>              : bool is_main_thread();</span>
@@ -368,9 +368,9 @@
 <span id="L306"><span class="lineNum">     306</span>              : void set_uv_worker_pool_thread();</span>
 <span id="L307"><span class="lineNum">     307</span>              : bool is_uv_worker_pool_thread();</span>
 <span id="L308"><span class="lineNum">     308</span>              : </span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC tlaBgGNC">  1184321784 : FORCEINLINE static void cpu_yield() {</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">  1184321784 : #if defined(__x86_64__) || defined(__i386__) || defined(_M_X64) || defined(_M_IX86)</span></span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">  1184321784 :         _mm_pause();</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">  1148921081 : FORCEINLINE static void cpu_yield() {</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">  1148921081 : #if defined(__x86_64__) || defined(__i386__) || defined(_M_X64) || defined(_M_IX86)</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC">  1148921081 :         _mm_pause();</span></span>
 <span id="L312"><span class="lineNum">     312</span>              : #elif defined(_M_ARM64) || defined(_M_ARM)</span>
 <span id="L313"><span class="lineNum">     313</span>              :         __yield();</span>
 <span id="L314"><span class="lineNum">     314</span>              : #elif defined(__aarch64__) || defined(__arm__)</span>
@@ -378,7 +378,7 @@
 <span id="L316"><span class="lineNum">     316</span>              : #else</span>
 <span id="L317"><span class="lineNum">     317</span>              :         // no-op on other platforms</span>
 <span id="L318"><span class="lineNum">     318</span>              : #endif</span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">  1184321784 : }</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">  1148921081 : }</span></span>
 <span id="L320"><span class="lineNum">     320</span>              : </span>
 <span id="L321"><span class="lineNum">     321</span>              : extern bool disable_resolve_host;</span>
 <span id="L322"><span class="lineNum">     322</span>              : bool resolve_host(std::string&amp; host, bool&amp; is_v6);</span>
@@ -397,12 +397,12 @@
 <span id="L335"><span class="lineNum">     335</span>              : </span>
 <span id="L336"><span class="lineNum">     336</span>              :         template&lt;typename T&gt;</span>
 <span id="L337"><span class="lineNum">     337</span>              :         static void generate(T begin, T end)</span>
-<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">          24 :         {</span></span>
-<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">          24 :                 std::random_device rd;</span></span>
-<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">       15000 :                 for (T i = begin; i != end; ++i) {</span></span>
-<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       14976 :                         *i = rd();</span></span>
-<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">       14976 :                 }</span></span>
-<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          24 :         }</span></span>
+<span id="L338"><span class="lineNum">     338</span> <span class="tlaGNC">          25 :         {</span></span>
+<span id="L339"><span class="lineNum">     339</span> <span class="tlaGNC">          25 :                 std::random_device rd;</span></span>
+<span id="L340"><span class="lineNum">     340</span> <span class="tlaGNC">       15625 :                 for (T i = begin; i != end; ++i) {</span></span>
+<span id="L341"><span class="lineNum">     341</span> <span class="tlaGNC">       15600 :                         *i = rd();</span></span>
+<span id="L342"><span class="lineNum">     342</span> <span class="tlaGNC">       15600 :                 }</span></span>
+<span id="L343"><span class="lineNum">     343</span> <span class="tlaGNC">          25 :         }</span></span>
 <span id="L344"><span class="lineNum">     344</span>              : </span>
 <span id="L345"><span class="lineNum">     345</span>              :         static RandomDeviceSeed instance;</span>
 <span id="L346"><span class="lineNum">     346</span>              : };</span>
@@ -416,16 +416,16 @@
 <span id="L354"><span class="lineNum">     354</span> <span class="tlaGNC">     3315658 : }</span></span>
 <span id="L355"><span class="lineNum">     355</span>              : </span>
 <span id="L356"><span class="lineNum">     356</span>              : FORCEINLINE uint64_t seconds_since_epoch()</span>
-<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">     1442696 : {</span></span>
-<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">     1442696 :         using namespace std::chrono;</span></span>
-<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">     1442696 :         return duration_cast&lt;seconds&gt;(steady_clock::now().time_since_epoch()).count();</span></span>
-<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">     1442696 : }</span></span>
+<span id="L357"><span class="lineNum">     357</span> <span class="tlaGNC">     1431247 : {</span></span>
+<span id="L358"><span class="lineNum">     358</span> <span class="tlaGNC">     1431247 :         using namespace std::chrono;</span></span>
+<span id="L359"><span class="lineNum">     359</span> <span class="tlaGNC">     1431247 :         return duration_cast&lt;seconds&gt;(steady_clock::now().time_since_epoch()).count();</span></span>
+<span id="L360"><span class="lineNum">     360</span> <span class="tlaGNC">     1431247 : }</span></span>
 <span id="L361"><span class="lineNum">     361</span>              : </span>
 <span id="L362"><span class="lineNum">     362</span>              : FORCEINLINE uint64_t microseconds_since_epoch()</span>
-<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">       13514 : {</span></span>
-<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">       13514 :         using namespace std::chrono;</span></span>
-<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       13514 :         return duration_cast&lt;microseconds&gt;(steady_clock::now().time_since_epoch()).count();</span></span>
-<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">       13514 : }</span></span>
+<span id="L363"><span class="lineNum">     363</span> <span class="tlaGNC">       13515 : {</span></span>
+<span id="L364"><span class="lineNum">     364</span> <span class="tlaGNC">       13515 :         using namespace std::chrono;</span></span>
+<span id="L365"><span class="lineNum">     365</span> <span class="tlaGNC">       13515 :         return duration_cast&lt;microseconds&gt;(steady_clock::now().time_since_epoch()).count();</span></span>
+<span id="L366"><span class="lineNum">     366</span> <span class="tlaGNC">       13515 : }</span></span>
 <span id="L367"><span class="lineNum">     367</span>              : </span>
 <span id="L368"><span class="lineNum">     368</span>              : uint64_t bsr_reference(uint64_t x);</span>
 <span id="L369"><span class="lineNum">     369</span>              : </span>
@@ -499,15 +499,15 @@
 <span id="L437"><span class="lineNum">     437</span>              : {</span>
 <span id="L438"><span class="lineNum">     438</span>              :         struct Base</span>
 <span id="L439"><span class="lineNum">     439</span>              :         {</span>
-<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC tlaBgGNC">      110578 :                 virtual ~Base() {}</span></span>
+<span id="L440"><span class="lineNum">     440</span> <span class="tlaGNC tlaBgGNC">      110428 :                 virtual ~Base() {}</span></span>
 <span id="L441"><span class="lineNum">     441</span>              :                 virtual R operator()(Args...) const = 0;</span>
 <span id="L442"><span class="lineNum">     442</span>              :         };</span>
 <span id="L443"><span class="lineNum">     443</span>              : </span>
 <span id="L444"><span class="lineNum">     444</span>              :         template&lt;typename T&gt;</span>
 <span id="L445"><span class="lineNum">     445</span>              :         struct Derived : public Base</span>
 <span id="L446"><span class="lineNum">     446</span>              :         {</span>
-<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">      110052 :                 explicit FORCEINLINE Derived(T&amp;&amp; cb) : m_cb(std::forward&lt;T&gt;(cb)) {}</span></span>
-<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">      326923 :                 R operator()(Args... args) const override { return m_cb(args...); }</span></span>
+<span id="L447"><span class="lineNum">     447</span> <span class="tlaGNC">      109979 :                 explicit FORCEINLINE Derived(T&amp;&amp; cb) : m_cb(std::forward&lt;T&gt;(cb)) {}</span></span>
+<span id="L448"><span class="lineNum">     448</span> <span class="tlaGNC">      326435 :                 R operator()(Args... args) const override { return m_cb(args...); }</span></span>
 <span id="L449"><span class="lineNum">     449</span>              : </span>
 <span id="L450"><span class="lineNum">     450</span>              :         private:</span>
 <span id="L451"><span class="lineNum">     451</span>              :                 Derived&amp; operator=(Derived&amp;&amp;) = delete;</span>
@@ -579,9 +579,9 @@
 <span id="L517"><span class="lineNum">     517</span>              : struct hash&lt;p2pool::hash&gt;</span>
 <span id="L518"><span class="lineNum">     518</span>              : {</span>
 <span id="L519"><span class="lineNum">     519</span>              :         FORCEINLINE size_t operator()(const p2pool::hash&amp; value) const noexcept</span>
-<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC tlaBgGNC">     4698348 :         {</span></span>
-<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">     4698348 :                 return hash_bytes(value.h, p2pool::HASH_SIZE);</span></span>
-<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">     4698348 :         }</span></span>
+<span id="L520"><span class="lineNum">     520</span> <span class="tlaGNC tlaBgGNC">     4686175 :         {</span></span>
+<span id="L521"><span class="lineNum">     521</span> <span class="tlaGNC">     4686175 :                 return hash_bytes(value.h, p2pool::HASH_SIZE);</span></span>
+<span id="L522"><span class="lineNum">     522</span> <span class="tlaGNC">     4686175 :         }</span></span>
 <span id="L523"><span class="lineNum">     523</span>              : };</span>
 <span id="L524"><span class="lineNum">     524</span>              : </span>
 <span id="L525"><span class="lineNum">     525</span>              : template&lt;&gt;</span>
@@ -597,9 +597,9 @@
 <span id="L535"><span class="lineNum">     535</span>              : struct hash&lt;std::array&lt;uint8_t, N&gt;&gt;</span>
 <span id="L536"><span class="lineNum">     536</span>              : {</span>
 <span id="L537"><span class="lineNum">     537</span>              :         FORCEINLINE size_t operator()(const std::array&lt;uint8_t, N&gt;&amp; value) const noexcept</span>
-<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">    10185169 :         {</span></span>
-<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">    10185169 :                 return hash_bytes(value.data(), N);</span></span>
-<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">    10185169 :         }</span></span>
+<span id="L538"><span class="lineNum">     538</span> <span class="tlaGNC">    10173248 :         {</span></span>
+<span id="L539"><span class="lineNum">     539</span> <span class="tlaGNC">    10173248 :                 return hash_bytes(value.data(), N);</span></span>
+<span id="L540"><span class="lineNum">     540</span> <span class="tlaGNC">    10173248 :         }</span></span>
 <span id="L541"><span class="lineNum">     541</span>              : };</span>
 <span id="L542"><span class="lineNum">     542</span>              : </span>
 <span id="L543"><span class="lineNum">     543</span>              : template&lt;&gt;</span>
@@ -625,9 +625,9 @@
 <span id="L563"><span class="lineNum">     563</span>              : struct hash&lt;p2pool::carrot::janus_anchor&gt;</span>
 <span id="L564"><span class="lineNum">     564</span>              : {</span>
 <span id="L565"><span class="lineNum">     565</span>              :         FORCEINLINE size_t operator()(const p2pool::carrot::janus_anchor&amp; value) const noexcept</span>
-<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC tlaBgGNC">        2168 :         {</span></span>
-<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">        2168 :                 return hash_bytes(&amp;value, sizeof(value));</span></span>
-<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">        2168 :         }</span></span>
+<span id="L566"><span class="lineNum">     566</span> <span class="tlaGNC tlaBgGNC">        2172 :         {</span></span>
+<span id="L567"><span class="lineNum">     567</span> <span class="tlaGNC">        2172 :                 return hash_bytes(&amp;value, sizeof(value));</span></span>
+<span id="L568"><span class="lineNum">     568</span> <span class="tlaGNC">        2172 :         }</span></span>
 <span id="L569"><span class="lineNum">     569</span>              : };</span>
 <span id="L570"><span class="lineNum">     570</span>              : </span>
 <span id="L571"><span class="lineNum">     571</span>              : } // namespace robin_hood</span>

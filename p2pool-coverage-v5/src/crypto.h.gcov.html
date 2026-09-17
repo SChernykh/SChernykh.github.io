@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-17 11:26:35</td>
+            <td class="headerValue">2026-09-17 18:20:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -87,7 +87,7 @@
 <span id="L25"><span class="lineNum">      25</span>              : </span>
 <span id="L26"><span class="lineNum">      26</span>              : struct batch_public_key_input</span>
 <span id="L27"><span class="lineNum">      27</span>              : {</span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">      373246 :         FORCEINLINE batch_public_key_input(const hash&amp; d, size_t i, const hash&amp; b) : derivation(d), output_index(i), base(b) {}</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC tlaBgGNC">      371119 :         FORCEINLINE batch_public_key_input(const hash&amp; d, size_t i, const hash&amp; b) : derivation(d), output_index(i), base(b) {}</span></span>
 <span id="L29"><span class="lineNum">      29</span>              : </span>
 <span id="L30"><span class="lineNum">      30</span>              :         hash derivation;</span>
 <span id="L31"><span class="lineNum">      31</span>              :         size_t output_index;</span>
@@ -113,10 +113,11 @@
 <span id="L51"><span class="lineNum">      51</span>              : #ifdef P2POOL_UNIT_TESTS</span>
 <span id="L52"><span class="lineNum">      52</span>              : size_t get_last_carrot_public_key_batch_size();</span>
 <span id="L53"><span class="lineNum">      53</span>              : size_t get_last_sender_receiver_secret_batch_size();</span>
-<span id="L54"><span class="lineNum">      54</span>              : uint32_t get_from_bytes_cache_state(const hash&amp; public_key);</span>
-<span id="L55"><span class="lineNum">      55</span>              : #endif</span>
-<span id="L56"><span class="lineNum">      56</span>              : </span>
-<span id="L57"><span class="lineNum">      57</span>              : } // namespace p2pool</span>
+<span id="L54"><span class="lineNum">      54</span>              : size_t get_last_coinbase_output_batch_size();</span>
+<span id="L55"><span class="lineNum">      55</span>              : uint32_t get_from_bytes_cache_state(const hash&amp; public_key);</span>
+<span id="L56"><span class="lineNum">      56</span>              : #endif</span>
+<span id="L57"><span class="lineNum">      57</span>              : </span>
+<span id="L58"><span class="lineNum">      58</span>              : } // namespace p2pool</span>
         </pre>
               </td>
             </tr>

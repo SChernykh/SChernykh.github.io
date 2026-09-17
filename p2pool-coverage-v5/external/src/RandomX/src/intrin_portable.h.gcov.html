@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-17 11:26:35</td>
+            <td class="headerValue">2026-09-17 18:20:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -199,7 +199,7 @@
 <span id="L137"><span class="lineNum">     137</span>              : </span>
 <span id="L138"><span class="lineNum">     138</span>              : #ifdef __AES__</span>
 <span id="L139"><span class="lineNum">     139</span>              : </span>
-<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC tlaBgGNC">      241776 : #define rx_aesenc_vec_i128 _mm_aesenc_si128</span></span>
+<span id="L140"><span class="lineNum">     140</span> <span class="tlaGNC tlaBgGNC">      241784 : #define rx_aesenc_vec_i128 _mm_aesenc_si128</span></span>
 <span id="L141"><span class="lineNum">     141</span>              : #define rx_aesdec_vec_i128 _mm_aesdec_si128</span>
 <span id="L142"><span class="lineNum">     142</span>              : </span>
 <span id="L143"><span class="lineNum">     143</span>              : #define HAVE_AES 1</span>
@@ -223,9 +223,9 @@
 <span id="L161"><span class="lineNum">     161</span> <span class="tlaUNC">           0 : }</span></span>
 <span id="L162"><span class="lineNum">     162</span>              : </span>
 <span id="L163"><span class="lineNum">     163</span>              : #define rx_set_int_vec_i128 _mm_set_epi32</span>
-<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">   369257886 : #define rx_xor_vec_i128 _mm_xor_si128</span></span>
+<span id="L164"><span class="lineNum">     164</span> <span class="tlaGNC tlaBgGNC">   386034099 : #define rx_xor_vec_i128 _mm_xor_si128</span></span>
 <span id="L165"><span class="lineNum">     165</span>              : #define rx_load_vec_i128 _mm_load_si128</span>
-<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">       60444 : #define rx_store_vec_i128 _mm_store_si128</span></span>
+<span id="L166"><span class="lineNum">     166</span> <span class="tlaGNC">       60446 : #define rx_store_vec_i128 _mm_store_si128</span></span>
 <span id="L167"><span class="lineNum">     167</span>              : </span>
 <span id="L168"><span class="lineNum">     168</span> <span class="tlaUNC tlaBgUNC">           0 : FORCE_INLINE rx_vec_f128 rx_cvt_packed_int_vec_f128(const void* addr) {</span></span>
 <span id="L169"><span class="lineNum">     169</span> <span class="tlaUNC">           0 :         __m128i ix = _mm_loadl_epi64((const __m128i*)addr);</span></span>

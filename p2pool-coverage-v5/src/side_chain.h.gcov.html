@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-17 11:26:35</td>
+            <td class="headerValue">2026-09-17 18:20:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">73.3&nbsp;%</td>
@@ -123,10 +123,10 @@
 <span id="L61"><span class="lineNum">      61</span>              :         // Consensus ID can be used to spawn independent P2Pools with their own sidechains</span>
 <span id="L62"><span class="lineNum">      62</span>              :         // It's never sent over the network to avoid revealing it to the possible man in the middle</span>
 <span id="L63"><span class="lineNum">      63</span>              :         // Consensus ID can therefore be used as a password to create private P2Pools</span>
-<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC tlaBgGNC">       47231 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       70720 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
-<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        6507 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
-<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       43222 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
+<span id="L64"><span class="lineNum">      64</span> <span class="tlaGNC tlaBgGNC">       47233 :         [[nodiscard]] const std::vector&lt;uint8_t&gt;&amp; consensus_id() const { return m_consensusId; }</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">       70722 :         [[nodiscard]] const hash&amp; consensus_hash() const { return m_consensusHash; }</span></span>
+<span id="L66"><span class="lineNum">      66</span> <span class="tlaGNC">        6508 :         [[nodiscard]] uint64_t chain_window_size() const { return m_chainWindowSize; }</span></span>
+<span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">       43223 :         [[nodiscard]] static NetworkType network_type() { return s_networkType; }</span></span>
 <span id="L68"><span class="lineNum">      68</span>              :         [[nodiscard]] static uint64_t network_major_version(uint64_t height);</span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">        6789 :         [[nodiscard]] FORCEINLINE difficulty_type difficulty() const { ReadLock lock(m_curDifficultyLock); return m_curDifficulty; }</span></span>
 <span id="L70"><span class="lineNum">      70</span>              :         [[nodiscard]] difficulty_type total_hashes() const;</span>
@@ -174,7 +174,7 @@
 <span id="L112"><span class="lineNum">     112</span>              :                 std::vector&lt;uint64_t&gt;&amp; rewards</span>
 <span id="L113"><span class="lineNum">     113</span>              :         );</span>
 <span id="L114"><span class="lineNum">     114</span>              : </span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       40502 :         [[nodiscard]] FORCEINLINE uint64_t monero_headers_required() const { return m_chainWindowSize * 4 * m_targetBlockTime / MONERO_BLOCK_TIME; }</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">       40503 :         [[nodiscard]] FORCEINLINE uint64_t monero_headers_required() const { return m_chainWindowSize * 4 * m_targetBlockTime / MONERO_BLOCK_TIME; }</span></span>
 <span id="L116"><span class="lineNum">     116</span>              :         [[nodiscard]] FORCEINLINE bool is_block_too_old(uint64_t block_height, uint64_t mainchain_height) const</span>
 <span id="L117"><span class="lineNum">     117</span> <span class="tlaUNC tlaBgUNC">           0 :         {</span></span>
 <span id="L118"><span class="lineNum">     118</span> <span class="tlaUNC">           0 :                 return (mainchain_height &gt;= block_height) &amp;&amp; (mainchain_height - block_height &gt;= monero_headers_required());</span></span>
