@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-17 18:20:46</td>
+            <td class="headerValue">2026-09-18 02:54:37</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -313,14 +313,14 @@
 <span id="L251"><span class="lineNum">     251</span>              :         // and let the M smallest round up</span>
 <span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC tlaBgGNC">         340 :         std::sort(order.begin(), order.end(),</span></span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">         340 :                 [&amp;u, &amp;fp, &amp;shares](size_t x, size_t y)</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">      778269 :                 {</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">      778278 :                 {</span></span>
 <span id="L255"><span class="lineNum">     255</span>              :                         // Q_x &lt; Q_y, cross-multiplied</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">      778269 :                         const u128 qx = u128(u[x] * (T - fp[x])) * ((T - u[y]) * fp[y]);</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">      778269 :                         const u128 qy = u128(u[y] * (T - fp[y])) * ((T - u[x]) * fp[x]);</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">      778278 :                         const u128 qx = u128(u[x] * (T - fp[x])) * ((T - u[y]) * fp[y]);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">      778278 :                         const u128 qy = u128(u[y] * (T - fp[y])) * ((T - u[x]) * fp[x]);</span></span>
 <span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">      778269 :                         if (qx != qy) {</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">      778255 :                                 return qx &lt; qy;</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">      778255 :                         }</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">      778278 :                         if (qx != qy) {</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">      778264 :                                 return qx &lt; qy;</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">      778264 :                         }</span></span>
 <span id="L262"><span class="lineNum">     262</span>              : </span>
 <span id="L263"><span class="lineNum">     263</span>              :                         // Ties: weight descending, then the order the shares came in</span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">          14 :                         if (shares[x].m_weight != shares[y].m_weight) {</span></span>
