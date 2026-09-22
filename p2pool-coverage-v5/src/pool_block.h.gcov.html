@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-21 16:15:57</td>
+            <td class="headerValue">2026-09-22 11:03:59</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">41.9&nbsp;%</td>
@@ -85,14 +85,14 @@
 <span id="L23"><span class="lineNum">      23</span>              : #include &lt;map&gt;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : #if defined(_DEBUG) || defined(DEV_DEBUG)</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       36069 : #define POOL_BLOCK_DEBUG 1</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       36266 : #define POOL_BLOCK_DEBUG 1</span></span>
 <span id="L27"><span class="lineNum">      27</span>              : #else</span>
 <span id="L28"><span class="lineNum">      28</span>              : #define POOL_BLOCK_DEBUG 0</span>
 <span id="L29"><span class="lineNum">      29</span>              : #endif</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              : namespace p2pool {</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       36069 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       36266 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : class RandomX_Hasher_Base;</span>
 <span id="L36"><span class="lineNum">      36</span>              : class SideChain;</span>
@@ -117,7 +117,7 @@
 <span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC tlaBgGNC">       47370 :         FORCEINLINE void clear() { m_shares.clear(); m_powHash = {}; m_weightTruncated = false; }</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
 <span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       20132 :         [[nodiscard]] FORCEINLINE bool empty() const { return m_shares.empty(); }</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       47942 :         [[nodiscard]] FORCEINLINE size_t size() const { return m_shares.size(); }</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       41069 :         [[nodiscard]] FORCEINLINE size_t size() const { return m_shares.size(); }</span></span>
 <span id="L59"><span class="lineNum">      59</span>              : };</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
 <span id="L61"><span class="lineNum">      61</span>              : /*</span>
@@ -357,21 +357,21 @@
 <span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       76821 :         }</span></span>
 <span id="L296"><span class="lineNum">     296</span>              : </span>
 <span id="L297"><span class="lineNum">     297</span>              :         [[nodiscard]] static FORCEINLINE constexpr size_t output_blob_size_estimate(uint8_t major_version)</span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       50980 :         {</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       50980 :                 constexpr size_t OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + 1;</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">       50980 :                 constexpr size_t CARROT_OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + CARROT_VIEW_TAG_BYTES + CARROT_JANUS_ANCHOR_BYTES;</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       57742 :         {</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       57742 :                 constexpr size_t OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + 1;</span></span>
+<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">       57742 :                 constexpr size_t CARROT_OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + CARROT_VIEW_TAG_BYTES + CARROT_JANUS_ANCHOR_BYTES;</span></span>
 <span id="L301"><span class="lineNum">     301</span>              : </span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       50980 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? CARROT_OUTPUT_BLOB_SIZE : OUTPUT_BLOB_SIZE;</span></span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       50980 :         }</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       57742 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? CARROT_OUTPUT_BLOB_SIZE : OUTPUT_BLOB_SIZE;</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       57742 :         }</span></span>
 <span id="L304"><span class="lineNum">     304</span>              : </span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">       37432 :         [[nodiscard]] FORCEINLINE constexpr size_t output_blob_size_estimate() const { return output_blob_size_estimate(m_majorVersion); }</span></span>
 <span id="L306"><span class="lineNum">     306</span>              : </span>
 <span id="L307"><span class="lineNum">     307</span>              :         [[nodiscard]] static FORCEINLINE constexpr uint64_t max_block_size(uint8_t major_version)</span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">      211942 :         {</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">      211942 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? MAX_BLOCK_SIZE_NEW : MAX_BLOCK_SIZE_OLD;</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      211942 :         }</span></span>
+<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">      211826 :         {</span></span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">      211826 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? MAX_BLOCK_SIZE_NEW : MAX_BLOCK_SIZE_OLD;</span></span>
+<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      211826 :         }</span></span>
 <span id="L311"><span class="lineNum">     311</span>              : </span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      211942 :         [[nodiscard]] FORCEINLINE constexpr uint64_t max_block_size() const { return max_block_size(m_majorVersion); }</span></span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      211826 :         [[nodiscard]] FORCEINLINE constexpr uint64_t max_block_size() const { return max_block_size(m_majorVersion); }</span></span>
 <span id="L313"><span class="lineNum">     313</span>              : };</span>
 <span id="L314"><span class="lineNum">     314</span>              : </span>
 <span id="L315"><span class="lineNum">     315</span>              : } // namespace p2pool</span>
