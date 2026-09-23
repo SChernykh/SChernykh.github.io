@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-22 11:03:59</td>
+            <td class="headerValue">2026-09-23 18:00:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -242,8 +242,8 @@
 <span id="L180"><span class="lineNum">     180</span> <span class="tlaGNC">       30566 :         const size_t header_size = data.size();</span></span>
 <span id="L181"><span class="lineNum">     181</span>              : </span>
 <span id="L182"><span class="lineNum">     182</span> <span class="tlaGNC">       30566 :         if (layout) {</span></span>
-<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">          99 :                 layout-&gt;header_size = header_size;</span></span>
-<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">          99 :         }</span></span>
+<span id="L183"><span class="lineNum">     183</span> <span class="tlaGNC">        6869 :                 layout-&gt;header_size = header_size;</span></span>
+<span id="L184"><span class="lineNum">     184</span> <span class="tlaGNC">        6869 :         }</span></span>
 <span id="L185"><span class="lineNum">     185</span>              : </span>
 <span id="L186"><span class="lineNum">     186</span>              :         // Miner tx</span>
 <span id="L187"><span class="lineNum">     187</span> <span class="tlaGNC">       30566 :         data.push_back(TX_VERSION);</span></span>
@@ -255,8 +255,8 @@
 <span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       30566 :         const int outputs_offset = static_cast&lt;int&gt;(data.size());</span></span>
 <span id="L194"><span class="lineNum">     194</span>              : </span>
 <span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">       30566 :         if (layout) {</span></span>
-<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          99 :                 layout-&gt;outputs_offset = outputs_offset;</span></span>
-<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">          99 :         }</span></span>
+<span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">        6869 :                 layout-&gt;outputs_offset = outputs_offset;</span></span>
+<span id="L197"><span class="lineNum">     197</span> <span class="tlaGNC">        6869 :         }</span></span>
 <span id="L198"><span class="lineNum">     198</span>              : </span>
 <span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       30566 :         if (m_majorVersion &gt;= HARDFORK_VERSION_CARROT) {</span></span>
 <span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">         316 :                 writeVarint(m_carrotOutputs.size(), data);</span></span>
@@ -282,8 +282,8 @@
 <span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">       30250 :         }</span></span>
 <span id="L221"><span class="lineNum">     221</span>              : </span>
 <span id="L222"><span class="lineNum">     222</span> <span class="tlaGNC">       30566 :         if (layout) {</span></span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">          99 :                 layout-&gt;outputs_blob_size = static_cast&lt;int&gt;(data.size()) - outputs_offset;</span></span>
-<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">          99 :         }</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">        6869 :                 layout-&gt;outputs_blob_size = static_cast&lt;int&gt;(data.size()) - outputs_offset;</span></span>
+<span id="L224"><span class="lineNum">     224</span> <span class="tlaGNC">        6869 :         }</span></span>
 <span id="L225"><span class="lineNum">     225</span>              : </span>
 <span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">       30566 :         std::vector&lt;uint8_t&gt; tx_extra;</span></span>
 <span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">       30566 :         tx_extra.reserve(128 + m_carrotOutputs.size() * HASH_SIZE);</span></span>
@@ -307,8 +307,8 @@
 <span id="L245"><span class="lineNum">     245</span> <span class="tlaGNC">       30250 :         }</span></span>
 <span id="L246"><span class="lineNum">     246</span>              : </span>
 <span id="L247"><span class="lineNum">     247</span> <span class="tlaGNC">       30566 :         if (layout) {</span></span>
-<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">          99 :                 layout-&gt;pubkeys_blob_size = static_cast&lt;int&gt;(tx_extra.size());</span></span>
-<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">          99 :         }</span></span>
+<span id="L248"><span class="lineNum">     248</span> <span class="tlaGNC">        6869 :                 layout-&gt;pubkeys_blob_size = static_cast&lt;int&gt;(tx_extra.size());</span></span>
+<span id="L249"><span class="lineNum">     249</span> <span class="tlaGNC">        6869 :         }</span></span>
 <span id="L250"><span class="lineNum">     250</span>              : </span>
 <span id="L251"><span class="lineNum">     251</span> <span class="tlaGNC">       30566 :         uint64_t extra_nonce_size = m_extraNonceSize;</span></span>
 <span id="L252"><span class="lineNum">     252</span>              : </span>
@@ -339,16 +339,16 @@
 <span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">       30566 :         writeVarint(tx_extra.size(), data);</span></span>
 <span id="L278"><span class="lineNum">     278</span>              : </span>
 <span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">       30566 :         if (layout) {</span></span>
-<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">          99 :                 layout-&gt;pubkeys_offset = static_cast&lt;int&gt;(data.size());</span></span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">          99 :         }</span></span>
+<span id="L280"><span class="lineNum">     280</span> <span class="tlaGNC">        6869 :                 layout-&gt;pubkeys_offset = static_cast&lt;int&gt;(data.size());</span></span>
+<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">        6869 :         }</span></span>
 <span id="L282"><span class="lineNum">     282</span>              : </span>
 <span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">       30566 :         data.insert(data.end(), tx_extra.begin(), tx_extra.end());</span></span>
 <span id="L284"><span class="lineNum">     284</span>              : </span>
 <span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">       30566 :         data.push_back(0);</span></span>
 <span id="L286"><span class="lineNum">     286</span>              : </span>
 <span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       30566 :         if (layout) {</span></span>
-<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">          99 :                 layout-&gt;miner_tx_size = data.size() - header_size;</span></span>
-<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">          99 :         }</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">        6869 :                 layout-&gt;miner_tx_size = data.size() - header_size;</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">        6869 :         }</span></span>
 <span id="L290"><span class="lineNum">     290</span>              : </span>
 <span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       30566 :         writeVarint(m_transactions.size(), data);</span></span>
 <span id="L292"><span class="lineNum">     292</span>              : </span>
