@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-23 18:00:28</td>
+            <td class="headerValue">2026-09-24 08:38:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
@@ -1775,7 +1775,7 @@
 <span id="L1713"><span class="lineNum">    1713</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1714"><span class="lineNum">    1714</span>              : </span>
 <span id="L1715"><span class="lineNum">    1715</span> <span class="tlaUNC">           0 :         constexpr uint64_t major = 3;</span></span>
-<span id="L1716"><span class="lineNum">    1716</span> <span class="tlaUNC">           0 :         constexpr uint64_t minor = 10;</span></span>
+<span id="L1716"><span class="lineNum">    1716</span> <span class="tlaUNC">           0 :         constexpr uint64_t minor = 18;</span></span>
 <span id="L1717"><span class="lineNum">    1717</span> <span class="tlaUNC">           0 :         constexpr uint64_t required = (major &lt;&lt; 16) | minor;</span></span>
 <span id="L1718"><span class="lineNum">    1718</span>              : </span>
 <span id="L1719"><span class="lineNum">    1719</span> <span class="tlaUNC">           0 :         if (version &lt; required) {</span></span>
@@ -1783,7 +1783,7 @@
 <span id="L1721"><span class="lineNum">    1721</span> <span class="tlaUNC">           0 :                 const uint64_t version_lo = version &amp; 65535;</span></span>
 <span id="L1722"><span class="lineNum">    1722</span> <span class="tlaUNC">           0 :                 const uint64_t required_version_hi = required &gt;&gt; 16;</span></span>
 <span id="L1723"><span class="lineNum">    1723</span> <span class="tlaUNC">           0 :                 const uint64_t required_version_lo = required &amp; 65535;</span></span>
-<span id="L1724"><span class="lineNum">    1724</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;monerod RPC v&quot; &lt;&lt; version_hi &lt;&lt; '.' &lt;&lt; version_lo &lt;&lt; &quot; is incompatible, update to RPC &gt;= v&quot; &lt;&lt; required_version_hi &lt;&lt; '.' &lt;&lt; required_version_lo &lt;&lt; &quot; (Monero v0.18.0.0 or newer)&quot;);</span></span>
+<span id="L1724"><span class="lineNum">    1724</span> <span class="tlaUNC">           0 :                 LOGERR(1, &quot;monerod RPC v&quot; &lt;&lt; version_hi &lt;&lt; '.' &lt;&lt; version_lo &lt;&lt; &quot; is incompatible, update to RPC &gt;= v&quot; &lt;&lt; required_version_hi &lt;&lt; '.' &lt;&lt; required_version_lo &lt;&lt; &quot; (Monero with FCMP++, Carrot and RandomX v2 support)&quot;);</span></span>
 <span id="L1725"><span class="lineNum">    1725</span> <span class="tlaUNC">           0 :                 PANIC_STOP();</span></span>
 <span id="L1726"><span class="lineNum">    1726</span> <span class="tlaUNC">           0 :         }</span></span>
 <span id="L1727"><span class="lineNum">    1727</span>              : </span>

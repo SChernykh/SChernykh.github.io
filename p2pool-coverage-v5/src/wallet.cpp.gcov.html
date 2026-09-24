@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-23 18:00:28</td>
+            <td class="headerValue">2026-09-24 08:38:32</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">90.0&nbsp;%</td>
@@ -140,15 +140,15 @@
 <span id="L78"><span class="lineNum">      78</span>              : namespace p2pool {</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
 <span id="L80"><span class="lineNum">      80</span>              : Wallet::Wallet(const char* address)</span>
-<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">      143983 :         : m_prefix(0)</span></span>
-<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">      143983 :         , m_checksum(0)</span></span>
-<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">      143983 :         , m_type(NetworkType::Invalid)</span></span>
-<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">      143983 :         , m_torsioned(false)</span></span>
-<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">      143983 : {</span></span>
-<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">      143983 :         if (!decode(address) &amp;&amp; address) {</span></span>
+<span id="L81"><span class="lineNum">      81</span> <span class="tlaGNC tlaBgGNC">      143984 :         : m_prefix(0)</span></span>
+<span id="L82"><span class="lineNum">      82</span> <span class="tlaGNC">      143984 :         , m_checksum(0)</span></span>
+<span id="L83"><span class="lineNum">      83</span> <span class="tlaGNC">      143984 :         , m_type(NetworkType::Invalid)</span></span>
+<span id="L84"><span class="lineNum">      84</span> <span class="tlaGNC">      143984 :         , m_torsioned(false)</span></span>
+<span id="L85"><span class="lineNum">      85</span> <span class="tlaGNC">      143984 : {</span></span>
+<span id="L86"><span class="lineNum">      86</span> <span class="tlaGNC">      143984 :         if (!decode(address) &amp;&amp; address) {</span></span>
 <span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">          13 :                 LOGWARN(1, address &lt;&lt; &quot; failed to decode&quot;);</span></span>
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">          13 :         }</span></span>
-<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">      143983 : }</span></span>
+<span id="L89"><span class="lineNum">      89</span> <span class="tlaGNC">      143984 : }</span></span>
 <span id="L90"><span class="lineNum">      90</span>              : </span>
 <span id="L91"><span class="lineNum">      91</span>              : Wallet::Wallet(const Wallet&amp; w)</span>
 <span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">    28821675 : {</span></span>
@@ -172,13 +172,13 @@
 <span id="L110"><span class="lineNum">     110</span> <span class="tlaGNC">    28875636 : }</span></span>
 <span id="L111"><span class="lineNum">     111</span>              : </span>
 <span id="L112"><span class="lineNum">     112</span>              : bool Wallet::decode(const char* address)</span>
-<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">      143989 : {</span></span>
-<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">      143989 :         m_type = NetworkType::Invalid;</span></span>
-<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">      143989 :         m_torsioned = false;</span></span>
+<span id="L113"><span class="lineNum">     113</span> <span class="tlaGNC">      143990 : {</span></span>
+<span id="L114"><span class="lineNum">     114</span> <span class="tlaGNC">      143990 :         m_type = NetworkType::Invalid;</span></span>
+<span id="L115"><span class="lineNum">     115</span> <span class="tlaGNC">      143990 :         m_torsioned = false;</span></span>
 <span id="L116"><span class="lineNum">     116</span>              : </span>
-<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">      143989 :         if (!address || (strlen(address) != ADDRESS_LENGTH)) {</span></span>
-<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">      143936 :                 return false;</span></span>
-<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">      143936 :         }</span></span>
+<span id="L117"><span class="lineNum">     117</span> <span class="tlaGNC">      143990 :         if (!address || (strlen(address) != ADDRESS_LENGTH)) {</span></span>
+<span id="L118"><span class="lineNum">     118</span> <span class="tlaGNC">      143937 :                 return false;</span></span>
+<span id="L119"><span class="lineNum">     119</span> <span class="tlaGNC">      143937 :         }</span></span>
 <span id="L120"><span class="lineNum">     120</span>              : </span>
 <span id="L121"><span class="lineNum">     121</span> <span class="tlaGNC">          53 :         constexpr int last_block_size_index = block_sizes_lookup[last_block_size];</span></span>
 <span id="L122"><span class="lineNum">     122</span>              : </span>
@@ -252,41 +252,41 @@
 <span id="L190"><span class="lineNum">     190</span> <span class="tlaGNC">          51 : }</span></span>
 <span id="L191"><span class="lineNum">     191</span>              : </span>
 <span id="L192"><span class="lineNum">     192</span>              : bool Wallet::assign(const hash&amp; spend_pub_key, const hash&amp; view_pub_key, NetworkType type)</span>
-<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       43934 : {</span></span>
-<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       43934 :         if (!check_public_key(spend_pub_key) || !check_public_key(view_pub_key)) {</span></span>
+<span id="L193"><span class="lineNum">     193</span> <span class="tlaGNC">       43935 : {</span></span>
+<span id="L194"><span class="lineNum">     194</span> <span class="tlaGNC">       43935 :         if (!check_public_key(spend_pub_key) || !check_public_key(view_pub_key)) {</span></span>
 <span id="L195"><span class="lineNum">     195</span> <span class="tlaGNC">          13 :                 return false;</span></span>
 <span id="L196"><span class="lineNum">     196</span> <span class="tlaGNC">          13 :         }</span></span>
 <span id="L197"><span class="lineNum">     197</span>              : </span>
-<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       43921 :         set_keys(spend_pub_key, view_pub_key, type);</span></span>
-<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       43921 :         return true;</span></span>
-<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">       43934 : }</span></span>
+<span id="L198"><span class="lineNum">     198</span> <span class="tlaGNC">       43922 :         set_keys(spend_pub_key, view_pub_key, type);</span></span>
+<span id="L199"><span class="lineNum">     199</span> <span class="tlaGNC">       43922 :         return true;</span></span>
+<span id="L200"><span class="lineNum">     200</span> <span class="tlaGNC">       43935 : }</span></span>
 <span id="L201"><span class="lineNum">     201</span>              : </span>
 <span id="L202"><span class="lineNum">     202</span>              : void Wallet::set_keys(const hash&amp; spend_pub_key, const hash&amp; view_pub_key, NetworkType type)</span>
-<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">      113053 : {</span></span>
-<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      113053 :         switch (type)</span></span>
-<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">      113053 :         {</span></span>
-<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">      110081 :         case NetworkType::Mainnet:  m_prefix = valid_prefixes[0]; break;</span></span>
+<span id="L203"><span class="lineNum">     203</span> <span class="tlaGNC">      113054 : {</span></span>
+<span id="L204"><span class="lineNum">     204</span> <span class="tlaGNC">      113054 :         switch (type)</span></span>
+<span id="L205"><span class="lineNum">     205</span> <span class="tlaGNC">      113054 :         {</span></span>
+<span id="L206"><span class="lineNum">     206</span> <span class="tlaGNC">      110082 :         case NetworkType::Mainnet:  m_prefix = valid_prefixes[0]; break;</span></span>
 <span id="L207"><span class="lineNum">     207</span> <span class="tlaGNC">        2968 :         case NetworkType::Testnet:  m_prefix = valid_prefixes[1]; break;</span></span>
 <span id="L208"><span class="lineNum">     208</span> <span class="tlaGNC">           3 :         case NetworkType::Stagenet: m_prefix = valid_prefixes[2]; break;</span></span>
 <span id="L209"><span class="lineNum">     209</span> <span class="tlaGNC">           1 :         default:                    m_prefix = 0;                 break;</span></span>
-<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">      113053 :         }</span></span>
+<span id="L210"><span class="lineNum">     210</span> <span class="tlaGNC">      113054 :         }</span></span>
 <span id="L211"><span class="lineNum">     211</span>              : </span>
-<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">      113053 :         m_keys[0] = spend_pub_key;</span></span>
-<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">      113053 :         m_keys[1] = view_pub_key;</span></span>
+<span id="L212"><span class="lineNum">     212</span> <span class="tlaGNC">      113054 :         m_keys[0] = spend_pub_key;</span></span>
+<span id="L213"><span class="lineNum">     213</span> <span class="tlaGNC">      113054 :         m_keys[1] = view_pub_key;</span></span>
 <span id="L214"><span class="lineNum">     214</span>              : </span>
-<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">      113053 :         uint8_t data[1 + HASH_SIZE * 2];</span></span>
-<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">      113053 :         data[0] = static_cast&lt;uint8_t&gt;(m_prefix);</span></span>
-<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">      113053 :         memcpy(data + 1, spend_pub_key.h, HASH_SIZE);</span></span>
-<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">      113053 :         memcpy(data + 1 + HASH_SIZE, view_pub_key.h, HASH_SIZE);</span></span>
+<span id="L215"><span class="lineNum">     215</span> <span class="tlaGNC">      113054 :         uint8_t data[1 + HASH_SIZE * 2];</span></span>
+<span id="L216"><span class="lineNum">     216</span> <span class="tlaGNC">      113054 :         data[0] = static_cast&lt;uint8_t&gt;(m_prefix);</span></span>
+<span id="L217"><span class="lineNum">     217</span> <span class="tlaGNC">      113054 :         memcpy(data + 1, spend_pub_key.h, HASH_SIZE);</span></span>
+<span id="L218"><span class="lineNum">     218</span> <span class="tlaGNC">      113054 :         memcpy(data + 1 + HASH_SIZE, view_pub_key.h, HASH_SIZE);</span></span>
 <span id="L219"><span class="lineNum">     219</span>              : </span>
-<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">      113053 :         uint8_t md[200];</span></span>
-<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      113053 :         keccak(data, sizeof(data), md);</span></span>
+<span id="L220"><span class="lineNum">     220</span> <span class="tlaGNC">      113054 :         uint8_t md[200];</span></span>
+<span id="L221"><span class="lineNum">     221</span> <span class="tlaGNC">      113054 :         keccak(data, sizeof(data), md);</span></span>
 <span id="L222"><span class="lineNum">     222</span>              : </span>
-<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      113053 :         memcpy(&amp;m_checksum, md, sizeof(m_checksum));</span></span>
+<span id="L223"><span class="lineNum">     223</span> <span class="tlaGNC">      113054 :         memcpy(&amp;m_checksum, md, sizeof(m_checksum));</span></span>
 <span id="L224"><span class="lineNum">     224</span>              : </span>
-<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">      113053 :         m_type = type;</span></span>
-<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">      113053 :         m_torsioned = false;</span></span>
-<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">      113053 : }</span></span>
+<span id="L225"><span class="lineNum">     225</span> <span class="tlaGNC">      113054 :         m_type = type;</span></span>
+<span id="L226"><span class="lineNum">     226</span> <span class="tlaGNC">      113054 :         m_torsioned = false;</span></span>
+<span id="L227"><span class="lineNum">     227</span> <span class="tlaGNC">      113054 : }</span></span>
 <span id="L228"><span class="lineNum">     228</span>              : </span>
 <span id="L229"><span class="lineNum">     229</span>              : void Wallet::encode(char (&amp;buf)[ADDRESS_LENGTH]) const</span>
 <span id="L230"><span class="lineNum">     230</span> <span class="tlaGNC">          36 : {</span></span>
