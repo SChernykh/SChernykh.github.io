@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-26 12:51:20</td>
+            <td class="headerValue">2026-09-26 18:25:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -129,10 +129,10 @@
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           1 :                         H(&quot;b3354891c5722dabfe6200c2ee17efb008b38414471500826b0b46e5545c32bf&quot;),</span></span>
 <span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 :                         H(&quot;9f3e9cffab3dc768649f2de52ffda2235f6ec4f479a777dfea7a82ff2a798215&quot;),</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 :                         H(&quot;a1f0b44e5d144ef1c02779acf7a823ded868f7bd732fe634e5aba26a86b026b8&quot;) } },</span></span>
-<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           1 :                 { 3012000, {</span></span>
-<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :                         H(&quot;67e87aa830837d231f01ac4b30d1709c0c21040a4f2cae8c22de6256eb3a5c06&quot;),</span></span>
-<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :                         H(&quot;0206fa01e57831c64ec64607664e9b53753035c508a7d76358951440ef8d5c5d&quot;),</span></span>
-<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 :                         H(&quot;981c99fed06592c81e941829a3fd8afed6429300c8c23f2844ad05def874ac0d&quot;) } },</span></span>
+<span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           1 :                 { 3102800, {</span></span>
+<span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :                         H(&quot;ebcfb71716e38168dc27801b1a9df3dbed1c69fe7c9cd51ed5e49a7560851cc9&quot;),</span></span>
+<span id="L72"><span class="lineNum">      72</span> <span class="tlaGNC">           1 :                         H(&quot;3a8e489cba8ff2db2f834619b213c8c2b5dfc74e3467af129e1889b8ba80e6ab&quot;),</span></span>
+<span id="L73"><span class="lineNum">      73</span> <span class="tlaGNC">           1 :                         H(&quot;9bc4081a78aa124e1ca2c62650e94e0b2d1135c7fc56c47bd0f6a5aacf73703d&quot;) } },</span></span>
 <span id="L74"><span class="lineNum">      74</span> <span class="tlaGNC">           1 :                 { 0x100000000ULL, {</span></span>
 <span id="L75"><span class="lineNum">      75</span> <span class="tlaGNC">           1 :                         H(&quot;43d259d2173c487207e7a743ead45bea3c88649067ea03c97abb04bd57dd0536&quot;),</span></span>
 <span id="L76"><span class="lineNum">      76</span> <span class="tlaGNC">           1 :                         H(&quot;a846eea0b5581a1b90c13c1ae69eb709e6e18114e307055ddac12c159b52e18f&quot;),</span></span>
@@ -361,7 +361,7 @@
 <span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">           1 :                 { 600123456789ULL, 0, 0, 0 },</span></span>
 <span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">           1 :                 { 600123456789ULL, 0, 0, 0 },</span></span>
 <span id="L301"><span class="lineNum">     301</span> <span class="tlaGNC">           1 :                 { 300000000000ULL, 300123456789ULL, 0, 0 },</span></span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           1 :                 { 200400000000ULL, 199800000000ULL, 199923456789ULL, 0 },</span></span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">           1 :                 { 199800000000ULL, 200400000000ULL, 199923456789ULL, 0 },</span></span>
 <span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">           1 :         };</span></span>
 <span id="L304"><span class="lineNum">     304</span>              : </span>
 <span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">           1 :         std::ifstream ancestors(&quot;block_carrot_ancestors.dat&quot;, std::ios::binary);</span></span>
@@ -376,10 +376,10 @@
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">           1 :                 hash coinbase_hash;</span></span>
 <span id="L315"><span class="lineNum">     315</span> <span class="tlaGNC">           1 :                 const char* hashing_blob;</span></span>
 <span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">           1 :         } expected[] = {</span></span>
-<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           1 :                 { 4386, 5079, 0, 0, H(&quot;25cac7af43aaa0a9304de1cebca2d3f46f5dceb640779aafbd14209cabe120be&quot;), H(&quot;7e8f150bf3bf371d456cee2c5abdeef64f11c8569beef0ea6299c6d7b6c9c942&quot;), &quot;111280cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a89785634128dfb65b76fc722d125c9f8c223a7258551254b5c0c351d0aab8fd15b6ae02db68301&quot; },</span></span>
-<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           1 :                 { 4386, 5079, 1052, 1103, H(&quot;2bc3bc9c3e2bcce7f8df4395dee9e0baaeae350fc0d6b4fc976e2462e3ed7866&quot;), H(&quot;8ea409a00df52e6146290bdec31293082c525b1a8db3fd1373bd2d249d46e2d8&quot;), &quot;11128acae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a89795634127308c40cbb06392c1f2db9f57089946e81fbc3012ab8ec6f50e23226ef67c56e8301&quot; },</span></span>
-<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           1 :                 { 4477, 5079, 1052, 1194, H(&quot;17356749bd1aa11a447c4ef4318eb36e9a43b00337b9a53407ea0e0b0439760b&quot;), H(&quot;ef142bb0cd6050523032d148288223816db9c64d85d84f7d4e64781204fd9faf&quot;), &quot;111294cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897a563412086776a11305e10a57a8a58746f6e549b9c6ae3254ec184abbf0f16dc20d29fc8301&quot; },</span></span>
-<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           1 :                 { 4568, 5081, 1086, 1317, H(&quot;170f24cce5a463cc7bfd1261db3b64c02f912ae0966d39e4acbdc3d3d18e6aef&quot;), H(&quot;20d473a995d2601b76b1bc018ffe45e4349e53eb425a43d906a7d172a716f7ee&quot;), &quot;11129ecae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897b563412d4b7af7f53b2e1e95abf661f29d972d3e59b28ae8d26282ba337415c6ceb62878301&quot; },</span></span>
+<span id="L317"><span class="lineNum">     317</span> <span class="tlaGNC">           1 :                 { 4386, 5079, 0, 0, H(&quot;918309a3619958fc58717cfe64ad9ecdec437f3057f3f69d3e6de2b07916705e&quot;), H(&quot;552d2704514754ff4475d87b889a48228786e2beb49e8e1a340e981369e685bb&quot;), &quot;111280cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897856341217fea4f8db518b3589e6f6218d941be7bdf4c8f362ade80e9f1613bd80c72d4e8301&quot; },</span></span>
+<span id="L318"><span class="lineNum">     318</span> <span class="tlaGNC">           1 :                 { 4386, 5079, 1052, 1103, H(&quot;f98d904b199e6e2e761055f5ae50a33e11065f4fc7313bd8a991b7a01f3e266f&quot;), H(&quot;c307697707ba66facc4d7fc700632db7531bf88ba793e15337b77bfe23dea6fa&quot;), &quot;11128acae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897956341250c08b59031d71c0a6e7043079fb5da2fcc76f3fc0d64930877dd3cc0940bc2c8301&quot; },</span></span>
+<span id="L319"><span class="lineNum">     319</span> <span class="tlaGNC">           1 :                 { 4477, 5079, 1052, 1194, H(&quot;1e203462d608ef086092b679ab8c12dd913652acfa12facd43143ca94eae9cf3&quot;), H(&quot;ece6a6719e555abba178fbd6c0f5d6ca636986115163880f2af6dbaaf7a62905&quot;), &quot;111294cae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897a5634121549d2f3e485ba5ce23cc878cbd63ad46956df848a2199e271cade56cbc53b238301&quot; },</span></span>
+<span id="L320"><span class="lineNum">     320</span> <span class="tlaGNC">           1 :                 { 4568, 5081, 1086, 1317, H(&quot;d3b834bb52428d6a92118aab2d3aa595ab2d510526485ab7438befd8a6e7e3e3&quot;), H(&quot;64df04e7d29cce1f2d35fcf16f2a6fb68e2795381be5bbc191d2f7a795416e10&quot;), &quot;11129ecae2d006bdda1c810a375bad19096497a8e2129c9af02cbb6654571c900a1d82abbb3a897b563412b88dbc5e4521790efefe93977aacc046850c14356a07084573a7527280ce39e08301&quot; },</span></span>
 <span id="L321"><span class="lineNum">     321</span> <span class="tlaGNC">           1 :         };</span></span>
 <span id="L322"><span class="lineNum">     322</span>              : </span>
 <span id="L323"><span class="lineNum">     323</span> <span class="tlaGNC">           1 :         PoolBlock decoded;</span></span>
@@ -456,8 +456,8 @@
 <span id="L394"><span class="lineNum">     394</span>              : </span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_majorVersion, HARDFORK_VERSION_CARROT);</span></span>
 <span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_minorVersion, 18U);</span></span>
-<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txinGenHeight, 3012000U);</span></span>
-<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txkeySecSeed, H(&quot;44898813cdaa6a4c41ed362a36e7bd128e763af57770a72b007f1c097462fe14&quot;));</span></span>
+<span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txinGenHeight, 3102800U);</span></span>
+<span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_txkeySecSeed, H(&quot;fd912d9f62f086f659bf4cec729abaee5ee59cd17020d18e6bb1f6cfdadea104&quot;));</span></span>
 <span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_sidechainHeight, i);</span></span>
 <span id="L400"><span class="lineNum">     400</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_timestamp, 1780000000U + i * 10);</span></span>
 <span id="L401"><span class="lineNum">     401</span> <span class="tlaGNC">           4 :                 ASSERT_EQ(b.m_nonce, 0x12345678U + i);</span></span>
@@ -812,7 +812,7 @@
 <span id="L750"><span class="lineNum">     750</span> <span class="tlaGNC">           1 :         params.m_miningWallet = Wallet(&quot;4B4aCvEcZr6GcusVJfEds2LXixCeJ2dQBaDUCguWmzi5L7PW5tVXfAnE4cn1mQdiNzH6zWcEPMQTiYTsNcX44ryxCJWZKZH&quot;);</span></span>
 <span id="L751"><span class="lineNum">     751</span> <span class="tlaGNC">           1 :         MinerData data{};</span></span>
 <span id="L752"><span class="lineNum">     752</span> <span class="tlaGNC">           1 :         data.major_version = HARDFORK_VERSION_CARROT;</span></span>
-<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">           1 :         data.height = 3012000;</span></span>
+<span id="L753"><span class="lineNum">     753</span> <span class="tlaGNC">           1 :         data.height = 3102800;</span></span>
 <span id="L754"><span class="lineNum">     754</span> <span class="tlaGNC">           1 :         data.prev_id = H(&quot;81a0260b29d5224e88d04b11faff321fbdc11c4570779386b2a1817a86dc622c&quot;);</span></span>
 <span id="L755"><span class="lineNum">     755</span> <span class="tlaGNC">           1 :         data.seed_hash = keccak(&quot;duplicate PoW seed&quot;);</span></span>
 <span id="L756"><span class="lineNum">     756</span> <span class="tlaGNC">           1 :         data.difficulty = sidechain.m_testMainChainDiff;</span></span>
@@ -846,7 +846,7 @@
 <span id="L784"><span class="lineNum">     784</span> <span class="tlaGNC">           2 :                 workers[i] = std::thread([&amp;, i]() {</span></span>
 <span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">           2 :                         initially_missing[i] = !sidechain.find_block(variants[i].m_sidechainId);</span></span>
 <span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">           2 :                         ready.fetch_add(1);</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">         121 :                         while (ready.load() != 2) std::this_thread::yield();</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">          55 :                         while (ready.load() != 2) std::this_thread::yield();</span></span>
 <span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">           2 :                         accepted[i] = sidechain.add_block(variants[i], true);</span></span>
 <span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">           2 :                 });</span></span>
 <span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">           2 :         }</span></span>
@@ -933,7 +933,7 @@
 <span id="L871"><span class="lineNum">     871</span> <span class="tlaGNC">           7 :                 Params params;</span></span>
 <span id="L872"><span class="lineNum">     872</span> <span class="tlaGNC">           7 :                 MinerData data{};</span></span>
 <span id="L873"><span class="lineNum">     873</span> <span class="tlaGNC">           7 :                 data.major_version = test.legacy ? (HARDFORK_VERSION_CARROT - 1) : HARDFORK_VERSION_CARROT;</span></span>
-<span id="L874"><span class="lineNum">     874</span> <span class="tlaGNC">           7 :                 data.height = test.legacy ? 2762973 : 3012000;</span></span>
+<span id="L874"><span class="lineNum">     874</span> <span class="tlaGNC">           7 :                 data.height = test.legacy ? 2762973 : 3102800;</span></span>
 <span id="L875"><span class="lineNum">     875</span> <span class="tlaGNC">           7 :                 data.prev_id = H(&quot;81a0260b29d5224e88d04b11faff321fbdc11c4570779386b2a1817a86dc622c&quot;);</span></span>
 <span id="L876"><span class="lineNum">     876</span> <span class="tlaGNC">           7 :                 data.seed_hash = keccak(&quot;parent RandomX seed&quot;);</span></span>
 <span id="L877"><span class="lineNum">     877</span> <span class="tlaGNC">           7 :                 data.difficulty = source.m_testMainChainDiff;</span></span>
@@ -981,7 +981,7 @@
 <span id="L919"><span class="lineNum">     919</span> <span class="tlaGNC">           7 :                 const hash parent_pow = stored_parent-&gt;m_powHash;</span></span>
 <span id="L920"><span class="lineNum">     920</span>              : </span>
 <span id="L921"><span class="lineNum">     921</span> <span class="tlaGNC">           7 :                 data.major_version = HARDFORK_VERSION_CARROT;</span></span>
-<span id="L922"><span class="lineNum">     922</span> <span class="tlaGNC">           7 :                 data.height = 3012001;</span></span>
+<span id="L922"><span class="lineNum">     922</span> <span class="tlaGNC">           7 :                 data.height = 3102801;</span></span>
 <span id="L923"><span class="lineNum">     923</span> <span class="tlaGNC">           7 :                 data.prev_id.h[0] ^= 1;</span></span>
 <span id="L924"><span class="lineNum">     924</span> <span class="tlaGNC">           7 :                 data.seed_hash = keccak(&quot;child RandomX seed&quot;);</span></span>
 <span id="L925"><span class="lineNum">     925</span> <span class="tlaGNC">           7 :                 tpl.update(data, mempool, params);</span></span>
@@ -1095,11 +1095,11 @@
 <span id="L1033"><span class="lineNum">    1033</span> <span class="tlaGNC">           1 :                 bool cached;</span></span>
 <span id="L1034"><span class="lineNum">    1034</span> <span class="tlaGNC">           1 :                 uint64_t mainchain_diff;</span></span>
 <span id="L1035"><span class="lineNum">    1035</span> <span class="tlaGNC">           1 :         } cases[] = {</span></span>
-<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaGNC">           1 :                 { &quot;Carrot&quot;, HARDFORK_VERSION_CARROT, 3012000, true, 1000000000000ULL },</span></span>
+<span id="L1036"><span class="lineNum">    1036</span> <span class="tlaGNC">           1 :                 { &quot;Carrot&quot;, HARDFORK_VERSION_CARROT, 3102800, true, 1000000000000ULL },</span></span>
 <span id="L1037"><span class="lineNum">    1037</span>              :                 // Max PPLNS weight is 2x Monero difficulty, so the window is cut after 4 blocks with the minimum difficulty (100000)</span>
-<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">           1 :                 { &quot;Carrot, window cut by weight&quot;, HARDFORK_VERSION_CARROT, 3012000, true, 150000 },</span></span>
+<span id="L1038"><span class="lineNum">    1038</span> <span class="tlaGNC">           1 :                 { &quot;Carrot, window cut by weight&quot;, HARDFORK_VERSION_CARROT, 3102800, true, 150000 },</span></span>
 <span id="L1039"><span class="lineNum">    1039</span>              :                 // The next Monero block is Carrot (testnet), so the first Carrot blocks will take these blocks' windows</span>
-<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">           1 :                 { &quot;last pre-Carrot Monero block&quot;, HARDFORK_VERSION_CARROT - 1, 3011999, true, 1000000000000ULL },</span></span>
+<span id="L1040"><span class="lineNum">    1040</span> <span class="tlaGNC">           1 :                 { &quot;last pre-Carrot Monero block&quot;, HARDFORK_VERSION_CARROT - 1, 3102799, true, 1000000000000ULL },</span></span>
 <span id="L1041"><span class="lineNum">    1041</span> <span class="tlaGNC">           1 :                 { &quot;pre-Carrot&quot;, HARDFORK_VERSION_CARROT - 1, 2762973, false, 1000000000000ULL },</span></span>
 <span id="L1042"><span class="lineNum">    1042</span> <span class="tlaGNC">           1 :         };</span></span>
 <span id="L1043"><span class="lineNum">    1043</span>              : </span>

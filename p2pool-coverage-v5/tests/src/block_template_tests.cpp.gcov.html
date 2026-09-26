@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-26 12:51:20</td>
+            <td class="headerValue">2026-09-26 18:25:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -127,7 +127,7 @@
 <span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           1 :         MinerData data{};</span></span>
 <span id="L66"><span class="lineNum">      66</span>              : </span>
 <span id="L67"><span class="lineNum">      67</span> <span class="tlaGNC">           1 :         data.major_version = HARDFORK_VERSION_CARROT;</span></span>
-<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 :         data.height = 3012000;</span></span>
+<span id="L68"><span class="lineNum">      68</span> <span class="tlaGNC">           1 :         data.height = 3102800;</span></span>
 <span id="L69"><span class="lineNum">      69</span> <span class="tlaGNC">           1 :         data.prev_id = keccak(&quot;pre-warmup mainchain tip&quot;);</span></span>
 <span id="L70"><span class="lineNum">      70</span> <span class="tlaGNC">           1 :         data.difficulty = difficulty_type(1000000000000ULL);</span></span>
 <span id="L71"><span class="lineNum">      71</span> <span class="tlaGNC">           1 :         data.median_weight = 300000;</span></span>
@@ -455,7 +455,7 @@
 <span id="L393"><span class="lineNum">     393</span> <span class="tlaGNC">           4 :                         MinerData data{};</span></span>
 <span id="L394"><span class="lineNum">     394</span>              : </span>
 <span id="L395"><span class="lineNum">     395</span> <span class="tlaGNC">           4 :                         data.major_version = version;</span></span>
-<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           4 :                         data.height = (version &lt; HARDFORK_VERSION_CARROT) ? 2762973 : 3012000;</span></span>
+<span id="L396"><span class="lineNum">     396</span> <span class="tlaGNC">           4 :                         data.height = (version &lt; HARDFORK_VERSION_CARROT) ? 2762973 : 3102800;</span></span>
 <span id="L397"><span class="lineNum">     397</span> <span class="tlaGNC">           4 :                         data.prev_id = H(&quot;81a0260b29d5224e88d04b11faff321fbdc11c4570779386b2a1817a86dc622c&quot;);</span></span>
 <span id="L398"><span class="lineNum">     398</span> <span class="tlaGNC">           4 :                         data.difficulty = sidechain.m_testMainChainDiff;</span></span>
 <span id="L399"><span class="lineNum">     399</span> <span class="tlaGNC">           4 :                         data.median_weight = 300000;</span></span>
@@ -480,7 +480,7 @@
 <span id="L418"><span class="lineNum">     418</span>              : </span>
 <span id="L419"><span class="lineNum">     419</span> <span class="tlaGNC">           8 :                                 const hash expected_seed = genesis</span></span>
 <span id="L420"><span class="lineNum">     420</span> <span class="tlaGNC">           8 :                                         ? (change_prev_id ? genesis-&gt;calculate_tx_key_seed() : genesis-&gt;m_txkeySecSeed)</span></span>
-<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           8 :                                         : ((version &lt; HARDFORK_VERSION_CARROT) ? sidechain.consensus_hash() : H(&quot;0206fa01e57831c64ec64607664e9b53753035c508a7d76358951440ef8d5c5d&quot;));</span></span>
+<span id="L421"><span class="lineNum">     421</span> <span class="tlaGNC">           8 :                                         : ((version &lt; HARDFORK_VERSION_CARROT) ? sidechain.consensus_hash() : H(&quot;3a8e489cba8ff2db2f834619b213c8c2b5dfc74e3467af129e1889b8ba80e6ab&quot;));</span></span>
 <span id="L422"><span class="lineNum">     422</span>              : </span>
 <span id="L423"><span class="lineNum">     423</span> <span class="tlaGNC">           8 :                                 ASSERT_EQ(b-&gt;m_txkeySecSeed, expected_seed);</span></span>
 <span id="L424"><span class="lineNum">     424</span>              : </span>
