@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-24 08:38:32</td>
+            <td class="headerValue">2026-09-26 11:56:03</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">41.9&nbsp;%</td>
@@ -85,21 +85,21 @@
 <span id="L23"><span class="lineNum">      23</span>              : #include &lt;map&gt;</span>
 <span id="L24"><span class="lineNum">      24</span>              : </span>
 <span id="L25"><span class="lineNum">      25</span>              : #if defined(_DEBUG) || defined(DEV_DEBUG)</span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       36271 : #define POOL_BLOCK_DEBUG 1</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC tlaBgGNC">       36395 : #define POOL_BLOCK_DEBUG 1</span></span>
 <span id="L27"><span class="lineNum">      27</span>              : #else</span>
 <span id="L28"><span class="lineNum">      28</span>              : #define POOL_BLOCK_DEBUG 0</span>
 <span id="L29"><span class="lineNum">      29</span>              : #endif</span>
 <span id="L30"><span class="lineNum">      30</span>              : </span>
 <span id="L31"><span class="lineNum">      31</span>              : namespace p2pool {</span>
 <span id="L32"><span class="lineNum">      32</span>              : </span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       36271 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">       36395 : static FORCEINLINE constexpr int pool_block_debug() { return POOL_BLOCK_DEBUG; }</span></span>
 <span id="L34"><span class="lineNum">      34</span>              : </span>
 <span id="L35"><span class="lineNum">      35</span>              : class RandomX_Hasher_Base;</span>
 <span id="L36"><span class="lineNum">      36</span>              : class SideChain;</span>
 <span id="L37"><span class="lineNum">      37</span>              : </span>
 <span id="L38"><span class="lineNum">      38</span>              : struct MinerShare</span>
 <span id="L39"><span class="lineNum">      39</span>              : {</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     5703275 :         FORCEINLINE MinerShare(const difficulty_type&amp; w, const Wallet* x) : m_weight(w), m_wallet(x) {}</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">     6652991 :         FORCEINLINE MinerShare(const difficulty_type&amp; w, const Wallet* x) : m_weight(w), m_wallet(x) {}</span></span>
 <span id="L41"><span class="lineNum">      41</span>              : </span>
 <span id="L42"><span class="lineNum">      42</span> <span class="tlaUNC tlaBgUNC">           0 :         FORCEINLINE bool operator==(const MinerShare&amp; s) const { return *m_wallet == *s.m_wallet; }</span></span>
 <span id="L43"><span class="lineNum">      43</span>              : </span>
@@ -114,10 +114,10 @@
 <span id="L52"><span class="lineNum">      52</span>              :         // Set to true when PPLNS window gets smaller than the configured size (max PPLNS weight is reached)</span>
 <span id="L53"><span class="lineNum">      53</span>              :         bool m_weightTruncated = false;</span>
 <span id="L54"><span class="lineNum">      54</span>              : </span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC tlaBgGNC">       47370 :         FORCEINLINE void clear() { m_shares.clear(); m_powHash = {}; m_weightTruncated = false; }</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC tlaBgGNC">       47500 :         FORCEINLINE void clear() { m_shares.clear(); m_powHash = {}; m_weightTruncated = false; }</span></span>
 <span id="L56"><span class="lineNum">      56</span>              : </span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       20132 :         [[nodiscard]] FORCEINLINE bool empty() const { return m_shares.empty(); }</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       41070 :         [[nodiscard]] FORCEINLINE size_t size() const { return m_shares.size(); }</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">       20629 :         [[nodiscard]] FORCEINLINE bool empty() const { return m_shares.empty(); }</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">       41869 :         [[nodiscard]] FORCEINLINE size_t size() const { return m_shares.size(); }</span></span>
 <span id="L59"><span class="lineNum">      59</span>              : };</span>
 <span id="L60"><span class="lineNum">      60</span>              : </span>
 <span id="L61"><span class="lineNum">      61</span>              : /*</span>
@@ -171,7 +171,7 @@
 <span id="L109"><span class="lineNum">     109</span>              : </span>
 <span id="L110"><span class="lineNum">     110</span>              : struct DifficultyData</span>
 <span id="L111"><span class="lineNum">     111</span>              : {</span>
-<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">    41775811 :         FORCEINLINE DifficultyData(uint64_t t, const difficulty_type&amp; d) : m_timestamp(t), m_cumulativeDifficulty(d) {}</span></span>
+<span id="L112"><span class="lineNum">     112</span> <span class="tlaGNC">    41775955 :         FORCEINLINE DifficultyData(uint64_t t, const difficulty_type&amp; d) : m_timestamp(t), m_cumulativeDifficulty(d) {}</span></span>
 <span id="L113"><span class="lineNum">     113</span>              : </span>
 <span id="L114"><span class="lineNum">     114</span>              :         uint64_t m_timestamp;</span>
 <span id="L115"><span class="lineNum">     115</span>              :         difficulty_type m_cumulativeDifficulty;</span>
@@ -296,98 +296,102 @@
 <span id="L234"><span class="lineNum">     234</span>              :         // Used to speed up SideChain::get_difficulty</span>
 <span id="L235"><span class="lineNum">     235</span>              :         mutable difficulty_type m_cachedNextDifficulty;</span>
 <span id="L236"><span class="lineNum">     236</span>              : </span>
-<span id="L237"><span class="lineNum">     237</span>              :         hash m_coinbase_tx_hash;</span>
-<span id="L238"><span class="lineNum">     238</span>              : </span>
-<span id="L239"><span class="lineNum">     239</span>              :         struct MainchainLayout {</span>
-<span id="L240"><span class="lineNum">     240</span>              :                 size_t header_size;</span>
-<span id="L241"><span class="lineNum">     241</span>              :                 size_t miner_tx_size;</span>
+<span id="L237"><span class="lineNum">     237</span>              :         // Used to speed up SideChain::get_shares for the chain tip and a few blocks below it</span>
+<span id="L238"><span class="lineNum">     238</span>              :         PPLNSWindow m_cachedShares;</span>
+<span id="L239"><span class="lineNum">     239</span>              :         uint64_t m_cachedSharesBottomHeight;</span>
+<span id="L240"><span class="lineNum">     240</span>              : </span>
+<span id="L241"><span class="lineNum">     241</span>              :         hash m_coinbase_tx_hash;</span>
 <span id="L242"><span class="lineNum">     242</span>              : </span>
-<span id="L243"><span class="lineNum">     243</span>              :                 int outputs_offset;</span>
-<span id="L244"><span class="lineNum">     244</span>              :                 int outputs_blob_size;</span>
-<span id="L245"><span class="lineNum">     245</span>              : </span>
-<span id="L246"><span class="lineNum">     246</span>              :                 int pubkeys_offset;</span>
-<span id="L247"><span class="lineNum">     247</span>              :                 int pubkeys_blob_size;</span>
-<span id="L248"><span class="lineNum">     248</span>              :         };</span>
+<span id="L243"><span class="lineNum">     243</span>              :         struct MainchainLayout {</span>
+<span id="L244"><span class="lineNum">     244</span>              :                 size_t header_size;</span>
+<span id="L245"><span class="lineNum">     245</span>              :                 size_t miner_tx_size;</span>
+<span id="L246"><span class="lineNum">     246</span>              : </span>
+<span id="L247"><span class="lineNum">     247</span>              :                 int outputs_offset;</span>
+<span id="L248"><span class="lineNum">     248</span>              :                 int outputs_blob_size;</span>
 <span id="L249"><span class="lineNum">     249</span>              : </span>
-<span id="L250"><span class="lineNum">     250</span>              :         std::vector&lt;uint8_t&gt; serialize_mainchain_data(MainchainLayout* layout = nullptr, const uint32_t* nonce = nullptr, const uint32_t* extra_nonce = nullptr) const;</span>
-<span id="L251"><span class="lineNum">     251</span>              :         std::vector&lt;uint8_t&gt; serialize_sidechain_data() const;</span>
-<span id="L252"><span class="lineNum">     252</span>              : </span>
-<span id="L253"><span class="lineNum">     253</span>              :         enum class DeserializeStatus {</span>
-<span id="L254"><span class="lineNum">     254</span>              :                 NEEDS_PARENT_POW = -1,</span>
-<span id="L255"><span class="lineNum">     255</span>              :         };</span>
+<span id="L250"><span class="lineNum">     250</span>              :                 int pubkeys_offset;</span>
+<span id="L251"><span class="lineNum">     251</span>              :                 int pubkeys_blob_size;</span>
+<span id="L252"><span class="lineNum">     252</span>              :         };</span>
+<span id="L253"><span class="lineNum">     253</span>              : </span>
+<span id="L254"><span class="lineNum">     254</span>              :         std::vector&lt;uint8_t&gt; serialize_mainchain_data(MainchainLayout* layout = nullptr, const uint32_t* nonce = nullptr, const uint32_t* extra_nonce = nullptr) const;</span>
+<span id="L255"><span class="lineNum">     255</span>              :         std::vector&lt;uint8_t&gt; serialize_sidechain_data() const;</span>
 <span id="L256"><span class="lineNum">     256</span>              : </span>
-<span id="L257"><span class="lineNum">     257</span>              :         [[nodiscard]] int deserialize(const uint8_t* data, size_t size, const SideChain&amp; sidechain, bool compact, bool allow_pruned);</span>
-<span id="L258"><span class="lineNum">     258</span>              :         void reset_offchain_data();</span>
-<span id="L259"><span class="lineNum">     259</span>              : </span>
-<span id="L260"><span class="lineNum">     260</span>              :         [[nodiscard]] bool get_pow_hash(RandomX_Hasher_Base* hasher, uint64_t height, const hash&amp; seed_hash, hash&amp; pow_hash, bool force_light_mode, size_t lane);</span>
-<span id="L261"><span class="lineNum">     261</span>              :         [[nodiscard]] bool get_hashing_blob(std::vector&lt;uint8_t&gt;&amp; hashing_blob, hash&amp; coinbase_tx_hash, const uint32_t* nonce = nullptr, const uint32_t* extra_nonce = nullptr) const;</span>
-<span id="L262"><span class="lineNum">     262</span>              : </span>
-<span id="L263"><span class="lineNum">     263</span>              :         uint64_t get_payout(const Wallet&amp; w) const;</span>
-<span id="L264"><span class="lineNum">     264</span>              : </span>
-<span id="L265"><span class="lineNum">     265</span>              :         typedef std::array&lt;uint8_t, HASH_SIZE + NONCE_SIZE + EXTRA_NONCE_SIZE&gt; full_id;</span>
+<span id="L257"><span class="lineNum">     257</span>              :         enum class DeserializeStatus {</span>
+<span id="L258"><span class="lineNum">     258</span>              :                 NEEDS_PARENT_POW = -1,</span>
+<span id="L259"><span class="lineNum">     259</span>              :         };</span>
+<span id="L260"><span class="lineNum">     260</span>              : </span>
+<span id="L261"><span class="lineNum">     261</span>              :         [[nodiscard]] int deserialize(const uint8_t* data, size_t size, const SideChain&amp; sidechain, bool compact, bool allow_pruned);</span>
+<span id="L262"><span class="lineNum">     262</span>              :         void reset_offchain_data();</span>
+<span id="L263"><span class="lineNum">     263</span>              : </span>
+<span id="L264"><span class="lineNum">     264</span>              :         [[nodiscard]] bool get_pow_hash(RandomX_Hasher_Base* hasher, uint64_t height, const hash&amp; seed_hash, hash&amp; pow_hash, bool force_light_mode, size_t lane);</span>
+<span id="L265"><span class="lineNum">     265</span>              :         [[nodiscard]] bool get_hashing_blob(std::vector&lt;uint8_t&gt;&amp; hashing_blob, hash&amp; coinbase_tx_hash, const uint32_t* nonce = nullptr, const uint32_t* extra_nonce = nullptr) const;</span>
 <span id="L266"><span class="lineNum">     266</span>              : </span>
-<span id="L267"><span class="lineNum">     267</span>              :         FORCEINLINE full_id get_full_id() const</span>
-<span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">        6746 :         {</span></span>
-<span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">        6746 :                 full_id key;</span></span>
-<span id="L270"><span class="lineNum">     270</span> <span class="tlaGNC">        6746 :                 uint8_t* p = key.data();</span></span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">        6746 :                 memcpy(p, m_sidechainId.h, HASH_SIZE);</span></span>
-<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        6746 :                 memcpy(p + HASH_SIZE, &amp;m_nonce, NONCE_SIZE);</span></span>
-<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        6746 :                 memcpy(p + HASH_SIZE + NONCE_SIZE, &amp;m_extraNonce, EXTRA_NONCE_SIZE);</span></span>
-<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        6746 :                 return key;</span></span>
-<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        6746 :         }</span></span>
-<span id="L276"><span class="lineNum">     276</span>              : </span>
-<span id="L277"><span class="lineNum">     277</span>              :         hash calculate_genesis_tx_key_seed(const hash&amp; consensus_hash) const;</span>
-<span id="L278"><span class="lineNum">     278</span>              :         hash calculate_tx_key_seed() const;</span>
-<span id="L279"><span class="lineNum">     279</span>              : </span>
-<span id="L280"><span class="lineNum">     280</span>              :         static FORCEINLINE uint64_t encode_merkle_tree_data(uint32_t n_aux_chains, uint32_t nonce)</span>
-<span id="L281"><span class="lineNum">     281</span> <span class="tlaGNC">       23160 :         {</span></span>
-<span id="L282"><span class="lineNum">     282</span> <span class="tlaGNC">       23160 :                 uint32_t n_bits = 1U;</span></span>
-<span id="L283"><span class="lineNum">     283</span> <span class="tlaGNC">      121618 :                 while (((1U &lt;&lt; n_bits) &lt; n_aux_chains) &amp;&amp; (n_bits &lt; 8)) {</span></span>
-<span id="L284"><span class="lineNum">     284</span> <span class="tlaGNC">       98458 :                         ++n_bits;</span></span>
-<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">       98458 :                 }</span></span>
-<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">       23160 :                 return (n_bits - 1U) | ((n_aux_chains - 1U) &lt;&lt; 3U) | (static_cast&lt;uint64_t&gt;(nonce) &lt;&lt; (3U + n_bits));</span></span>
-<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">       23160 :         }</span></span>
-<span id="L288"><span class="lineNum">     288</span>              : </span>
-<span id="L289"><span class="lineNum">     289</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
-<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">       76821 :         {</span></span>
-<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       76821 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
-<span id="L292"><span class="lineNum">     292</span> <span class="tlaGNC">       76821 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
-<span id="L293"><span class="lineNum">     293</span> <span class="tlaGNC">       76821 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
-<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       76821 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
-<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       76821 :         }</span></span>
-<span id="L296"><span class="lineNum">     296</span>              : </span>
-<span id="L297"><span class="lineNum">     297</span>              :         [[nodiscard]] static FORCEINLINE constexpr size_t output_blob_size_estimate(uint8_t major_version)</span>
-<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       64512 :         {</span></span>
-<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       64512 :                 constexpr size_t OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + 1;</span></span>
-<span id="L300"><span class="lineNum">     300</span> <span class="tlaGNC">       64512 :                 constexpr size_t CARROT_OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + CARROT_VIEW_TAG_BYTES + CARROT_JANUS_ANCHOR_BYTES;</span></span>
-<span id="L301"><span class="lineNum">     301</span>              : </span>
-<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       64512 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? CARROT_OUTPUT_BLOB_SIZE : OUTPUT_BLOB_SIZE;</span></span>
-<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       64512 :         }</span></span>
-<span id="L304"><span class="lineNum">     304</span>              : </span>
-<span id="L305"><span class="lineNum">     305</span> <span class="tlaGNC">       44202 :         [[nodiscard]] FORCEINLINE constexpr size_t output_blob_size_estimate() const { return output_blob_size_estimate(m_majorVersion); }</span></span>
-<span id="L306"><span class="lineNum">     306</span>              : </span>
-<span id="L307"><span class="lineNum">     307</span>              :         [[nodiscard]] static FORCEINLINE constexpr uint64_t max_block_size(uint8_t major_version)</span>
-<span id="L308"><span class="lineNum">     308</span> <span class="tlaGNC">      211826 :         {</span></span>
-<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">      211826 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? MAX_BLOCK_SIZE_NEW : MAX_BLOCK_SIZE_OLD;</span></span>
-<span id="L310"><span class="lineNum">     310</span> <span class="tlaGNC">      211826 :         }</span></span>
-<span id="L311"><span class="lineNum">     311</span>              : </span>
-<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      211826 :         [[nodiscard]] FORCEINLINE constexpr uint64_t max_block_size() const { return max_block_size(m_majorVersion); }</span></span>
-<span id="L313"><span class="lineNum">     313</span>              : };</span>
-<span id="L314"><span class="lineNum">     314</span>              : </span>
-<span id="L315"><span class="lineNum">     315</span>              : } // namespace p2pool</span>
-<span id="L316"><span class="lineNum">     316</span>              : </span>
-<span id="L317"><span class="lineNum">     317</span>              : namespace robin_hood {</span>
+<span id="L267"><span class="lineNum">     267</span>              :         uint64_t get_payout(const Wallet&amp; w) const;</span>
+<span id="L268"><span class="lineNum">     268</span>              : </span>
+<span id="L269"><span class="lineNum">     269</span>              :         typedef std::array&lt;uint8_t, HASH_SIZE + NONCE_SIZE + EXTRA_NONCE_SIZE&gt; full_id;</span>
+<span id="L270"><span class="lineNum">     270</span>              : </span>
+<span id="L271"><span class="lineNum">     271</span>              :         FORCEINLINE full_id get_full_id() const</span>
+<span id="L272"><span class="lineNum">     272</span> <span class="tlaGNC">        6778 :         {</span></span>
+<span id="L273"><span class="lineNum">     273</span> <span class="tlaGNC">        6778 :                 full_id key;</span></span>
+<span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">        6778 :                 uint8_t* p = key.data();</span></span>
+<span id="L275"><span class="lineNum">     275</span> <span class="tlaGNC">        6778 :                 memcpy(p, m_sidechainId.h, HASH_SIZE);</span></span>
+<span id="L276"><span class="lineNum">     276</span> <span class="tlaGNC">        6778 :                 memcpy(p + HASH_SIZE, &amp;m_nonce, NONCE_SIZE);</span></span>
+<span id="L277"><span class="lineNum">     277</span> <span class="tlaGNC">        6778 :                 memcpy(p + HASH_SIZE + NONCE_SIZE, &amp;m_extraNonce, EXTRA_NONCE_SIZE);</span></span>
+<span id="L278"><span class="lineNum">     278</span> <span class="tlaGNC">        6778 :                 return key;</span></span>
+<span id="L279"><span class="lineNum">     279</span> <span class="tlaGNC">        6778 :         }</span></span>
+<span id="L280"><span class="lineNum">     280</span>              : </span>
+<span id="L281"><span class="lineNum">     281</span>              :         hash calculate_genesis_tx_key_seed(const hash&amp; consensus_hash) const;</span>
+<span id="L282"><span class="lineNum">     282</span>              :         hash calculate_tx_key_seed() const;</span>
+<span id="L283"><span class="lineNum">     283</span>              : </span>
+<span id="L284"><span class="lineNum">     284</span>              :         static FORCEINLINE uint64_t encode_merkle_tree_data(uint32_t n_aux_chains, uint32_t nonce)</span>
+<span id="L285"><span class="lineNum">     285</span> <span class="tlaGNC">       23193 :         {</span></span>
+<span id="L286"><span class="lineNum">     286</span> <span class="tlaGNC">       23193 :                 uint32_t n_bits = 1U;</span></span>
+<span id="L287"><span class="lineNum">     287</span> <span class="tlaGNC">      121651 :                 while (((1U &lt;&lt; n_bits) &lt; n_aux_chains) &amp;&amp; (n_bits &lt; 8)) {</span></span>
+<span id="L288"><span class="lineNum">     288</span> <span class="tlaGNC">       98458 :                         ++n_bits;</span></span>
+<span id="L289"><span class="lineNum">     289</span> <span class="tlaGNC">       98458 :                 }</span></span>
+<span id="L290"><span class="lineNum">     290</span> <span class="tlaGNC">       23193 :                 return (n_bits - 1U) | ((n_aux_chains - 1U) &lt;&lt; 3U) | (static_cast&lt;uint64_t&gt;(nonce) &lt;&lt; (3U + n_bits));</span></span>
+<span id="L291"><span class="lineNum">     291</span> <span class="tlaGNC">       23193 :         }</span></span>
+<span id="L292"><span class="lineNum">     292</span>              : </span>
+<span id="L293"><span class="lineNum">     293</span>              :         FORCEINLINE void decode_merkle_tree_data(uint32_t&amp; mm_n_aux_chains, uint32_t&amp; mm_nonce) const</span>
+<span id="L294"><span class="lineNum">     294</span> <span class="tlaGNC">       76886 :         {</span></span>
+<span id="L295"><span class="lineNum">     295</span> <span class="tlaGNC">       76886 :                 const uint32_t k = static_cast&lt;uint32_t&gt;(m_merkleTreeData);</span></span>
+<span id="L296"><span class="lineNum">     296</span> <span class="tlaGNC">       76886 :                 const uint32_t n = 1U + (k &amp; 7U);</span></span>
+<span id="L297"><span class="lineNum">     297</span> <span class="tlaGNC">       76886 :                 mm_n_aux_chains = 1U + ((k &gt;&gt; 3U) &amp; ((1U &lt;&lt; n) - 1U));</span></span>
+<span id="L298"><span class="lineNum">     298</span> <span class="tlaGNC">       76886 :                 mm_nonce = static_cast&lt;uint32_t&gt;(m_merkleTreeData &gt;&gt; (3U + n));</span></span>
+<span id="L299"><span class="lineNum">     299</span> <span class="tlaGNC">       76886 :         }</span></span>
+<span id="L300"><span class="lineNum">     300</span>              : </span>
+<span id="L301"><span class="lineNum">     301</span>              :         [[nodiscard]] static FORCEINLINE constexpr size_t output_blob_size_estimate(uint8_t major_version)</span>
+<span id="L302"><span class="lineNum">     302</span> <span class="tlaGNC">       64841 :         {</span></span>
+<span id="L303"><span class="lineNum">     303</span> <span class="tlaGNC">       64841 :                 constexpr size_t OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + 1;</span></span>
+<span id="L304"><span class="lineNum">     304</span> <span class="tlaGNC">       64841 :                 constexpr size_t CARROT_OUTPUT_BLOB_SIZE = 5 + 1 + HASH_SIZE + CARROT_VIEW_TAG_BYTES + CARROT_JANUS_ANCHOR_BYTES;</span></span>
+<span id="L305"><span class="lineNum">     305</span>              : </span>
+<span id="L306"><span class="lineNum">     306</span> <span class="tlaGNC">       64841 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? CARROT_OUTPUT_BLOB_SIZE : OUTPUT_BLOB_SIZE;</span></span>
+<span id="L307"><span class="lineNum">     307</span> <span class="tlaGNC">       64841 :         }</span></span>
+<span id="L308"><span class="lineNum">     308</span>              : </span>
+<span id="L309"><span class="lineNum">     309</span> <span class="tlaGNC">       44432 :         [[nodiscard]] FORCEINLINE constexpr size_t output_blob_size_estimate() const { return output_blob_size_estimate(m_majorVersion); }</span></span>
+<span id="L310"><span class="lineNum">     310</span>              : </span>
+<span id="L311"><span class="lineNum">     311</span>              :         [[nodiscard]] static FORCEINLINE constexpr uint64_t max_block_size(uint8_t major_version)</span>
+<span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">      212054 :         {</span></span>
+<span id="L313"><span class="lineNum">     313</span> <span class="tlaGNC">      212054 :                 return (major_version &gt;= HARDFORK_VERSION_CARROT) ? MAX_BLOCK_SIZE_NEW : MAX_BLOCK_SIZE_OLD;</span></span>
+<span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">      212054 :         }</span></span>
+<span id="L315"><span class="lineNum">     315</span>              : </span>
+<span id="L316"><span class="lineNum">     316</span> <span class="tlaGNC">      212054 :         [[nodiscard]] FORCEINLINE constexpr uint64_t max_block_size() const { return max_block_size(m_majorVersion); }</span></span>
+<span id="L317"><span class="lineNum">     317</span>              : };</span>
 <span id="L318"><span class="lineNum">     318</span>              : </span>
-<span id="L319"><span class="lineNum">     319</span>              :         template&lt;&gt;</span>
-<span id="L320"><span class="lineNum">     320</span>              :         struct hash&lt;p2pool::MinerShare&gt;</span>
-<span id="L321"><span class="lineNum">     321</span>              :         {</span>
-<span id="L322"><span class="lineNum">     322</span>              :                 FORCEINLINE size_t operator()(const p2pool::MinerShare&amp; value) const noexcept</span>
-<span id="L323"><span class="lineNum">     323</span> <span class="tlaUNC tlaBgUNC">           0 :                 {</span></span>
-<span id="L324"><span class="lineNum">     324</span> <span class="tlaUNC">           0 :                         return hash_bytes(value.m_wallet-&gt;keys(), p2pool::HASH_SIZE * 2);</span></span>
-<span id="L325"><span class="lineNum">     325</span> <span class="tlaUNC">           0 :                 }</span></span>
-<span id="L326"><span class="lineNum">     326</span>              :         };</span>
-<span id="L327"><span class="lineNum">     327</span>              : </span>
-<span id="L328"><span class="lineNum">     328</span>              : } // namespace robin_hood</span>
+<span id="L319"><span class="lineNum">     319</span>              : } // namespace p2pool</span>
+<span id="L320"><span class="lineNum">     320</span>              : </span>
+<span id="L321"><span class="lineNum">     321</span>              : namespace robin_hood {</span>
+<span id="L322"><span class="lineNum">     322</span>              : </span>
+<span id="L323"><span class="lineNum">     323</span>              :         template&lt;&gt;</span>
+<span id="L324"><span class="lineNum">     324</span>              :         struct hash&lt;p2pool::MinerShare&gt;</span>
+<span id="L325"><span class="lineNum">     325</span>              :         {</span>
+<span id="L326"><span class="lineNum">     326</span>              :                 FORCEINLINE size_t operator()(const p2pool::MinerShare&amp; value) const noexcept</span>
+<span id="L327"><span class="lineNum">     327</span> <span class="tlaUNC tlaBgUNC">           0 :                 {</span></span>
+<span id="L328"><span class="lineNum">     328</span> <span class="tlaUNC">           0 :                         return hash_bytes(value.m_wallet-&gt;keys(), p2pool::HASH_SIZE * 2);</span></span>
+<span id="L329"><span class="lineNum">     329</span> <span class="tlaUNC">           0 :                 }</span></span>
+<span id="L330"><span class="lineNum">     330</span>              :         };</span>
+<span id="L331"><span class="lineNum">     331</span>              : </span>
+<span id="L332"><span class="lineNum">     332</span>              : } // namespace robin_hood</span>
         </pre>
               </td>
             </tr>
