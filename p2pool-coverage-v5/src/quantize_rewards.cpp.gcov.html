@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-26 11:56:03</td>
+            <td class="headerValue">2026-09-26 12:51:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -313,14 +313,14 @@
 <span id="L251"><span class="lineNum">     251</span>              :         // and let the M smallest round up</span>
 <span id="L252"><span class="lineNum">     252</span> <span class="tlaGNC tlaBgGNC">       50374 :         auto ranks_lower =</span></span>
 <span id="L253"><span class="lineNum">     253</span> <span class="tlaGNC">       50374 :                 [&amp;u, &amp;fp, &amp;shares](size_t x, size_t y)</span></span>
-<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">     2298394 :                 {</span></span>
+<span id="L254"><span class="lineNum">     254</span> <span class="tlaGNC">     2298374 :                 {</span></span>
 <span id="L255"><span class="lineNum">     255</span>              :                         // Q_x &lt; Q_y, cross-multiplied</span>
-<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">     2298394 :                         const u128 qx = u128(u[x] * (T - fp[x])) * ((T - u[y]) * fp[y]);</span></span>
-<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     2298394 :                         const u128 qy = u128(u[y] * (T - fp[y])) * ((T - u[x]) * fp[x]);</span></span>
+<span id="L256"><span class="lineNum">     256</span> <span class="tlaGNC">     2298374 :                         const u128 qx = u128(u[x] * (T - fp[x])) * ((T - u[y]) * fp[y]);</span></span>
+<span id="L257"><span class="lineNum">     257</span> <span class="tlaGNC">     2298374 :                         const u128 qy = u128(u[y] * (T - fp[y])) * ((T - u[x]) * fp[x]);</span></span>
 <span id="L258"><span class="lineNum">     258</span>              : </span>
-<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     2298394 :                         if (qx != qy) {</span></span>
-<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     1964057 :                                 return qx &lt; qy;</span></span>
-<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">     1964057 :                         }</span></span>
+<span id="L259"><span class="lineNum">     259</span> <span class="tlaGNC">     2298374 :                         if (qx != qy) {</span></span>
+<span id="L260"><span class="lineNum">     260</span> <span class="tlaGNC">     1964037 :                                 return qx &lt; qy;</span></span>
+<span id="L261"><span class="lineNum">     261</span> <span class="tlaGNC">     1964037 :                         }</span></span>
 <span id="L262"><span class="lineNum">     262</span>              : </span>
 <span id="L263"><span class="lineNum">     263</span>              :                         // Ties: weight descending, then the order the shares came in</span>
 <span id="L264"><span class="lineNum">     264</span> <span class="tlaGNC">      334337 :                         if (shares[x].m_weight != shares[y].m_weight) {</span></span>
@@ -330,7 +330,7 @@
 <span id="L268"><span class="lineNum">     268</span> <span class="tlaGNC">      155893 :                         return x &lt; y;</span></span>
 <span id="L269"><span class="lineNum">     269</span> <span class="tlaGNC">      334337 :                 };</span></span>
 <span id="L270"><span class="lineNum">     270</span>              : </span>
-<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">       50374 :         std::nth_element(order.begin(), order.begin() + M, order.end(), ranks_lower);</span></span>
+<span id="L271"><span class="lineNum">     271</span> <span class="tlaGNC">       50374 :         std::nth_element(order.begin(), order.begin() + static_cast&lt;ptrdiff_t&gt;(M), order.end(), ranks_lower);</span></span>
 <span id="L272"><span class="lineNum">     272</span>              : </span>
 <span id="L273"><span class="lineNum">     273</span>              :         // r_i: the payout, before the remainder</span>
 <span id="L274"><span class="lineNum">     274</span> <span class="tlaGNC">     1060163 :         for (size_t i = 0; i &lt; n; ++i) {</span></span>
@@ -370,7 +370,7 @@
 <span id="L308"><span class="lineNum">     308</span> <span class="tlaUNC tlaBgUNC">           0 :                                 LOGERR(1, &quot;rho &gt; 0 but nothing is ranked. Check the code!&quot;);</span></span>
 <span id="L309"><span class="lineNum">     309</span> <span class="tlaUNC">           0 :                                 return false;</span></span>
 <span id="L310"><span class="lineNum">     310</span> <span class="tlaUNC">           0 :                         }</span></span>
-<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC tlaBgGNC">       12826 :                         h = M ? *std::max_element(order.begin(), order.begin() + M, ranks_lower) : *std::min_element(order.begin(), order.end(), ranks_lower);</span></span>
+<span id="L311"><span class="lineNum">     311</span> <span class="tlaGNC tlaBgGNC">       12826 :                         h = M ? *std::max_element(order.begin(), order.begin() + static_cast&lt;ptrdiff_t&gt;(M), ranks_lower) : *std::min_element(order.begin(), order.end(), ranks_lower);</span></span>
 <span id="L312"><span class="lineNum">     312</span> <span class="tlaGNC">       12826 :                 }</span></span>
 <span id="L313"><span class="lineNum">     313</span>              : </span>
 <span id="L314"><span class="lineNum">     314</span> <span class="tlaGNC">       44875 :                 rewards[h] += rho;</span></span>

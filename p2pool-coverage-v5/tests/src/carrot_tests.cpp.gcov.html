@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-26 11:56:03</td>
+            <td class="headerValue">2026-09-26 12:51:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -1337,23 +1337,23 @@
 <span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">        9125 :         result.valid = gen_onetime_address(in.spend_public_key, sender_extension_g, sender_extension_t, result.onetime_address);</span></span>
 <span id="L1276"><span class="lineNum">    1276</span>              : </span>
 <span id="L1277"><span class="lineNum">    1277</span> <span class="tlaGNC">        9125 :         if (result.valid) {</span></span>
-<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">        9121 :                 result.vt = gen_view_tag(in.sender_receiver_secret, height, result.onetime_address);</span></span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">        9121 :                 result.anchor_enc = gen_encrypted_janus_anchor(in.contextualized_sender_receiver_secret, in.anchor, result.onetime_address);</span></span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">        9121 :         }</span></span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC">           4 :         else {</span></span>
-<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaGNC">           4 :                 result.onetime_address = hash();</span></span>
-<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaGNC">           4 :         }</span></span>
+<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">        9122 :                 result.vt = gen_view_tag(in.sender_receiver_secret, height, result.onetime_address);</span></span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">        9122 :                 result.anchor_enc = gen_encrypted_janus_anchor(in.contextualized_sender_receiver_secret, in.anchor, result.onetime_address);</span></span>
+<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">        9122 :         }</span></span>
+<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC">           3 :         else {</span></span>
+<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaGNC">           3 :                 result.onetime_address = hash();</span></span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaGNC">           3 :         }</span></span>
 <span id="L1284"><span class="lineNum">    1284</span>              : </span>
 <span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">        9125 :         return result;</span></span>
 <span id="L1286"><span class="lineNum">    1286</span> <span class="tlaGNC">        9125 : }</span></span>
 <span id="L1287"><span class="lineNum">    1287</span>              : </span>
 <span id="L1288"><span class="lineNum">    1288</span>              : static bool equal_outputs(const coinbase_tx_output&amp; a, const coinbase_tx_output&amp; b)</span>
-<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaGNC">       13616 : {</span></span>
-<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">       13616 :         return (a.valid == b.valid) &amp;&amp;</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       13616 :                 (a.onetime_address == b.onetime_address) &amp;&amp;</span></span>
+<span id="L1289"><span class="lineNum">    1289</span> <span class="tlaGNC">       13615 : {</span></span>
+<span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">       13615 :         return (a.valid == b.valid) &amp;&amp;</span></span>
+<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       13615 :                 (a.onetime_address == b.onetime_address) &amp;&amp;</span></span>
 <span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">       13615 :                 (memcmp(&amp;a.vt, &amp;b.vt, sizeof(view_tag)) == 0) &amp;&amp;</span></span>
 <span id="L1293"><span class="lineNum">    1293</span> <span class="tlaGNC">       13614 :                 (memcmp(&amp;a.anchor_enc, &amp;b.anchor_enc, sizeof(janus_anchor)) == 0);</span></span>
-<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaGNC">       13616 : }</span></span>
+<span id="L1294"><span class="lineNum">    1294</span> <span class="tlaGNC">       13615 : }</span></span>
 <span id="L1295"><span class="lineNum">    1295</span>              : </span>
 <span id="L1296"><span class="lineNum">    1296</span>              : TEST(carrot, batch_coinbase_outputs)</span>
 <span id="L1297"><span class="lineNum">    1297</span> <span class="tlaGNC">           1 : {</span></span>
