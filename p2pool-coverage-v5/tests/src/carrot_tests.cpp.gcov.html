@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-26 18:25:48</td>
+            <td class="headerValue">2026-09-27 18:25:00</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -1351,7 +1351,7 @@
 <span id="L1289"><span class="lineNum">    1289</span> <span class="tlaGNC">       13616 : {</span></span>
 <span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">       13616 :         return (a.valid == b.valid) &amp;&amp;</span></span>
 <span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       13616 :                 (a.onetime_address == b.onetime_address) &amp;&amp;</span></span>
-<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">       13615 :                 (memcmp(&amp;a.vt, &amp;b.vt, sizeof(view_tag)) == 0) &amp;&amp;</span></span>
+<span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">       13614 :                 (memcmp(&amp;a.vt, &amp;b.vt, sizeof(view_tag)) == 0) &amp;&amp;</span></span>
 <span id="L1293"><span class="lineNum">    1293</span> <span class="tlaGNC">       13614 :                 (memcmp(&amp;a.anchor_enc, &amp;b.anchor_enc, sizeof(janus_anchor)) == 0);</span></span>
 <span id="L1294"><span class="lineNum">    1294</span> <span class="tlaGNC">       13616 : }</span></span>
 <span id="L1295"><span class="lineNum">    1295</span>              : </span>
@@ -1981,17 +1981,17 @@
 <span id="L1919"><span class="lineNum">    1919</span> <span class="tlaGNC">         561 :                 reference_secrets.emplace_back(reference_coinbase_secrets(txkey_sec, 0, height, wallets[i]));</span></span>
 <span id="L1920"><span class="lineNum">    1920</span> <span class="tlaGNC">         561 :         }</span></span>
 <span id="L1921"><span class="lineNum">    1921</span>              : </span>
-<span id="L1922"><span class="lineNum">    1922</span> <span class="tlaGNC">        7967 :         auto reference_output = [&amp;](size_t i, uint64_t a) {</span></span>
-<span id="L1923"><span class="lineNum">    1923</span> <span class="tlaGNC">        7967 :                 coinbase_output_input in{};</span></span>
+<span id="L1922"><span class="lineNum">    1922</span> <span class="tlaGNC">        7968 :         auto reference_output = [&amp;](size_t i, uint64_t a) {</span></span>
+<span id="L1923"><span class="lineNum">    1923</span> <span class="tlaGNC">        7968 :                 coinbase_output_input in{};</span></span>
 <span id="L1924"><span class="lineNum">    1924</span>              : </span>
-<span id="L1925"><span class="lineNum">    1925</span> <span class="tlaGNC">        7967 :                 in.spend_public_key = wallets[i].spend_public_key();</span></span>
-<span id="L1926"><span class="lineNum">    1926</span> <span class="tlaGNC">        7967 :                 in.sender_receiver_secret = reference_secrets[i].sender_receiver_secret;</span></span>
-<span id="L1927"><span class="lineNum">    1927</span> <span class="tlaGNC">        7967 :                 in.contextualized_sender_receiver_secret = reference_secrets[i].contextualized_sender_receiver_secret;</span></span>
-<span id="L1928"><span class="lineNum">    1928</span> <span class="tlaGNC">        7967 :                 in.anchor = reference_secrets[i].anchor;</span></span>
-<span id="L1929"><span class="lineNum">    1929</span> <span class="tlaGNC">        7967 :                 in.amount = a;</span></span>
+<span id="L1925"><span class="lineNum">    1925</span> <span class="tlaGNC">        7968 :                 in.spend_public_key = wallets[i].spend_public_key();</span></span>
+<span id="L1926"><span class="lineNum">    1926</span> <span class="tlaGNC">        7968 :                 in.sender_receiver_secret = reference_secrets[i].sender_receiver_secret;</span></span>
+<span id="L1927"><span class="lineNum">    1927</span> <span class="tlaGNC">        7968 :                 in.contextualized_sender_receiver_secret = reference_secrets[i].contextualized_sender_receiver_secret;</span></span>
+<span id="L1928"><span class="lineNum">    1928</span> <span class="tlaGNC">        7968 :                 in.anchor = reference_secrets[i].anchor;</span></span>
+<span id="L1929"><span class="lineNum">    1929</span> <span class="tlaGNC">        7968 :                 in.amount = a;</span></span>
 <span id="L1930"><span class="lineNum">    1930</span>              : </span>
-<span id="L1931"><span class="lineNum">    1931</span> <span class="tlaGNC">        7967 :                 return reference_coinbase_output(height, in);</span></span>
-<span id="L1932"><span class="lineNum">    1932</span> <span class="tlaGNC">        7967 :         };</span></span>
+<span id="L1931"><span class="lineNum">    1931</span> <span class="tlaGNC">        7968 :                 return reference_coinbase_output(height, in);</span></span>
+<span id="L1932"><span class="lineNum">    1932</span> <span class="tlaGNC">        7968 :         };</span></span>
 <span id="L1933"><span class="lineNum">    1933</span>              : </span>
 <span id="L1934"><span class="lineNum">    1934</span> <span class="tlaGNC">          46 :         auto check_outputs = [&amp;](const std::vector&lt;size_t&gt;&amp; indices, const std::vector&lt;uint64_t&gt;&amp; a, const std::vector&lt;coinbase_tx_output&gt;&amp; out) {</span></span>
 <span id="L1935"><span class="lineNum">    1935</span> <span class="tlaGNC">          46 :                 ASSERT_EQ(out.size(), indices.size());</span></span>
