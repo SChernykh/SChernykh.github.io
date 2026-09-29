@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-27 18:25:00</td>
+            <td class="headerValue">2026-09-29 09:00:43</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">57.1&nbsp;%</td>
@@ -171,7 +171,7 @@
 <span id="L109"><span class="lineNum">     109</span>              : #endif</span>
 <span id="L110"><span class="lineNum">     110</span>              : #ifndef P2POOL_UNIT_TESTS</span>
 <span id="L111"><span class="lineNum">     111</span>              :                 &lt;&lt; &quot; - libcurl &quot; &lt;&lt; (curl_version_data ? curl_version_data-&gt;version : &quot;unknown&quot;)</span>
-<span id="L112"><span class="lineNum">     112</span>              :                 &lt;&lt; &quot;, SSL library: &quot; &lt;&lt; (curl_version_data ? curl_version_data-&gt;ssl_version : &quot;unknown&quot;) &lt;&lt; '\n'</span>
+<span id="L112"><span class="lineNum">     112</span>              :                 &lt;&lt; &quot;, SSL library: &quot; &lt;&lt; (curl_version_data ? (curl_version_data-&gt;ssl_version ? curl_version_data-&gt;ssl_version : &quot;none&quot;) : &quot;unknown&quot;) &lt;&lt; '\n'</span>
 <span id="L113"><span class="lineNum">     113</span>              : #endif</span>
 <span id="L114"><span class="lineNum">     114</span> <span class="tlaUNC">           0 :                 &lt;&lt; &quot; - libuv &quot; &lt;&lt; uv_version_string() &lt;&lt; '\n'</span></span>
 <span id="L115"><span class="lineNum">     115</span> <span class="tlaUNC">           0 :                 &lt;&lt; &quot; - libzmq &quot; &lt;&lt; zmq_major &lt;&lt; '.' &lt;&lt; zmq_minor &lt;&lt; '.' &lt;&lt; zmq_patch &lt;&lt; '\n'</span></span>
