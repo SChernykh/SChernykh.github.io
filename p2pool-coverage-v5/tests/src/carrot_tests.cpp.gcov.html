@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-29 09:20:22</td>
+            <td class="headerValue">2026-09-29 10:36:55</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -1350,7 +1350,7 @@
 <span id="L1288"><span class="lineNum">    1288</span>              : static bool equal_outputs(const coinbase_tx_output&amp; a, const coinbase_tx_output&amp; b)</span>
 <span id="L1289"><span class="lineNum">    1289</span> <span class="tlaGNC">       13616 : {</span></span>
 <span id="L1290"><span class="lineNum">    1290</span> <span class="tlaGNC">       13616 :         return (a.valid == b.valid) &amp;&amp;</span></span>
-<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       13616 :                 (a.onetime_address == b.onetime_address) &amp;&amp;</span></span>
+<span id="L1291"><span class="lineNum">    1291</span> <span class="tlaGNC">       13615 :                 (a.onetime_address == b.onetime_address) &amp;&amp;</span></span>
 <span id="L1292"><span class="lineNum">    1292</span> <span class="tlaGNC">       13615 :                 (memcmp(&amp;a.vt, &amp;b.vt, sizeof(view_tag)) == 0) &amp;&amp;</span></span>
 <span id="L1293"><span class="lineNum">    1293</span> <span class="tlaGNC">       13614 :                 (memcmp(&amp;a.anchor_enc, &amp;b.anchor_enc, sizeof(janus_anchor)) == 0);</span></span>
 <span id="L1294"><span class="lineNum">    1294</span> <span class="tlaGNC">       13616 : }</span></span>
