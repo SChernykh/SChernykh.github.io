@@ -31,17 +31,17 @@
             <td class="headerValue">coverage.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">50.0&nbsp;%</td>
-            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntryLo">33.3&nbsp;%</td>
+            <td class="headerCovTableEntry">9</td>
             <td class="headerCovTableEntry">3</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-29 10:36:55</td>
+            <td class="headerValue">2026-09-30 16:46:14</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">7</td>
             <td class="headerCovTableEntry">0</td>
           </tr>
                   <tr><td><img src="../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -135,7 +135,7 @@
 <span id="L73"><span class="lineNum">      73</span>              : // A consumer may use this symbol in the preprocessor to temporarily build</span>
 <span id="L74"><span class="lineNum">      74</span>              : // against multiple revisions of BoringSSL at the same time. It is not</span>
 <span id="L75"><span class="lineNum">      75</span>              : // recommended to do so for longer than is necessary.</span>
-<span id="L76"><span class="lineNum">      76</span>              : #define BORINGSSL_API_VERSION 42</span>
+<span id="L76"><span class="lineNum">      76</span>              : #define BORINGSSL_API_VERSION 43</span>
 <span id="L77"><span class="lineNum">      77</span>              : </span>
 <span id="L78"><span class="lineNum">      78</span>              : #if defined(BORINGSSL_SHARED_LIBRARY)</span>
 <span id="L79"><span class="lineNum">      79</span>              : </span>
@@ -429,11 +429,11 @@
 <span id="L367"><span class="lineNum">     367</span>              : </span>
 <span id="L368"><span class="lineNum">     368</span>              : // BSSL_CHECK aborts if `condition` is not true.</span>
 <span id="L369"><span class="lineNum">     369</span>              : #define BSSL_CHECK(condition) \</span>
-<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC tlaBgGNC">      160611 :   do {                        \</span></span>
-<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">      160611 :     if (!(condition)) {       \</span></span>
+<span id="L370"><span class="lineNum">     370</span> <span class="tlaGNC tlaBgGNC">      160609 :   do {                        \</span></span>
+<span id="L371"><span class="lineNum">     371</span> <span class="tlaGNC">      160609 :     if (!(condition)) {       \</span></span>
 <span id="L372"><span class="lineNum">     372</span> <span class="tlaUNC tlaBgUNC">           0 :       abort();                \</span></span>
 <span id="L373"><span class="lineNum">     373</span> <span class="tlaUNC">           0 :     }                         \</span></span>
-<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC tlaBgGNC">      160611 :   } while (0);</span></span>
+<span id="L374"><span class="lineNum">     374</span> <span class="tlaGNC tlaBgGNC">      160609 :   } while (0);</span></span>
 <span id="L375"><span class="lineNum">     375</span>              : </span>
 <span id="L376"><span class="lineNum">     376</span>              : #if defined(__cplusplus)</span>
 <span id="L377"><span class="lineNum">     377</span>              : }  // extern C</span>
@@ -457,129 +457,156 @@
 <span id="L395"><span class="lineNum">     395</span>              : </span>
 <span id="L396"><span class="lineNum">     396</span>              : #define BORINGSSL_MAKE_DELETER(type, deleter)</span>
 <span id="L397"><span class="lineNum">     397</span>              : #define BORINGSSL_MAKE_UP_REF(type, up_ref_func)</span>
-<span id="L398"><span class="lineNum">     398</span>              : </span>
-<span id="L399"><span class="lineNum">     399</span>              : #else</span>
-<span id="L400"><span class="lineNum">     400</span>              : </span>
-<span id="L401"><span class="lineNum">     401</span>              : // Work around consumers including our headers under extern &quot;C&quot;.</span>
-<span id="L402"><span class="lineNum">     402</span>              : extern &quot;C++&quot; {</span>
+<span id="L398"><span class="lineNum">     398</span>              : #define BORINGSSL_MAKE_STACK_TRAITS(type, init_func, cleanup_func)</span>
+<span id="L399"><span class="lineNum">     399</span>              : #define BORINGSSL_MAKE_STACK_TRAITS_MOVABLE(type, init_func, cleanup_func, \</span>
+<span id="L400"><span class="lineNum">     400</span>              :                                             move_func)</span>
+<span id="L401"><span class="lineNum">     401</span>              : </span>
+<span id="L402"><span class="lineNum">     402</span>              : #else</span>
 <span id="L403"><span class="lineNum">     403</span>              : </span>
-<span id="L404"><span class="lineNum">     404</span>              : #include &lt;memory&gt;</span>
-<span id="L405"><span class="lineNum">     405</span>              : </span>
-<span id="L406"><span class="lineNum">     406</span>              : BSSL_NAMESPACE_BEGIN</span>
-<span id="L407"><span class="lineNum">     407</span>              : </span>
-<span id="L408"><span class="lineNum">     408</span>              : namespace internal {</span>
-<span id="L409"><span class="lineNum">     409</span>              : </span>
-<span id="L410"><span class="lineNum">     410</span>              : // The Enable parameter is ignored and only exists so specializations can use</span>
-<span id="L411"><span class="lineNum">     411</span>              : // SFINAE.</span>
-<span id="L412"><span class="lineNum">     412</span>              : template &lt;typename T, typename Enable = void&gt;</span>
-<span id="L413"><span class="lineNum">     413</span>              : struct DeleterImpl {};</span>
-<span id="L414"><span class="lineNum">     414</span>              : </span>
-<span id="L415"><span class="lineNum">     415</span>              : struct Deleter {</span>
-<span id="L416"><span class="lineNum">     416</span>              :   template &lt;typename T&gt;</span>
-<span id="L417"><span class="lineNum">     417</span>              :   void operator()(T *ptr) {</span>
-<span id="L418"><span class="lineNum">     418</span>              :     // Rather than specialize Deleter for each type, we specialize</span>
-<span id="L419"><span class="lineNum">     419</span>              :     // DeleterImpl. This allows bssl::UniquePtr&lt;T&gt; to be used while only</span>
-<span id="L420"><span class="lineNum">     420</span>              :     // including base.h as long as the destructor is not emitted. This matches</span>
-<span id="L421"><span class="lineNum">     421</span>              :     // std::unique_ptr's behavior on forward-declared types.</span>
-<span id="L422"><span class="lineNum">     422</span>              :     //</span>
-<span id="L423"><span class="lineNum">     423</span>              :     // DeleterImpl itself is specialized in the corresponding module's header</span>
-<span id="L424"><span class="lineNum">     424</span>              :     // and must be included to release an object. If not included, the compiler</span>
-<span id="L425"><span class="lineNum">     425</span>              :     // will error that DeleterImpl&lt;T&gt; does not have a method Free.</span>
-<span id="L426"><span class="lineNum">     426</span>              :     DeleterImpl&lt;T&gt;::Free(ptr);</span>
-<span id="L427"><span class="lineNum">     427</span>              :   }</span>
-<span id="L428"><span class="lineNum">     428</span>              : };</span>
-<span id="L429"><span class="lineNum">     429</span>              : </span>
-<span id="L430"><span class="lineNum">     430</span>              : template &lt;typename T, typename CleanupRet, void (*init)(T *),</span>
-<span id="L431"><span class="lineNum">     431</span>              :           CleanupRet (*cleanup)(T *)&gt;</span>
-<span id="L432"><span class="lineNum">     432</span>              : class StackAllocated {</span>
-<span id="L433"><span class="lineNum">     433</span>              :  public:</span>
-<span id="L434"><span class="lineNum">     434</span>              :   StackAllocated() { init(&amp;ctx_); }</span>
-<span id="L435"><span class="lineNum">     435</span>              :   ~StackAllocated() { cleanup(&amp;ctx_); }</span>
-<span id="L436"><span class="lineNum">     436</span>              : </span>
-<span id="L437"><span class="lineNum">     437</span>              :   StackAllocated(const StackAllocated &amp;) = delete;</span>
-<span id="L438"><span class="lineNum">     438</span>              :   StackAllocated &amp;operator=(const StackAllocated &amp;) = delete;</span>
-<span id="L439"><span class="lineNum">     439</span>              : </span>
-<span id="L440"><span class="lineNum">     440</span>              :   T *get() { return &amp;ctx_; }</span>
-<span id="L441"><span class="lineNum">     441</span>              :   const T *get() const { return &amp;ctx_; }</span>
-<span id="L442"><span class="lineNum">     442</span>              : </span>
-<span id="L443"><span class="lineNum">     443</span>              :   T *operator-&gt;() { return &amp;ctx_; }</span>
-<span id="L444"><span class="lineNum">     444</span>              :   const T *operator-&gt;() const { return &amp;ctx_; }</span>
-<span id="L445"><span class="lineNum">     445</span>              : </span>
-<span id="L446"><span class="lineNum">     446</span>              :   void Reset() {</span>
-<span id="L447"><span class="lineNum">     447</span>              :     cleanup(&amp;ctx_);</span>
-<span id="L448"><span class="lineNum">     448</span>              :     init(&amp;ctx_);</span>
-<span id="L449"><span class="lineNum">     449</span>              :   }</span>
+<span id="L404"><span class="lineNum">     404</span>              : // Work around consumers including our headers under extern &quot;C&quot;.</span>
+<span id="L405"><span class="lineNum">     405</span>              : extern &quot;C++&quot; {</span>
+<span id="L406"><span class="lineNum">     406</span>              : </span>
+<span id="L407"><span class="lineNum">     407</span>              : #include &lt;memory&gt;</span>
+<span id="L408"><span class="lineNum">     408</span>              : </span>
+<span id="L409"><span class="lineNum">     409</span>              : BSSL_NAMESPACE_BEGIN</span>
+<span id="L410"><span class="lineNum">     410</span>              : </span>
+<span id="L411"><span class="lineNum">     411</span>              : namespace internal {</span>
+<span id="L412"><span class="lineNum">     412</span>              : </span>
+<span id="L413"><span class="lineNum">     413</span>              : // The Enable parameter is ignored and only exists so specializations can use</span>
+<span id="L414"><span class="lineNum">     414</span>              : // SFINAE.</span>
+<span id="L415"><span class="lineNum">     415</span>              : template &lt;typename T, typename Enable = void&gt;</span>
+<span id="L416"><span class="lineNum">     416</span>              : struct DeleterImpl {};</span>
+<span id="L417"><span class="lineNum">     417</span>              : </span>
+<span id="L418"><span class="lineNum">     418</span>              : struct Deleter {</span>
+<span id="L419"><span class="lineNum">     419</span>              :   template &lt;typename T&gt;</span>
+<span id="L420"><span class="lineNum">     420</span>              :   void operator()(T *ptr) {</span>
+<span id="L421"><span class="lineNum">     421</span>              :     // Rather than specialize Deleter for each type, we specialize</span>
+<span id="L422"><span class="lineNum">     422</span>              :     // DeleterImpl. This allows bssl::UniquePtr&lt;T&gt; to be used while only</span>
+<span id="L423"><span class="lineNum">     423</span>              :     // including base.h as long as the destructor is not emitted. This matches</span>
+<span id="L424"><span class="lineNum">     424</span>              :     // std::unique_ptr's behavior on forward-declared types.</span>
+<span id="L425"><span class="lineNum">     425</span>              :     //</span>
+<span id="L426"><span class="lineNum">     426</span>              :     // DeleterImpl itself is specialized in the corresponding module's header</span>
+<span id="L427"><span class="lineNum">     427</span>              :     // and must be included to release an object. If not included, the compiler</span>
+<span id="L428"><span class="lineNum">     428</span>              :     // will error that DeleterImpl&lt;T&gt; does not have a method Free.</span>
+<span id="L429"><span class="lineNum">     429</span>              :     DeleterImpl&lt;T&gt;::Free(ptr);</span>
+<span id="L430"><span class="lineNum">     430</span>              :   }</span>
+<span id="L431"><span class="lineNum">     431</span>              : };</span>
+<span id="L432"><span class="lineNum">     432</span>              : </span>
+<span id="L433"><span class="lineNum">     433</span>              : template &lt;typename T&gt;</span>
+<span id="L434"><span class="lineNum">     434</span>              : struct StackAllocatedTraits {};</span>
+<span id="L435"><span class="lineNum">     435</span>              : </span>
+<span id="L436"><span class="lineNum">     436</span>              : template &lt;typename T, typename Traits = StackAllocatedTraits&lt;T&gt; &gt;</span>
+<span id="L437"><span class="lineNum">     437</span>              : class StackAllocated {</span>
+<span id="L438"><span class="lineNum">     438</span>              :  public:</span>
+<span id="L439"><span class="lineNum">     439</span>              :   StackAllocated() { Traits::Init(&amp;ctx_); }</span>
+<span id="L440"><span class="lineNum">     440</span>              :   ~StackAllocated() { Traits::Cleanup(&amp;ctx_); }</span>
+<span id="L441"><span class="lineNum">     441</span>              : </span>
+<span id="L442"><span class="lineNum">     442</span>              :   StackAllocated(const StackAllocated &amp;) = delete;</span>
+<span id="L443"><span class="lineNum">     443</span>              :   StackAllocated &amp;operator=(const StackAllocated &amp;) = delete;</span>
+<span id="L444"><span class="lineNum">     444</span>              : </span>
+<span id="L445"><span class="lineNum">     445</span>              :   T *get() { return &amp;ctx_; }</span>
+<span id="L446"><span class="lineNum">     446</span>              :   const T *get() const { return &amp;ctx_; }</span>
+<span id="L447"><span class="lineNum">     447</span>              : </span>
+<span id="L448"><span class="lineNum">     448</span>              :   T *operator-&gt;() { return &amp;ctx_; }</span>
+<span id="L449"><span class="lineNum">     449</span>              :   const T *operator-&gt;() const { return &amp;ctx_; }</span>
 <span id="L450"><span class="lineNum">     450</span>              : </span>
-<span id="L451"><span class="lineNum">     451</span>              :  private:</span>
-<span id="L452"><span class="lineNum">     452</span>              :   T ctx_;</span>
-<span id="L453"><span class="lineNum">     453</span>              : };</span>
-<span id="L454"><span class="lineNum">     454</span>              : </span>
-<span id="L455"><span class="lineNum">     455</span>              : template &lt;typename T, typename CleanupRet, void (*init)(T *),</span>
-<span id="L456"><span class="lineNum">     456</span>              :           CleanupRet (*cleanup)(T *), void (*move)(T *, T *)&gt;</span>
-<span id="L457"><span class="lineNum">     457</span>              : class StackAllocatedMovable {</span>
-<span id="L458"><span class="lineNum">     458</span>              :  public:</span>
-<span id="L459"><span class="lineNum">     459</span>              :   StackAllocatedMovable() { init(&amp;ctx_); }</span>
-<span id="L460"><span class="lineNum">     460</span>              :   ~StackAllocatedMovable() { cleanup(&amp;ctx_); }</span>
-<span id="L461"><span class="lineNum">     461</span>              : </span>
-<span id="L462"><span class="lineNum">     462</span>              :   StackAllocatedMovable(StackAllocatedMovable &amp;&amp;other) {</span>
-<span id="L463"><span class="lineNum">     463</span>              :     init(&amp;ctx_);</span>
-<span id="L464"><span class="lineNum">     464</span>              :     move(&amp;ctx_, &amp;other.ctx_);</span>
-<span id="L465"><span class="lineNum">     465</span>              :   }</span>
-<span id="L466"><span class="lineNum">     466</span>              :   StackAllocatedMovable &amp;operator=(StackAllocatedMovable &amp;&amp;other) {</span>
-<span id="L467"><span class="lineNum">     467</span>              :     move(&amp;ctx_, &amp;other.ctx_);</span>
-<span id="L468"><span class="lineNum">     468</span>              :     return *this;</span>
-<span id="L469"><span class="lineNum">     469</span>              :   }</span>
-<span id="L470"><span class="lineNum">     470</span>              : </span>
-<span id="L471"><span class="lineNum">     471</span>              :   T *get() { return &amp;ctx_; }</span>
-<span id="L472"><span class="lineNum">     472</span>              :   const T *get() const { return &amp;ctx_; }</span>
-<span id="L473"><span class="lineNum">     473</span>              : </span>
-<span id="L474"><span class="lineNum">     474</span>              :   T *operator-&gt;() { return &amp;ctx_; }</span>
-<span id="L475"><span class="lineNum">     475</span>              :   const T *operator-&gt;() const { return &amp;ctx_; }</span>
-<span id="L476"><span class="lineNum">     476</span>              : </span>
-<span id="L477"><span class="lineNum">     477</span>              :   void Reset() {</span>
-<span id="L478"><span class="lineNum">     478</span>              :     cleanup(&amp;ctx_);</span>
-<span id="L479"><span class="lineNum">     479</span>              :     init(&amp;ctx_);</span>
-<span id="L480"><span class="lineNum">     480</span>              :   }</span>
-<span id="L481"><span class="lineNum">     481</span>              : </span>
-<span id="L482"><span class="lineNum">     482</span>              :  private:</span>
-<span id="L483"><span class="lineNum">     483</span>              :   T ctx_;</span>
-<span id="L484"><span class="lineNum">     484</span>              : };</span>
-<span id="L485"><span class="lineNum">     485</span>              : </span>
-<span id="L486"><span class="lineNum">     486</span>              : }  // namespace internal</span>
-<span id="L487"><span class="lineNum">     487</span>              : </span>
-<span id="L488"><span class="lineNum">     488</span>              : #define BORINGSSL_MAKE_DELETER(type, deleter)     \</span>
-<span id="L489"><span class="lineNum">     489</span>              :   namespace internal {                            \</span>
-<span id="L490"><span class="lineNum">     490</span>              :   template &lt;&gt;                                     \</span>
-<span id="L491"><span class="lineNum">     491</span>              :   struct DeleterImpl&lt;type&gt; {                      \</span>
-<span id="L492"><span class="lineNum">     492</span> <span class="tlaUNC tlaBgUNC">           0 :     static void Free(type *ptr) { deleter(ptr); } \</span></span>
-<span id="L493"><span class="lineNum">     493</span>              :   };                                              \</span>
-<span id="L494"><span class="lineNum">     494</span>              :   }</span>
-<span id="L495"><span class="lineNum">     495</span>              : </span>
-<span id="L496"><span class="lineNum">     496</span>              : // Holds ownership of heap-allocated BoringSSL structures. Sample usage:</span>
-<span id="L497"><span class="lineNum">     497</span>              : //   bssl::UniquePtr&lt;RSA&gt; rsa(RSA_new());</span>
-<span id="L498"><span class="lineNum">     498</span>              : //   bssl::UniquePtr&lt;BIO&gt; bio(BIO_new(BIO_s_mem()));</span>
-<span id="L499"><span class="lineNum">     499</span>              : template &lt;typename T&gt;</span>
-<span id="L500"><span class="lineNum">     500</span>              : using UniquePtr = std::unique_ptr&lt;T, internal::Deleter&gt;;</span>
-<span id="L501"><span class="lineNum">     501</span>              : </span>
-<span id="L502"><span class="lineNum">     502</span>              : #define BORINGSSL_MAKE_UP_REF(type, up_ref_func)             \</span>
-<span id="L503"><span class="lineNum">     503</span>              :   inline UniquePtr&lt;type&gt; UpRef(type *v) {                    \</span>
-<span id="L504"><span class="lineNum">     504</span>              :     if (v != nullptr) {                                      \</span>
-<span id="L505"><span class="lineNum">     505</span>              :       up_ref_func(v);                                        \</span>
-<span id="L506"><span class="lineNum">     506</span>              :     }                                                        \</span>
-<span id="L507"><span class="lineNum">     507</span>              :     return UniquePtr&lt;type&gt;(v);                               \</span>
-<span id="L508"><span class="lineNum">     508</span>              :   }                                                          \</span>
-<span id="L509"><span class="lineNum">     509</span>              :                                                              \</span>
-<span id="L510"><span class="lineNum">     510</span>              :   inline UniquePtr&lt;type&gt; UpRef(const UniquePtr&lt;type&gt; &amp;ptr) { \</span>
-<span id="L511"><span class="lineNum">     511</span>              :     return UpRef(ptr.get());                                 \</span>
-<span id="L512"><span class="lineNum">     512</span>              :   }</span>
-<span id="L513"><span class="lineNum">     513</span>              : </span>
-<span id="L514"><span class="lineNum">     514</span>              : BSSL_NAMESPACE_END</span>
-<span id="L515"><span class="lineNum">     515</span>              : </span>
-<span id="L516"><span class="lineNum">     516</span>              : }  // extern C++</span>
-<span id="L517"><span class="lineNum">     517</span>              : </span>
-<span id="L518"><span class="lineNum">     518</span>              : #endif  // !BORINGSSL_NO_CXX</span>
-<span id="L519"><span class="lineNum">     519</span>              : </span>
-<span id="L520"><span class="lineNum">     520</span>              : #endif  // OPENSSL_HEADER_BASE_H</span>
+<span id="L451"><span class="lineNum">     451</span>              :   void Reset() {</span>
+<span id="L452"><span class="lineNum">     452</span>              :     Traits::Cleanup(&amp;ctx_);</span>
+<span id="L453"><span class="lineNum">     453</span>              :     Traits::Init(&amp;ctx_);</span>
+<span id="L454"><span class="lineNum">     454</span>              :   }</span>
+<span id="L455"><span class="lineNum">     455</span>              : </span>
+<span id="L456"><span class="lineNum">     456</span>              :  private:</span>
+<span id="L457"><span class="lineNum">     457</span>              :   T ctx_;</span>
+<span id="L458"><span class="lineNum">     458</span>              : };</span>
+<span id="L459"><span class="lineNum">     459</span>              : </span>
+<span id="L460"><span class="lineNum">     460</span>              : template &lt;typename T&gt;</span>
+<span id="L461"><span class="lineNum">     461</span>              : struct StackAllocatedMovableTraits {};</span>
+<span id="L462"><span class="lineNum">     462</span>              : </span>
+<span id="L463"><span class="lineNum">     463</span>              : template &lt;typename T, typename Traits = StackAllocatedMovableTraits&lt;T&gt; &gt;</span>
+<span id="L464"><span class="lineNum">     464</span>              : class StackAllocatedMovable {</span>
+<span id="L465"><span class="lineNum">     465</span>              :  public:</span>
+<span id="L466"><span class="lineNum">     466</span>              :   StackAllocatedMovable() { Traits::Init(&amp;ctx_); }</span>
+<span id="L467"><span class="lineNum">     467</span>              :   ~StackAllocatedMovable() { Traits::Cleanup(&amp;ctx_); }</span>
+<span id="L468"><span class="lineNum">     468</span>              : </span>
+<span id="L469"><span class="lineNum">     469</span>              :   StackAllocatedMovable(StackAllocatedMovable &amp;&amp;other) {</span>
+<span id="L470"><span class="lineNum">     470</span>              :     Traits::Init(&amp;ctx_);</span>
+<span id="L471"><span class="lineNum">     471</span>              :     Traits::Move(&amp;ctx_, &amp;other.ctx_);</span>
+<span id="L472"><span class="lineNum">     472</span>              :   }</span>
+<span id="L473"><span class="lineNum">     473</span>              :   StackAllocatedMovable &amp;operator=(StackAllocatedMovable &amp;&amp;other) {</span>
+<span id="L474"><span class="lineNum">     474</span>              :     Traits::Move(&amp;ctx_, &amp;other.ctx_);</span>
+<span id="L475"><span class="lineNum">     475</span>              :     return *this;</span>
+<span id="L476"><span class="lineNum">     476</span>              :   }</span>
+<span id="L477"><span class="lineNum">     477</span>              : </span>
+<span id="L478"><span class="lineNum">     478</span>              :   T *get() { return &amp;ctx_; }</span>
+<span id="L479"><span class="lineNum">     479</span>              :   const T *get() const { return &amp;ctx_; }</span>
+<span id="L480"><span class="lineNum">     480</span>              : </span>
+<span id="L481"><span class="lineNum">     481</span>              :   T *operator-&gt;() { return &amp;ctx_; }</span>
+<span id="L482"><span class="lineNum">     482</span>              :   const T *operator-&gt;() const { return &amp;ctx_; }</span>
+<span id="L483"><span class="lineNum">     483</span>              : </span>
+<span id="L484"><span class="lineNum">     484</span>              :   void Reset() {</span>
+<span id="L485"><span class="lineNum">     485</span>              :     Traits::Cleanup(&amp;ctx_);</span>
+<span id="L486"><span class="lineNum">     486</span>              :     Traits::Init(&amp;ctx_);</span>
+<span id="L487"><span class="lineNum">     487</span>              :   }</span>
+<span id="L488"><span class="lineNum">     488</span>              : </span>
+<span id="L489"><span class="lineNum">     489</span>              :  private:</span>
+<span id="L490"><span class="lineNum">     490</span>              :   T ctx_;</span>
+<span id="L491"><span class="lineNum">     491</span>              : };</span>
+<span id="L492"><span class="lineNum">     492</span>              : </span>
+<span id="L493"><span class="lineNum">     493</span>              : }  // namespace internal</span>
+<span id="L494"><span class="lineNum">     494</span>              : </span>
+<span id="L495"><span class="lineNum">     495</span>              : #define BORINGSSL_MAKE_DELETER(type, deleter)     \</span>
+<span id="L496"><span class="lineNum">     496</span>              :   namespace internal {                            \</span>
+<span id="L497"><span class="lineNum">     497</span>              :   template &lt;&gt;                                     \</span>
+<span id="L498"><span class="lineNum">     498</span>              :   struct DeleterImpl&lt;type&gt; {                      \</span>
+<span id="L499"><span class="lineNum">     499</span> <span class="tlaUNC tlaBgUNC">           0 :     static void Free(type *ptr) { deleter(ptr); } \</span></span>
+<span id="L500"><span class="lineNum">     500</span>              :   };                                              \</span>
+<span id="L501"><span class="lineNum">     501</span>              :   }</span>
+<span id="L502"><span class="lineNum">     502</span>              : </span>
+<span id="L503"><span class="lineNum">     503</span>              : #define BORINGSSL_MAKE_STACK_TRAITS(type, init_func, cleanup_func) \</span>
+<span id="L504"><span class="lineNum">     504</span>              :   namespace internal {                                             \</span>
+<span id="L505"><span class="lineNum">     505</span>              :   template &lt;&gt;                                                      \</span>
+<span id="L506"><span class="lineNum">     506</span>              :   struct StackAllocatedTraits&lt;type&gt; {                              \</span>
+<span id="L507"><span class="lineNum">     507</span>              :     static void Init(type *ptr) { init_func(ptr); }                \</span>
+<span id="L508"><span class="lineNum">     508</span>              :     static void Cleanup(type *ptr) { cleanup_func(ptr); }          \</span>
+<span id="L509"><span class="lineNum">     509</span>              :   };                                                               \</span>
+<span id="L510"><span class="lineNum">     510</span>              :   }</span>
+<span id="L511"><span class="lineNum">     511</span>              : </span>
+<span id="L512"><span class="lineNum">     512</span>              : #define BORINGSSL_MAKE_STACK_TRAITS_MOVABLE(type, init_func, cleanup_func, \</span>
+<span id="L513"><span class="lineNum">     513</span>              :                                             move_func)                     \</span>
+<span id="L514"><span class="lineNum">     514</span>              :   namespace internal {                                                     \</span>
+<span id="L515"><span class="lineNum">     515</span>              :   template &lt;&gt;                                                              \</span>
+<span id="L516"><span class="lineNum">     516</span>              :   struct StackAllocatedMovableTraits&lt;type&gt; {                               \</span>
+<span id="L517"><span class="lineNum">     517</span> <span class="tlaUNC">           0 :     static void Init(type *ptr) { init_func(ptr); }                        \</span></span>
+<span id="L518"><span class="lineNum">     518</span> <span class="tlaUNC">           0 :     static void Cleanup(type *ptr) { cleanup_func(ptr); }                  \</span></span>
+<span id="L519"><span class="lineNum">     519</span> <span class="tlaUNC">           0 :     static void Move(type *out, type *in) { move_func(out, in); }          \</span></span>
+<span id="L520"><span class="lineNum">     520</span>              :   };                                                                       \</span>
+<span id="L521"><span class="lineNum">     521</span>              :   }</span>
+<span id="L522"><span class="lineNum">     522</span>              : </span>
+<span id="L523"><span class="lineNum">     523</span>              : // Holds ownership of heap-allocated BoringSSL structures. Sample usage:</span>
+<span id="L524"><span class="lineNum">     524</span>              : //   bssl::UniquePtr&lt;RSA&gt; rsa(RSA_new());</span>
+<span id="L525"><span class="lineNum">     525</span>              : //   bssl::UniquePtr&lt;BIO&gt; bio(BIO_new(BIO_s_mem()));</span>
+<span id="L526"><span class="lineNum">     526</span>              : template &lt;typename T&gt;</span>
+<span id="L527"><span class="lineNum">     527</span>              : using UniquePtr = std::unique_ptr&lt;T, internal::Deleter&gt;;</span>
+<span id="L528"><span class="lineNum">     528</span>              : </span>
+<span id="L529"><span class="lineNum">     529</span>              : #define BORINGSSL_MAKE_UP_REF(type, up_ref_func)             \</span>
+<span id="L530"><span class="lineNum">     530</span>              :   inline UniquePtr&lt;type&gt; UpRef(type *v) {                    \</span>
+<span id="L531"><span class="lineNum">     531</span>              :     if (v != nullptr) {                                      \</span>
+<span id="L532"><span class="lineNum">     532</span>              :       up_ref_func(v);                                        \</span>
+<span id="L533"><span class="lineNum">     533</span>              :     }                                                        \</span>
+<span id="L534"><span class="lineNum">     534</span>              :     return UniquePtr&lt;type&gt;(v);                               \</span>
+<span id="L535"><span class="lineNum">     535</span>              :   }                                                          \</span>
+<span id="L536"><span class="lineNum">     536</span>              :                                                              \</span>
+<span id="L537"><span class="lineNum">     537</span>              :   inline UniquePtr&lt;type&gt; UpRef(const UniquePtr&lt;type&gt; &amp;ptr) { \</span>
+<span id="L538"><span class="lineNum">     538</span>              :     return UpRef(ptr.get());                                 \</span>
+<span id="L539"><span class="lineNum">     539</span>              :   }</span>
+<span id="L540"><span class="lineNum">     540</span>              : </span>
+<span id="L541"><span class="lineNum">     541</span>              : BSSL_NAMESPACE_END</span>
+<span id="L542"><span class="lineNum">     542</span>              : </span>
+<span id="L543"><span class="lineNum">     543</span>              : }  // extern C++</span>
+<span id="L544"><span class="lineNum">     544</span>              : </span>
+<span id="L545"><span class="lineNum">     545</span>              : #endif  // !BORINGSSL_NO_CXX</span>
+<span id="L546"><span class="lineNum">     546</span>              : </span>
+<span id="L547"><span class="lineNum">     547</span>              : #endif  // OPENSSL_HEADER_BASE_H</span>
         </pre>
               </td>
             </tr>
