@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-30 16:46:14</td>
+            <td class="headerValue">2026-09-30 18:17:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -1328,24 +1328,24 @@
 <span id="L1266"><span class="lineNum">    1266</span> <span class="tlaGNC">           1 : }</span></span>
 <span id="L1267"><span class="lineNum">    1267</span>              : </span>
 <span id="L1268"><span class="lineNum">    1268</span>              : static coinbase_tx_output reference_coinbase_output(uint64_t height, const coinbase_output_input&amp; in)</span>
-<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaGNC">        9125 : {</span></span>
-<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaGNC">        9125 :         coinbase_tx_output result{};</span></span>
+<span id="L1269"><span class="lineNum">    1269</span> <span class="tlaGNC">        9117 : {</span></span>
+<span id="L1270"><span class="lineNum">    1270</span> <span class="tlaGNC">        9117 :         coinbase_tx_output result{};</span></span>
 <span id="L1271"><span class="lineNum">    1271</span>              : </span>
-<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaGNC">        9125 :         const hash sender_extension_g = gen_sender_extension_g(in.contextualized_sender_receiver_secret, in.amount, in.spend_public_key);</span></span>
-<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaGNC">        9125 :         const hash sender_extension_t = gen_sender_extension_t(in.contextualized_sender_receiver_secret, in.amount, in.spend_public_key);</span></span>
+<span id="L1272"><span class="lineNum">    1272</span> <span class="tlaGNC">        9117 :         const hash sender_extension_g = gen_sender_extension_g(in.contextualized_sender_receiver_secret, in.amount, in.spend_public_key);</span></span>
+<span id="L1273"><span class="lineNum">    1273</span> <span class="tlaGNC">        9117 :         const hash sender_extension_t = gen_sender_extension_t(in.contextualized_sender_receiver_secret, in.amount, in.spend_public_key);</span></span>
 <span id="L1274"><span class="lineNum">    1274</span>              : </span>
-<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">        9125 :         result.valid = gen_onetime_address(in.spend_public_key, sender_extension_g, sender_extension_t, result.onetime_address);</span></span>
+<span id="L1275"><span class="lineNum">    1275</span> <span class="tlaGNC">        9117 :         result.valid = gen_onetime_address(in.spend_public_key, sender_extension_g, sender_extension_t, result.onetime_address);</span></span>
 <span id="L1276"><span class="lineNum">    1276</span>              : </span>
-<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaGNC">        9125 :         if (result.valid) {</span></span>
-<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">        9121 :                 result.vt = gen_view_tag(in.sender_receiver_secret, height, result.onetime_address);</span></span>
-<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">        9121 :                 result.anchor_enc = gen_encrypted_janus_anchor(in.contextualized_sender_receiver_secret, in.anchor, result.onetime_address);</span></span>
-<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">        9121 :         }</span></span>
-<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC">           4 :         else {</span></span>
-<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaGNC">           4 :                 result.onetime_address = hash();</span></span>
-<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaGNC">           4 :         }</span></span>
+<span id="L1277"><span class="lineNum">    1277</span> <span class="tlaGNC">        9120 :         if (result.valid) {</span></span>
+<span id="L1278"><span class="lineNum">    1278</span> <span class="tlaGNC">        9120 :                 result.vt = gen_view_tag(in.sender_receiver_secret, height, result.onetime_address);</span></span>
+<span id="L1279"><span class="lineNum">    1279</span> <span class="tlaGNC">        9120 :                 result.anchor_enc = gen_encrypted_janus_anchor(in.contextualized_sender_receiver_secret, in.anchor, result.onetime_address);</span></span>
+<span id="L1280"><span class="lineNum">    1280</span> <span class="tlaGNC">        9120 :         }</span></span>
+<span id="L1281"><span class="lineNum">    1281</span> <span class="tlaGNC"> >1844*10^16 :         else {</span></span>
+<span id="L1282"><span class="lineNum">    1282</span> <span class="tlaGNC"> >1844*10^16 :                 result.onetime_address = hash();</span></span>
+<span id="L1283"><span class="lineNum">    1283</span> <span class="tlaGNC"> >1844*10^16 :         }</span></span>
 <span id="L1284"><span class="lineNum">    1284</span>              : </span>
-<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">        9125 :         return result;</span></span>
-<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaGNC">        9125 : }</span></span>
+<span id="L1285"><span class="lineNum">    1285</span> <span class="tlaGNC">        9117 :         return result;</span></span>
+<span id="L1286"><span class="lineNum">    1286</span> <span class="tlaGNC">        9117 : }</span></span>
 <span id="L1287"><span class="lineNum">    1287</span>              : </span>
 <span id="L1288"><span class="lineNum">    1288</span>              : static bool equal_outputs(const coinbase_tx_output&amp; a, const coinbase_tx_output&amp; b)</span>
 <span id="L1289"><span class="lineNum">    1289</span> <span class="tlaGNC">       13616 : {</span></span>
@@ -1981,17 +1981,17 @@
 <span id="L1919"><span class="lineNum">    1919</span> <span class="tlaGNC">         561 :                 reference_secrets.emplace_back(reference_coinbase_secrets(txkey_sec, 0, height, wallets[i]));</span></span>
 <span id="L1920"><span class="lineNum">    1920</span> <span class="tlaGNC">         561 :         }</span></span>
 <span id="L1921"><span class="lineNum">    1921</span>              : </span>
-<span id="L1922"><span class="lineNum">    1922</span> <span class="tlaGNC">        7967 :         auto reference_output = [&amp;](size_t i, uint64_t a) {</span></span>
-<span id="L1923"><span class="lineNum">    1923</span> <span class="tlaGNC">        7967 :                 coinbase_output_input in{};</span></span>
+<span id="L1922"><span class="lineNum">    1922</span> <span class="tlaGNC">        7966 :         auto reference_output = [&amp;](size_t i, uint64_t a) {</span></span>
+<span id="L1923"><span class="lineNum">    1923</span> <span class="tlaGNC">        7966 :                 coinbase_output_input in{};</span></span>
 <span id="L1924"><span class="lineNum">    1924</span>              : </span>
-<span id="L1925"><span class="lineNum">    1925</span> <span class="tlaGNC">        7967 :                 in.spend_public_key = wallets[i].spend_public_key();</span></span>
-<span id="L1926"><span class="lineNum">    1926</span> <span class="tlaGNC">        7967 :                 in.sender_receiver_secret = reference_secrets[i].sender_receiver_secret;</span></span>
-<span id="L1927"><span class="lineNum">    1927</span> <span class="tlaGNC">        7967 :                 in.contextualized_sender_receiver_secret = reference_secrets[i].contextualized_sender_receiver_secret;</span></span>
-<span id="L1928"><span class="lineNum">    1928</span> <span class="tlaGNC">        7967 :                 in.anchor = reference_secrets[i].anchor;</span></span>
-<span id="L1929"><span class="lineNum">    1929</span> <span class="tlaGNC">        7967 :                 in.amount = a;</span></span>
+<span id="L1925"><span class="lineNum">    1925</span> <span class="tlaGNC">        7966 :                 in.spend_public_key = wallets[i].spend_public_key();</span></span>
+<span id="L1926"><span class="lineNum">    1926</span> <span class="tlaGNC">        7966 :                 in.sender_receiver_secret = reference_secrets[i].sender_receiver_secret;</span></span>
+<span id="L1927"><span class="lineNum">    1927</span> <span class="tlaGNC">        7966 :                 in.contextualized_sender_receiver_secret = reference_secrets[i].contextualized_sender_receiver_secret;</span></span>
+<span id="L1928"><span class="lineNum">    1928</span> <span class="tlaGNC">        7966 :                 in.anchor = reference_secrets[i].anchor;</span></span>
+<span id="L1929"><span class="lineNum">    1929</span> <span class="tlaGNC">        7966 :                 in.amount = a;</span></span>
 <span id="L1930"><span class="lineNum">    1930</span>              : </span>
-<span id="L1931"><span class="lineNum">    1931</span> <span class="tlaGNC">        7967 :                 return reference_coinbase_output(height, in);</span></span>
-<span id="L1932"><span class="lineNum">    1932</span> <span class="tlaGNC">        7967 :         };</span></span>
+<span id="L1931"><span class="lineNum">    1931</span> <span class="tlaGNC">        7966 :                 return reference_coinbase_output(height, in);</span></span>
+<span id="L1932"><span class="lineNum">    1932</span> <span class="tlaGNC">        7966 :         };</span></span>
 <span id="L1933"><span class="lineNum">    1933</span>              : </span>
 <span id="L1934"><span class="lineNum">    1934</span> <span class="tlaGNC">          46 :         auto check_outputs = [&amp;](const std::vector&lt;size_t&gt;&amp; indices, const std::vector&lt;uint64_t&gt;&amp; a, const std::vector&lt;coinbase_tx_output&gt;&amp; out) {</span></span>
 <span id="L1935"><span class="lineNum">    1935</span> <span class="tlaGNC">          46 :                 ASSERT_EQ(out.size(), indices.size());</span></span>

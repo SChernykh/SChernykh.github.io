@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-09-30 16:46:14</td>
+            <td class="headerValue">2026-09-30 18:17:20</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -194,8 +194,8 @@
 <span id="L132"><span class="lineNum">     132</span>              : Single-pass fixed-base table with signed 6-bit digits: (j + 1) * 64^i * B for 0 &lt;= i &lt; 43, 0 &lt;= j &lt; 32</span>
 <span id="L133"><span class="lineNum">     133</span>              : 43 rows cover every scalar with a[31] &lt;= 127, so a multiplication is at most 43 mixed additions and no doublings</span>
 <span id="L134"><span class="lineNum">     134</span>              : */</span>
-<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">    82002191 : #define GE_WTABLE_ROWS 43</span></span>
-<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">    40870695 : #define GE_WTABLE_ROW_SIZE 32</span></span>
+<span id="L135"><span class="lineNum">     135</span> <span class="tlaGNC tlaBgGNC">    78236196 : #define GE_WTABLE_ROWS 43</span></span>
+<span id="L136"><span class="lineNum">     136</span> <span class="tlaGNC">    38865313 : #define GE_WTABLE_ROW_SIZE 32</span></span>
 <span id="L137"><span class="lineNum">     137</span>              : typedef ge_precomp ge_wtable[GE_WTABLE_ROWS * GE_WTABLE_ROW_SIZE];</span>
 <span id="L138"><span class="lineNum">     138</span>              : </span>
 <span id="L139"><span class="lineNum">     139</span>              : /* The tables for the Ed25519 base point B and the FCMP++ generator T (P2Pool builds them in init_crypto_cache()). Return 0 on success. */</span>
