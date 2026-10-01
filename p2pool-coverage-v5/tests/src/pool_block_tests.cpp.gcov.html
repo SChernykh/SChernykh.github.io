@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-01 09:03:05</td>
+            <td class="headerValue">2026-10-01 11:04:35</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
@@ -846,7 +846,7 @@
 <span id="L784"><span class="lineNum">     784</span> <span class="tlaGNC">           2 :                 workers[i] = std::thread([&amp;, i]() {</span></span>
 <span id="L785"><span class="lineNum">     785</span> <span class="tlaGNC">           2 :                         initially_missing[i] = !sidechain.find_block(variants[i].m_sidechainId);</span></span>
 <span id="L786"><span class="lineNum">     786</span> <span class="tlaGNC">           2 :                         ready.fetch_add(1);</span></span>
-<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">          84 :                         while (ready.load() != 2) std::this_thread::yield();</span></span>
+<span id="L787"><span class="lineNum">     787</span> <span class="tlaGNC">         120 :                         while (ready.load() != 2) std::this_thread::yield();</span></span>
 <span id="L788"><span class="lineNum">     788</span> <span class="tlaGNC">           2 :                         accepted[i] = sidechain.add_block(variants[i], true);</span></span>
 <span id="L789"><span class="lineNum">     789</span> <span class="tlaGNC">           2 :                 });</span></span>
 <span id="L790"><span class="lineNum">     790</span> <span class="tlaGNC">           2 :         }</span></span>
