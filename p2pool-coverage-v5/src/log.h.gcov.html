@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2026-10-20 09:25:25</td>
+            <td class="headerValue">2026-10-20 09:55:25</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryLo">15.9&nbsp;%</td>
@@ -149,11 +149,11 @@
 <span id="L87"><span class="lineNum">      87</span> <span class="tlaGNC">        5315 :                 size_t k = sizeof(buf);</span></span>
 <span id="L88"><span class="lineNum">      88</span> <span class="tlaGNC">        5315 :                 int w = std::min&lt;int&gt;(m_numberWidth, static_cast&lt;int&gt;(sizeof(buf)));</span></span>
 <span id="L89"><span class="lineNum">      89</span>              : </span>
-<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       15096 :                 do {</span></span>
-<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       15096 :                         buf[--k] = &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;[udata % base];</span></span>
-<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       15096 :                         udata /= base;</span></span>
-<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       15096 :                         --w;</span></span>
-<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       15096 :                 } while (udata || (w &gt; 0));</span></span>
+<span id="L90"><span class="lineNum">      90</span> <span class="tlaGNC">       15097 :                 do {</span></span>
+<span id="L91"><span class="lineNum">      91</span> <span class="tlaGNC">       15097 :                         buf[--k] = &quot;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/&quot;[udata % base];</span></span>
+<span id="L92"><span class="lineNum">      92</span> <span class="tlaGNC">       15097 :                         udata /= base;</span></span>
+<span id="L93"><span class="lineNum">      93</span> <span class="tlaGNC">       15097 :                         --w;</span></span>
+<span id="L94"><span class="lineNum">      94</span> <span class="tlaGNC">       15097 :                 } while (udata || (w &gt; 0));</span></span>
 <span id="L95"><span class="lineNum">      95</span>              : </span>
 <span id="L96"><span class="lineNum">      96</span> <span class="tlaGNC">        5315 :                 if (negative) {</span></span>
 <span id="L97"><span class="lineNum">      97</span> <span class="tlaGNC">        1025 :                         buf[--k] = '-';</span></span>
